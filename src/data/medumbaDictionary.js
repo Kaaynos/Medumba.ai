@@ -258,6 +258,18 @@ export const THEMES_META = {
   "l14": {
     "titleFr": "Métiers",
     "titleEn": "Professions"
+  },
+  "l15": {
+    "titleFr": "Conversations",
+    "titleEn": "Conversations"
+  },
+  "l16": {
+    "titleFr": "Verbes d'action",
+    "titleEn": "Action Verbs"
+  },
+  "l17": {
+    "titleFr": "Culture & Rites",
+    "titleEn": "Culture & Rites"
   }
 };
 
@@ -1436,6 +1448,82 @@ export const MEDUMBA_QUESTIONS = {
       "bank": ["Nswɛ̀nfu", "Nsòŋsaŋvə̀", "Ndè'càm", "Tα̂lὰm", "Ndʉ̂'nὰ", "Ngàtswìtə̀"], "audio": "Nswɛ̀nfu" },
     { "sourceFr": "Banquier", "sourceEn": "Banker", "answer": ["Ndè'nkαb"],
       "bank": ["Ndè'nkαb", "Ndè'càm", "Nsòŋsaŋvə̀", "Tα̂lὰm", "Ngàtswìtə̀", "Nswɛ̀nfu"], "audio": "Ndè'nkαb" }
+  ],
+
+  /* ── l15 : Conversations (Phrasebook Ch.1-2) ── */
+  "l15": [
+    { "sourceFr": "Bonjour / Salut", "sourceEn": "Hello / Hi", "answer": ["Ndà'ndà' lα!"],
+      "bank": ["Ndà'ndà' lα!", "A fi tsə", "Mə làbtə̌", "Ndʉ̂ kə?", "Ò bə α̂ wə?"], "audio": "Ndà'ndà' lα!" },
+    { "sourceFr": "Comment ça va ?", "sourceEn": "How are you?", "answer": ["Ndʉ̂ kə?"],
+      "bank": ["Ndʉ̂ kə?", "Ndà'ndà' lα!", "Lɛ̂n su bə α̂ wə?", "Mə làbtə̌", "A fi tsə"], "audio": "Ndʉ̂ kə?" },
+    { "sourceFr": "Ça va bien", "sourceEn": "I'm fine", "answer": ["A fi tsə"],
+      "bank": ["A fi tsə", "Ndʉ̂ kə?", "Ndà'ndà' lα!", "Mə làbtə̌", "Ò bə α̂ wə?"], "audio": "A fi tsə" },
+    { "sourceFr": "Merci", "sourceEn": "Thank you", "answer": ["Mə làbtə̌"],
+      "bank": ["Mə làbtə̌", "A fi tsə", "Ndà'ndà' lα!", "Ngα", "Ŋ"], "audio": "Mə làbtə̌" },
+    { "sourceFr": "Comment tu t'appelles ?", "sourceEn": "What is your name?", "answer": ["Lɛ̂n su bə α̂ wə?"],
+      "bank": ["Lɛ̂n su bə α̂ wə?", "Ò bə α̂ wə?", "Ndʉ̂ kə?", "Ndà'ndà' lα!", "A fi tsə"], "audio": "Lɛ̂n su bə α̂ wə?" },
+    { "sourceFr": "Mon nom est…", "sourceEn": "My name is…", "answer": ["Lɛ̂n sαm bə α̂…"],
+      "bank": ["Lɛ̂n sαm bə α̂…", "Lɛ̂n su bə α̂ wə?", "Mə làbtə̌", "A fi tsə", "Ndʉ̂ kə?"], "audio": "Lɛ̂n sαm bə α̂…" },
+    { "sourceFr": "Qui es-tu ?", "sourceEn": "Who are you?", "answer": ["Ò bə α̂ wə?"],
+      "bank": ["Ò bə α̂ wə?", "Lɛ̂n su bə α̂ wə?", "Ndʉ̂ kə?", "A fi tsə", "Ndà'ndà' lα!"], "audio": "Ò bə α̂ wə?" },
+    { "sourceFr": "Oui", "sourceEn": "Yes", "answer": ["Ŋ"],
+      "bank": ["Ŋ", "Ngα", "A fi tsə", "Mə làbtə̌", "Ò bə α̂ wə?"], "audio": "Ŋ" },
+    { "sourceFr": "Non", "sourceEn": "No", "answer": ["Ngα"],
+      "bank": ["Ngα", "Ŋ", "A fi tsə", "Mə làbtə̌", "Ndʉ̂ kə?"], "audio": "Ngα" },
+    { "sourceFr": "Et toi ?", "sourceEn": "And you?", "answer": ["Wʉ̌ yò ghò?"],
+      "bank": ["Wʉ̌ yò ghò?", "Ò bə α̂ wə?", "Ndʉ̂ kə?", "A fi tsə", "Mə làbtə̌"], "audio": "Wʉ̌ yò ghò?" },
+    { "sourceFr": "Je suis en bonne santé", "sourceEn": "I am healthy", "answer": ["Mə tswə ntʉ̀n"],
+      "bank": ["Mə tswə ntʉ̀n", "A fi tsə", "Mə làbtə̌", "Ndʉ̂ kə?", "Ò bə α̂ wə?"], "audio": "Mə tswə ntʉ̀n" },
+    { "sourceFr": "Mon ami / Mon amie", "sourceEn": "My friend", "answer": ["Nshûn ὰm"],
+      "bank": ["Nshûn ὰm", "Mɛ̀nnzwi", "Mɛnmαndùm", "Mə làbtə̌", "Lɛ̂n sαm bə α̂…"], "audio": "Nshûn ὰm" }
+  ],
+
+  /* ── l16 : Verbes d'action ── */
+  "l16": [
+    { "sourceFr": "Récolter / Cueillir", "sourceEn": "Harvest", "answer": ["Nə̀ ba"],
+      "bank": ["Nə̀ ba", "Nə̀ bǎg", "Nə̀ badtə", "Nə̀ bàdtə̌", "Nə̀ babə", "Nə̀ bagə"], "audio": "Nə̀ ba" },
+    { "sourceFr": "Rougir / Mûrir", "sourceEn": "To redden / ripen", "answer": ["Nə̀ bǎ"],
+      "bank": ["Nə̀ bǎ", "Nə̀ ba", "Nə̀ bàdtə̌", "Nə̀ bǎg", "Nə̀ bagə", "Nə̀ babə"], "audio": "Nə̀ bǎ" },
+    { "sourceFr": "Verser (avec violence)", "sourceEn": "To pour forcefully", "answer": ["Nə̀ babə"],
+      "bank": ["Nə̀ babə", "Nə̀ ba", "Nə̀ bǎ", "Nə̀ bǎg", "Nə̀ badtə", "Nə̀ bagə"], "audio": "Nə̀ babə" },
+    { "sourceFr": "Flatter / Coller", "sourceEn": "To flatter / stick", "answer": ["Nə̀ badtə"],
+      "bank": ["Nə̀ badtə", "Nə̀ bàdtə̌", "Nə̀ babə", "Nə̀ ba", "Nə̀ bagə", "Nə̀ bǎg"], "audio": "Nə̀ badtə" },
+    { "sourceFr": "Porter au dos", "sourceEn": "To carry on back", "answer": ["Nə̀ bàdtə̌"],
+      "bank": ["Nə̀ bàdtə̌", "Nə̀ badtə", "Nə̀ babə", "Nə̀ bǎ", "Nə̀ bagə", "Nə̀ bǎg"], "audio": "Nə̀ bàdtə̌" },
+    { "sourceFr": "Se gâter / S'avarier", "sourceEn": "To spoil / go bad", "answer": ["Nə̀ bagə"],
+      "bank": ["Nə̀ bagə", "Nə̀ ba", "Nə̀ bǎ", "Nə̀ bàdtə̌", "Nə̀ babə", "Nə̀ badtə"], "audio": "Nə̀ bagə" },
+    { "sourceFr": "Fendre / Éventrer", "sourceEn": "To split / cut open", "answer": ["Nə̀ bǎg"],
+      "bank": ["Nə̀ bǎg", "Nə̀ ba", "Nə̀ bǎ", "Nə̀ bagə", "Nə̀ badtə", "Nə̀ babə"], "audio": "Nə̀ bǎg" },
+    { "sourceFr": "Changer de chemin", "sourceEn": "To change path", "answer": ["Nə̀ ba nzə̀"],
+      "bank": ["Nə̀ ba nzə̀", "Nə̀ bǎg", "Nə̀ babə", "Nə̀ badtə", "Nə̀ bagə", "Nə̀ bàdtə̌"], "audio": "Nə̀ ba nzə̀" }
+  ],
+
+  /* ── l17 : Culture & Rites ── */
+  "l17": [
+    { "sourceFr": "Deuil", "sourceEn": "Mourning", "answer": ["Vʉ"],
+      "bank": ["Vʉ", "Ndαvʉ", "Nə̀ sǎvʉ", "Nə̀ zi mò", "Mbwə̀'", "Nə̀ nyǎncu"], "audio": "Vʉ" },
+    { "sourceFr": "Déclarer la mort", "sourceEn": "Announce death", "answer": ["Nə̀ to vʉ"],
+      "bank": ["Nə̀ to vʉ", "Nə̀ lα̌n vʉ", "Nə̀ coŋ mɛ̀n", "Nə̀ sǎvʉ", "Nə̀ loŋvʉ", "Vʉ"], "audio": "Nə̀ to vʉ" },
+    { "sourceFr": "Se lamenter / Pleurer un mort", "sourceEn": "To lament", "answer": ["Nə̀ lα̌n vʉ"],
+      "bank": ["Nə̀ lα̌n vʉ", "Nə̀ to vʉ", "Nə̀ sǎvʉ", "Nə̀ coŋ mɛ̀n", "Vʉ", "Ndαvʉ"], "audio": "Nə̀ lα̌n vʉ" },
+    { "sourceFr": "Enterrer", "sourceEn": "To bury", "answer": ["Nə̀ coŋ mɛ̀n"],
+      "bank": ["Nə̀ coŋ mɛ̀n", "Nə̀ lα̌n vʉ", "Nə̀ to vʉ", "Nə̀ loŋvʉ", "Ndαvʉ", "Nə̀ zi mò"], "audio": "Nə̀ coŋ mɛ̀n" },
+    { "sourceFr": "Veillée funèbre", "sourceEn": "Wake / Night vigil", "answer": ["Nə̀ zi mò"],
+      "bank": ["Nə̀ zi mò", "Nə̀ coŋ mɛ̀n", "Nə̀ sǎvʉ", "Ndαvʉ", "Vʉ", "Mbwə̀'"], "audio": "Nə̀ zi mò" },
+    { "sourceFr": "Maison de deuil", "sourceEn": "House of mourning", "answer": ["Ndαvʉ"],
+      "bank": ["Ndαvʉ", "Nə̀ zi mò", "Mbwə̀'", "Lâ'kwa", "Nshʉ̂'nὰ", "Vʉ"], "audio": "Ndαvʉ" },
+    { "sourceFr": "Danser", "sourceEn": "To dance", "answer": ["Nə̀ nyǎncu"],
+      "bank": ["Nə̀ nyǎncu", "Nə̀ sǎvʉ", "Nə̀ loŋvʉ", "Nə̀ zi mò", "Ndαvʉ", "Mbwə̀'"], "audio": "Nə̀ nyǎncu" },
+    { "sourceFr": "Funérailles", "sourceEn": "Funeral rites", "answer": ["Nə̀ sǎvʉ"],
+      "bank": ["Nə̀ sǎvʉ", "Nə̀ nyǎncu", "Nə̀ loŋvʉ", "Nə̀ coŋ mɛ̀n", "Ndαvʉ", "Vʉ"], "audio": "Nə̀ sǎvʉ" },
+    { "sourceFr": "Porter le deuil", "sourceEn": "To be in mourning", "answer": ["Nə̀ loŋvʉ"],
+      "bank": ["Nə̀ loŋvʉ", "Nə̀ sǎvʉ", "Nə̀ coŋ mɛ̀n", "Nə̀ nyǎncu", "Vʉ", "Mbwə̀'"], "audio": "Nə̀ loŋvʉ" },
+    { "sourceFr": "Lieu sacré", "sourceEn": "Sacred place", "answer": ["Mbwə̀'"],
+      "bank": ["Mbwə̀'", "Lâ'kwa", "Ndαvʉ", "Nshʉ̂'nὰ", "Nə̀ zi mò", "Vʉ"], "audio": "Mbwə̀'" },
+    { "sourceFr": "Travail communautaire", "sourceEn": "Community work", "answer": ["Nshʉ̂'nὰ"],
+      "bank": ["Nshʉ̂'nὰ", "Mbwə̀'", "Lâ'kwa", "Ndαvʉ", "Nə̀ nyǎncu", "Nə̀ sǎvʉ"], "audio": "Nshʉ̂'nὰ" },
+    { "sourceFr": "Lieu d'initiation", "sourceEn": "Initiation ground", "answer": ["Lâ'kwa"],
+      "bank": ["Lâ'kwa", "Mbwə̀'", "Nshʉ̂'nὰ", "Ndαvʉ", "Nə̀ zi mò", "Nə̀ sǎvʉ"], "audio": "Lâ'kwa" }
   ]
 };
 
@@ -1925,6 +2013,114 @@ export const LEVEL_QUESTIONS = {
       { medumba: 'Tα̂lὰm',      french: 'Couturier',   english: 'Tailor'     },
       { medumba: 'Ndè\'càm',    french: 'Secrétaire',  english: 'Secretary'  },
       { medumba: 'Nsòŋsaŋvə̀',  french: 'Pharmacien',  english: 'Pharmacist' },
+    ]}],
+  },
+
+  l15: {
+    meaning: [
+      { type: 'meaning', sourceFr: 'Bonjour / Salut', sourceEn: 'Hello', audio: 'Ndà\'ndà\' lα!',
+        options: ['Ndà\'ndà\' lα!', 'A fi tsə', 'Mə làbtə̌', 'Ndʉ̂ kə?'],
+        optionsFr: ['Ndà\'ndà\' lα!', 'A fi tsə', 'Mə làbtə̌', 'Ndʉ̂ kə?'],
+        answer: 'Ndà\'ndà\' lα!', answerFr: 'Ndà\'ndà\' lα!' },
+      { type: 'meaning', sourceFr: 'Ça va bien', sourceEn: 'I\'m fine', audio: 'A fi tsə',
+        options: ['A fi tsə', 'Ndʉ̂ kə?', 'Mə làbtə̌', 'Ò bə α̂ wə?'],
+        optionsFr: ['A fi tsə', 'Ndʉ̂ kə?', 'Mə làbtə̌', 'Ò bə α̂ wə?'],
+        answer: 'A fi tsə', answerFr: 'A fi tsə' },
+      { type: 'meaning', sourceFr: 'Merci', sourceEn: 'Thank you', audio: 'Mə làbtə̌',
+        options: ['Mə làbtə̌', 'A fi tsə', 'Ngα', 'Ŋ'],
+        optionsFr: ['Mə làbtə̌', 'A fi tsə', 'Ngα', 'Ŋ'],
+        answer: 'Mə làbtə̌', answerFr: 'Mə làbtə̌' },
+      { type: 'meaning', sourceFr: 'Comment ça va ?', sourceEn: 'How are you?', audio: 'Ndʉ̂ kə?',
+        options: ['Ndʉ̂ kə?', 'Ò bə α̂ wə?', 'A fi tsə', 'Lɛ̂n su bə α̂ wə?'],
+        optionsFr: ['Ndʉ̂ kə?', 'Ò bə α̂ wə?', 'A fi tsə', 'Lɛ̂n su bə α̂ wə?'],
+        answer: 'Ndʉ̂ kə?', answerFr: 'Ndʉ̂ kə?' },
+      { type: 'meaning', sourceFr: 'Oui', sourceEn: 'Yes', audio: 'Ŋ',
+        options: ['Ŋ', 'Ngα', 'Mə làbtə̌', 'A fi tsə'],
+        optionsFr: ['Ŋ', 'Ngα', 'Mə làbtə̌', 'A fi tsə'],
+        answer: 'Ŋ', answerFr: 'Ŋ' },
+      { type: 'meaning', sourceFr: 'Non', sourceEn: 'No', audio: 'Ngα',
+        options: ['Ngα', 'Ŋ', 'A fi tsə', 'Ndʉ̂ kə?'],
+        optionsFr: ['Ngα', 'Ŋ', 'A fi tsə', 'Ndʉ̂ kə?'],
+        answer: 'Ngα', answerFr: 'Ngα' },
+    ],
+    match: [{ type: 'match', pairs: [
+      { medumba: 'Ndà\'ndà\' lα!', french: 'Bonjour',        english: 'Hello'     },
+      { medumba: 'A fi tsə',       french: 'Ça va bien',     english: 'I\'m fine' },
+      { medumba: 'Mə làbtə̌',      french: 'Merci',          english: 'Thank you' },
+      { medumba: 'Ndʉ̂ kə?',       french: 'Comment ça va?', english: 'How are you?' },
+      { medumba: 'Ò bə α̂ wə?',    french: 'Qui es-tu ?',    english: 'Who are you?' },
+    ]}],
+  },
+
+  l16: {
+    meaning: [
+      { type: 'meaning', sourceFr: 'Récolter / Cueillir', sourceEn: 'To harvest', audio: 'Nə̀ ba',
+        options: ['Nə̀ ba', 'Nə̀ bǎg', 'Nə̀ bagə', 'Nə̀ babə'],
+        optionsFr: ['Nə̀ ba', 'Nə̀ bǎg', 'Nə̀ bagə', 'Nə̀ babə'],
+        answer: 'Nə̀ ba', answerFr: 'Nə̀ ba' },
+      { type: 'meaning', sourceFr: 'Rougir / Mûrir', sourceEn: 'To ripen', audio: 'Nə̀ bǎ',
+        options: ['Nə̀ bǎ', 'Nə̀ ba', 'Nə̀ bagə', 'Nə̀ bǎg'],
+        optionsFr: ['Nə̀ bǎ', 'Nə̀ ba', 'Nə̀ bagə', 'Nə̀ bǎg'],
+        answer: 'Nə̀ bǎ', answerFr: 'Nə̀ bǎ' },
+      { type: 'meaning', sourceFr: 'Se gâter', sourceEn: 'To spoil', audio: 'Nə̀ bagə',
+        options: ['Nə̀ bagə', 'Nə̀ ba', 'Nə̀ bǎ', 'Nə̀ bǎg'],
+        optionsFr: ['Nə̀ bagə', 'Nə̀ ba', 'Nə̀ bǎ', 'Nə̀ bǎg'],
+        answer: 'Nə̀ bagə', answerFr: 'Nə̀ bagə' },
+      { type: 'meaning', sourceFr: 'Fendre / Couper', sourceEn: 'To split', audio: 'Nə̀ bǎg',
+        options: ['Nə̀ bǎg', 'Nə̀ ba', 'Nə̀ bǎ', 'Nə̀ babə'],
+        optionsFr: ['Nə̀ bǎg', 'Nə̀ ba', 'Nə̀ bǎ', 'Nə̀ babə'],
+        answer: 'Nə̀ bǎg', answerFr: 'Nə̀ bǎg' },
+      { type: 'meaning', sourceFr: 'Porter au dos', sourceEn: 'Carry on back', audio: 'Nə̀ bàdtə̌',
+        options: ['Nə̀ bàdtə̌', 'Nə̀ badtə', 'Nə̀ babə', 'Nə̀ bagə'],
+        optionsFr: ['Nə̀ bàdtə̌', 'Nə̀ badtə', 'Nə̀ babə', 'Nə̀ bagə'],
+        answer: 'Nə̀ bàdtə̌', answerFr: 'Nə̀ bàdtə̌' },
+    ],
+    match: [{ type: 'match', pairs: [
+      { medumba: 'Nə̀ ba',     french: 'Récolter',         english: 'To harvest'  },
+      { medumba: 'Nə̀ bǎ',     french: 'Rougir / Mûrir',   english: 'To ripen'    },
+      { medumba: 'Nə̀ bagə',   french: 'Se gâter',          english: 'To spoil'    },
+      { medumba: 'Nə̀ bǎg',    french: 'Fendre',            english: 'To split'    },
+      { medumba: 'Nə̀ babə',   french: 'Verser avec force', english: 'Pour forcefully' },
+    ]}],
+  },
+
+  l17: {
+    meaning: [
+      { type: 'meaning', sourceFr: 'Deuil', sourceEn: 'Mourning', audio: 'Vʉ',
+        options: ['Vʉ', 'Ndαvʉ', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ'],
+        optionsFr: ['Vʉ', 'Ndαvʉ', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ'],
+        answer: 'Vʉ', answerFr: 'Vʉ' },
+      { type: 'meaning', sourceFr: 'Enterrer', sourceEn: 'To bury', audio: 'Nə̀ coŋ mɛ̀n',
+        options: ['Nə̀ coŋ mɛ̀n', 'Nə̀ to vʉ', 'Nə̀ lα̌n vʉ', 'Nə̀ loŋvʉ'],
+        optionsFr: ['Nə̀ coŋ mɛ̀n', 'Nə̀ to vʉ', 'Nə̀ lα̌n vʉ', 'Nə̀ loŋvʉ'],
+        answer: 'Nə̀ coŋ mɛ̀n', answerFr: 'Nə̀ coŋ mɛ̀n' },
+      { type: 'meaning', sourceFr: 'Funérailles', sourceEn: 'Funeral rites', audio: 'Nə̀ sǎvʉ',
+        options: ['Nə̀ sǎvʉ', 'Nə̀ coŋ mɛ̀n', 'Ndαvʉ', 'Vʉ'],
+        optionsFr: ['Nə̀ sǎvʉ', 'Nə̀ coŋ mɛ̀n', 'Ndαvʉ', 'Vʉ'],
+        answer: 'Nə̀ sǎvʉ', answerFr: 'Nə̀ sǎvʉ' },
+      { type: 'meaning', sourceFr: 'Lieu sacré', sourceEn: 'Sacred place', audio: 'Mbwə̀\'',
+        options: ['Mbwə̀\'', 'Lâ\'kwa', 'Ndαvʉ', 'Nshʉ̂\'nὰ'],
+        optionsFr: ['Mbwə̀\'', 'Lâ\'kwa', 'Ndαvʉ', 'Nshʉ̂\'nὰ'],
+        answer: 'Mbwə̀\'', answerFr: 'Mbwə̀\'' },
+      { type: 'meaning', sourceFr: 'Lieu d\'initiation', sourceEn: 'Initiation ground', audio: 'Lâ\'kwa',
+        options: ['Lâ\'kwa', 'Mbwə̀\'', 'Ndαvʉ', 'Nshʉ̂\'nὰ'],
+        optionsFr: ['Lâ\'kwa', 'Mbwə̀\'', 'Ndαvʉ', 'Nshʉ̂\'nὰ'],
+        answer: 'Lâ\'kwa', answerFr: 'Lâ\'kwa' },
+      { type: 'meaning', sourceFr: 'Danser', sourceEn: 'To dance', audio: 'Nə̀ nyǎncu',
+        options: ['Nə̀ nyǎncu', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ', 'Nə̀ zi mò'],
+        optionsFr: ['Nə̀ nyǎncu', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ', 'Nə̀ zi mò'],
+        answer: 'Nə̀ nyǎncu', answerFr: 'Nə̀ nyǎncu' },
+      { type: 'meaning', sourceFr: 'Travail communautaire', sourceEn: 'Community work', audio: 'Nshʉ̂\'nὰ',
+        options: ['Nshʉ̂\'nὰ', 'Mbwə̀\'', 'Lâ\'kwa', 'Ndαvʉ'],
+        optionsFr: ['Nshʉ̂\'nὰ', 'Mbwə̀\'', 'Lâ\'kwa', 'Ndαvʉ'],
+        answer: 'Nshʉ̂\'nὰ', answerFr: 'Nshʉ̂\'nὰ' },
+    ],
+    match: [{ type: 'match', pairs: [
+      { medumba: 'Vʉ',           french: 'Deuil',              english: 'Mourning'        },
+      { medumba: 'Nə̀ sǎvʉ',     french: 'Funérailles',        english: 'Funeral rites'   },
+      { medumba: 'Nə̀ coŋ mɛ̀n', french: 'Enterrer',           english: 'To bury'         },
+      { medumba: 'Mbwə̀\'',       french: 'Lieu sacré',         english: 'Sacred place'    },
+      { medumba: 'Nə̀ nyǎncu',   french: 'Danser',             english: 'To dance'        },
     ]}],
   },
 };

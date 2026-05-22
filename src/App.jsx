@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
 import LanguageSelectionPage    from './components/LanguageSelectionPage';
@@ -74,8 +74,32 @@ function App() {
   // ── Static game stats ────────────────────────────────────────────
   const [userStats] = useState({ streak: 7, xp: 340, gems: 50, hearts: 4 });
 
-  const go   = (n) => setStep(n);
-  const back = () => setStep((s) => Math.max(0, s - 1));
+  /* ── History API — fixes browser back button ─────────────────────
+     Every go(n) pushes a state so the browser can pop it back.
+     popstate syncs React state when the user presses ← in the browser.
+  ── */
+  const go = (n, newHubView) => {
+    const hv = newHubView ?? hubView;
+    if (newHubView !== undefined) setHubView(newHubView);
+    history.pushState({ step: n, hubView: hv }, '');
+    setStep(n);
+  };
+
+  const back = () => history.back();
+
+  useEffect(() => {
+    // Stamp the very first page so the first back-press lands here, not outside
+    history.replaceState({ step: 0, hubView: 'hub' }, '');
+
+    const onPop = (e) => {
+      if (e.state) {
+        setStep(e.state.step);
+        setHubView(e.state.hubView ?? 'hub');
+      }
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Assembled profile object ─────────────────────────────────────
   const profile = {
@@ -100,10 +124,10 @@ function App() {
         <WelcomePage
           onNext={() => go(2)}
           onLogin={() => go(16)}
-          onCalendar   ={() => { setHubView('calendar');   go(14); }}
-          onVideo      ={() => { setHubView('video');      go(14); }}
-          onCounting   ={() => { setHubView('counting');   go(14); }}
-          onDictionary ={() => { setHubView('dictionary'); go(14); }}
+          onCalendar   ={() => go(14, 'calendar')}
+          onVideo      ={() => go(14, 'video')}
+          onCounting   ={() => go(14, 'counting')}
+          onDictionary ={() => go(14, 'dictionary')}
         />
       )}
 
@@ -120,14 +144,14 @@ function App() {
       {step === 3 && (
         <ConnectionPage
           onNext={(c) => { setConnection(c); go(4); }}
-          onBack={() => go(2)}
+          onBack={back}
           nativeLang={nativeLang}
         />
       )}
       {step === 4 && (
         <ProficiencyPage
           onNext={(level) => { setProficiency(level); go(5); }}
-          onBack={() => go(3)}
+          onBack={back}
           nativeLang={nativeLang} learningLang={learningLang}
         />
       )}
@@ -171,9 +195,9 @@ function App() {
       )}
 
       {/* ── Password reset ── */}
-      {step === 20 && <ForgotPasswordPage      onNext={(e) => { setResetEmail(e); go(21); }} onBack={() => go(16)} nativeLang={nativeLang} />}
-      {step === 21 && <OTPVerificationPage     onNext={() => go(22)} onBack={() => go(20)} email={resetEmail}       nativeLang={nativeLang} />}
-      {step === 22 && <NewPasswordPage         onNext={() => go(23)} onBack={() => go(21)}                          nativeLang={nativeLang} />}
+      {step === 20 && <ForgotPasswordPage      onNext={(e) => { setResetEmail(e); go(21); }} onBack={back} nativeLang={nativeLang} />}
+      {step === 21 && <OTPVerificationPage     onNext={() => go(22)} onBack={back} email={resetEmail}       nativeLang={nativeLang} />}
+      {step === 22 && <NewPasswordPage         onNext={() => go(23)} onBack={back}                          nativeLang={nativeLang} />}
       {step === 23 && <PasswordResetSuccessPage onNext={() => go(16)}                                                                         nativeLang={nativeLang} />}
 
       {/* ── Section viewer (from Welcome page buttons) ── */}

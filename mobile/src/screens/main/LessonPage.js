@@ -8,6 +8,7 @@ import { colors } from '../../theme/colors';
 import { getExpressionsByLesson } from '../../data/expressionsByLesson';
 import { generateLessonQuestions } from '../../utils/lessonGenerator';
 import { MEDUMBA_QUESTIONS } from '../../data/medumbaDictionary';
+import { speakMedumba, getIPA } from '../../utils/medumbaAudio';
 
 const DIAMONDS_PER_Q = 5;
 const XP_PER_Q = 10;
@@ -377,6 +378,11 @@ export default function LessonPage({ route, navigation }) {
           <>
             <View style={s.sourceCard}>
               <Text style={s.sourceText}>{q?.sourceFr ?? ''}</Text>
+              {q?.audio && (
+                <TouchableOpacity onPress={() => speakMedumba(q.audio)} style={s.audioBtn}>
+                  <Text style={s.audioBtnText}>🔊</Text>
+                </TouchableOpacity>
+              )}
             </View>
             <View style={[s.answerArea, placed.length > 0 && { borderColor: colors.primary, backgroundColor: '#eff6ff' }]}>
               {placed.length === 0
@@ -410,6 +416,11 @@ export default function LessonPage({ route, navigation }) {
                 {q?._exprDir === 'med2fr' ? 'Expression Medumba' : 'Mot en français'}
               </Text>
               <Text style={[s.sourceText, { fontSize: q?._exprDir ? 20 : 28 }]}>{q?.sourceFr ?? ''}</Text>
+              {q?.audio && (
+                <TouchableOpacity onPress={() => speakMedumba(q.audio)} style={[s.audioBtn, { marginTop: 12 }]}>
+                  <Text style={s.audioBtnText}>🔊  Écouter</Text>
+                </TouchableOpacity>
+              )}
             </View>
             <View style={[s.optionsGrid, q?._exprDir === 'med2fr' && { flexDirection: 'column' }]}>
               {options.map(opt => {
@@ -444,6 +455,11 @@ export default function LessonPage({ route, navigation }) {
               <Text style={{ fontSize: 72, lineHeight: 88 }}>{q?.emoji}</Text>
               <Text style={s.meaningLabel}>En français</Text>
               <Text style={[s.sourceText, { fontSize: 24, textAlign: 'center' }]}>{q?.labelFr ?? q?.labelEn ?? ''}</Text>
+              {q?.audio && (
+                <TouchableOpacity onPress={() => speakMedumba(q.audio)} style={[s.audioBtn, { marginTop: 12 }]}>
+                  <Text style={s.audioBtnText}>🔊  Écouter</Text>
+                </TouchableOpacity>
+              )}
             </View>
             <View style={s.optionsGrid}>
               {options.map(opt => {
@@ -580,6 +596,8 @@ const s = StyleSheet.create({
   tileBankUsed: { backgroundColor: '#f1f5f9', borderColor: '#e2e8f0', opacity: 0.4 },
   tileBankText: { fontWeight: '700', fontSize: 15, color: '#0f172a' },
   meaningLabel: { fontSize: 11, fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.7, marginBottom: 8 },
+  audioBtn: { backgroundColor: '#eff6ff', borderWidth: 1.5, borderColor: '#bfdbfe', borderRadius: 20, paddingHorizontal: 18, paddingVertical: 8, alignSelf: 'center' },
+  audioBtnText: { fontSize: 16, color: '#1d4ed8', fontWeight: '600' },
   optionsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 12 },
   optionBtn: { width: '48%', padding: 14, borderRadius: 14, borderWidth: 2, borderColor: '#e2e8f0', backgroundColor: colors.white },
   optionText: { fontSize: 15, fontWeight: '700', color: '#0f172a' },

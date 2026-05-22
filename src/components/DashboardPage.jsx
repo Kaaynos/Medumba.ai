@@ -292,6 +292,19 @@ const DashboardPage = ({
                 { id: 'c3',  titleEn: 'Chest',        titleFr: 'Coffre',        type: 'chest',  status: 'locked' },
             ],
         },
+        {
+            id: 5, color: '#b45309', accent: '#92400e', emoji: '🥁',
+            titleEn: 'Culture & Language', titleFr: 'Culture & Langue',
+            subEn:   'Conversations, verbs and Medumba cultural rites',
+            subFr:   'Conversations, verbes et rites culturels Medumba',
+            lessons: [
+                { id: 'l15', titleEn: 'Conversations', titleFr: 'Conversations',   type: 'lesson', status: 'locked' },
+                { id: 'l16', titleEn: 'Action Verbs',  titleFr: 'Verbes d\'action', type: 'lesson', status: 'locked' },
+                { id: 'b3',  titleEn: 'Boss Fight',    titleFr: 'Défi Boss',        type: 'boss',   status: 'locked' },
+                { id: 'l17', titleEn: 'Culture & Rites', titleFr: 'Culture & Rites', type: 'lesson', status: 'locked' },
+                { id: 'c4',  titleEn: 'Chest',         titleFr: 'Coffre',           type: 'chest',  status: 'locked' },
+            ],
+        },
     ];
 
     /* ── learning path data — English track ── */

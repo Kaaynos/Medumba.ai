@@ -258,6 +258,10 @@ export const THEMES_META = {
   "l14": {
     "titleFr": "Métiers",
     "titleEn": "Professions"
+  },
+  "l17": {
+    "titleFr": "Activités culturelles",
+    "titleEn": "Cultural Activities"
   }
 };
 
@@ -1436,6 +1440,33 @@ export const MEDUMBA_QUESTIONS = {
       "bank": ["Nswɛ̀nfu", "Nsòŋsaŋvə̀", "Ndè'càm", "Tα̂lὰm", "Ndʉ̂'nὰ", "Ngàtswìtə̀"], "audio": "Nswɛ̀nfu" },
     { "sourceFr": "Banquier", "sourceEn": "Banker", "answer": ["Ndè'nkαb"],
       "bank": ["Ndè'nkαb", "Ndè'càm", "Nsòŋsaŋvə̀", "Tα̂lὰm", "Ngàtswìtə̀", "Nswɛ̀nfu"], "audio": "Ndè'nkαb" }
+  ],
+
+  "l17": [
+    { "sourceFr": "Le deuil / la mort", "sourceEn": "Death / mourning", "answer": ["Vʉ"],
+      "bank": ["Vʉ", "Ndα̂vʉ", "Nə̀ sǎvʉ", "Nə̀ loŋvʉ", "Mbwə̀'", "Nshʉ̂'nὰ"], "audio": "Vʉ" },
+    { "sourceFr": "Déclarer la mort", "sourceEn": "Announce a death", "answer": ["Nə̀ to vʉ"],
+      "bank": ["Nə̀ to vʉ", "Nə̀ lα̌n vʉ", "Nə̀ coŋ mɛ̀n", "Nə̀ zi mò", "Nə̀ sǎvʉ", "Ndα̂vʉ"], "audio": "Nə̀ to vʉ" },
+    { "sourceFr": "Lamenter / pleurer", "sourceEn": "To lament / cry", "answer": ["Nə̀ lα̌n vʉ"],
+      "bank": ["Nə̀ lα̌n vʉ", "Nə̀ to vʉ", "Nə̀ coŋ mɛ̀n", "Nə̀ nyǎncu", "Nə̀ bu'cʉ", "Nə̀ jʉα̌cu"], "audio": "Nə̀ lα̌n vʉ" },
+    { "sourceFr": "Enterrer le mort", "sourceEn": "To bury the deceased", "answer": ["Nə̀ coŋ mɛ̀n"],
+      "bank": ["Nə̀ coŋ mɛ̀n", "Nə̀ lα̌n vʉ", "Nə̀ zi mò", "Nə̀ co nkǎvʉ", "Nə̀ to vʉ", "Vʉ"], "audio": "Nə̀ coŋ mɛ̀n" },
+    { "sourceFr": "Organiser la veillée", "sourceEn": "Organise the wake", "answer": ["Nə̀ zi mò"],
+      "bank": ["Nə̀ zi mò", "Nə̀ coŋ mɛ̀n", "Nə̀ bu'cʉ", "Nə̀ sǎvʉ", "Ndα̂vʉ", "Nə̀ to vʉ"], "audio": "Nə̀ zi mò" },
+    { "sourceFr": "Maison de deuil", "sourceEn": "House of mourning", "answer": ["Ndα̂vʉ"],
+      "bank": ["Ndα̂vʉ", "Vʉ", "Mbwə̀'", "Lâ'kwa", "Lâ'kamə", "Nshʉ̂'nὰ"], "audio": "Ndα̂vʉ" },
+    { "sourceFr": "Danser", "sourceEn": "To dance", "answer": ["Nə̀ nyǎncu"],
+      "bank": ["Nə̀ nyǎncu", "Nə̀ bu'cu", "Nə̀ jʉα̌cu", "Nə̀ co nkǎvʉ", "Nə̀ lα̌n vʉ", "Nə̀ zi mò"], "audio": "Nə̀ nyǎncu" },
+    { "sourceFr": "Funérailles", "sourceEn": "Funeral", "answer": ["Nə̀ sǎvʉ"],
+      "bank": ["Nə̀ sǎvʉ", "Ndα̂vʉ", "Nə̀ loŋvʉ", "Nə̀ zi mò", "Vʉ", "Nə̀ coŋ mɛ̀n"], "audio": "Nə̀ sǎvʉ" },
+    { "sourceFr": "Porter le deuil", "sourceEn": "To wear mourning", "answer": ["Nə̀ loŋvʉ"],
+      "bank": ["Nə̀ loŋvʉ", "Nə̀ sǎvʉ", "Nə̀ tswə fogə", "Nə̀ sɔ̌ nzwə̂ vʉ", "Ndα̂vʉ", "Vʉ"], "audio": "Nə̀ loŋvʉ" },
+    { "sourceFr": "Lieu sacré / temple traditionnel", "sourceEn": "Sacred place / shrine", "answer": ["Mbwə̀'"],
+      "bank": ["Mbwə̀'", "Lâ'kwa", "Lâ'kamə", "Ndα̂vʉ", "Nshʉ̂'nὰ", "Vʉ"], "audio": "Mbwə̀'" },
+    { "sourceFr": "Travail en équipe (à tour de rôle)", "sourceEn": "Team work (rotating)", "answer": ["Nshʉ̂'nὰ"],
+      "bank": ["Nshʉ̂'nὰ", "Mbwə̀'", "Lâ'kwa", "Ndα̂vʉ", "Nə̀ zi kà", "Nə̀ ghǒm fə̀n"], "audio": "Nshʉ̂'nὰ" },
+    { "sourceFr": "Lieu d'initiation du chef", "sourceEn": "Chief's initiation place", "answer": ["Lâ'kwa"],
+      "bank": ["Lâ'kwa", "Lâ'kamə", "Mbwə̀'", "Ndα̂vʉ", "Nshʉ̂'nὰ", "Nə̀ zi wà'"], "audio": "Lâ'kwa" }
   ]
 };
 
@@ -1925,6 +1956,47 @@ export const LEVEL_QUESTIONS = {
       { medumba: 'Tα̂lὰm',      french: 'Couturier',   english: 'Tailor'     },
       { medumba: 'Ndè\'càm',    french: 'Secrétaire',  english: 'Secretary'  },
       { medumba: 'Nsòŋsaŋvə̀',  french: 'Pharmacien',  english: 'Pharmacist' },
+    ]}],
+  },
+
+  /* ── l17 : Activités culturelles des villages ───────────────── */
+  l17: {
+    meaning: [
+      { type: 'meaning', sourceFr: 'Le deuil / la mort', sourceEn: 'Death / mourning', audio: 'Vʉ',
+        options: ['Vʉ', 'Ndα̂vʉ', 'Mbwə̀\'', 'Nshʉ̂\'nὰ'],
+        optionsFr: ['Vʉ', 'Ndα̂vʉ', 'Mbwə̀\'', 'Nshʉ̂\'nὰ'],
+        answer: 'Vʉ', answerFr: 'Vʉ' },
+      { type: 'meaning', sourceFr: 'Déclarer la mort', sourceEn: 'Announce a death', audio: 'Nə̀ to vʉ',
+        options: ['Nə̀ to vʉ', 'Nə̀ lα̌n vʉ', 'Nə̀ coŋ mɛ̀n', 'Nə̀ zi mò'],
+        optionsFr: ['Nə̀ to vʉ', 'Nə̀ lα̌n vʉ', 'Nə̀ coŋ mɛ̀n', 'Nə̀ zi mò'],
+        answer: 'Nə̀ to vʉ', answerFr: 'Nə̀ to vʉ' },
+      { type: 'meaning', sourceFr: 'Enterrer le mort', sourceEn: 'Bury the deceased', audio: 'Nə̀ coŋ mɛ̀n',
+        options: ['Nə̀ coŋ mɛ̀n', 'Nə̀ to vʉ', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ'],
+        optionsFr: ['Nə̀ coŋ mɛ̀n', 'Nə̀ to vʉ', 'Nə̀ sǎvʉ', 'Nə̀ loŋvʉ'],
+        answer: 'Nə̀ coŋ mɛ̀n', answerFr: 'Nə̀ coŋ mɛ̀n' },
+      { type: 'meaning', sourceFr: 'Danser', sourceEn: 'To dance', audio: 'Nə̀ nyǎncu',
+        options: ['Nə̀ nyǎncu', 'Nə̀ bu\'cu', 'Nə̀ jʉα̌cu', 'Nə̀ lα̌n vʉ'],
+        optionsFr: ['Nə̀ nyǎncu', 'Nə̀ bu\'cu', 'Nə̀ jʉα̌cu', 'Nə̀ lα̌n vʉ'],
+        answer: 'Nə̀ nyǎncu', answerFr: 'Nə̀ nyǎncu' },
+      { type: 'meaning', sourceFr: 'Funérailles', sourceEn: 'Funeral', audio: 'Nə̀ sǎvʉ',
+        options: ['Nə̀ sǎvʉ', 'Ndα̂vʉ', 'Nə̀ loŋvʉ', 'Vʉ'],
+        optionsFr: ['Nə̀ sǎvʉ', 'Ndα̂vʉ', 'Nə̀ loŋvʉ', 'Vʉ'],
+        answer: 'Nə̀ sǎvʉ', answerFr: 'Nə̀ sǎvʉ' },
+      { type: 'meaning', sourceFr: 'Lieu sacré / temple traditionnel', sourceEn: 'Sacred shrine', audio: 'Mbwə̀\'',
+        options: ['Mbwə̀\'', 'Lâ\'kwa', 'Lâ\'kamə', 'Ndα̂vʉ'],
+        optionsFr: ['Mbwə̀\'', 'Lâ\'kwa', 'Lâ\'kamə', 'Ndα̂vʉ'],
+        answer: 'Mbwə̀\'', answerFr: 'Mbwə̀\'' },
+      { type: 'meaning', sourceFr: 'Travail en équipe (à tour de rôle)', sourceEn: 'Rotating teamwork', audio: 'Nshʉ̂\'nὰ',
+        options: ['Nshʉ̂\'nὰ', 'Mbwə̀\'', 'Lâ\'kwa', 'Ndα̂vʉ'],
+        optionsFr: ['Nshʉ̂\'nὰ', 'Mbwə̀\'', 'Lâ\'kwa', 'Ndα̂vʉ'],
+        answer: 'Nshʉ̂\'nὰ', answerFr: 'Nshʉ̂\'nὰ' },
+    ],
+    match: [{ type: 'match', pairs: [
+      { medumba: 'Vʉ',           french: 'Le deuil / la mort',  english: 'Death / mourning' },
+      { medumba: 'Ndα̂vʉ',       french: 'Maison de deuil',     english: 'House of mourning' },
+      { medumba: 'Nə̀ sǎvʉ',     french: 'Funérailles',         english: 'Funeral' },
+      { medumba: 'Nə̀ nyǎncu',   french: 'Danser',              english: 'To dance' },
+      { medumba: 'Mbwə̀\'',      french: 'Lieu sacré',          english: 'Sacred shrine' },
     ]}],
   },
 };

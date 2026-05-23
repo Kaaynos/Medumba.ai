@@ -25,6 +25,8 @@ const LEARNING_PATH = [
   { id: 'l9',  title: 'Temps & Horaires',    icon: '⏰', xp: 30,  lessonId: 'l9'  },
   { id: 'l13', title: 'École',               icon: '📚', xp: 40,  lessonId: 'l13' },
   { id: 'l14', title: 'Travail',             icon: '💼', xp: 40,  lessonId: 'l14' },
+  { id: 'l15', title: 'Conversations',       icon: '💬', xp: 40,  lessonId: 'l15' },
+  { id: 'l16', title: 'Verbes d\'action',    icon: '⚡', xp: 40,  lessonId: 'l16' },
   { id: 'l17', title: 'Culture & Rites',     icon: '🥁', xp: 45,  lessonId: 'l17' },
 ];
 

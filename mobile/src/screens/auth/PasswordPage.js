@@ -1,17 +1,58 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  View, Text, TextInput, TouchableOpacity, StyleSheet,
+  KeyboardAvoidingView, Platform, ActivityIndicator,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OnboardingHeader from '../../components/OnboardingHeader';
 import { colors } from '../../theme/colors';
+import { useApp } from '../../context/AppContext';
+import { registerUser } from '../../services/authService';
+
+const DAILY_GOAL_MAP = { light: 5, normal: 10, serious: 15, ultra: 20 };
 
 export default function PasswordPage({ navigation }) {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm]   = useState('');
   const [show, setShow]         = useState(false);
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState('');
+
+  const { userName, userAge, userEmail, reason, dailyGoal } = useApp();
 
   const strong = password.length >= 8;
   const match  = password === confirm && confirm.length > 0;
   const valid  = strong && match;
+
+  async function handleCreate() {
+    if (!valid || loading) return;
+    setError('');
+    setLoading(true);
+    try {
+      await registerUser({
+        name:      userName,
+        email:     userEmail,
+        password,
+        age:       userAge || null,
+        language:  'french',
+        reason:    reason  || null,
+        dailyGoal: DAILY_GOAL_MAP[dailyGoal] ?? 10,
+      });
+      navigation.navigate('Success');
+    } catch (e) {
+      if (e.code === 'auth/email-already-in-use') {
+        setError('Cette adresse e-mail est déjà utilisée.');
+      } else if (e.code === 'auth/invalid-email') {
+        setError('Adresse e-mail invalide.');
+      } else if (e.code === 'auth/weak-password') {
+        setError('Mot de passe trop faible.');
+      } else {
+        setError('Erreur lors de la création du compte. Réessayez.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -48,19 +89,23 @@ export default function PasswordPage({ navigation }) {
             <Text style={styles.errorText}>Les mots de passe ne correspondent pas</Text>
           )}
 
-          {/* Strength indicators */}
           <View style={styles.rules}>
             <Text style={[styles.rule, password.length >= 8 && styles.ruleOk]}>✓ Au moins 8 caractères</Text>
             <Text style={[styles.rule, /[A-Z]/.test(password) && styles.ruleOk]}>✓ Une majuscule</Text>
             <Text style={[styles.rule, /[0-9]/.test(password) && styles.ruleOk]}>✓ Un chiffre</Text>
           </View>
 
+          {error !== '' && <Text style={styles.firebaseError}>{error}</Text>}
+
           <TouchableOpacity
-            style={[styles.btn, !valid && styles.btnDisabled]}
-            disabled={!valid}
-            onPress={() => navigation.navigate('Success')}
+            style={[styles.btn, (!valid || loading) && styles.btnDisabled]}
+            disabled={!valid || loading}
+            onPress={handleCreate}
           >
-            <Text style={styles.btnText}>Créer mon compte →</Text>
+            {loading
+              ? <ActivityIndicator color={colors.white} />
+              : <Text style={styles.btnText}>Créer mon compte →</Text>
+            }
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -89,6 +134,13 @@ const styles = StyleSheet.create({
   eyeBtn: { position: 'absolute', right: 16, top: 14 },
   eyeIcon: { fontSize: 20 },
   errorText: { fontSize: 12, color: colors.danger, marginBottom: 12 },
+  firebaseError: {
+    fontSize: 13,
+    color: colors.danger,
+    marginBottom: 16,
+    textAlign: 'center',
+    fontWeight: '600',
+  },
   rules: { gap: 6, marginBottom: 28 },
   rule: { fontSize: 13, color: colors.grayLight, fontWeight: '600' },
   ruleOk: { color: colors.success },

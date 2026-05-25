@@ -234,17 +234,42 @@ const CountingPage = ({ nativeLang, onBack }) => {
         loadingRef.current = false;
     }, []);
 
-    const playNumber = useCallback(async (n) => {
+    const speakTTS = useCallback((text, n) => {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        // Try fr-CM first, fall back to fr-FR
+        const voices = window.speechSynthesis.getVoices();
+        const v = voices.find(v => v.lang === 'fr-CM') || voices.find(v => v.lang.startsWith('fr'));
+        if (v) u.voice = v;
+        u.lang = 'fr-CM';
+        u.rate = 0.85;
+        setSpeaking(n);
+        u.onend = () => setSpeaking(null);
+        u.onerror = () => setSpeaking(null);
+        window.speechSynthesis.speak(u);
+    }, []);
+
+    const playNumber = useCallback(async (n, medumbaText) => {
         const seg = AUDIO_MAP[n];
-        if (!seg) return; // n=0 not in recording
+
+        // No OGG clip → fall back to TTS
+        if (!seg) {
+            speakTTS(medumbaText, n);
+            return;
+        }
 
         await loadAudio();
-        if (!audioBufferRef.current) return;
+
+        // OGG failed to load → fall back to TTS
+        if (!audioBufferRef.current) {
+            speakTTS(medumbaText, n);
+            return;
+        }
 
         const ctx = getCtx();
         if (ctx.state === 'suspended') await ctx.resume();
 
-        // Stop any currently playing segment
         if (sourceRef.current) {
             try { sourceRef.current.stop(); } catch (_) {}
         }
@@ -256,7 +281,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
         source.onended = () => setSpeaking(null);
         sourceRef.current = source;
         setSpeaking(n);
-    }, [loadAudio]);
+    }, [loadAudio, speakTTS]);
 
     const pick = (opt) => {
         if (picked !== null) return;
@@ -283,22 +308,19 @@ const CountingPage = ({ nativeLang, onBack }) => {
         setQuiz(makeQuiz());
     };
 
-    const SpeakerBtn = ({ n }) => {
-        const hasAudio = AUDIO_MAP[n] != null;
-        const active   = speaking === n;
+    const SpeakerBtn = ({ n, medumba }) => {
+        const active = speaking === n;
         return (
             <button
-                onClick={() => hasAudio ? playNumber(n) : undefined}
-                disabled={!hasAudio}
-                title={hasAudio ? (isFr ? 'Écouter' : 'Listen') : (isFr ? 'Audio non disponible' : 'Audio not available')}
+                onClick={() => playNumber(n, medumba)}
+                title={isFr ? 'Écouter' : 'Listen'}
                 style={{
                     background: active ? '#eff6ff' : '#f8fafc',
-                    border: `2px solid ${active ? '#0891b2' : hasAudio ? '#e2e8f0' : '#f1f5f9'}`,
+                    border: `2px solid ${active ? '#0891b2' : '#e2e8f0'}`,
                     borderRadius: '50%', width: '40px', height: '40px',
-                    cursor: hasAudio ? 'pointer' : 'default',
-                    fontSize: '1.2rem', display: 'flex', alignItems: 'center',
+                    cursor: 'pointer', fontSize: '1.2rem',
+                    display: 'flex', alignItems: 'center',
                     justifyContent: 'center', flexShrink: 0,
-                    opacity: hasAudio ? 1 : 0.35,
                 }}
             >
                 {active ? '🔊' : '🔈'}
@@ -348,7 +370,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     <div style={{ fontSize: '1.05rem', fontWeight: '800', color: '#0891b2' }}>{num.medumba}</div>
                                     <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: '600' }}>{isFr ? num.frEn[0] : num.frEn[1]}</div>
                                 </div>
-                                <SpeakerBtn n={num.n} />
+                                <SpeakerBtn n={num.n} medumba={num.medumba} />
                             </div>
                         ))}
                     </div>
@@ -415,8 +437,8 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     <div style={{ fontSize: '2.8rem', fontWeight: '900', color: '#0891b2', marginBottom: '0.5rem' }}>
                                         {quiz.q.medumba}
                                     </div>
-                                    <button onClick={() => playNumber(quiz.q.n)} disabled={!AUDIO_MAP[quiz.q.n]} title={AUDIO_MAP[quiz.q.n] ? (isFr ? 'Écouter' : 'Listen') : (isFr ? 'Audio non disponible' : 'Audio not available')} style={{ background: '#f0f9ff', border: '2px solid #bae6fd', borderRadius: '99px', padding: '0.4rem 1rem', cursor: AUDIO_MAP[quiz.q.n] ? 'pointer' : 'default', fontSize: '0.85rem', fontWeight: '700', color: '#0891b2', fontFamily: 'inherit', opacity: AUDIO_MAP[quiz.q.n] ? 1 : 0.4 }}>
-                                        🔈 {isFr ? 'Écouter' : 'Listen'}
+                                    <button onClick={() => playNumber(quiz.q.n, quiz.q.medumba)} style={{ background: '#f0f9ff', border: '2px solid #bae6fd', borderRadius: '99px', padding: '0.4rem 1rem', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#0891b2', fontFamily: 'inherit' }}>
+                                        {speaking === quiz.q.n ? '🔊' : '🔈'} {isFr ? 'Écouter' : 'Listen'}
                                     </button>
                                 </div>
 
@@ -468,7 +490,6 @@ const CountingPage = ({ nativeLang, onBack }) => {
                     const num = raw === '' ? null : parseInt(raw, 10);
                     const valid = num !== null && !isNaN(num) && num >= 0 && num <= 1000;
                     const medumba = valid ? toMedumba(num) : null;
-                    const hasAudio = valid && AUDIO_MAP[num] != null;
                     return (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             <div style={{ backgroundColor: '#fff', borderRadius: '20px', border: '2px solid #e2e8f0', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
@@ -509,8 +530,8 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     <div style={{ fontSize: '1rem', fontWeight: '700', color: '#475569', marginBottom: '1rem' }}>
                                         = {num}
                                     </div>
-                                    {hasAudio && (
-                                        <button onClick={() => playNumber(num)} style={{
+                                    {medumba && (
+                                        <button onClick={() => playNumber(num, medumba)} style={{
                                             background: '#f0f9ff', border: '2px solid #bae6fd', borderRadius: '99px',
                                             padding: '0.5rem 1.25rem', cursor: 'pointer', fontSize: '0.9rem',
                                             fontWeight: '700', color: '#0891b2', fontFamily: 'inherit',

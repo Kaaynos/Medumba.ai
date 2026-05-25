@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Image, Animated, StyleSheet, ActivityIndicator } from 'react-native';
 import { colors } from '../../theme/colors';
+import { listenAuthState } from '../../services/authService';
 
 const logo = require('../../../assets/logo.png');
 
@@ -16,15 +17,20 @@ export default function SplashScreen({ navigation }) {
       ])
     ).start();
 
-    const fadeTimer = setTimeout(() => {
-      Animated.timing(opacity, { toValue: 0, duration: 500, useNativeDriver: true }).start();
-    }, 2500);
+    // Wait for Firebase auth state then route accordingly
+    const unsubscribe = listenAuthState((user) => {
+      unsubscribe(); // only need first result
 
-    const navTimer = setTimeout(() => {
-      navigation.replace('Welcome');
-    }, 3000);
+      const fadeTimer = setTimeout(() => {
+        Animated.timing(opacity, { toValue: 0, duration: 500, useNativeDriver: true }).start();
+      }, 2000);
 
-    return () => { clearTimeout(fadeTimer); clearTimeout(navTimer); };
+      const navTimer = setTimeout(() => {
+        navigation.replace(user ? 'Dashboard' : 'Welcome');
+      }, 2500);
+
+      return () => { clearTimeout(fadeTimer); clearTimeout(navTimer); };
+    });
   }, []);
 
   return (
@@ -50,27 +56,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logoWrap: {
-    alignItems: 'center',
-  },
-  logo: {
-    width: 120,
-    height: 120,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '800',
-    color: colors.black,
-    letterSpacing: -0.5,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: colors.textMuted,
-    marginTop: 6,
-  },
-  spinner: {
-    position: 'absolute',
-    bottom: 80,
-  },
+  logoWrap: { alignItems: 'center' },
+  logo: { width: 120, height: 120, marginBottom: 20 },
+  title: { fontSize: 32, fontWeight: '800', color: colors.black, letterSpacing: -0.5 },
+  subtitle: { fontSize: 14, color: colors.textMuted, marginTop: 6 },
+  spinner: { position: 'absolute', bottom: 80 },
 });

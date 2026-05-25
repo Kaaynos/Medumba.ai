@@ -19,7 +19,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1B4FD8"
+        "backgroundColor": "#FFFFFF"
       },
       "edgeToEdgeEnabled": false,
       "package": "com.medumba.app"

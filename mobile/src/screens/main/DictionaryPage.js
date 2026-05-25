@@ -4,6 +4,7 @@ import {
   ActivityIndicator, ScrollView, KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MEDUMBA_VOCAB }       from '../../data/medumbaVocab';
 import { MEDUMBA_EXPRESSIONS } from '../../data/medumbaExpressions';
 import { colors } from '../../theme/colors';
 
@@ -18,15 +19,22 @@ export default function DictionaryPage({ navigation }) {
   const [query,     setQuery]     = useState('');
   const [direction, setDirection] = useState('fr2med');
 
+  // Combined source: simple vocab first, then full expressions (deduplicated)
+  const ALL_WORDS = useMemo(() => {
+    const seen = new Set(MEDUMBA_VOCAB.map(v => v.fr.toLowerCase()));
+    const extras = MEDUMBA_EXPRESSIONS.filter(e => !seen.has(e.fr.toLowerCase()));
+    return [...MEDUMBA_VOCAB, ...extras];
+  }, []);
+
   const results = useMemo(() => {
-    if (!query.trim()) return MEDUMBA_EXPRESSIONS.slice(0, 30);
+    if (!query.trim()) return MEDUMBA_VOCAB; // default: simple words only
     const q = query.toLowerCase();
-    return MEDUMBA_EXPRESSIONS.filter(e =>
+    return ALL_WORDS.filter(e =>
       direction === 'fr2med'
         ? e.fr.toLowerCase().includes(q)
         : e.medumba.toLowerCase().includes(q)
-    ).slice(0, 50);
-  }, [query, direction]);
+    ).slice(0, 60);
+  }, [query, direction, ALL_WORDS]);
 
   const noResults = query.trim().length > 0 && results.length === 0;
 
@@ -133,7 +141,7 @@ export default function DictionaryPage({ navigation }) {
           <Text style={styles.countText}>
             {query
               ? `${results.length} résultat(s)`
-              : `${MEDUMBA_EXPRESSIONS.length} expressions au total`}
+              : `${MEDUMBA_VOCAB.length} mots · recherche dans ${ALL_WORDS.length} entrées`}
           </Text>
 
           {noResults ? (

@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProgressBar from '../../components/ProgressBar';
 import { useApp } from '../../context/AppContext';
 import { colors } from '../../theme/colors';
+import { logoutUser } from '../../services/authService';
 
 const TABS = ['Accueil', 'Classement', 'Défis', 'Premium', 'Profil'];
 const TAB_ICONS = ['🏠', '🏆', '⚡', '💎', '👤'];
@@ -234,7 +235,10 @@ export default function DashboardPage({ navigation }) {
               ))}
             </View>
 
-            <TouchableOpacity style={styles.logoutBtn} onPress={() => navigation.replace('Welcome')}>
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={async () => { await logoutUser(); navigation.replace('Welcome'); }}
+            >
               <Text style={styles.logoutText}>Se déconnecter</Text>
             </TouchableOpacity>
           </View>

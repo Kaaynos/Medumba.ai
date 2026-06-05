@@ -65,8 +65,7 @@ export default function LandingPage({ onStart, onLogin }) {
     const [vw,       setVw]         = useState(() => window.innerWidth);
     const [activeT,  setActiveT]    = useState(0);
 
-    const isMobile = vw < 768;
-    const isSmall  = vw < 480;
+    const isMobile = vw < 680;   // used only for layout direction decisions
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 50);
@@ -89,9 +88,9 @@ export default function LandingPage({ onStart, onLogin }) {
         { name: 'Sophie N.',       role: 'Enseignante, Bafoussam',       avatar: '👩🏿', text: "Les classes en ligne avec les enseignants CEPOM sont d'une qualité exceptionnelle. Je recommande à tous mes élèves." },
     ];
 
-    /* ── reusable styles ── */
-    const P = isMobile ? '2.5rem 1.1rem' : '5rem 3.5rem';
-    const sectionTitle = { fontSize: isSmall ? '1.6rem' : isMobile ? '1.9rem' : '2.5rem', fontWeight: 900, color: '#0f172a' };
+    /* ── reusable fluid styles ── */
+    const P = 'clamp(2.5rem,6vw,5rem) clamp(1.1rem,4vw,3.5rem)';
+    const sectionTitle = { fontSize: 'clamp(1.6rem,4vw,2.5rem)', fontWeight: 900, color: '#0f172a' };
 
     return (
         <div style={{ fontFamily: "'Outfit',system-ui,sans-serif", color: '#0f172a', background: '#fff', overflowX: 'hidden' }}>
@@ -150,26 +149,17 @@ export default function LandingPage({ onStart, onLogin }) {
                 ::-webkit-scrollbar { width:5px; }
                 ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:99px; }
 
-                @media (max-width:480px) {
+                /* ── Fluid grids — no hard breakpoints ── */
+                .stats-grid         { grid-template-columns: repeat(auto-fit, minmax(130px,1fr)) !important; }
+                .feat-grid          { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)) !important; }
+                .class-types-grid   { grid-template-columns: repeat(auto-fit, minmax(150px,1fr)) !important; }
+                .teachers-grid      { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) !important; }
+
+                @media (max-width:520px) {
                     .hero-ctas { flex-direction:column !important; }
                     .hero-ctas button, .hero-ctas .lp-btn-ghost { width:100% !important; }
-                    .stats-grid { grid-template-columns:1fr 1fr !important; gap:.75rem !important; }
-                    .feat-grid  { grid-template-columns:1fr !important; }
-                    .class-types-grid { grid-template-columns:1fr 1fr !important; }
-                    .teachers-grid { grid-template-columns:1fr !important; }
                     .dl-buttons { flex-direction:column !important; }
                     .dl-buttons > div { width:100% !important; }
-                }
-
-                @media (min-width:481px) and (max-width:767px) {
-                    .feat-grid { grid-template-columns:1fr 1fr !important; }
-                    .class-types-grid { grid-template-columns:1fr 1fr !important; }
-                }
-
-                @media (min-width:768px) and (max-width:1023px) {
-                    .feat-grid { grid-template-columns:repeat(3,1fr) !important; }
-                    .class-types-grid { grid-template-columns:repeat(4,1fr) !important; }
-                    .teachers-grid { grid-template-columns:repeat(3,1fr) !important; }
                 }
             `}</style>
 
@@ -180,7 +170,7 @@ export default function LandingPage({ onStart, onLogin }) {
                 backdropFilter: scrolled ? 'blur(16px)' : 'none',
                 borderBottom: scrolled ? '1px solid #e2e8f0' : 'none',
                 transition:'all .3s',
-                padding: isMobile ? '.8rem 1.1rem' : '.8rem 3.5rem',
+                padding: '.8rem clamp(1.1rem,4vw,3.5rem)',
                 display:'flex', alignItems:'center', justifyContent:'space-between',
             }}>
                 <div style={{ display:'flex', alignItems:'center', gap:'.55rem', cursor:'pointer' }} onClick={() => window.scrollTo({ top:0, behavior:'smooth' })}>
@@ -238,7 +228,7 @@ export default function LandingPage({ onStart, onLogin }) {
                 minHeight: '100vh',
                 background:'linear-gradient(145deg,#e8f0fe 0%,#dbeafe 40%,#ede9fe 70%,#fce7f3 100%)',
                 display:'flex', alignItems:'center', justifyContent:'center',
-                padding: isSmall ? '5.5rem .9rem 3rem' : isMobile ? '5.5rem 1.25rem 3.5rem' : '7rem 3.5rem 4rem',
+                padding: 'clamp(5.5rem,8vw,7rem) clamp(.9rem,4vw,3.5rem) clamp(3rem,5vw,4rem)',
                 position:'relative', overflow:'hidden',
             }}>
                 {/* Background blobs */}
@@ -269,18 +259,18 @@ export default function LandingPage({ onStart, onLogin }) {
                     </>
                 )}
 
-                <div style={{ maxWidth:'1140px', width:'100%', display:'flex', flexDirection: isMobile?'column':'row', alignItems:'center', gap: isMobile?'2.5rem':'5rem', zIndex:3 }}>
+                <div style={{ maxWidth:'1140px', width:'100%', display:'flex', flexDirection: isMobile?'column':'row', alignItems:'center', gap: 'clamp(2rem,5vw,5rem)', zIndex:3 }}>
                     {/* Left */}
                     <div style={{ flex:1, minWidth:0 }}>
                         <Reveal>
                             <div style={{ display:'inline-flex', alignItems:'center', gap:'.45rem', background:'linear-gradient(135deg,#eff6ff,#dbeafe)', border:'2px solid #bfdbfe', borderRadius:'99px', padding:'.3rem .9rem', marginBottom:'1.25rem', maxWidth:'100%' }}>
                                 <span style={{ width:'7px', height:'7px', borderRadius:'50%', background:'#22c55e', animation:'pulse-dot 1.8s ease-in-out infinite', display:'inline-block', flexShrink:0 }} />
-                                <span style={{ fontSize: isSmall?'.72rem':'.78rem', fontWeight:700, color:B, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>2 847 apprenants actifs cette semaine</span>
+                                <span style={{ fontSize:'clamp(.68rem,1.8vw,.82rem)', fontWeight:700, color:B, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>2 847 apprenants actifs cette semaine</span>
                             </div>
                         </Reveal>
 
                         <Reveal delay={0.1}>
-                            <h1 style={{ ...sectionTitle, fontSize: isSmall?'1.9rem':isMobile?'2.3rem':'3.4rem', lineHeight:1.1, marginBottom:'1rem' }}>
+                            <h1 style={{ ...sectionTitle, fontSize: 'clamp(1.9rem,5.5vw,3.4rem)', lineHeight:1.1, marginBottom:'1rem' }}>
                                 Apprenez le{' '}
                                 <span style={{
                                     background:`linear-gradient(90deg,${B},${A},#7c3aed,${B})`,
@@ -293,7 +283,7 @@ export default function LandingPage({ onStart, onLogin }) {
                         </Reveal>
 
                         <Reveal delay={0.18}>
-                            <p style={{ fontSize: isSmall?'.9rem':isMobile?'.95rem':'1.05rem', color:'#475569', lineHeight:1.7, marginBottom:'1.75rem', maxWidth:'480px' }}>
+                            <p style={{ fontSize: 'clamp(.88rem,2vw,1.05rem)', color:'#475569', lineHeight:1.7, marginBottom:'1.75rem', maxWidth:'480px' }}>
                                 La première app d'apprentissage de la langue Medumba — leçons gamifiées, classes live avec des enseignants certifiés CEPOM, et IA vocale.
                             </p>
                         </Reveal>
@@ -306,10 +296,10 @@ export default function LandingPage({ onStart, onLogin }) {
                         </Reveal>
 
                         <Reveal delay={0.34}>
-                            <div style={{ display:'flex', gap: isSmall?'1.25rem':'2rem', flexWrap:'wrap' }}>
+                            <div style={{ display:'flex', gap: 'clamp(1rem,3vw,2rem)', flexWrap:'wrap' }}>
                                 {[['17+','Leçons'],['3','Unités'],['100%','Gratuit'],['🇨🇲','Medumba']].map(([n,l]) => (
                                     <div key={l}>
-                                        <div style={{ fontSize: isSmall?'1.3rem':'1.5rem', fontWeight:900, color:B }}>{n}</div>
+                                        <div style={{ fontSize: 'clamp(1.15rem,2.5vw,1.5rem)', fontWeight:900, color:B }}>{n}</div>
                                         <div style={{ fontSize:'.72rem', color:'#64748b', fontWeight:600, marginTop:'1px' }}>{l}</div>
                                     </div>
                                 ))}
@@ -322,7 +312,7 @@ export default function LandingPage({ onStart, onLogin }) {
                         <div style={{ position:'relative', display:'flex', justifyContent:'center' }}>
                             <div style={{ position:'absolute', inset:'-16px', borderRadius:'50%', background:'radial-gradient(circle,rgba(0,86,210,.18) 0%,transparent 70%)', animation:'glow-ring 3s ease-in-out infinite', pointerEvents:'none' }} />
                             <div style={{
-                                width: isSmall?'170px':isMobile?'195px':'250px',
+                                width: 'clamp(160px,26vw,250px)',
                                 aspectRatio:'9/19.5', borderRadius:'36px',
                                 background:`linear-gradient(160deg,${B2},${B},#0891b2)`,
                                 boxShadow:`0 36px 90px rgba(0,86,210,.4),0 0 0 5px rgba(255,255,255,.85),0 0 0 9px rgba(0,86,210,.12)`,
@@ -357,21 +347,21 @@ export default function LandingPage({ onStart, onLogin }) {
             <Wave topColor="transparent" bottomColor="#fff" />
 
             {/* ══════ STATS ══════ */}
-            <section style={{ background:'#fff', padding: isMobile?'2rem 1.1rem':'2.5rem 3.5rem' }}>
+            <section style={{ background:'#fff', padding: 'clamp(2rem,4vw,2.5rem) clamp(1.1rem,4vw,3.5rem)' }}>
                 <Reveal>
-                    <div className="stats-grid" style={{ maxWidth:'860px', margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'1rem', textAlign:'center' }}>
+                    <div className="stats-grid" style={{ maxWidth:'860px', margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'clamp(.75rem,2vw,1rem)', textAlign:'center' }}>
                         {[
                             { target:2847, suffix:'+', label:'Apprenants actifs', emoji:'👥', bg:'#eff6ff' },
                             { target:17,   suffix:'',  label:'Leçons interactives', emoji:'📚', bg:'#f0fdf4' },
                             { target:3,    suffix:'',  label:'Enseignants CEPOM', emoji:'🎓', bg:'#fef3c7' },
                             { target:100,  suffix:'%', label:"Gratuit d'accès", emoji:'🎁', bg:'#fdf4ff' },
                         ].map((s, i) => (
-                            <div key={i} style={{ padding:isMobile?'1rem .75rem':'1.25rem', borderRadius:'18px', background:`linear-gradient(135deg,${s.bg},#fff)`, border:'2px solid #f1f5f9' }}>
-                                <div style={{ fontSize:isMobile?'1.25rem':'1.4rem', marginBottom:'.25rem' }}>{s.emoji}</div>
-                                <div style={{ fontSize:isMobile?'1.5rem':'1.9rem', fontWeight:900, color:B, lineHeight:1 }}>
+                            <div key={i} style={{ padding:'clamp(.75rem,2vw,1.25rem)', borderRadius:'18px', background:`linear-gradient(135deg,${s.bg},#fff)`, border:'2px solid #f1f5f9' }}>
+                                <div style={{ fontSize:'clamp(1.1rem,2.5vw,1.4rem)', marginBottom:'.25rem' }}>{s.emoji}</div>
+                                <div style={{ fontSize:'clamp(1.3rem,3vw,1.9rem)', fontWeight:900, color:B, lineHeight:1 }}>
                                     <Counter target={s.target} suffix={s.suffix} />
                                 </div>
-                                <div style={{ fontSize:isSmall?'.62rem':'.74rem', color:'#64748b', fontWeight:600, marginTop:'4px', lineHeight:1.3 }}>{s.label}</div>
+                                <div style={{ fontSize:'clamp(.6rem,1.4vw,.74rem)', color:'#64748b', fontWeight:600, marginTop:'4px', lineHeight:1.3 }}>{s.label}</div>
                             </div>
                         ))}
                     </div>
@@ -388,12 +378,12 @@ export default function LandingPage({ onStart, onLogin }) {
                             <span style={{ fontSize:'.74rem', fontWeight:800, color:B, letterSpacing:'1px' }}>✦ POURQUOI MEDUMBA.AI</span>
                         </div>
                         <h2 style={sectionTitle}>Tout pour maîtriser le Medumba</h2>
-                        <p style={{ color:'#64748b', fontSize: isMobile?'.92rem':'1rem', maxWidth:'480px', margin:'.65rem auto 0', lineHeight:1.7 }}>
+                        <p style={{ color:'#64748b', fontSize: 'clamp(.88rem,1.8vw,1rem)', maxWidth:'480px', margin:'.65rem auto 0', lineHeight:1.7 }}>
                             Une expérience pensée pour les apprenants modernes — interactive, culturelle et efficace.
                         </p>
                     </Reveal>
 
-                    <div className="feat-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1.1rem' }}>
+                    <div className="feat-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'clamp(.75rem,2vw,1.1rem)' }}>
                         {[
                             { emoji:'🎮', title:'Leçons gamifiées',      desc:'XP, streaks, diamants et combo. Restez motivé grâce à un système de récompenses addictif.',    bg:'linear-gradient(135deg,#eff6ff,#dbeafe)' },
                             { emoji:'🎙', title:'Prononciation vocale',   desc:"Enregistrez votre voix, l'IA analyse votre prononciation et vous donne un score instantané.",  bg:'linear-gradient(135deg,#fef3c7,#fef9c3)' },
@@ -424,12 +414,12 @@ export default function LandingPage({ onStart, onLogin }) {
                             <span style={{ fontSize:'.74rem', fontWeight:800, color:'#7c3aed', letterSpacing:'1px' }}>🎓 CLASSES EN LIGNE</span>
                         </div>
                         <h2 style={sectionTitle}>Apprenez avec de vrais enseignants</h2>
-                        <p style={{ color:'#64748b', fontSize: isMobile?'.92rem':'1rem', maxWidth:'500px', margin:'.65rem auto 0', lineHeight:1.7 }}>
+                        <p style={{ color:'#64748b', fontSize: 'clamp(.88rem,1.8vw,1rem)', maxWidth:'500px', margin:'.65rem auto 0', lineHeight:1.7 }}>
                             Des cours animés par des enseignants certifiés CEPOM — live, replay ou en 1-à-1.
                         </p>
                     </Reveal>
 
-                    <div className="class-types-grid" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'1rem', marginBottom:'3rem' }}>
+                    <div className="class-types-grid" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'clamp(.75rem,2vw,1rem)', marginBottom:'3rem' }}>
                         {[
                             { emoji:'📡', title:'Classes Live',      desc:'En direct, max 30', grad:'linear-gradient(145deg,#0056D2,#0891b2)' },
                             { emoji:'🎬', title:'Replay',            desc:'Archives illimitées', grad:'linear-gradient(145deg,#7c3aed,#a855f7)' },
@@ -437,9 +427,9 @@ export default function LandingPage({ onStart, onLogin }) {
                             { emoji:'🏛', title:'Ateliers Culturels',desc:'Contes & musique',    grad:'linear-gradient(145deg,#15803d,#22c55e)' },
                         ].map((c, i) => (
                             <Reveal key={i} delay={i * 0.07}>
-                                <div className="class-card" style={{ padding:'1.5rem 1.25rem', background:c.grad, color:'#fff', boxShadow:'0 10px 28px rgba(0,0,0,.14)', height:'100%' }}>
-                                    <div style={{ fontSize:isMobile?'1.8rem':'2rem', marginBottom:'.6rem' }}>{c.emoji}</div>
-                                    <div style={{ fontWeight:800, fontSize:isMobile?'.88rem':'.95rem', marginBottom:'.3rem' }}>{c.title}</div>
+                                <div className="class-card" style={{ padding:'clamp(1.1rem,2.5vw,1.5rem) clamp(.9rem,2vw,1.25rem)', background:c.grad, color:'#fff', boxShadow:'0 10px 28px rgba(0,0,0,.14)', height:'100%' }}>
+                                    <div style={{ fontSize:'clamp(1.6rem,3vw,2rem)', marginBottom:'.6rem' }}>{c.emoji}</div>
+                                    <div style={{ fontWeight:800, fontSize:'clamp(.82rem,1.8vw,.95rem)', marginBottom:'.3rem' }}>{c.title}</div>
                                     <div style={{ fontSize:'.75rem', opacity:.85, lineHeight:1.4 }}>{c.desc}</div>
                                 </div>
                             </Reveal>
@@ -449,7 +439,7 @@ export default function LandingPage({ onStart, onLogin }) {
                     <Reveal style={{ textAlign:'center', marginBottom:'1.5rem' }}>
                         <h3 style={{ fontSize: isMobile?'1.1rem':'1.25rem', fontWeight:800, color:'#0f172a' }}>Nos enseignants certifiés CEPOM</h3>
                     </Reveal>
-                    <div className="teachers-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'1.25rem' }}>
+                    <div className="teachers-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'clamp(.9rem,2.5vw,1.25rem)' }}>
                         {[
                             { name:'Prof. Kamgaing J.', level:'Débutant · Intermédiaire', spec:'Grammaire & Phonologie',    rating:'4.9', students:142, avatar:'👨🏿‍🏫', border:'#bfdbfe', bg:'#eff6ff' },
                             { name:'Dr. Feudjio M.',     level:'Intermédiaire · Avancé',  spec:'Littérature & Proverbes',    rating:'4.8', students:98,  avatar:'👩🏾‍🏫', border:'#ddd6fe', bg:'#fdf4ff' },
@@ -496,10 +486,10 @@ export default function LandingPage({ onStart, onLogin }) {
                             <span style={{ fontSize:'.74rem', fontWeight:800, color:'#92400e', letterSpacing:'1px' }}>✦ COMMENT ÇA MARCHE</span>
                         </div>
                         <h2 style={{ ...sectionTitle, marginBottom:'.6rem' }}>Commencez en 3 étapes</h2>
-                        <p style={{ color:'#64748b', fontSize: isMobile?'.9rem':'.98rem', marginBottom: isMobile?'2rem':'3rem', lineHeight:1.7 }}>Simple, rapide, efficace.</p>
+                        <p style={{ color:'#64748b', fontSize: 'clamp(.88rem,1.8vw,.98rem)', marginBottom: 'clamp(2rem,4vw,3rem)', lineHeight:1.7 }}>Simple, rapide, efficace.</p>
                     </Reveal>
 
-                    <div style={{ display:'grid', gridTemplateColumns: isMobile?'1fr':'repeat(3,1fr)', gap: isMobile?'1.5rem':'2rem', position:'relative' }}>
+                    <div style={{ display:'grid', gridTemplateColumns: isMobile?'1fr':'repeat(3,1fr)', gap: 'clamp(1.25rem,3vw,2rem)', position:'relative' }}>
                         {!isMobile && (
                             <>
                                 <div style={{ position:'absolute', top:'35px', left:'34%', width:'32%', height:'2px', backgroundImage:`repeating-linear-gradient(90deg,${B} 0,${B} 7px,transparent 7px,transparent 14px)`, zIndex:0 }} />
@@ -525,7 +515,7 @@ export default function LandingPage({ onStart, onLogin }) {
                     </div>
 
                     <Reveal delay={0.3}>
-                        <button onClick={onStart} className="lp-btn-primary" style={{ marginTop: isMobile?'2rem':'3rem', width: isMobile?'100%':'auto' }}>
+                        <button onClick={onStart} className="lp-btn-primary" style={{ marginTop: 'clamp(2rem,4vw,3rem)', width: isMobile?'100%':'auto' }}>
                             Commencer maintenant — c'est gratuit 🚀
                         </button>
                     </Reveal>
@@ -614,10 +604,10 @@ export default function LandingPage({ onStart, onLogin }) {
                             <div style={{ display:'inline-block', background:'rgba(255,255,255,.14)', borderRadius:'99px', padding:'.3rem 1rem', marginBottom:'.9rem', border:'1px solid rgba(255,255,255,.25)' }}>
                                 <span style={{ fontSize:'.74rem', fontWeight:800, color:'rgba(255,255,255,.9)', letterSpacing:'1px' }}>📱 TÉLÉCHARGER</span>
                             </div>
-                            <h2 style={{ fontSize: isSmall?'1.7rem':isMobile?'2rem':'2.6rem', fontWeight:900, color:'#fff', lineHeight:1.15, marginBottom:'.9rem' }}>
+                            <h2 style={{ fontSize: 'clamp(1.7rem,4vw,2.6rem)', fontWeight:900, color:'#fff', lineHeight:1.15, marginBottom:'.9rem' }}>
                                 Medumba.AI<br />dans votre poche
                             </h2>
-                            <p style={{ color:'rgba(255,255,255,.8)', fontSize: isMobile?'.9rem':'1rem', lineHeight:1.75, marginBottom:'2rem', maxWidth:'400px' }}>
+                            <p style={{ color:'rgba(255,255,255,.8)', fontSize: 'clamp(.88rem,1.8vw,1rem)', lineHeight:1.75, marginBottom:'2rem', maxWidth:'400px' }}>
                                 Apprenez partout — dans le bus, à la maison, en voyage. Disponible sur Android et iOS.
                             </p>
 
@@ -680,7 +670,7 @@ export default function LandingPage({ onStart, onLogin }) {
             </section>
 
             {/* ══════ FOOTER ══════ */}
-            <footer style={{ background:'#0f172a', padding: isMobile?'2.25rem 1.1rem':'3rem 3.5rem', color:'rgba(255,255,255,.5)', fontFamily:"'Outfit',system-ui,sans-serif" }}>
+            <footer style={{ background:'#0f172a', padding: 'clamp(2.25rem,4vw,3rem) clamp(1.1rem,4vw,3.5rem)', color:'rgba(255,255,255,.5)', fontFamily:"'Outfit',system-ui,sans-serif" }}>
                 <div style={{ maxWidth:'1140px', margin:'0 auto' }}>
                     <div style={{ display:'flex', flexDirection: isMobile?'column':'row', gap:'2rem', justifyContent:'space-between', alignItems: isMobile?'flex-start':'center', marginBottom:'1.75rem' }}>
                         <div>

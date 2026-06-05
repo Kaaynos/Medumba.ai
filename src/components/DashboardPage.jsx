@@ -1,4 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { isAdmin } from '../services/adminService';
+import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
 import profileWelcomeVector from '../assets/profile_welcome_vector.png';
 import celebrationImg from '../assets/Auto Layout Vertical.png';
@@ -89,9 +91,10 @@ const WEEKLY_CHALLENGES = [
 
 /* ── small reusable progress bar ── */
 const Bar = ({ value, max, color = '#0056D2' }) => {
+    const { T } = useTheme();
     const pct = Math.min((value / max) * 100, 100);
     return (
-        <div style={{ width: '100%', height: '8px', backgroundColor: '#e2e8f0', borderRadius: '99px', overflow: 'hidden' }}>
+        <div style={{ width: '100%', height: '8px', backgroundColor: T.border, borderRadius: '99px', overflow: 'hidden' }}>
             <div style={{ width: `${pct}%`, height: '100%', backgroundColor: color, borderRadius: '99px', transition: 'width 0.4s ease' }} />
         </div>
     );
@@ -105,10 +108,22 @@ const DashboardPage = ({
     nativeLang   = null,
     learningLang = null,
     profile      = {},  // { name, age, email, proficiency, reason, goals, dailyGoal }
+    onLogout     = null,
+    onAdmin      = null,
+    currentUid   = null,
 }) => {
+    /* ── theme ── */
+    const { isDark, T, toggle: toggleDark } = useTheme();
+
     /* ── local lang override ── */
     const [lang, setLang]           = useState(nativeLang === 'french' ? 'fr' : 'en');
     const isFr                      = lang === 'fr';
+
+    /* ── admin role check ── */
+    const [userIsAdmin, setUserIsAdmin] = useState(false);
+    useEffect(() => {
+      if (currentUid) isAdmin(currentUid).then(setUserIsAdmin);
+    }, [currentUid]);
 
     /* ── profile shorthands ── */
     const userName    = profile.name        || '';
@@ -384,13 +399,13 @@ const DashboardPage = ({
             <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
                 <button onClick={() => setPurchaseFlow('packages')} style={{
                     background: 'none', border: 'none', fontSize: '1.5rem',
-                    cursor: 'pointer', color: '#0f172a', marginBottom: '1.5rem', padding: '0',
+                    cursor: 'pointer', color: T.text, marginBottom: '1.5rem', padding: '0',
                 }}>←</button>
 
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.5rem' }}>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.5rem' }}>
                     {isFr ? 'Mode de paiement 💳' : 'Payment Method 💳'}
                 </h2>
-                <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '1.5rem' }}>
+                <p style={{ fontSize: '0.9rem', color: T.textMuted, marginBottom: '1.5rem' }}>
                     {isFr ? 'Choisissez votre méthode de paiement' : 'Choose your payment method'}
                 </p>
 
@@ -398,7 +413,7 @@ const DashboardPage = ({
                 {selectedPkg && (
                     <div style={{
                         padding: '0.9rem 1.2rem', borderRadius: '14px',
-                        backgroundColor: '#eff6ff', border: '2px solid #bfdbfe',
+                        backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
                         marginBottom: '1.5rem', display: 'flex',
                         justifyContent: 'space-between', alignItems: 'center',
                     }}>
@@ -418,7 +433,7 @@ const DashboardPage = ({
                                 style={{
                                     display: 'flex', alignItems: 'center', gap: '1rem',
                                     padding: '1rem 1.2rem', borderRadius: '16px',
-                                    border: `2px solid ${sel ? '#0056D2' : '#e2e8f0'}`,
+                                    border: `2px solid ${sel ? '#0056D2' : T.border}`,
                                     backgroundColor: sel ? '#eff6ff' : '#fff',
                                     cursor: 'pointer', fontFamily: 'inherit',
                                     transition: 'all 0.15s',
@@ -445,13 +460,13 @@ const DashboardPage = ({
                                 const v = e.target.value.replace(/\D/g,'').slice(0,16);
                                 setCardNum(v.replace(/(.{4})/g,'$1 ').trim());
                             }}
-                            style={inputStyle}
+                            style={inputStyle(T)}
                         />
                         <input
                             placeholder={isFr ? 'Nom sur la carte' : 'Name on card'}
                             value={cardName}
                             onChange={(e) => setCardName(e.target.value)}
-                            style={inputStyle}
+                            style={inputStyle(T)}
                         />
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                             <input
@@ -462,14 +477,14 @@ const DashboardPage = ({
                                     const v = e.target.value.replace(/\D/g,'').slice(0,4);
                                     setCardExpiry(v.length > 2 ? v.slice(0,2)+'/'+v.slice(2) : v);
                                 }}
-                                style={{ ...inputStyle, flex: 1 }}
+                                style={{ ...inputStyle(T), flex: 1 }}
                             />
                             <input
                                 placeholder="CVV"
                                 maxLength={3}
                                 value={cardCvv}
                                 onChange={(e) => setCardCvv(e.target.value.replace(/\D/g,'').slice(0,3))}
-                                style={{ ...inputStyle, flex: 1 }}
+                                style={{ ...inputStyle(T), flex: 1 }}
                             />
                         </div>
                     </div>
@@ -491,19 +506,19 @@ const DashboardPage = ({
         <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }}>
             <button onClick={() => setPurchaseFlow('payment')} style={{
                 background: 'none', border: 'none', fontSize: '1.5rem',
-                cursor: 'pointer', color: '#0f172a', marginBottom: '1.5rem', padding: '0',
+                cursor: 'pointer', color: T.text, marginBottom: '1.5rem', padding: '0',
             }}>←</button>
 
-            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.5rem' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.5rem' }}>
                 {isFr ? 'Récapitulatif 📋' : 'Order Summary 📋'}
             </h2>
-            <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '0.9rem', color: T.textMuted, marginBottom: '1.5rem' }}>
                 {isFr ? 'Vérifiez votre commande avant de confirmer' : 'Review your order before confirming'}
             </p>
 
             {/* Summary card */}
             <div style={{
-                borderRadius: '20px', border: '2px solid #e2e8f0',
+                borderRadius: '20px', border: `2px solid ${T.border}`,
                 overflow: 'hidden', marginBottom: '1.5rem',
             }}>
                 <div style={{
@@ -522,15 +537,15 @@ const DashboardPage = ({
                         payMethod === 'mastercard' && { labelEn: 'Card', labelFr: 'Carte', val: `•••• •••• •••• ${cardNum.slice(-4)}` },
                     ].filter(Boolean).map((row, i) => (
                         <div key={i} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '0.88rem', color: '#64748b', fontWeight: '600' }}>
+                            <span style={{ fontSize: '0.88rem', color: T.textMuted, fontWeight: '600' }}>
                                 {isFr ? row.labelFr : row.labelEn}
                             </span>
-                            <span style={{ fontSize: '0.88rem', color: '#0f172a', fontWeight: '700' }}>{row.val}</span>
+                            <span style={{ fontSize: '0.88rem', color: T.text, fontWeight: '700' }}>{row.val}</span>
                         </div>
                     ))}
-                    <div style={{ height: '1px', backgroundColor: '#e2e8f0' }} />
+                    <div style={{ height: '1px', backgroundColor: T.border }} />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontWeight: '800', color: '#0f172a' }}>Total</span>
+                        <span style={{ fontWeight: '800', color: T.text }}>Total</span>
                         <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '1.1rem' }}>
                             {selectedPkg?.price}
                         </span>
@@ -586,11 +601,11 @@ const DashboardPage = ({
                 }}
             />
 
-            <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.75rem' }}>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: T.text, marginBottom: '0.75rem' }}>
                 {isFr ? 'Succès !' : 'Successful!'}
             </h2>
             <p style={{
-                fontSize: '1rem', color: '#64748b', maxWidth: '280px',
+                fontSize: '1rem', color: T.textMuted, maxWidth: '280px',
                 lineHeight: '1.65', marginBottom: '2.5rem', fontWeight: '500',
             }}>
                 {selectedPkg
@@ -714,7 +729,7 @@ const DashboardPage = ({
                 <div style={{
                     margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
                     padding: '0.9rem 1.2rem', borderRadius: '16px',
-                    backgroundColor: '#eff6ff', border: '2px solid #bfdbfe',
+                    backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
                     fontSize: '0.85rem', fontWeight: '600', color: '#1e40af', lineHeight: 1.5,
                 }}>
                     {getPersonalizedTip(profile, isFr)}
@@ -762,7 +777,7 @@ const DashboardPage = ({
                                 const isChest = lesson.type === 'chest';
                                 const size    = isBoss ? 88 : isChest ? 72 : 68;
                                 const radius  = isBoss ? '20px' : isChest ? '18px' : '50%';
-                                const bg      = done || active ? unit.color : '#e2e8f0';
+                                const bg      = done || active ? unit.color : T.border;
                                 const sh      = done || active ? unit.accent : '#b2b2b2';
                                 const icon    = done ? '✓'
                                     : locked ? (isChest ? '💰' : isBoss ? '🏆' : '🔒')
@@ -854,11 +869,11 @@ const DashboardPage = ({
 
                         {uIdx < units.length - 1 && (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '0.5rem 2rem', color: '#cbd5e1' }}>
-                                <div style={{ flex: 1, height: '2px', backgroundColor: '#e5e7eb' }} />
+                                <div style={{ flex: 1, height: '2px', backgroundColor: T.border }} />
                                 <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#cbd5e1' }}>
                                     {isFr ? 'UNITÉ SUIVANTE' : 'NEXT UNIT'}
                                 </span>
-                                <div style={{ flex: 1, height: '2px', backgroundColor: '#e5e7eb' }} />
+                                <div style={{ flex: 1, height: '2px', backgroundColor: T.border }} />
                             </div>
                         )}
                     </div>
@@ -870,10 +885,10 @@ const DashboardPage = ({
     /* ── LEADERBOARD ── */
     const renderLeaderboard = () => (
         <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.25rem' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.25rem' }}>
                 {isFr ? '🏆 Classement' : '🏆 Leaderboard'}
             </h2>
-            <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '0.88rem', color: T.textMuted, marginBottom: '1.5rem' }}>
                 {isFr ? 'Voyez où vous vous situez cette semaine' : 'See how you rank this week'}
             </p>
 
@@ -885,7 +900,7 @@ const DashboardPage = ({
                 ].map((t) => (
                     <button key={t.id} onClick={() => setLbTab(t.id)} style={{
                         padding: '0.5rem 1.2rem', borderRadius: '99px',
-                        border: `2px solid ${lbTab === t.id ? '#0056D2' : '#e2e8f0'}`,
+                        border: `2px solid ${lbTab === t.id ? '#0056D2' : T.border}`,
                         backgroundColor: lbTab === t.id ? '#eff6ff' : '#fff',
                         color: lbTab === t.id ? '#0056D2' : '#64748b',
                         fontWeight: '700', fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
@@ -902,7 +917,7 @@ const DashboardPage = ({
             }}>
                 {[LEADERBOARD_DATA[1], LEADERBOARD_DATA[0], LEADERBOARD_DATA[2]].map((entry, pi) => {
                     const heights = [90, 120, 75];
-                    const colors  = ['#e2e8f0', '#fbbf24', '#d1d5db'];
+                    const colors  = [T.border, '#fbbf24', '#d1d5db'];
                     const order   = [2, 1, 3];
                     return (
                         <div key={entry.rank} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
@@ -910,8 +925,8 @@ const DashboardPage = ({
                                 width: '44px', height: '44px', borderRadius: '50%',
                                 backgroundColor: colors[pi], display: 'flex',
                                 alignItems: 'center', justifyContent: 'center',
-                                fontSize: '1.2rem', fontWeight: '800', color: '#0f172a',
-                                border: `3px solid ${pi === 1 ? '#f59e0b' : '#e2e8f0'}`,
+                                fontSize: '1.2rem', fontWeight: '800', color: T.text,
+                                border: `3px solid ${pi === 1 ? '#f59e0b' : T.border}`,
                             }}>
                                 {entry.badge || entry.name[0]}
                             </div>
@@ -934,13 +949,13 @@ const DashboardPage = ({
             </div>
 
             {/* Full list */}
-            <div style={{ borderRadius: '16px', border: '2px solid #e2e8f0', overflow: 'hidden' }}>
+            <div style={{ borderRadius: '16px', border: `2px solid ${T.border}`, overflow: 'hidden' }}>
                 {LEADERBOARD_DATA.map((entry, i) => (
                     <div key={entry.rank} style={{
                         display: 'flex', alignItems: 'center', gap: '0.75rem',
                         padding: '0.85rem 1.1rem',
                         backgroundColor: entry.you ? '#eff6ff' : i % 2 === 0 ? '#fff' : '#fafafa',
-                        borderBottom: i < LEADERBOARD_DATA.length - 1 ? '1px solid #f1f5f9' : 'none',
+                        borderBottom: i < LEADERBOARD_DATA.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                     }}>
                         <span style={{
                             width: '24px', textAlign: 'center',
@@ -951,7 +966,7 @@ const DashboardPage = ({
                         </span>
                         <div style={{
                             width: '32px', height: '32px', borderRadius: '50%',
-                            backgroundColor: entry.you ? '#0056D2' : '#e2e8f0',
+                            backgroundColor: entry.you ? '#0056D2' : T.border,
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             fontSize: '0.82rem', fontWeight: '800',
                             color: entry.you ? '#fff' : '#334155',
@@ -976,10 +991,10 @@ const DashboardPage = ({
     /* ── CHALLENGE ── */
     const renderChallenge = () => (
         <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.25rem' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.25rem' }}>
                 {isFr ? '⚡ Défis' : '⚡ Challenges'}
             </h2>
-            <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '0.88rem', color: T.textMuted, marginBottom: '1.5rem' }}>
                 {isFr ? 'Relevez des défis pour gagner des récompenses' : 'Complete challenges to earn rewards'}
             </p>
 
@@ -1009,7 +1024,7 @@ const DashboardPage = ({
             </div>
 
             {/* Daily */}
-            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: T.text, marginBottom: '1rem' }}>
                 {isFr ? '📅 Défis du jour' : '📅 Daily Challenges'}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
@@ -1018,12 +1033,12 @@ const DashboardPage = ({
                     return (
                         <div key={ch.id} style={{
                             padding: '1rem 1.25rem', borderRadius: '16px',
-                            border: `2px solid ${done ? '#bbf7d0' : '#e2e8f0'}`,
+                            border: `2px solid ${done ? '#bbf7d0' : T.border}`,
                             backgroundColor: done ? '#f0fdf4' : '#fff',
                         }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
                                 <span style={{ fontSize: '1.4rem' }}>{ch.icon}</span>
-                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' }}>
+                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
                                     {isFr ? ch.titleFr : ch.titleEn}
                                 </span>
                                 <span style={{
@@ -1034,7 +1049,7 @@ const DashboardPage = ({
                                     +{ch.reward} XP
                                 </span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#64748b', marginBottom: '0.4rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.4rem' }}>
                                 <span>{ch.progress} / {ch.total}</span>
                                 {done && <span style={{ color: '#16a34a', fontWeight: '700' }}>✓ {isFr ? 'Terminé' : 'Done'}</span>}
                             </div>
@@ -1045,7 +1060,7 @@ const DashboardPage = ({
             </div>
 
             {/* Weekly */}
-            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: T.text, marginBottom: '1rem' }}>
                 {isFr ? '📆 Défis de la semaine' : '📆 Weekly Challenges'}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -1054,23 +1069,23 @@ const DashboardPage = ({
                     return (
                         <div key={ch.id} style={{
                             padding: '1rem 1.25rem', borderRadius: '16px',
-                            border: `2px solid ${done ? '#bbf7d0' : '#e2e8f0'}`,
+                            border: `2px solid ${done ? '#bbf7d0' : T.border}`,
                             backgroundColor: done ? '#f0fdf4' : '#fff',
                         }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
                                 <span style={{ fontSize: '1.4rem' }}>{ch.icon}</span>
-                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' }}>
+                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
                                     {isFr ? ch.titleFr : ch.titleEn}
                                 </span>
                                 <span style={{
                                     padding: '0.25rem 0.65rem', borderRadius: '99px',
-                                    backgroundColor: '#eff6ff', color: '#0056D2',
+                                    backgroundColor: T.blueTint, color: '#0056D2',
                                     fontSize: '0.75rem', fontWeight: '800',
                                 }}>
                                     💎 {ch.reward}
                                 </span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#64748b', marginBottom: '0.4rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.4rem' }}>
                                 <span>{ch.progress} / {ch.total}</span>
                                 {done && <span style={{ color: '#16a34a', fontWeight: '700' }}>✓ {isFr ? 'Terminé' : 'Done'}</span>}
                             </div>
@@ -1118,14 +1133,14 @@ const DashboardPage = ({
                 </div>
 
                 {/* Packages */}
-                <h3 style={{ fontSize: '1rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: '800', color: T.text, marginBottom: '1rem' }}>
                     {isFr ? 'Choisissez un forfait' : 'Choose a package'}
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
                     {GEM_PACKAGES.map((pkg) => (
                         <div key={pkg.id} style={{
                             padding: '1rem 1.25rem', borderRadius: '16px',
-                            border: `2px solid ${pkg.popular ? '#0056D2' : '#e2e8f0'}`,
+                            border: `2px solid ${pkg.popular ? '#0056D2' : T.border}`,
                             backgroundColor: pkg.popular ? '#eff6ff' : '#fff',
                             display: 'flex', alignItems: 'center', gap: '0.75rem',
                             position: 'relative',
@@ -1144,10 +1159,10 @@ const DashboardPage = ({
                             )}
                             <span style={{ fontSize: '1.75rem' }}>💎</span>
                             <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: '800', fontSize: '1rem', color: '#0f172a' }}>
+                                <div style={{ fontWeight: '800', fontSize: '1rem', color: T.text }}>
                                     {pkg.gems.toLocaleString()} {isFr ? 'diamants' : 'diamonds'}
                                 </div>
-                                <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: '600' }}>
+                                <div style={{ fontSize: '0.78rem', color: T.textMuted, fontWeight: '600' }}>
                                     {isFr ? `Environ ${(pkg.gems / parseFloat(pkg.price.slice(1))).toFixed(0)} par $` : `~${(pkg.gems / parseFloat(pkg.price.slice(1))).toFixed(0)} per $`}
                                 </div>
                             </div>
@@ -1169,9 +1184,9 @@ const DashboardPage = ({
                 {/* Perks */}
                 <div style={{
                     padding: '1.25rem', borderRadius: '16px',
-                    border: '2px solid #e2e8f0', backgroundColor: '#fafafa',
+                    border: `2px solid ${T.border}`, backgroundColor: T.surface2,
                 }}>
-                    <h4 style={{ fontWeight: '800', fontSize: '0.9rem', color: '#0f172a', marginBottom: '0.75rem' }}>
+                    <h4 style={{ fontWeight: '800', fontSize: '0.9rem', color: T.text, marginBottom: '0.75rem' }}>
                         {isFr ? '💡 À quoi servent les diamants ?' : '💡 What can diamonds do?'}
                     </h4>
                     {[
@@ -1183,7 +1198,7 @@ const DashboardPage = ({
                         <div key={i} style={{
                             display: 'flex', alignItems: 'center', gap: '0.65rem',
                             padding: '0.4rem 0',
-                            borderBottom: i < 3 ? '1px solid #e2e8f0' : 'none',
+                            borderBottom: i < 3 ? `1px solid ${T.border}` : 'none',
                         }}>
                             <span>{perk.icon}</span>
                             <span style={{ fontSize: '0.85rem', color: '#334155', fontWeight: '600' }}>
@@ -1209,19 +1224,19 @@ const DashboardPage = ({
                 {isMobile && (
                     <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem' }}>
                         <div style={{ flex: 1 }}>
-                            <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#94a3b8', letterSpacing: '0.5px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
+                            <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, letterSpacing: '0.5px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
                                 {isFr ? 'Langue app' : 'App language'}
                             </div>
-                            <select value={lang} onChange={(e) => setLang(e.target.value)} style={selectStyle}>
+                            <select value={lang} onChange={(e) => setLang(e.target.value)} style={selectStyle(T)}>
                                 <option value="en">🇺🇸 English</option>
                                 <option value="fr">🇫🇷 Français</option>
                             </select>
                         </div>
                         <div style={{ flex: 1 }}>
-                            <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#94a3b8', letterSpacing: '0.5px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
+                            <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, letterSpacing: '0.5px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
                                 {isFr ? 'J\'apprends' : 'Learning'}
                             </div>
-                            <select value={learnLang} onChange={(e) => setLearnLang(e.target.value)} style={{ ...selectStyle, border: '2px solid #bfdbfe', backgroundColor: '#eff6ff', color: '#0056D2' }}>
+                            <select value={learnLang} onChange={(e) => setLearnLang(e.target.value)} style={{ ...selectStyle(T), border: '2px solid #bfdbfe', backgroundColor: T.blueTint, color: '#0056D2' }}>
                                 <option value="medumba">🇨🇲 Medumba</option>
                                 <option value="english">🇬🇧 English</option>
                             </select>
@@ -1253,7 +1268,7 @@ const DashboardPage = ({
                         )}
                     </div>
                     {/* Overlapping avatar */}
-                    <div style={{ backgroundColor: '#fff', padding: '0 1.5rem 1.25rem', position: 'relative' }}>
+                    <div style={{ backgroundColor: T.surface, padding: '0 1.5rem 1.25rem', position: 'relative' }}>
                         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '1rem', marginTop: '-2.25rem', marginBottom: '1rem' }}>
                             <div style={{
                                 width: '72px', height: '72px', borderRadius: '50%',
@@ -1272,7 +1287,7 @@ const DashboardPage = ({
                                     }}>📊 {isFr ? profMeta.fr : profMeta.en}</span>
                                     <span style={{
                                         fontSize: '0.72rem', fontWeight: '800', color: '#0056D2',
-                                        backgroundColor: '#eff6ff', border: '1.5px solid #bfdbfe',
+                                        backgroundColor: T.blueTint, border: '1.5px solid #bfdbfe',
                                         borderRadius: '99px', padding: '0.15rem 0.6rem',
                                     }}>{learnLang === 'english' ? '🇬🇧 English' : '🇨🇲 Medumba'}</span>
                                 </div>
@@ -1280,7 +1295,7 @@ const DashboardPage = ({
                         </div>
 
                         {/* ── Personal info rows ── */}
-                        <h3 style={{ fontSize: '0.82rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.65rem' }}>
+                        <h3 style={{ fontSize: '0.82rem', fontWeight: '800', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.65rem' }}>
                             {isFr ? 'Informations personnelles' : 'Personal information'}
                         </h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
@@ -1294,13 +1309,13 @@ const DashboardPage = ({
                                 <div key={i} style={{
                                     display: 'flex', alignItems: 'center', gap: '0.75rem',
                                     padding: '0.75rem 0',
-                                    borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none',
+                                    borderBottom: i < arr.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                                 }}>
                                     <span style={{ fontSize: '1rem', flexShrink: 0, width: '22px', textAlign: 'center' }}>{row.icon}</span>
-                                    <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '600', width: '100px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '600', width: '100px', flexShrink: 0 }}>
                                         {isFr ? row.labelFr : row.labelEn}
                                     </span>
-                                    <span style={{ fontSize: '0.88rem', fontWeight: '700', color: '#0f172a', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    <span style={{ fontSize: '0.88rem', fontWeight: '700', color: T.text, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                         {row.value}
                                     </span>
                                 </div>
@@ -1332,7 +1347,7 @@ const DashboardPage = ({
                 )}
 
                 {/* ── Stats ── */}
-                <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.85rem' }}>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, marginBottom: '0.85rem' }}>
                     {isFr ? '📊 Mes Statistiques' : '📊 My Stats'}
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
@@ -1344,13 +1359,13 @@ const DashboardPage = ({
                     ].map((stat, i) => (
                         <div key={i} style={{
                             padding: '1rem', borderRadius: '14px',
-                            border: '2px solid #e2e8f0', backgroundColor: '#fff', textAlign: 'center',
+                            border: `2px solid ${T.border}`, backgroundColor: T.surface, textAlign: 'center',
                         }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '0.3rem' }}>{stat.icon}</div>
                             <div style={{ fontWeight: '800', fontSize: '1.1rem', color: '#0056D2' }}>
                                 {isFr ? stat.valFr : stat.valEn}
                             </div>
-                            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: '600', marginTop: '2px' }}>
+                            <div style={{ fontSize: '0.72rem', color: T.textMuted, fontWeight: '600', marginTop: '2px' }}>
                                 {isFr ? stat.labelFr : stat.labelEn}
                             </div>
                         </div>
@@ -1358,37 +1373,84 @@ const DashboardPage = ({
                 </div>
 
                 {/* ── Settings ── */}
-                <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.85rem' }}>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, marginBottom: '0.85rem' }}>
                     {isFr ? '⚙️ Paramètres' : '⚙️ Settings'}
                 </h3>
-                <div style={{ borderRadius: '16px', border: '2px solid #e2e8f0', overflow: 'hidden', marginBottom: '1rem' }}>
+                <div style={{ borderRadius: '16px', border: `2px solid ${T.border}`, overflow: 'hidden', marginBottom: '1rem' }}>
+                    <style>{`
+                        @keyframes toggle-slide { from{transform:translateX(0);} to{transform:translateX(20px);} }
+                    `}</style>
+                    {/* Dark Mode row — functional toggle */}
+                    <div onClick={toggleDark} style={{
+                        display: 'flex', alignItems: 'center', gap: '0.75rem',
+                        padding: '0.9rem 1.1rem', cursor: 'pointer', backgroundColor: T.surface,
+                        borderBottom: `1px solid ${T.borderSub}`,
+                    }}>
+                        <span style={{ fontSize: '1.1rem' }}>{isDark ? '☀️' : '🌙'}</span>
+                        <span style={{ flex: 1, fontWeight: '600', fontSize: '0.9rem', color: T.text }}>
+                            {isFr ? 'Mode Sombre' : 'Dark Mode'}
+                        </span>
+                        {/* Toggle pill */}
+                        <div style={{
+                            width: '44px', height: '24px', borderRadius: '99px', flexShrink: 0,
+                            backgroundColor: isDark ? '#0056D2' : T.border,
+                            position: 'relative', transition: 'background-color 0.25s',
+                        }}>
+                            <div style={{
+                                position: 'absolute', top: '3px',
+                                left: isDark ? '21px' : '3px',
+                                width: '18px', height: '18px', borderRadius: '50%',
+                                backgroundColor: '#fff',
+                                boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                                transition: 'left 0.25s cubic-bezier(0.4,0,0.2,1)',
+                            }} />
+                        </div>
+                    </div>
                     {[
                         { icon: '🔔', en: 'Notifications',      fr: 'Notifications'        },
-                        { icon: '🌙', en: 'Dark Mode',          fr: 'Mode Sombre'          },
                         { icon: '🔒', en: 'Privacy & Security', fr: 'Confidentialité'      },
                         { icon: '📖', en: 'About Medumba',      fr: 'À propos de Medumba'  },
                     ].map((item, i, arr) => (
                         <div key={i} style={{
                             display: 'flex', alignItems: 'center', gap: '0.75rem',
-                            padding: '0.9rem 1.1rem', cursor: 'pointer', backgroundColor: '#fff',
-                            borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none',
+                            padding: '0.9rem 1.1rem', cursor: 'pointer', backgroundColor: T.surface,
+                            borderBottom: i < arr.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                         }}>
                             <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
-                            <span style={{ flex: 1, fontWeight: '600', fontSize: '0.9rem', color: '#334155' }}>
+                            <span style={{ flex: 1, fontWeight: '600', fontSize: '0.9rem', color: T.text }}>
                                 {isFr ? item.fr : item.en}
                             </span>
-                            <span style={{ color: '#9ca3af' }}>›</span>
+                            <span style={{ color: T.textSub }}>›</span>
                         </div>
                     ))}
                 </div>
 
+                {/* Admin button - visible only for admins */}
+                {userIsAdmin && onAdmin && (
+                    <button
+                        onClick={onAdmin}
+                        style={{
+                            width: '100%', padding: '0.9rem', borderRadius: '14px',
+                            border: '2px solid #1B4FD8', backgroundColor: T.blueTint,
+                            color: '#1B4FD8', fontWeight: '800', fontSize: '0.9rem',
+                            cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.3px',
+                            marginBottom: '0.75rem',
+                        }}
+                    >
+                        🛡️ {isFr ? 'Panel Administrateur' : 'Admin Panel'}
+                    </button>
+                )}
+
                 {/* Logout */}
-                <button style={{
-                    width: '100%', padding: '0.9rem', borderRadius: '14px',
-                    border: '2px solid #fee2e2', backgroundColor: '#fff',
-                    color: '#ef4444', fontWeight: '800', fontSize: '0.9rem',
-                    cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.3px',
-                }}>
+                <button
+                    onClick={onLogout}
+                    style={{
+                        width: '100%', padding: '0.9rem', borderRadius: '14px',
+                        border: '2px solid #fee2e2', backgroundColor: T.surface,
+                        color: '#ef4444', fontWeight: '800', fontSize: '0.9rem',
+                        cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.3px',
+                    }}
+                >
                     🚪 {isFr ? 'Se déconnecter' : 'Log out'}
                 </button>
             </div>
@@ -1399,22 +1461,22 @@ const DashboardPage = ({
     const renderRightPanel = () => (
         <aside style={{
             width: '272px', minWidth: '272px',
-            borderLeft: '2px solid #e5e7eb', padding: '1.5rem 1.1rem',
+            borderLeft: `2px solid ${T.border}`, padding: '1.5rem 1.1rem',
             display: 'flex', flexDirection: 'column', gap: '1.1rem',
-            backgroundColor: '#fff', overflowY: 'auto',
+            backgroundColor: T.surface, overflowY: 'auto',
         }}>
             {/* Daily goal */}
-            <div style={{ padding: '1.1rem 1.2rem', borderRadius: '16px', border: '2px solid #e5e7eb' }}>
+            <div style={{ padding: '1.1rem 1.2rem', borderRadius: '16px', border: `2px solid ${T.border}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
-                    <span style={{ fontWeight: '800', fontSize: '0.88rem', color: '#0f172a' }}>
+                    <span style={{ fontWeight: '800', fontSize: '0.88rem', color: T.text }}>
                         {isFr ? 'Objectif du jour' : 'Daily Goal'}
                     </span>
                     <span style={{ fontSize: '1.1rem' }}>🎯</span>
                 </div>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '600', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '0.7rem', color: T.textSub, fontWeight: '600', marginBottom: '0.5rem' }}>
                     {goalCfg.time} {isFr ? 'min / jour' : 'min / day'}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#64748b', marginBottom: '0.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: T.textMuted, marginBottom: '0.5rem' }}>
                     <span>0 / {goalCfg.xp} XP</span>
                     <span style={{ fontWeight: '700', color: '#0056D2' }}>0%</span>
                 </div>
@@ -1436,7 +1498,7 @@ const DashboardPage = ({
                             <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                 <div style={{
                                     width: '28px', height: '28px', borderRadius: '50%',
-                                    backgroundColor: on ? '#f59e0b' : '#e2e8f0',
+                                    backgroundColor: on ? '#f59e0b' : T.border,
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     fontSize: on ? '0.8rem' : '0',
                                 }}>
@@ -1450,9 +1512,9 @@ const DashboardPage = ({
             </div>
 
             {/* Leaderboard teaser */}
-            <div style={{ padding: '1.1rem 1.2rem', borderRadius: '16px', border: '2px solid #e5e7eb' }}>
+            <div style={{ padding: '1.1rem 1.2rem', borderRadius: '16px', border: `2px solid ${T.border}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <span style={{ fontWeight: '800', fontSize: '0.88rem', color: '#0f172a' }}>
+                    <span style={{ fontWeight: '800', fontSize: '0.88rem', color: T.text }}>
                         {isFr ? 'Classement' : 'Leaderboard'}
                     </span>
                     <span style={{ fontSize: '1.1rem' }}>🏆</span>
@@ -1461,7 +1523,7 @@ const DashboardPage = ({
                     <div key={entry.rank} style={{
                         display: 'flex', alignItems: 'center', gap: '0.55rem',
                         padding: '0.45rem 0',
-                        borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none',
+                        borderBottom: i < arr.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                     }}>
                         <span style={{ fontSize: '1rem' }}>{entry.badge}</span>
                         <span style={{ flex: 1, fontWeight: '600', fontSize: '0.82rem', color: '#334155' }}>{entry.name}</span>
@@ -1473,7 +1535,7 @@ const DashboardPage = ({
                     style={{
                         marginTop: '0.75rem', width: '100%', padding: '0.5rem',
                         borderRadius: '8px', backgroundColor: 'transparent',
-                        border: '2px solid #e5e7eb', color: '#0056D2',
+                        border: `2px solid ${T.border}`, color: '#0056D2',
                         fontWeight: '700', fontSize: '0.78rem', cursor: 'pointer',
                         fontFamily: 'inherit', letterSpacing: '0.5px',
                     }}
@@ -1496,7 +1558,7 @@ const DashboardPage = ({
                 <button
                     onClick={() => setActiveNav('premium')}
                     style={{
-                        backgroundColor: '#fff', color: '#0056D2',
+                        backgroundColor: T.surface, color: '#0056D2',
                         width: '100%', padding: '0.6rem', borderRadius: '10px',
                         fontWeight: '800', fontSize: '0.82rem', border: 'none',
                         cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.5px',
@@ -1551,16 +1613,39 @@ const DashboardPage = ({
         const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
         return (
             <div style={{
-                width: '100%', height: '100vh', backgroundColor: '#f8fafc',
+                width: '100%', height: '100vh', backgroundColor: T.bg,
                 display: 'flex', flexDirection: 'column', alignItems: 'center',
                 justifyContent: 'center', padding: '2rem 1.5rem', textAlign: 'center',
                 fontFamily: "'Outfit', system-ui, sans-serif", gap: '1.25rem',
+                position: 'relative', overflow: 'hidden',
             }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#0056D2', margin: 0 }}>
+                <style>{`
+                    @keyframes lc-pop  { 0%{transform:scale(0.7);opacity:0;} 65%{transform:scale(1.06);} 100%{transform:scale(1);opacity:1;} }
+                    @keyframes lc-fade { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+                    @keyframes xp-float { 0%{opacity:0;transform:translateY(0) scale(0.6);} 25%{opacity:1;transform:translateY(-12px) scale(1.1);} 70%{opacity:1;transform:translateY(-30px) scale(1);} 100%{opacity:0;transform:translateY(-52px) scale(0.9);} }
+                `}</style>
+
+                {/* Floating XP badge */}
+                {res.xp > 0 && (
+                    <div style={{
+                        position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)',
+                        pointerEvents: 'none', zIndex: 10,
+                        animation: 'xp-float 1.8s ease-out 0.3s both',
+                        backgroundColor: '#fef3c7', border: '2.5px solid #f59e0b',
+                        borderRadius: '99px', padding: '0.45rem 1.1rem',
+                        fontSize: '1.1rem', fontWeight: '900', color: '#d97706',
+                        whiteSpace: 'nowrap',
+                        boxShadow: '0 4px 16px rgba(245,158,11,0.35)',
+                    }}>
+                        ⚡ +{res.xp} XP
+                    </div>
+                )}
+
+                <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#0056D2', margin: 0, animation: 'lc-fade 0.5s ease-out both' }}>
                     {isFr ? 'Leçon terminée !' : 'Lesson completed!'}
                 </h1>
-                <img src={celebrationImg} alt="Celebration" style={{ width: '240px', maxWidth: '80%', height: 'auto' }} />
-                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: '#0056D2', borderRadius: '16px', padding: '1rem', color: '#fff' }}>
+                <img src={celebrationImg} alt="Celebration" style={{ width: '240px', maxWidth: '80%', height: 'auto', animation: 'lc-pop 0.55s cubic-bezier(0.175,0.885,0.32,1.275) 0.1s both' }} />
+                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: '#0056D2', borderRadius: '16px', padding: '1rem', color: '#fff', animation: 'lc-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s both' }}>
                     <div style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.8, marginBottom: '0.4rem' }}>
                         {isFr ? 'Diamants' : 'Diamonds'}
                     </div>
@@ -1568,23 +1653,28 @@ const DashboardPage = ({
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
                     {[
-                        { label: 'Total XP',                    value: res.xp,              bg: '#f59e0b', icon: '⚡' },
-                        { label: isFr ? 'Temps' : 'Time',       value: formatTime(res.time), bg: '#22c55e', icon: '⏱' },
-                        { label: isFr ? 'Précision' : 'Accuracy', value: `${res.accuracy}%`, bg: '#ef4444', icon: '🎯' },
+                        { label: 'Total XP',                      value: res.xp,               bg: '#f59e0b', icon: '⚡', delay: '0.3s' },
+                        { label: isFr ? 'Temps' : 'Time',         value: formatTime(res.time),  bg: '#22c55e', icon: '⏱', delay: '0.4s' },
+                        { label: isFr ? 'Précision' : 'Accuracy', value: `${res.accuracy}%`,    bg: '#ef4444', icon: '🎯', delay: '0.5s' },
                     ].map(s => (
-                        <div key={s.label} style={{ flex: 1, backgroundColor: s.bg, borderRadius: '14px', padding: '0.75rem 0.5rem', color: '#fff', textAlign: 'center' }}>
+                        <div key={s.label} style={{ flex: 1, backgroundColor: s.bg, borderRadius: '14px', padding: '0.75rem 0.5rem', color: '#fff', textAlign: 'center', animation: `lc-pop 0.45s cubic-bezier(0.175,0.885,0.32,1.275) ${s.delay} both` }}>
                             <div style={{ fontSize: '1.2rem' }}>{s.icon}</div>
                             <div style={{ fontSize: '1rem', fontWeight: '900' }}>{s.value}</div>
                             <div style={{ fontSize: '0.65rem', fontWeight: '700', opacity: 0.85 }}>{s.label}</div>
                         </div>
                     ))}
                 </div>
-                <button onClick={() => setLessonFlow('daily_mission')} style={{
-                    width: '100%', maxWidth: '320px', backgroundColor: '#0056D2', color: '#fff',
-                    padding: '1.1rem', borderRadius: '9999px', fontSize: '1rem', fontWeight: '700',
-                    border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                    boxShadow: '0 8px 20px rgba(0,86,210,0.35)',
-                }}>
+                <button onClick={() => setLessonFlow('daily_mission')}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,86,210,0.5)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,86,210,0.35)'; }}
+                    style={{
+                        width: '100%', maxWidth: '320px', backgroundColor: '#0056D2', color: '#fff',
+                        padding: '1.1rem', borderRadius: '9999px', fontSize: '1rem', fontWeight: '700',
+                        border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                        boxShadow: '0 8px 20px rgba(0,86,210,0.35)',
+                        transition: 'transform 0.15s, box-shadow 0.15s',
+                        animation: 'lc-fade 0.5s ease-out 0.55s both',
+                    }}>
                     {isFr ? 'Continuer →' : 'Continue →'}
                 </button>
             </div>
@@ -1602,7 +1692,7 @@ const DashboardPage = ({
         ];
         return (
             <div style={{
-                width: '100%', height: '100vh', backgroundColor: '#f8fafc',
+                width: '100%', height: '100vh', backgroundColor: T.bg,
                 display: 'flex', flexDirection: 'column', alignItems: 'center',
                 padding: '2.5rem 1.5rem', fontFamily: "'Outfit', system-ui, sans-serif", overflowY: 'auto',
             }}>
@@ -1612,20 +1702,20 @@ const DashboardPage = ({
                 <div style={{ width: '100%', maxWidth: '360px', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
                     {missions.map(m => (
                         <div key={m.labelEn} style={{
-                            backgroundColor: '#fff', borderRadius: '16px', padding: '1rem 1.25rem',
+                            backgroundColor: T.surface, borderRadius: '16px', padding: '1rem 1.25rem',
                             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
                             display: 'flex', alignItems: 'center', gap: '1rem',
                         }}>
                             <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{m.icon}</span>
                             <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: '#0f172a', marginBottom: '0.4rem' }}>
+                                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: T.text, marginBottom: '0.4rem' }}>
                                     {isFr ? m.labelFr : m.labelEn}
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <div style={{ flex: 1, height: '8px', backgroundColor: '#e2e8f0', borderRadius: '99px', overflow: 'hidden' }}>
+                                    <div style={{ flex: 1, height: '8px', backgroundColor: T.border, borderRadius: '99px', overflow: 'hidden' }}>
                                         <div style={{ height: '100%', width: `${Math.min((m.current / m.total) * 100, 100)}%`, backgroundColor: m.color, borderRadius: '99px', transition: 'width 0.5s ease' }} />
                                     </div>
-                                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#64748b', whiteSpace: 'nowrap' }}>
+                                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: T.textMuted, whiteSpace: 'nowrap' }}>
                                         {m.current} / {m.total}
                                     </span>
                                 </div>
@@ -1654,19 +1744,24 @@ const DashboardPage = ({
         const checked  = days.map((_, i) => i <= todayIdx && (todayIdx - i) < streak);
         return (
             <div style={{
-                width: '100%', height: '100vh', backgroundColor: '#fff',
+                width: '100%', height: '100vh', backgroundColor: T.surface,
                 display: 'flex', flexDirection: 'column', alignItems: 'center',
                 justifyContent: 'center', padding: '2rem 1.5rem', textAlign: 'center',
                 fontFamily: "'Outfit', system-ui, sans-serif", gap: '1.25rem',
             }}>
-                <span style={{ fontSize: '5rem', lineHeight: 1 }}>🔥</span>
-                <h1 style={{ fontSize: '1.9rem', fontWeight: '900', color: '#0056D2', margin: 0 }}>
+                <style>{`
+                    @keyframes flame-bounce { 0%,100%{transform:scale(1) rotate(-3deg);} 30%{transform:scale(1.2) rotate(3deg);} 60%{transform:scale(1.1) rotate(-2deg);} }
+                    @keyframes flame-glow   { 0%,100%{filter:drop-shadow(0 0 0px #f97316);} 50%{filter:drop-shadow(0 0 18px #f97316);} }
+                    @keyframes streak-pop   { 0%{transform:scale(0.6);opacity:0;} 65%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+                `}</style>
+                <span style={{ fontSize: '5rem', lineHeight: 1, animation: 'flame-bounce 0.8s ease-in-out infinite, flame-glow 1.2s ease-in-out infinite' }}>🔥</span>
+                <h1 style={{ fontSize: '1.9rem', fontWeight: '900', color: '#0056D2', margin: 0, animation: 'streak-pop 0.55s cubic-bezier(0.175,0.885,0.32,1.275) 0.15s both' }}>
                     {isFr ? `${streak} jours de suite !` : `${streak} days straight!`}
                 </h1>
                 {/* Week calendar */}
-                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: '#f8fafc', borderRadius: '18px', padding: '1.25rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: T.bg, borderRadius: '18px', padding: '1.25rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '0.75rem' }}>
-                        {days.map(d => <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: '#64748b' }}>{d}</span>)}
+                        {days.map(d => <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: T.textMuted }}>{d}</span>)}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         {checked.map((done, i) => (
@@ -1680,7 +1775,7 @@ const DashboardPage = ({
                             </div>
                         ))}
                     </div>
-                    <hr style={{ margin: '1rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
+                    <hr style={{ margin: '1rem 0', border: 'none', borderTop: `1px solid ${T.border}` }} />
                     <p style={{ margin: 0, fontSize: '0.88rem', color: '#475569', fontWeight: '600', lineHeight: 1.6 }}>
                         {isFr
                             ? 'Augmente si vous pratiquez chaque jour et revient à zéro si vous ratez une journée !'
@@ -1690,7 +1785,7 @@ const DashboardPage = ({
                 <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
                     <button onClick={() => setLessonFlow('share')} style={{
                         flex: 1, padding: '1rem', borderRadius: '9999px',
-                        backgroundColor: '#eff6ff', color: '#0056D2',
+                        backgroundColor: T.blueTint, color: '#0056D2',
                         border: '2px solid #bfdbfe', fontWeight: '700', fontSize: '0.95rem',
                         cursor: 'pointer', fontFamily: 'inherit',
                     }}>
@@ -1729,14 +1824,14 @@ const DashboardPage = ({
         ];
         return (
             <div style={{
-                width: '100%', height: '100vh', backgroundColor: '#fff',
+                width: '100%', height: '100vh', backgroundColor: T.surface,
                 display: 'flex', flexDirection: 'column',
                 fontFamily: "'Outfit', system-ui, sans-serif", overflowY: 'auto',
             }}>
                 {/* Header */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1.25rem 1.5rem', borderBottom: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1.25rem 1.5rem', borderBottom: `1px solid ${T.border}` }}>
                     <button onClick={() => setLessonFlow('congrats')} style={{ background: 'none', border: 'none', fontSize: '1.1rem', cursor: 'pointer', color: '#475569' }}>✕</button>
-                    <span style={{ fontWeight: '800', fontSize: '1.1rem', color: '#0f172a' }}>
+                    <span style={{ fontWeight: '800', fontSize: '1.1rem', color: T.text }}>
                         {isFr ? 'Partager' : 'Share'}
                     </span>
                 </div>
@@ -1744,27 +1839,27 @@ const DashboardPage = ({
                 <div style={{ flex: 1, padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }}>
                     {/* Share card */}
                     <div style={{
-                        width: '100%', maxWidth: '360px', backgroundColor: '#f8fafc',
+                        width: '100%', maxWidth: '360px', backgroundColor: T.bg,
                         borderRadius: '18px', padding: '1.75rem', textAlign: 'center',
-                        border: '1px solid #e2e8f0',
+                        border: `1px solid ${T.border}`,
                     }}>
                         <span style={{ fontSize: '3rem' }}>🔥</span>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '900', color: '#0f172a', margin: '0.5rem 0 0.25rem' }}>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '900', color: T.text, margin: '0.5rem 0 0.25rem' }}>
                             {isFr ? `${streak} jours de suite !` : `${streak} days straight!`}
                         </div>
                         <div style={{ fontSize: '1rem', fontWeight: '700', color: '#0056D2' }}>Medumba.ia</div>
                     </div>
 
                     {/* Social list */}
-                    <div style={{ width: '100%', maxWidth: '360px', backgroundColor: '#fff', borderRadius: '18px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                    <div style={{ width: '100%', maxWidth: '360px', backgroundColor: T.surface, borderRadius: '18px', border: `1px solid ${T.border}`, overflow: 'hidden' }}>
                         {socials.map((s, i) => (
                             <button key={s.label} onClick={doShare} style={{
                                 width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
                                 padding: '1rem 1.25rem',
-                                borderBottom: i < socials.length - 1 ? '1px solid #f1f5f9' : 'none',
+                                borderBottom: i < socials.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                                 background: 'none', border: 'none',
                                 cursor: 'pointer', fontFamily: 'inherit',
-                                fontSize: '1rem', fontWeight: '600', color: '#0f172a',
+                                fontSize: '1rem', fontWeight: '600', color: T.text,
                             }}>
                                 <span style={{ fontSize: '1.5rem' }}>{s.icon}</span>
                                 {s.label}
@@ -1792,7 +1887,7 @@ const DashboardPage = ({
         <>
         <div style={{
             display: 'flex', width: '100%', height: '100vh',
-            backgroundColor: '#f8fafc',
+            backgroundColor: T.bg,
             fontFamily: "'Outfit', system-ui, sans-serif",
             overflow: 'hidden',
         }}>
@@ -1800,9 +1895,9 @@ const DashboardPage = ({
             {/* ══════════════ LEFT SIDEBAR — desktop only ══════════════ */}
             {!isMobile && <aside style={{
                 width: '220px', minWidth: '220px',
-                borderRight: '2px solid #e5e7eb',
+                borderRight: `2px solid ${T.border}`,
                 display: 'flex', flexDirection: 'column',
-                height: '100%', backgroundColor: '#fff',
+                height: '100%', backgroundColor: T.surface,
                 padding: '1.5rem 0.75rem',
             }}>
                 {/* Brand */}
@@ -1820,28 +1915,57 @@ const DashboardPage = ({
 
                 {/* Interface language switcher */}
                 <div style={{ padding: '0 0.5rem', marginBottom: '0.65rem' }}>
-                    <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#94a3b8', letterSpacing: '0.6px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
+                    <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, letterSpacing: '0.6px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
                         {isFr ? 'Langue de l\'app' : 'App language'}
                     </div>
                     <select
                         value={lang}
                         onChange={(e) => setLang(e.target.value)}
-                        style={selectStyle}
+                        style={selectStyle(T)}
                     >
                         <option value="en">🇺🇸 English</option>
                         <option value="fr">🇫🇷 Français</option>
                     </select>
                 </div>
 
+                {/* Dark mode quick toggle */}
+                <div style={{ padding: '0 0.5rem', marginBottom: '0.65rem' }}>
+                    <button onClick={toggleDark} style={{
+                        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '0.55rem 0.75rem', borderRadius: '12px',
+                        border: `2px solid ${T.border}`, backgroundColor: T.bg,
+                        cursor: 'pointer', fontFamily: 'inherit',
+                    }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: '700', color: T.text }}>
+                            {isDark ? '☀️ Light' : '🌙 Dark'}
+                        </span>
+                        <div style={{
+                            width: '36px', height: '20px', borderRadius: '99px',
+                            backgroundColor: isDark ? '#0056D2' : T.border,
+                            position: 'relative', transition: 'background-color 0.25s',
+                            flexShrink: 0,
+                        }}>
+                            <div style={{
+                                position: 'absolute', top: '2px',
+                                left: isDark ? '17px' : '2px',
+                                width: '16px', height: '16px', borderRadius: '50%',
+                                backgroundColor: '#fff',
+                                boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                                transition: 'left 0.25s cubic-bezier(0.4,0,0.2,1)',
+                            }} />
+                        </div>
+                    </button>
+                </div>
+
                 {/* Learning language switcher */}
                 <div style={{ padding: '0 0.5rem', marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#94a3b8', letterSpacing: '0.6px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
+                    <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, letterSpacing: '0.6px', marginBottom: '0.3rem', textTransform: 'uppercase' }}>
                         {isFr ? 'J\'apprends' : 'I\'m learning'}
                     </div>
                     <select
                         value={learnLang}
                         onChange={(e) => setLearnLang(e.target.value)}
-                        style={{ ...selectStyle, border: '2px solid #bfdbfe', backgroundColor: '#eff6ff', color: '#0056D2' }}
+                        style={{ ...selectStyle(T), border: '2px solid #bfdbfe', backgroundColor: T.blueTint, color: '#0056D2' }}
                     >
                         <option value="medumba">🇨🇲 Medumba</option>
                         <option value="english">🇬🇧 English</option>
@@ -1900,7 +2024,7 @@ const DashboardPage = ({
 
                 {/* Top Stats Bar */}
                 <header style={{
-                    backgroundColor: '#fff', borderBottom: '2px solid #e5e7eb',
+                    backgroundColor: T.surface, borderBottom: `2px solid ${T.border}`,
                     padding: isMobile ? '0.65rem 1rem' : '0.8rem 2rem',
                     display: 'flex', alignItems: 'center',
                     justifyContent: isMobile ? 'space-between' : 'flex-end',
@@ -1916,13 +2040,20 @@ const DashboardPage = ({
                     )}
                     {/* Stats */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.75rem' : '1.75rem' }}>
-                        {/* XP — desktop only */}
+                        {/* XP + Level — desktop only */}
                         {!isMobile && (
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                                     <span style={{ fontSize: '1rem' }}>⚡</span>
                                     <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '0.9rem' }}>
                                         {xp} XP
+                                    </span>
+                                    <span style={{
+                                        fontSize: '0.65rem', fontWeight: '800', color: '#fff',
+                                        backgroundColor: '#f59e0b', borderRadius: '6px',
+                                        padding: '1px 5px', letterSpacing: '0.3px',
+                                    }}>
+                                        Lv.{Math.floor(xp / XP_TO_NEXT) + 1}
                                     </span>
                                 </div>
                                 <div style={{ width: '72px', height: '5px', backgroundColor: '#dbeafe', borderRadius: '99px', overflow: 'hidden' }}>
@@ -1973,8 +2104,8 @@ const DashboardPage = ({
                 {isMobile && (
                     <nav style={{
                         display: 'flex', flexShrink: 0,
-                        borderTop: '2px solid #e5e7eb',
-                        backgroundColor: '#fff',
+                        borderTop: `2px solid ${T.border}`,
+                        backgroundColor: T.surface,
                         height: '62px',
                     }}>
                         {navItems.map((item) => {
@@ -1988,7 +2119,7 @@ const DashboardPage = ({
                                         alignItems: 'center', justifyContent: 'center', gap: '2px',
                                         background: 'none', border: 'none', cursor: 'pointer',
                                         borderTop: `3px solid ${on ? '#0056D2' : 'transparent'}`,
-                                        color: on ? '#0056D2' : '#9ca3af',
+                                        color: on ? '#0056D2' : T.textSub,
                                         fontFamily: 'inherit', padding: '0',
                                     }}
                                 >
@@ -2008,11 +2139,11 @@ const DashboardPage = ({
     );
 };
 
-/* ── shared style helpers ── */
-const selectStyle = {
+/* ── shared style helpers (T passed as argument because they live outside the component) ── */
+const selectStyle = (T) => ({
     width: '100%', padding: '0.55rem 0.75rem',
-    borderRadius: '12px', border: '2px solid #e2e8f0',
-    backgroundColor: '#f8fafc', color: '#0f172a',
+    borderRadius: '12px', border: `2px solid ${T.border}`,
+    backgroundColor: T.bg, color: T.text,
     fontSize: '0.85rem', fontWeight: '700',
     cursor: 'pointer', fontFamily: 'inherit',
     outline: 'none', appearance: 'none',
@@ -2020,14 +2151,14 @@ const selectStyle = {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right 0.75rem center',
     paddingRight: '2rem',
-};
+});
 
-const inputStyle = {
+const inputStyle = (T) => ({
     padding: '0.9rem 1rem', borderRadius: '14px',
-    border: '2px solid #e2e8f0', fontSize: '0.95rem',
-    width: '100%', outline: 'none', backgroundColor: '#fff',
-    color: '#0f172a', fontFamily: 'inherit', boxSizing: 'border-box',
-};
+    border: `2px solid ${T.border}`, fontSize: '0.95rem',
+    width: '100%', outline: 'none', backgroundColor: T.surface,
+    color: T.text, fontFamily: 'inherit', boxSizing: 'border-box',
+});
 
 const ctaStyle = (enabled) => ({
     width: '100%', backgroundColor: enabled ? '#0056D2' : '#cbd5e1',

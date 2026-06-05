@@ -15,6 +15,8 @@ const WelcomePage = ({ onNext, onLogin, onCalendar, onVideo, onCounting, onDicti
         <style>{`
             @keyframes welcome-fade { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
             @keyframes badge-pop    { 0%{transform:scale(0.7);opacity:0;} 70%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+            @keyframes pulse-dot    { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.5);opacity:0.6;} }
+            @keyframes count-pop    { 0%{transform:scale(0.85);opacity:0;} 70%{transform:scale(1.04);} 100%{transform:scale(1);opacity:1;} }
         `}</style>
 
         {/* Logo */}
@@ -44,10 +46,27 @@ const WelcomePage = ({ onNext, onLogin, onCalendar, onVideo, onCounting, onDicti
             </h1>
             <p style={{
                 fontSize: '1rem', fontWeight: '500', color: '#64748b',
-                lineHeight: 1.7, maxWidth: '290px', margin: '0 auto 1.5rem',
+                lineHeight: 1.7, maxWidth: '290px', margin: '0 auto 0.85rem',
             }}>
                 Des milliers de locuteurs d'héritage reconnectent avec le Medumba — chaque jour, à leur propre rythme.
             </p>
+
+            {/* Social proof — live-looking learner count */}
+            <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                backgroundColor: '#f0fdf4', border: '1.5px solid #bbf7d0',
+                borderRadius: '99px', padding: '0.35rem 1rem',
+                fontSize: '0.8rem', fontWeight: '700', color: '#15803d',
+                margin: '0 auto 1.5rem',
+                animation: 'count-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both',
+            }}>
+                <span style={{
+                    width: '8px', height: '8px', borderRadius: '50%',
+                    backgroundColor: '#22c55e', flexShrink: 0,
+                    animation: 'pulse-dot 1.8s ease-in-out infinite',
+                }} />
+                2 847 apprenants actifs cette semaine
+            </div>
 
             {/* Quick-access feature buttons */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: '0.5rem' }}>
@@ -73,21 +92,29 @@ const WelcomePage = ({ onNext, onLogin, onCalendar, onVideo, onCounting, onDicti
 
         {/* Action buttons */}
         <div style={{ width: '100%', maxWidth: '360px', display: 'flex', flexDirection: 'column', gap: '0.85rem', animation: 'welcome-fade 0.5s ease-out 0.35s both' }}>
-            <button onClick={onNext} style={{
-                width: '100%', backgroundColor: B, color: '#fff',
-                padding: '1.15rem', borderRadius: '9999px',
-                fontSize: '1rem', fontWeight: '800', border: 'none',
-                cursor: 'pointer', letterSpacing: '0.4px',
-                boxShadow: '0 8px 24px rgba(27,79,216,0.35)',
-            }}>
+            <button onClick={onNext}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(27,79,216,0.45)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.boxShadow = '0 8px 24px rgba(27,79,216,0.35)'; }}
+                style={{
+                    width: '100%', backgroundColor: B, color: '#fff',
+                    padding: '1.15rem', borderRadius: '9999px',
+                    fontSize: '1rem', fontWeight: '800', border: 'none',
+                    cursor: 'pointer', letterSpacing: '0.4px',
+                    boxShadow: '0 8px 24px rgba(27,79,216,0.35)',
+                    transition: 'transform 0.15s, box-shadow 0.15s',
+                }}>
                 COMMENCER MON VOYAGE
             </button>
-            <button onClick={onLogin} style={{
-                width: '100%', backgroundColor: '#eff6ff', color: B,
-                padding: '1.1rem', borderRadius: '9999px',
-                fontSize: '1rem', fontWeight: '700', border: '2px solid #bfdbfe',
-                cursor: 'pointer', letterSpacing: '0.3px',
-            }}>
+            <button onClick={onLogin}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.backgroundColor = '#dbeafe'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.backgroundColor = '#eff6ff'; }}
+                style={{
+                    width: '100%', backgroundColor: '#eff6ff', color: B,
+                    padding: '1.1rem', borderRadius: '9999px',
+                    fontSize: '1rem', fontWeight: '700', border: '2px solid #bfdbfe',
+                    cursor: 'pointer', letterSpacing: '0.3px',
+                    transition: 'transform 0.15s, background-color 0.15s',
+                }}>
                 J'AI DÉJÀ UN COMPTE
             </button>
         </div>

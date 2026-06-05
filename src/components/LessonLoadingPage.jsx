@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useTheme } from '../context/ThemeContext';
 import loadingVec from '../assets/loading vec.png';
 
 const B = '#1B4FD8';
 
 const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
+    const { T } = useTheme();
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
@@ -25,7 +27,7 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
 
     return (
         <div style={{
-            width: '100%', height: '100vh', backgroundColor: '#fff',
+            width: '100%', height: '100vh', backgroundColor: T.surface,
             display: 'flex', flexDirection: 'column', alignItems: 'center',
             fontFamily: "'Outfit', system-ui, sans-serif", overflow: 'hidden',
             position: 'relative',
@@ -36,7 +38,7 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
                 style={{
                     position: 'absolute', top: '1.25rem', left: '1.25rem',
                     background: 'none', border: 'none', cursor: 'pointer',
-                    fontSize: '1.3rem', color: '#64748b', padding: '0.35rem',
+                    fontSize: '1.3rem', color: T.textMuted, padding: '0.35rem',
                     lineHeight: 1, zIndex: 10,
                 }}
             >
@@ -70,7 +72,7 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
                 </h2>
 
                 {/* Progress bar */}
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#e2e8f0', borderRadius: '99px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: T.border, borderRadius: '99px', overflow: 'hidden' }}>
                     <div style={{
                         width: `${progress}%`, height: '100%',
                         backgroundColor: B, borderRadius: '99px',

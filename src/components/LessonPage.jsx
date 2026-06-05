@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { useTheme } from '../context/ThemeContext';
 import { MEDUMBA_QUESTIONS } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
 import { getExpressionsByLesson } from '../data/expressionsByLesson';
@@ -223,6 +224,7 @@ function formatTime(seconds) {
    COMPONENT
 ════════════════════════════════════════════════════════════════════ */
 const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClose }) => {
+    const { isDark, T } = useTheme();
     /* themed expression pool for this lesson */
     const exprPool = useMemo(
         () => getExpressionsByLesson(lesson?.id),
@@ -275,6 +277,8 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     const [checkReady,      setCheckReady]      = useState(false);
     const [speaking,        setSpeaking]       = useState(false);
     const [showExitModal,   setShowExitModal]  = useState(false);
+    const [comboCount,      setComboCount]     = useState(0);
+    const [showComboToast,  setShowComboToast] = useState(false);
 
     const q    = questions[currentQ];
     const type = q?.type ?? 'tile';
@@ -302,6 +306,13 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         setContinueEnabled(false);
         setCheckReady(false);
     }, [currentQ]);
+
+    /* ── Combo toast auto-hide ── */
+    useEffect(() => {
+        if (!showComboToast) return;
+        const t = setTimeout(() => setShowComboToast(false), 1400);
+        return () => clearTimeout(t);
+    }, [showComboToast]);
 
     /* ── Delay Continue button to prevent accidental double-tap ── */
     useEffect(() => {
@@ -376,9 +387,16 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         }
         setStatus(correct ? 'correct' : 'wrong');
         if (correct) {
+            const newCombo = comboCount + 1;
+            setComboCount(newCombo);
+            const xpMultiplier = newCombo >= 4 ? 2 : newCombo >= 2 ? 1.5 : 1;
+            const bonusXp = Math.round(XP_PER_Q * xpMultiplier);
             setDiamondsEarned(d => d + DIAMONDS_PER_Q);
-            setXpEarned(x => x + XP_PER_Q);
+            setXpEarned(x => x + bonusXp);
             setCorrectCount(c => c + 1);
+            if (newCombo >= 2) setShowComboToast(true);
+        } else {
+            setComboCount(0);
         }
     };
 
@@ -441,6 +459,8 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         setCorrectCount(0);
         setCompleted(false);
         setFailed(false);
+        setComboCount(0);
+        setShowComboToast(false);
     };
 
     const canCheck = type === 'tile'
@@ -467,18 +487,18 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
             }}>
                 {/* Top bar */}
                 <div style={{
-                    backgroundColor: '#fff', borderBottom: '2px solid #e5e7eb',
+                    backgroundColor: T.surface, borderBottom: `2px solid ${T.border}`,
                     padding: '0.85rem 1.5rem',
                     display: 'flex', alignItems: 'center', gap: '1rem',
                 }}>
                     <button onClick={() => onClose?.()} style={{
                         width: '36px', height: '36px', borderRadius: '50%',
-                        border: '2px solid #e2e8f0', backgroundColor: 'transparent',
-                        cursor: 'pointer', fontSize: '1rem', color: '#64748b',
+                        border: `2px solid ${T.border}`, backgroundColor: 'transparent',
+                        cursor: 'pointer', fontSize: '1rem', color: T.textMuted,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontFamily: 'inherit',
                     }}>✕</button>
-                    <div style={{ flex: 1, height: '10px', backgroundColor: '#e2e8f0', borderRadius: '99px', overflow: 'hidden' }}>
+                    <div style={{ flex: 1, height: '10px', backgroundColor: T.border, borderRadius: '99px', overflow: 'hidden' }}>
                         <div style={{
                             height: '100%',
                             width: `${((cardIdx + 1) / flashcards.length) * 100}%`,
@@ -497,7 +517,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     <p style={{ fontSize: '0.75rem', fontWeight: '700', color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.8px', margin: 0 }}>
                         {isFr ? 'Expressions à retenir' : 'Expressions to learn'}
                     </p>
-                    <p style={{ fontSize: '0.78rem', color: '#64748b', margin: '0.25rem 0 0' }}>
+                    <p style={{ fontSize: '0.78rem', color: T.textMuted, margin: '0.25rem 0 0' }}>
                         {isFr
                             ? `Expressions liées à : ${lesson?.titleFr ?? 'cette leçon'} — étudiez-les avant de commencer.`
                             : `Expressions for: ${lesson?.titleEn ?? 'this lesson'} — study them before starting.`}
@@ -541,7 +561,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                             {flipped ? card.medumba : card.fr}
                         </div>
                         {!flipped && (
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>
+                            <div style={{ fontSize: '0.75rem', color: T.textSub, marginTop: '0.5rem' }}>
                                 {isFr ? '👆 Appuyez pour voir la traduction' : '👆 Tap to see translation'}
                             </div>
                         )}
@@ -592,7 +612,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         return (
             <div style={{
                 width: '100%', height: '100vh',
-                backgroundColor: '#fef2f2',
+                backgroundColor: isDark ? '#2d1515' : '#fef2f2',
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center',
                 padding: '2rem 1.5rem', textAlign: 'center',
@@ -603,9 +623,9 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#dc2626', margin: 0 }}>
                     {isFr ? 'Score insuffisant' : 'Score too low'}
                 </h1>
-                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#0f172a' }}>
+                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: T.text }}>
                     {correctCount} / {questions.length}
-                    <span style={{ fontSize: '1.1rem', color: '#64748b', marginLeft: '0.5rem' }}>({accuracy}%)</span>
+                    <span style={{ fontSize: '1.1rem', color: T.textMuted, marginLeft: '0.5rem' }}>({accuracy}%)</span>
                 </div>
                 <div style={{
                     backgroundColor: '#fee2e2', border: '2px solid #fca5a5',
@@ -643,7 +663,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         return (
             <div style={{
                 width: '100%', height: '100vh',
-                backgroundColor: '#f8fafc',
+                backgroundColor: T.bg,
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center',
                 padding: '2rem 1.5rem', textAlign: 'center',
@@ -728,7 +748,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     return (
         <div style={{
             width: '100%', height: '100vh',
-            backgroundColor: '#f8fafc',
+            backgroundColor: T.bg,
             display: 'flex', flexDirection: 'column',
             fontFamily: "'Outfit', system-ui, sans-serif",
             overflow: 'hidden',
@@ -759,7 +779,42 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     from { transform: scale(0.85) translateY(20px); opacity: 0; }
                     to   { transform: scale(1) translateY(0);        opacity: 1; }
                 }
+                @keyframes combo-pop {
+                    0%   { transform: scale(0.5) translateY(0);   opacity: 0; }
+                    40%  { transform: scale(1.25) translateY(-8px); opacity: 1; }
+                    70%  { transform: scale(1) translateY(-4px);   opacity: 1; }
+                    100% { transform: scale(0.9) translateY(-16px); opacity: 0; }
+                }
+                @keyframes shake {
+                    0%,100% { transform: translateX(0); }
+                    20%     { transform: translateX(-6px); }
+                    40%     { transform: translateX(6px); }
+                    60%     { transform: translateX(-4px); }
+                    80%     { transform: translateX(4px); }
+                }
             `}</style>
+
+            {/* ── Combo toast ── */}
+            {showComboToast && (
+                <div style={{
+                    position: 'fixed', top: '22%', left: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 200, pointerEvents: 'none',
+                    animation: 'combo-pop 1.4s ease-out forwards',
+                    display: 'flex', alignItems: 'center', gap: '0.4rem',
+                    backgroundColor: '#fff7ed', border: '2.5px solid #f97316',
+                    borderRadius: '99px', padding: '0.5rem 1.25rem',
+                    boxShadow: '0 6px 24px rgba(249,115,22,0.35)',
+                    whiteSpace: 'nowrap',
+                }}>
+                    <span style={{ fontSize: '1.4rem' }}>🔥</span>
+                    <span style={{ fontWeight: '900', fontSize: '1.05rem', color: '#ea580c' }}>
+                        x{comboCount} COMBO!
+                    </span>
+                    {comboCount >= 4 && <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#f97316', backgroundColor: T.surface, borderRadius: '6px', padding: '1px 6px' }}>x2 XP</span>}
+                    {comboCount >= 2 && comboCount < 4 && <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#f97316', backgroundColor: T.surface, borderRadius: '6px', padding: '1px 6px' }}>+50% XP</span>}
+                </div>
+            )}
 
             {/* ── Exit confirmation modal ── */}
             {showExitModal && (
@@ -770,17 +825,17 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     padding: '1.5rem',
                 }}>
                     <div style={{
-                        backgroundColor: '#fff', borderRadius: '28px',
+                        backgroundColor: T.surface, borderRadius: '28px',
                         padding: '2.25rem 1.75rem', width: '100%', maxWidth: '340px',
                         textAlign: 'center', boxShadow: '0 24px 64px rgba(0,0,0,0.22)',
                         animation: 'modal-in 0.25s cubic-bezier(0.175,0.885,0.32,1.275) both',
                         fontFamily: "'Outfit', system-ui, sans-serif",
                     }}>
                         <div style={{ fontSize: '3.5rem', marginBottom: '0.75rem', lineHeight: 1 }}>😟</div>
-                        <h2 style={{ fontSize: '1.35rem', fontWeight: '900', color: '#0f172a', marginBottom: '0.5rem' }}>
+                        <h2 style={{ fontSize: '1.35rem', fontWeight: '900', color: T.text, marginBottom: '0.5rem' }}>
                             {isFr ? 'Quitter la leçon ?' : 'Leave the lesson?'}
                         </h2>
-                        <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '1.75rem', lineHeight: 1.6 }}>
+                        <p style={{ fontSize: '0.9rem', color: T.textMuted, marginBottom: '1.75rem', lineHeight: 1.6 }}>
                             {isFr
                                 ? 'Votre progression dans cet exercice sera perdue.'
                                 : 'Your progress in this exercise will be lost.'}
@@ -816,19 +871,19 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
 
             {/* ── Top bar ── */}
             <div style={{
-                backgroundColor: '#fff', borderBottom: '2px solid #e5e7eb',
+                backgroundColor: T.surface, borderBottom: `2px solid ${T.border}`,
                 padding: '0.85rem 1.5rem',
                 display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0,
             }}>
                 <button onClick={() => setShowExitModal(true)} style={{
                     width: '36px', height: '36px', borderRadius: '50%',
-                    border: '2px solid #e2e8f0', backgroundColor: 'transparent',
+                    border: `2px solid ${T.border}`, backgroundColor: 'transparent',
                     cursor: 'pointer', fontSize: '1rem', fontWeight: '700',
-                    color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: T.textMuted, display: 'flex', alignItems: 'center', justifyContent: 'center',
                     flexShrink: 0, fontFamily: 'inherit',
                 }}>✕</button>
 
-                <div style={{ flex: 1, height: '14px', backgroundColor: '#e2e8f0', borderRadius: '99px', overflow: 'hidden' }}>
+                <div style={{ flex: 1, height: '14px', backgroundColor: T.border, borderRadius: '99px', overflow: 'hidden' }}>
                     <div style={{
                         height: '100%', width: `${progress}%`,
                         background: 'linear-gradient(90deg, #0056D2, #38bdf8)',
@@ -851,7 +906,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
             </div>
 
             {/* ── Content ── */}
-            <div style={{
+            <div className="lesson-content" style={{
                 flex: 1, overflowY: 'auto',
                 padding: '1.75rem 1.5rem 0',
                 display: 'flex', flexDirection: 'column',
@@ -867,7 +922,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
 
                 {/* ── Instruction ── */}
                 <p style={{
-                    fontSize: '0.78rem', fontWeight: '700', color: '#64748b',
+                    fontSize: '0.78rem', fontWeight: '700', color: T.textMuted,
                     textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.35rem',
                 }}>
                     {type === 'tile'        && (q?._exprDir === 'tile'
@@ -886,7 +941,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     {/* Source sentence card */}
                     <div style={{
                         display: 'flex', alignItems: 'center', gap: '1rem',
-                        backgroundColor: '#fff', border: '2px solid #e2e8f0',
+                        backgroundColor: T.surface, border: `2px solid ${T.border}`,
                         borderRadius: '18px', padding: '1.1rem 1.3rem',
                         marginBottom: '1.5rem',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
@@ -902,7 +957,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         }}>
                             {speaking ? '🔊' : '🔈'}
                         </button>
-                        <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#0f172a', lineHeight: 1.4 }}>
+                        <span style={{ fontSize: '1.25rem', fontWeight: '700', color: T.text, lineHeight: 1.4 }}>
                             {learnLang === 'english' ? (q?.sourceFr ?? '') : (isFr ? (q?.sourceFr ?? '') : (q?.sourceEn ?? ''))}
                         </span>
                     </div>
@@ -918,7 +973,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         marginBottom: '1.5rem', transition: 'all 0.2s',
                     }}>
                         {placed.length === 0 ? (
-                            <span style={{ color: '#94a3b8', fontSize: '0.85rem', fontWeight: '600' }}>
+                            <span style={{ color: T.textSub, fontSize: '0.85rem', fontWeight: '600' }}>
                                 {isFr ? 'Sélectionnez les mots ci-dessous…' : 'Tap words below to build your answer…'}
                             </span>
                         ) : placed.map((bankIdx, pos) => (
@@ -938,7 +993,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     </div>
 
                     {/* Word bank */}
-                    <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.65rem' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.65rem' }}>
                         {isFr ? 'Mots disponibles' : 'Available words'}
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem', marginBottom: '1.5rem' }}>
@@ -967,17 +1022,17 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 {/* ════ MEANING exercise ════ */}
                 {type === 'meaning' && (<>
                     <div style={{
-                        backgroundColor: '#fff', border: '2px solid #e2e8f0',
+                        backgroundColor: T.surface, border: `2px solid ${T.border}`,
                         borderRadius: '18px', padding: '1.4rem 1.5rem',
                         marginBottom: '1.75rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                         textAlign: 'center',
                     }}>
-                        <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.5rem' }}>
+                        <div style={{ fontSize: '0.7rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.5rem' }}>
                             {q?._exprDir === 'med2fr'
                                 ? (isFr ? 'Expression Medumba' : 'Medumba expression')
                                 : (isFr ? 'Mot en français' : 'Word in English')}
                         </div>
-                        <span style={{ fontSize: q?._exprDir ? '1.3rem' : '2rem', fontWeight: '900', color: '#0f172a', lineHeight: 1.3 }}>
+                        <span style={{ fontSize: q?._exprDir ? '1.3rem' : '2rem', fontWeight: '900', color: T.text, lineHeight: 1.3 }}>
                             {isFr ? q?.sourceFr : q?.sourceEn}
                         </span>
                     </div>
@@ -1012,7 +1067,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'audio-pulse 2s ease-in-out infinite',
                         }}>{speaking ? '🔊' : '🔈'}</button>
-                        <span style={{ fontSize: '0.82rem', fontWeight: '700', color: '#64748b' }}>
+                        <span style={{ fontSize: '0.82rem', fontWeight: '700', color: T.textMuted }}>
                             {isFr ? 'Appuyer pour rejouer' : 'Tap to replay'}
                         </span>
                     </div>
@@ -1040,7 +1095,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 {type === 'image_vocab' && (<>
                     {/* Emoji image card */}
                     <div style={{
-                        backgroundColor: '#fff', border: '2px solid #e2e8f0',
+                        backgroundColor: T.surface, border: `2px solid ${T.border}`,
                         borderRadius: '20px', padding: '1.5rem 1.5rem 1.25rem',
                         marginBottom: '1.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                         textAlign: 'center',
@@ -1051,10 +1106,10 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         }}>
                             {q?.emoji}
                         </div>
-                        <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
+                        <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
                             {isFr ? 'En français' : 'In English'}
                         </div>
-                        <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#0f172a' }}>
+                        <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text }}>
                             {isFr ? q?.labelFr : q?.labelEn}
                         </div>
                         {q?.audio && (
@@ -1098,7 +1153,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                     <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem' }}>
                         {/* Left column — Medumba */}
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
+                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
                                 Medumba
                             </div>
                             {shuffledLeft.map(pair => {
@@ -1121,7 +1176,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
 
                         {/* Right column — Translation */}
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
+                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.25rem' }}>
                                 {isFr ? 'Français' : 'English'}
                             </div>
                             {shuffledRight.map(pair => {
@@ -1147,10 +1202,13 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
             </div>
 
             {/* ── Bottom action / feedback ── */}
+            {status === 'wrong' && (
+                <style>{`.lesson-content { animation: shake 0.35s ease-out; }`}</style>
+            )}
             {type === 'match' ? null : status === null ? (
                 <div style={{
                     padding: '1rem 1.5rem', borderTop: '2px solid #e5e7eb',
-                    backgroundColor: '#fff', maxWidth: '640px', width: '100%', margin: '0 auto',
+                    backgroundColor: T.surface, maxWidth: '640px', width: '100%', margin: '0 auto',
                 }}>
                     <button type="button" onClick={checkAnswer} disabled={!canCheck || !checkReady} style={{
                         width: '100%',
@@ -1186,9 +1244,9 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         )}
                     </div>
                     {!feedbackCorrect && (
-                        <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '0.75rem', fontWeight: '600' }}>
+                        <p style={{ fontSize: '0.88rem', color: T.textMuted, marginBottom: '0.75rem', fontWeight: '600' }}>
                             {isFr ? 'Bonne réponse : ' : 'Correct answer: '}
-                            <strong style={{ color: '#0f172a' }}>
+                            <strong style={{ color: T.text }}>
                                 {type === 'tile' ? answer.join(' ') : correctAns}
                             </strong>
                         </p>

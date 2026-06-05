@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { registerUser } from '../services/authService';
 
 const B = '#1B4FD8';
 
@@ -10,16 +11,48 @@ const Eye = ({ crossed }) => (
     </svg>
 );
 
-const PasswordPage = ({ onNext, onBack, nativeLang }) => {
+const DAILY_GOAL_MAP = { relaxed: 5, normal: 10, serious: 15, great: 30, awesome: 60 };
+
+const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => {
     const isFrench = nativeLang === 'french';
     const [password, setPassword] = useState('');
-    const [show, setShow] = useState(false);
+    const [show, setShow]         = useState(false);
+    const [loading, setLoading]   = useState(false);
+    const [error, setError]       = useState('');
 
     const h   = isFrench ? "Crée un mot de passe 🔒" : "Create a password 🔒";
     const lbl = isFrench ? "Mot de passe" : "Password";
     const ph  = isFrench ? "Minimum 6 caractères" : "Minimum 6 characters";
     const btn = isFrench ? "C'est parti !" : "Let's go!";
     const ok  = password.length >= 6;
+
+    async function handleNext() {
+        if (!ok || loading) return;
+        setError('');
+        setLoading(true);
+        try {
+            await registerUser({
+                name:      registrationData.name     || '',
+                email:     registrationData.email    || '',
+                password,
+                age:       registrationData.age      || null,
+                language:  isFrench ? 'french' : 'english',
+                reason:    registrationData.reason   || null,
+                dailyGoal: DAILY_GOAL_MAP[registrationData.dailyGoal] ?? 10,
+            });
+            onNext();
+        } catch (e) {
+            if (e.code === 'auth/email-already-in-use') {
+                setError(isFrench ? 'Cette adresse e-mail est déjà utilisée.' : 'This email is already in use.');
+            } else if (e.code === 'auth/invalid-email') {
+                setError(isFrench ? 'Adresse e-mail invalide.' : 'Invalid email address.');
+            } else {
+                setError(isFrench ? 'Erreur lors de la création du compte.' : 'Failed to create account. Try again.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#fff' }}>
@@ -35,7 +68,8 @@ const PasswordPage = ({ onNext, onBack, nativeLang }) => {
                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#64748b', marginBottom: '0.5rem' }}>{lbl}</label>
                     <div style={{ position: 'relative' }}>
                         <input
-                            type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={ph}
+                            type={show ? 'text' : 'password'} value={password}
+                            onChange={(e) => setPassword(e.target.value)} placeholder={ph}
                             style={{ border: 'none', borderBottom: `2px solid ${B}`, padding: '0.5rem 2.5rem 0.5rem 0', fontSize: '1.15rem', fontWeight: '600', width: '100%', outline: 'none', backgroundColor: 'transparent', color: '#0f172a' }}
                         />
                         <button type="button" onClick={() => setShow(!show)} style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem', display: 'flex', alignItems: 'center' }}>
@@ -43,9 +77,27 @@ const PasswordPage = ({ onNext, onBack, nativeLang }) => {
                         </button>
                     </div>
                 </div>
+
+                {error && (
+                    <p style={{ color: '#ef4444', fontSize: '0.9rem', fontWeight: '600', marginBottom: '1rem', textAlign: 'center' }}>
+                        {error}
+                    </p>
+                )}
+
                 <div style={{ flex: 1 }} />
-                <button onClick={() => onNext(password)} disabled={!ok} style={{ width: '100%', backgroundColor: ok ? B : '#cbd5e1', color: '#fff', padding: '1.1rem', borderRadius: '9999px', fontSize: '1.05rem', fontWeight: '700', border: 'none', cursor: ok ? 'pointer' : 'not-allowed', boxShadow: ok ? '0 8px 24px rgba(27,79,216,0.3)' : 'none', letterSpacing: '0.3px' }}>
-                    {btn}
+                <button
+                    onClick={handleNext}
+                    disabled={!ok || loading}
+                    style={{
+                        width: '100%', backgroundColor: ok && !loading ? B : '#cbd5e1',
+                        color: '#fff', padding: '1.1rem', borderRadius: '9999px',
+                        fontSize: '1.05rem', fontWeight: '700', border: 'none',
+                        cursor: ok && !loading ? 'pointer' : 'not-allowed',
+                        boxShadow: ok && !loading ? '0 8px 24px rgba(27,79,216,0.3)' : 'none',
+                        letterSpacing: '0.3px',
+                    }}
+                >
+                    {loading ? '...' : btn}
                 </button>
             </div>
         </div>

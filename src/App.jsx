@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { logoutUser, listenAuthState } from './services/authService';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
 import LanguageSelectionPage    from './components/LanguageSelectionPage';
@@ -23,7 +24,9 @@ import CalendarPage             from './components/CalendarPage';
 import VideoPage                from './components/VideoPage';
 import CountingPage             from './components/CountingPage';
 import DictionaryPage           from './components/DictionaryPage';
+import AdminPage                from './components/AdminPage';
 import ErrorBoundary            from './components/ErrorBoundary';
+import { ThemeProvider }        from './context/ThemeContext';
 
 // ─── Step map ───────────────────────────────────────────────────────────────
 //  0  Splash
@@ -47,6 +50,7 @@ import ErrorBoundary            from './components/ErrorBoundary';
 // 23  Reset Success    (→16)     ┘
 // 14  Section viewer   (calendar | video | counting | dictionary)
 // 15  Gamified Dashboard
+// 99  Admin Panel
 
 function App() {
   const [step, setStep] = useState(0);
@@ -64,9 +68,10 @@ function App() {
   const [dailyGoal,   setDailyGoal]   = useState(null);
 
   // ── Account creation ─────────────────────────────────────────────
-  const [userName,  setUserName]  = useState('');
-  const [userAge,   setUserAge]   = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const [userName,    setUserName]    = useState('');
+  const [userAge,     setUserAge]     = useState('');
+  const [userEmail,   setUserEmail]   = useState('');
+  const [currentUid,  setCurrentUid]  = useState(null);
 
   // ── Password reset ───────────────────────────────────────────────
   const [resetEmail, setResetEmail] = useState('');
@@ -101,6 +106,30 @@ function App() {
     return () => window.removeEventListener('popstate', onPop);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Persistent Firebase auth listener ───────────────────────────
+  // The first call is the initial auth check (handled by SplashScreen).
+  // All subsequent calls (Google login, email login, logout) are handled here.
+  const authInitialized = useRef(false);
+  useEffect(() => {
+    return listenAuthState((user) => {
+      if (!authInitialized.current) {
+        authInitialized.current = true;
+        return; // SplashScreen handles initial routing
+      }
+      if (user) {
+        if (user.displayName) setUserName(user.displayName.split(' ')[0]);
+        if (user.email) setUserEmail(user.email);
+        setCurrentUid(user.uid);
+        setStep(15);
+        history.pushState({ step: 15, hubView: 'hub' }, '');
+      } else {
+        setCurrentUid(null);
+        setStep(1);
+        history.pushState({ step: 1, hubView: 'hub' }, '');
+      }
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Assembled profile object ─────────────────────────────────────
   const profile = {
     name:        userName,
@@ -114,10 +143,22 @@ function App() {
   };
 
   return (
+    <ThemeProvider>
     <ErrorBoundary>
 
       {/* ── Splash ── */}
-      {step === 0 && <SplashScreen onFinish={() => go(1)} />}
+      {step === 0 && (
+        <SplashScreen onFinish={(user) => {
+          if (user) {
+            if (user.displayName) setUserName(user.displayName.split(' ')[0]);
+            if (user.email) setUserEmail(user.email);
+            setCurrentUid(user.uid);
+            go(15);
+          } else {
+            go(1);
+          }
+        }} />
+      )}
 
       {/* ── Welcome ── */}
       {step === 1 && (
@@ -182,23 +223,30 @@ function App() {
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a) => { setUserAge(a);   go(11); }} onBack={back} nativeLang={nativeLang} />}
       {step === 11 && <EmailPage    onNext={(e) => { setUserEmail(e); go(12); }} onBack={back} nativeLang={nativeLang} />}
-      {step === 12 && <PasswordPage onNext={() => go(13)} onBack={back} nativeLang={nativeLang} />}
+      {step === 12 && (
+        <PasswordPage
+          onNext={() => go(13)} onBack={back} nativeLang={nativeLang}
+          registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal }}
+        />
+      )}
       {step === 13 && <SuccessPage  onNext={() => go(15)}                        nativeLang={nativeLang} />}
 
       {/* ── Login ── */}
       {step === 16 && (
         <LoginPage
-          onLogin={() => go(15)} onBack={back}
+          onLogin={({ user }) => {
+            if (user?.displayName) setUserName(user.displayName.split(' ')[0]);
+            if (user?.email) setUserEmail(user.email);
+            go(15);
+          }}
+          onBack={back}
           onForgotPassword={() => go(20)}
           nativeLang={nativeLang}
         />
       )}
 
-      {/* ── Password reset ── */}
-      {step === 20 && <ForgotPasswordPage      onNext={(e) => { setResetEmail(e); go(21); }} onBack={back} nativeLang={nativeLang} />}
-      {step === 21 && <OTPVerificationPage     onNext={() => go(22)} onBack={back} email={resetEmail}       nativeLang={nativeLang} />}
-      {step === 22 && <NewPasswordPage         onNext={() => go(23)} onBack={back}                          nativeLang={nativeLang} />}
-      {step === 23 && <PasswordResetSuccessPage onNext={() => go(16)}                                                                         nativeLang={nativeLang} />}
+      {/* ── Password reset (Firebase sends email directly, no OTP needed) ── */}
+      {step === 20 && <ForgotPasswordPage onNext={() => go(16)} onBack={back} nativeLang={nativeLang} />}
 
       {/* ── Section viewer (from Welcome page buttons) ── */}
       {step === 14 && hubView === 'calendar'  && <CalendarPage   nativeLang={nativeLang} onBack={() => go(1)} />}
@@ -213,10 +261,22 @@ function App() {
           nativeLang={nativeLang}
           learningLang={learningLang}
           profile={profile}
+          currentUid={currentUid}
+          onLogout={async () => { await logoutUser(); go(1); }}
+          onAdmin={() => go(99)}
+        />
+      )}
+
+      {/* ── Admin Panel ── */}
+      {step === 99 && (
+        <AdminPage
+          onBack={() => go(15)}
+          currentUserUid={currentUid}
         />
       )}
 
     </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 

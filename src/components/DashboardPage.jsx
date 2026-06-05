@@ -158,35 +158,26 @@ const DashboardPage = ({
         };
     });
 
-    /* ── session-completed lessons (unlocks next in path) ── */
+    /* ── completed lessons persisted in localStorage ── */
     const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem('med_completed'); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
     useEffect(() => { localStorage.setItem('med_completed', JSON.stringify([...completedLessons])); }, [completedLessons]);
 
+    /* ── linear progression: completing item[i] → item[i+1] becomes active ── */
     const applySessionProgress = (units) => {
-        if (completedLessons.size === 0) return units;
-
-        // Step 1: flatten all lessons and mark session-completed ones
-        const allLessons = units.flatMap(u => u.lessons).map(lesson =>
-            completedLessons.has(lesson.id) ? { ...lesson, status: 'completed' } : lesson
+        // Flatten all lessons across ALL units in sequence order
+        let flat = units.flatMap(u => u.lessons).map(l =>
+            completedLessons.has(l.id) ? { ...l, status: 'completed' } : l
         );
 
-        // Step 2: promote the first locked regular lesson after a completed one to 'active'
-        let lastWasCompleted = false;
-        let promotedOne = false;
-        const updated = allLessons.map(lesson => {
-            if (lesson.type === 'chest' || lesson.type === 'boss') return lesson;
-            if (lesson.status === 'completed') { lastWasCompleted = true; return lesson; }
-            if (lastWasCompleted && !promotedOne && lesson.status !== 'active') {
-                promotedOne = true;
-                lastWasCompleted = false;
-                return { ...lesson, status: 'active' };
-            }
+        // Each item whose predecessor is completed becomes active (if not already completed)
+        flat = flat.map((lesson, i) => {
+            if (lesson.status === 'completed') return lesson;
+            if (i > 0 && flat[i - 1].status === 'completed') return { ...lesson, status: 'active' };
             return lesson;
         });
 
-        // Step 3: rebuild unit structure
         let i = 0;
-        return units.map(unit => ({ ...unit, lessons: unit.lessons.map(() => updated[i++]) }));
+        return units.map(u => ({ ...u, lessons: u.lessons.map(() => flat[i++]) }));
     };
 
     /* ── learning language (what the user is studying) ── */
@@ -390,19 +381,17 @@ const DashboardPage = ({
         },
     ];
 
-    /* ── unlock chest when all preceding regular lessons in unit are done ── */
+    /* ── mark opened chests as completed so the linear chain can continue ── */
     const applyChestUnlocks = (rawUnits) => rawUnits.map(unit => ({
         ...unit,
-        lessons: unit.lessons.map((lesson, idx) => {
+        lessons: unit.lessons.map((lesson) => {
             if (lesson.type !== 'chest') return lesson;
-            if (openedChests.has(lesson.id)) return { ...lesson, status: 'completed' };
-            const preceding = unit.lessons.slice(0, idx).filter(l => l.type === 'lesson');
-            const allDone = preceding.length > 0 && preceding.every(l => l.status === 'completed');
-            return allDone ? { ...lesson, status: 'active' } : lesson;
+            return openedChests.has(lesson.id) ? { ...lesson, status: 'completed' } : lesson;
         }),
     }));
 
-    const units = applyChestUnlocks(applySessionProgress(applyProgress(learnLang === 'english' ? unitsEnglish : unitsMedumba)));
+    // Pipeline: proficiency baseline → chest opened state → linear unlock chain
+    const units = applySessionProgress(applyChestUnlocks(applyProgress(learnLang === 'english' ? unitsEnglish : unitsMedumba)));
 
     const zigzagFull   = [0, 56, 90, 56, 0, -56, -90, -56, 0, 56, 90];
     const zigzagMobile = [0, 36, 56, 36, 0, -36, -56, -36, 0, 36, 56];

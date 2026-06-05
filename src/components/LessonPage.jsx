@@ -125,7 +125,7 @@ const FALLBACK_MD = QUESTIONS.l1;
 
 const DIAMONDS_PER_Q = 5;
 const XP_PER_Q       = 10;
-const FLASHCARD_COUNT = 5;  // expressions shown before exercises
+const FLASHCARD_COUNT = 3;  // expressions shown before exercises
 
 /* Pick N random items from an array without mutation */
 function pickRandom(pool, n) {
@@ -201,7 +201,7 @@ function buildExpressionQuestions(studied, pool) {
             });
         });
 
-    /* 4 — Match: pair all 5 studied cards */
+    /* 4 — Match: pair all studied cards */
     const matchPairs = studied.map(e => ({
         medumba: trunc(e.medumba, 30),
         french:  trunc(e.fr, 32),
@@ -241,10 +241,11 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         [flashcards, learnLang],
     );
 
+    const MAX_QUESTIONS = 13;
     const questions = useMemo(
         () => {
             const base = generateLessonQuestions(lesson?.id, profile ?? {}, QUESTIONS, learnLang);
-            return [...base, ...exprQuestions];
+            return [...base, ...exprQuestions].slice(0, MAX_QUESTIONS);
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [lesson?.id, learnLang],

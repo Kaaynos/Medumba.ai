@@ -9,11 +9,11 @@ import { VARIETY_QUESTIONS, LEVEL_QUESTIONS } from '../data/medumbaDictionary';
 
 /* ── Session length cap by daily-goal ──────────────────────────── */
 const GOAL_QUESTION_CAP = {
-    relaxed: 4,
-    normal:  6,
-    serious: 8,
-    great:   10,
-    awesome: Infinity,
+    relaxed: 5,
+    normal:  7,
+    serious: 10,
+    great:   13,
+    awesome: 13,
 };
 
 /* ── Variety mix driven by learner goals (Level 4 only) ─────────── */

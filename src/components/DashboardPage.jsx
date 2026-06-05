@@ -205,6 +205,27 @@ const DashboardPage = ({
     /* ── leaderboard tab ── */
     const [lbTab, setLbTab]         = useState('weekly');
 
+    /* ── daily stories ── */
+    const [activeStory,  setActiveStory]  = useState(null);
+    const [seenStories,  setSeenStories]  = useState(() => {
+        try {
+            const saved = JSON.parse(localStorage.getItem('med_seen_stories') || '{}');
+            const today = new Date().toDateString();
+            return saved.date === today ? new Set(saved.ids) : new Set();
+        } catch { return new Set(); }
+    });
+    const markStorySeen = (id) => {
+        setSeenStories(prev => {
+            const next = new Set(prev).add(id);
+            localStorage.setItem('med_seen_stories', JSON.stringify({ date: new Date().toDateString(), ids: [...next] }));
+            return next;
+        });
+    };
+
+    /* ── videos tab ── */
+    const [activeVideo, setActiveVideo] = useState(null);
+    const [filterCat,   setFilterCat]   = useState('all');
+
     /* ── live stats (persisted in localStorage) ── */
     const [gems,   setGems]   = useState(() => { const v = localStorage.getItem('med_gems');   return v !== null ? parseInt(v) : userStats.gems; });
     const [xp,     setXp]     = useState(() => { const v = localStorage.getItem('med_xp');     return v !== null ? parseInt(v) : userStats.xp; });
@@ -250,6 +271,7 @@ const DashboardPage = ({
         { id: 'home',        icon: '🏠', labelEn: 'HOME',        labelFr: 'ACCUEIL'    },
         { id: 'leaderboard', icon: '🏆', labelEn: 'LEADERBOARD', labelFr: 'CLASSEMENT' },
         { id: 'challenge',   icon: '⚡', labelEn: 'CHALLENGE',   labelFr: 'DÉFI'       },
+        { id: 'videos',      icon: '🎬', labelEn: 'VIDEOS',      labelFr: 'VIDÉOS'     },
         { id: 'premium',     icon: '💎', labelEn: 'PREMIUM',     labelFr: 'PREMIUM'    },
         { id: 'account',     icon: '👤', labelEn: 'ACCOUNT',     labelFr: 'COMPTE'     },
     ];
@@ -679,6 +701,181 @@ const DashboardPage = ({
         );
     };
 
+    /* ── DAILY STORIES data ── */
+    const STORIES = [
+        {
+            id: 's1', type: 'word', emoji: '📖', color: '#0056D2',
+            labelEn: 'Word of the Day', labelFr: 'Mot du jour',
+            titleEn: 'ŋwɑ̂ʼ', titleFr: 'ŋwɑ̂ʼ',
+            bodyEn: '"Water" in Medumba. Used in greetings: ŋwɑ̂ʼ tə — the water flows.',
+            bodyFr: '"Eau" en Medumba. Utilisé dans les salutations : ŋwɑ̂ʼ tə — l\'eau coule.',
+        },
+        {
+            id: 's2', type: 'phrase', emoji: '💬', color: '#7c3aed',
+            labelEn: 'Expression', labelFr: 'Expression',
+            titleEn: 'Ó tsɑ̌ʼ nə?', titleFr: 'Ó tsɑ̌ʼ nə?',
+            bodyEn: '"How are you?" — the most common Medumba greeting. Reply: Mə̀ tsɑ̌ʼ yə̀.',
+            bodyFr: '"Comment vas-tu ?" — la salutation Medumba la plus courante. Réponse : Mə̀ tsɑ̌ʼ yə̀.',
+        },
+        {
+            id: 's3', type: 'challenge', emoji: '⚡', color: '#d97706',
+            labelEn: 'Flash Challenge', labelFr: 'Défi Flash',
+            titleEn: 'Quick Quiz!', titleFr: 'Quiz Rapide !',
+            bodyEn: 'What does "mbɑ́ʼ" mean? A) House  B) Fire  C) Tree\n\nAnswer: A) House 🏠',
+            bodyFr: 'Que signifie "mbɑ́ʼ" ? A) Maison  B) Feu  C) Arbre\n\nRéponse : A) Maison 🏠',
+        },
+        {
+            id: 's4', type: 'culture', emoji: '🎵', color: '#059669',
+            labelEn: 'Culture', labelFr: 'Culture',
+            titleEn: 'Medumba Music', titleFr: 'Musique Medumba',
+            bodyEn: 'The "nkúʼ" drum is sacred in Medumba culture. It announces ceremonies and signals important messages across villages.',
+            bodyFr: 'Le tambour "nkúʼ" est sacré dans la culture Medumba. Il annonce les cérémonies et transmet des messages importants entre villages.',
+        },
+        {
+            id: 's5', type: 'proverb', emoji: '🌿', color: '#0891b2',
+            labelEn: 'Proverb', labelFr: 'Proverbe',
+            titleEn: 'Medumba Wisdom', titleFr: 'Sagesse Medumba',
+            bodyEn: '"The tree that bends in the wind does not break." — Medumba proverb on resilience.',
+            bodyFr: '"L\'arbre qui se courbe dans le vent ne se brise pas." — Proverbe Medumba sur la résilience.',
+        },
+    ];
+
+    const renderStoriesStrip = () => (
+        <div style={{ margin: isMobile ? '1rem 0 0' : '1.25rem 0 0', position: 'relative' }}>
+            <style>{`
+                @keyframes story-pop   { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+                @keyframes story-ring  { 0%,100% { box-shadow: 0 0 0 3px #0056D2; } 50% { box-shadow: 0 0 0 3px #0056D2, 0 0 12px 4px rgba(0,86,210,0.4); } }
+                @keyframes slide-up    { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                @keyframes progress-bar { from { width: 0%; } to { width: 100%; } }
+            `}</style>
+
+            {/* Scrollable strip */}
+            <div style={{
+                display: 'flex', gap: '1rem', overflowX: 'auto', padding: isMobile ? '0 0.75rem 0.5rem' : '0 2rem 0.5rem',
+                scrollbarWidth: 'none', msOverflowStyle: 'none',
+            }}>
+                {STORIES.map((story, idx) => {
+                    const seen = seenStories.has(story.id);
+                    return (
+                        <div key={story.id}
+                            onClick={() => { setActiveStory(idx); markStorySeen(story.id); }}
+                            style={{
+                                flexShrink: 0, display: 'flex', flexDirection: 'column',
+                                alignItems: 'center', gap: '0.4rem', cursor: 'pointer',
+                                animation: `story-pop 0.35s ease ${idx * 0.07}s both`,
+                            }}
+                        >
+                            <div style={{
+                                width: '62px', height: '62px', borderRadius: '50%',
+                                padding: '3px',
+                                background: seen ? T.border : `linear-gradient(135deg, ${story.color}, #f59e0b)`,
+                                animation: !seen ? 'story-ring 2.5s ease-in-out infinite' : 'none',
+                            }}>
+                                <div style={{
+                                    width: '100%', height: '100%', borderRadius: '50%',
+                                    backgroundColor: seen ? T.surface3 : story.color,
+                                    border: `3px solid ${T.surface}`,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontSize: '1.6rem', opacity: seen ? 0.5 : 1,
+                                }}>
+                                    {story.emoji}
+                                </div>
+                            </div>
+                            <span style={{
+                                fontSize: '0.68rem', fontWeight: '700', color: seen ? T.textSub : T.text,
+                                maxWidth: '68px', textAlign: 'center', lineHeight: 1.2,
+                            }}>
+                                {isFr ? story.labelFr : story.labelEn}
+                            </span>
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* Full-screen story overlay */}
+            {activeStory !== null && (() => {
+                const story = STORIES[activeStory];
+                const hasPrev = activeStory > 0;
+                const hasNext = activeStory < STORIES.length - 1;
+                return (
+                    <div style={{
+                        position: 'fixed', inset: 0, zIndex: 1000,
+                        backgroundColor: 'rgba(0,0,0,0.92)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        animation: 'slide-up 0.25s ease',
+                    }}
+                        onClick={() => setActiveStory(null)}
+                    >
+                        <div
+                            onClick={e => e.stopPropagation()}
+                            style={{
+                                width: 'min(380px, 92vw)', borderRadius: '24px',
+                                background: `linear-gradient(160deg, ${story.color}ee, #0f172a)`,
+                                padding: '1.5rem 1.75rem 2rem',
+                                position: 'relative', boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+                            }}
+                        >
+                            {/* Progress bars */}
+                            <div style={{ display: 'flex', gap: '4px', marginBottom: '1.25rem' }}>
+                                {STORIES.map((_, i) => (
+                                    <div key={i} style={{ flex: 1, height: '3px', borderRadius: '99px', backgroundColor: 'rgba(255,255,255,0.25)', overflow: 'hidden' }}>
+                                        <div style={{
+                                            height: '100%', backgroundColor: '#fff', borderRadius: '99px',
+                                            width: i < activeStory ? '100%' : i === activeStory ? '0%' : '0%',
+                                            animation: i === activeStory ? 'progress-bar 6s linear forwards' : 'none',
+                                        }} />
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Header */}
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                                    <span style={{ fontSize: '1.6rem' }}>{story.emoji}</span>
+                                    <span style={{ fontSize: '0.78rem', fontWeight: '800', color: 'rgba(255,255,255,0.9)', letterSpacing: '0.5px' }}>
+                                        {isFr ? story.labelFr : story.labelEn}
+                                    </span>
+                                </div>
+                                <button onClick={() => setActiveStory(null)} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer', opacity: 0.7, padding: '0' }}>✕</button>
+                            </div>
+
+                            {/* Content */}
+                            <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#fff', marginBottom: '0.75rem', lineHeight: 1.2 }}>
+                                {isFr ? story.titleFr : story.titleEn}
+                            </div>
+                            <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, whiteSpace: 'pre-line' }}>
+                                {isFr ? story.bodyFr : story.bodyEn}
+                            </div>
+
+                            {/* Nav arrows */}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem', gap: '0.75rem' }}>
+                                <button
+                                    onClick={() => { if (hasPrev) setActiveStory(activeStory - 1); }}
+                                    disabled={!hasPrev}
+                                    style={{
+                                        flex: 1, padding: '0.7rem', borderRadius: '12px',
+                                        backgroundColor: hasPrev ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)',
+                                        border: 'none', color: hasPrev ? '#fff' : 'rgba(255,255,255,0.3)',
+                                        fontWeight: '700', fontSize: '0.85rem', cursor: hasPrev ? 'pointer' : 'default', fontFamily: 'inherit',
+                                    }}
+                                >← {isFr ? 'Préc.' : 'Prev'}</button>
+                                <button
+                                    onClick={() => { if (hasNext) { setActiveStory(activeStory + 1); markStorySeen(STORIES[activeStory + 1].id); } else setActiveStory(null); }}
+                                    style={{
+                                        flex: 1, padding: '0.7rem', borderRadius: '12px',
+                                        backgroundColor: 'rgba(255,255,255,0.2)',
+                                        border: 'none', color: '#fff',
+                                        fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit',
+                                    }}
+                                >{hasNext ? (isFr ? 'Suiv. →' : 'Next →') : (isFr ? 'Fermer ✓' : 'Close ✓')}</button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })()}
+        </div>
+    );
+
     /* ── HOME: Learning Path ── */
     const renderHome = () => (
         <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '2rem' }}>
@@ -735,6 +932,9 @@ const DashboardPage = ({
                     {getPersonalizedTip(profile, isFr)}
                 </div>
             )}
+
+            {/* ── Daily Stories strip ── */}
+            {renderStoriesStrip()}
 
             {units.map((unit, uIdx) => {
                 const unitStart = globalIdx;
@@ -1880,6 +2080,235 @@ const DashboardPage = ({
         );
     }
 
+    /* ── VIDEOS ── */
+    const VIDEO_LIBRARY = [
+        {
+            id: 'v1', youtubeId: 'PLACEHOLDER_1',
+            titleEn: 'Introduction to Medumba', titleFr: 'Introduction au Medumba',
+            descEn: 'Discover the basics of the Medumba language',
+            descFr: 'Découvrez les bases de la langue Medumba',
+            duration: '5:32', category: 'beginner',
+        },
+        {
+            id: 'v2', youtubeId: 'PLACEHOLDER_2',
+            titleEn: 'Greetings & Expressions', titleFr: 'Salutations & Expressions',
+            descEn: 'Essential greetings used every day',
+            descFr: 'Les salutations essentielles du quotidien',
+            duration: '8:14', category: 'beginner',
+        },
+        {
+            id: 'v3', youtubeId: 'PLACEHOLDER_3',
+            titleEn: 'Medumba Tones & Pronunciation', titleFr: 'Tons & Prononciation Medumba',
+            descEn: 'Master the tonal system of Medumba',
+            descFr: 'Maîtrisez le système tonal du Medumba',
+            duration: '12:07', category: 'intermediate',
+        },
+        {
+            id: 'v4', youtubeId: 'PLACEHOLDER_4',
+            titleEn: 'Numbers 1–20', titleFr: 'Les Chiffres 1–20',
+            descEn: 'Count from 1 to 20 in Medumba',
+            descFr: 'Comptez de 1 à 20 en Medumba',
+            duration: '6:45', category: 'beginner',
+        },
+        {
+            id: 'v5', youtubeId: 'PLACEHOLDER_5',
+            titleEn: 'Family Vocabulary', titleFr: 'Vocabulaire de la Famille',
+            descEn: 'Family members and relationships',
+            descFr: 'Les membres de la famille et les relations',
+            duration: '9:20', category: 'beginner',
+        },
+        {
+            id: 'v6', youtubeId: 'PLACEHOLDER_6',
+            titleEn: 'Medumba Grammar Essentials', titleFr: 'Grammaire Essentielle',
+            descEn: 'Core grammar rules explained simply',
+            descFr: 'Les règles de grammaire essentielles expliquées simplement',
+            duration: '15:30', category: 'intermediate',
+        },
+    ];
+
+    const CATEGORY_COLORS = {
+        beginner:     { bg: '#dcfce7', text: '#15803d', label: { en: 'Beginner', fr: 'Débutant' } },
+        intermediate: { bg: '#dbeafe', text: '#1d4ed8', label: { en: 'Intermediate', fr: 'Intermédiaire' } },
+        advanced:     { bg: '#fef3c7', text: '#b45309', label: { en: 'Advanced', fr: 'Avancé' } },
+    };
+
+    const renderVideos = () => {
+        const filtered = filterCat === 'all' ? VIDEO_LIBRARY : VIDEO_LIBRARY.filter(v => v.category === filterCat);
+        const isPlaceholder = (id) => id.startsWith('PLACEHOLDER');
+
+        return (
+            <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
+                <style>{`
+                    @keyframes vid-fade-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+                    .vid-card { animation: vid-fade-in 0.3s ease both; transition: transform 0.18s, box-shadow 0.18s; }
+                    .vid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,86,210,0.15) !important; }
+                    .play-btn { transition: transform 0.15s, background 0.15s; }
+                    .play-btn:hover { transform: scale(1.08); }
+                `}</style>
+
+                {/* Header */}
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.25rem' }}>
+                    {isFr ? '🎬 Vidéos' : '🎬 Videos'}
+                </h2>
+                <p style={{ fontSize: '0.88rem', color: T.textMuted, marginBottom: '1.5rem' }}>
+                    {isFr ? 'Apprenez le Medumba avec nos tutoriels vidéo' : 'Learn Medumba with our video tutorials'}
+                </p>
+
+                {/* Category filter */}
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                    {[
+                        { id: 'all',          en: 'All',          fr: 'Tout'          },
+                        { id: 'beginner',     en: 'Beginner',     fr: 'Débutant'      },
+                        { id: 'intermediate', en: 'Intermediate', fr: 'Intermédiaire' },
+                        { id: 'advanced',     en: 'Advanced',     fr: 'Avancé'        },
+                    ].map((cat) => (
+                        <button key={cat.id} onClick={() => setFilterCat(cat.id)} style={{
+                            padding: '0.45rem 1.1rem', borderRadius: '99px',
+                            border: `2px solid ${filterCat === cat.id ? '#0056D2' : T.border}`,
+                            backgroundColor: filterCat === cat.id ? '#0056D2' : T.surface,
+                            color: filterCat === cat.id ? '#fff' : T.textMuted,
+                            fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'inherit',
+                            transition: 'all 0.15s',
+                        }}>
+                            {isFr ? cat.fr : cat.en}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Video grid */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))',
+                    gap: '1.25rem',
+                }}>
+                    {filtered.map((vid, idx) => {
+                        const cat = CATEGORY_COLORS[vid.category];
+                        const isActive = activeVideo === vid.id;
+                        const placeholder = isPlaceholder(vid.youtubeId);
+                        return (
+                            <div key={vid.id} className="vid-card" style={{
+                                animationDelay: `${idx * 0.06}s`,
+                                backgroundColor: T.surface,
+                                borderRadius: '16px',
+                                border: `2px solid ${isActive ? '#0056D2' : T.border}`,
+                                overflow: 'hidden',
+                                boxShadow: T.cardShadow,
+                            }}>
+                                {/* Video / Thumbnail area */}
+                                {isActive && !placeholder ? (
+                                    <div style={{ position: 'relative', paddingTop: '56.25%', backgroundColor: '#000' }}>
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${vid.youtubeId}?autoplay=1&rel=0`}
+                                            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            title={isFr ? vid.titleFr : vid.titleEn}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div
+                                        onClick={() => !placeholder && setActiveVideo(vid.id)}
+                                        style={{
+                                            position: 'relative', paddingTop: '56.25%',
+                                            backgroundColor: placeholder ? T.surface3 : '#0f172a',
+                                            cursor: placeholder ? 'default' : 'pointer',
+                                        }}
+                                    >
+                                        {!placeholder && (
+                                            <img
+                                                src={`https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg`}
+                                                alt=""
+                                                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }}
+                                            />
+                                        )}
+                                        <div style={{
+                                            position: 'absolute', inset: 0,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        }}>
+                                            {placeholder ? (
+                                                <div style={{ textAlign: 'center', color: T.textMuted }}>
+                                                    <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🎬</div>
+                                                    <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>
+                                                        {isFr ? 'Bientôt disponible' : 'Coming soon'}
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="play-btn" style={{
+                                                    width: '52px', height: '52px', borderRadius: '50%',
+                                                    backgroundColor: 'rgba(0,86,210,0.92)',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                                                }}>
+                                                    <span style={{ color: '#fff', fontSize: '1.3rem', marginLeft: '3px' }}>▶</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                        {/* Duration badge */}
+                                        {!placeholder && (
+                                            <div style={{
+                                                position: 'absolute', bottom: '8px', right: '8px',
+                                                backgroundColor: 'rgba(0,0,0,0.75)', color: '#fff',
+                                                fontSize: '0.72rem', fontWeight: '700', padding: '2px 6px', borderRadius: '4px',
+                                            }}>
+                                                {vid.duration}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Card body */}
+                                <div style={{ padding: '0.9rem 1rem 1rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                                        <span style={{ fontSize: '0.72rem', fontWeight: '700', padding: '2px 8px', borderRadius: '99px', backgroundColor: cat.bg, color: cat.text }}>
+                                            {isFr ? cat.label.fr : cat.label.en}
+                                        </span>
+                                        {isActive && (
+                                            <button onClick={() => setActiveVideo(null)} style={{
+                                                background: 'none', border: 'none', cursor: 'pointer',
+                                                color: T.textMuted, fontSize: '0.8rem', padding: '0',
+                                            }}>✕</button>
+                                        )}
+                                    </div>
+                                    <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, margin: '0 0 0.3rem', lineHeight: 1.3 }}>
+                                        {isFr ? vid.titleFr : vid.titleEn}
+                                    </h3>
+                                    <p style={{ fontSize: '0.8rem', color: T.textMuted, margin: 0, lineHeight: 1.5 }}>
+                                        {isFr ? vid.descFr : vid.descEn}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Upload CTA */}
+                <div style={{
+                    marginTop: '2rem', padding: '1.5rem',
+                    backgroundColor: T.blueTint, border: `2px solid ${T.blueBorder}`,
+                    borderRadius: '16px', textAlign: 'center',
+                }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📤</div>
+                    <div style={{ fontWeight: '800', color: '#0056D2', fontSize: '1rem', marginBottom: '0.3rem' }}>
+                        {isFr ? 'Ajouter des vidéos' : 'Add Videos'}
+                    </div>
+                    <p style={{ fontSize: '0.83rem', color: T.textMuted, margin: '0 0 1rem', lineHeight: 1.5 }}>
+                        {isFr
+                            ? 'Uploadez vos vidéos sur YouTube puis ajoutez l\'ID ici pour les diffuser dans l\'app.'
+                            : 'Upload your videos to YouTube then add the ID here to stream them in the app.'}
+                    </p>
+                    <div style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                        backgroundColor: '#0056D2', color: '#fff',
+                        padding: '0.6rem 1.4rem', borderRadius: '99px',
+                        fontSize: '0.83rem', fontWeight: '700',
+                    }}>
+                        {isFr ? '→ youtube.com/upload' : '→ youtube.com/upload'}
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     /* ════════════════════════════════════════════════════════════════
        RENDER
     ════════════════════════════════════════════════════════════════ */
@@ -1979,7 +2408,7 @@ const DashboardPage = ({
                         return (
                             <button
                                 key={item.id}
-                                onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); }}
+                                onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
                                 style={{
                                     display: 'flex', alignItems: 'center', gap: '0.85rem',
                                     padding: '0.78rem 1rem', borderRadius: '12px',
@@ -2092,6 +2521,7 @@ const DashboardPage = ({
                         {activeNav === 'home'        && renderHome()}
                         {activeNav === 'leaderboard' && renderLeaderboard()}
                         {activeNav === 'challenge'   && renderChallenge()}
+                        {activeNav === 'videos'      && renderVideos()}
                         {activeNav === 'premium'     && renderPremium()}
                         {activeNav === 'account'     && renderAccount()}
                     </div>
@@ -2113,7 +2543,7 @@ const DashboardPage = ({
                             return (
                                 <button
                                     key={item.id}
-                                    onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); }}
+                                    onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
                                     style={{
                                         flex: 1, display: 'flex', flexDirection: 'column',
                                         alignItems: 'center', justifyContent: 'center', gap: '2px',

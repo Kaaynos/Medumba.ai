@@ -19,6 +19,8 @@ import ForgotPasswordPage       from './components/ForgotPasswordPage';
 import OTPVerificationPage      from './components/OTPVerificationPage';
 import NewPasswordPage          from './components/NewPasswordPage';
 import PasswordResetSuccessPage from './components/PasswordResetSuccessPage';
+import LandingPage              from './components/LandingPage';
+import QuickSetupPage           from './components/QuickSetupPage';
 import DashboardPage            from './components/DashboardPage';
 import CalendarPage             from './components/CalendarPage';
 import VideoPage                from './components/VideoPage';
@@ -160,15 +162,11 @@ function App() {
         }} />
       )}
 
-      {/* ── Welcome ── */}
+      {/* ── Landing (marketing) ── */}
       {step === 1 && (
-        <WelcomePage
-          onNext={() => go(2)}
+        <LandingPage
+          onStart={() => go(2)}
           onLogin={() => go(16)}
-          onCalendar   ={() => go(14, 'calendar')}
-          onVideo      ={() => go(14, 'video')}
-          onCounting   ={() => go(14, 'counting')}
-          onDictionary ={() => go(14, 'dictionary')}
         />
       )}
 
@@ -181,45 +179,21 @@ function App() {
         />
       )}
 
-      {/* ── Courses onboarding ── */}
+      {/* ── Quick setup (niveau + raison + objectif — tout en 1) ── */}
       {step === 3 && (
-        <ConnectionPage
-          onNext={(c) => { setConnection(c); go(4); }}
-          onBack={back}
+        <QuickSetupPage
+          onNext={() => go(8)} onBack={back}
           nativeLang={nativeLang}
-        />
-      )}
-      {step === 4 && (
-        <ProficiencyPage
-          onNext={(level) => { setProficiency(level); go(5); }}
-          onBack={back}
-          nativeLang={nativeLang} learningLang={learningLang}
-        />
-      )}
-      {step === 5 && (
-        <ReasonPage
-          onNext={(r) => { setReason(r); go(6); }}
-          onBack={back}
-          nativeLang={nativeLang} learningLang={learningLang}
-        />
-      )}
-      {step === 6 && (
-        <AchievePage
-          onNext={(g) => { setGoals(g); go(7); }}
-          onBack={back}
-          nativeLang={nativeLang}
-        />
-      )}
-      {step === 7 && (
-        <DailyGoalPage
-          onNext={(dg) => { setDailyGoal(dg); go(8); }}
-          onBack={back}
-          nativeLang={nativeLang}
+          setConnection={setConnection}
+          setProficiency={setProficiency}
+          setReason={setReason}
+          setGoals={setGoals}
+          setDailyGoal={setDailyGoal}
         />
       )}
 
       {/* ── Account creation ── */}
-      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} onSkip={() => go(15)} nativeLang={nativeLang} />}
+      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} nativeLang={nativeLang} />}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a) => { setUserAge(a);   go(11); }} onBack={back} nativeLang={nativeLang} />}
       {step === 11 && <EmailPage    onNext={(e) => { setUserEmail(e); go(12); }} onBack={back} nativeLang={nativeLang} />}

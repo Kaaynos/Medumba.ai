@@ -226,6 +226,10 @@ const DashboardPage = ({
     const [activeVideo, setActiveVideo] = useState(null);
     const [filterCat,   setFilterCat]   = useState('all');
 
+    /* ── social share ── */
+    const [shareModal,   setShareModal]   = useState(null); // null | { type:'lesson'|'profile', data:{} }
+    const [copyDone,     setCopyDone]     = useState(false);
+
     /* ── live stats (persisted in localStorage) ── */
     const [gems,   setGems]   = useState(() => { const v = localStorage.getItem('med_gems');   return v !== null ? parseInt(v) : userStats.gems; });
     const [xp,     setXp]     = useState(() => { const v = localStorage.getItem('med_xp');     return v !== null ? parseInt(v) : userStats.xp; });
@@ -1572,6 +1576,25 @@ const DashboardPage = ({
                     ))}
                 </div>
 
+                {/* ── Share ── */}
+                <button
+                    onClick={() => setShareModal({ type: 'profile', data: {} })}
+                    style={{
+                        width: '100%', marginBottom: '1.5rem', padding: '1rem',
+                        borderRadius: '16px', cursor: 'pointer', fontFamily: 'inherit',
+                        background: 'linear-gradient(135deg, #0056D2, #0891b2)',
+                        color: '#fff', border: 'none',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
+                        fontWeight: 800, fontSize: '0.95rem',
+                        boxShadow: '0 6px 20px rgba(0,86,210,0.3)',
+                        transition: 'transform 0.15s, box-shadow 0.15s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(0,86,210,0.4)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,86,210,0.3)'; }}
+                >
+                    📲 {isFr ? 'Partager ma progression' : 'Share my progress'}
+                </button>
+
                 {/* ── Settings ── */}
                 <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, marginBottom: '0.85rem' }}>
                     {isFr ? '⚙️ Paramètres' : '⚙️ Settings'}
@@ -1864,6 +1887,23 @@ const DashboardPage = ({
                         </div>
                     ))}
                 </div>
+                {/* Share button */}
+                <button
+                    onClick={() => setShareModal({ type: 'lesson', data: res })}
+                    style={{
+                        width: '100%', maxWidth: '320px', backgroundColor: 'transparent', color: '#0056D2',
+                        padding: '0.85rem', borderRadius: '9999px', fontSize: '0.95rem', fontWeight: '700',
+                        border: '2px solid #bfdbfe', cursor: 'pointer', fontFamily: 'inherit',
+                        animation: 'lc-fade 0.5s ease-out 0.5s both',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                        transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = '#eff6ff'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                >
+                    📲 {isFr ? 'Partager mon score' : 'Share my score'}
+                </button>
+
                 <button onClick={() => setLessonFlow('daily_mission')}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,86,210,0.5)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,86,210,0.35)'; }}
@@ -2309,6 +2349,127 @@ const DashboardPage = ({
         );
     };
 
+    /* ── SHARE MODAL ── */
+    const renderShareModal = () => {
+        if (!shareModal) return null;
+        const { type, data } = shareModal;
+
+        const msgFr = type === 'lesson'
+            ? `🎉 Je viens de terminer une leçon Medumba avec ${data.accuracy}% de précision et +${data.xp} XP sur Medumba.AI !\n🔥 Série de ${streak} jours · ⚡ ${xp} XP total\n\nApprends le Medumba toi aussi → medumba.ai`
+            : `🇨🇲 J'apprends le Medumba sur Medumba.AI !\n🔥 ${streak} jours de série · ⚡ ${xp} XP · 💎 ${gems} diamants\n\nRejoins-moi → medumba.ai`;
+
+        const msgEn = type === 'lesson'
+            ? `🎉 Just finished a Medumba lesson with ${data.accuracy}% accuracy and +${data.xp} XP on Medumba.AI!\n🔥 ${streak}-day streak · ⚡ ${xp} XP total\n\nLearn Medumba too → medumba.ai`
+            : `🇨🇲 I'm learning Medumba on Medumba.AI!\n🔥 ${streak}-day streak · ⚡ ${xp} XP · 💎 ${gems} diamonds\n\nJoin me → medumba.ai`;
+
+        const msg = isFr ? msgFr : msgEn;
+        const encoded = encodeURIComponent(msg);
+
+        const platforms = [
+            { id: 'whatsapp', label: 'WhatsApp', color: '#25D366', bg: '#f0fdf4', border: '#bbf7d0',
+              icon: <svg viewBox="0 0 32 32" width="22" height="22" fill="#25D366"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.647 4.83 1.78 6.86L2 30l7.34-1.76A14 14 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.45 11.45 0 0 1-5.83-1.6l-.42-.25-4.35 1.04 1.07-4.24-.28-.44A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.61c-.34-.17-2.02-.99-2.33-1.1-.31-.12-.54-.17-.77.17-.23.34-.88 1.1-1.08 1.33-.2.23-.4.26-.74.09-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.69-2.02-1.89-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.86-1.06-2.55-.28-.67-.57-.58-.77-.59h-.66c-.23 0-.6.09-.91.43-.31.34-1.19 1.16-1.19 2.84s1.22 3.3 1.39 3.53c.17.23 2.4 3.66 5.82 5.13.81.35 1.44.56 1.93.72.81.26 1.55.22 2.13.13.65-.1 2.02-.83 2.3-1.63.28-.8.28-1.49.2-1.63-.09-.14-.31-.23-.65-.4z"/></svg>,
+              url: `https://wa.me/?text=${encoded}` },
+            { id: 'facebook', label: 'Facebook', color: '#1877F2', bg: '#eff6ff', border: '#bfdbfe',
+              icon: <svg viewBox="0 0 32 32" width="22" height="22" fill="#1877F2"><path d="M29 16c0-7.18-5.82-13-13-13S3 8.82 3 16c0 6.49 4.75 11.87 10.97 12.85V19.89H10.9V16h3.07v-2.67c0-3.03 1.8-4.7 4.56-4.7 1.32 0 2.7.24 2.7.24v2.97h-1.52c-1.5 0-1.97.93-1.97 1.89V16h3.34l-.53 3.89h-2.81v8.96C24.25 27.87 29 22.49 29 16z"/></svg>,
+              url: `https://www.facebook.com/sharer/sharer.php?quote=${encoded}` },
+            { id: 'twitter', label: 'X / Twitter', color: '#000', bg: '#f8fafc', border: '#e2e8f0',
+              icon: <svg viewBox="0 0 32 32" width="22" height="22" fill="#000"><path d="M18.24 13.9L27.8 3h-2.27l-8.28 9.63L10.6 3H3l10.04 14.6L3 29h2.27l8.78-10.22L21.4 29H29L18.24 13.9zm-3.11 3.61l-1.02-1.45L6.1 4.72h3.49l6.54 9.35 1.02 1.45 8.5 12.15h-3.49l-6.93-9.9 .9-1.26z"/></svg>,
+              url: `https://twitter.com/intent/tweet?text=${encoded}` },
+        ];
+
+        const handleCopy = () => {
+            navigator.clipboard.writeText(msg).then(() => {
+                setCopyDone(true);
+                setTimeout(() => setCopyDone(false), 2000);
+            });
+        };
+
+        const handleNativeShare = () => {
+            if (navigator.share) {
+                navigator.share({ text: msg, title: 'Medumba.AI' }).catch(() => {});
+            }
+        };
+
+        return (
+            <div style={{
+                position: 'fixed', inset: 0, zIndex: 500,
+                backgroundColor: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)',
+                display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+            }} onClick={() => setShareModal(null)}>
+                <style>{`@keyframes share-slide { from{transform:translateY(100%);opacity:0} to{transform:translateY(0);opacity:1} }`}</style>
+                <div onClick={e => e.stopPropagation()} style={{
+                    width: '100%', maxWidth: '480px',
+                    backgroundColor: T.surface, borderRadius: '28px 28px 0 0',
+                    padding: '1.5rem 1.5rem 2.5rem',
+                    animation: 'share-slide 0.3s cubic-bezier(0.34,1.56,0.64,1)',
+                    boxShadow: '0 -8px 40px rgba(0,0,0,0.2)',
+                }}>
+                    {/* Handle */}
+                    <div style={{ width: '40px', height: '4px', borderRadius: '99px', backgroundColor: T.border, margin: '0 auto 1.25rem' }} />
+
+                    <div style={{ fontSize: '1.1rem', fontWeight: 900, color: T.text, marginBottom: '0.25rem' }}>
+                        {isFr ? '📲 Partager ma progression' : '📲 Share my progress'}
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: T.textMuted, marginBottom: '1.25rem', fontWeight: 600 }}>
+                        {isFr ? 'Montre tes progrès à tes amis !' : 'Show your progress to your friends!'}
+                    </p>
+
+                    {/* Preview card */}
+                    <div style={{
+                        backgroundColor: T.bg, border: `2px solid ${T.border}`,
+                        borderRadius: '16px', padding: '1rem', marginBottom: '1.25rem',
+                        fontSize: '0.82rem', color: T.textMuted, lineHeight: 1.65, fontWeight: 600,
+                        whiteSpace: 'pre-line',
+                    }}>
+                        {msg}
+                    </div>
+
+                    {/* Platform buttons */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '0.75rem', marginBottom: '0.85rem' }}>
+                        {platforms.map(p => (
+                            <a key={p.id} href={p.url} target="_blank" rel="noreferrer"
+                                style={{
+                                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem',
+                                    padding: '0.85rem 0.5rem', borderRadius: '16px',
+                                    backgroundColor: p.bg, border: `2px solid ${p.border}`,
+                                    cursor: 'pointer', textDecoration: 'none', transition: 'transform 0.15s',
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+                                onMouseLeave={e => e.currentTarget.style.transform = 'none'}
+                            >
+                                {p.icon}
+                                <span style={{ fontSize: '0.72rem', fontWeight: 800, color: p.color }}>{p.label}</span>
+                            </a>
+                        ))}
+                    </div>
+
+                    {/* Copy + Native share */}
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        {navigator.share && (
+                            <button onClick={handleNativeShare} style={{
+                                flex: 1, padding: '0.85rem', borderRadius: '14px',
+                                backgroundColor: '#0056D2', color: '#fff', border: 'none',
+                                fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: 'inherit',
+                            }}>
+                                ↗ {isFr ? 'Partager via…' : 'Share via…'}
+                            </button>
+                        )}
+                        <button onClick={handleCopy} style={{
+                            flex: 1, padding: '0.85rem', borderRadius: '14px',
+                            backgroundColor: copyDone ? '#dcfce7' : T.surface3,
+                            color: copyDone ? '#15803d' : T.text,
+                            border: `2px solid ${copyDone ? '#bbf7d0' : T.border}`,
+                            fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: 'inherit',
+                            transition: 'all 0.2s',
+                        }}>
+                            {copyDone ? '✓ ' + (isFr ? 'Copié !' : 'Copied!') : '📋 ' + (isFr ? 'Copier le texte' : 'Copy text')}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     /* ════════════════════════════════════════════════════════════════
        RENDER
     ════════════════════════════════════════════════════════════════ */
@@ -2529,6 +2690,9 @@ const DashboardPage = ({
                     {/* Right panel — home tab, desktop only */}
                     {!isMobile && activeNav === 'home' && renderRightPanel()}
                 </div>
+
+                {/* Share modal */}
+                {renderShareModal()}
 
                 {/* ══════════════ BOTTOM NAV — mobile only ══════════════ */}
                 {isMobile && (

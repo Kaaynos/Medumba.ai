@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Medumba.AI — Documentation d'intégration des données</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Outfit', system-ui, sans-serif; color: #0f172a; background: #fff; }
+  @media print {
+    .page-break { page-break-before: always; }
+    body { font-size: 11px; }
+    nav { display: none; }
+  }
+  nav { position: fixed; top: 0; left: 0; right: 0; background: #0056D2; color: #fff; padding: .6rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+  nav button { background: #fff; color: #0056D2; border: none; border-radius: 6px; padding: .4rem 1rem; font-weight: 700; cursor: pointer; }
+  .container { max-width: 900px; margin: 0 auto; padding: 70px 2rem 4rem; }
+
+  .cover { background: linear-gradient(145deg, #0041a3, #0056D2, #0891b2); color: #fff; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 3rem; text-align: center; }
+  .cover h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: .5rem; }
+  .cover p { font-size: 1.1rem; opacity: .85; margin-bottom: .25rem; }
+
+  h1.section { font-size: 1.8rem; font-weight: 900; color: #0056D2; margin: 2.5rem 0 .75rem; padding-bottom: .5rem; border-bottom: 3px solid #bfdbfe; }
+  h2 { font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 1.5rem 0 .5rem; }
+  h3 { font-size: 1rem; font-weight: 700; color: #0056D2; margin: 1rem 0 .35rem; }
+  p { font-size: .95rem; line-height: 1.7; color: #334155; margin-bottom: .6rem; }
+
+  .badge { display: inline-flex; align-items: center; gap: .4rem; background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 99px; padding: .2rem .75rem; font-size: .78rem; font-weight: 700; color: #0056D2; margin: .15rem; }
+  .badge.green { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+  .badge.orange { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+  .badge.red { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .88rem; }
+  th { background: #0056D2; color: #fff; font-weight: 700; padding: .6rem .75rem; text-align: left; }
+  td { padding: .5rem .75rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafc; }
+
+  .code { background: #1e293b; color: #93c5fd; font-family: 'Courier New', monospace; font-size: .85rem; padding: .75rem 1rem; border-radius: 8px; margin: .5rem 0; overflow-x: auto; }
+  ul { padding-left: 1.5rem; margin: .5rem 0; }
+  li { font-size: .92rem; line-height: 1.8; color: #334155; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+  .stat-card { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 2px solid #bfdbfe; border-radius: 14px; padding: 1rem; text-align: center; }
+  .stat-card .num { font-size: 2rem; font-weight: 900; color: #0056D2; }
+  .stat-card .lbl { font-size: .78rem; font-weight: 600; color: #475569; margin-top: 2px; }
+  .note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: .75rem 1rem; border-radius: 0 8px 8px 0; margin: .75rem 0; font-size: .9rem; }
+  .blocked { background: #fef2f2; border-left: 4px solid #ef4444; padding: .75rem 1rem; border-radius: 0 8px 8px 0; margin: .75rem 0; font-size: .9rem; }
+  .pipeline { display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
+  .pipeline-step { display: flex; align-items: center; gap: .75rem; padding: .5rem .75rem; background: #f8fafc; border-radius: 8px; font-size: .88rem; }
+  .pipeline-step .arrow { color: #0056D2; font-weight: 900; font-size: 1.1rem; }
+  .file-row { display: flex; gap: 1rem; padding: .5rem .75rem; border-bottom: 1px solid #e2e8f0; align-items: flex-start; font-size: .88rem; }
+  .file-row:nth-child(even) { background: #f8fafc; }
+  .file-name { font-family: monospace; color: #0056D2; font-weight: 700; min-width: 220px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span style="font-weight:800;font-size:1.05rem;">📄 Medumba.AI — Documentation Données</span>
+  <button onclick="window.print()">🖨️ Imprimer / Sauvegarder en PDF</button>
+</nav>
+
+<div class="container">
+
+  <!-- COUVERTURE -->
+  <div class="cover">
+    <h1>Medumba.AI</h1>
+    <p style="font-size:1.3rem;font-weight:700;">Documentation d'intégration des données linguistiques</p>
+    <p>Projet NKONI · Juillet 2026</p>
+    <p style="margin-top:.75rem;opacity:.7;font-size:.9rem;">Généré le 8 juin 2026</p>
+  </div>
+
+  <!-- STATS GLOBALES -->
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">1 218</div><div class="lbl">Paires FR↔Medumba intégrées</div></div>
+    <div class="stat-card"><div class="num">1 147</div><div class="lbl">Syllabes avec IPA</div></div>
+    <div class="stat-card"><div class="num">63</div><div class="lbl">Termes mathématiques</div></div>
+  </div>
+
+  <!-- 1. PHRASEBOOK -->
+  <h1 class="section">1. Phrasebook Medumba pour Lecture</h1>
+  <span class="badge">📄 Source : Medumba pour lecture Phrasebook.docx</span>
+  <span class="badge green">✓ Intégré</span>
+
+  <h2>Contenu source</h2>
+  <p>32 chapitres thématiques, 2033 paires de phrases bilingues Français ↔ Medumba. Couverture complète de la communication quotidienne : présentations, salutations, famille, professions, santé, météo, maison, repas, travail, grammaire et culture.</p>
+
+  <h2>Chapitres et mapping leçons</h2>
+  <table>
+    <tr><th>Chapitres</th><th>Thème</th><th>Leçon(s) app</th></tr>
+    <tr><td>1–3</td><td>Présentations, Salutations, Adieux</td><td><span class="badge">l1</span><span class="badge">l10</span></td></tr>
+    <tr><td>4</td><td>Questions courantes</td><td><span class="badge">l1</span><span class="badge">l10</span></td></tr>
+    <tr><td>5–6</td><td>Famille et relations</td><td><span class="badge">l7</span></td></tr>
+    <tr><td>7</td><td>Professions</td><td><span class="badge">l14</span></td></tr>
+    <tr><td>8</td><td>Voyages et déplacements</td><td><span class="badge">l9</span></td></tr>
+    <tr><td>11–12</td><td>Pardon, Célébrations</td><td><span class="badge">l1</span></td></tr>
+    <tr><td>13</td><td>Météo et nature</td><td><span class="badge">l8</span></td></tr>
+    <tr><td>14–16</td><td>Sensations, Compassion, Humeur</td><td><span class="badge">l12</span></td></tr>
+    <tr><td>21–23</td><td>Santé, États physiques</td><td><span class="badge">l12</span></td></tr>
+    <tr><td>24–25</td><td>Temps et dates</td><td><span class="badge">l9</span></td></tr>
+    <tr><td>26</td><td>La maison</td><td><span class="badge">l11</span></td></tr>
+    <tr><td>27</td><td>Repas et cuisine</td><td><span class="badge">l3</span><span class="badge">l11</span></td></tr>
+    <tr><td>28</td><td>Travail</td><td><span class="badge">l14</span></td></tr>
+    <tr><td>9–10, 17–20, 29–32</td><td>Amour, Émotions, Grammaire, Culture</td><td><span class="badge orange">Futurs modules</span></td></tr>
+  </table>
+
+  <h2>Format des données générées</h2>
+  <div class="code">// src/data/phrasebookExpressions.js
+export const PHRASEBOOK_EXPRESSIONS = [
+  { fr: 'Salut.', medumba: 'Ndà\'ndà\' lα!', lessons: ['l1'] },
+  { fr: 'Comment ça va ?', medumba: 'Ndʉ̂kə?', lessons: ['l1'] },
+  { fr: 'Mon père s\'appelle...', medumba: 'Lɛ̂n tα̂α bə α̂...', lessons: ['l7'] },
+  // ... 654 autres entrées
+];</div>
+
+  <h2>Utilisation dans l'app</h2>
+  <ul>
+    <li>Source des flashcards dans la phase d'étude (avant les exercices)</li>
+    <li>Filtrée par <code>getExpressionsByLesson()</code> via les mots-clés de <code>LESSON_KEYWORDS</code></li>
+    <li>Le champ <code>lessons[]</code> permet un ciblage direct par leçon</li>
+    <li>Les chapitres non mappés sont disponibles pour les futurs modules (amour, culture, grammaire)</li>
+  </ul>
+  <div class="note">⚡ <strong>Résultat :</strong> 657 paires intégrées (35 max par chapitre, chapitres avec leçon uniquement). Fichier : <code>phrasebookExpressions.js</code></div>
+
+  <!-- 2. 511+259 -->
+  <div class="page-break"></div>
+  <h1 class="section">2. Vocabulaire de base — 511 + 259 Expressions</h1>
+  <span class="badge">📄 511 expresions mə̀dʉ̂mbὰ.docx</span>
+  <span class="badge">📊 259 Expressions Medumba.xlsx</span>
+  <span class="badge green">✓ Intégré</span>
+
+  <h2>Source A : 511 expressions</h2>
+  <p>511 entrées numérotées couvrant le vocabulaire fondamental du Medumba. Organisées du plus simple au plus complexe.</p>
+  <table>
+    <tr><th>Plage</th><th>Contenu</th></tr>
+    <tr><td>1–50</td><td>Mots fondamentaux : famille, corps humain, pronoms, animaux domestiques</td></tr>
+    <tr><td>51–100</td><td>Actions quotidiennes, objets, nature, aliments de base</td></tr>
+    <tr><td>101–200</td><td>Adjectifs, couleurs, temps, espace, politesse</td></tr>
+    <tr><td>201–300</td><td>Vocabulaire étendu : environnement, maison, école</td></tr>
+    <tr><td>301–511</td><td>Conjugaisons (présent/passé/futur), expressions idiomatiques</td></tr>
+  </table>
+  <p><strong>Exemples :</strong> <em>Maman : Mα</em> | <em>Non : Nga</em> | <em>Boire de l'eau : Nu ntsə</em> | <em>Zéro : Bα̌nbαn</em></p>
+
+  <h2>Source B : 259 expressions</h2>
+  <p>224 paires valides de phrases contextuelles de niveau intermédiaire (36 lignes avaient un placeholder "t" au lieu du texte).</p>
+  <p><strong>Exemple :</strong> <em>Ma mère vient d'arriver. → Mə̂ α yǒg ne sə̂' ə</em></p>
+
+  <div class="note">⚡ <strong>Résultat :</strong> 300 mots intégrés depuis les 511 expressions + les 259 déjà présentes dans la base originale. Fichier : <code>vocabExpressions.js</code></div>
+
+  <h2>Pool combiné final — MEDUMBA_EXPRESSIONS</h2>
+  <div class="code">// src/data/medumbaExpressions.js
+import { PHRASEBOOK_EXPRESSIONS } from './phrasebookExpressions';
+import { VOCAB_EXPRESSIONS }      from './vocabExpressions';
+
+export const MEDUMBA_EXPRESSIONS = [
+  ...BASE_EXPRESSIONS,          // 261 expressions originales
+  ...PHRASEBOOK_EXPRESSIONS,    // 657 phrases du phrasebook
+  ...VOCAB_EXPRESSIONS,         // 300 mots de vocabulaire
+];
+// Total : ~1218 paires FR↔Medumba</div>
+
+  <!-- 3. SYLLABAIRE -->
+  <div class="page-break"></div>
+  <h1 class="section">3. Syllabaire Medumba</h1>
+  <span class="badge">📄 Les syllabes medumba.docx</span>
+  <span class="badge green">✓ Intégré</span>
+
+  <h2>Contenu source</h2>
+  <p>Inventaire phonologique complet de 1147 syllabes Medumba avec leur transcription IPA. Couverture totale de l'alphabet : de <strong>a</strong> jusqu'à <strong>zwi'</strong>.</p>
+
+  <h2>Format des données</h2>
+  <div class="code">// src/data/medumbaSyllables.js
+export const MEDUMBA_SYLLABLES = [
+  { syllable: 'a',   ipa: '[a]' },
+  { syllable: 'a\'', ipa: '[ɑʔ]' },
+  { syllable: 'bə',  ipa: '[bœ], [bʉ]' },
+  { syllable: 'zwi', ipa: '[zɥi]' },
+  // ... 1143 autres syllabes
+];</div>
+
+  <h2>Exemples représentatifs</h2>
+  <table>
+    <tr><th>Syllabe</th><th>IPA</th><th>Note phonologique</th></tr>
+    <tr><td>a</td><td>[a]</td><td>Voyelle ouverte centrale</td></tr>
+    <tr><td>a'</td><td>[ɑʔ]</td><td>Voyelle ouverte + occlusive glottale</td></tr>
+    <tr><td>bə</td><td>[bœ], [bʉ]</td><td>Bilabiale + voyelle centrale (deux réalisations)</td></tr>
+    <tr><td>ŋwa'</td><td>[ŋɥɑʔ]</td><td>Nasale vélaire + semi-voyelle + glottale</td></tr>
+    <tr><td>zwi'</td><td>[zɥiʔ]</td><td>Groupe consonantique complexe avec glottale</td></tr>
+  </table>
+
+  <h2>Utilisation prévue dans l'app</h2>
+  <ul>
+    <li><strong>CountingPage</strong> — module d'apprentissage de la lecture syllabique</li>
+    <li><strong>Module Prononciation</strong> — référence IPA pour la validation vocale (Web Speech API)</li>
+    <li><strong>Syllabaire interactif</strong> — tableau de référence comme le hiragana/katakana</li>
+    <li><strong>Exercices de phonologie</strong> — reconnaissance et reproduction des sons Medumba</li>
+  </ul>
+
+  <!-- 4. MATHS -->
+  <div class="page-break"></div>
+  <h1 class="section">4. Lexique Mathématique du Primaire</h1>
+  <span class="badge">📊 Lexique Mathematique du primaire.xlsx</span>
+  <span class="badge green">✓ Intégré</span>
+
+  <h2>Contenu</h2>
+  <p>63 termes mathématiques du niveau primaire traduits en Medumba. Couvre : opérations arithmétiques, géométrie, mesures, statistiques, numération.</p>
+
+  <table>
+    <tr><th>Français</th><th>Medumba</th></tr>
+    <tr><td>Addition</td><td>tnə̀cùbə</td></tr>
+    <tr><td>Soustraction</td><td>Nə̀kwì'tə̌</td></tr>
+    <tr><td>Multiplication</td><td>Nə̀yòŋə / nə̀ fǎ</td></tr>
+    <tr><td>Division</td><td>Nə̀cûsə</td></tr>
+    <tr><td>Fraction</td><td>mfè</td></tr>
+    <tr><td>Carré</td><td>Kàmcɛd</td></tr>
+    <tr><td>Mesure</td><td>Mfì'</td></tr>
+    <tr><td>Résultat</td><td>Cɔ̀</td></tr>
+    <tr><td>Nombre</td><td>tJutʉntə̀</td></tr>
+    <tr><td>Compter</td><td>Nə̀ tʉntə</td></tr>
+    <tr><td>Moitié</td><td>kàm</td></tr>
+    <tr><td>Double</td><td>fag</td></tr>
+  </table>
+
+  <h2>Utilisation prévue dans l'app</h2>
+  <ul>
+    <li>Futur module <strong>"Maths en Medumba"</strong> dans les leçons de l'unité École (l13)</li>
+    <li>Extension du <strong>DictionaryPage</strong> avec une catégorie Mathématiques</li>
+    <li>Exercices spécialisés pour les enseignants et étudiants du primaire</li>
+  </ul>
+
+  <!-- 5. ARCHITECTURE -->
+  <div class="page-break"></div>
+  <h1 class="section">5. Architecture technique des données</h1>
+
+  <h2>Pipeline de traitement</h2>
+  <div class="pipeline">
+    <div class="pipeline-step"><span>📁</span><span>Fichiers source (.docx / .xlsx) dans OneDrive</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>Scripts PowerShell + Python → Fichiers .txt intermédiaires</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>generate_data2.mjs → Parse et génère les fichiers JS dans src/data/</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>medumbaExpressions.js importe et fusionne les 3 sources → MEDUMBA_EXPRESSIONS (1218)</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>getExpressionsByLesson(lessonId) → filtre par mots-clés de la leçon</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>buildExpressionQuestions(flashcards) → 3 flashcards + ~10 exercices variés</span></div>
+    <div class="pipeline-step"><span class="arrow">↓</span><span>LessonPage → max 13 questions à l'utilisateur (score min 60% pour passer)</span></div>
+  </div>
+
+  <h2>Fichiers de données (src/data/)</h2>
+  <div class="file-row"><span class="file-name">medumbaExpressions.js</span><span>Pool combiné : 261 + 657 + 300 = <strong>1218 paires FR↔Medumba</strong></span></div>
+  <div class="file-row"><span class="file-name">phrasebookExpressions.js</span><span>657 phrases du phrasebook avec champ lessons[] pour ciblage par leçon</span></div>
+  <div class="file-row"><span class="file-name">vocabExpressions.js</span><span>300 mots de vocabulaire depuis les 511 expressions</span></div>
+  <div class="file-row"><span class="file-name">medumbaSyllables.js</span><span>1147 syllabes avec transcription IPA — module CountingPage</span></div>
+  <div class="file-row"><span class="file-name">medumbaMath.js</span><span>63 termes mathématiques du primaire</span></div>
+  <div class="file-row"><span class="file-name">medumbaDictionary.js</span><span>4257 entrées Ncobnkùn trilingues + questions d'exercices (existant)</span></div>
+  <div class="file-row"><span class="file-name">expressionsByLesson.js</span><span>Mapping mots-clés par leçon l1–l14, mis à jour avec les nouveaux termes</span></div>
+
+  <h2>Nouveaux mots-clés ajoutés dans expressionsByLesson.js</h2>
+  <table>
+    <tr><th>Leçon</th><th>Nouveaux mots-clés</th></tr>
+    <tr><td>l1 – Salutations</td><td>salut, présente, enchanté, ravi, adieu, félicit, comment, appelles</td></tr>
+    <tr><td>l2 – Corps humain</td><td>tête, ventre, main, dents, yeux, oreille, langue, bouche, cheveux</td></tr>
+    <tr><td>l3 – Nourriture</td><td>repas, soif, lait, pain, fruit, légume, mangeons, buvons</td></tr>
+    <tr><td>l4 – Couleurs</td><td>rouge, bleu, vert, jaune, blanc, noir, rose</td></tr>
+    <tr><td>l5 – Chiffres</td><td>zéro, numéro, chiffre, premier, deuxième, compter, nombre</td></tr>
+    <tr><td>l6 – Animaux</td><td>vache, mouton, chien, chat, poulet, bœuf, cochon</td></tr>
+    <tr><td>l7 – Famille</td><td>grand-mère, grand-père, cousin, oncle, tante, neveu, nièce, époux</td></tr>
+    <tr><td>l8 – Nature</td><td>soleil, vent, nuage, saison, fleuve, forêt, nuit, matin, soir</td></tr>
+    <tr><td>l9 – Temps</td><td>date, mois, année, hier, demain, lundi→dimanche, janvier, saisons</td></tr>
+    <tr><td>l11 – Maison</td><td>salon, chambre, lit, table, chaise, porte, fenêtre</td></tr>
+    <tr><td>l12 – Santé</td><td>médecin, hôpital, fièvre, remède, guérir, chaud, froid, soif</td></tr>
+    <tr><td>l14 – Professions</td><td>profession, métier, emploi, patron, salaire, ingénieur, avocat</td></tr>
+  </table>
+
+  <!-- 6. NON INTÉGRÉS -->
+  <div class="page-break"></div>
+  <h1 class="section">6. Ressources non intégrées (bloquées)</h1>
+
+  <div class="blocked">
+    <strong>🔒 Dictionnaire Medumba 2.pdf</strong> — 179 pages. Encodage mojibake total (Latin-1 interprété comme UTF-8). Texte illisible. <strong>Nécessite OCR.</strong>
+  </div>
+  <div class="blocked">
+    <strong>🔒 Lexique Médecine.pdf</strong> — 118 termes médicaux/neurodéveloppementaux. Même problème d'encodage. Les mots sont fragmentés par des espaces erronés (ex: "gh oÌŒ nmbuâ€™tu" au lieu de "ghǒnmbu'tu"). <strong>Nécessite OCR ou re-exportation.</strong>
+  </div>
+  <div class="blocked">
+    <strong>🔒 Dictionnaire Français-Medumba.pdf</strong> — ~848 entrées sur 1049 pages. Texte français lisible, diacritiques Medumba partiellement corrompus. <strong>Utilisable après normalisation des glyphes.</strong>
+  </div>
+  <div class="blocked">
+    <strong>🔒 Présentation PPTX — Le grenier de la langue Medumba</strong> — 89 MB. Contenu culturel avec images et médias. Non extrait. <strong>Nécessite LibreOffice ou COM automation.</strong>
+  </div>
+
+  <h2>Ressource disponible non encore intégrée</h2>
+  <div class="note">
+    <strong>📚 Dictionnaire des Verbes Medumba</strong> — 1384 verbes B–Z avec IPA, classe tonale, transitivité et exemples de phrases. Extrait dans <code>verbes_clean.txt</code> (490 KB). Format riche — chaque entrée contient :<br><br>
+    <code>Ba [bá] (1) v.t. Détourner : Bo ba ncua'a. ≈ On a détourné la tontine.</code><br><br>
+    Prévu pour le <strong>module Verbes avancé</strong> (une fois que la structure de conjugaison est définie dans l'app).
+  </div>
+
+  <!-- 7. PROCHAINES ÉTAPES -->
+  <h1 class="section">7. Prochaines étapes recommandées</h1>
+
+  <h2>Court terme (avant NKONI Juillet 2026)</h2>
+  <ul>
+    <li>Intégrer <code>MEDUMBA_SYLLABLES</code> dans <strong>CountingPage</strong> pour un module de lecture syllabique interactif</li>
+    <li>Créer des leçons spécialisées l15–l17 en exploitant les chapitres 9–10 du phrasebook (amour, culture)</li>
+    <li>Utiliser <code>MEDUMBA_MATH</code> pour un module "École / Maths" dans la leçon l13</li>
+    <li>Corriger l'encodage du Lexique Médecine via OCR → module Santé (l12)</li>
+  </ul>
+
+  <h2>Moyen terme</h2>
+  <ul>
+    <li>Intégrer les <strong>1384 verbes</strong> dans une section "Conjugaison" avancée</li>
+    <li>Exploiter les transcriptions IPA du dictionnaire des verbes pour le module <strong>Prononciation Vocale</strong></li>
+    <li>Re-extraire Dictionnaire Médecine 2.pdf et FR-Medumba.pdf via OCR (Tesseract)</li>
+    <li>Mapper les chapitres 17–20 (émotions) sur de nouvelles leçons</li>
+  </ul>
+
+  <h2>Long terme</h2>
+  <ul>
+    <li>Traiter le PPTX "Le grenier du Medumba" (89MB) → module Culture</li>
+    <li>Intégrer les 511 expressions complètes (entrées 301–511 non encore importées)</li>
+    <li>Moteur de recherche full-text sur le pool de 1218+ expressions</li>
+    <li>Système de recommandation basé sur les erreurs de l'utilisateur → ciblage des expressions faibles</li>
+  </ul>
+
+  <div style="margin-top:3rem;padding:1.5rem;background:#0056D2;border-radius:14px;color:#fff;text-align:center;">
+    <div style="font-weight:900;font-size:1.2rem;margin-bottom:.5rem;">Medumba.AI — Projet NKONI</div>
+    <div style="opacity:.8;font-size:.9rem;">github.com/noumifelix83-lang/medumba.ia · admin@kaaynos.com</div>
+    <div style="opacity:.6;font-size:.8rem;margin-top:.35rem;">Document généré le 8 juin 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

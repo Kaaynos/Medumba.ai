@@ -1,4 +1,7 @@
-export const MEDUMBA_EXPRESSIONS = [
+﻿import { PHRASEBOOK_EXPRESSIONS } from './phrasebookExpressions';
+import { VOCAB_EXPRESSIONS } from './vocabExpressions';
+
+const BASE_EXPRESSIONS = [
   { fr: "Ma mère vient d’arriver.", medumba: "Mə̂ α yǒg ne sə̂’ ə" },
   { fr: "Il vient bientôt", medumba: "Ndàʼndàʼa sê’" },
   { fr: "Notre truie à mis bas.", medumba: "Zèbə̀ ngʉnyα̌m bwə" },
@@ -258,4 +261,11 @@ export const MEDUMBA_EXPRESSIONS = [
   { fr: "Il y a coupure d’eau", medumba: "Bo kəb ntsə" },
   { fr: "Un instant svp", medumba: "nəcô’o, sə̌’ kò di" },
   { fr: "C’est le tout dernier", medumba: "À bə α̂ miὰgtə̀" }
+];
+
+// Combined pool: original (261) + phrasebook (1992) + vocab 511/259 (510)
+export const MEDUMBA_EXPRESSIONS = [
+  ...BASE_EXPRESSIONS,
+  ...PHRASEBOOK_EXPRESSIONS.map(({ fr, medumba }) => ({ fr, medumba })),
+  ...VOCAB_EXPRESSIONS,
 ];

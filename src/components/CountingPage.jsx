@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import vocalSrc from '../assets/vocal-count-medumba.ogg';
+import { MEDUMBA_MATH } from '../data/medumbaMath';
 
 // ─── Medumba number translator (ported from medumba_counter.jar) ───────────
 const _U = ["bαnbαn","ncʉ'","bα̂","tad","kuὰ","tὰn","ntogə","sὰmbα̂","fomə","bwə̀'ə"];
@@ -208,6 +209,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
     const [quizNum,   setQuizNum]  = useState(1);
     const [quizDone,  setQuizDone] = useState(false);
     const [convInput, setConvInput] = useState('');
+    const [mathSearch, setMathSearch] = useState('');
 
     const audioCtxRef    = useRef(null);
     const audioBufferRef = useRef(null);
@@ -347,7 +349,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                 </div>
                 {/* Tabs */}
                 <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '12px', padding: '0.3rem' }}>
-                    {[{ id: 'list', en: 'Numbers', fr: 'Liste' }, { id: 'quiz', en: 'Quiz', fr: 'Quiz' }, { id: 'conv', en: 'Converter', fr: 'Convertir' }].map(t => (
+                    {[{ id: 'list', en: 'Numbers', fr: 'Liste' }, { id: 'quiz', en: 'Quiz', fr: 'Quiz' }, { id: 'conv', en: 'Converter', fr: 'Convertir' }, { id: 'math', en: 'Maths', fr: 'Maths' }].map(t => (
                         <button key={t.id} onClick={() => { setTab(t.id); setPicked(null); setQuiz(makeQuiz()); }} style={{
                             flex: 1, padding: '0.5rem', borderRadius: '9px', border: 'none', cursor: 'pointer',
                             backgroundColor: tab === t.id ? '#fff' : 'transparent',
@@ -547,6 +549,51 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     {isFr ? 'Tapez un nombre pour voir sa traduction Medumba' : 'Type a number to see its Medumba translation'}
                                 </div>
                             )}
+                        </div>
+                    );
+                })()}
+                {tab === 'math' && (() => {
+                    const filtered = MEDUMBA_MATH.filter(m =>
+                        m.fr.toLowerCase().includes(mathSearch.toLowerCase()) ||
+                        m.medumba.toLowerCase().includes(mathSearch.toLowerCase())
+                    );
+                    return (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            <input
+                                type="text"
+                                value={mathSearch}
+                                onChange={e => setMathSearch(e.target.value)}
+                                placeholder={isFr ? 'Rechercher un terme…' : 'Search a term…'}
+                                style={{
+                                    width: '100%', padding: '0.65rem 1rem', fontSize: '0.95rem',
+                                    border: '2px solid #bae6fd', borderRadius: '12px', outline: 'none',
+                                    fontFamily: 'inherit', fontWeight: 600, background: '#f0f9ff', color: '#0f172a',
+                                }}
+                            />
+                            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textAlign: 'right' }}>
+                                {filtered.length} {isFr ? 'termes' : 'terms'}
+                            </div>
+                            {filtered.map((m, i) => (
+                                <div key={i} style={{
+                                    display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                    backgroundColor: '#fff', borderRadius: '14px',
+                                    border: '2px solid #e2e8f0', padding: '0.75rem 1rem',
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                                }}>
+                                    <div style={{
+                                        width: '36px', height: '36px', borderRadius: '10px', flexShrink: 0,
+                                        background: 'linear-gradient(135deg, #7c3aed, #a78bfa)',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        fontSize: '0.7rem', fontWeight: 900, color: '#fff',
+                                    }}>
+                                        {i + 1}
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748b' }}>{m.fr}</div>
+                                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#7c3aed' }}>{m.medumba}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     );
                 })()}

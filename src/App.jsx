@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState } from './services/authService';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
@@ -26,6 +27,7 @@ import CalendarPage             from './components/CalendarPage';
 import VideoPage                from './components/VideoPage';
 import CountingPage             from './components/CountingPage';
 import DictionaryPage           from './components/DictionaryPage';
+import PronunciationPage        from './components/PronunciationPage';
 import AdminPage                from './components/AdminPage';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
@@ -74,6 +76,11 @@ function App() {
   const [userAge,     setUserAge]     = useState('');
   const [userEmail,   setUserEmail]   = useState('');
   const [currentUid,  setCurrentUid]  = useState(null);
+
+  // ── Profil discret (usage interne uniquement) ────────────────────
+  const [_zodiacSign, _setZodiacSign] = useState(() => {
+    try { return localStorage.getItem('_mp') ?? null; } catch { return null; }
+  });
 
   // ── Password reset ───────────────────────────────────────────────
   const [resetEmail, setResetEmail] = useState('');
@@ -133,6 +140,7 @@ function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Assembled profile object ─────────────────────────────────────
+  const _zp = getZodiacProfile(_zodiacSign);
   const profile = {
     name:        userName,
     age:         userAge,
@@ -142,6 +150,10 @@ function App() {
     reason:      reason,
     goals:       goals,
     dailyGoal:   dailyGoal ?? 'normal',
+    _pace:       _zp?.pace       ?? 'normal',
+    _style:      _zp?.style      ?? 'standard',
+    _focus:      _zp?.focus      ?? 'vocabulary',
+    _motivation: getMotivationMessage(_zp),
   };
 
   return (
@@ -167,6 +179,7 @@ function App() {
         <LandingPage
           onStart={() => go(2)}
           onLogin={() => go(16)}
+          onNavigate={(view) => go(14, view)}
         />
       )}
 
@@ -195,7 +208,18 @@ function App() {
       {/* ── Account creation ── */}
       {step === 8  && <ProfileWelcomePage onNext={() => go(9)} nativeLang={nativeLang} />}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
-      {step === 10 && <AgePage      onNext={(a) => { setUserAge(a);   go(11); }} onBack={back} nativeLang={nativeLang} />}
+      {step === 10 && <AgePage      onNext={(a, birthdate) => {
+        setUserAge(a);
+        if (birthdate) {
+          const [mon, day] = birthdate.split('-');
+          const sign = getZodiacSign(mon, day);
+          if (sign) {
+            _setZodiacSign(sign);
+            try { localStorage.setItem('_mp', sign); } catch {}
+          }
+        }
+        go(11);
+      }} onBack={back} nativeLang={nativeLang} />}
       {step === 11 && <EmailPage    onNext={(e) => { setUserEmail(e); go(12); }} onBack={back} nativeLang={nativeLang} />}
       {step === 12 && (
         <PasswordPage
@@ -226,7 +250,8 @@ function App() {
       {step === 14 && hubView === 'calendar'  && <CalendarPage   nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'video'     && <VideoPage      nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'counting'  && <CountingPage   nativeLang={nativeLang} onBack={() => go(1)} />}
-      {step === 14 && hubView === 'dictionary'&& <DictionaryPage nativeLang={nativeLang} onBack={() => go(1)} />}
+      {step === 14 && hubView === 'dictionary'     && <DictionaryPage    nativeLang={nativeLang} onBack={() => go(1)} />}
+      {step === 14 && hubView === 'pronunciation' && <PronunciationPage nativeLang={nativeLang} onBack={() => go(1)} />}
 
       {/* ── Gamified Dashboard ── */}
       {step === 15 && (

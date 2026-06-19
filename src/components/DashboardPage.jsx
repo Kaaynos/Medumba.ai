@@ -11,6 +11,8 @@ import globeImg   from '../assets/globe 1.png';
 import LessonLoadingPage from './LessonLoadingPage';
 import LessonPage        from './LessonPage';
 import { getPersonalizedTip } from '../utils/lessonGenerator';
+import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
+import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
 
 /* ════════════════════════════════════════════════════════════════════
    DashboardPage
@@ -187,7 +189,12 @@ const DashboardPage = ({
     const [activeNav, setActiveNav] = useState('home');
 
     /* ── leaderboard tab ── */
-    const [lbTab, setLbTab]         = useState('weekly');
+    const [lbTab, setLbTab]                 = useState('weekly');
+    const [challengeTab, setChallengeTab]   = useState('target');
+    const [pbCategory,   setPbCategory]     = useState(null);   // selected phrasebook category
+    const [pbDir,        setPbDir]          = useState('fr');    // 'fr' | 'medumba'
+    const [wcCategory,   setWcCategory]     = useState(null);   // selected word-card category
+    const [wcCard,       setWcCard]         = useState(null);   // active card index
 
     /* ── daily stories ── */
     const [activeStory,  setActiveStory]  = useState(null);
@@ -257,10 +264,9 @@ const DashboardPage = ({
     /* ── nav items ── */
     const navItems = [
         { id: 'home',        icon: '🏠', labelEn: 'HOME',        labelFr: 'ACCUEIL'    },
-        { id: 'leaderboard', icon: '🏆', labelEn: 'LEADERBOARD', labelFr: 'CLASSEMENT' },
+        { id: 'phrasebook',  icon: '📖', labelEn: 'PHRASEBOOK',  labelFr: 'PHRASEBOOK' },
+        { id: 'wordcards',   icon: '🃏', labelEn: 'WORD CARDS',  labelFr: 'FICHES'     },
         { id: 'challenge',   icon: '⚡', labelEn: 'CHALLENGE',   labelFr: 'DÉFI'       },
-        { id: 'videos',      icon: '🎬', labelEn: 'VIDEOS',      labelFr: 'VIDÉOS'     },
-        { id: 'premium',     icon: '💎', labelEn: 'PREMIUM',     labelFr: 'PREMIUM'    },
         { id: 'account',     icon: '👤', labelEn: 'ACCOUNT',     labelFr: 'COMPTE'     },
     ];
 
@@ -1174,114 +1180,390 @@ const DashboardPage = ({
         </div>
     );
 
+    /* ── PHRASEBOOK ── */
+    const PB_CATEGORIES = [
+        { id: 'greetings', icon: '👋', lessons: ['l1','l10'], premium: false, en: 'Greetings & Introductions', fr: 'Salutations & Présentations', desc_en: 'Start conversations warmly', desc_fr: 'Commencez les conversations chaleureusement' },
+        { id: 'food',      icon: '🍜', lessons: ['l3','l11'], premium: false, en: 'Dining & Food',              fr: 'Repas & Nourriture',           desc_en: 'Order food and discuss meals', desc_fr: 'Commander et parler des repas' },
+        { id: 'family',    icon: '👨‍👩‍👧', lessons: ['l7','l15'], premium: false, en: 'Family & Social',           fr: 'Famille & Social',             desc_en: 'Talk about family and daily life', desc_fr: 'Parler de la famille et du quotidien' },
+        { id: 'numbers',   icon: '🔢', lessons: ['l5','l9'],  premium: false, en: 'Numbers & Time',             fr: 'Chiffres & Temps',             desc_en: 'Count and tell the time', desc_fr: 'Compter et dire l\'heure' },
+        { id: 'body',      icon: '🏃', lessons: ['l2','l12'], premium: true,  en: 'Body & Health',              fr: 'Corps & Santé',                desc_en: 'Describe health and body parts', desc_fr: 'Décrire la santé et le corps' },
+        { id: 'school',    icon: '🎓', lessons: ['l13','l14'],premium: true,  en: 'School & Work',              fr: 'École & Travail',              desc_en: 'Navigate school and professional life', desc_fr: 'École et vie professionnelle' },
+        { id: 'nature',    icon: '🌿', lessons: ['l6','l8'],  premium: true,  en: 'Nature & Animals',           fr: 'Nature & Animaux',             desc_en: 'Talk about nature and wildlife', desc_fr: 'La nature et les animaux' },
+        { id: 'culture',   icon: '🥁', lessons: ['l17'],      premium: true,  en: 'Culture & Rites',            fr: 'Culture & Rites',              desc_en: 'Medumba traditions and rites', desc_fr: 'Traditions et rites Medumba' },
+    ];
+
+    const renderPhrasebook = () => {
+        if (pbCategory) {
+            const cat    = PB_CATEGORIES.find(c => c.id === pbCategory);
+            const phrases = PHRASEBOOK_EXPRESSIONS.filter(e =>
+                e.lessons && cat.lessons.some(l => e.lessons.includes(l))
+            ).slice(0, 35);
+            const showMedumba = pbDir === 'medumba';
+            return (
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                    {/* Header */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
+                        <button onClick={() => setPbCategory(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
+                        <span style={{ flex: 1, fontWeight: '800', fontSize: '1rem', color: T.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {isFr ? cat.fr : cat.en}
+                        </span>
+                        <span style={{ fontSize: '1.1rem', color: T.textSub }}>🔍</span>
+                    </div>
+                    {/* Language toggle */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
+                        <button onClick={() => setPbDir('fr')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'fr' ? '#eff6ff' : 'transparent', color: pbDir === 'fr' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Français</button>
+                        <span style={{ color: T.textSub, fontWeight: '700' }}>⇄</span>
+                        <button onClick={() => setPbDir('medumba')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'medumba' ? '#eff6ff' : 'transparent', color: pbDir === 'medumba' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Medumba</button>
+                    </div>
+                    {/* Phrase list */}
+                    <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
+                        {phrases.map((p, i) => {
+                            const primary   = showMedumba ? p.medumba : p.fr;
+                            const secondary = showMedumba ? p.fr      : p.medumba;
+                            if (primary.length > 120) return null;
+                            return (
+                                <div key={i} style={{ padding: '0.85rem 1.25rem', borderBottom: `1px solid ${T.borderSub}` }}>
+                                    <div style={{ fontWeight: '600', fontSize: '0.95rem', color: T.text, marginBottom: secondary ? '0.2rem' : 0 }}>{primary}</div>
+                                    {secondary && <div style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '500' }}>{secondary}</div>}
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 1.25rem 1rem', flexShrink: 0 }}>
+                        <button style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.4rem', boxShadow: '0 4px 16px rgba(34,197,94,0.4)' }}>▶</button>
+                    </div>
+                </div>
+            );
+        }
+        return (
+            <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '1.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                    <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: T.text }}>Phrasebook</h2>
+                    <span style={{ fontSize: '1.1rem', color: T.textSub, cursor: 'pointer' }}>🔍</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {PB_CATEGORIES.map((cat, i) => (
+                        <button key={cat.id} onClick={() => !cat.premium && setPbCategory(cat.id)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 0.5rem', borderBottom: `1px solid ${T.border}`, background: 'none', border: 'none', borderBottom: `1px solid ${T.border}`, cursor: cat.premium ? 'default' : 'pointer', textAlign: 'left', width: '100%', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
+                            <div style={{ width: '44px', height: '44px', borderRadius: '12px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', flexShrink: 0 }}>{cat.icon}</div>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: T.text }}>{isFr ? cat.fr : cat.en}</div>
+                                <div style={{ fontSize: '0.75rem', color: T.textSub, marginTop: '0.15rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{isFr ? cat.desc_fr : cat.desc_en}</div>
+                            </div>
+                            {cat.premium ? <span style={{ fontSize: '1rem', flexShrink: 0 }}>👑</span> : <span style={{ color: T.textSub, fontSize: '1.1rem', flexShrink: 0 }}>›</span>}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
+    /* ── WORD CARDS ── */
+    const WC_CATEGORIES = [
+        { id: 'family',    icon: '👨‍👩‍👧', en: 'Family',    fr: 'Famille',    premium: false, keywords: ['mère','père','frère','sœur','enfant','ami','garçon','fille','maman','papa'] },
+        { id: 'body',      icon: '🖐️',   en: 'Body',      fr: 'Corps',      premium: false, keywords: ['tête','main','pied','ventre','bouche','dents','yeux','oreilles','langue'] },
+        { id: 'animals',   icon: '🦉',   en: 'Animals',   fr: 'Animaux',    premium: false, keywords: ['chien','serpent','souris','chat'] },
+        { id: 'food',      icon: '🌽',   en: 'Food',      fr: 'Nourriture', premium: false, keywords: ['lait','eau','manger','boire'] },
+        { id: 'colors',    icon: '🎨',   en: 'Colors',    fr: 'Couleurs',   premium: false, keywords: ['rouge','blanc','noir','bleu','vert','jaune'] },
+        { id: 'numbers',   icon: '🔢',   en: 'Numbers',   fr: 'Chiffres',   premium: false, keywords: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'] },
+        { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: true,  keywords: ['champ','arbre','soleil','rivière'] },
+        { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: true,  keywords: ['bonjour','salut','merci','oui','non','bienvenue'] },
+    ];
+
+    const renderWordCards = () => {
+        if (wcCategory !== null) {
+            const cat   = WC_CATEGORIES[wcCategory];
+            const words = VOCAB_EXPRESSIONS.filter(v =>
+                cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase()))
+            );
+            if (wcCard !== null) {
+                const word = words[wcCard] || words[0];
+                return (
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', height: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '340px', marginBottom: '1.5rem' }}>
+                            <button onClick={() => setWcCard(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', color: T.textSub }}>✕</button>
+                            <span style={{ fontWeight: '800', fontSize: '1rem', color: T.text }}>{isFr ? cat.fr : cat.en}</span>
+                            <span style={{ fontSize: '0.8rem', color: T.textSub }}>{wcCard + 1}/{words.length}</span>
+                        </div>
+                        <div style={{ width: '100%', maxWidth: '340px', backgroundColor: T.surface, borderRadius: '20px', border: `1.5px solid ${T.border}`, padding: '2rem 1.5rem', textAlign: 'left', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                            <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text, marginBottom: '0.3rem' }}>{word.medumba}</div>
+                            <div style={{ fontSize: '1rem', color: T.textSub, fontWeight: '600', marginBottom: '1rem' }}>{word.fr}</div>
+                            <div style={{ fontSize: '4rem', textAlign: 'center', margin: '1.5rem 0' }}>{cat.icon}</div>
+                            <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>🔊</button>
+                        </div>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                            <button disabled={wcCard === 0} onClick={() => setWcCard(wcCard - 1)} style={{ padding: '0.75rem 1.5rem', borderRadius: '10px', border: `2px solid ${T.border}`, backgroundColor: wcCard === 0 ? T.border : T.surface, color: T.text, fontWeight: '700', cursor: wcCard === 0 ? 'default' : 'pointer', fontFamily: 'inherit' }}>← {isFr ? 'Préc.' : 'Prev'}</button>
+                            <button disabled={wcCard >= words.length - 1} onClick={() => setWcCard(wcCard + 1)} style={{ padding: '0.75rem 1.5rem', borderRadius: '10px', border: 'none', backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', cursor: wcCard >= words.length - 1 ? 'default' : 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Suiv.' : 'Next'} →</button>
+                        </div>
+                    </div>
+                );
+            }
+            return (
+                <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '1.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                        <button onClick={() => { setWcCategory(null); setWcCard(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
+                        <h2 style={{ fontSize: '1.2rem', fontWeight: '800', color: T.text, margin: 0 }}>{isFr ? cat.fr : cat.en}</h2>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {words.map((w, i) => (
+                            <button key={i} onClick={() => setWcCard(i)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', width: '100%' }}>
+                                <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{cat.icon}</span>
+                                <div>
+                                    <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>{w.medumba}</div>
+                                    <div style={{ fontSize: '0.78rem', color: T.textSub }}>{w.fr}</div>
+                                </div>
+                                <span style={{ marginLeft: 'auto', color: T.textSub }}>›</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+        return (
+            <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '1.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                    <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: T.text }}>{isFr ? 'Fiches de mots' : 'Word Cards'}</h2>
+                    <span style={{ fontSize: '1.1rem', color: T.textSub, cursor: 'pointer' }}>🔍</span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    {WC_CATEGORIES.map((cat, i) => (
+                        <button key={cat.id} onClick={() => !cat.premium && setWcCategory(i)} style={{ borderRadius: '16px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: cat.premium ? 'default' : 'pointer', padding: '0', overflow: 'hidden', textAlign: 'left', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
+                            <div style={{ backgroundColor: '#f8fafc', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>{cat.icon}</div>
+                            <div style={{ padding: '0.6rem 0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <span style={{ fontWeight: '700', fontSize: '0.85rem', color: T.text }}>{isFr ? cat.fr : cat.en}</span>
+                                {cat.premium && <span style={{ fontSize: '0.85rem' }}>👑</span>}
+                            </div>
+                        </button>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
     /* ── CHALLENGE ── */
-    const renderChallenge = () => (
-        <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: T.text, marginBottom: '0.25rem' }}>
-                {isFr ? '⚡ Défis' : '⚡ Challenges'}
-            </h2>
-            <p style={{ fontSize: '0.88rem', color: T.textMuted, marginBottom: '1.5rem' }}>
-                {isFr ? 'Relevez des défis pour gagner des récompenses' : 'Complete challenges to earn rewards'}
-            </p>
+    const renderChallenge = () => {
+        const [chalTab, setChalTab] = [challengeTab, setChallengeTab];
 
-            {/* ── Personalised challenge based on user's reason ── */}
-            <div style={{
-                padding: '1rem 1.25rem', borderRadius: '16px', marginBottom: '1.75rem',
-                background: 'linear-gradient(135deg, #0056D2 0%, #38bdf8 100%)',
-                color: '#fff',
-            }}>
-                <div style={{ fontSize: '0.68rem', fontWeight: '800', letterSpacing: '0.8px', opacity: 0.8, marginBottom: '0.4rem', textTransform: 'uppercase' }}>
-                    {isFr ? `✨ Défi personnalisé · ${reasonMeta.fr}` : `✨ Personalised · ${reasonMeta.en}`}
+        const MISSIONS = [
+            { icon: '💎', bg: '#dbeafe', color: '#1d4ed8', titleEn: 'Get 25 Diamonds',       titleFr: 'Obtenir 25 Diamants',      progress: 12, total: 25 },
+            { icon: '⚡', bg: '#fef3c7', color: '#d97706', titleEn: 'Get 40 XP',              titleFr: 'Obtenir 40 XP',            progress: 24, total: 40 },
+            { icon: '🎯', bg: '#fee2e2', color: '#dc2626', titleEn: 'Get 2 perfect lessons',  titleFr: '2 leçons parfaites',       progress: 0,  total: 2  },
+            { icon: '🔥', bg: '#ffedd5', color: '#ea580c', titleEn: 'Complete 1 challenge',   titleFr: 'Terminer 1 défi',          progress: 1,  total: 1  },
+        ];
+
+        const EVENTS = [
+            {
+                bg: '#f59e0b', labelEn: 'Competition', labelFr: 'Compétition',
+                titleEn: 'Medumba Match!', titleFr: 'Medumba Match !',
+                descEn: 'Earn 2000 XP and get a special bonus from Medumba!',
+                descFr: 'Gagnez 2000 XP et obtenez un bonus spécial de Medumba !',
+                progress: 872, total: 2000, daysLeft: 3,
+            },
+            {
+                bg: '#ec4899', labelEn: 'Lesson', labelFr: 'Leçon',
+                titleEn: 'Complete 10 Lessons!', titleFr: 'Terminer 10 Leçons !',
+                descEn: 'Earn 1500 XP and get a special bonus from Medumba!',
+                descFr: 'Gagnez 1500 XP et obtenez un bonus spécial de Medumba !',
+                progress: 872, total: 1500, daysLeft: 5,
+            },
+            {
+                bg: '#10b981', labelEn: 'Leaderboard', labelFr: 'Classement',
+                titleEn: 'Be Number 1!', titleFr: 'Soyez N°1 !',
+                descEn: 'Reach the top of the leaderboard this week.',
+                descFr: 'Atteignez le sommet du classement cette semaine.',
+                progress: 340, total: 2840, daysLeft: 7,
+            },
+        ];
+
+        const BADGES = [
+            {
+                year: isFr ? 'Cette année' : 'This Year', count: 3,
+                items: [
+                    { icon: '👑', bg: '#fbbf24', titleEn: 'Quiz King',      titleFr: 'Roi du Quiz',     month: isFr ? 'Novembre' : 'November', xp: 2000 },
+                    { icon: '🧭', bg: '#ef4444', titleEn: 'Compass Smart',  titleFr: 'Boussole Pro',    month: isFr ? 'Juillet'  : 'July',     xp: 1500 },
+                    { icon: '💎', bg: '#3b82f6', titleEn: 'Diamond Winner', titleFr: 'Gagnant Diamant', month: isFr ? 'Mars'     : 'March',    xp: 2500 },
+                ],
+            },
+            {
+                year: '2024', count: 4,
+                items: [
+                    { icon: '⭐', bg: '#22c55e', titleEn: 'Shining Star',  titleFr: 'Étoile Brillante', month: isFr ? 'Décembre' : 'December', xp: 2500 },
+                    { icon: '💼', bg: '#78716c', titleEn: 'Most Active',   titleFr: 'Plus Actif',       month: isFr ? 'Août'     : 'August',   xp: 3000 },
+                    { icon: '🍬', bg: '#a855f7', titleEn: 'The Sweetest',  titleFr: 'Le Plus Doux',     month: isFr ? 'Avril'    : 'April',    xp: 1050 },
+                    { icon: '🎯', bg: '#f97316', titleEn: 'Best Target',   titleFr: 'Meilleure Cible',  month: isFr ? 'Février'  : 'February', xp: 1500 },
+                ],
+            },
+            {
+                year: '2023', count: 3,
+                items: [
+                    { icon: '🔧', bg: '#6b7280', titleEn: 'Quick Fix',       titleFr: 'Réparation Rapide', month: isFr ? 'Octobre' : 'October', xp: 2500 },
+                    { icon: '⏱️', bg: '#06b6d4', titleEn: 'The Fastest Man', titleFr: 'Le Plus Rapide',    month: isFr ? 'Juillet' : 'July',    xp: 2000 },
+                    { icon: '📚', bg: '#8b5cf6', titleEn: 'Smart Learning',  titleFr: 'Apprentissage Pro', month: isFr ? 'Mai'     : 'May',     xp: 3000 },
+                ],
+            },
+        ];
+
+        return (
+            <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '1.5rem' }}>
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                    <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: T.text }}>
+                        {isFr ? 'Défi' : 'Challenge'}
+                    </h2>
+                    <span style={{ fontSize: '1.2rem', color: T.textSub, cursor: 'pointer' }}>○</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                    <span style={{ fontSize: '1.5rem' }}>{reasonMeta.emoji}</span>
-                    <span style={{ fontWeight: '700', fontSize: '0.95rem' }}>
-                        {isFr ? reasonMeta.challengeFr : reasonMeta.challengeEn}
-                    </span>
-                    <span style={{
-                        marginLeft: 'auto', backgroundColor: 'rgba(255,255,255,0.2)',
-                        borderRadius: '99px', padding: '0.2rem 0.65rem',
-                        fontSize: '0.75rem', fontWeight: '800', whiteSpace: 'nowrap',
-                    }}>
-                        +{reasonMeta.reward} XP
-                    </span>
+
+                {/* Target / Badges toggle */}
+                <div style={{
+                    display: 'flex', gap: '0', marginBottom: '1.5rem',
+                    backgroundColor: T.border, borderRadius: '99px', padding: '3px',
+                }}>
+                    {['target', 'badges'].map(tab => (
+                        <button key={tab} onClick={() => setChalTab(tab)} style={{
+                            flex: 1, padding: '0.55rem', borderRadius: '99px',
+                            backgroundColor: chalTab === tab ? '#0056D2' : 'transparent',
+                            color: chalTab === tab ? '#fff' : T.textSub,
+                            fontWeight: '700', fontSize: '0.88rem', border: 'none',
+                            cursor: 'pointer', fontFamily: 'inherit',
+                            transition: 'background 0.2s, color 0.2s',
+                        }}>
+                            {tab === 'target' ? (isFr ? 'Objectifs' : 'Target') : 'Badges'}
+                        </button>
+                    ))}
                 </div>
-                <Bar value={0} max={1} color="rgba(255,255,255,0.5)" />
-            </div>
 
-            {/* Daily */}
-            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: T.text, marginBottom: '1rem' }}>
-                {isFr ? '📅 Défis du jour' : '📅 Daily Challenges'}
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
-                {DAILY_CHALLENGES.map((ch) => {
-                    const done = ch.progress >= ch.total;
-                    return (
-                        <div key={ch.id} style={{
-                            padding: '1rem 1.25rem', borderRadius: '16px',
-                            border: `2px solid ${done ? '#bbf7d0' : T.border}`,
-                            backgroundColor: done ? '#f0fdf4' : '#fff',
-                        }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
-                                <span style={{ fontSize: '1.4rem' }}>{ch.icon}</span>
-                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
-                                    {isFr ? ch.titleFr : ch.titleEn}
-                                </span>
-                                <span style={{
-                                    padding: '0.25rem 0.65rem', borderRadius: '99px',
-                                    backgroundColor: '#fef9c3', color: '#ca8a04',
-                                    fontSize: '0.75rem', fontWeight: '800',
-                                }}>
-                                    +{ch.reward} XP
-                                </span>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.4rem' }}>
-                                <span>{ch.progress} / {ch.total}</span>
-                                {done && <span style={{ color: '#16a34a', fontWeight: '700' }}>✓ {isFr ? 'Terminé' : 'Done'}</span>}
-                            </div>
-                            <Bar value={ch.progress} max={ch.total} color={done ? '#16a34a' : '#0056D2'} />
+                {chalTab === 'target' ? (
+                    <>
+                        {/* Daily Missions */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+                            <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>
+                                {isFr ? 'Missions du jour 🎯' : 'Daily Missions 🎯'}
+                            </span>
+                            <span style={{ fontSize: '0.8rem', color: '#0056D2', fontWeight: '700', cursor: 'pointer' }}>→</span>
                         </div>
-                    );
-                })}
-            </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: '1.75rem' }}>
+                            {MISSIONS.map((m, i) => {
+                                const done = m.progress >= m.total;
+                                return (
+                                    <div key={i} style={{
+                                        display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                        padding: '0.85rem 1rem', borderRadius: '14px',
+                                        backgroundColor: T.surface, border: `1.5px solid ${T.border}`,
+                                    }}>
+                                        <div style={{
+                                            width: '40px', height: '40px', borderRadius: '10px',
+                                            backgroundColor: m.bg, display: 'flex',
+                                            alignItems: 'center', justifyContent: 'center',
+                                            fontSize: '1.2rem', flexShrink: 0,
+                                        }}>{m.icon}</div>
+                                        <div style={{ flex: 1, minWidth: 0 }}>
+                                            <div style={{ fontWeight: '700', fontSize: '0.88rem', color: T.text, marginBottom: '0.35rem' }}>
+                                                {isFr ? m.titleFr : m.titleEn}
+                                            </div>
+                                            <Bar value={m.progress} max={m.total} color={done ? '#16a34a' : m.color} />
+                                            <div style={{ fontSize: '0.72rem', color: T.textMuted, fontWeight: '600', marginTop: '0.25rem' }}>
+                                                {m.progress} / {m.total}
+                                            </div>
+                                        </div>
+                                        {done && <span style={{ fontSize: '1.1rem' }}>✅</span>}
+                                    </div>
+                                );
+                            })}
+                        </div>
 
-            {/* Weekly */}
-            <h3 style={{ fontSize: '1rem', fontWeight: '800', color: T.text, marginBottom: '1rem' }}>
-                {isFr ? '📆 Défis de la semaine' : '📆 Weekly Challenges'}
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                {WEEKLY_CHALLENGES.map((ch) => {
-                    const done = ch.progress >= ch.total;
-                    return (
-                        <div key={ch.id} style={{
-                            padding: '1rem 1.25rem', borderRadius: '16px',
-                            border: `2px solid ${done ? '#bbf7d0' : T.border}`,
-                            backgroundColor: done ? '#f0fdf4' : '#fff',
-                        }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
-                                <span style={{ fontSize: '1.4rem' }}>{ch.icon}</span>
-                                <span style={{ flex: 1, fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
-                                    {isFr ? ch.titleFr : ch.titleEn}
-                                </span>
-                                <span style={{
-                                    padding: '0.25rem 0.65rem', borderRadius: '99px',
-                                    backgroundColor: T.blueTint, color: '#0056D2',
-                                    fontSize: '0.75rem', fontWeight: '800',
-                                }}>
-                                    💎 {ch.reward}
-                                </span>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.4rem' }}>
-                                <span>{ch.progress} / {ch.total}</span>
-                                {done && <span style={{ color: '#16a34a', fontWeight: '700' }}>✓ {isFr ? 'Terminé' : 'Done'}</span>}
-                            </div>
-                            <Bar value={ch.progress} max={ch.total} color={done ? '#16a34a' : '#2563eb'} />
+                        {/* Challenge Events */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+                            <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>
+                                {isFr ? 'Événements 📅' : 'Challenge Events 📅'}
+                            </span>
+                            <span style={{ fontSize: '0.8rem', color: '#0056D2', fontWeight: '700', cursor: 'pointer' }}>→</span>
                         </div>
-                    );
-                })}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                            {EVENTS.map((ev, i) => (
+                                <div key={i} style={{
+                                    borderRadius: '16px', padding: '1.1rem 1.25rem',
+                                    backgroundColor: ev.bg + '18',
+                                    border: `2px solid ${ev.bg}44`,
+                                }}>
+                                    <div style={{
+                                        display: 'inline-block', marginBottom: '0.6rem',
+                                        backgroundColor: ev.bg, color: '#fff',
+                                        fontSize: '0.68rem', fontWeight: '800',
+                                        padding: '0.2rem 0.65rem', borderRadius: '99px',
+                                        letterSpacing: '0.4px',
+                                    }}>
+                                        {isFr ? ev.labelFr : ev.labelEn}
+                                    </div>
+                                    <div style={{ fontWeight: '800', fontSize: '1rem', color: T.text, marginBottom: '0.3rem' }}>
+                                        {isFr ? ev.titleFr : ev.titleEn}
+                                    </div>
+                                    <div style={{ fontSize: '0.8rem', color: T.textSub, marginBottom: '0.75rem', lineHeight: 1.5 }}>
+                                        {isFr ? ev.descFr : ev.descEn}
+                                    </div>
+                                    <Bar value={ev.progress} max={ev.total} color={ev.bg} />
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem' }}>
+                                        <span style={{ fontSize: '0.78rem', color: T.textMuted, fontWeight: '600' }}>
+                                            {ev.progress} / {ev.total} · {ev.daysLeft} {isFr ? 'jours restants' : 'days left'}
+                                        </span>
+                                    </div>
+                                    <button style={{
+                                        width: '100%', marginTop: '0.75rem', padding: '0.65rem',
+                                        borderRadius: '10px', border: `1.5px solid ${ev.bg}`,
+                                        backgroundColor: 'transparent', color: ev.bg,
+                                        fontWeight: '700', fontSize: '0.85rem',
+                                        cursor: 'pointer', fontFamily: 'inherit',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                    }}>
+                                        <span>{isFr ? 'Relever le défi' : 'Take the Challenge'}</span>
+                                        <span>›</span>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    /* Badges tab */
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        {BADGES.map((group) => (
+                            <div key={group.year}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                                    <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>{group.year}</span>
+                                    <span style={{ fontSize: '0.78rem', color: T.textMuted, fontWeight: '600' }}>
+                                        {group.count} {isFr ? 'badges' : 'badges'}
+                                    </span>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0', borderRadius: '16px', border: `1.5px solid ${T.border}`, overflow: 'hidden' }}>
+                                    {group.items.map((b, i) => (
+                                        <div key={i} style={{
+                                            display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                            padding: '0.9rem 1rem',
+                                            borderBottom: i < group.items.length - 1 ? `1px solid ${T.border}` : 'none',
+                                            backgroundColor: T.surface,
+                                        }}>
+                                            <div style={{
+                                                width: '44px', height: '44px', borderRadius: '50%',
+                                                backgroundColor: b.bg, display: 'flex',
+                                                alignItems: 'center', justifyContent: 'center',
+                                                fontSize: '1.3rem', flexShrink: 0,
+                                            }}>{b.icon}</div>
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
+                                                    {isFr ? b.titleFr : b.titleEn}
+                                                </div>
+                                                <div style={{ fontSize: '0.75rem', color: T.textMuted, fontWeight: '600', marginTop: '0.15rem' }}>
+                                                    {b.month} · {b.xp.toLocaleString()} XP
+                                                </div>
+                                            </div>
+                                            <span style={{ color: T.textSub, fontSize: '1rem' }}>›</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
-        </div>
-    );
+        );
+    };
 
     /* ── PREMIUM (gem packages) ── */
     const renderPremium = () => {
@@ -1562,7 +1844,7 @@ const DashboardPage = ({
                 <button
                     onClick={() => setShareModal({ type: 'profile', data: {} })}
                     style={{
-                        width: '100%', marginBottom: '1.5rem', padding: '1rem',
+                        width: '100%', marginBottom: '0.75rem', padding: '1rem',
                         borderRadius: '16px', cursor: 'pointer', fontFamily: 'inherit',
                         background: 'linear-gradient(135deg, #0056D2, #0891b2)',
                         color: '#fff', border: 'none',
@@ -1575,6 +1857,36 @@ const DashboardPage = ({
                     onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,86,210,0.3)'; }}
                 >
                     📲 {isFr ? 'Partager ma progression' : 'Share my progress'}
+                </button>
+
+                {/* ── Reset progress ── */}
+                <button
+                    onClick={() => {
+                        if (!window.confirm(isFr
+                            ? 'Recommencer depuis Salutations ? Toute ta progression sera effacée.'
+                            : 'Restart from Greetings? All your progress will be erased.')) return;
+                        setCompletedLessons(new Set());
+                        setOpenedChests(new Set());
+                        setXp(0);
+                        setStreak(0);
+                        setGems(50);
+                        setHearts(5);
+                        localStorage.setItem(lsKey('med_completed'),    '[]');
+                        localStorage.setItem(lsKey('med_chests'),       '[]');
+                        localStorage.setItem(lsKey('med_xp'),           '0');
+                        localStorage.setItem(lsKey('med_streak'),       '0');
+                        localStorage.setItem(lsKey('med_gems'),         '50');
+                        localStorage.setItem(lsKey('med_hearts'),       '5');
+                    }}
+                    style={{
+                        width: '100%', marginBottom: '1.5rem', padding: '0.9rem',
+                        borderRadius: '14px', cursor: 'pointer', fontFamily: 'inherit',
+                        border: '2px solid #fde68a', backgroundColor: '#fffbeb',
+                        color: '#92400e', fontWeight: '800', fontSize: '0.9rem',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                    }}
+                >
+                    🔄 {isFr ? 'Recommencer depuis le début' : 'Restart from beginning'}
                 </button>
 
                 {/* ── Settings ── */}
@@ -1862,11 +2174,14 @@ const DashboardPage = ({
                     {isFr ? 'Leçon terminée !' : 'Lesson completed!'}
                 </h1>
                 <img src={celebrationImg} alt="Celebration" style={{ width: '240px', maxWidth: '80%', height: 'auto', animation: 'lc-pop 0.55s cubic-bezier(0.175,0.885,0.32,1.275) 0.1s both' }} />
-                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: '#0056D2', borderRadius: '16px', padding: '1rem', color: '#fff', animation: 'lc-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s both' }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.8, marginBottom: '0.4rem' }}>
+                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: T.surface, borderRadius: '16px', padding: '1.25rem 1.5rem', border: '2px solid #bfdbfe', animation: 'lc-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s both', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                    <div style={{ fontSize: '0.82rem', fontWeight: '700', color: '#64748b' }}>
                         {isFr ? 'Diamants' : 'Diamonds'}
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: '900' }}>💎 {res.diamonds}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                        <span style={{ fontSize: '2rem' }}>💎</span>
+                        <span style={{ fontSize: '2.2rem', fontWeight: '900', color: T.text }}>{res.diamonds}</span>
+                    </div>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
                     {[
@@ -2049,12 +2364,12 @@ const DashboardPage = ({
             }
         };
         const socials = [
-            { icon: '📘', label: 'Facebook'  },
-            { icon: '💬', label: 'WhatsApp'  },
-            { icon: '📷', label: 'Instagram' },
-            { icon: '🐦', label: 'Twitter'   },
-            { icon: '💚', label: 'Line'       },
-            { icon: '💼', label: 'LinkedIn'  },
+            { bg: '#1877f2', letter: 'f',  label: 'Facebook'  },
+            { bg: '#25d366', letter: 'W',  label: 'WhatsApp'  },
+            { bg: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', letter: '📷', label: 'Instagram' },
+            { bg: '#1da1f2', letter: 'X',  label: 'Twitter'   },
+            { bg: '#06c755', letter: 'L',  label: 'Line'       },
+            { bg: '#0a66c2', letter: 'in', label: 'LinkedIn'  },
         ];
         return (
             <div style={{
@@ -2081,7 +2396,7 @@ const DashboardPage = ({
                         <div style={{ fontSize: '1.4rem', fontWeight: '900', color: T.text, margin: '0.5rem 0 0.25rem' }}>
                             {isFr ? `${streak} jours de suite !` : `${streak} days straight!`}
                         </div>
-                        <div style={{ fontSize: '1rem', fontWeight: '700', color: '#0056D2' }}>Medumba.ia</div>
+                        {userName && <div style={{ fontSize: '1rem', fontWeight: '700', color: '#0056D2' }}>{userName}</div>}
                     </div>
 
                     {/* Social list */}
@@ -2095,7 +2410,15 @@ const DashboardPage = ({
                                 cursor: 'pointer', fontFamily: 'inherit',
                                 fontSize: '1rem', fontWeight: '600', color: T.text,
                             }}>
-                                <span style={{ fontSize: '1.5rem' }}>{s.icon}</span>
+                                <div style={{
+                                    width: '36px', height: '36px', borderRadius: '50%',
+                                    background: s.bg, flexShrink: 0,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    color: '#fff', fontWeight: '900',
+                                    fontSize: s.letter.length > 1 ? '0.7rem' : s.label === 'Instagram' ? '1.1rem' : '1rem',
+                                }}>
+                                    {s.letter}
+                                </div>
                                 {s.label}
                             </button>
                         ))}
@@ -2674,10 +2997,9 @@ const DashboardPage = ({
                 <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                         {activeNav === 'home'        && renderHome()}
-                        {activeNav === 'leaderboard' && renderLeaderboard()}
+                        {activeNav === 'phrasebook'  && renderPhrasebook()}
+                        {activeNav === 'wordcards'   && renderWordCards()}
                         {activeNav === 'challenge'   && renderChallenge()}
-                        {activeNav === 'videos'      && renderVideos()}
-                        {activeNav === 'premium'     && renderPremium()}
                         {activeNav === 'account'     && renderAccount()}
                     </div>
 

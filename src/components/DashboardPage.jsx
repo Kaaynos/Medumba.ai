@@ -134,33 +134,26 @@ const DashboardPage = ({
     const reasonMeta  = REASON_META[userReason] ?? REASON_META.fun;
     const profMeta    = PROF_LABELS[profLevel]  ?? PROF_LABELS[1];
 
-    /* ── compute lesson statuses from proficiency ──
-       profLevel 1 → lesson index 0 active (true beginner)
-       profLevel 2 → lesson 0 done, index 1 active
-       profLevel 3 → lessons 0-1 done, index 2 active
-       profLevel 4 → lessons 0-2 done, index 3 active
-    ── */
+    /* ── all users always start at lesson 1 (Salutations) regardless of proficiency ── */
     const applyProgress = (units) => units.map((unit, uIdx) => {
-        if (uIdx > 0) return unit; // only unlock progress in unit 1
-        let regularSeen = 0;
-        const doneCount = profLevel - 1; // number of regular lessons pre-completed
+        if (uIdx > 0) return unit;
+        let first = true;
         return {
             ...unit,
             lessons: unit.lessons.map((lesson) => {
                 if (lesson.type === 'chest' || lesson.type === 'boss') {
                     return { ...lesson, status: 'locked' };
                 }
-                const idx = regularSeen++;
-                if (idx < doneCount)       return { ...lesson, status: 'completed' };
-                if (idx === doneCount)     return { ...lesson, status: 'active' };
+                if (first) { first = false; return { ...lesson, status: 'active' }; }
                 return { ...lesson, status: 'locked' };
             }),
         };
     });
 
-    /* ── completed lessons persisted in localStorage ── */
-    const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem('med_completed'); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
-    useEffect(() => { localStorage.setItem('med_completed', JSON.stringify([...completedLessons])); }, [completedLessons]);
+    /* ── completed lessons persisted in localStorage (per user) ── */
+    const lsKey = (k) => `${currentUid || 'anon'}_${k}`;
+    const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem(lsKey('med_completed')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
+    useEffect(() => { localStorage.setItem(lsKey('med_completed'), JSON.stringify([...completedLessons])); }, [completedLessons]); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── linear progression: completing item[i] → item[i+1] becomes active ── */
     const applySessionProgress = (units) => {
@@ -200,7 +193,7 @@ const DashboardPage = ({
     const [activeStory,  setActiveStory]  = useState(null);
     const [seenStories,  setSeenStories]  = useState(() => {
         try {
-            const saved = JSON.parse(localStorage.getItem('med_seen_stories') || '{}');
+            const saved = JSON.parse(localStorage.getItem(lsKey('med_seen_stories')) || '{}');
             const today = new Date().toDateString();
             return saved.date === today ? new Set(saved.ids) : new Set();
         } catch { return new Set(); }
@@ -208,7 +201,7 @@ const DashboardPage = ({
     const markStorySeen = (id) => {
         setSeenStories(prev => {
             const next = new Set(prev).add(id);
-            localStorage.setItem('med_seen_stories', JSON.stringify({ date: new Date().toDateString(), ids: [...next] }));
+            localStorage.setItem(lsKey('med_seen_stories'), JSON.stringify({ date: new Date().toDateString(), ids: [...next] }));
             return next;
         });
     };
@@ -221,23 +214,23 @@ const DashboardPage = ({
     const [shareModal,   setShareModal]   = useState(null); // null | { type:'lesson'|'profile', data:{} }
     const [copyDone,     setCopyDone]     = useState(false);
 
-    /* ── live stats (persisted in localStorage) ── */
-    const [gems,   setGems]   = useState(() => { const v = localStorage.getItem('med_gems');   return v !== null ? parseInt(v) : userStats.gems; });
-    const [xp,     setXp]     = useState(() => { const v = localStorage.getItem('med_xp');     return v !== null ? parseInt(v) : userStats.xp; });
-    const [streak, setStreak] = useState(() => { const v = localStorage.getItem('med_streak'); return v !== null ? parseInt(v) : userStats.streak; });
-    const [hearts, setHearts] = useState(() => { const v = localStorage.getItem('med_hearts'); return v !== null ? parseInt(v) : userStats.hearts; });
+    /* ── live stats (persisted in localStorage, per user) ── */
+    const [gems,   setGems]   = useState(() => { const v = localStorage.getItem(lsKey('med_gems'));   return v !== null ? parseInt(v) : userStats.gems; });
+    const [xp,     setXp]     = useState(() => { const v = localStorage.getItem(lsKey('med_xp'));     return v !== null ? parseInt(v) : userStats.xp; });
+    const [streak, setStreak] = useState(() => { const v = localStorage.getItem(lsKey('med_streak')); return v !== null ? parseInt(v) : userStats.streak; });
+    const [hearts, setHearts] = useState(() => { const v = localStorage.getItem(lsKey('med_hearts')); return v !== null ? parseInt(v) : userStats.hearts; });
 
-    useEffect(() => { localStorage.setItem('med_gems',   gems);   }, [gems]);
-    useEffect(() => { localStorage.setItem('med_xp',     xp);     }, [xp]);
-    useEffect(() => { localStorage.setItem('med_streak', streak); }, [streak]);
-    useEffect(() => { localStorage.setItem('med_hearts', hearts); }, [hearts]);
+    useEffect(() => { localStorage.setItem(lsKey('med_gems'),   gems);   }, [gems]);   // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => { localStorage.setItem(lsKey('med_xp'),     xp);     }, [xp]);     // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => { localStorage.setItem(lsKey('med_streak'), streak); }, [streak]); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => { localStorage.setItem(lsKey('med_hearts'), hearts); }, [hearts]); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── chest mechanic ── */
-    const [openedChests,  setOpenedChests]  = useState(() => { try { const v = localStorage.getItem('med_chests'); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
+    const [openedChests,  setOpenedChests]  = useState(() => { try { const v = localStorage.getItem(lsKey('med_chests')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
     const [chestModal,    setChestModal]    = useState(null);
     const [chestCollected, setChestCollected] = useState(false);
 
-    useEffect(() => { localStorage.setItem('med_chests', JSON.stringify([...openedChests])); }, [openedChests]);
+    useEffect(() => { localStorage.setItem(lsKey('med_chests'), JSON.stringify([...openedChests])); }, [openedChests]); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── purchase flow ──
        null | 'packages' | 'payment' | 'summary' | 'success'
@@ -1811,9 +1804,21 @@ const DashboardPage = ({
                     setXp(prev => prev + (result.xp || 0));
                     setGems(prev => prev + (result.diamonds || 0));
                     setLessonResult(result);
+                    setStreak(prev => prev + 1);
                     setLessonFlow('lesson_complete');
                 }}
-                onShare={() => setLessonFlow('share')}
+                onShare={(result) => {
+                    if (activeLesson?.id) {
+                        setCompletedLessons(prev => new Set([...prev, activeLesson.id]));
+                    }
+                    if (result) {
+                        setXp(prev => prev + (result.xp || 0));
+                        setGems(prev => prev + (result.diamonds || 0));
+                        setLessonResult(result);
+                        setStreak(prev => prev + 1);
+                    }
+                    setLessonFlow('share');
+                }}
                 onClose={() => { setLessonFlow(null); setActiveLesson(null); }}
             />
         );

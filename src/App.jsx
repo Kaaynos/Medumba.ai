@@ -227,7 +227,13 @@ function App() {
           registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal }}
         />
       )}
-      {step === 13 && <SuccessPage  onNext={() => go(15)}                        nativeLang={nativeLang} />}
+      {step === 13 && <SuccessPage
+          onNext={() => go(15)}
+          nativeLang={nativeLang}
+          userName={userName}
+          onNavigate={(view) => go(14, view)}
+          onLanding={() => go(1)}
+        />}
 
       {/* ── Login ── */}
       {step === 16 && (
@@ -256,6 +262,7 @@ function App() {
       {/* ── Gamified Dashboard ── */}
       {step === 15 && (
         <DashboardPage
+          key={currentUid || 'anon'}
           userStats={userStats}
           nativeLang={nativeLang}
           learningLang={learningLang}

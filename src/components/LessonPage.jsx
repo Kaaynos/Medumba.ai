@@ -710,7 +710,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 {/* Buttons */}
                 <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
                     <button
-                        onClick={() => onShare?.()}
+                        onClick={() => onShare?.({ xp: xpEarned, diamonds: diamondsEarned, time: elapsed, accuracy })}
                         style={{
                             flex: 1, padding: '1rem', borderRadius: '9999px',
                             backgroundColor: '#eff6ff', color: '#0056D2',

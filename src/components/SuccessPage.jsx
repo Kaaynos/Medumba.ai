@@ -3,8 +3,9 @@ import welcomeVec from '../assets/welcom vector.png';
 
 const B = '#1B4FD8';
 
-const SuccessPage = ({ onNext, nativeLang }) => {
+const SuccessPage = ({ onNext, nativeLang, userName, onNavigate, onLanding }) => {
     const isFr = nativeLang === 'french';
+    const firstName = (userName || '').split(' ')[0] || '';
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -94,17 +95,53 @@ const SuccessPage = ({ onNext, nativeLang }) => {
                     marginBottom: '0.6rem', letterSpacing: '-0.02em',
                     animation: 'suc-fade 0.5s ease-out 0.2s both',
                 }}>
-                    {isFr ? 'Bienvenue 👋' : 'Welcome 👋'}
+                    {isFr
+                        ? `Bienvenue${firstName ? `, ${firstName}` : ''} 👋`
+                        : `Welcome${firstName ? `, ${firstName}` : ''} 👋`}
                 </h1>
 
                 {/* Subtext */}
                 <p style={{
                     fontSize: '1rem', color: '#64748b', maxWidth: '280px',
-                    lineHeight: 1.6, marginBottom: '2.5rem', fontWeight: '500',
+                    lineHeight: 1.6, marginBottom: '1.5rem', fontWeight: '500',
                     animation: 'suc-fade 0.5s ease-out 0.3s both',
                 }}>
                     {isFr ? 'Votre profil a été créé avec succès.' : 'Your profile has been created successfully.'}
                 </p>
+
+                {/* Quick-access buttons */}
+                <div style={{
+                    display: 'grid', gridTemplateColumns: '1fr 1fr',
+                    gap: '0.65rem', width: '100%', maxWidth: '340px',
+                    marginBottom: '1.25rem',
+                    animation: 'suc-fade 0.5s ease-out 0.35s both',
+                }}>
+                    {[
+                        { icon: '📖', labelFr: 'Dictionnaire', labelEn: 'Dictionary', view: 'dictionary' },
+                        { icon: '🔢', labelFr: 'Comptage',     labelEn: 'Counting',   view: 'counting'   },
+                        { icon: '📅', labelFr: 'Calendrier',   labelEn: 'Calendar',   view: 'calendar'   },
+                        { icon: '🎬', labelFr: 'Vidéos',       labelEn: 'Videos',     view: 'video'      },
+                    ].map(btn => (
+                        <button
+                            key={btn.view}
+                            onClick={() => onNavigate?.(btn.view)}
+                            style={{
+                                padding: '0.8rem 0.6rem', borderRadius: '14px',
+                                backgroundColor: '#eff6ff', border: '2px solid #bfdbfe',
+                                color: B, fontWeight: '700', fontSize: '0.9rem',
+                                cursor: 'pointer', fontFamily: 'inherit',
+                                display: 'flex', flexDirection: 'column',
+                                alignItems: 'center', gap: '0.3rem',
+                                transition: 'background 0.15s',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#dbeafe'}
+                            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#eff6ff'}
+                        >
+                            <span style={{ fontSize: '1.4rem' }}>{btn.icon}</span>
+                            <span>{isFr ? btn.labelFr : btn.labelEn}</span>
+                        </button>
+                    ))}
+                </div>
 
                 {/* CTA */}
                 <button onClick={onNext} style={{
@@ -116,11 +153,25 @@ const SuccessPage = ({ onNext, nativeLang }) => {
                     letterSpacing: '0.5px',
                     animation: 'suc-fade 0.5s ease-out 0.4s both',
                     transition: 'transform 0.15s, box-shadow 0.15s',
+                    marginBottom: '0.75rem',
                 }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(27,79,216,0.4)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.boxShadow = '0 8px 24px rgba(27,79,216,0.3)'; }}
                 >
-                    {isFr ? 'CONTINUER VERS L\'ACCUEIL' : 'CONTINUE TO HOME'}
+                    {isFr ? "CONTINUER VERS L'ACCUEIL" : 'CONTINUE TO HOME'}
+                </button>
+
+                {/* Back to landing */}
+                <button onClick={onLanding} style={{
+                    width: '100%', maxWidth: '340px',
+                    backgroundColor: 'transparent', color: '#64748b',
+                    padding: '0.75rem', borderRadius: '9999px',
+                    fontSize: '0.9rem', fontWeight: '600',
+                    border: '2px solid #e2e8f0', cursor: 'pointer',
+                    fontFamily: 'inherit',
+                    animation: 'suc-fade 0.5s ease-out 0.45s both',
+                }}>
+                    {isFr ? '← Retour à la page d\'accueil' : '← Back to landing page'}
                 </button>
             </div>
         </div>

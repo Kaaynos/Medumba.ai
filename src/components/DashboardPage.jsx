@@ -1259,15 +1259,58 @@ const DashboardPage = ({
 
     /* ── WORD CARDS ── */
     const WC_CATEGORIES = [
-        { id: 'family',    icon: '👨‍👩‍👧', en: 'Family',    fr: 'Famille',    premium: false, keywords: ['mère','père','frère','sœur','enfant','ami','garçon','fille','maman','papa'] },
-        { id: 'body',      icon: '🖐️',   en: 'Body',      fr: 'Corps',      premium: false, keywords: ['tête','main','pied','ventre','bouche','dents','yeux','oreilles','langue'] },
-        { id: 'animals',   icon: '🦉',   en: 'Animals',   fr: 'Animaux',    premium: false, keywords: ['chien','serpent','souris','chat'] },
-        { id: 'food',      icon: '🌽',   en: 'Food',      fr: 'Nourriture', premium: false, keywords: ['lait','eau','manger','boire'] },
-        { id: 'colors',    icon: '🎨',   en: 'Colors',    fr: 'Couleurs',   premium: false, keywords: ['rouge','blanc','noir','bleu','vert','jaune'] },
+        { id: 'family',    icon: '👨‍👩‍👧', en: 'Family',    fr: 'Famille',    premium: false, keywords: ['mère','père','frère','sœur','enfant','ami','garçon','fille','maman','papa','mari','femme','épouse','oncle','tante','grand'] },
+        { id: 'body',      icon: '🖐️',   en: 'Body',      fr: 'Corps',      premium: false, keywords: ['tête','main','pied','ventre','bouche','dents','yeux','oreilles','langue','nez','bras','jambe','dos','cœur','sang','corps'] },
+        { id: 'animals',   icon: '🐾',   en: 'Animals',   fr: 'Animaux',    premium: false, keywords: ['chien','serpent','souris','chat','vache','bœuf','mouton','chèvre','cochon','poule','poulet','coq','singe','lion','oiseau','poisson','grenouille','tortue','cheval','lapin','canard','hibou','chouette','abeille','papillon','araignée','fourmi','lièvre','cabri','âne','taureau'] },
+        { id: 'food',      icon: '🌽',   en: 'Food',      fr: 'Nourriture', premium: false, keywords: ['lait','eau','manger','boire','riz','maïs','banane','mangue','viande','sel','huile','farine','nourriture','repas','bouillie','légume','fruit'] },
+        { id: 'colors',    icon: '🎨',   en: 'Colors',    fr: 'Couleurs',   premium: false, keywords: ['rouge','blanc','noir','bleu','vert','jaune','orange','violet','rose','couleur'] },
         { id: 'numbers',   icon: '🔢',   en: 'Numbers',   fr: 'Chiffres',   premium: false, keywords: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'] },
-        { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: true,  keywords: ['champ','arbre','soleil','rivière'] },
-        { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: true,  keywords: ['bonjour','salut','merci','oui','non','bienvenue'] },
+        { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: true,  keywords: ['champ','arbre','soleil','rivière','montagne','pluie','vent','feu','terre','fleur','forêt','rocher','feuille'] },
+        { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: true,  keywords: ['bonjour','salut','merci','oui','non','bienvenue','viens','bonsoir','bonne nuit','au revoir'] },
     ];
+
+    const WORD_ICONS = {
+        // Animals — each gets its own emoji
+        chien: '🐕', serpent: '🐍', souris: '🐭', chat: '🐱',
+        vache: '🐄', bœuf: '🐂', mouton: '🐑', chèvre: '🐐',
+        cochon: '🐷', poule: '🐔', poulet: '🐔', coq: '🐓',
+        singe: '🐒', lion: '🦁', oiseau: '🐦', grenouille: '🐸',
+        tortue: '🐢', cheval: '🐴', lapin: '🐰', canard: '🦆',
+        hibou: '🦉', chouette: '🦉', abeille: '🐝', papillon: '🦋',
+        araignée: '🕷️', fourmi: '🐜', lièvre: '🐇', âne: '🫏',
+        cabri: '🐐', taureau: '🐂', poisson: '🐟',
+        // Body
+        tête: '🧠', main: '🖐️', pied: '🦶', ventre: '🫃',
+        bouche: '👄', dents: '🦷', yeux: '👀', oreilles: '👂',
+        langue: '👅', nez: '👃', bras: '💪', jambe: '🦵', dos: '🫀', cœur: '❤️', sang: '🩸',
+        // Family
+        mère: '👩', maman: '👩', père: '👨', papa: '👨',
+        frère: '👦', sœur: '👧', enfant: '👶', ami: '🤝',
+        garçon: '👦', fille: '👧', mari: '👫', femme: '👩',
+        // Food
+        lait: '🥛', eau: '💧', riz: '🍚', maïs: '🌽',
+        banane: '🍌', mangue: '🥭', viande: '🥩', sel: '🧂', huile: '🫙', farine: '🌾',
+        // Colors
+        rouge: '🔴', blanc: '⚪', noir: '⚫', bleu: '🔵',
+        vert: '🟢', jaune: '🟡', orange: '🟠', violet: '🟣', rose: '🌸',
+        // Numbers
+        un: '1️⃣', deux: '2️⃣', trois: '3️⃣', quatre: '4️⃣', cinq: '5️⃣',
+        six: '6️⃣', sept: '7️⃣', huit: '8️⃣', neuf: '9️⃣', dix: '🔟',
+        // Nature
+        arbre: '🌳', soleil: '☀️', rivière: '🏞️', champ: '🌾',
+        montagne: '⛰️', pluie: '🌧️', vent: '💨', feu: '🔥', fleur: '🌸', forêt: '🌲',
+        // Greetings
+        bonjour: '👋', salut: '✋', merci: '🙏', oui: '✅', non: '❌', bienvenue: '🎉',
+    };
+
+    const getWordIcon = (fr, fallback) => {
+        if (!fr) return fallback;
+        const lower = fr.toLowerCase();
+        for (const [kw, icon] of Object.entries(WORD_ICONS)) {
+            if (lower.includes(kw)) return icon;
+        }
+        return fallback;
+    };
 
     const renderWordCards = () => {
         if (wcCategory !== null) {
@@ -1287,7 +1330,7 @@ const DashboardPage = ({
                         <div style={{ width: '100%', maxWidth: '340px', backgroundColor: T.surface, borderRadius: '20px', border: `1.5px solid ${T.border}`, padding: '2rem 1.5rem', textAlign: 'left', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
                             <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text, marginBottom: '0.3rem' }}>{word.medumba}</div>
                             <div style={{ fontSize: '1rem', color: T.textSub, fontWeight: '600', marginBottom: '1rem' }}>{word.fr}</div>
-                            <div style={{ fontSize: '4rem', textAlign: 'center', margin: '1.5rem 0' }}>{cat.icon}</div>
+                            <div style={{ fontSize: '4rem', textAlign: 'center', margin: '1.5rem 0' }}>{getWordIcon(word.fr, cat.icon)}</div>
                             <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>🔊</button>
                         </div>
                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
@@ -1306,7 +1349,7 @@ const DashboardPage = ({
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         {words.map((w, i) => (
                             <button key={i} onClick={() => setWcCard(i)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', width: '100%' }}>
-                                <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{cat.icon}</span>
+                                <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{getWordIcon(w.fr, cat.icon)}</span>
                                 <div>
                                     <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>{w.medumba}</div>
                                     <div style={{ fontSize: '0.78rem', color: T.textSub }}>{w.fr}</div>

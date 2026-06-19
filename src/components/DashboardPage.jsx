@@ -13,12 +13,6 @@ import LessonPage        from './LessonPage';
 import { getPersonalizedTip } from '../utils/lessonGenerator';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faDog, faCat, faCow, faHorse, faFish, faFrog, faSpider, faBug,
-    faCrow, faDove, faPaw, faRodSnake, faOtter, faMosquito, faShrimp,
-    faDragon, faWorm, faHippo,
-} from '@fortawesome/free-solid-svg-icons';
 
 /* ════════════════════════════════════════════════════════════════════
    DashboardPage
@@ -1318,46 +1312,55 @@ const DashboardPage = ({
         return fallback;
     };
 
-    const FA_ANIMAL_ICONS = [
-        { kw: 'chien',      icon: faDog      },
-        { kw: 'chat',       icon: faCat      },
-        { kw: 'vache',      icon: faCow      },
-        { kw: 'bœuf',       icon: faCow      },
-        { kw: 'taureau',    icon: faCow      },
-        { kw: 'cheval',     icon: faHorse    },
-        { kw: 'poisson',    icon: faFish     },
-        { kw: 'grenouille', icon: faFrog     },
-        { kw: 'araignée',   icon: faSpider   },
-        { kw: 'fourmi',     icon: faBug      },
-        { kw: 'abeille',    icon: faBug      },
-        { kw: 'moustique',  icon: faMosquito },
-        { kw: 'oiseau',     icon: faCrow     },
-        { kw: 'canard',     icon: faDove     },
-        { kw: 'pigeon',     icon: faDove     },
-        { kw: 'colombe',    icon: faDove     },
-        { kw: 'serpent',    icon: faRodSnake },
-        { kw: 'hippopotame',icon: faHippo    },
-        { kw: 'loutre',     icon: faOtter    },
-        { kw: 'crevette',   icon: faShrimp   },
-        { kw: 'dragon',     icon: faDragon   },
-        { kw: 'ver',        icon: faWorm     },
-        { kw: 'souris',     icon: faPaw      },
-        { kw: 'lapin',      icon: faPaw      },
-        { kw: 'mouton',     icon: faPaw      },
-        { kw: 'chèvre',     icon: faPaw      },
-        { kw: 'cochon',     icon: faPaw      },
-        { kw: 'lièvre',     icon: faPaw      },
-        { kw: 'cabri',      icon: faPaw      },
-        { kw: 'âne',        icon: faPaw      },
-        { kw: 'singe',      icon: faPaw      },
-        { kw: 'lion',       icon: faPaw      },
-    ];
+    const FE = 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@latest/assets';
+    const ANIMAL_3D = {
+        chien:       `${FE}/Dog%20face/3D/dog_face_3d.png`,
+        chat:        `${FE}/Cat%20face/3D/cat_face_3d.png`,
+        vache:       `${FE}/Cow%20face/3D/cow_face_3d.png`,
+        bœuf:        `${FE}/Ox/3D/ox_3d.png`,
+        taureau:     `${FE}/Ox/3D/ox_3d.png`,
+        cheval:      `${FE}/Horse%20face/3D/horse_face_3d.png`,
+        poisson:     `${FE}/Fish/3D/fish_3d.png`,
+        grenouille:  `${FE}/Frog/3D/frog_3d.png`,
+        araignée:    `${FE}/Spider/3D/spider_3d.png`,
+        fourmi:      `${FE}/Ant/3D/ant_3d.png`,
+        abeille:     `${FE}/Honeybee/3D/honeybee_3d.png`,
+        moustique:   `${FE}/Mosquito/3D/mosquito_3d.png`,
+        papillon:    `${FE}/Butterfly/3D/butterfly_3d.png`,
+        oiseau:      `${FE}/Bird/3D/bird_3d.png`,
+        canard:      `${FE}/Duck/3D/duck_3d.png`,
+        hibou:       `${FE}/Owl/3D/owl_3d.png`,
+        chouette:    `${FE}/Owl/3D/owl_3d.png`,
+        serpent:     `${FE}/Snake/3D/snake_3d.png`,
+        souris:      `${FE}/Mouse%20face/3D/mouse_face_3d.png`,
+        lapin:       `${FE}/Rabbit%20face/3D/rabbit_face_3d.png`,
+        lièvre:      `${FE}/Rabbit%20face/3D/rabbit_face_3d.png`,
+        mouton:      `${FE}/Sheep/3D/sheep_3d.png`,
+        chèvre:      `${FE}/Goat/3D/goat_3d.png`,
+        cabri:       `${FE}/Goat/3D/goat_3d.png`,
+        cochon:      `${FE}/Pig%20face/3D/pig_face_3d.png`,
+        lion:        `${FE}/Lion/3D/lion_3d.png`,
+        singe:       `${FE}/Monkey%20face/3D/monkey_face_3d.png`,
+        hippopotame: `${FE}/Hippopotamus/3D/hippopotamus_3d.png`,
+        tortue:      `${FE}/Turtle/3D/turtle_3d.png`,
+        âne:         `${FE}/Donkey/3D/donkey_3d.png`,
+        poulet:      `${FE}/Chicken/3D/chicken_3d.png`,
+        poule:       `${FE}/Chicken/3D/chicken_3d.png`,
+        coq:         `${FE}/Rooster/3D/rooster_3d.png`,
+        éléphant:    `${FE}/Elephant/3D/elephant_3d.png`,
+        gorille:     `${FE}/Gorilla/3D/gorilla_3d.png`,
+        zèbre:       `${FE}/Zebra/3D/zebra_3d.png`,
+        girafe:      `${FE}/Giraffe/3D/giraffe_3d.png`,
+        crocodile:   `${FE}/Crocodile/3D/crocodile_3d.png`,
+        scorpion:    `${FE}/Scorpion/3D/scorpion_3d.png`,
+        chauve:      `${FE}/Bat/3D/bat_3d.png`,
+    };
 
-    const renderWordIcon = (fr, fallback, size = '1.5rem', color = '#374151') => {
+    const renderWordIcon = (fr, fallback, size = '1.5rem') => {
         if (fr) {
             const lower = fr.toLowerCase();
-            const match = FA_ANIMAL_ICONS.find(({ kw }) => lower.includes(kw));
-            if (match) return <FontAwesomeIcon icon={match.icon} style={{ fontSize: size, color }} />;
+            const url = Object.entries(ANIMAL_3D).find(([kw]) => lower.includes(kw))?.[1];
+            if (url) return <img src={url} alt={fr} style={{ width: size, height: size, objectFit: 'contain', display: 'block' }} />;
         }
         return <span style={{ fontSize: size }}>{getWordIcon(fr, fallback)}</span>;
     };
@@ -1380,7 +1383,7 @@ const DashboardPage = ({
                         <div style={{ width: '100%', maxWidth: '340px', backgroundColor: T.surface, borderRadius: '20px', border: `1.5px solid ${T.border}`, padding: '2rem 1.5rem', textAlign: 'left', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
                             <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text, marginBottom: '0.3rem' }}>{word.medumba}</div>
                             <div style={{ fontSize: '1rem', color: T.textSub, fontWeight: '600', marginBottom: '1rem' }}>{word.fr}</div>
-                            <div style={{ fontSize: '4rem', textAlign: 'center', margin: '1.5rem 0' }}>{renderWordIcon(word.fr, cat.icon, '4rem', '#1f2937')}</div>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '1.5rem 0' }}>{renderWordIcon(word.fr, cat.icon, '7rem')}</div>
                             <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>🔊</button>
                         </div>
                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
@@ -1399,7 +1402,7 @@ const DashboardPage = ({
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         {words.map((w, i) => (
                             <button key={i} onClick={() => setWcCard(i)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', width: '100%' }}>
-                                <span style={{ fontSize: '1.5rem', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '2rem' }}>{renderWordIcon(w.fr, cat.icon, '1.4rem', '#374151')}</span>
+                                <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '2.2rem', height: '2.2rem' }}>{renderWordIcon(w.fr, cat.icon, '2rem')}</span>
                                 <div>
                                     <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>{w.medumba}</div>
                                     <div style={{ fontSize: '0.78rem', color: T.textSub }}>{w.fr}</div>

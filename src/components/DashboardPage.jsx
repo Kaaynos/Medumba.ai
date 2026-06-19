@@ -14,6 +14,59 @@ import { getPersonalizedTip } from '../utils/lessonGenerator';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
 
+/* ── Fluent Emoji 3D component ── */
+const _FE = 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@latest/assets';
+const EMOJI_3D = {
+    '🏠': `${_FE}/House/3D/house_3d.png`,
+    '📖': `${_FE}/Open%20book/3D/open_book_3d.png`,
+    '🃏': `${_FE}/Joker/3D/joker_3d.png`,
+    '⚡': `${_FE}/High%20voltage/3D/high_voltage_3d.png`,
+    '👤': `${_FE}/Bust%20in%20silhouette/3D/bust_in_silhouette_3d.png`,
+    '👋': `${_FE}/Waving%20hand/3D/waving_hand_3d.png`,
+    '🍜': `${_FE}/Steaming%20bowl/3D/steaming_bowl_3d.png`,
+    '👨‍👩‍👧': `${_FE}/People%20hugging/3D/people_hugging_3d.png`,
+    '🔢': `${_FE}/Input%20numbers/3D/input_numbers_3d.png`,
+    '🏃': `${_FE}/Person%20running/3D/person_running_3d.png`,
+    '🎓': `${_FE}/Graduation%20cap/3D/graduation_cap_3d.png`,
+    '🌿': `${_FE}/Herb/3D/herb_3d.png`,
+    '🥁': `${_FE}/Drum/3D/drum_3d.png`,
+    '🖐️': `${_FE}/Hand%20with%20fingers%20splayed/3D/hand_with_fingers_splayed_3d.png`,
+    '🐾': `${_FE}/Paw%20prints/3D/paw_prints_3d.png`,
+    '🌽': `${_FE}/Ear%20of%20corn/3D/ear_of_corn_3d.png`,
+    '🎨': `${_FE}/Artist%20palette/3D/artist_palette_3d.png`,
+    '🔥': `${_FE}/Fire/3D/fire_3d.png`,
+    '💎': `${_FE}/Gem%20stone/3D/gem_stone_3d.png`,
+    '❤️': `${_FE}/Red%20heart/3D/red_heart_3d.png`,
+    '⭐': `${_FE}/Star/3D/star_3d.png`,
+    '🏆': `${_FE}/Trophy/3D/trophy_3d.png`,
+    '🎯': `${_FE}/Bullseye/3D/bullseye_3d.png`,
+    '🏅': `${_FE}/Sports%20medal/3D/sports_medal_3d.png`,
+    '💬': `${_FE}/Speech%20balloon/3D/speech_balloon_3d.png`,
+    '💰': `${_FE}/Money%20bag/3D/money_bag_3d.png`,
+    '🔊': `${_FE}/Speaker%20high%20volume/3D/speaker_high_volume_3d.png`,
+    '🔍': `${_FE}/Magnifying%20glass%20tilted%20left/3D/magnifying_glass_tilted_left_3d.png`,
+    '👑': `${_FE}/Crown/3D/crown_3d.png`,
+    '🔒': `${_FE}/Locked/3D/locked_3d.png`,
+    '🔓': `${_FE}/Unlocked/3D/unlocked_3d.png`,
+    '🎁': `${_FE}/Wrapped%20gift/3D/wrapped_gift_3d.png`,
+    '📚': `${_FE}/Books/3D/books_3d.png`,
+    '✨': `${_FE}/Sparkles/3D/sparkles_3d.png`,
+    '🎉': `${_FE}/Party%20popper/3D/party_popper_3d.png`,
+    '💡': `${_FE}/Light%20bulb/3D/light_bulb_3d.png`,
+    '🧭': `${_FE}/Compass/3D/compass_3d.png`,
+    '💼': `${_FE}/Briefcase/3D/briefcase_3d.png`,
+    '🍬': `${_FE}/Candy/3D/candy_3d.png`,
+    '🔧': `${_FE}/Wrench/3D/wrench_3d.png`,
+    '⏱️': `${_FE}/Stopwatch/3D/stopwatch_3d.png`,
+    '🌍': `${_FE}/Globe%20showing%20Europe-Africa/3D/globe_showing_europe-africa_3d.png`,
+    '💪': `${_FE}/Flexed%20biceps/3D/flexed_biceps_3d.png`,
+};
+const E3D = ({ emoji, size = '1.5rem', style: s = {} }) => {
+    const url = EMOJI_3D[emoji];
+    if (url) return <img src={url} alt={emoji} style={{ width: size, height: size, objectFit: 'contain', flexShrink: 0, display: 'inline-block', ...s }} />;
+    return <span style={{ fontSize: size, ...s }}>{emoji}</span>;
+};
+
 /* ════════════════════════════════════════════════════════════════════
    DashboardPage
    – Language switcher in sidebar
@@ -539,7 +592,7 @@ const DashboardPage = ({
                     background: 'linear-gradient(135deg, #0056D2, #38bdf8)',
                     padding: '1.5rem', textAlign: 'center', color: '#fff',
                 }}>
-                    <div style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>💎</div>
+                    <div style={{ marginBottom: '0.25rem', display: 'flex', justifyContent: 'center' }}><E3D emoji="💎" size="2.5rem" /></div>
                     <div style={{ fontSize: '1.8rem', fontWeight: '800' }}>
                         {selectedPkg?.gems.toLocaleString()} {isFr ? 'diamants' : 'diamonds'}
                     </div>
@@ -898,11 +951,11 @@ const DashboardPage = ({
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '99px', padding: '0.2rem 0.7rem' }}>
-                                <span style={{ fontSize: '0.9rem' }}>🔥</span>
+                                <E3D emoji="🔥" size="1.1rem" />
                                 <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#fff' }}>{streak} {isFr ? 'j.' : 'day streak'}</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '99px', padding: '0.2rem 0.7rem' }}>
-                                <span style={{ fontSize: '0.9rem' }}>⚡</span>
+                                <E3D emoji="⚡" size="1.1rem" />
                                 <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#fff' }}>{xp} XP</span>
                             </div>
                         </div>
@@ -1244,12 +1297,12 @@ const DashboardPage = ({
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {PB_CATEGORIES.map((cat, i) => (
                         <button key={cat.id} onClick={() => !cat.premium && setPbCategory(cat.id)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 0.5rem', borderBottom: `1px solid ${T.border}`, background: 'none', border: 'none', borderBottom: `1px solid ${T.border}`, cursor: cat.premium ? 'default' : 'pointer', textAlign: 'left', width: '100%', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
-                            <div style={{ width: '44px', height: '44px', borderRadius: '12px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', flexShrink: 0 }}>{cat.icon}</div>
+                            <div style={{ width: '44px', height: '44px', borderRadius: '12px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><E3D emoji={cat.icon} size="2rem" /></div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ fontWeight: '700', fontSize: '0.95rem', color: T.text }}>{isFr ? cat.fr : cat.en}</div>
                                 <div style={{ fontSize: '0.75rem', color: T.textSub, marginTop: '0.15rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{isFr ? cat.desc_fr : cat.desc_en}</div>
                             </div>
-                            {cat.premium ? <span style={{ fontSize: '1rem', flexShrink: 0 }}>👑</span> : <span style={{ color: T.textSub, fontSize: '1.1rem', flexShrink: 0 }}>›</span>}
+                            {cat.premium ? <E3D emoji="👑" size="1.2rem" /> : <span style={{ color: T.textSub, fontSize: '1.1rem', flexShrink: 0 }}>›</span>}
                         </button>
                     ))}
                 </div>
@@ -1423,10 +1476,10 @@ const DashboardPage = ({
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                     {WC_CATEGORIES.map((cat, i) => (
                         <button key={cat.id} onClick={() => !cat.premium && setWcCategory(i)} style={{ borderRadius: '16px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: cat.premium ? 'default' : 'pointer', padding: '0', overflow: 'hidden', textAlign: 'left', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
-                            <div style={{ backgroundColor: '#f8fafc', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>{cat.icon}</div>
+                            <div style={{ backgroundColor: '#f8fafc', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><E3D emoji={cat.icon} size="3.5rem" /></div>
                             <div style={{ padding: '0.6rem 0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <span style={{ fontWeight: '700', fontSize: '0.85rem', color: T.text }}>{isFr ? cat.fr : cat.en}</span>
-                                {cat.premium && <span style={{ fontSize: '0.85rem' }}>👑</span>}
+                                {cat.premium && <E3D emoji="👑" size="1.1rem" />}
                             </div>
                         </button>
                     ))}
@@ -1550,7 +1603,7 @@ const DashboardPage = ({
                                             backgroundColor: m.bg, display: 'flex',
                                             alignItems: 'center', justifyContent: 'center',
                                             fontSize: '1.2rem', flexShrink: 0,
-                                        }}>{m.icon}</div>
+                                        }}><E3D emoji={m.icon} size="1.4rem" /></div>
                                         <div style={{ flex: 1, minWidth: 0 }}>
                                             <div style={{ fontWeight: '700', fontSize: '0.88rem', color: T.text, marginBottom: '0.35rem' }}>
                                                 {isFr ? m.titleFr : m.titleEn}
@@ -1640,7 +1693,7 @@ const DashboardPage = ({
                                                 backgroundColor: b.bg, display: 'flex',
                                                 alignItems: 'center', justifyContent: 'center',
                                                 fontSize: '1.3rem', flexShrink: 0,
-                                            }}>{b.icon}</div>
+                                            }}><E3D emoji={b.icon} size="1.5rem" /></div>
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>
                                                     {isFr ? b.titleFr : b.titleEn}
@@ -2029,7 +2082,7 @@ const DashboardPage = ({
                             padding: '0.9rem 1.1rem', cursor: 'pointer', backgroundColor: T.surface,
                             borderBottom: i < arr.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                         }}>
-                            <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+                            <E3D emoji={item.icon} size="1.5rem" />
                             <span style={{ flex: 1, fontWeight: '600', fontSize: '0.9rem', color: T.text }}>
                                 {isFr ? item.fr : item.en}
                             </span>
@@ -2351,7 +2404,7 @@ const DashboardPage = ({
                             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
                             display: 'flex', alignItems: 'center', gap: '1rem',
                         }}>
-                            <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{m.icon}</span>
+                            <E3D emoji={m.icon} size="2rem" style={{ flexShrink: 0 }} />
                             <div style={{ flex: 1 }}>
                                 <div style={{ fontWeight: '700', fontSize: '0.95rem', color: T.text, marginBottom: '0.4rem' }}>
                                     {isFr ? m.labelFr : m.labelEn}
@@ -2995,7 +3048,7 @@ const DashboardPage = ({
                                 onMouseEnter={(e) => { if (!on) e.currentTarget.style.backgroundColor = '#f3f4f6'; }}
                                 onMouseLeave={(e) => { if (!on) e.currentTarget.style.backgroundColor = 'transparent'; }}
                             >
-                                <span style={{ fontSize: '1.15rem' }}>{item.icon}</span>
+                                <E3D emoji={item.icon} size="1.4rem" />
                                 <span style={{ fontWeight: '700', fontSize: '0.8rem', letterSpacing: '0.7px' }}>
                                     {isFr ? item.labelFr : item.labelEn}
                                 </span>
@@ -3129,7 +3182,7 @@ const DashboardPage = ({
                                         fontFamily: 'inherit', padding: '0',
                                     }}
                                 >
-                                    <span style={{ fontSize: '1.25rem' }}>{item.icon}</span>
+                                    <E3D emoji={item.icon} size="1.5rem" />
                                     <span style={{ fontSize: '0.56rem', fontWeight: '700', letterSpacing: '0.3px' }}>
                                         {isFr ? item.labelFr : item.labelEn}
                                     </span>

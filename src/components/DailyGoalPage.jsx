@@ -49,69 +49,74 @@ const DailyGoalPage = ({ onNext, onBack, nativeLang }) => {
     ];
 
     return (
-        <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+        <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', fontFamily: "'Outfit', system-ui, sans-serif" }}>
             {/* Top bar */}
-            <div style={{ padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 50 }}>
+            <div style={{ padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
                 <button onClick={onBack} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: '#0f172a', padding: '0.25rem 0.5rem' }}>←</button>
                 <div style={{ flex: 1, height: '8px', backgroundColor: '#e2e8f0', borderRadius: '99px' }}>
                     <div style={{ width: '90%', height: '100%', backgroundColor: B, borderRadius: '99px' }} />
                 </div>
             </div>
 
-            {/* Character + speech bubble */}
-            <div style={{ display: 'flex', justifyContent: 'center', padding: '0.5rem 1.5rem 0', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
-                <div style={{ position: 'relative', width: 'fit-content' }}>
-                    <img src={teacher} alt="Teacher" style={{ width: '200px', height: 'auto', display: 'block' }} />
-                    <div style={{
-                        position: 'absolute', top: '5px', right: '-90px',
-                        backgroundColor: '#fff', border: '1.5px solid #e2e8f0',
-                        borderRadius: '16px', borderBottomLeftRadius: '4px',
-                        padding: '0.75rem 1rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', width: '165px',
-                    }}>
-                        <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '700', color: '#0f172a', lineHeight: 1.4 }}>{q}</p>
+            {/* Scrollable content */}
+            <div style={{ flex: 1, overflowY: 'auto', width: '100%', maxWidth: '500px', margin: '0 auto' }}>
+                {/* Character + speech bubble */}
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '0.25rem 1.5rem 0' }}>
+                    <div style={{ position: 'relative', width: 'fit-content' }}>
+                        <img src={teacher} alt="Teacher" style={{ width: '140px', height: 'auto', display: 'block' }} />
+                        <div style={{
+                            position: 'absolute', top: '5px', right: '-90px',
+                            backgroundColor: '#fff', border: '1.5px solid #e2e8f0',
+                            borderRadius: '16px', borderBottomLeftRadius: '4px',
+                            padding: '0.75rem 1rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', width: '165px',
+                        }}>
+                            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '700', color: '#0f172a', lineHeight: 1.4 }}>{q}</p>
+                        </div>
                     </div>
+                </div>
+
+                {/* Goals list */}
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '0.75rem 1.5rem 1rem', gap: '0.55rem' }}>
+                    {goals.map((goal) => {
+                        const sel = selectedGoal === goal.id;
+                        return (
+                            <div key={goal.id} onClick={() => setSelectedGoal(goal.id)} style={{
+                                display: 'flex', alignItems: 'center', gap: '1rem',
+                                padding: '0.8rem 1.25rem', borderRadius: '16px',
+                                border: sel ? `2px solid ${B}` : '1.5px solid #e2e8f0',
+                                backgroundColor: sel ? '#eff6ff' : '#fff',
+                                cursor: 'pointer', transition: 'all 0.15s',
+                            }}>
+                                <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{goal.emoji}</span>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                                        <span style={{ fontWeight: '800', color: sel ? B : '#0f172a', fontSize: '1rem' }}>
+                                            {goal.time} {isFrench ? 'min / jour' : 'min / day'}
+                                        </span>
+                                        <span style={{ fontSize: '0.85rem', color: sel ? B : '#64748b', fontWeight: '700' }}>
+                                            · {goal.label}
+                                        </span>
+                                    </div>
+                                    <div style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '500', marginTop: '0.1rem' }}>
+                                        {goal.sub}
+                                    </div>
+                                </div>
+                                <div style={{
+                                    width: '20px', height: '20px', borderRadius: '50%',
+                                    border: `2px solid ${sel ? B : '#cbd5e1'}`,
+                                    backgroundColor: sel ? B : 'transparent',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                                }}>
+                                    {sel && <span style={{ color: '#fff', fontSize: '0.65rem', fontWeight: '900' }}>✓</span>}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Goals list */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '500px', margin: '0 auto', padding: '1.25rem 1.5rem 2.5rem', gap: '0.65rem' }}>
-                {goals.map((goal) => {
-                    const sel = selectedGoal === goal.id;
-                    return (
-                        <div key={goal.id} onClick={() => setSelectedGoal(goal.id)} style={{
-                            display: 'flex', alignItems: 'center', gap: '1rem',
-                            padding: '0.9rem 1.25rem', borderRadius: '16px',
-                            border: sel ? `2px solid ${B}` : '1.5px solid #e2e8f0',
-                            backgroundColor: sel ? '#eff6ff' : '#fff',
-                            cursor: 'pointer', transition: 'all 0.15s',
-                        }}>
-                            <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{goal.emoji}</span>
-                            <div style={{ flex: 1 }}>
-                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                                    <span style={{ fontWeight: '800', color: sel ? B : '#0f172a', fontSize: '1rem' }}>
-                                        {goal.time} {isFrench ? 'min / jour' : 'min / day'}
-                                    </span>
-                                    <span style={{ fontSize: '0.85rem', color: sel ? B : '#64748b', fontWeight: '700' }}>
-                                        · {goal.label}
-                                    </span>
-                                </div>
-                                <div style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '500', marginTop: '0.1rem' }}>
-                                    {goal.sub}
-                                </div>
-                            </div>
-                            <div style={{
-                                width: '20px', height: '20px', borderRadius: '50%',
-                                border: `2px solid ${sel ? B : '#cbd5e1'}`,
-                                backgroundColor: sel ? B : 'transparent',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                            }}>
-                                {sel && <span style={{ color: '#fff', fontSize: '0.65rem', fontWeight: '900' }}>✓</span>}
-                            </div>
-                        </div>
-                    );
-                })}
-
-                <div style={{ flex: 1 }} />
+            {/* Footer — always visible */}
+            <div style={{ flexShrink: 0, width: '100%', maxWidth: '500px', margin: '0 auto', padding: '0.75rem 1.5rem 1.5rem' }}>
                 <button
                     onClick={() => onNext(selectedGoal)} disabled={!selectedGoal}
                     style={{

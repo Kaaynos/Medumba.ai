@@ -13,6 +13,11 @@ import LessonPage        from './LessonPage';
 import { getPersonalizedTip } from '../utils/lessonGenerator';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
+import {
+    registerSW, checkOnOpen, isEnabled, setEnabled,
+    requestPermission, getPermission, recordSession,
+    scheduleReminder, scheduleDailyReminder,
+} from '../utils/notifications';
 
 /* ── Fluent Emoji 3D component ── */
 const _FE = 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@latest/assets';
@@ -284,6 +289,16 @@ const DashboardPage = ({
     useEffect(() => { localStorage.setItem(lsKey('med_xp'),     xp);     }, [xp]);     // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_streak'), streak); }, [streak]); // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_hearts'), hearts); }, [hearts]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    /* ── notifications ── */
+    const [notifEnabled, setNotifEnabled] = useState(() => isEnabled());
+    const [notifPerm,    setNotifPerm]    = useState(() => getPermission());
+    useEffect(() => {
+        registerSW().then(() => {
+            checkOnOpen(isFr);
+            scheduleDailyReminder(isFr);
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── chest mechanic ── */
     const [openedChests,  setOpenedChests]  = useState(() => { try { const v = localStorage.getItem(lsKey('med_chests')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
@@ -2436,8 +2451,59 @@ const DashboardPage = ({
                             }} />
                         </div>
                     </div>
+                    {/* Notifications toggle — functional */}
+                    <div
+                        onClick={async () => {
+                            if (notifPerm === 'denied') return;
+                            if (notifPerm !== 'granted') {
+                                const p = await requestPermission();
+                                setNotifPerm(p);
+                                if (p !== 'granted') return;
+                            }
+                            const next = !notifEnabled;
+                            setNotifEnabled(next);
+                            setEnabled(next);
+                            if (next) scheduleReminder();
+                        }}
+                        style={{
+                            display: 'flex', alignItems: 'center', gap: '0.75rem',
+                            padding: '0.9rem 1.1rem', cursor: notifPerm === 'denied' ? 'not-allowed' : 'pointer',
+                            backgroundColor: T.surface, borderBottom: `1px solid ${T.borderSub}`,
+                        }}
+                    >
+                        <E3D emoji="🔔" size="1.5rem" />
+                        <div style={{ flex: 1 }}>
+                            <div style={{ fontWeight: '600', fontSize: '0.9rem', color: T.text }}>
+                                {isFr ? 'Notifications' : 'Notifications'}
+                            </div>
+                            {notifPerm === 'denied' && (
+                                <div style={{ fontSize: '0.7rem', color: '#ef4444', marginTop: '1px' }}>
+                                    {isFr ? 'Bloquées dans le navigateur' : 'Blocked in browser'}
+                                </div>
+                            )}
+                            {notifPerm === 'default' && (
+                                <div style={{ fontSize: '0.7rem', color: '#d97706', marginTop: '1px' }}>
+                                    {isFr ? 'Touchez pour autoriser' : 'Tap to allow'}
+                                </div>
+                            )}
+                        </div>
+                        {notifPerm !== 'denied' && (
+                            <div style={{
+                                width: '44px', height: '24px', borderRadius: '99px', flexShrink: 0,
+                                backgroundColor: notifEnabled && notifPerm === 'granted' ? '#0056D2' : T.border,
+                                position: 'relative', transition: 'background-color 0.25s',
+                            }}>
+                                <div style={{
+                                    position: 'absolute', top: '3px',
+                                    left: notifEnabled && notifPerm === 'granted' ? '21px' : '3px',
+                                    width: '18px', height: '18px', borderRadius: '50%',
+                                    backgroundColor: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                                    transition: 'left 0.25s cubic-bezier(0.4,0,0.2,1)',
+                                }} />
+                            </div>
+                        )}
+                    </div>
                     {[
-                        { icon: '🔔', en: 'Notifications',      fr: 'Notifications'        },
                         { icon: '🔒', en: 'Privacy & Security', fr: 'Confidentialité'      },
                         { icon: '📖', en: 'About Medumba',      fr: 'À propos de Medumba'  },
                     ].map((item, i, arr) => (
@@ -2631,6 +2697,7 @@ const DashboardPage = ({
                     setLessonResult(result);
                     setStreak(prev => prev + 1);
                     setLessonFlow('lesson_complete');
+                    recordSession();
                 }}
                 onShare={(result) => {
                     if (activeLesson?.id) {

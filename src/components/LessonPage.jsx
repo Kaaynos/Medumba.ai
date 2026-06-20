@@ -272,7 +272,6 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     const [diamondsEarned, setDiamondsEarned] = useState(0);
     const [xpEarned,       setXpEarned]       = useState(0);
     const [correctCount,   setCorrectCount]   = useState(0);
-    const [completed,       setCompleted]      = useState(false);
     const [failed,          setFailed]         = useState(false);
     const [continueEnabled, setContinueEnabled] = useState(false);
     const [checkReady,      setCheckReady]      = useState(false);
@@ -429,10 +428,11 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     /* ── Continue ── */
     const handleContinue = () => {
         if (currentQ >= questions.length - 1) {
-            const finalCorrect = correctCount + (status === 'correct' ? 0 : 0); // already counted in checkAnswer
             const pct = questions.length > 0 ? correctCount / questions.length : 0;
             if (pct >= 0.6) {
-                setCompleted(true);
+                const elapsed  = Math.floor((Date.now() - startTimeRef.current) / 1000);
+                const accuracy = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
+                onFinish({ xp: xpEarned, diamonds: diamondsEarned, time: elapsed, accuracy });
             } else {
                 setFailed(true);
             }
@@ -458,7 +458,6 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         setDiamondsEarned(0);
         setXpEarned(0);
         setCorrectCount(0);
-        setCompleted(false);
         setFailed(false);
         setComboCount(0);
         setShowComboToast(false);
@@ -650,89 +649,6 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 >
                     {isFr ? '🔄 Recommencer' : '🔄 Restart lesson'}
                 </button>
-            </div>
-        );
-    }
-
-    /* ════════════════════════════════════════════════════
-       COMPLETION SCREEN — Auto Layout Vertical design
-    ════════════════════════════════════════════════════ */
-    if (completed) {
-        const elapsed  = Math.floor((Date.now() - startTimeRef.current) / 1000);
-        const accuracy = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
-
-        return (
-            <div style={{
-                width: '100%', height: '100vh',
-                backgroundColor: T.bg,
-                display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center',
-                padding: '2rem 1.5rem', textAlign: 'center',
-                fontFamily: "'Outfit', system-ui, sans-serif",
-                gap: '1.25rem',
-            }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#0056D2', margin: 0 }}>
-                    {isFr ? 'Leçon terminée !' : 'Lesson completed!'}
-                </h1>
-
-                <img src={celebrationImg} alt="Celebration" style={{ width: '240px', maxWidth: '80%', height: 'auto' }} />
-
-                {/* Diamonds card */}
-                <div style={{
-                    width: '100%', maxWidth: '320px',
-                    backgroundColor: '#0056D2', borderRadius: '16px',
-                    padding: '1rem', color: '#fff',
-                }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.8, marginBottom: '0.4rem' }}>
-                        {isFr ? 'Diamants' : 'Diamonds'}
-                    </div>
-                    <div style={{ fontSize: '2rem', fontWeight: '900' }}>💎 {diamondsEarned}</div>
-                </div>
-
-                {/* Stats row */}
-                <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
-                    {[
-                        { label: isFr ? 'Total XP' : 'Total XP', value: xpEarned,           bg: '#f59e0b', icon: '⚡' },
-                        { label: isFr ? 'Temps'    : 'Time',     value: formatTime(elapsed), bg: '#22c55e', icon: '⏱' },
-                        { label: isFr ? 'Précision': 'Accuracy', value: `${accuracy}%`,     bg: '#ef4444', icon: '🎯' },
-                    ].map(s => (
-                        <div key={s.label} style={{
-                            flex: 1, backgroundColor: s.bg, borderRadius: '14px',
-                            padding: '0.75rem 0.5rem', color: '#fff', textAlign: 'center',
-                        }}>
-                            <div style={{ fontSize: '1.2rem' }}>{s.icon}</div>
-                            <div style={{ fontSize: '1rem', fontWeight: '900' }}>{s.value}</div>
-                            <div style={{ fontSize: '0.65rem', fontWeight: '700', opacity: 0.85 }}>{s.label}</div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Buttons */}
-                <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '320px' }}>
-                    <button
-                        onClick={() => onShare?.({ xp: xpEarned, diamonds: diamondsEarned, time: elapsed, accuracy })}
-                        style={{
-                            flex: 1, padding: '1rem', borderRadius: '9999px',
-                            backgroundColor: '#eff6ff', color: '#0056D2',
-                            border: '2px solid #bfdbfe', fontWeight: '700',
-                            fontSize: '0.95rem', cursor: 'pointer', fontFamily: 'inherit',
-                        }}
-                    >
-                        {isFr ? 'Partager' : 'Share'}
-                    </button>
-                    <button
-                        onClick={() => onFinish({ xp: xpEarned, diamonds: diamondsEarned, time: elapsed, accuracy })}
-                        style={{
-                            flex: 2, padding: '1rem', borderRadius: '9999px',
-                            backgroundColor: '#0056D2', color: '#fff',
-                            border: 'none', fontWeight: '700',
-                            fontSize: '0.95rem', cursor: 'pointer', fontFamily: 'inherit',
-                            boxShadow: '0 6px 16px rgba(0,86,210,0.35)',
-                        }}
-                    >
-                        {isFr ? 'Continuer →' : 'Continue →'}
-                    </button>
-                </div>
             </div>
         );
     }

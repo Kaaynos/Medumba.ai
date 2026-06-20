@@ -2345,23 +2345,6 @@ const DashboardPage = ({
                         </div>
                     ))}
                 </div>
-                {/* Share button */}
-                <button
-                    onClick={() => setShareModal({ type: 'lesson', data: res })}
-                    style={{
-                        width: '100%', maxWidth: '320px', backgroundColor: 'transparent', color: '#0056D2',
-                        padding: '0.85rem', borderRadius: '9999px', fontSize: '0.95rem', fontWeight: '700',
-                        border: '2px solid #bfdbfe', cursor: 'pointer', fontFamily: 'inherit',
-                        animation: 'lc-fade 0.5s ease-out 0.5s both',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                        transition: 'background 0.15s',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.backgroundColor = '#eff6ff'}
-                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-                >
-                    📲 {isFr ? 'Partager mon score' : 'Share my score'}
-                </button>
-
                 <button onClick={() => setLessonFlow('daily_mission')}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,86,210,0.5)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,86,210,0.35)'; }}

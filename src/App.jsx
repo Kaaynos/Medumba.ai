@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
-import { logoutUser, listenAuthState } from './services/authService';
+import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
 import LanguageSelectionPage    from './components/LanguageSelectionPage';
@@ -126,9 +126,12 @@ function App() {
         return; // SplashScreen handles initial routing
       }
       if (user) {
-        if (user.displayName) setUserName(user.displayName.split(' ')[0]);
         if (user.email) setUserEmail(user.email);
         setCurrentUid(user.uid);
+        getUserProfile(user.uid).then((prof) => {
+          const name = prof?.name || user.displayName || '';
+          if (name) setUserName(name.split(' ')[0]);
+        });
         setStep(15);
         history.pushState({ step: 15, hubView: 'hub' }, '');
       } else {
@@ -239,8 +242,11 @@ function App() {
       {step === 16 && (
         <LoginPage
           onLogin={({ user }) => {
-            if (user?.displayName) setUserName(user.displayName.split(' ')[0]);
             if (user?.email) setUserEmail(user.email);
+            if (user?.uid) getUserProfile(user.uid).then((prof) => {
+              const name = prof?.name || user.displayName || '';
+              if (name) setUserName(name.split(' ')[0]);
+            });
             go(15);
           }}
           onBack={back}

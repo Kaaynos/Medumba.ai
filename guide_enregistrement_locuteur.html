@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide d'enregistrement — Medumba.AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 11pt;
+    color: #1a1a2e;
+    background: #fff;
+    padding: 0;
+  }
+
+  /* ── COUVERTURE ── */
+  .cover {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0056D2 0%, #003a91 100%);
+    color: #fff;
+    text-align: center;
+    padding: 3rem;
+    gap: 1.5rem;
+  }
+  .cover .logo { font-size: 3.5rem; }
+  .cover h1 { font-size: 2.4rem; font-weight: 900; line-height: 1.2; }
+  .cover .subtitle { font-size: 1.1rem; opacity: 0.85; max-width: 500px; line-height: 1.6; }
+  .cover .badge {
+    margin-top: 1rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .cover .date { font-size: 0.85rem; opacity: 0.6; margin-top: 2rem; }
+
+  /* ── PAGES INTÉRIEURES ── */
+  .page {
+    padding: 2.5rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #0056D2;
+    border-bottom: 3px solid #0056D2;
+    padding-bottom: 0.4rem;
+    margin: 2rem 0 1rem;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 1.2rem 0 0.5rem;
+  }
+  p { line-height: 1.7; margin-bottom: 0.8rem; color: #333; }
+
+  /* ── ENCADRÉS ── */
+  .box {
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .box-blue   { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .box-green  { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .box-orange { background: #fff7ed; border: 1px solid #fed7aa; }
+  .box-red    { background: #fef2f2; border: 1px solid #fecaca; }
+
+  .box strong { color: #0056D2; }
+
+  /* ── LISTE DE MOTS ── */
+  .word-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 10.5pt;
+  }
+  .word-table th {
+    background: #0056D2;
+    color: #fff;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 700;
+  }
+  .word-table td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+  }
+  .word-table tr:nth-child(even) td { background: #f8fafc; }
+  .word-table .medumba {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #0056D2;
+    letter-spacing: 0.02em;
+  }
+  .word-table .num {
+    color: #94a3b8;
+    font-size: 9pt;
+    font-weight: 600;
+    width: 2rem;
+  }
+  .word-table .check {
+    width: 2.5rem;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  /* ── ÉTAPES ── */
+  .steps { list-style: none; padding: 0; }
+  .steps li {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 1.8rem; height: 1.8rem;
+    background: #0056D2;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.85rem;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── PHONÉTIQUE ── */
+  .phonetic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin: 0.8rem 0;
+  }
+  .phonetic-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+  }
+  .phonetic-card .symbol { font-size: 1.4rem; font-weight: 900; color: #0056D2; }
+  .phonetic-card .desc   { font-size: 0.72rem; color: #64748b; margin-top: 0.2rem; }
+
+  /* ── PHRASES ── */
+  .phrase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .phrase-row:nth-child(even) { background: #f8fafc; }
+  .phrase-row .fr  { color: #64748b; font-size: 10pt; }
+  .phrase-row .med { font-weight: 700; color: #0056D2; font-size: 10pt; }
+  .phrase-row .num-ph { color: #94a3b8; font-size: 8.5pt; }
+
+  /* ── FICHE TECHNIQUE ── */
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.8rem 0;
+  }
+  .spec-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+  }
+  .spec-card .label { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  .spec-card .value { font-size: 1rem; font-weight: 700; color: #0056D2; margin-top: 0.2rem; }
+
+  /* ── SIGNATURE ── */
+  .signature {
+    margin-top: 3rem;
+    border-top: 2px solid #e2e8f0;
+    padding-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .sig-box { text-align: center; }
+  .sig-line { border-top: 1px solid #334155; margin: 2rem 0 0.3rem; }
+  .sig-label { font-size: 0.8rem; color: #64748b; }
+
+  /* ── PAGINATION ── */
+  @page {
+    margin: 1cm 1.5cm;
+  }
+  @media print {
+    .cover { min-height: 27cm; }
+    .page-break { page-break-before: always; }
+    body { font-size: 10.5pt; }
+    .phonetic-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     COUVERTURE
+═══════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="logo">🎙️</div>
+  <h1>Guide d'enregistrement<br>Medumba.AI</h1>
+  <p class="subtitle">
+    Ce document est destiné au locuteur natif de la langue Mə̀dʉ̂mbɑ̀.<br>
+    Il contient toutes les instructions et la liste complète des mots et phrases
+    à enregistrer pour alimenter l'application d'apprentissage.
+  </p>
+  <div class="badge">📱 Application Medumba.AI — Version 1.0</div>
+  <div class="date">Préparé par l'équipe Medumba.AI · Juin 2026</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 2 — INTRODUCTION
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <h2>1. Présentation du projet</h2>
+
+  <p>
+    <strong>Medumba.AI</strong> est une application mobile et web d'apprentissage de la langue
+    Mə̀dʉ̂mbɑ̀, conçue pour les membres de la diaspora et les jeunes souhaitant renouer
+    avec leur héritage culturel. Elle fonctionne comme Duolingo mais est entièrement
+    dédiée à la langue Medumba.
+  </p>
+
+  <div class="box box-blue">
+    <strong>Votre rôle est central.</strong> Sans voix humaine native, l'application
+    ne peut pas enseigner la prononciation correcte — surtout pour une langue à tons
+    comme le Medumba. Chaque enregistrement que vous produisez sera entendu par des
+    milliers d'apprenants.
+  </div>
+
+  <h2>2. Ce que nous vous demandons</h2>
+
+  <p>Nous avons besoin que vous enregistriez :</p>
+
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <p><strong>250 mots de vocabulaire</strong> — les mots essentiels utilisés dans les leçons
+      (animaux, corps humain, nourriture, famille, nombres, etc.)</p>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <p><strong>80 phrases de phrasebook</strong> — les salutations, expressions du quotidien
+      et phrases des leçons de conversation</p>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <p><strong>Chaque enregistrement = 1 fichier audio séparé</strong> — un mot ou une phrase
+      par fichier, nommé selon la convention indiquée page 4</p>
+    </li>
+  </ul>
+
+  <div class="box box-green">
+    <strong>Durée estimée :</strong> environ 4 à 6 heures au total, selon votre rythme.
+    Vous pouvez le faire en plusieurs sessions. Une pause toutes les 30 minutes
+    est recommandée pour préserver la qualité de votre voix.
+  </div>
+
+  <h2>3. Importance des tons</h2>
+
+  <p>
+    Le Medumba est une <strong>langue à tons</strong> : le sens d'un mot change selon le ton
+    avec lequel il est prononcé. Les accents dans l'orthographe indiquent ces tons :
+  </p>
+
+  <div class="phonetic-grid">
+    <div class="phonetic-card">
+      <div class="symbol">á / â</div>
+      <div class="desc">Ton haut<br>(voix qui monte)</div>
+    </div>
+    <div class="phonetic-card">
+      <div class="symbol">à / ǎ</div>
+      <div class="desc">Ton bas<br>(voix qui descend)</div>
+    </div>
+    <div class="phonetic-card">
+      <div class="symbol">a</div>
+      <div class="desc">Ton moyen<br>(voix stable)</div>
+    </div>
+    <div class="phonetic-card">
+      <div class="symbol">ɛ / ɔ</div>
+      <div class="desc">Voyelles ouvertes<br>(bouche plus ouverte)</div>
+    </div>
+    <div class="phonetic-card">
+      <div class="symbol">ŋ / ɲ</div>
+      <div class="desc">Nasales<br>("ng" / "gn")</div>
+    </div>
+    <div class="phonetic-card">
+      <div class="symbol">ʉ / α</div>
+      <div class="desc">Voyelles centrales<br>(spécifiques au Medumba)</div>
+    </div>
+  </div>
+
+  <div class="box box-orange">
+    <strong>Important :</strong> Lisez chaque mot naturellement, comme vous le diriez
+    dans une conversation normale. Ne surarticulez pas. La prononciation naturelle
+    d'un locuteur natif est ce qui donne sa valeur à l'enregistrement.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 3 — INSTRUCTIONS TECHNIQUES
+═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <h2>4. Instructions d'enregistrement</h2>
+
+  <h3>🏠 Environnement</h3>
+  <ul class="steps">
+    <li><div class="step-num">✓</div><p>Choisissez une <strong>pièce calme</strong> : fermez les fenêtres, éteignez la télévision, le ventilateur et l'air conditionné pendant l'enregistrement</p></li>
+    <li><div class="step-num">✓</div><p>Évitez les grandes pièces vides qui produisent de l'écho (préférez une chambre avec des meubles et des rideaux)</p></li>
+    <li><div class="step-num">✓</div><p>Enregistrez de préférence le <strong>matin ou en début d'après-midi</strong>, quand votre voix est fraîche</p></li>
+  </ul>
+
+  <h3>🎙️ Matériel</h3>
+  <ul class="steps">
+    <li><div class="step-num">✓</div><p><strong>Smartphone</strong> : utilisez l'application "Dictaphone" (iPhone) ou "Enregistreur vocal" (Android). Tenez le téléphone à environ 15–20 cm de votre bouche</p></li>
+    <li><div class="step-num">✓</div><p><strong>Microphone externe</strong> (si disponible) : encore mieux — branchez un casque avec micro ou un micro USB</p></li>
+    <li><div class="step-num">✓</div><p>Évitez de tenir le téléphone directement contre votre bouche (risque de souffle)</p></li>
+  </ul>
+
+  <h3>🔊 Comment prononcer</h3>
+  <ul class="steps">
+    <li><div class="step-num">1</div><p>Faites une courte <strong>pause de 0,5 seconde</strong> avant de commencer à parler</p></li>
+    <li><div class="step-num">2</div><p>Prononcez le mot ou la phrase <strong>une seule fois, clairement</strong></p></li>
+    <li><div class="step-num">3</div><p>Faites une courte <strong>pause de 0,5 seconde</strong> après avoir fini</p></li>
+    <li><div class="step-num">4</div><p>Arrêtez l'enregistrement, <strong>réécoutez</strong>, et recommencez si nécessaire</p></li>
+  </ul>
+
+  <div class="box box-red">
+    <strong>À éviter :</strong> bruits de fond, toux, rires, hésitations ("euh…"),
+    claquements de langue, souffle trop fort dans le micro. Si une erreur se produit,
+    effacez et recommencez — ne continuez pas l'enregistrement après une erreur.
+  </div>
+
+  <h2>5. Spécifications techniques</h2>
+
+  <div class="spec-grid">
+    <div class="spec-card">
+      <div class="label">Format audio</div>
+      <div class="value">MP3 ou M4A</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Qualité minimale</div>
+      <div class="value">44 100 Hz / 128 kbps</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Durée par fichier</div>
+      <div class="value">1 à 5 secondes</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Volume</div>
+      <div class="value">Voix normale (pas de cri)</div>
+    </div>
+  </div>
+
+  <h2>6. Nommage des fichiers</h2>
+
+  <p>
+    Nommez chaque fichier avec le <strong>numéro du mot</strong> suivi du mot en français,
+    tel qu'indiqué dans les tableaux ci-après. Exemple :
+  </p>
+
+  <div class="box box-blue" style="font-family: monospace; font-size: 1rem;">
+    <strong>001_chien.mp3</strong><br>
+    <strong>002_chat.mp3</strong><br>
+    <strong>003_eau.mp3</strong><br>
+    <strong>…</strong><br>
+    <strong>101_salut.mp3</strong> (pour les phrases)
+  </div>
+
+  <p>
+    Regroupez tous les fichiers dans un dossier nommé <strong>"Medumba_Audio"</strong>
+    puis envoyez-le par Google Drive, WeTransfer ou WhatsApp à l'équipe Medumba.AI.
+  </p>
+
+  <h2>7. Livraison et contacts</h2>
+
+  <div class="box box-green">
+    📧 Email : <strong>admin@kaaynos.com</strong><br>
+    📱 Envoi des fichiers par Google Drive ou WhatsApp recommandé<br>
+    📅 Délai souhaité : dès que possible — chaque session partielle est utile
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 4 — VOCABULAIRE (MOTS ESSENTIELS)
+═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <h2>8. Liste des mots à enregistrer</h2>
+  <p>Prononcez chaque mot Medumba <strong>une seule fois</strong>, naturellement.
+  Cochez la case après l'enregistrement.</p>
+
+  <h3>🐾 Animaux</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">001</td><td>Chien</td><td class="medumba">Mbʉ</td><td class="check">☐</td></tr>
+      <tr><td class="num">002</td><td>Chat</td><td class="medumba">Bùsi</td><td class="check">☐</td></tr>
+      <tr><td class="num">003</td><td>Vache</td><td class="medumba">Saŋə</td><td class="check">☐</td></tr>
+      <tr><td class="num">004</td><td>Poisson</td><td class="medumba">Ngǒntsə</td><td class="check">☐</td></tr>
+      <tr><td class="num">005</td><td>Oiseau</td><td class="medumba">Nyαmnaꞌ</td><td class="check">☐</td></tr>
+      <tr><td class="num">006</td><td>Mouton</td><td class="medumba">Mbwə̂</td><td class="check">☐</td></tr>
+      <tr><td class="num">007</td><td>Chèvre</td><td class="medumba">Ngàb</td><td class="check">☐</td></tr>
+      <tr><td class="num">008</td><td>Porc / Cochon</td><td class="medumba">Ngʉnyàm</td><td class="check">☐</td></tr>
+      <tr><td class="num">009</td><td>Poulet</td><td class="medumba">Ngwàg</td><td class="check">☐</td></tr>
+      <tr><td class="num">010</td><td>Singe</td><td class="medumba">Nkwǐ</td><td class="check">☐</td></tr>
+      <tr><td class="num">011</td><td>Serpent</td><td class="medumba">Nzwî</td><td class="check">☐</td></tr>
+      <tr><td class="num">012</td><td>Lion</td><td class="medumba">Nkùm</td><td class="check">☐</td></tr>
+      <tr><td class="num">013</td><td>Éléphant</td><td class="medumba">Ngwὲn</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🌿 Nature et environnement</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">014</td><td>Eau</td><td class="medumba">Ntsə</td><td class="check">☐</td></tr>
+      <tr><td class="num">015</td><td>Soleil</td><td class="medumba">Nyàm</td><td class="check">☐</td></tr>
+      <tr><td class="num">016</td><td>Lune</td><td class="medumba">Mαŋwʉ</td><td class="check">☐</td></tr>
+      <tr><td class="num">017</td><td>Feu</td><td class="medumba">Mbwoge</td><td class="check">☐</td></tr>
+      <tr><td class="num">018</td><td>Arbre</td><td class="medumba">Tʉ̂</td><td class="check">☐</td></tr>
+      <tr><td class="num">019</td><td>Pierre / Rocher</td><td class="medumba">Mbàŋ</td><td class="check">☐</td></tr>
+      <tr><td class="num">020</td><td>Terre / Sol</td><td class="medumba">Ngua</td><td class="check">☐</td></tr>
+      <tr><td class="num">021</td><td>Vent</td><td class="medumba">Mbαb</td><td class="check">☐</td></tr>
+      <tr><td class="num">022</td><td>Pluie</td><td class="medumba">Ngwa</td><td class="check">☐</td></tr>
+      <tr><td class="num">023</td><td>Nuit</td><td class="medumba">Tswəꞌ</td><td class="check">☐</td></tr>
+      <tr><td class="num">024</td><td>Jour</td><td class="medumba">Leꞌe</td><td class="check">☐</td></tr>
+      <tr><td class="num">025</td><td>Matin</td><td class="medumba">Ncùbsi</td><td class="check">☐</td></tr>
+      <tr><td class="num">026</td><td>Soir</td><td class="medumba">Njom</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>👨‍👩‍👧 Famille et personnes</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">027</td><td>Enfant</td><td class="medumba">Mɛn</td><td class="check">☐</td></tr>
+      <tr><td class="num">028</td><td>Fille</td><td class="medumba">Ngòn</td><td class="check">☐</td></tr>
+      <tr><td class="num">029</td><td>Garçon</td><td class="medumba">Nshùm</td><td class="check">☐</td></tr>
+      <tr><td class="num">030</td><td>Mère</td><td class="medumba">Mα̂</td><td class="check">☐</td></tr>
+      <tr><td class="num">031</td><td>Père</td><td class="medumba">Tα̂</td><td class="check">☐</td></tr>
+      <tr><td class="num">032</td><td>Frère</td><td class="medumba">Nshùmmα</td><td class="check">☐</td></tr>
+      <tr><td class="num">033</td><td>Sœur</td><td class="medumba">Ngònmα</td><td class="check">☐</td></tr>
+      <tr><td class="num">034</td><td>Homme</td><td class="medumba">Màndùm</td><td class="check">☐</td></tr>
+      <tr><td class="num">035</td><td>Femme</td><td class="medumba">Nzwî</td><td class="check">☐</td></tr>
+      <tr><td class="num">036</td><td>Ami(e)</td><td class="medumba">Nshûn</td><td class="check">☐</td></tr>
+      <tr><td class="num">037</td><td>Grand-mère</td><td class="medumba">Mαα zə̀ndʉ̂b</td><td class="check">☐</td></tr>
+      <tr><td class="num">038</td><td>Grand-père</td><td class="medumba">Tα zə̀ndʉ̂b</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 5 — VOCABULAIRE SUITE
+═══════════════════════════════════════════════ -->
+<div class="page page-break">
+
+  <h3>🍌 Nourriture et boissons</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">039</td><td>Banane</td><td class="medumba">Kəlɔ̀ bàkə̀lɔ̀</td><td class="check">☐</td></tr>
+      <tr><td class="num">040</td><td>Lait</td><td class="medumba">Bʉn</td><td class="check">☐</td></tr>
+      <tr><td class="num">041</td><td>Maïs</td><td class="medumba">Ngə̀fələ</td><td class="check">☐</td></tr>
+      <tr><td class="num">042</td><td>Huile de palme</td><td class="medumba">Dʉ̀mtə̀</td><td class="check">☐</td></tr>
+      <tr><td class="num">043</td><td>Viande</td><td class="medumba">Mbαb</td><td class="check">☐</td></tr>
+      <tr><td class="num">044</td><td>Sel</td><td class="medumba">Ngwa</td><td class="check">☐</td></tr>
+      <tr><td class="num">045</td><td>Pain</td><td class="medumba">Nkûnmèkale</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🏠 Lieux et objets du quotidien</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">046</td><td>Maison</td><td class="medumba">Baꞌ</td><td class="check">☐</td></tr>
+      <tr><td class="num">047</td><td>École</td><td class="medumba">Dʉ̌'ŋwà'nì</td><td class="check">☐</td></tr>
+      <tr><td class="num">048</td><td>Livre</td><td class="medumba">Mbu'ŋwà'nì</td><td class="check">☐</td></tr>
+      <tr><td class="num">049</td><td>Stylo</td><td class="medumba">Cô sû</td><td class="check">☐</td></tr>
+      <tr><td class="num">050</td><td>Route / Chemin</td><td class="medumba">Njwî</td><td class="check">☐</td></tr>
+      <tr><td class="num">051</td><td>Marché</td><td class="medumba">Nkəb</td><td class="check">☐</td></tr>
+      <tr><td class="num">052</td><td>Restaurant</td><td class="medumba">Dʉ̂'caŋ</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🔢 Nombres (1 à 10)</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Chiffre</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">053</td><td>Un (1)</td><td class="medumba">Ncʉ'</td><td class="check">☐</td></tr>
+      <tr><td class="num">054</td><td>Deux (2)</td><td class="medumba">Bàhα</td><td class="check">☐</td></tr>
+      <tr><td class="num">055</td><td>Trois (3)</td><td class="medumba">Tàtə</td><td class="check">☐</td></tr>
+      <tr><td class="num">056</td><td>Quatre (4)</td><td class="medumba">Nàʼα</td><td class="check">☐</td></tr>
+      <tr><td class="num">057</td><td>Cinq (5)</td><td class="medumba">Tàntə</td><td class="check">☐</td></tr>
+      <tr><td class="num">058</td><td>Six (6)</td><td class="medumba">Ntsègə</td><td class="check">☐</td></tr>
+      <tr><td class="num">059</td><td>Sept (7)</td><td class="medumba">Ntsambwəhα</td><td class="check">☐</td></tr>
+      <tr><td class="num">060</td><td>Huit (8)</td><td class="medumba">Bwə'ə</td><td class="check">☐</td></tr>
+      <tr><td class="num">061</td><td>Neuf (9)</td><td class="medumba">Bwə'ə ncʉ'</td><td class="check">☐</td></tr>
+      <tr><td class="num">062</td><td>Dix (10)</td><td class="medumba">Ntʉ̂b</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🗣️ Mots essentiels de base</h3>
+  <table class="word-table">
+    <thead><tr><th class="num">#</th><th>Français</th><th>Medumba</th><th class="check">✓</th></tr></thead>
+    <tbody>
+      <tr><td class="num">063</td><td>Oui</td><td class="medumba">Ŋ̂ / À ndè</td><td class="check">☐</td></tr>
+      <tr><td class="num">064</td><td>Non</td><td class="medumba">Aa / Kâ'</td><td class="check">☐</td></tr>
+      <tr><td class="num">065</td><td>Merci</td><td class="medumba">Mə lὰbtə̌</td><td class="check">☐</td></tr>
+      <tr><td class="num">066</td><td>S'il vous plaît</td><td class="medumba">Nə̀co'o</td><td class="check">☐</td></tr>
+      <tr><td class="num">067</td><td>Pardon / Excuse-moi</td><td class="medumba">Mə bɛ̂n njàŋ</td><td class="check">☐</td></tr>
+      <tr><td class="num">068</td><td>Je</td><td class="medumba">Mə̀</td><td class="check">☐</td></tr>
+      <tr><td class="num">069</td><td>Tu / Vous</td><td class="medumba">O / Bìn</td><td class="check">☐</td></tr>
+      <tr><td class="num">070</td><td>Il / Elle</td><td class="medumba">À / Yi</td><td class="check">☐</td></tr>
+      <tr><td class="num">071</td><td>Nous</td><td class="medumba">Bα̌g</td><td class="check">☐</td></tr>
+      <tr><td class="num">072</td><td>Ici</td><td class="medumba">Nsə̂n nî</td><td class="check">☐</td></tr>
+      <tr><td class="num">073</td><td>Là-bas</td><td class="medumba">Nsə̂n nα</td><td class="check">☐</td></tr>
+      <tr><td class="num">074</td><td>Quoi / Que</td><td class="medumba">Nù</td><td class="check">☐</td></tr>
+      <tr><td class="num">075</td><td>Qui</td><td class="medumba">Wə</td><td class="check">☐</td></tr>
+      <tr><td class="num">076</td><td>Où</td><td class="medumba">Nsə̂n</td><td class="check">☐</td></tr>
+      <tr><td class="num">077</td><td>Quand</td><td class="medumba">Leꞌe lî</td><td class="check">☐</td></tr>
+      <tr><td class="num">078</td><td>Comment</td><td class="medumba">Ndʉ̂kə</td><td class="check">☐</td></tr>
+      <tr><td class="num">079</td><td>Combien</td><td class="medumba">Sî'i</td><td class="check">☐</td></tr>
+      <tr><td class="num">080</td><td>Grand / Gros</td><td class="medumba">Nsàmɛ̀n</td><td class="check">☐</td></tr>
+      <tr><td class="num">081</td><td>Petit</td><td class="medumba">Ncʉ̀mtə</td><td class="check">☐</td></tr>
+      <tr><td class="num">082</td><td>Bon / Bien</td><td class="medumba">Bwɔ̀</td><td class="check">☐</td></tr>
+      <tr><td class="num">083</td><td>Mauvais</td><td class="medumba">Kə̂' bwɔ̀</td><td class="check">☐</td></tr>
+      <tr><td class="num">084</td><td>Beau / Belle</td><td class="medumba">Nshùm</td><td class="check">☐</td></tr>
+      <tr><td class="num">085</td><td>Vieux / Vieille</td><td class="medumba">Ndʉ̂b</td><td class="check">☐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 6 — PHRASES
+═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <h2>9. Phrases à enregistrer</h2>
+  <p>Pour chaque phrase : lisez la version Medumba <strong>une seule fois</strong>,
+  de façon naturelle. La traduction française est là uniquement pour vous aider
+  à comprendre le contexte.</p>
+
+  <h3>👋 Salutations</h3>
+  <div style="border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; margin: 0.5rem 0 1.2rem;">
+    <div class="phrase-row"><span class="num-ph">#101</span><span class="fr">Salut !</span><span class="med">Ndà'ndà' lα!</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#102</span><span class="fr">Bonjour !</span><span class="med">O zi ὰ?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#103</span><span class="fr">Comment ça va ?</span><span class="med">Ndʉ̂kə? / Â ndʉ̂kə?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#104</span><span class="fr">Ça va bien.</span><span class="med">A fi tsə.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#105</span><span class="fr">Ça va bien, merci.</span><span class="med">A fi tsə. Mə lὰbtə̌.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#106</span><span class="fr">Et toi ?</span><span class="med">Wʉ̌ yò ghò?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#107</span><span class="fr">Je suis en santé, merci.</span><span class="med">Mə tswə ntʉ̀n. Mə lὰbtə̌.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#108</span><span class="fr">Bienvenue !</span><span class="med">Sə̌' mə̀bwɔ!</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#109</span><span class="fr">Bonjour à tous !</span><span class="med">Bǐn zi ὰ?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#110</span><span class="fr">Bonsoir !</span><span class="med">O njom ὰ?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#111</span><span class="fr">Bonne nuit !</span><span class="med">O tswə' bwɔ!</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#112</span><span class="fr">Au revoir !</span><span class="med">Fà'a bwɔ!</span><span class="check">☐</span></div>
+  </div>
+
+  <h3>🙋 Se présenter</h3>
+  <div style="border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; margin: 0.5rem 0 1.2rem;">
+    <div class="phrase-row"><span class="num-ph">#113</span><span class="fr">Qui es-tu ?</span><span class="med">Ò bə α̂ wə?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#114</span><span class="fr">Comment tu t'appelles ?</span><span class="med">Lɛ̂n su bə α̂ wə?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#115</span><span class="fr">Je m'appelle… (mon nom est…)</span><span class="med">Lɛ̂n sαm bə α̂…</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#116</span><span class="fr">Quel âge as-tu ?</span><span class="med">Ò ghʉ̂α̂ ngù' sî'i?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#117</span><span class="fr">Présente-toi.</span><span class="med">Tswǐ wûl ù.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#118</span><span class="fr">C'est mon ami(e).</span><span class="med">Â nshûn ὰm.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#119</span><span class="fr">Enchanté(e).</span><span class="med">Mə lὰbtə̌ nə̀ yi'tə̀ o.</span><span class="check">☐</span></div>
+  </div>
+
+  <h3>❓ Questions et réponses du quotidien</h3>
+  <div style="border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; margin: 0.5rem 0 1.2rem;">
+    <div class="phrase-row"><span class="num-ph">#120</span><span class="fr">Où habites-tu ?</span><span class="med">O kə ntswə α̂ nsə̂n ?</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#121</span><span class="fr">C'est là que j'habite.</span><span class="med">Mə̀ kə ntswə α̂ nsə̂nna.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#122</span><span class="fr">Je ne comprends pas.</span><span class="med">Mə̀ kə̂' yi lα.</td><td class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#123</span><span class="fr">Répète, s'il te plaît.</span><span class="med">Côb bàhα, nə̀co'o.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#124</span><span class="fr">Je suis fatigué(e).</span><span class="med">Mə yα̌ ju'.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#125</span><span class="fr">J'ai faim.</span><span class="med">Mə̀ ghʉ̌ nzîd.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#126</span><span class="fr">J'ai soif.</span><span class="med">Mə̀ ghʉ̌ njîd ntsə.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#127</span><span class="fr">Je suis malade.</span><span class="med">Mə bɛ̀n nkə mgônə.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#128</span><span class="fr">Dis-lui de venir.</span><span class="med">Côb yi mbə̌ à sə'ə.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#129</span><span class="fr">Je vais revenir.</span><span class="med">Mə̀ à' bə yǒg.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#130</span><span class="fr">À bientôt !</span><span class="med">Ndàʼndàʼa sê'!</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#131</span><span class="fr">Merci beaucoup.</span><span class="med">Mə lὰbtə̌ tα.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#132</span><span class="fr">Je vous en prie.</span><span class="med">Nə̀co'o ! Bin jǹ di.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#133</span><span class="fr">C'est bien / C'est bon.</span><span class="med">A bwɔ̀.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#134</span><span class="fr">C'est vrai.</span><span class="med">A nə̀nʉnə.</span><span class="check">☐</span></div>
+    <div class="phrase-row"><span class="num-ph">#135</span><span class="fr">Ma mère vient d'arriver.</span><span class="med">Mə̂ α yǒg ne sə̂' ə.</span><span class="check">☐</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 7 — SIGNATURE ET RÉCAPITULATIF
+═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <h2>10. Récapitulatif</h2>
+
+  <div class="spec-grid">
+    <div class="spec-card">
+      <div class="label">Mots de vocabulaire</div>
+      <div class="value">85 mots (001–085)</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Phrases</div>
+      <div class="value">35 phrases (101–135)</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Total fichiers audio</div>
+      <div class="value">120 enregistrements</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Durée estimée</div>
+      <div class="value">4 à 6 heures</div>
+    </div>
+  </div>
+
+  <div class="box box-green" style="margin-top: 1.5rem;">
+    <strong>Rappel :</strong> Vous pouvez faire les enregistrements en plusieurs sessions.
+    Même 20 mots enregistrés par jour font une grande différence.
+    L'équipe peut intégrer les fichiers au fur et à mesure.
+  </div>
+
+  <h2>11. Checklist finale avant envoi</h2>
+  <ul class="steps">
+    <li><div class="step-num">☐</div><p>Tous les fichiers sont nommés selon la convention (001_chien.mp3, etc.)</p></li>
+    <li><div class="step-num">☐</div><p>Les fichiers sont en format MP3 ou M4A</p></li>
+    <li><div class="step-num">☐</div><p>Chaque fichier a été réécouté et validé</p></li>
+    <li><div class="step-num">☐</div><p>Tous les fichiers sont regroupés dans un dossier "Medumba_Audio"</p></li>
+    <li><div class="step-num">☐</div><p>Le dossier est envoyé à admin@kaaynos.com ou partagé via Google Drive</p></li>
+  </ul>
+
+  <div class="box box-blue" style="margin-top: 1.5rem;">
+    <strong>Note importante :</strong> Ces enregistrements seront utilisés exclusivement
+    dans l'application Medumba.AI pour l'apprentissage de la langue. Ils ne seront pas
+    revendus ni utilisés à des fins commerciales autres que celles de l'application.
+    En envoyant les fichiers, vous autorisez leur utilisation dans ce cadre.
+  </div>
+
+  <div class="signature">
+    <div class="sig-box">
+      <div class="sig-line"></div>
+      <div class="sig-label">Signature du locuteur<br>Nom : ______________________</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-line"></div>
+      <div class="sig-label">Date de livraison<br>_______ / _______ / 2026</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem; text-align: center; color: #94a3b8; font-size: 0.8rem;">
+    Medumba.AI — Préserver la langue, honorer les racines.<br>
+    <strong>admin@kaaynos.com</strong>
+  </div>
+</div>
+
+</body>
+</html>

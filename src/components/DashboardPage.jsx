@@ -921,6 +921,341 @@ const DashboardPage = ({
         </div>
     );
 
+    /* ── MUSIQUE & CULTURE ── */
+    const CHANTS = [
+        {
+            id: 'c1', emoji: '🥁', color: '#7c3aed',
+            titleFr: 'Chant du Nkúʼ', titleEn: 'Nkúʼ Drum Chant',
+            descFr: 'Le tambour sacré qui unit les villages Medumba lors des cérémonies.',
+            descEn: 'The sacred drum that unites Medumba villages during ceremonies.',
+            lyrics: [
+                { medumba: 'Nkúʼ ǎ yóŋ', fr: 'Le tambour résonne', en: 'The drum resonates' },
+                { medumba: 'Bwɔ mɛn ǎ tòŋ', fr: 'Les enfants se rassemblent', en: 'The children gather' },
+                { medumba: 'Tα̂ bwɔ ǎ kɔ̀ŋ', fr: 'Les pères répondent', en: 'The fathers answer' },
+                { medumba: 'Mbʉ ǎ lí ntsə̀', fr: 'Le chien boit l\'eau', en: 'The dog drinks water' },
+            ],
+        },
+        {
+            id: 'c2', emoji: '💍', color: '#0891b2',
+            titleFr: 'Ndùŋ — Chant de mariage', titleEn: 'Ndùŋ — Wedding Song',
+            descFr: 'Chanté lors des cérémonies de mariage pour célébrer l\'union des familles.',
+            descEn: 'Sung at wedding ceremonies to celebrate the union of families.',
+            lyrics: [
+                { medumba: 'Ngòn ǎ bí', fr: 'La fille arrive', en: 'The girl arrives' },
+                { medumba: 'Mα̂ ǎ yə̌', fr: 'La mère pleure de joie', en: 'The mother cries with joy' },
+                { medumba: 'Nshûn bwɔ ǎ yèŋ', fr: 'Les amis chantent', en: 'The friends sing' },
+                { medumba: 'Bα̂ ǎ kóʼ yə̀', fr: 'Ils se rejoignent', en: 'They come together' },
+            ],
+        },
+        {
+            id: 'c3', emoji: '🌾', color: '#059669',
+            titleFr: 'Chant de travail', titleEn: 'Work Song',
+            descFr: 'Rythme qui accompagne les travaux des champs pour donner de l\'énergie.',
+            descEn: 'Rhythm that accompanies fieldwork to give energy.',
+            lyrics: [
+                { medumba: 'Mbwoge ǎ lóm', fr: 'Le feu brûle', en: 'The fire burns' },
+                { medumba: 'Nyàm ǎ yùŋ', fr: 'Le soleil brille', en: 'The sun shines' },
+                { medumba: 'Bwɔ mɛn ǎ tsɔ̀ŋ', fr: 'Les enfants travaillent', en: 'The children work' },
+                { medumba: 'Ntsə̀ ǎ kɛ̀ŋ bwɔ', fr: 'L\'eau les rafraîchit', en: 'The water refreshes them' },
+            ],
+        },
+    ];
+
+    const PROVERBES = [
+        {
+            medumba: '"Mbʉ ǎ yìŋ ntsə, ǎ ká kɔ̀ŋ ngàb"',
+            fr: 'Le chien qui cherche l\'eau ne dispute pas la chèvre.',
+            en: 'The dog who seeks water does not quarrel with the goat.',
+            moral: { fr: 'Qui poursuit la paix évite les conflits inutiles.', en: 'One who pursues peace avoids unnecessary conflict.' },
+            emoji: '🐕',
+        },
+        {
+            medumba: '"Tα̂ ǎ kʉ̀, ngòn ǎ yə̌, nshùm ǎ tòŋ"',
+            fr: 'Quand le père meurt, la fille pleure, le garçon se rassemble.',
+            en: 'When the father dies, the daughter weeps, the son gathers.',
+            moral: { fr: 'Chacun exprime le deuil à sa manière.', en: 'Each person expresses grief in their own way.' },
+            emoji: '🌿',
+        },
+        {
+            medumba: '"Bα̂ bwɔ kùŋ kùŋ, mbwɔ ká yə̌"',
+            fr: 'Ceux qui cherchent ensemble trouvent toujours.',
+            en: 'Those who search together always find.',
+            moral: { fr: 'L\'union fait la force dans la culture Medumba.', en: 'Unity is strength in Medumba culture.' },
+            emoji: '🤝',
+        },
+        {
+            medumba: '"Nyàm ǎ wʉ̀ ntsə̀ yə̀, mαŋwʉ ǎ nòm"',
+            fr: 'Quand le soleil se couche, la lune prend sa place.',
+            en: 'When the sun sets, the moon takes its place.',
+            moral: { fr: 'Chaque personne a son rôle et son moment.', en: 'Every person has their role and their moment.' },
+            emoji: '🌙',
+        },
+        {
+            medumba: '"Mɛn ǎ bí kɛ̀ŋ, bα̂ ǎ yɔ̀ŋ"',
+            fr: 'L\'enfant qui grandit est la fierté de la maison.',
+            en: 'The child who grows up is the pride of the home.',
+            moral: { fr: 'L\'éducation est au cœur des valeurs Medumba.', en: 'Education is central to Medumba values.' },
+            emoji: '🏠',
+        },
+    ];
+
+    const INSTRUMENTS = [
+        {
+            emoji: '🥁', name: 'Nkúʼ',
+            roleFr: 'Tambour sacré de communication',
+            roleEn: 'Sacred communication drum',
+            descFr: 'Le Nkúʼ est le tambour à langage utilisé pour transmettre des messages entre villages. Chaque village possède son propre code rythmique. Il est fabriqué en bois de Moabi et peau de bœuf.',
+            descEn: 'The Nkúʼ is the language drum used to transmit messages between villages. Each village has its own rhythmic code. It is made from Moabi wood and cowhide.',
+            color: '#7c3aed',
+        },
+        {
+            emoji: '🪕', name: 'Mvet',
+            roleFr: 'Harpe-cithare épique',
+            roleEn: 'Epic harp-zither',
+            descFr: 'Instrument à cordes des griots Medumba, le Mvet accompagne les récits épiques sur les héros ancestraux. Classé au patrimoine culturel immatériel de l\'UNESCO.',
+            descEn: 'String instrument of Medumba griots, the Mvet accompanies epic tales about ancestral heroes. Listed in UNESCO\'s Intangible Cultural Heritage.',
+            color: '#d97706',
+        },
+        {
+            emoji: '🎵', name: 'Balafon',
+            roleFr: 'Xylophone traditionnel',
+            roleEn: 'Traditional xylophone',
+            descFr: 'Le Balafon Medumba est sculpté dans du bois de Wengé. Ses calebasses de résonance sont accordées selon les 7 tons de la langue Medumba — musique et langue sont inséparables.',
+            descEn: 'The Medumba Balafon is carved from Wengé wood. Its gourd resonators are tuned to the 7 tones of the Medumba language — music and language are inseparable.',
+            color: '#059669',
+        },
+    ];
+
+    const [expandedChant, setExpandedChant] = useState(null);
+
+    const renderMusicCulture = () => (
+        <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '2rem' }}>
+            {/* Sticky header */}
+            <div style={{
+                position: 'sticky', top: 0, zIndex: 10,
+                backgroundColor: T.surface, borderBottom: `2px solid ${T.border}`,
+                padding: isMobile ? '0.85rem 1rem' : '1rem 2rem',
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+            }}>
+                <button
+                    onClick={() => setActiveNav('home')}
+                    style={{
+                        background: T.surface3, border: 'none', cursor: 'pointer',
+                        width: '34px', height: '34px', borderRadius: '50%',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '1.1rem', color: T.text, flexShrink: 0,
+                    }}
+                >←</button>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '800', color: T.text, lineHeight: 1.2 }}>
+                        {isFr ? '🎵 Musique & Culture' : '🎵 Music & Culture'}
+                    </h2>
+                    <p style={{ margin: 0, fontSize: '0.72rem', color: T.textMuted, marginTop: '1px' }}>
+                        {isFr ? 'L\'âme du peuple Medumba' : 'The soul of the Medumba people'}
+                    </p>
+                </div>
+            </div>
+
+            <div style={{ padding: isMobile ? '1rem 0.75rem' : '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+
+                {/* Hero banner */}
+                <div style={{
+                    borderRadius: '20px', overflow: 'hidden',
+                    background: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #6d28d9 100%)',
+                    padding: '1.6rem', position: 'relative',
+                    boxShadow: '0 8px 28px rgba(109,40,217,0.3)',
+                }}>
+                    <div style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '4rem', opacity: 0.25 }}>🎵</div>
+                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.65)', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
+                        MEDUMBA · CAMEROUN
+                    </div>
+                    <div style={{ fontSize: '1.3rem', fontWeight: '900', color: '#fff', marginBottom: '0.4rem' }}>
+                        {isFr ? 'Héritage Musical' : 'Musical Heritage'}
+                    </div>
+                    <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, maxWidth: '280px' }}>
+                        {isFr
+                            ? 'La musique Medumba est indissociable de la langue : les 7 tons du Medumba donnent naissance aux mélodies traditionnelles.'
+                            : 'Medumba music is inseparable from language: the 7 tones of Medumba give birth to traditional melodies.'}
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                        {[
+                            { n: '3', label: isFr ? 'Chants' : 'Songs' },
+                            { n: '5', label: isFr ? 'Proverbes' : 'Proverbs' },
+                            { n: '3', label: isFr ? 'Instruments' : 'Instruments' },
+                        ].map((s, i) => (
+                            <div key={i} style={{
+                                backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '99px',
+                                padding: '0.25rem 0.75rem', fontSize: '0.72rem', fontWeight: '700', color: '#fff',
+                            }}>
+                                {s.n} {s.label}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ── Chants ── */}
+                <section>
+                    <h3 style={{ fontSize: '0.82rem', fontWeight: '800', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.9rem' }}>
+                        {isFr ? '🎤 Chants Traditionnels' : '🎤 Traditional Songs'}
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {CHANTS.map((chant) => {
+                            const open = expandedChant === chant.id;
+                            return (
+                                <div key={chant.id} style={{
+                                    borderRadius: '16px', border: `2px solid ${open ? chant.color : T.border}`,
+                                    backgroundColor: T.surface, overflow: 'hidden',
+                                    transition: 'border-color 0.2s',
+                                }}>
+                                    <button
+                                        onClick={() => setExpandedChant(open ? null : chant.id)}
+                                        style={{
+                                            width: '100%', padding: '1rem 1.1rem',
+                                            display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                            background: 'none', border: 'none', cursor: 'pointer',
+                                            textAlign: 'left', fontFamily: 'inherit',
+                                        }}
+                                    >
+                                        <div style={{
+                                            width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
+                                            backgroundColor: chant.color + '20', border: `2px solid ${chant.color}40`,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem',
+                                        }}>
+                                            {chant.emoji}
+                                        </div>
+                                        <div style={{ flex: 1, minWidth: 0 }}>
+                                            <div style={{ fontWeight: '800', fontSize: '0.92rem', color: T.text }}>
+                                                {isFr ? chant.titleFr : chant.titleEn}
+                                            </div>
+                                            <div style={{ fontSize: '0.75rem', color: T.textMuted, marginTop: '2px', lineHeight: 1.4 }}>
+                                                {isFr ? chant.descFr : chant.descEn}
+                                            </div>
+                                        </div>
+                                        <span style={{ color: T.textSub, fontSize: '1rem', flexShrink: 0 }}>
+                                            {open ? '▲' : '▼'}
+                                        </span>
+                                    </button>
+                                    {open && (
+                                        <div style={{ padding: '0 1.1rem 1.1rem', borderTop: `1px solid ${T.borderSub}` }}>
+                                            <div style={{ marginTop: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                                {chant.lyrics.map((line, li) => (
+                                                    <div key={li} style={{
+                                                        display: 'grid', gridTemplateColumns: '1fr 1fr',
+                                                        gap: '0.5rem', padding: '0.6rem 0.85rem',
+                                                        borderRadius: '10px', backgroundColor: T.surface3,
+                                                        alignItems: 'center',
+                                                    }}>
+                                                        <div>
+                                                            <div style={{ fontWeight: '800', fontSize: '0.88rem', color: chant.color }}>{line.medumba}</div>
+                                                            <div style={{ fontSize: '0.65rem', color: T.textSub, fontWeight: '600', marginTop: '1px' }}>Medumba</div>
+                                                        </div>
+                                                        <div>
+                                                            <div style={{ fontWeight: '600', fontSize: '0.82rem', color: T.text }}>{isFr ? line.fr : line.en}</div>
+                                                            <div style={{ fontSize: '0.65rem', color: T.textSub, fontWeight: '600', marginTop: '1px' }}>
+                                                                {isFr ? 'Français' : 'English'}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </section>
+
+                {/* ── Proverbes ── */}
+                <section>
+                    <h3 style={{ fontSize: '0.82rem', fontWeight: '800', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.9rem' }}>
+                        {isFr ? '🌿 Proverbes Medumba' : '🌿 Medumba Proverbs'}
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {PROVERBES.map((p, i) => (
+                            <div key={i} style={{
+                                padding: '1.1rem 1.2rem', borderRadius: '16px',
+                                border: `2px solid ${T.border}`, backgroundColor: T.surface,
+                            }}>
+                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                    <span style={{ fontSize: '1.5rem', flexShrink: 0, marginTop: '2px' }}>{p.emoji}</span>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontWeight: '800', fontSize: '0.88rem', color: '#059669', fontStyle: 'italic', marginBottom: '0.4rem', lineHeight: 1.4 }}>
+                                            {p.medumba}
+                                        </div>
+                                        <div style={{ fontWeight: '600', fontSize: '0.82rem', color: T.text, marginBottom: '0.35rem', lineHeight: 1.5 }}>
+                                            {isFr ? p.fr : p.en}
+                                        </div>
+                                        <div style={{
+                                            padding: '0.4rem 0.75rem', borderRadius: '8px',
+                                            backgroundColor: '#f0fdf4', border: '1.5px solid #bbf7d0',
+                                            fontSize: '0.72rem', color: '#16a34a', fontWeight: '600', lineHeight: 1.4,
+                                        }}>
+                                            💡 {isFr ? p.moral.fr : p.moral.en}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Instruments ── */}
+                <section>
+                    <h3 style={{ fontSize: '0.82rem', fontWeight: '800', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.9rem' }}>
+                        {isFr ? '🎼 Rythmes & Instruments' : '🎼 Rhythms & Instruments'}
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {INSTRUMENTS.map((inst) => (
+                            <div key={inst.name} style={{
+                                padding: '1.1rem 1.2rem', borderRadius: '16px',
+                                border: `2px solid ${inst.color}40`,
+                                backgroundColor: inst.color + '08',
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '0.6rem' }}>
+                                    <div style={{
+                                        width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
+                                        backgroundColor: inst.color + '20', border: `2px solid ${inst.color}40`,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem',
+                                    }}>
+                                        {inst.emoji}
+                                    </div>
+                                    <div>
+                                        <div style={{ fontWeight: '800', fontSize: '1rem', color: inst.color }}>{inst.name}</div>
+                                        <div style={{ fontSize: '0.72rem', color: T.textSub, fontWeight: '600' }}>
+                                            {isFr ? inst.roleFr : inst.roleEn}
+                                        </div>
+                                    </div>
+                                </div>
+                                <p style={{ margin: 0, fontSize: '0.82rem', color: T.text, lineHeight: 1.6 }}>
+                                    {isFr ? inst.descFr : inst.descEn}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Culture note ── */}
+                <div style={{
+                    padding: '1.2rem', borderRadius: '16px',
+                    background: 'linear-gradient(135deg, #0056D2 0%, #0891b2 100%)',
+                    color: '#fff', textAlign: 'center',
+                }}>
+                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🎓</div>
+                    <div style={{ fontWeight: '800', fontSize: '0.95rem', marginBottom: '0.3rem' }}>
+                        {isFr ? 'Le saviez-vous ?' : 'Did you know?'}
+                    </div>
+                    <div style={{ fontSize: '0.82rem', opacity: 0.9, lineHeight: 1.6 }}>
+                        {isFr
+                            ? 'Le Medumba est une langue à 7 tons. Chaque variation de hauteur de voix change complètement le sens d\'un mot — comme en musique !'
+                            : 'Medumba is a 7-tone language. Each variation in voice pitch completely changes the meaning of a word — just like in music!'}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    );
+
     /* ── HOME: Learning Path ── */
     const renderHome = () => (
         <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '2rem' }}>
@@ -980,6 +1315,35 @@ const DashboardPage = ({
 
             {/* ── Daily Stories strip ── */}
             {renderStoriesStrip()}
+
+            {/* ── Quick access: Musique & Culture ── */}
+            <div style={{ margin: isMobile ? '0.75rem 0.75rem 0' : '1rem 2rem 0' }}>
+                <button
+                    onClick={() => setActiveNav('music')}
+                    style={{
+                        width: '100%', padding: '0.9rem 1.2rem', borderRadius: '16px',
+                        background: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #6d28d9 100%)',
+                        border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                        display: 'flex', alignItems: 'center', gap: '1rem',
+                        boxShadow: '0 4px 16px rgba(109,40,217,0.25)',
+                    }}
+                >
+                    <div style={{
+                        width: '42px', height: '42px', borderRadius: '12px', flexShrink: 0,
+                        backgroundColor: 'rgba(255,255,255,0.15)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem',
+                    }}>🎵</div>
+                    <div style={{ flex: 1, textAlign: 'left' }}>
+                        <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#fff' }}>
+                            {isFr ? 'Musique & Culture' : 'Music & Culture'}
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.7)', marginTop: '1px' }}>
+                            {isFr ? 'Chants · Proverbes · Instruments' : 'Songs · Proverbs · Instruments'}
+                        </div>
+                    </div>
+                    <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>→</span>
+                </button>
+            </div>
 
             {units.map((unit, uIdx) => {
                 const unitStart = globalIdx;
@@ -3133,6 +3497,7 @@ const DashboardPage = ({
                         {activeNav === 'wordcards'   && renderWordCards()}
                         {activeNav === 'challenge'   && renderChallenge()}
                         {activeNav === 'account'     && renderAccount()}
+                        {activeNav === 'music'       && renderMusicCulture()}
                     </div>
 
                     {/* Right panel — home tab, desktop only */}

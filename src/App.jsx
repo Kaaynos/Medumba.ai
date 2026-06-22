@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
+import { getPaymentSuccessFromUrl } from './config/stripe';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
 import LanguageSelectionPage    from './components/LanguageSelectionPage';
@@ -28,7 +29,9 @@ import VideoPage                from './components/VideoPage';
 import CountingPage             from './components/CountingPage';
 import DictionaryPage           from './components/DictionaryPage';
 import PronunciationPage        from './components/PronunciationPage';
+import AlphabetPage             from './components/AlphabetPage';
 import AdminPage                from './components/AdminPage';
+import AppDownloadPage          from './components/AppDownloadPage';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
 
@@ -76,6 +79,9 @@ function App() {
   const [userAge,     setUserAge]     = useState('');
   const [userEmail,   setUserEmail]   = useState('');
   const [currentUid,  setCurrentUid]  = useState(null);
+
+  // ── Stripe payment success (detected from URL on load) ─────────
+  const [paymentSuccess, setPaymentSuccess] = useState(() => getPaymentSuccessFromUrl());
 
   // ── Profil discret (usage interne uniquement) ────────────────────
   const [_zodiacSign, _setZodiacSign] = useState(() => {
@@ -167,9 +173,12 @@ function App() {
       {step === 0 && (
         <SplashScreen onFinish={(user) => {
           if (user) {
-            if (user.displayName) setUserName(user.displayName.split(' ')[0]);
             if (user.email) setUserEmail(user.email);
             setCurrentUid(user.uid);
+            getUserProfile(user.uid).then((prof) => {
+              const name = prof?.name || user.displayName || '';
+              if (name) setUserName(name.split(' ')[0]);
+            });
             go(15);
           } else {
             go(1);
@@ -183,8 +192,12 @@ function App() {
           onStart={() => go(2)}
           onLogin={() => go(16)}
           onNavigate={(view) => go(14, view)}
+          onDownload={() => go(17)}
         />
       )}
+
+      {/* ── App Download Page ── */}
+      {step === 17 && <AppDownloadPage onBack={back} />}
 
       {/* ── Language selection ── */}
       {step === 2 && (
@@ -264,6 +277,7 @@ function App() {
       {step === 14 && hubView === 'counting'  && <CountingPage   nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'dictionary'     && <DictionaryPage    nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'pronunciation' && <PronunciationPage nativeLang={nativeLang} onBack={() => go(1)} />}
+      {step === 14 && hubView === 'alphabet'      && <AlphabetPage      nativeLang={nativeLang} onBack={() => go(1)} />}
 
       {/* ── Gamified Dashboard ── */}
       {step === 15 && (
@@ -276,6 +290,8 @@ function App() {
           currentUid={currentUid}
           onLogout={async () => { await logoutUser(); go(1); }}
           onAdmin={() => go(99)}
+          paymentSuccess={paymentSuccess}
+          onPaymentHandled={() => setPaymentSuccess(null)}
         />
       )}
 

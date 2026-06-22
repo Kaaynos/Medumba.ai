@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import Lottie from 'lottie-react';
+import { openStripePayment } from '../config/stripe';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -70,6 +72,68 @@ const E3D = ({ emoji, size = '1.5rem', style: s = {} }) => {
     const url = EMOJI_3D[emoji];
     if (url) return <img src={url} alt={emoji} style={{ width: size, height: size, objectFit: 'contain', flexShrink: 0, display: 'inline-block', ...s }} />;
     return <span style={{ fontSize: size, ...s }}>{emoji}</span>;
+};
+
+/* ── 3dicons.co 3D illustrations (CC0 license) ────────────────────── */
+const _D3 = 'https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color';
+const D3I = ({ name, size = '2rem', style: s = {} }) => (
+    <img
+        src={`${_D3}/${name}-dynamic-color.png`}
+        alt={name}
+        style={{ width: size, height: size, objectFit: 'contain', flexShrink: 0, display: 'inline-block', ...s }}
+        onError={e => { e.currentTarget.style.display = 'none'; }}
+    />
+);
+
+/* ── Storyset vector illustration URLs (freepiklabs CDN, free to use) ── */
+const STORYSET = {
+    family:    'https://stories.freepiklabs.com/storage/13526/Family_Mesa-de-trabajo-1.svg',
+    greetings: 'https://stories.freepiklabs.com/storage/2415/Conversation_Mesa-de-trabajo-1.svg',
+    nature:    'https://stories.freepiklabs.com/storage/13530/Forest_Mesa-de-trabajo-1.svg',
+};
+
+/* ── Category visuals: gradient + accent + 3dicons + Fluent fallback ── */
+const _FE3 = 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@latest/assets';
+const CAT_VISUAL = {
+    family:    { gradient: 'linear-gradient(135deg,#f3e8ff,#ddd6fe)', accent: '#7c3aed', svgUrl: STORYSET.family,    d3icon: null,            fluent: `${_FE3}/People%20hugging/3D/people_hugging_3d.png`,              lottie: null },
+    body:      { gradient: 'linear-gradient(135deg,#ccfbf1,#99f6e4)', accent: '#0d9488', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Hand%20with%20fingers%20splayed/3D/hand_with_fingers_splayed_3d.png`, lottie: null },
+    animals:   { gradient: 'linear-gradient(135deg,#dcfce7,#bbf7d0)', accent: '#16a34a', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Paw%20prints/3D/paw_prints_3d.png`,                    lottie: null },
+    food:      { gradient: 'linear-gradient(135deg,#fff7ed,#fed7aa)', accent: '#ea580c', svgUrl: null,               d3icon: 'tea-cup',       fluent: `${_FE3}/Steaming%20bowl/3D/steaming_bowl_3d.png`,              lottie: 'https://assets8.lottiefiles.com/temp/lf20_nXwOJj.json' },
+    colors:    { gradient: 'linear-gradient(135deg,#fef9c3,#fde68a)', accent: '#ca8a04', svgUrl: null,               d3icon: 'color-palette', fluent: `${_FE3}/Artist%20palette/3D/artist_palette_3d.png`,            lottie: null },
+    numbers:   { gradient: 'linear-gradient(135deg,#dbeafe,#bfdbfe)', accent: '#2563eb', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Input%20numbers/3D/input_numbers_3d.png`,              lottie: null },
+    nature:    { gradient: 'linear-gradient(135deg,#f0fdf4,#bbf7d0)', accent: '#15803d', svgUrl: STORYSET.nature,    d3icon: null,            fluent: `${_FE3}/Herb/3D/herb_3d.png`,                                 lottie: null },
+    greetings: { gradient: 'linear-gradient(135deg,#e0e7ff,#c7d2fe)', accent: '#4f46e5', svgUrl: STORYSET.greetings, d3icon: null,           fluent: `${_FE3}/Waving%20hand/3D/waving_hand_3d.png`,                 lottie: null },
+};
+
+const LottieIcon = ({ catId, fallbackEmoji, size = 80 }) => {
+    const vis = CAT_VISUAL[catId];
+    const [animData, setAnimData] = useState(null);
+    const [failed,   setFailed]   = useState(false);
+
+    useEffect(() => {
+        if (!vis?.lottie) { setFailed(true); return; }
+        let cancelled = false;
+        fetch(vis.lottie)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+            .then(d => { if (!cancelled) setAnimData(d); })
+            .catch(() => { if (!cancelled) setFailed(true); });
+        return () => { cancelled = true; };
+    }, [vis?.lottie]);
+
+    const sz = `${size}px`;
+    if (!failed && animData) {
+        return <div style={{ width: sz, height: sz }}><Lottie animationData={animData} loop autoplay style={{ width: '100%', height: '100%' }} /></div>;
+    }
+    if (vis?.svgUrl) {
+        return <img src={vis.svgUrl} alt="" style={{ width: sz, height: sz, objectFit: 'contain' }} />;
+    }
+    if (vis?.d3icon) {
+        return <D3I name={vis.d3icon} size={sz} />;
+    }
+    if (vis?.fluent) {
+        return <img src={vis.fluent} alt="" style={{ width: sz, height: sz, objectFit: 'contain' }} />;
+    }
+    return <span style={{ fontSize: sz }}>{fallbackEmoji}</span>;
 };
 
 /* ════════════════════════════════════════════════════════════════════
@@ -164,13 +228,15 @@ const Bar = ({ value, max, color = '#0056D2' }) => {
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════════════════ */
 const DashboardPage = ({
-    userStats    = { streak: 7, xp: 340, gems: 50, hearts: 4 },
-    nativeLang   = null,
-    learningLang = null,
-    profile      = {},  // { name, age, email, proficiency, reason, goals, dailyGoal }
-    onLogout     = null,
-    onAdmin      = null,
-    currentUid   = null,
+    userStats      = { streak: 7, xp: 340, gems: 50, hearts: 4 },
+    nativeLang     = null,
+    learningLang   = null,
+    profile        = {},  // { name, age, email, proficiency, reason, goals, dailyGoal }
+    onLogout       = null,
+    onAdmin        = null,
+    currentUid     = null,
+    paymentSuccess    = null, // { pkg, gems } — set by App.jsx after Stripe redirect
+    onPaymentHandled  = null,
 }) => {
     /* ── theme ── */
     const { isDark, T, toggle: toggleDark } = useTheme();
@@ -184,6 +250,17 @@ const DashboardPage = ({
     useEffect(() => {
       if (currentUid) isAdmin(currentUid).then(setUserIsAdmin);
     }, [currentUid]);
+
+    /* ── handle return from Stripe payment ── */
+    useEffect(() => {
+        if (!paymentSuccess) return;
+        setGems(g => g + paymentSuccess.gems);
+        const pkg = GEM_PACKAGES.find(p => p.id === paymentSuccess.pkg);
+        if (pkg) setSelectedPkg(pkg);
+        setActiveNav('account');
+        setPurchaseFlow('success');
+        if (onPaymentHandled) onPaymentHandled();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── profile shorthands ── */
     const userName    = profile.name        || '';
@@ -311,6 +388,7 @@ const DashboardPage = ({
        null | 'packages' | 'payment' | 'summary' | 'success'
     ── */
     const [purchaseFlow,  setPurchaseFlow]  = useState(null);
+    const [premiumModal,  setPremiumModal]  = useState(null);
     const [selectedPkg,   setSelectedPkg]   = useState(null);
     const [payMethod,     setPayMethod]     = useState(null);
     const [cardNum,       setCardNum]       = useState('');
@@ -607,7 +685,7 @@ const DashboardPage = ({
                     background: 'linear-gradient(135deg, #0056D2, #38bdf8)',
                     padding: '1.5rem', textAlign: 'center', color: '#fff',
                 }}>
-                    <div style={{ marginBottom: '0.25rem', display: 'flex', justifyContent: 'center' }}><E3D emoji="💎" size="2.5rem" /></div>
+                    <div style={{ marginBottom: '0.25rem', display: 'flex', justifyContent: 'center' }}><D3I name="medal" size="2.5rem" /></div>
                     <div style={{ fontSize: '1.8rem', fontWeight: '800' }}>
                         {selectedPkg?.gems.toLocaleString()} {isFr ? 'diamants' : 'diamonds'}
                     </div>
@@ -826,17 +904,21 @@ const DashboardPage = ({
                             }}
                         >
                             <div style={{
-                                width: '62px', height: '62px', borderRadius: '50%',
+                                width: '64px', height: '64px', borderRadius: '50%',
                                 padding: '3px',
                                 background: seen ? T.border : `linear-gradient(135deg, ${story.color}, #f59e0b)`,
+                                boxShadow: seen ? 'none' : `0 5px 0 ${story.color}99, 0 6px 14px ${story.color}44`,
                                 animation: !seen ? 'story-ring 2.5s ease-in-out infinite' : 'none',
                             }}>
                                 <div style={{
                                     width: '100%', height: '100%', borderRadius: '50%',
-                                    backgroundColor: seen ? T.surface3 : story.color,
+                                    background: seen
+                                        ? T.surface3
+                                        : `radial-gradient(ellipse at 38% 30%, ${story.color}cc, ${story.color})`,
                                     border: `3px solid ${T.surface}`,
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     fontSize: '1.6rem', opacity: seen ? 0.5 : 1,
+                                    boxShadow: seen ? 'none' : 'inset 0 -3px 6px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.35)',
                                 }}>
                                     {story.emoji}
                                 </div>
@@ -1301,7 +1383,7 @@ const DashboardPage = ({
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '99px', padding: '0.2rem 0.7rem' }}>
-                                <E3D emoji="🔥" size="1.1rem" />
+                                <D3I name="fire" size="1.1rem" />
                                 <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#fff' }}>{streak} {isFr ? 'j.' : 'day streak'}</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '99px', padding: '0.2rem 0.7rem' }}>
@@ -1360,37 +1442,81 @@ const DashboardPage = ({
                 </button>
             </div>
 
+            {/* ── Comment fonctionnent les leçons ── */}
+            <div style={{
+                margin: isMobile ? '0.75rem 0.75rem 0' : '1rem 2rem 0',
+                padding: '0.95rem 1.1rem', borderRadius: '16px',
+                background: isDark
+                    ? 'linear-gradient(135deg, #1c2333, #1e2d40)'
+                    : 'linear-gradient(135deg, #f0fdf4, #ecfdf5)',
+                border: `1.5px solid ${isDark ? '#1e3a2a' : '#bbf7d0'}`,
+                display: 'flex', gap: '0.85rem', alignItems: 'flex-start',
+            }}>
+                <div style={{
+                    width: '36px', height: '36px', borderRadius: '10px', flexShrink: 0,
+                    background: 'linear-gradient(135deg, #16a34a, #4ade80)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem',
+                }}>📚</div>
+                <div>
+                    <div style={{ fontSize: '0.82rem', fontWeight: '800', color: isDark ? '#4ade80' : '#15803d', marginBottom: '0.3rem' }}>
+                        {isFr ? 'Comment se déroule une leçon ?' : 'How does a lesson work?'}
+                    </div>
+                    <div style={{ fontSize: '0.76rem', fontWeight: '500', color: isDark ? '#94a3b8' : '#475569', lineHeight: 1.55 }}>
+                        {isFr
+                            ? 'Avant chaque leçon, vous recevez une série de fiches français → Medumba pour découvrir le vocabulaire de la session. Ensuite, des exercices interactifs vous permettent de pratiquer et de mémoriser.'
+                            : 'Before each lesson, you receive a set of French → Medumba flashcards to preview the session\'s vocabulary. Then interactive exercises help you practise and memorise.'}
+                    </div>
+                </div>
+            </div>
+
             {units.map((unit, uIdx) => {
                 const unitStart = globalIdx;
                 globalIdx += unit.lessons.length;
                 return (
                     <div key={unit.id}>
-                        {/* Unit header */}
+                        {/* Unit header — flat banner style */}
                         <div style={{
-                            margin: isMobile ? '1rem 0.75rem 0' : '2rem 2rem 0',
-                            padding: isMobile ? '1rem 1.1rem' : '1.2rem 1.6rem', borderRadius: '20px',
-                            background: `linear-gradient(135deg, ${unit.color}, ${unit.accent})`,
-                            color: '#fff', display: 'flex', justifyContent: 'space-between',
-                            alignItems: 'center', boxShadow: `0 8px 24px ${unit.color}44`,
+                            margin: isMobile ? '1.5rem 0.75rem 0' : '2rem 2rem 0',
+                            borderRadius: '18px', overflow: 'hidden',
+                            boxShadow: `0 6px 20px ${unit.color}35`,
                         }}>
-                            <div>
-                                <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '1px', opacity: 0.75, marginBottom: '0.2rem' }}>
-                                    {(isFr ? `UNITÉ ${unit.id}` : `UNIT ${unit.id}`) + ' · ' + (learnLang === 'english' ? '🇬🇧' : '🇨🇲')}
-                                </div>
-                                <div style={{ fontSize: '1.1rem', fontWeight: '800' }}>{isFr ? unit.titleFr : unit.titleEn}</div>
-                                <div style={{ fontSize: '0.78rem', opacity: 0.85, marginTop: '0.2rem' }}>{isFr ? unit.subFr : unit.subEn}</div>
-                            </div>
+                            {/* Coloured top strip */}
                             <div style={{
-                                width: '52px', height: '52px', borderRadius: '14px',
-                                backgroundColor: 'rgba(255,255,255,0.2)', display: 'flex',
-                                alignItems: 'center', justifyContent: 'center', fontSize: '1.85rem',
-                            }}>{unit.emoji}</div>
+                                background: unit.color,
+                                padding: '0.85rem 1.25rem',
+                                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            }}>
+                                <div>
+                                    <div style={{ fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1.2px', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', marginBottom: '0.15rem' }}>
+                                        {isFr ? `Unité ${unit.id}` : `Unit ${unit.id}`} · {learnLang === 'english' ? '🇬🇧' : '🇨🇲'}
+                                    </div>
+                                    <div style={{ fontSize: '1rem', fontWeight: '900', color: '#fff', letterSpacing: '-0.01em' }}>
+                                        {isFr ? unit.titleFr : unit.titleEn}
+                                    </div>
+                                </div>
+                                <div style={{
+                                    width: '44px', height: '44px', borderRadius: '12px',
+                                    backgroundColor: 'rgba(255,255,255,0.22)',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontSize: '1.6rem', flexShrink: 0,
+                                }}>{unit.emoji}</div>
+                            </div>
+                            {/* Subtitle bottom strip */}
+                            <div style={{
+                                background: isDark ? '#1e2535' : '#fff',
+                                padding: '0.55rem 1.25rem',
+                                borderTop: `3px solid ${unit.accent}`,
+                                fontSize: '0.75rem', fontWeight: '600',
+                                color: isDark ? '#94a3b8' : '#64748b',
+                            }}>
+                                {isFr ? unit.subFr : unit.subEn}
+                            </div>
                         </div>
 
                         {/* Lesson nodes */}
                         <div style={{
                             display: 'flex', flexDirection: 'column',
-                            alignItems: 'center', padding: '2rem 0', gap: '1.6rem',
+                            alignItems: 'center', padding: '2rem 0', gap: '0',
                         }}>
                             {unit.lessons.map((lesson, lIdx) => {
                                 const offset  = zigzag[(unitStart + lIdx) % zigzag.length];
@@ -1401,19 +1527,23 @@ const DashboardPage = ({
                                 const isChest = lesson.type === 'chest';
                                 const size    = isBoss ? 88 : isChest ? 72 : 68;
                                 const radius  = isBoss ? '20px' : isChest ? '18px' : '50%';
-                                const bg      = done || active ? unit.color : T.border;
-                                const sh      = done || active ? unit.accent : '#b2b2b2';
-                                const icon    = done ? '✓'
-                                    : locked ? (isChest ? '💰' : isBoss ? '🏆' : '🔒')
-                                    : (isChest ? '💰' : isBoss ? '🏆' : '⭐');
+                                // ── Node colours (reference: gold=done, navy=active, gray=locked)
+                                const bg = done    ? '#fbbf24'
+                                    : active       ? '#1e3a5f'
+                                    : isDark       ? '#2d3748' : '#e2e8f0';
+                                const sh = done    ? '#d97706'
+                                    : active       ? '#0f2040'
+                                    : isDark       ? '#1a2030' : '#c4cdd6';
+                                const iconColor = (done || active) ? '#fff' : '#9ca3af';
 
-                                // Decorative illustrations placed beside specific nodes
+                                // Decorative illustrations beside specific nodes
                                 const globalNodeIdx = unitStart + lIdx;
                                 const decorators = [
-                                    { idx: 0, src: person2Img, side: 'right', alt: '' },
-                                    { idx: 2, src: laptopImg,  side: 'right', alt: '' },
-                                    { idx: 4, src: globeImg,   side: 'right', alt: '' },
-                                    { idx: 6, src: person1Img, side: 'left',  alt: '' },
+                                    { idx: 0, src: person2Img, side: 'right', w: 82  },
+                                    { idx: 2, src: laptopImg,  side: 'left',  w: 76  },
+                                    { idx: 4, src: globeImg,   side: 'right', w: 70  },
+                                    { idx: 6, src: person1Img, side: 'left',  w: 82  },
+                                    { idx: 8, src: person2Img, side: 'right', w: 78  },
                                 ];
                                 const decorator = decorators.find(d => d.idx === globalNodeIdx);
 
@@ -1423,35 +1553,52 @@ const DashboardPage = ({
                                         alignItems: 'center', gap: '0.55rem',
                                         transform: `translateX(${offset}px)`, position: 'relative',
                                     }}>
+                                        {/* Decorative illustration */}
                                         {decorator && (
-                                            <img src={decorator.src} alt={decorator.alt} style={{
+                                            <img src={decorator.src} alt="" style={{
                                                 position: 'absolute',
                                                 top: '50%', transform: 'translateY(-50%)',
-                                                [decorator.side]: decorator.side === 'right' ? '-90px' : '-90px',
-                                                width: '78px', height: 'auto',
+                                                [decorator.side]: '-96px',
+                                                width: `${decorator.w}px`, height: 'auto',
                                                 pointerEvents: 'none', userSelect: 'none',
-                                                opacity: 0.92,
+                                                opacity: 0.95,
+                                                filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.08))',
                                             }} />
                                         )}
+
+                                        {/* START speech bubble */}
                                         {active && (
                                             <div style={{
-                                                position: 'absolute', top: `-${size / 2 + 28}px`,
-                                                backgroundColor: unit.color, color: '#fff',
-                                                padding: '0.4rem 1rem', borderRadius: '10px',
-                                                fontWeight: '800', fontSize: '0.78rem',
-                                                letterSpacing: '0.6px', whiteSpace: 'nowrap',
-                                                boxShadow: `0 4px 0 ${unit.accent}`, zIndex: 5,
+                                                position: 'absolute', top: `-${size / 2 + 40}px`,
+                                                backgroundColor: '#fff',
+                                                border: `2.5px solid ${unit.color}`,
+                                                color: unit.color,
+                                                padding: '0.4rem 1.1rem', borderRadius: '12px',
+                                                fontWeight: '900', fontSize: '0.8rem',
+                                                letterSpacing: '0.8px', whiteSpace: 'nowrap',
+                                                boxShadow: '0 4px 14px rgba(0,0,0,0.12)', zIndex: 5,
                                             }}>
-                                                {isFr ? 'COMMENCER' : 'START'}
+                                                {isFr ? 'COMMENCER !' : 'START!'}
+                                                {/* outer border triangle */}
+                                                <div style={{
+                                                    position: 'absolute', bottom: '-11px', left: '50%',
+                                                    transform: 'translateX(-50%)',
+                                                    borderLeft: '9px solid transparent',
+                                                    borderRight: '9px solid transparent',
+                                                    borderTop: `9px solid ${unit.color}`,
+                                                }} />
+                                                {/* inner white fill triangle */}
                                                 <div style={{
                                                     position: 'absolute', bottom: '-7px', left: '50%',
                                                     transform: 'translateX(-50%)',
                                                     borderLeft: '7px solid transparent',
                                                     borderRight: '7px solid transparent',
-                                                    borderTop: `7px solid ${unit.color}`,
+                                                    borderTop: '7px solid #fff',
                                                 }} />
                                             </div>
                                         )}
+
+                                        {/* Node circle */}
                                         <div
                                             onClick={() => {
                                                 if (locked || isBoss) return;
@@ -1464,28 +1611,63 @@ const DashboardPage = ({
                                             }}
                                             style={{
                                                 width: `${size}px`, height: `${size}px`,
-                                                borderRadius: radius, backgroundColor: bg,
-                                                boxShadow: `0 6px 0 ${sh}`,
+                                                borderRadius: radius,
+                                                background: done
+                                                    ? 'radial-gradient(ellipse at 38% 28%, #fde68a, #f59e0b)'
+                                                    : active
+                                                    ? 'radial-gradient(ellipse at 38% 28%, #2d5a8e, #1e3a5f)'
+                                                    : isDark ? 'radial-gradient(ellipse at 38% 28%, #374151, #1f2937)' : 'radial-gradient(ellipse at 38% 28%, #f1f5f9, #cbd5e1)',
+                                                boxShadow: done
+                                                    ? `0 6px 0 #d97706, 0 8px 20px rgba(245,158,11,0.4), inset 0 2px 4px rgba(255,255,255,0.5)`
+                                                    : active
+                                                    ? `0 6px 0 #0f2040, 0 8px 20px rgba(30,58,95,0.45), inset 0 2px 4px rgba(255,255,255,0.15)`
+                                                    : `0 5px 0 ${sh}, inset 0 1px 3px rgba(255,255,255,0.2)`,
                                                 display: 'flex', flexDirection: 'column',
                                                 justifyContent: 'center', alignItems: 'center',
                                                 cursor: locked || isBoss ? 'default' : 'pointer',
-                                                opacity: locked ? 0.55 : 1, gap: '2px',
+                                                opacity: locked ? 0.5 : 1, gap: '2px',
                                                 animation: active ? 'pulse-ring 2s ease-out infinite' : 'none',
+                                                border: done ? '3px solid #fbbf24' : active ? '3px solid #2d5a8e' : 'none',
                                             }}
                                             onMouseDown={(e) => { if (!locked && !isBoss) e.currentTarget.style.transform = 'translateY(5px)'; }}
                                             onMouseUp={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                                             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                                         >
-                                            <span style={{ fontSize: isBoss ? '1.9rem' : isChest ? '1.6rem' : '1.5rem' }}>{icon}</span>
+                                            <span style={{
+                                                fontSize: isBoss ? '1.9rem' : isChest ? '1.6rem' : done ? '1.6rem' : '1.5rem',
+                                                color: iconColor,
+                                                fontWeight: done ? '900' : 'normal',
+                                                lineHeight: 1,
+                                            }}>
+                                                {done ? '✓'
+                                                    : locked ? (isChest ? '💰' : isBoss ? '🏆' : '🔒')
+                                                    : (isChest ? '💰' : isBoss ? '🏆' : '⭐')}
+                                            </span>
                                             {isBoss && <span style={{ fontSize: '0.55rem', fontWeight: '800', color: '#fff', letterSpacing: '0.5px' }}>BOSS</span>}
                                         </div>
                                         <span style={{
                                             fontWeight: '700', fontSize: '0.78rem',
-                                            color: done || active ? unit.color : '#9ca3af',
+                                            color: done ? '#d97706' : active ? '#1e3a5f' : '#9ca3af',
                                             textAlign: 'center', maxWidth: '84px', lineHeight: 1.3,
                                         }}>
                                             {isFr ? lesson.titleFr : lesson.titleEn}
                                         </span>
+
+                                        {/* Dotted connector to next node */}
+                                        {lIdx < unit.lessons.length - 1 && (
+                                            <div style={{
+                                                display: 'flex', flexDirection: 'column',
+                                                alignItems: 'center', gap: '5px',
+                                                marginTop: '0.4rem', marginBottom: '0.1rem',
+                                            }}>
+                                                {[0,1,2].map(i => (
+                                                    <div key={i} style={{
+                                                        width: '5px', height: '5px', borderRadius: '50%',
+                                                        backgroundColor: done ? '#fbbf24' : isDark ? '#2d3748' : '#e2e8f0',
+                                                    }} />
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 );
                             })}
@@ -1675,13 +1857,13 @@ const DashboardPage = ({
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {PB_CATEGORIES.map((cat, i) => (
-                        <button key={cat.id} onClick={() => !cat.premium && setPbCategory(cat.id)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 0.5rem', borderBottom: `1px solid ${T.border}`, background: 'none', border: 'none', borderBottom: `1px solid ${T.border}`, cursor: cat.premium ? 'default' : 'pointer', textAlign: 'left', width: '100%', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
+                        <button key={cat.id} onClick={() => { if (cat.premium) { setPremiumModal({ labelEn: cat.en, labelFr: cat.fr, icon: cat.icon, gradient: 'linear-gradient(135deg,#e0e7ff,#c7d2fe)', accent: '#4f46e5', svgUrl: null, fluentUrl: null }); } else { setPbCategory(cat.id); } }} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 0.5rem', borderBottom: `1px solid ${T.border}`, background: 'none', border: 'none', borderBottom: `1px solid ${T.border}`, cursor: 'pointer', textAlign: 'left', width: '100%', fontFamily: 'inherit', opacity: cat.premium ? 0.75 : 1 }}>
                             <div style={{ width: '44px', height: '44px', borderRadius: '12px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><E3D emoji={cat.icon} size="2rem" /></div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ fontWeight: '700', fontSize: '0.95rem', color: T.text }}>{isFr ? cat.fr : cat.en}</div>
                                 <div style={{ fontSize: '0.75rem', color: T.textSub, marginTop: '0.15rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{isFr ? cat.desc_fr : cat.desc_en}</div>
                             </div>
-                            {cat.premium ? <E3D emoji="👑" size="1.2rem" /> : <span style={{ color: T.textSub, fontSize: '1.1rem', flexShrink: 0 }}>›</span>}
+                            {cat.premium ? <D3I name="star" size="1.3rem" /> : <span style={{ color: T.textSub, fontSize: '1.1rem', flexShrink: 0 }}>›</span>}
                         </button>
                     ))}
                 </div>
@@ -1786,13 +1968,90 @@ const DashboardPage = ({
         crocodile:   `${FE}/Crocodile/3D/crocodile_3d.png`,
         scorpion:    `${FE}/Scorpion/3D/scorpion_3d.png`,
         chauve:      `${FE}/Bat/3D/bat_3d.png`,
+        // Body — skin-toned → /Default/3D/name_3d_default.png
+        tête:        `${FE}/Brain/3D/brain_3d.png`,
+        main:        `${FE}/Hand%20with%20fingers%20splayed/Default/3D/hand_with_fingers_splayed_3d_default.png`,
+        pied:        `${FE}/Foot/Default/3D/foot_3d_default.png`,
+        bouche:      `${FE}/Mouth/3D/mouth_3d.png`,
+        dents:       `${FE}/Tooth/3D/tooth_3d.png`,
+        yeux:        `${FE}/Eyes/3D/eyes_3d.png`,
+        oreilles:    `${FE}/Ear/Default/3D/ear_3d_default.png`,
+        langue:      `${FE}/Tongue/3D/tongue_3d.png`,
+        nez:         `${FE}/Nose/Default/3D/nose_3d_default.png`,
+        bras:        `${FE}/Flexed%20biceps/Default/3D/flexed_biceps_3d_default.png`,
+        jambe:       `${FE}/Leg/Default/3D/leg_3d_default.png`,
+        cœur:        `${FE}/Red%20heart/3D/red_heart_3d.png`,
+        sang:        `${FE}/Drop%20of%20blood/3D/drop_of_blood_3d.png`,
+        ventre:      `${FE}/Pregnant%20woman/Default/3D/pregnant_woman_3d_default.png`,
+        // Family — skin-toned → /Default/3D/name_3d_default.png
+        mère:        `${FE}/Woman/Default/3D/woman_3d_default.png`,
+        maman:       `${FE}/Woman/Default/3D/woman_3d_default.png`,
+        père:        `${FE}/Man/Default/3D/man_3d_default.png`,
+        papa:        `${FE}/Man/Default/3D/man_3d_default.png`,
+        frère:       `${FE}/Boy/Default/3D/boy_3d_default.png`,
+        sœur:        `${FE}/Girl/Default/3D/girl_3d_default.png`,
+        enfant:      `${FE}/Baby/Default/3D/baby_3d_default.png`,
+        garçon:      `${FE}/Boy/Default/3D/boy_3d_default.png`,
+        fille:       `${FE}/Girl/Default/3D/girl_3d_default.png`,
+        mari:        `${FE}/Man/Default/3D/man_3d_default.png`,
+        famille:     `${FE}/People%20hugging/3D/people_hugging_3d.png`,
+        ami:         `${FE}/Handshake/3D/handshake_3d.png`,
+        // Food
+        lait:        `${FE}/Glass%20of%20milk/3D/glass_of_milk_3d.png`,
+        eau:         `${FE}/Droplet/3D/droplet_3d.png`,
+        riz:         `${FE}/Steaming%20bowl/3D/steaming_bowl_3d.png`,
+        maïs:        `${FE}/Ear%20of%20corn/3D/ear_of_corn_3d.png`,
+        banane:      `${FE}/Banana/3D/banana_3d.png`,
+        mangue:      `${FE}/Mango/3D/mango_3d.png`,
+        viande:      `${FE}/Cut%20of%20meat/3D/cut_of_meat_3d.png`,
+        sel:         `${FE}/Salt/3D/salt_3d.png`,
+        huile:       `${FE}/Jar/3D/jar_3d.png`,
+        farine:      `${FE}/Sheaf%20of%20rice/3D/sheaf_of_rice_3d.png`,
+        // Colors
+        rouge:       `${FE}/Red%20circle/3D/red_circle_3d.png`,
+        blanc:       `${FE}/White%20circle/3D/white_circle_3d.png`,
+        noir:        `${FE}/Black%20circle/3D/black_circle_3d.png`,
+        bleu:        `${FE}/Blue%20circle/3D/blue_circle_3d.png`,
+        vert:        `${FE}/Green%20circle/3D/green_circle_3d.png`,
+        jaune:       `${FE}/Yellow%20circle/3D/yellow_circle_3d.png`,
+        orange:      `${FE}/Orange%20circle/3D/orange_circle_3d.png`,
+        violet:      `${FE}/Purple%20circle/3D/purple_circle_3d.png`,
+        rose:        `${FE}/Pink%20heart/3D/pink_heart_3d.png`,
+        // Nature
+        arbre:       `${FE}/Deciduous%20tree/3D/deciduous_tree_3d.png`,
+        soleil:      `${FE}/Sun/3D/sun_3d.png`,
+        rivière:     `${FE}/Water%20wave/3D/water_wave_3d.png`,
+        champ:       `${FE}/Sheaf%20of%20rice/3D/sheaf_of_rice_3d.png`,
+        montagne:    `${FE}/Snow-capped%20mountain/3D/snow-capped_mountain_3d.png`,
+        pluie:       `${FE}/Cloud%20with%20rain/3D/cloud_with_rain_3d.png`,
+        vent:        `${FE}/Wind%20face/3D/wind_face_3d.png`,
+        feu:         `${FE}/Fire/3D/fire_3d.png`,
+        fleur:       `${FE}/Blossom/3D/blossom_3d.png`,
+        forêt:       `${FE}/Evergreen%20tree/3D/evergreen_tree_3d.png`,
+        feuille:     `${FE}/Leaf%20fluttering%20in%20wind/3D/leaf_fluttering_in_wind_3d.png`,
+        rocher:      `${FE}/Rock/3D/rock_3d.png`,
+        // Greetings — skin-toned → /Default/3D/name_3d_default.png
+        bonjour:     `${FE}/Waving%20hand/Default/3D/waving_hand_3d_default.png`,
+        salut:       `${FE}/Raised%20hand/Default/3D/raised_hand_3d_default.png`,
+        merci:       `${FE}/Folded%20hands/Default/3D/folded_hands_3d_default.png`,
+        bienvenue:   `${FE}/Party%20popper/3D/party_popper_3d.png`,
     };
 
     const renderWordIcon = (fr, fallback, size = '1.5rem') => {
         if (fr) {
             const lower = fr.toLowerCase();
             const url = Object.entries(ANIMAL_3D).find(([kw]) => lower.includes(kw))?.[1];
-            if (url) return <img src={url} alt={fr} style={{ width: size, height: size, objectFit: 'contain', display: 'block' }} />;
+            if (url) return (
+                <img
+                    src={url}
+                    alt={fr}
+                    style={{ width: size, height: size, objectFit: 'contain', display: 'block' }}
+                    onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.outerHTML = `<span style="font-size:${size};line-height:1">${getWordIcon(fr, fallback)}</span>`;
+                    }}
+                />
+            );
         }
         return <span style={{ fontSize: size }}>{getWordIcon(fr, fallback)}</span>;
     };
@@ -1812,11 +2071,15 @@ const DashboardPage = ({
                             <span style={{ fontWeight: '800', fontSize: '1rem', color: T.text }}>{isFr ? cat.fr : cat.en}</span>
                             <span style={{ fontSize: '0.8rem', color: T.textSub }}>{wcCard + 1}/{words.length}</span>
                         </div>
-                        <div style={{ width: '100%', maxWidth: '340px', backgroundColor: T.surface, borderRadius: '20px', border: `1.5px solid ${T.border}`, padding: '2rem 1.5rem', textAlign: 'left', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-                            <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text, marginBottom: '0.3rem' }}>{word.medumba}</div>
-                            <div style={{ fontSize: '1rem', color: T.textSub, fontWeight: '600', marginBottom: '1rem' }}>{word.fr}</div>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '1.5rem 0' }}>{renderWordIcon(word.fr, cat.icon, '7rem')}</div>
-                            <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>🔊</button>
+                        <div style={{ width: '100%', maxWidth: '340px', backgroundColor: T.surface, borderRadius: '24px', border: `1.5px solid ${T.border}`, overflow: 'hidden', textAlign: 'left', position: 'relative', boxShadow: `0 6px 0 ${CAT_VISUAL[cat.id]?.accent ?? '#94a3b8'}30, 0 8px 24px rgba(0,0,0,0.1)` }}>
+                            <div style={{ background: CAT_VISUAL[cat.id]?.gradient ?? '#f8fafc', padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '160px' }}>
+                                {renderWordIcon(word.fr, cat.icon, '9rem')}
+                            </div>
+                            <div style={{ padding: '1.25rem 1.5rem 2.5rem' }}>
+                                <div style={{ fontSize: '1.7rem', fontWeight: '900', color: T.text, marginBottom: '0.25rem', letterSpacing: '-0.5px' }}>{word.medumba}</div>
+                                <div style={{ fontSize: '1rem', color: CAT_VISUAL[cat.id]?.accent ?? T.textSub, fontWeight: '600' }}>{word.fr}</div>
+                            </div>
+                            <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 3px 0 #15803d' }}>🔊</button>
                         </div>
                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
                             <button disabled={wcCard === 0} onClick={() => setWcCard(wcCard - 1)} style={{ padding: '0.75rem 1.5rem', borderRadius: '10px', border: `2px solid ${T.border}`, backgroundColor: wcCard === 0 ? T.border : T.surface, color: T.text, fontWeight: '700', cursor: wcCard === 0 ? 'default' : 'pointer', fontFamily: 'inherit' }}>← {isFr ? 'Préc.' : 'Prev'}</button>
@@ -1853,15 +2116,63 @@ const DashboardPage = ({
                     <span style={{ fontSize: '1.1rem', color: T.textSub, cursor: 'pointer' }}>🔍</span>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                    {WC_CATEGORIES.map((cat, i) => (
-                        <button key={cat.id} onClick={() => !cat.premium && setWcCategory(i)} style={{ borderRadius: '16px', border: `1.5px solid ${T.border}`, backgroundColor: T.surface, cursor: cat.premium ? 'default' : 'pointer', padding: '0', overflow: 'hidden', textAlign: 'left', fontFamily: 'inherit', opacity: cat.premium ? 0.6 : 1 }}>
-                            <div style={{ backgroundColor: '#f8fafc', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><E3D emoji={cat.icon} size="3.5rem" /></div>
-                            <div style={{ padding: '0.6rem 0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <span style={{ fontWeight: '700', fontSize: '0.85rem', color: T.text }}>{isFr ? cat.fr : cat.en}</span>
-                                {cat.premium && <E3D emoji="👑" size="1.1rem" />}
-                            </div>
-                        </button>
-                    ))}
+                    {WC_CATEGORIES.map((cat, i) => {
+                        const vis = CAT_VISUAL[cat.id];
+                        return (
+                            <button
+                                key={cat.id}
+                                onClick={() => {
+                                    if (cat.premium) {
+                                        setPremiumModal({ labelEn: cat.en, labelFr: cat.fr, icon: cat.icon, gradient: vis?.gradient ?? 'linear-gradient(135deg,#e0e7ff,#c7d2fe)', accent: vis?.accent ?? '#4f46e5', svgUrl: vis?.svgUrl ?? null, fluentUrl: vis?.fluent ?? null });
+                                    } else {
+                                        setWcCategory(i);
+                                    }
+                                }}
+                                style={{
+                                    borderRadius: '18px',
+                                    border: `2px solid ${vis?.accent ?? T.border}30`,
+                                    backgroundColor: T.surface,
+                                    cursor: 'pointer',
+                                    padding: '0',
+                                    overflow: 'hidden',
+                                    textAlign: 'left',
+                                    fontFamily: 'inherit',
+                                    opacity: cat.premium ? 0.75 : 1,
+                                    boxShadow: cat.premium ? `0 2px 8px ${vis?.accent ?? '#94a3b8'}15` : `0 4px 0 ${vis?.accent ?? '#94a3b8'}25, 0 6px 16px ${vis?.accent ?? '#94a3b8'}15`,
+                                    transition: 'transform 0.15s, box-shadow 0.15s',
+                                }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
+                            >
+                                <div style={{
+                                    background: vis?.gradient ?? '#f8fafc',
+                                    height: '120px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                }}>
+                                    <LottieIcon catId={cat.id} fallbackEmoji={cat.icon} size={vis?.svgUrl ? 110 : 72} />
+                                    {cat.premium && (
+                                        <div style={{ position: 'absolute', top: '8px', right: '8px' }}>
+                                            <D3I name="star" size="1.4rem" />
+                                        </div>
+                                    )}
+                                </div>
+                                <div style={{
+                                    padding: '0.6rem 0.75rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    borderTop: `2px solid ${vis?.accent ?? T.border}20`,
+                                }}>
+                                    <span style={{ fontWeight: '700', fontSize: '0.85rem', color: vis?.accent ?? T.text }}>{isFr ? cat.fr : cat.en}</span>
+                                    <span style={{ fontSize: '0.72rem', color: T.textSub, fontWeight: '600' }}>›</span>
+                                </div>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -2095,12 +2406,11 @@ const DashboardPage = ({
 
     /* ── PREMIUM (gem packages) ── */
     const renderPremium = () => {
-        if (purchaseFlow === 'payment')  return renderPaymentMethod();
-        if (purchaseFlow === 'summary')  return renderOrderSummary();
-        if (purchaseFlow === 'success')  return renderPaymentSuccess();
+        if (purchaseFlow === 'success') return renderPaymentSuccess();
 
         return (
             <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem' }}>
+                <button onClick={() => setPurchaseFlow(null)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: T.text, marginBottom: '1rem', padding: '0', lineHeight: 1 }}>←</button>
                 {/* Hero */}
                 <div style={{
                     borderRadius: '20px', padding: '1.75rem',
@@ -2163,7 +2473,15 @@ const DashboardPage = ({
                                 </div>
                             </div>
                             <button
-                                onClick={() => { setSelectedPkg(pkg); setPurchaseFlow('payment'); }}
+                                onClick={() => {
+                                    setSelectedPkg(pkg);
+                                    const redirected = openStripePayment(pkg.id, profile?.email);
+                                    if (!redirected) {
+                                        // Demo mode: Stripe pas encore configuré → succès immédiat
+                                        setGems(g => g + pkg.gems);
+                                        setPurchaseFlow('success');
+                                    }
+                                }}
                                 style={{
                                     padding: '0.6rem 1.2rem', borderRadius: '99px',
                                     backgroundColor: '#0056D2', color: '#fff',
@@ -2207,8 +2525,124 @@ const DashboardPage = ({
         );
     };
 
+    /* ── PREMIUM PAYWALL MODAL ── */
+    const renderPremiumModal = () => {
+        if (!premiumModal) return null;
+        const { labelEn, labelFr, icon, gradient, accent, svgUrl, fluentUrl } = premiumModal;
+        const label = isFr ? labelFr : labelEn;
+        return (
+            <div
+                onClick={() => setPremiumModal(null)}
+                style={{
+                    position: 'fixed', inset: 0, zIndex: 1000,
+                    backgroundColor: 'rgba(0,0,0,0.55)',
+                    display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+                }}
+            >
+                <style>{`@keyframes premSlideUp { from{transform:translateY(100%);opacity:0} to{transform:translateY(0);opacity:1} }`}</style>
+                <div
+                    onClick={e => e.stopPropagation()}
+                    style={{
+                        width: '100%', maxWidth: '480px',
+                        backgroundColor: '#fff', borderRadius: '28px 28px 0 0',
+                        overflow: 'hidden', animation: 'premSlideUp 0.3s cubic-bezier(0.34,1.56,0.64,1)',
+                    }}
+                >
+                    {/* Category hero */}
+                    <div style={{
+                        background: gradient, padding: '2rem 1.5rem 1.25rem',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center',
+                        position: 'relative',
+                    }}>
+                        <button
+                            onClick={() => setPremiumModal(null)}
+                            style={{
+                                position: 'absolute', top: '1rem', right: '1rem',
+                                background: 'rgba(0,0,0,0.12)', border: 'none',
+                                borderRadius: '50%', width: '32px', height: '32px',
+                                cursor: 'pointer', fontSize: '0.9rem', color: '#000',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            }}
+                        >✕</button>
+                        {svgUrl
+                            ? <img src={svgUrl} alt="" style={{ width: '110px', height: '110px', objectFit: 'contain' }} />
+                            : fluentUrl
+                            ? <img src={fluentUrl} alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+                            : <span style={{ fontSize: '4rem', lineHeight: 1 }}>{icon}</span>
+                        }
+                        <div style={{
+                            marginTop: '0.75rem',
+                            display: 'flex', alignItems: 'center', gap: '0.4rem',
+                            backgroundColor: 'rgba(255,255,255,0.55)',
+                            padding: '0.3rem 0.8rem', borderRadius: '99px',
+                        }}>
+                            <D3I name="star" size="1rem" />
+                            <span style={{ fontWeight: '800', fontSize: '0.75rem', color: accent, letterSpacing: '0.5px' }}>
+                                {isFr ? 'CONTENU PREMIUM' : 'PREMIUM CONTENT'}
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Body */}
+                    <div style={{ padding: '1.5rem' }}>
+                        <h2 style={{ fontSize: '1.35rem', fontWeight: '900', textAlign: 'center', marginBottom: '0.3rem', color: '#0f172a' }}>
+                            {isFr ? `Déverrouillez ${label}` : `Unlock ${label}`}
+                        </h2>
+                        <p style={{ fontSize: '0.84rem', color: '#64748b', textAlign: 'center', marginBottom: '1.25rem', lineHeight: 1.55 }}>
+                            {isFr
+                                ? `Accédez à toutes les cartes vocabulaire de la catégorie ${label} et bien plus encore.`
+                                : `Get full access to all ${label} vocabulary cards and more.`}
+                        </p>
+                        {[
+                            { icon: '🃏', en: `Full ${label} vocabulary pack`,    fr: `Pack vocabulaire ${label} complet` },
+                            { icon: '🔊', en: 'Native audio pronunciations',      fr: 'Prononciations audio natives'       },
+                            { icon: '⭐', en: 'Unlimited practice sessions',      fr: 'Sessions d\'entraînement illimitées'},
+                        ].map((p, i) => (
+                            <div key={i} style={{
+                                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                                padding: '0.6rem 0',
+                                borderBottom: i < 2 ? '1px solid #f1f5f9' : 'none',
+                            }}>
+                                <span style={{ fontSize: '1.15rem' }}>{p.icon}</span>
+                                <span style={{ fontSize: '0.87rem', fontWeight: '600', color: '#334155' }}>
+                                    {isFr ? p.fr : p.en}
+                                </span>
+                            </div>
+                        ))}
+                        <button
+                            onClick={() => { setPremiumModal(null); setActiveNav('account'); setPurchaseFlow('gems'); }}
+                            style={{
+                                width: '100%', marginTop: '1.25rem', padding: '1rem',
+                                borderRadius: '16px',
+                                background: 'linear-gradient(135deg, #0056D2, #0891b2)',
+                                color: '#fff', border: 'none', fontWeight: '800', fontSize: '1rem',
+                                cursor: 'pointer', fontFamily: 'inherit',
+                                boxShadow: '0 6px 20px rgba(0,86,210,0.3)',
+                            }}
+                        >
+                            💎 {isFr ? 'Débloquer avec des Diamants' : 'Unlock with Diamonds'}
+                        </button>
+                        <button
+                            onClick={() => setPremiumModal(null)}
+                            style={{
+                                width: '100%', marginTop: '0.6rem', padding: '0.75rem',
+                                background: 'none', border: 'none',
+                                color: '#94a3b8', fontWeight: '600', fontSize: '0.9rem',
+                                cursor: 'pointer', fontFamily: 'inherit',
+                            }}
+                        >
+                            {isFr ? 'Non merci' : 'Not now'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     /* ── ACCOUNT ── */
     const renderAccount = () => {
+        if (purchaseFlow) return renderPremium();
+
         const initials = userName
             ? userName.trim().split(' ').map((w) => w[0].toUpperCase()).slice(0, 2).join('')
             : '?';
@@ -3492,13 +3926,15 @@ const DashboardPage = ({
             {/* ══════════════ MAIN ══════════════ */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
 
-                {/* Top Stats Bar */}
+                {/* Top Stats Bar — 3D chips */}
                 <header style={{
-                    backgroundColor: T.surface, borderBottom: `2px solid ${T.border}`,
-                    padding: isMobile ? '0.65rem 1rem' : '0.8rem 2rem',
+                    backgroundColor: T.surface,
+                    borderBottom: `2px solid ${T.border}`,
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.07)',
+                    padding: isMobile ? '0.55rem 1rem' : '0.7rem 2rem',
                     display: 'flex', alignItems: 'center',
                     justifyContent: isMobile ? 'space-between' : 'flex-end',
-                    gap: '1rem', flexShrink: 0, zIndex: 10,
+                    gap: '0.6rem', flexShrink: 0, zIndex: 10,
                 }}>
                     {/* Logo — mobile only */}
                     {isMobile && (
@@ -3508,48 +3944,66 @@ const DashboardPage = ({
                             <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '1rem' }}>Medumba</span>
                         </div>
                     )}
-                    {/* Stats */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.75rem' : '1.75rem' }}>
+                    {/* Stats — 3D pill chips */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.45rem' : '0.75rem' }}>
                         {/* XP + Level — desktop only */}
                         {!isMobile && (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                                    <span style={{ fontSize: '1rem' }}>⚡</span>
-                                    <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '0.9rem' }}>
-                                        {xp} XP
-                                    </span>
-                                    <span style={{
-                                        fontSize: '0.65rem', fontWeight: '800', color: '#fff',
-                                        backgroundColor: '#f59e0b', borderRadius: '6px',
-                                        padding: '1px 5px', letterSpacing: '0.3px',
-                                    }}>
+                            <div style={{
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px',
+                                background: 'linear-gradient(180deg,#eff6ff,#dbeafe)',
+                                border: '2px solid #bfdbfe',
+                                borderRadius: '12px', padding: '0.35rem 0.75rem',
+                                boxShadow: '0 3px 0 #93c5fd, 0 4px 8px rgba(0,86,210,0.12)',
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                    <E3D emoji="⚡" size="1rem" />
+                                    <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '0.85rem' }}>{xp} XP</span>
+                                    <span style={{ fontSize: '0.6rem', fontWeight: '800', color: '#fff', backgroundColor: '#f59e0b', borderRadius: '5px', padding: '1px 4px' }}>
                                         Lv.{Math.floor(xp / XP_TO_NEXT) + 1}
                                     </span>
                                 </div>
-                                <div style={{ width: '72px', height: '5px', backgroundColor: '#dbeafe', borderRadius: '99px', overflow: 'hidden' }}>
-                                    <div style={{ width: `${xpProgress}%`, height: '100%', backgroundColor: '#0056D2', borderRadius: '99px', transition: 'width 0.4s ease' }} />
+                                <div style={{ width: '68px', height: '4px', backgroundColor: '#bfdbfe', borderRadius: '99px', overflow: 'hidden' }}>
+                                    <div style={{ width: `${xpProgress}%`, height: '100%', background: 'linear-gradient(90deg,#0056D2,#38bdf8)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
                                 </div>
                             </div>
                         )}
-                        {/* Gems */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span style={{ fontSize: '1.1rem' }}>💎</span>
+                        {/* Gems chip */}
+                        <div style={{
+                            display: 'flex', alignItems: 'center', gap: '0.3rem',
+                            background: 'linear-gradient(180deg,#e0f2fe,#bae6fd)',
+                            border: '2px solid #7dd3fc',
+                            borderRadius: '12px', padding: '0.3rem 0.6rem',
+                            boxShadow: '0 3px 0 #38bdf8, 0 4px 8px rgba(14,165,233,0.15)',
+                            cursor: 'pointer',
+                        }} onClick={() => { setActiveNav('account'); setPurchaseFlow('gems'); }}>
+                            <D3I name="medal" size="1.35rem" />
                             <span style={{ fontWeight: '800', color: '#0284c7', fontSize: '0.88rem' }}>{gems}</span>
                         </div>
-                        {/* Hearts */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
+                        {/* Hearts chip */}
+                        <div style={{
+                            display: 'flex', alignItems: 'center', gap: '2px',
+                            background: 'linear-gradient(180deg,#fff1f2,#fecdd3)',
+                            border: '2px solid #fca5a5',
+                            borderRadius: '12px', padding: '0.3rem 0.6rem',
+                            boxShadow: '0 3px 0 #f87171, 0 4px 8px rgba(239,68,68,0.12)',
+                        }}>
                             {[...Array(5)].map((_, i) => (
-                                <span key={i} style={{
-                                    fontSize: isMobile ? '0.75rem' : '0.95rem',
+                                <D3I key={i} name="heart" size={isMobile ? '0.95rem' : '1.1rem'} style={{
+                                    opacity: i < hearts ? 1 : 0.2,
                                     filter: i < hearts ? 'none' : 'grayscale(1)',
-                                    opacity: i < hearts ? 1 : 0.3,
-                                }}>❤️</span>
+                                }} />
                             ))}
                         </div>
-                        {/* Streak — mobile only */}
+                        {/* Streak chip — mobile only */}
                         {isMobile && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                                <span style={{ fontSize: '1rem' }}>🔥</span>
+                            <div style={{
+                                display: 'flex', alignItems: 'center', gap: '0.25rem',
+                                background: 'linear-gradient(180deg,#fff7ed,#fed7aa)',
+                                border: '2px solid #fdba74',
+                                borderRadius: '12px', padding: '0.3rem 0.6rem',
+                                boxShadow: '0 3px 0 #fb923c, 0 4px 8px rgba(251,146,60,0.15)',
+                            }}>
+                                <D3I name="fire" size="1.35rem" />
                                 <span style={{ fontWeight: '800', color: '#d97706', fontSize: '0.88rem' }}>{streak}</span>
                             </div>
                         )}
@@ -3574,11 +4028,15 @@ const DashboardPage = ({
                 {/* Share modal */}
                 {renderShareModal()}
 
+                {/* Premium paywall modal */}
+                {renderPremiumModal()}
+
                 {/* ══════════════ BOTTOM NAV — mobile only ══════════════ */}
                 {isMobile && (
                     <nav style={{
                         display: 'flex', flexShrink: 0,
                         borderTop: `2px solid ${T.border}`,
+                        boxShadow: '0 -4px 16px rgba(0,0,0,0.08)',
                         backgroundColor: T.surface,
                         height: '62px',
                     }}>

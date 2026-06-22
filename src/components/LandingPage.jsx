@@ -28,6 +28,7 @@ const IconVideo  = () => <Ico><polygon points="23 7 16 12 23 17 23 7"/><rect x="
 const IconDict   = () => <Ico><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></Ico>;
 const IconCalc   = () => <Ico><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></Ico>;
 const IconCal    = () => <Ico><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></Ico>;
+const IconAlpha  = () => <Ico><polyline points="4 20 8 4 12 16 16 8 20 20"/></Ico>;
 const IconAndroid = () => (
     <svg width="26" height="26" viewBox="0 0 512 512" fill="currentColor">
         <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l236.6-236.1L47 0zm414.2 180.5l-48.6-28-67.9 67.9 67.9 67.9 49.4-28.7c14-7.8 23.8-22.2 23.8-38.6.1-16.4-9.4-31.2-24.6-40.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
@@ -148,7 +149,7 @@ function AppPreview({ small }) {
 }
 
 /* ══════════════ COMPOSANT PRINCIPAL ══════════════ */
-export default function LandingPage({ onStart, onLogin, onNavigate }) {
+export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }) {
     const nav = onNavigate ?? onStart;
     const [menuOpen,  setMenuOpen]  = useState(false);
     const [scrolled,  setScrolled]  = useState(false);
@@ -180,7 +181,11 @@ export default function LandingPage({ onStart, onLogin, onNavigate }) {
         return () => clearInterval(t);
     }, []);
 
-    const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior:'smooth' }); setMenuOpen(false); };
+    const scrollTo = (id) => {
+        if (id === 'download' && onDownload) { onDownload(); setMenuOpen(false); return; }
+        document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
+        setMenuOpen(false);
+    };
 
     const SERIF = "'Cormorant Garamond', Georgia, serif";
     const PH    = isMobile ? '3.5rem 1.25rem' : '5.5rem 3.5rem';
@@ -369,6 +374,11 @@ export default function LandingPage({ onStart, onLogin, onNavigate }) {
                             <div className="hero-ctas" style={{ display:'flex',gap:'.85rem',marginBottom:'2.5rem',flexWrap:'wrap' }}>
                                 <button onClick={onStart} className="lp-btn">🚀 Commencer gratuitement</button>
                                 <button onClick={() => scrollTo('cours')} className="lp-btn-ghost">📚 Voir les cours</button>
+                                {onDownload && (
+                                    <button onClick={onDownload} className="lp-btn-ghost" style={{ display:'flex',alignItems:'center',gap:'.45rem' }}>
+                                        📱 Télécharger l'app
+                                    </button>
+                                )}
                             </div>
                         </Reveal>
 
@@ -513,6 +523,31 @@ export default function LandingPage({ onStart, onLogin, onNavigate }) {
                             </Reveal>
                         ))}
                     </div>
+
+                    {/* ── Comment se déroule une leçon ── */}
+                    <Reveal style={{ marginTop: isMobile ? '2rem' : '2.5rem' }}>
+                        <div style={{
+                            background: 'linear-gradient(135deg, #f0fdf4, #ecfdf5)',
+                            border: '1.5px solid #bbf7d0',
+                            borderRadius: '20px',
+                            padding: isMobile ? '1.25rem 1.25rem' : '1.5rem 2rem',
+                            display: 'flex', gap: '1.25rem', alignItems: 'flex-start',
+                        }}>
+                            <div style={{
+                                width: '48px', height: '48px', borderRadius: '14px', flexShrink: 0,
+                                background: 'linear-gradient(135deg, #16a34a, #4ade80)',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem',
+                            }}>📚</div>
+                            <div>
+                                <h3 style={{ fontSize: '.97rem', fontWeight: 800, color: '#15803d', marginBottom: '.45rem' }}>
+                                    Comment se déroule une leçon ?
+                                </h3>
+                                <p style={{ fontSize: '.83rem', color: '#475569', lineHeight: 1.72, margin: 0 }}>
+                                    Avant chaque leçon, vous recevez une <strong style={{ color: '#15803d' }}>série de fiches français → Medumba</strong> pour découvrir le vocabulaire de la session. Ensuite, des exercices interactifs vous permettent de pratiquer et de mémoriser durablement.
+                                </p>
+                            </div>
+                        </div>
+                    </Reveal>
                 </div>
             </section>
 
@@ -525,7 +560,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate }) {
                             <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'460px' })}>
                                 Bien plus<br /><em style={{ color:B,fontStyle:'italic' }}>qu'une simple appli.</em>
                             </h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>Dictionnaire, comptage, calendrier culturel et vidéos — tout accessible en un clic.</p>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>Alphabet, dictionnaire, comptage, calendrier et vidéos — tout accessible en un clic.</p>
                         </div>
                     </Reveal>
 
@@ -536,6 +571,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate }) {
                             { Ico:IconMic,  view:'pronunciation', title:'Prononciation', desc:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', color:'#9333ea', badge:'1 147 syllabes' },
                             { Ico:IconCal,  view:'calendar',      title:'Calendrier',    desc:'Calendrier culturel Bamiléké : fêtes, saisons agricoles et événements traditionnels.', color:'#0891b2', badge:'Culturel' },
                             { Ico:IconVideo, view:'video',        title:'Vidéos',        desc:'Tutoriels vidéo, chants traditionnels et documentaires sur la culture Medumba.', color:'#15803d', badge:'HD' },
+                            { Ico:IconAlpha, view:'alphabet',     title:'Alphabet',      desc:'Les 32 lettres Medumba — voyelles, consonnes spéciales, IPA et exemples interactifs.', color:'#d97706', badge:'32 lettres' },
                         ].map((r,i) => (
                             <Reveal key={i} delay={i*.07}>
                                 <div className="res-card" onClick={() => nav(r.view)} style={{ position:'relative' }}>

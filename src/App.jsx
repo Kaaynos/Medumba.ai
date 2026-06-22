@@ -121,9 +121,11 @@ function App() {
     return () => window.removeEventListener('popstate', onPop);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Persistent Firebase auth listener ───────────────────────────
-  // The first call is the initial auth check (handled by SplashScreen).
-  // All subsequent calls (Google login, email login, logout) are handled here.
+  // ── Supabase auth listener ──────────────────────────────────────
+  // listenAuthState appelle le callback immédiatement avec la session
+  // existante (contrairement à Firebase qui skippait le premier appel).
+  // La SplashScreen gère le premier rendu ; ici on gère les changements
+  // de session ultérieurs (login, logout, OAuth redirect).
   const authInitialized = useRef(false);
   useEffect(() => {
     return listenAuthState((user) => {

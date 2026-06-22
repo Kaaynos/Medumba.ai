@@ -9,7 +9,7 @@ const SplashScreen = ({ onFinish }) => {
     let navTimer;
     let fadeTimer;
 
-    // Wait for Firebase to resolve auth state, then navigate
+    // Wait for Supabase to resolve auth state, then navigate
     const unsubscribe = listenAuthState((user) => {
       unsubscribe();
 

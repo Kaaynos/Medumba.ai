@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
+import { THEO } from '../services/theoService';
+import { playPhrasebookChapter, stopMedumbaAudio } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -328,6 +330,7 @@ const DashboardPage = ({
     const [challengeTab, setChallengeTab]   = useState('target');
     const [pbCategory,   setPbCategory]     = useState(null);   // selected phrasebook category
     const [pbDir,        setPbDir]          = useState('fr');    // 'fr' | 'medumba'
+    const [pbPlaying,    setPbPlaying]      = useState(false);  // chapter audio playing
     const [wcCategory,   setWcCategory]     = useState(null);   // selected word-card category
     const [wcCard,       setWcCard]         = useState(null);   // active card index
 
@@ -375,6 +378,7 @@ const DashboardPage = ({
             checkOnOpen(isFr);
             scheduleDailyReminder(isFr);
         });
+        THEO.appOpen();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     /* ── chest mechanic ── */
@@ -1607,6 +1611,7 @@ const DashboardPage = ({
                                                 } else {
                                                     setActiveLesson({ ...lesson, unitColor: unit.color, unitAccent: unit.accent });
                                                     setLessonFlow('loading');
+                                                    THEO.lessonStart(lesson.id, unit.id);
                                                 }
                                             }}
                                             style={{
@@ -1817,7 +1822,7 @@ const DashboardPage = ({
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
                     {/* Header */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
-                        <button onClick={() => setPbCategory(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
+                        <button onClick={() => { stopMedumbaAudio(); setPbPlaying(false); setPbCategory(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
                         <span style={{ flex: 1, fontWeight: '800', fontSize: '1rem', color: T.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {isFr ? cat.fr : cat.en}
                         </span>
@@ -1843,8 +1848,33 @@ const DashboardPage = ({
                             );
                         })}
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 1.25rem 1rem', flexShrink: 0 }}>
-                        <button style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.4rem', boxShadow: '0 4px 16px rgba(34,197,94,0.4)' }}>▶</button>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1.25rem 1rem', flexShrink: 0, borderTop: `1px solid ${T.border}` }}>
+                        <span style={{ fontSize: '0.75rem', color: T.textSub, fontWeight: '600' }}>
+                            {pbPlaying
+                                ? (isFr ? '🔊 Lecture en cours…' : '🔊 Playing…')
+                                : (isFr ? '🎙️ Locuteur natif disponible' : '🎙️ Native speaker available')}
+                        </span>
+                        <button
+                            onClick={() => {
+                                if (pbPlaying) {
+                                    stopMedumbaAudio();
+                                    setPbPlaying(false);
+                                } else {
+                                    setPbPlaying(true);
+                                    playPhrasebookChapter(pbCategory, null, () => setPbPlaying(false));
+                                    THEO.phraseView(pbCategory, 'chapter_audio');
+                                }
+                            }}
+                            style={{
+                                width: '52px', height: '52px', borderRadius: '50%',
+                                backgroundColor: pbPlaying ? '#ef4444' : '#22c55e',
+                                border: 'none', cursor: 'pointer', fontSize: '1.3rem',
+                                boxShadow: `0 4px 16px ${pbPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(34,197,94,0.4)'}`,
+                                transition: 'all 0.2s', flexShrink: 0,
+                            }}
+                        >
+                            {pbPlaying ? '⏹' : '▶'}
+                        </button>
                     </div>
                 </div>
             );
@@ -3125,6 +3155,7 @@ const DashboardPage = ({
                 onFinish={(result) => {
                     if (activeLesson?.id) {
                         setCompletedLessons(prev => new Set([...prev, activeLesson.id]));
+                        THEO.lessonComplete(activeLesson.id, result.xp ?? 0, result.accuracy ?? 100);
                     }
                     setXp(prev => prev + (result.xp || 0));
                     setGems(prev => prev + (result.diamonds || 0));
@@ -3883,7 +3914,7 @@ const DashboardPage = ({
                         return (
                             <button
                                 key={item.id}
-                                onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
+                                onClick={() => { setActiveNav(item.id); THEO.pageView(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
                                 style={{
                                     display: 'flex', alignItems: 'center', gap: '0.85rem',
                                     padding: '0.78rem 1rem', borderRadius: '12px',
@@ -4045,7 +4076,7 @@ const DashboardPage = ({
                             return (
                                 <button
                                     key={item.id}
-                                    onClick={() => { setActiveNav(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
+                                    onClick={() => { setActiveNav(item.id); THEO.pageView(item.id); if (item.id !== 'premium') setPurchaseFlow(null); if (item.id !== 'videos') { setActiveVideo(null); setFilterCat('all'); } }}
                                     style={{
                                         flex: 1, display: 'flex', flexDirection: 'column',
                                         alignItems: 'center', justifyContent: 'center', gap: '2px',

@@ -42,12 +42,16 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
             });
             onNext();
         } catch (e) {
-            if (e.code === 'auth/email-already-in-use') {
+            console.error('[register]', e);
+            const msg = (e.message || '').toLowerCase();
+            if (msg.includes('already registered') || msg.includes('already in use') || e.status === 422) {
                 setError(isFrench ? 'Cette adresse e-mail est déjà utilisée.' : 'This email is already in use.');
-            } else if (e.code === 'auth/invalid-email') {
+            } else if (msg.includes('invalid email') || msg.includes('email') && msg.includes('invalid')) {
                 setError(isFrench ? 'Adresse e-mail invalide.' : 'Invalid email address.');
+            } else if (msg.includes('password') && (msg.includes('6') || msg.includes('weak') || msg.includes('short'))) {
+                setError(isFrench ? 'Mot de passe trop court (6 caractères min.).' : 'Password too short (min. 6 characters).');
             } else {
-                setError(isFrench ? 'Erreur lors de la création du compte.' : 'Failed to create account. Try again.');
+                setError((isFrench ? 'Erreur : ' : 'Error: ') + (e.message || (isFrench ? 'Réessayez.' : 'Try again.')));
             }
         } finally {
             setLoading(false);

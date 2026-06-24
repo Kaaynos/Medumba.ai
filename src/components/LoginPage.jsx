@@ -57,12 +57,14 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
             const user = await loginUser(email, password);
             onLogin({ user });
         } catch (e) {
-            if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') {
+            console.error('[login]', e);
+            const msg = (e.message || '').toLowerCase();
+            if (msg.includes('invalid') || msg.includes('credentials') || msg.includes('not found') || msg.includes('wrong')) {
                 setError(isFrench ? 'E-mail ou mot de passe incorrect.' : 'Incorrect email or password.');
-            } else if (e.code === 'auth/too-many-requests') {
+            } else if (msg.includes('too many') || msg.includes('rate') || e.status === 429) {
                 setError(isFrench ? 'Trop de tentatives. Réessayez plus tard.' : 'Too many attempts. Try again later.');
             } else {
-                setError(isFrench ? 'Erreur de connexion. Réessayez.' : 'Login failed. Please try again.');
+                setError((isFrench ? 'Erreur : ' : 'Error: ') + (e.message || (isFrench ? 'Réessayez.' : 'Try again.')));
             }
         } finally {
             setLoading(false);
@@ -76,8 +78,10 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
             await loginWithGoogle();
             // Navigation handled instantly by the persistent auth listener in App.jsx
         } catch (e) {
-            if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
-                setError(isFrench ? 'Connexion Google échouée. Réessayez.' : 'Google login failed. Try again.');
+            console.error('[google-login]', e);
+            const msg = (e.message || '').toLowerCase();
+            if (!msg.includes('cancelled') && !msg.includes('closed')) {
+                setError((isFrench ? 'Google : ' : 'Google: ') + (e.message || (isFrench ? 'Réessayez.' : 'Try again.')));
             }
         } finally {
             setGoogleLoading(false);

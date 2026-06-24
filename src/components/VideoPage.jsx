@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { playMedumbaWord } from '../utils/medumbaAudio';
+import { supabase } from '../config/supabase';
 
 /* ══════════════════════════════════════════════════════════════════
    Video catalogue — served from /public/videos/
@@ -58,13 +60,26 @@ const CATEGORIES = [
             { src: '/videos/dessin/dessin_03.mp4', titleFr: 'Dessin 03', titleEn: 'Drawing 03', descFr: 'Leçon animée n°3',  descEn: 'Lesson #3',  thumb: '🎨', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
             { src: '/videos/dessin/dessin_04.mp4', titleFr: 'Dessin 04', titleEn: 'Drawing 04', descFr: 'Leçon animée n°4',  descEn: 'Lesson #4',  thumb: '🖌️', bg: 'linear-gradient(135deg,#0891b2,#22d3ee)' },
             { src: '/videos/dessin/dessin_05.mp4', titleFr: 'Dessin 05', titleEn: 'Drawing 05', descFr: 'Leçon animée n°5',  descEn: 'Lesson #5',  thumb: '✏️', bg: 'linear-gradient(135deg,#7c3aed,#a78bfa)' },
-            { src: '/videos/dessin/dessin_06.mp4', titleFr: 'Dessin 06', titleEn: 'Drawing 06', descFr: 'Leçon animée n°6',  descEn: 'Lesson #6',  thumb: '🖍️', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
-            { src: '/videos/dessin/dessin_07.mp4', titleFr: 'Dessin 07', titleEn: 'Drawing 07', descFr: 'Leçon animée n°7',  descEn: 'Lesson #7',  thumb: '🎨', bg: 'linear-gradient(135deg,#4f46e5,#818cf8)' },
-            { src: '/videos/dessin/dessin_08.mp4', titleFr: 'Dessin 08', titleEn: 'Drawing 08', descFr: 'Leçon animée n°8',  descEn: 'Lesson #8',  thumb: '🖌️', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },
-            { src: '/videos/dessin/dessin_09.mp4', titleFr: 'Dessin 09', titleEn: 'Drawing 09', descFr: 'Leçon animée n°9',  descEn: 'Lesson #9',  thumb: '✏️', bg: 'linear-gradient(135deg,#b45309,#fbbf24)' },
-            { src: '/videos/dessin/dessin_10.mp4', titleFr: 'Dessin 10', titleEn: 'Drawing 10', descFr: 'Leçon animée n°10', descEn: 'Lesson #10', thumb: '🖍️', bg: 'linear-gradient(135deg,#7c3aed,#c084fc)' },
-            { src: '/videos/dessin/dessin_11.mp4', titleFr: 'Dessin 11', titleEn: 'Drawing 11', descFr: 'Leçon animée n°11', descEn: 'Lesson #11', thumb: '🎨', bg: 'linear-gradient(135deg,#16a34a,#86efac)' },
-            { src: '/videos/dessin/dessin_12.mp4', titleFr: 'Dessin 12', titleEn: 'Drawing 12', descFr: 'Leçon animée n°12', descEn: 'Lesson #12', thumb: '🖌️', bg: 'linear-gradient(135deg,#0891b2,#67e8f9)' },
+            { src: '/videos/dessin/dessin_06.mp4', youtube: 'avB2s12HFlY', titleFr: 'Lecture du temps',          titleEn: 'Telling Time',             descFr: 'Lire et dire l\'heure',       descEn: 'Reading & telling time',  thumb: '⏰', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
+            { src: '/videos/dessin/dessin_07.mp4', youtube: 'O5eIMhubaQM', titleFr: 'Animaux de la savane',      titleEn: 'Savanna Animals',          descFr: 'Faune de la savane',          descEn: 'African savanna wildlife', thumb: '🦁', bg: 'linear-gradient(135deg,#d97706,#fb923c)' },
+            { src: '/videos/dessin/dessin_08.mp4', youtube: 'wcKfYEYkGqA', titleFr: 'Les couleurs',              titleEn: 'Colors',                   descFr: 'Nommer les couleurs',         descEn: 'Naming colors',           thumb: '🌈', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },
+            { src: '/videos/dessin/dessin_09.mp4', youtube: 'K6bxqnMXrhg', titleFr: 'Formes géométriques',      titleEn: 'Geometric Shapes',         descFr: 'Les formes en Medumba',       descEn: 'Shapes in Medumba',       thumb: '🔷', bg: 'linear-gradient(135deg,#4f46e5,#818cf8)' },
+            { src: '/videos/dessin/dessin_10.mp4', youtube: 'SZLGo44APac', titleFr: 'Animaux domestiques',      titleEn: 'Domestic Animals',         descFr: 'Les animaux de la maison',    descEn: 'Animals at home',         thumb: '🐾', bg: 'linear-gradient(135deg,#7c3aed,#c084fc)' },
+            { src: '/videos/dessin/dessin_11.mp4', youtube: '2R8aIlUErfo', titleFr: 'Salutation (Dessin)',      titleEn: 'Greetings (Drawing)',      descFr: 'Saluer en Medumba',           descEn: 'Greetings in Medumba',    thumb: '🤝', bg: 'linear-gradient(135deg,#16a34a,#86efac)' },
+            { src: '/videos/dessin/dessin_12.mp4', youtube: 'y7fWROWtMkY', titleFr: 'Chanson Mà we',            titleEn: 'Song Mà we',               descFr: 'Chanson traditionnelle',      descEn: 'Traditional song',        thumb: '🎵', bg: 'linear-gradient(135deg,#0891b2,#67e8f9)' },
+            { src: '/videos/dessin/dessin_13.mp4', youtube: 'zMaHWxA1MPc', titleFr: 'Conte : la tortue et la panthère', titleEn: 'Tale: The Tortoise & Panther', descFr: 'Conte traditionnel Medumba', descEn: 'Traditional Medumba tale', thumb: '🐢', bg: 'linear-gradient(135deg,#b45309,#fbbf24)' },
+        ],
+    },
+    {
+        id: 'zenu',
+        icon: '📖', color: '#7c3aed', grad: 'linear-gradient(135deg,#7c3aed,#c084fc)',
+        labelEn: 'Zenù — Stories & Culture', labelFr: 'Zenù — Contes & Culture',
+        descEn: 'Medumba heritage & oral tradition', descFr: 'Patrimoine & tradition orale Medumba',
+        videos: [
+            { src: '', youtube: 'vQMADuRX7Hs', titleFr: 'Zenù — Musique',                           titleEn: 'Zenù — Music',                         descFr: 'Chanson Zenù',                descEn: 'Zenù song',               thumb: '🎶', bg: 'linear-gradient(135deg,#7c3aed,#a855f7)' },
+            { src: '', youtube: 'IdOO9KJk2Io', titleFr: 'Histoire : Kebwog nzwimfèn',               titleEn: 'Story: Kebwog nzwimfèn',               descFr: 'Conte traditionnel Medumba',  descEn: 'Traditional Medumba tale', thumb: '📜', bg: 'linear-gradient(135deg,#1e3a5f,#3b82f6)' },
+            { src: '', youtube: '_W7BXXZJTgk', titleFr: 'La femme guerrière de Bangoulap',          titleEn: 'The Warrior Woman of Bangoulap',        descFr: 'Histoire héroïque Bangangté', descEn: 'Bangangté heroic history', thumb: '⚔️', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },
+            { src: '', youtube: 'sEvxMvx6sXs', titleFr: 'Les 8 jours de la semaine Medumba',       titleEn: 'The 8-Day Medumba Week',               descFr: 'Calendrier traditionnel',     descEn: 'Traditional calendar',    thumb: '🗓️', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
         ],
     },
 ];
@@ -112,7 +127,15 @@ const VideoPlayer = ({ video, cat, isFr, onClose }) => {
                     display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                 }}>✕</button>
             </div>
-            {videoError ? (
+            {video.youtube ? (
+                <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${video.youtube}?autoplay=1&rel=0`}
+                    title={isFr ? video.titleFr : video.titleEn}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ width: '100%', height: '300px', display: 'block', border: 'none', backgroundColor: '#000' }}
+                />
+            ) : videoError ? (
                 <div style={{ padding: '3rem 2rem', textAlign: 'center', backgroundColor: '#0f172a' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🎬</div>
                     <div style={{ color: '#94a3b8', fontWeight: '700', fontSize: '0.95rem' }}>
@@ -274,14 +297,205 @@ const HeroCard = ({ video, isFr, onPlay }) => (
 );
 
 /* ══════════════════════════════════════════════════════════════════
+   SHORTS DATA — TikTok-style 30-sec cards
+══════════════════════════════════════════════════════════════════ */
+const SHORTS = [
+    { id: 'sh1', word: 'Ndà\'ndà\'', fr: 'Salut !', en: 'Hi!',               color: '#7c3aed', emoji: '👋', cat: 'Salutations', audio: "Ndà'ndà' lα!" },
+    { id: 'sh2', word: 'Mə lὰbtə̌',  fr: 'Merci',   en: 'Thank you',          color: '#0056D2', emoji: '🙏', cat: 'Politesse',   audio: 'Mə lὰbtə̌' },
+    { id: 'sh3', word: 'Mbʉ',        fr: 'Chien',   en: 'Dog',                color: '#d97706', emoji: '🐕', cat: 'Animaux',     audio: 'Mbʉ' },
+    { id: 'sh4', word: 'Ntsə',       fr: 'Eau',     en: 'Water',              color: '#0891b2', emoji: '💧', cat: 'Nature',      audio: 'Ntsə' },
+    { id: 'sh5', word: 'Mɛn',        fr: 'Enfant',  en: 'Child',              color: '#16a34a', emoji: '👶', cat: 'Famille',     audio: 'Mɛn' },
+    { id: 'sh6', word: 'Nyàm',       fr: 'Soleil',  en: 'Sun',                color: '#f59e0b', emoji: '☀️', cat: 'Nature',      audio: 'Nyàm' },
+    { id: 'sh7', word: 'Mbwoge',     fr: 'Feu',     en: 'Fire',               color: '#ef4444', emoji: '🔥', cat: 'Nature',      audio: 'Mbwoge' },
+    { id: 'sh8', word: 'Baꞌ',        fr: 'Maison',  en: 'House',              color: '#059669', emoji: '🏠', cat: 'Maison',      audio: "Baꞌ" },
+    { id: 'sh9', word: 'Ngòn',       fr: 'Fille',   en: 'Girl',               color: '#e11d48', emoji: '👧', cat: 'Famille',     audio: 'Ngòn' },
+    { id: 'sh10', word: 'Bùsi',      fr: 'Chat',    en: 'Cat',                color: '#7c3aed', emoji: '🐱', cat: 'Animaux',     audio: 'Bùsi' },
+    { id: 'sh11', word: 'Mαŋwʉ',     fr: 'Lune',    en: 'Moon',               color: '#1e3a5f', emoji: '🌙', cat: 'Nature',      audio: 'Mαŋwʉ' },
+    { id: 'sh12', word: 'A fi tsə',  fr: 'Ça va bien', en: 'I am fine',       color: '#0f766e', emoji: '😊', cat: 'Salutations', audio: 'A fi tsə.' },
+];
+
+/* ── Single TikTok short card (full-screen vertical) ── */
+const ShortCard = ({ short, isFr, liked, onLike }) => {
+    const [playing, setPlaying] = useState(false);
+
+    const handleAudio = () => {
+        setPlaying(true);
+        playMedumbaWord(short.audio, null, () => setPlaying(false));
+    };
+
+    return (
+        <div style={{
+            height: '100vh', width: '100%',
+            background: `linear-gradient(160deg, ${short.color}dd 0%, #0f172a 70%)`,
+            display: 'flex', flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center',
+            position: 'relative', padding: '2rem 1.5rem',
+            flexShrink: 0,
+            scrollSnapAlign: 'start',
+        }}>
+            {/* Category chip */}
+            <div style={{
+                position: 'absolute', top: '5rem', left: '1.25rem',
+                backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)',
+                borderRadius: '99px', padding: '0.25rem 0.8rem',
+                fontSize: '0.7rem', fontWeight: '800', color: '#fff',
+                letterSpacing: '0.5px', textTransform: 'uppercase',
+            }}>{short.cat}</div>
+
+            {/* Main emoji */}
+            <div style={{ fontSize: '7rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.4))' }}>
+                {short.emoji}
+            </div>
+
+            {/* Medumba word */}
+            <div style={{
+                fontSize: '2.8rem', fontWeight: '900', color: '#fff',
+                textAlign: 'center', lineHeight: 1.1, marginBottom: '0.5rem',
+                textShadow: '0 2px 12px rgba(0,0,0,0.3)',
+            }}>{short.word}</div>
+
+            {/* Translation */}
+            <div style={{
+                fontSize: '1.2rem', fontWeight: '700',
+                color: 'rgba(255,255,255,0.75)', textAlign: 'center',
+                marginBottom: '2.5rem',
+            }}>{isFr ? short.fr : short.en}</div>
+
+            {/* Play button */}
+            <button
+                onClick={handleAudio}
+                style={{
+                    display: 'flex', alignItems: 'center', gap: '0.6rem',
+                    backgroundColor: playing ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.2)',
+                    backdropFilter: 'blur(8px)',
+                    border: '2px solid rgba(255,255,255,0.4)',
+                    borderRadius: '99px', padding: '0.75rem 1.75rem',
+                    color: playing ? '#0f172a' : '#fff',
+                    fontWeight: '800', fontSize: '1rem', cursor: 'pointer',
+                    fontFamily: 'inherit', transition: 'all 0.2s',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                }}
+            >
+                {playing ? '🔊 En cours…' : '🔊 Écouter'}
+            </button>
+
+            {/* Right action buttons */}
+            <div style={{
+                position: 'absolute', right: '1rem', bottom: '10rem',
+                display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center',
+            }}>
+                <button onClick={onLike} style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem',
+                }}>
+                    <span style={{ fontSize: '2rem', filter: liked ? 'none' : 'grayscale(1)', transition: 'filter 0.2s' }}>❤️</span>
+                    <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', fontWeight: '700' }}>{liked ? '1' : '0'}</span>
+                </button>
+                <button
+                    onClick={() => navigator.share?.({ title: `Medumba: ${short.word}`, text: `${short.word} = ${isFr ? short.fr : short.en} · Apprends le Medumba sur Medumba.AI !` }).catch(() => {})}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}
+                >
+                    <span style={{ fontSize: '2rem' }}>📲</span>
+                    <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', fontWeight: '700' }}>{isFr ? 'Partager' : 'Share'}</span>
+                </button>
+            </div>
+
+            {/* Scroll hint */}
+            <div style={{
+                position: 'absolute', bottom: '2rem',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem',
+                opacity: 0.5, animation: 'bounce 1.5s infinite',
+            }}>
+                <div style={{ width: '2px', height: '20px', backgroundColor: '#fff', borderRadius: '99px' }} />
+                <span style={{ fontSize: '0.65rem', color: '#fff', fontWeight: '700' }}>↕ {isFr ? 'Défiler' : 'Scroll'}</span>
+            </div>
+        </div>
+    );
+};
+
+/* ── Shorts feed ── */
+const ShortsView = ({ isFr }) => {
+    const [likedIds, setLikedIds] = useState(new Set());
+    const feedRef = useRef(null);
+
+    const toggleLike = (id) => setLikedIds(prev => {
+        const next = new Set(prev);
+        next.has(id) ? next.delete(id) : next.add(id);
+        return next;
+    });
+
+    return (
+        <div
+            ref={feedRef}
+            style={{
+                height: '100vh', overflowY: 'scroll',
+                scrollSnapType: 'y mandatory',
+                scrollbarWidth: 'none',
+            }}
+        >
+            <style>{`@keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(8px)} }`}</style>
+            {SHORTS.map(short => (
+                <ShortCard
+                    key={short.id}
+                    short={short}
+                    isFr={isFr}
+                    liked={likedIds.has(short.id)}
+                    onLike={() => toggleLike(short.id)}
+                />
+            ))}
+        </div>
+    );
+};
+
+/* ── Transforme une ligne Supabase (snake_case) en objet attendu par les composants ── */
+function mapSupabaseData(cats) {
+    return cats.map(cat => ({
+        id:       cat.id,
+        icon:     cat.icon,
+        color:    cat.color,
+        grad:     cat.grad,
+        labelFr:  cat.label_fr,
+        labelEn:  cat.label_en,
+        descFr:   cat.desc_fr,
+        descEn:   cat.desc_en,
+        videos: (cat.videos || [])
+            .sort((a, b) => a.sort_order - b.sort_order)
+            .map(v => ({
+                src:     v.src     ?? '',
+                youtube: v.youtube ?? null,
+                titleFr: v.title_fr,
+                titleEn: v.title_en,
+                descFr:  v.desc_fr,
+                descEn:  v.desc_en,
+                thumb:   v.thumb,
+                bg:      v.bg,
+            })),
+    }));
+}
+
+/* ══════════════════════════════════════════════════════════════════
    VideoPage
 ══════════════════════════════════════════════════════════════════ */
 const VideoPage = ({ nativeLang, onBack }) => {
     const isFr = nativeLang === 'french';
     const [playing, setPlaying] = useState(null);
+    const [activeTab, setActiveTab] = useState('videos'); // 'videos' | 'shorts'
+    const [categories, setCategories] = useState(CATEGORIES);
 
-    const totalVideos = CATEGORIES.reduce((sum, c) => sum + c.videos.length, 0);
-    const featuredVideo = CATEGORIES[0].videos[0];
+    useEffect(() => {
+        supabase
+            .from('video_categories')
+            .select('*, videos(*)')
+            .order('sort_order')
+            .then(({ data, error }) => {
+                if (!error && data && data.length > 0) {
+                    setCategories(mapSupabaseData(data));
+                }
+            });
+    }, []);
+
+    const totalVideos = categories.reduce((sum, c) => sum + c.videos.length, 0);
+    const featuredVideo = categories[0]?.videos[0];
 
     return (
         <div style={{
@@ -324,25 +538,51 @@ const VideoPage = ({ nativeLang, onBack }) => {
                         🎥 {isFr ? 'Vidéos Medumba' : 'Medumba Videos'}
                     </div>
                     <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', fontWeight: '600' }}>
-                        {totalVideos} {isFr ? 'vidéos · 4 collections' : 'videos · 4 collections'}
+                        {totalVideos} {isFr ? 'vidéos · 5 collections' : 'videos · 5 collections'}
                     </div>
                 </div>
             </div>
 
-            {/* ── Content ── */}
-            <div style={{ flex: 1, padding: '1.25rem 1.25rem 3rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {/* ── Tab switcher ── */}
+            <div style={{
+                display: 'flex', padding: '0.75rem 1.25rem 0',
+                gap: '0.5rem', position: 'sticky', top: '64px', zIndex: 49,
+                background: 'linear-gradient(to bottom, #0f172a 80%, transparent)',
+            }}>
+                {[
+                    { id: 'videos', icon: '🎬', labelFr: 'Vidéos',  labelEn: 'Videos' },
+                    { id: 'shorts', icon: '⚡', labelFr: 'Shorts',  labelEn: 'Shorts' },
+                ].map(tab => (
+                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+                        padding: '0.45rem 1.1rem', borderRadius: '99px',
+                        backgroundColor: activeTab === tab.id ? '#fff' : 'rgba(255,255,255,0.1)',
+                        color: activeTab === tab.id ? '#0f172a' : 'rgba(255,255,255,0.6)',
+                        border: 'none', fontWeight: '800', fontSize: '0.82rem',
+                        cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s',
+                        display: 'flex', alignItems: 'center', gap: '0.35rem',
+                    }}>
+                        {tab.icon} {isFr ? tab.labelFr : tab.labelEn}
+                    </button>
+                ))}
+            </div>
+
+            {/* ── Shorts view ── */}
+            {activeTab === 'shorts' && <ShortsView isFr={isFr} />}
+
+            {/* ── Videos content ── */}
+            {activeTab === 'videos' && <div style={{ flex: 1, padding: '1.25rem 1.25rem 3rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
                 {/* Featured hero */}
                 <div style={{ animation: 'fade-up 0.4s ease-out both' }}>
                     <HeroCard
                         video={featuredVideo}
                         isFr={isFr}
-                        onPlay={() => setPlaying({ video: featuredVideo, cat: CATEGORIES[0] })}
+                        onPlay={() => setPlaying({ video: featuredVideo, cat: categories[0] })}
                     />
                 </div>
 
                 {/* Category rows */}
-                {CATEGORIES.map((cat, ci) => (
+                {categories.map((cat, ci) => (
                     <div key={cat.id} style={{ animation: `fade-up 0.4s ease-out ${0.1 + ci * 0.08}s both` }}>
                         {/* Section header */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.85rem' }}>
@@ -379,7 +619,7 @@ const VideoPage = ({ nativeLang, onBack }) => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 };

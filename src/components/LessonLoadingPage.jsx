@@ -1,12 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import loadingVec from '../assets/loading vec.png';
+import { playLessonChapter, stopMedumbaAudio, LESSON_CHAPTERS } from '../utils/medumbaAudio';
 
 const B = '#1B4FD8';
 
-const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
+const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) => {
     const { T } = useTheme();
     const [progress, setProgress] = useState(0);
+    const [audioPlaying, setAudioPlaying] = useState(false);
+
+    const hasAudio = lessonId && LESSON_CHAPTERS[lessonId]?.length > 0;
+
+    const toggleAudio = () => {
+        if (audioPlaying) {
+            stopMedumbaAudio();
+            setAudioPlaying(false);
+        } else {
+            setAudioPlaying(true);
+            playLessonChapter(lessonId, null, () => setAudioPlaying(false));
+        }
+    };
+
+    // Arrête l'audio quand la leçon commence
+    useEffect(() => () => stopMedumbaAudio(), []);
 
     useEffect(() => {
         const id = setInterval(() => {
@@ -85,6 +102,26 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, onClose }) => {
                         ? 'Terminez le cours plus vite pour gagner plus de XP et de Diamants.'
                         : 'Complete the course faster to get more XP and Diamonds.'}
                 </p>
+
+                {/* Bouton audio locuteur natif (visible seulement si un chapitre est mappé) */}
+                {hasAudio && (
+                    <button
+                        onClick={toggleAudio}
+                        style={{
+                            display: 'flex', alignItems: 'center', gap: '0.5rem',
+                            backgroundColor: audioPlaying ? '#ef4444' : B,
+                            border: 'none', borderRadius: '99px',
+                            padding: '0.6rem 1.4rem', cursor: 'pointer',
+                            color: '#fff', fontWeight: '800', fontSize: '0.85rem',
+                            fontFamily: 'inherit', transition: 'all 0.2s',
+                            boxShadow: `0 4px 16px ${audioPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(27,79,216,0.35)'}`,
+                        }}
+                    >
+                        {audioPlaying
+                            ? `⏹ ${isFr ? 'Arrêter' : 'Stop'}`
+                            : `🔊 ${isFr ? 'Écouter la leçon' : 'Listen to lesson'}`}
+                    </button>
+                )}
             </div>
         </div>
     );

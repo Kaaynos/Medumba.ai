@@ -3138,6 +3138,7 @@ const DashboardPage = ({
             <LessonLoadingPage
                 isFr={isFr}
                 lessonTitle={isFr ? (activeLesson?.titleFr ?? '') : (activeLesson?.titleEn ?? '')}
+                lessonId={activeLesson?.id}
                 userName={userName}
                 onReady={() => setLessonFlow('lesson')}
                 onClose={() => { setLessonFlow(null); setActiveLesson(null); }}

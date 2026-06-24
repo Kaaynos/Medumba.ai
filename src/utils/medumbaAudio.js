@@ -281,12 +281,39 @@ export const PB_CATEGORY_CHAPTERS = {
     general:   [29, 30, 31],
 };
 
+/* ID de leçon → chapitres audio associés (locuteur natif) */
+export const LESSON_CHAPTERS = {
+    l1:  [2, 3, 4, 11],        // Salutations, au revoir, questions, pardon
+    l2:  [23],                  // Corps, sensations physiques
+    l3:  [27],                  // Nourriture, repas
+    l7:  [5, 6],                // Relations familiales
+    l8:  [13],                  // Nature, temps et saisons
+    l9:  [13, 24, 25],          // Heure, date, calendrier
+    l10: [1, 4],                // Se présenter, poser des questions
+    l11: [27],                  // Maison, cuisine
+    l12: [14, 21, 22, 23],      // Santé, sensations, états physiques
+    l13: [31],                  // École, grammaire
+    l14: [7],                   // Emplois, profession
+};
+
 /**
  * Joue l'enregistrement du chapitre correspondant à la catégorie phrasebook.
  * Si plusieurs chapitres pour la même catégorie, joue le premier disponible.
  */
 export async function playPhrasebookChapter(categoryId, onStart, onEnd) {
     const chapters = PB_CATEGORY_CHAPTERS[categoryId] ?? [];
+    await _playChapterList(chapters, onStart, onEnd);
+}
+
+/**
+ * Joue le chapitre audio associé à une leçon (écran de chargement de leçon).
+ */
+export async function playLessonChapter(lessonId, onStart, onEnd) {
+    const chapters = LESSON_CHAPTERS[lessonId] ?? [];
+    await _playChapterList(chapters, onStart, onEnd);
+}
+
+async function _playChapterList(chapters, onStart, onEnd) {
     for (const num of chapters) {
         const filename = PHRASEBOOK_CHAPTERS[num];
         if (!filename) continue;
@@ -294,7 +321,7 @@ export async function playPhrasebookChapter(categoryId, onStart, onEnd) {
         if (_urlCache[cacheKey] === null) continue;
         let url = _urlCache[cacheKey];
         if (url === undefined) {
-            url = getStorageUrl(`phrasebook/${filename.replace('phrasebook/', '')}`);
+            url = getStorageUrl(filename);
             _urlCache[cacheKey] = url ?? null;
         }
         if (url) { _playUrl(url, onStart, onEnd); return; }

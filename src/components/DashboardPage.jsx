@@ -3,6 +3,7 @@ import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playPhrasebookChapter, stopMedumbaAudio, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
+import CHAPTER_PHRASES from '../data/chapterPhrases.json';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -1835,19 +1836,40 @@ const DashboardPage = ({
                         <span style={{ color: T.textSub, fontWeight: '700' }}>⇄</span>
                         <button onClick={() => setPbDir('medumba')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'medumba' ? '#eff6ff' : 'transparent', color: pbDir === 'medumba' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Medumba</button>
                     </div>
-                    {/* Phrase list */}
+                    {/* Phrase list — chapitre audio si en lecture, sinon catégorie */}
                     <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
-                        {phrases.map((p, i) => {
-                            const primary   = showMedumba ? p.medumba : p.fr;
-                            const secondary = showMedumba ? p.fr      : p.medumba;
-                            if (primary.length > 120) return null;
-                            return (
-                                <div key={i} style={{ padding: '0.85rem 1.25rem', borderBottom: `1px solid ${T.borderSub}` }}>
-                                    <div style={{ fontWeight: '600', fontSize: '0.95rem', color: T.text, marginBottom: secondary ? '0.2rem' : 0 }}>{primary}</div>
-                                    {secondary && <div style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '500' }}>{secondary}</div>}
-                                </div>
-                            );
-                        })}
+                        {(() => {
+                            // Si audio en cours → phrases du chapitre exact
+                            const chPhrases = pbChapterNum
+                                ? (CHAPTER_PHRASES[String(pbChapterNum)]?.phrases ?? [])
+                                : null;
+                            const list = chPhrases ?? phrases;
+                            const isChapter = !!chPhrases;
+                            return list.map((p, i) => {
+                                const primary   = showMedumba ? p.medumba : p.fr;
+                                const secondary = showMedumba ? p.fr      : p.medumba;
+                                if (!isChapter && primary.length > 120) return null;
+                                return (
+                                    <div key={i} style={{
+                                        padding: '0.85rem 1.25rem',
+                                        borderBottom: `1px solid ${T.borderSub}`,
+                                        backgroundColor: isChapter && i % 2 === 0 ? 'rgba(34,197,94,0.04)' : 'transparent',
+                                    }}>
+                                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                                            {isChapter && (
+                                                <span style={{ fontSize: '0.65rem', color: '#16a34a', fontWeight: '800', minWidth: '22px', paddingTop: '2px' }}>
+                                                    {i + 1}.
+                                                </span>
+                                            )}
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: '600', fontSize: '0.95rem', color: T.text, marginBottom: secondary ? '0.2rem' : 0 }}>{primary}</div>
+                                                {secondary && <div style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '500' }}>{secondary}</div>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            });
+                        })()}
                     </div>
                     <div style={{ padding: '0.75rem 1.25rem 1rem', flexShrink: 0, borderTop: `1px solid ${T.border}` }}>
                         {/* Titre du chapitre en cours */}

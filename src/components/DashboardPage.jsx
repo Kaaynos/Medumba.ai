@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
-import { playPhrasebookChapter, stopMedumbaAudio } from '../utils/medumbaAudio';
+import { playPhrasebookChapter, stopMedumbaAudio, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -331,6 +331,7 @@ const DashboardPage = ({
     const [pbCategory,   setPbCategory]     = useState(null);   // selected phrasebook category
     const [pbDir,        setPbDir]          = useState('fr');    // 'fr' | 'medumba'
     const [pbPlaying,    setPbPlaying]      = useState(false);  // chapter audio playing
+    const [pbChapterNum, setPbChapterNum]   = useState(null);   // chapitre en cours de lecture
     const [wcCategory,   setWcCategory]     = useState(null);   // selected word-card category
     const [wcCard,       setWcCard]         = useState(null);   // active card index
 
@@ -1848,33 +1849,59 @@ const DashboardPage = ({
                             );
                         })}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1.25rem 1rem', flexShrink: 0, borderTop: `1px solid ${T.border}` }}>
-                        <span style={{ fontSize: '0.75rem', color: T.textSub, fontWeight: '600' }}>
-                            {pbPlaying
-                                ? (isFr ? '🔊 Lecture en cours…' : '🔊 Playing…')
-                                : (isFr ? '🎙️ Locuteur natif disponible' : '🎙️ Native speaker available')}
-                        </span>
-                        <button
-                            onClick={() => {
-                                if (pbPlaying) {
-                                    stopMedumbaAudio();
-                                    setPbPlaying(false);
-                                } else {
-                                    setPbPlaying(true);
-                                    playPhrasebookChapter(pbCategory, null, () => setPbPlaying(false));
-                                    THEO.phraseView(pbCategory, 'chapter_audio');
-                                }
-                            }}
-                            style={{
-                                width: '52px', height: '52px', borderRadius: '50%',
-                                backgroundColor: pbPlaying ? '#ef4444' : '#22c55e',
-                                border: 'none', cursor: 'pointer', fontSize: '1.3rem',
-                                boxShadow: `0 4px 16px ${pbPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(34,197,94,0.4)'}`,
-                                transition: 'all 0.2s', flexShrink: 0,
-                            }}
-                        >
-                            {pbPlaying ? '⏹' : '▶'}
-                        </button>
+                    <div style={{ padding: '0.75rem 1.25rem 1rem', flexShrink: 0, borderTop: `1px solid ${T.border}` }}>
+                        {/* Titre du chapitre en cours */}
+                        {pbPlaying && pbChapterNum && (
+                            <div style={{
+                                marginBottom: '0.6rem',
+                                backgroundColor: isFr ? '#eff6ff' : '#f0fdf4',
+                                borderRadius: '10px', padding: '0.5rem 0.85rem',
+                                borderLeft: '3px solid #22c55e',
+                            }}>
+                                <div style={{ fontSize: '0.62rem', fontWeight: '700', color: '#16a34a', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.15rem' }}>
+                                    {isFr ? `Chapitre ${pbChapterNum}` : `Chapter ${pbChapterNum}`}
+                                </div>
+                                <div style={{ fontSize: '0.82rem', fontWeight: '800', color: '#15803d' }}>
+                                    {isFr
+                                        ? PHRASEBOOK_CHAPTER_TITLES[pbChapterNum]?.fr
+                                        : PHRASEBOOK_CHAPTER_TITLES[pbChapterNum]?.en}
+                                </div>
+                            </div>
+                        )}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <span style={{ fontSize: '0.75rem', color: T.textSub, fontWeight: '600' }}>
+                                {pbPlaying
+                                    ? (isFr ? '🔊 Lecture en cours…' : '🔊 Playing…')
+                                    : (isFr ? '🎙️ Locuteur natif disponible' : '🎙️ Native speaker available')}
+                            </span>
+                            <button
+                                onClick={() => {
+                                    if (pbPlaying) {
+                                        stopMedumbaAudio();
+                                        setPbPlaying(false);
+                                        setPbChapterNum(null);
+                                    } else {
+                                        setPbPlaying(true);
+                                        setPbChapterNum(null);
+                                        playPhrasebookChapter(
+                                            pbCategory,
+                                            (num) => setPbChapterNum(num),
+                                            () => { setPbPlaying(false); setPbChapterNum(null); }
+                                        );
+                                        THEO.phraseView(pbCategory, 'chapter_audio');
+                                    }
+                                }}
+                                style={{
+                                    width: '52px', height: '52px', borderRadius: '50%',
+                                    backgroundColor: pbPlaying ? '#ef4444' : '#22c55e',
+                                    border: 'none', cursor: 'pointer', fontSize: '1.3rem',
+                                    boxShadow: `0 4px 16px ${pbPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(34,197,94,0.4)'}`,
+                                    transition: 'all 0.2s', flexShrink: 0,
+                                }}
+                            >
+                                {pbPlaying ? '⏹' : '▶'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             );

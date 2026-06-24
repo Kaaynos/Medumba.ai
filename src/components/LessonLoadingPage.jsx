@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import loadingVec from '../assets/loading vec.png';
-import { playLessonChapter, stopMedumbaAudio, LESSON_CHAPTERS } from '../utils/medumbaAudio';
+import { playLessonChapter, stopMedumbaAudio, LESSON_CHAPTERS, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
 
 const B = '#1B4FD8';
 
 const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) => {
     const { T } = useTheme();
     const [progress, setProgress] = useState(0);
-    const [audioPlaying, setAudioPlaying] = useState(false);
-    const [audioError,   setAudioError]   = useState(false);
+    const [audioPlaying,  setAudioPlaying]  = useState(false);
+    const [audioError,    setAudioError]    = useState(false);
+    const [chapterNum,    setChapterNum]    = useState(null);
 
     const hasAudio = lessonId && LESSON_CHAPTERS[lessonId]?.length > 0;
 
@@ -17,17 +18,20 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) =>
         if (audioPlaying) {
             stopMedumbaAudio();
             setAudioPlaying(false);
+            setChapterNum(null);
             return;
         }
         setAudioError(false);
+        setChapterNum(null);
         setAudioPlaying(true);
         const started = { flag: false };
         playLessonChapter(
             lessonId,
-            () => { started.flag = true; },          // onStart : audio bien lancé
+            (num) => { started.flag = true; setChapterNum(num); },
             () => {
                 setAudioPlaying(false);
-                if (!started.flag) setAudioError(true); // fin immédiate = fichier absent
+                setChapterNum(null);
+                if (!started.flag) setAudioError(true);
             }
         );
     };
@@ -115,7 +119,25 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) =>
 
                 {/* Bouton audio locuteur natif (visible seulement si un chapitre est mappé) */}
                 {hasAudio && (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', width: '100%' }}>
+                        {/* Titre du chapitre en cours */}
+                        {audioPlaying && chapterNum && (
+                            <div style={{
+                                width: '100%', borderRadius: '10px',
+                                backgroundColor: '#eff6ff',
+                                borderLeft: `3px solid ${B}`,
+                                padding: '0.45rem 0.85rem',
+                            }}>
+                                <div style={{ fontSize: '0.6rem', fontWeight: '700', color: B, textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.1rem' }}>
+                                    {isFr ? `Chapitre ${chapterNum}` : `Chapter ${chapterNum}`}
+                                </div>
+                                <div style={{ fontSize: '0.82rem', fontWeight: '800', color: '#1e3a8a' }}>
+                                    {isFr
+                                        ? PHRASEBOOK_CHAPTER_TITLES[chapterNum]?.fr
+                                        : PHRASEBOOK_CHAPTER_TITLES[chapterNum]?.en}
+                                </div>
+                            </div>
+                        )}
                         <button
                             onClick={toggleAudio}
                             style={{

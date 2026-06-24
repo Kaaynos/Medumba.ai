@@ -268,6 +268,40 @@ const PHRASEBOOK_CHAPTERS = {
     32: 'phrasebook/chapitre_32.mp4',   // Culture
 };
 
+/* Titre bilingue de chaque chapitre */
+export const PHRASEBOOK_CHAPTER_TITLES = {
+    1:  { fr: 'Faire les présentations',       en: 'Making introductions' },
+    2:  { fr: 'Salutations et accueil',        en: 'Greetings & welcome' },
+    3:  { fr: 'Dire au revoir',                en: 'Saying goodbye' },
+    4:  { fr: 'Poser les questions',           en: 'Asking questions' },
+    5:  { fr: 'Relations familiales',          en: 'Family relationships' },
+    6:  { fr: 'Relations familiales (2)',       en: 'Family relationships (2)' },
+    7:  { fr: 'Emplois & professions',         en: 'Jobs & professions' },
+    8:  { fr: 'Phrases pour voyageurs',        en: 'Traveler phrases' },
+    9:  { fr: 'Amour & sentiments',            en: 'Love & feelings' },
+    10: { fr: 'Cœur brisé',                   en: 'Heartbreak' },
+    11: { fr: 'Demander pardon',               en: 'Asking for forgiveness' },
+    12: { fr: 'Souhaits de fête',              en: 'Holiday wishes' },
+    13: { fr: 'Temps et saisons',              en: 'Weather & seasons' },
+    14: { fr: 'Sensations',                    en: 'Sensations' },
+    15: { fr: 'Compassion',                    en: 'Compassion' },
+    16: { fr: 'Humeur et état d\'âme',         en: 'Moods & feelings' },
+    17: { fr: 'Indignation & colère',          en: 'Anger & indignation' },
+    18: { fr: 'Expression de regret',          en: 'Expressing regret' },
+    19: { fr: 'Déception et désespoir',        en: 'Disappointment & despair' },
+    20: { fr: 'Expressions d\'étonnement',     en: 'Expressions of surprise' },
+    21: { fr: 'Questions sur la santé',        en: 'Health questions' },
+    22: { fr: 'Réponses sur la santé',         en: 'Health answers' },
+    23: { fr: 'États physiques',               en: 'Physical states' },
+    24: { fr: 'Temps et moment',               en: 'Time & moments' },
+    25: { fr: 'Demander et dire la date',      en: 'Asking & telling the date' },
+    27: { fr: 'À table — le repas est prêt',  en: 'At the table — meal is ready' },
+    29: { fr: 'Expressions générales',         en: 'General expressions' },
+    30: { fr: 'Expressions générales (2)',     en: 'General expressions (2)' },
+    31: { fr: 'Grammaire',                     en: 'Grammar' },
+    32: { fr: 'Culture Medumba',               en: 'Medumba culture' },
+};
+
 /* Catégorie phrasebook → liste de chapitres audio (ordre de lecture) */
 export const PB_CATEGORY_CHAPTERS = {
     greetings: [1, 2, 3, 4],
@@ -324,7 +358,11 @@ async function _playChapterList(chapters, onStart, onEnd) {
             url = getStorageUrl(filename);
             _urlCache[cacheKey] = url ?? null;
         }
-        if (url) { _playUrl(url, onStart, onEnd); return; }
+        if (url) {
+            // onStart reçoit le numéro du chapitre effectivement joué
+            _playUrl(url, () => onStart?.(num), onEnd);
+            return;
+        }
     }
     onEnd?.();
 }

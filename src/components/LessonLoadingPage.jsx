@@ -9,6 +9,7 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) =>
     const { T } = useTheme();
     const [progress, setProgress] = useState(0);
     const [audioPlaying, setAudioPlaying] = useState(false);
+    const [audioError,   setAudioError]   = useState(false);
 
     const hasAudio = lessonId && LESSON_CHAPTERS[lessonId]?.length > 0;
 
@@ -16,10 +17,19 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) =>
         if (audioPlaying) {
             stopMedumbaAudio();
             setAudioPlaying(false);
-        } else {
-            setAudioPlaying(true);
-            playLessonChapter(lessonId, null, () => setAudioPlaying(false));
+            return;
         }
+        setAudioError(false);
+        setAudioPlaying(true);
+        const started = { flag: false };
+        playLessonChapter(
+            lessonId,
+            () => { started.flag = true; },          // onStart : audio bien lancé
+            () => {
+                setAudioPlaying(false);
+                if (!started.flag) setAudioError(true); // fin immédiate = fichier absent
+            }
+        );
     };
 
     // Arrête l'audio quand la leçon commence
@@ -105,22 +115,29 @@ const LessonLoadingPage = ({ onReady, isFr, lessonTitle, lessonId, onClose }) =>
 
                 {/* Bouton audio locuteur natif (visible seulement si un chapitre est mappé) */}
                 {hasAudio && (
-                    <button
-                        onClick={toggleAudio}
-                        style={{
-                            display: 'flex', alignItems: 'center', gap: '0.5rem',
-                            backgroundColor: audioPlaying ? '#ef4444' : B,
-                            border: 'none', borderRadius: '99px',
-                            padding: '0.6rem 1.4rem', cursor: 'pointer',
-                            color: '#fff', fontWeight: '800', fontSize: '0.85rem',
-                            fontFamily: 'inherit', transition: 'all 0.2s',
-                            boxShadow: `0 4px 16px ${audioPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(27,79,216,0.35)'}`,
-                        }}
-                    >
-                        {audioPlaying
-                            ? `⏹ ${isFr ? 'Arrêter' : 'Stop'}`
-                            : `🔊 ${isFr ? 'Écouter la leçon' : 'Listen to lesson'}`}
-                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem' }}>
+                        <button
+                            onClick={toggleAudio}
+                            style={{
+                                display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                backgroundColor: audioError ? '#94a3b8' : audioPlaying ? '#ef4444' : B,
+                                border: 'none', borderRadius: '99px',
+                                padding: '0.6rem 1.4rem', cursor: 'pointer',
+                                color: '#fff', fontWeight: '800', fontSize: '0.85rem',
+                                fontFamily: 'inherit', transition: 'all 0.2s',
+                                boxShadow: `0 4px 16px ${audioPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(27,79,216,0.35)'}`,
+                            }}
+                        >
+                            {audioPlaying
+                                ? `⏹ ${isFr ? 'Arrêter' : 'Stop'}`
+                                : `🔊 ${isFr ? 'Écouter la leçon' : 'Listen to lesson'}`}
+                        </button>
+                        {audioError && (
+                            <span style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '600' }}>
+                                {isFr ? 'Audio non encore disponible' : 'Audio not yet available'}
+                            </span>
+                        )}
+                    </div>
                 )}
             </div>
         </div>

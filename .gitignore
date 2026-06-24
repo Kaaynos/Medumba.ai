@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Variables d'environnement — clés secrètes (NE JAMAIS POUSSER)
+.env
+.env.local
+.env.production
+
 # Firebase service account (NE JAMAIS POUSSER SUR GITHUB)
 service-account.json
 *-service-account.json

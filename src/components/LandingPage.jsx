@@ -619,9 +619,9 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
                     <div className="teachers-grid" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.25rem' }}>
                         {[
-                            {name:'Prof. Kamgaing J.',level:'Débutant · Intermédiaire',spec:'Grammaire & Phonologie',  rating:'4.9',students:142,initials:'KJ',color:B},
-                            {name:'Dr. Feudjio M.',   level:'Intermédiaire · Avancé', spec:'Littérature & Proverbes',  rating:'4.8',students:98, initials:'FM',color:AMB},
-                            {name:'Mme Nkouindji A.',level:'Enfants · Débutant',      spec:'Contes & Culture Medumba',rating:'5.0',students:67, initials:'NA',color:'#0891b2'},
+                            {name:'Kammbem Arthur',   level:'Débutant · Intermédiaire',spec:'Grammaire & Phonologie',  rating:'4.9',students:142,initials:'KA',color:B},
+                            {name:'Kuikeu Franck',    level:'Intermédiaire · Avancé', spec:'Littérature & Proverbes',  rating:'4.8',students:98, initials:'KF',color:AMB},
+                            {name:'Metchezin Francklin',level:'Enfants · Débutant',   spec:'Contes & Culture Medumba',rating:'5.0',students:67, initials:'MF',color:'#0891b2'},
                         ].map((t,i) => (
                             <Reveal key={i} delay={i*.09}>
                                 <div className="teacher-card" style={{ background:'#fff',padding:'1.5rem',border:`1.5px solid ${SAND}` }}>

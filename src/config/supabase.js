@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Copie ces valeurs depuis : supabase.com → ton projet → Settings → API
-const SUPABASE_URL  = import.meta.env.VITE_SUPABASE_URL  || 'https://REMPLACE.supabase.co';
-const SUPABASE_ANON = import.meta.env.VITE_SUPABASE_ANON_KEY || 'REMPLACE_ANON_KEY';
+const SUPABASE_URL  = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtaHp6d2lxbG1ld2dodGxtamJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyOTE0MDYsImV4cCI6MjA5Nzg2NzQwNn0.u5awGG3fob1zhh6-r6gNtrc8-KR-tnAL3-SETn7dcQA';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON, {
     auth: {

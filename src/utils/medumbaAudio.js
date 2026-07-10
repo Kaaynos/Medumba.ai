@@ -7,6 +7,7 @@
  */
 import { supabase } from '../config/supabase';
 import vocalSrc from '../assets/vocal-count-medumba.ogg';
+import { segmentPhrase, playPhraseAudio } from './syllableAudio';
 
 const BUCKET = 'medumba-audio';
 
@@ -184,9 +185,14 @@ function _playTTS(text, onStart, onEnd) {
 
 /* ── Public API ──────────────────────────────────────────────── */
 
+// Pseudo-ref (même forme qu'un useRef) pour réutiliser playPhraseAudio
+// en dehors d'un composant React.
+const _syllableAudioRef = { current: null };
+
 /**
  * Play a Medumba word.
- * Priority: Firebase Storage recording → OGG clip → TTS fallback.
+ * Priority: Firebase Storage recording → syllables enregistrées (bas/moyen/
+ * montant/descendant, voir syllableAudio.js) → OGG clip (nombres) → TTS.
  *
  * @param {string}   word     The Medumba word to speak (matches q.audio)
  * @param {Function} onStart  Called when audio begins
@@ -195,14 +201,29 @@ function _playTTS(text, onStart, onEnd) {
 export async function playMedumbaWord(word, onStart, onEnd) {
     if (!word) { onEnd?.(); return; }
 
-    // 1 — Supabase Storage (native speaker recording)
+    // 1 — Supabase Storage (native speaker recording, mot exact)
     const url = await getWordUrl(word);
     if (url) {
         _playUrl(url, onStart, onEnd);
         return;
     }
 
-    // 2 — Pre-recorded OGG clip (numbers)
+    // 2 — Syllabes enregistrées, enchaînées (couvre un sous-ensemble du
+    // lexique — voir syllableAudio.js). On ne tente que si le mot est
+    // entièrement décomposable, sinon on passe directement à la suite.
+    if (segmentPhrase(word) !== null) {
+        const started = playPhraseAudio(_syllableAudioRef, word, {
+            onEnd,
+            onFallback: () => _playNumberClipOrTTS(word, onStart, onEnd),
+        });
+        if (started) { onStart?.(); return; }
+    }
+
+    _playNumberClipOrTTS(word, onStart, onEnd);
+}
+
+async function _playNumberClipOrTTS(word, onStart, onEnd) {
+    // 3 — Pre-recorded OGG clip (numbers)
     const clip = WORD_CLIPS[word];
     if (clip) {
         const ok = await ensureBuffer();
@@ -212,13 +233,14 @@ export async function playMedumbaWord(word, onStart, onEnd) {
         }
     }
 
-    // 3 — TTS fallback
+    // 4 — TTS fallback
     _playTTS(word, onStart, onEnd);
 }
 
 /** Stop any currently playing audio immediately. */
 export function stopMedumbaAudio() {
     if (_htmlAudio) { _htmlAudio.pause(); _htmlAudio = null; }
+    _syllableAudioRef.current?.pause();
     _stopCurrent();
     if (window.speechSynthesis) window.speechSynthesis.cancel();
 }

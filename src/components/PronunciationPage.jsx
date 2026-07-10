@@ -2,10 +2,16 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
+import SYLLABLE_TONS from '../data/syllableTons.json';
 import { supabase } from '../config/supabase';
 
 const PURPLE = '#7c3aed';
 const LIGHT  = '#faf5ff';
+
+const TONE_KEYS  = ['bas', 'moyen', 'montant', 'descendant'];
+const TONE_LABEL = { bas: 'Bas', moyen: 'Moyen', montant: 'Montant', descendant: 'Descendant' };
+
+const SYLLABLE_TONS_MAP = new Map(SYLLABLE_TONS.map(s => [s.syllable, s]));
 
 /* ── Audio des syllabes (Supabase Storage) ──
  * La clé d'objet est l'encodage hexadécimal UTF-8 de la syllabe (les
@@ -19,6 +25,11 @@ function toHexKey(str) {
 
 function syllableAudioUrl(syllable) {
   return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}.ogg`).data.publicUrl;
+}
+
+/* ── Audio par ton (bas/moyen/montant/descendant) — voir upload_tons.mjs ── */
+function toneAudioUrl(syllable, tone) {
+  return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}_${tone}.ogg`).data.publicUrl;
 }
 
 /* ── Pool de mots : vocab + phrasebook, mots courts prioritaires ── */
@@ -54,6 +65,8 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   const [wordIdx,   setWordIdx]   = useState(0);
   const [speaking,  setSpeaking]  = useState(false);
   const [autoPlay,  setAutoPlay]  = useState(false);
+  const [selectedSyl, setSelectedSyl] = useState(null);
+  const [playingTone, setPlayingTone] = useState(null);
   const timerRef  = useRef(null);
   const audioRef  = useRef(null);
 
@@ -74,6 +87,19 @@ export default function PronunciationPage({ nativeLang, onBack }) {
     audio.onerror = () => speak(syllable);
     audio.src = syllableAudioUrl(syllable);
     audio.play().catch(() => speak(syllable));
+  }, [speak]);
+
+  /* ── Jouer le ton spécifique d'une syllabe (bas/moyen/montant/descendant),
+   *    repli sur la synthèse vocale du caractère tonal si le clip n'existe pas. ── */
+  const playTone = useCallback((syllable, tone, toneChar) => {
+    if (!audioRef.current) audioRef.current = new Audio();
+    const audio = audioRef.current;
+    audio.pause();
+    setPlayingTone(tone);
+    audio.onended = () => setPlayingTone(null);
+    audio.onerror = () => { speak(toneChar || syllable); setPlayingTone(null); };
+    audio.src = toneAudioUrl(syllable, tone);
+    audio.play().catch(() => { speak(toneChar || syllable); setPlayingTone(null); });
   }, [speak]);
 
   /* ── Navigation ── */
@@ -155,7 +181,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
         <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '12px 12px 0 0', padding: '0.4rem 0.4rem 0' }}>
           {[{ id: 'lecture', fr: 'Lecture', en: 'Reading' }, { id: 'syllabaire', fr: 'Syllabaire', en: 'Syllabary' }].map(t => (
             <button key={t.id}
-              onClick={() => { setTab(t.id); setAutoPlay(false); window.speechSynthesis?.cancel(); setSpeaking(false); }}
+              onClick={() => { setTab(t.id); setAutoPlay(false); window.speechSynthesis?.cancel(); setSpeaking(false); audioRef.current?.pause(); setPlayingTone(null); }}
               style={{
                 flex: 1, padding: '0.6rem', borderRadius: '9px 9px 0 0', border: 'none', cursor: 'pointer',
                 backgroundColor: tab === t.id ? '#fff' : 'transparent',
@@ -281,6 +307,56 @@ export default function PronunciationPage({ nativeLang, onBack }) {
               {filtered.length} / {MEDUMBA_SYLLABLES.length} {isFr ? 'syllabes' : 'syllables'}
             </div>
 
+            {/* Panneau de détail : les 4 tons de la syllabe sélectionnée */}
+            {selectedSyl && (
+              <div style={{
+                background: '#fff', border: `2px solid ${PURPLE}`, borderRadius: '16px',
+                padding: '1.1rem 1.25rem', marginBottom: '1.25rem',
+                boxShadow: `0 6px 20px ${PURPLE}18`,
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+                  <div>
+                    <span style={{ fontSize: '1.3rem', fontWeight: 900, color: PURPLE }}>{selectedSyl}</span>
+                    <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600, marginLeft: '0.5rem' }}>
+                      {SYLLABLE_TONS_MAP.get(selectedSyl)?.ipa}
+                    </span>
+                  </div>
+                  <button onClick={() => setSelectedSyl(null)}
+                    style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '1.1rem', cursor: 'pointer', padding: '0.2rem' }}>✕</button>
+                </div>
+
+                {SYLLABLE_TONS_MAP.has(selectedSyl) ? (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '0.6rem' }}>
+                    {TONE_KEYS.map(tone => {
+                      const toneChar = SYLLABLE_TONS_MAP.get(selectedSyl)[tone];
+                      const isPlaying = playingTone === tone;
+                      return (
+                        <button key={tone}
+                          onClick={() => playTone(selectedSyl, tone, toneChar)}
+                          style={{
+                            background: isPlaying ? PURPLE : LIGHT,
+                            border: `1.5px solid ${PURPLE}55`, borderRadius: '12px',
+                            padding: '0.65rem 0.5rem', cursor: 'pointer', fontFamily: 'inherit',
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem',
+                            transition: 'all 0.2s',
+                          }}>
+                          <span style={{ fontSize: '1.15rem', fontWeight: 800, color: isPlaying ? '#fff' : PURPLE }}>{toneChar}</span>
+                          <span style={{ fontSize: '0.62rem', fontWeight: 700, color: isPlaying ? '#fff' : '#64748b' }}>
+                            {isPlaying ? '🔊 ' : ''}{TONE_LABEL[tone]}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <button onClick={() => playSyllable(selectedSyl)} style={{
+                    width: '100%', background: LIGHT, border: `1.5px solid ${PURPLE}55`, borderRadius: '12px',
+                    padding: '0.65rem', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700, color: PURPLE, fontSize: '0.88rem',
+                  }}>🔈 {isFr ? 'Écouter' : 'Listen'}</button>
+                )}
+              </div>
+            )}
+
             {/* Groupes par lettre */}
             {Object.keys(groups).sort().map(letter => (
               <div key={letter} style={{ marginBottom: '1.5rem' }}>
@@ -292,25 +368,28 @@ export default function PronunciationPage({ nativeLang, onBack }) {
                   — {letter} —
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '0.45rem' }}>
-                  {groups[letter].map((s, i) => (
-                    <button
-                      key={i}
-                      onClick={() => playSyllable(s.syllable)}
-                      title={s.ipa}
-                      style={{
-                        background: '#fff', border: `1.5px solid #e9d5ff`,
-                        borderRadius: '10px', padding: '0.5rem 0.3rem',
-                        cursor: 'pointer', fontFamily: 'inherit',
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.15rem',
-                        transition: 'border-color 0.15s, box-shadow 0.15s',
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = PURPLE; e.currentTarget.style.boxShadow = `0 2px 8px ${PURPLE}22`; }}
-                      onMouseLeave={e => { e.currentTarget.style.borderColor = '#e9d5ff'; e.currentTarget.style.boxShadow = 'none'; }}
-                    >
-                      <span style={{ fontSize: '1rem', fontWeight: 800, color: PURPLE }}>{s.syllable}</span>
-                      <span style={{ fontSize: '0.58rem', color: '#94a3b8', fontWeight: 600, lineHeight: 1.2, textAlign: 'center' }}>{s.ipa}</span>
-                    </button>
-                  ))}
+                  {groups[letter].map((s, i) => {
+                    const active = selectedSyl === s.syllable;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedSyl(active ? null : s.syllable)}
+                        title={s.ipa}
+                        style={{
+                          background: active ? PURPLE : '#fff', border: `1.5px solid ${active ? PURPLE : '#e9d5ff'}`,
+                          borderRadius: '10px', padding: '0.5rem 0.3rem',
+                          cursor: 'pointer', fontFamily: 'inherit',
+                          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.15rem',
+                          transition: 'border-color 0.15s, box-shadow 0.15s, background 0.15s',
+                        }}
+                        onMouseEnter={e => { if (!active) { e.currentTarget.style.borderColor = PURPLE; e.currentTarget.style.boxShadow = `0 2px 8px ${PURPLE}22`; } }}
+                        onMouseLeave={e => { if (!active) { e.currentTarget.style.borderColor = '#e9d5ff'; e.currentTarget.style.boxShadow = 'none'; } }}
+                      >
+                        <span style={{ fontSize: '1rem', fontWeight: 800, color: active ? '#fff' : PURPLE }}>{s.syllable}</span>
+                        <span style={{ fontSize: '0.58rem', color: active ? 'rgba(255,255,255,.8)' : '#94a3b8', fontWeight: 600, lineHeight: 1.2, textAlign: 'center' }}>{s.ipa}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             ))}

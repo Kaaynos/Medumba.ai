@@ -2,9 +2,24 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
+import { supabase } from '../config/supabase';
 
 const PURPLE = '#7c3aed';
 const LIGHT  = '#faf5ff';
+
+/* ── Audio des syllabes (Supabase Storage) ──
+ * La clé d'objet est l'encodage hexadécimal UTF-8 de la syllabe (les
+ * caractères IPA comme ŋ, ɛ, α, ə, ʉ, ' sont refusés tels quels par
+ * Supabase Storage). Voir upload_syllabes_audio.mjs pour l'upload. */
+function toHexKey(str) {
+  return Array.from(new TextEncoder().encode(str))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function syllableAudioUrl(syllable) {
+  return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}.ogg`).data.publicUrl;
+}
 
 /* ── Pool de mots : vocab + phrasebook, mots courts prioritaires ── */
 const WORD_POOL = [
@@ -39,7 +54,8 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   const [wordIdx,   setWordIdx]   = useState(0);
   const [speaking,  setSpeaking]  = useState(false);
   const [autoPlay,  setAutoPlay]  = useState(false);
-  const timerRef = useRef(null);
+  const timerRef  = useRef(null);
+  const audioRef  = useRef(null);
 
   const word = WORD_POOL[wordIdx];
 
@@ -48,6 +64,17 @@ export default function PronunciationPage({ nativeLang, onBack }) {
     setSpeaking(true);
     speakWord(text, () => setSpeaking(false));
   }, []);
+
+  /* ── Jouer l'enregistrement réel d'une syllabe, repli sur la synthèse
+   *    vocale si aucun enregistrement n'existe pour cette syllabe. ── */
+  const playSyllable = useCallback((syllable) => {
+    if (!audioRef.current) audioRef.current = new Audio();
+    const audio = audioRef.current;
+    audio.pause();
+    audio.onerror = () => speak(syllable);
+    audio.src = syllableAudioUrl(syllable);
+    audio.play().catch(() => speak(syllable));
+  }, [speak]);
 
   /* ── Navigation ── */
   const goNext = useCallback(() => {
@@ -105,6 +132,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   useEffect(() => () => {
     window.speechSynthesis?.cancel();
     clearTimeout(timerRef.current);
+    audioRef.current?.pause();
   }, []);
 
   return (
@@ -267,7 +295,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
                   {groups[letter].map((s, i) => (
                     <button
                       key={i}
-                      onClick={() => speak(s.syllable)}
+                      onClick={() => playSyllable(s.syllable)}
                       title={s.ipa}
                       style={{
                         background: '#fff', border: `1.5px solid #e9d5ff`,

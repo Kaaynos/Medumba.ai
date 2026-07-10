@@ -1,6 +1,7 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { DICTIONARY } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
+import { playPhraseAudio, segmentPhrase } from '../utils/syllableAudio';
 
 const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({
     medumba: e.medumba,
@@ -10,6 +11,45 @@ const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({
 
 const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES];
 const AI_URL = 'https://medumba-ai.onrender.com/api/translate';
+
+// Mots courts affichés par défaut avant que l'utilisateur ne cherche —
+// une page vide au premier chargement donne une mauvaise impression.
+// Les mots avec une vraie voix enregistrée passent en premier.
+const DEFAULT_ENTRIES = DICTIONARY
+    .filter(e => e.medumba && e.medumba.length <= 12 && !e.medumba.includes(' '))
+    .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null))
+    .slice(0, 24);
+
+// Une ligne d'entrée du dictionnaire (mot + traduction + bouton écouter),
+// partagée entre la liste de résultats et les mots affichés par défaut.
+const EntryRow = ({ entry, i, isFr, speaking, onPlay }) => (
+    <div className="dict-row" style={{
+        display: 'flex', alignItems: 'center', gap: '0.85rem',
+        padding: '0.85rem 1rem', borderBottom: '1px solid #f1f5f9',
+        backgroundColor: '#fff', transition: 'background 0.15s',
+        animation: `fade-up 0.25s ease-out ${Math.min(i * 0.02, 0.25)}s both`,
+    }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '2px', flexWrap: 'wrap' }}>
+                <span style={{ fontWeight: '800', fontSize: '1rem', color: '#16a34a' }}>{entry.medumba}</span>
+                {entry.isExpression && (
+                    <span style={{ fontSize: '0.6rem', fontWeight: '800', color: '#7c3aed', background: '#f3e8ff', borderRadius: '99px', padding: '0.1rem 0.45rem', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                        {isFr ? 'Expression' : 'Phrase'}
+                    </span>
+                )}
+            </div>
+            <div style={{ fontSize: '0.85rem', color: '#334155', fontWeight: '600' }}>🇫🇷 {entry.french}</div>
+        </div>
+        <button onClick={() => onPlay(entry.medumba)} style={{
+            background: speaking === entry.medumba ? '#dcfce7' : '#f8fafc',
+            border: `2px solid ${speaking === entry.medumba ? '#22c55e' : '#e2e8f0'}`,
+            borderRadius: '50%', width: '36px', height: '36px',
+            cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+        }}>
+            {speaking === entry.medumba ? '🔊' : '🔈'}
+        </button>
+    </div>
+);
 
 /* ════════════════════════════════════════════════════════════════
    DictionaryPage — two completely separate tabs:
@@ -56,6 +96,22 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
         u.onerror = () => setSpeaking(null);
         window.speechSynthesis.speak(u);
     };
+
+    // Joue un mot Medumba avec les vrais enregistrements de syllabes quand
+    // c'est possible, repli sur la synthèse vocale sinon (voir syllableAudio.js).
+    const audioRef = useRef(null);
+    const playEntry = (medumba) => {
+        setSpeaking(medumba);
+        playPhraseAudio(audioRef, medumba, {
+            onEnd: () => setSpeaking(null),
+            onFallback: (p) => speak(p),
+        });
+    };
+
+    useEffect(() => () => {
+        window.speechSynthesis?.cancel();
+        audioRef.current?.pause();
+    }, []);
 
     /* ══ TAB 2 — TRADUCTEUR IA ══ */
     const [aiInput,   setAiInput]   = useState('');
@@ -181,26 +237,31 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                         </div>
                     </div>
 
-                    {/* Splash */}
+                    {/* Avant recherche : intro courte + mots à découvrir (jamais de page vide) */}
                     {!query && (
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2.5rem 1.5rem', animation: 'fade-up 0.3s ease-out both' }}>
-                            <div style={{ fontSize: '3.5rem', marginBottom: '0.75rem' }}>📖</div>
-                            <h2 style={{ fontSize: '1.15rem', fontWeight: '900', color: '#0f172a', marginBottom: '0.4rem', textAlign: 'center' }}>
-                                {isFr ? 'Recherchez un mot' : 'Search a word'}
-                            </h2>
-                            <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6, maxWidth: '260px', textAlign: 'center', marginBottom: '1.5rem' }}>
-                                {isFr ? '4 257 mots et 259 expressions Medumba' : '4,257 words and 259 Medumba expressions'}
-                            </p>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
-                                {(lang === 'french'
-                                    ? ['Eau', 'Feu', 'Maison', 'Enfant', 'Soleil']
-                                    : ['Mbʉ', 'Ntsə', 'Bùsi', 'Nyàm', 'Mɛn']
-                                ).map(w => (
-                                    <button key={w} onClick={() => setQuery(w)} style={{ background: '#dcfce7', border: '2px solid #bbf7d0', borderRadius: '99px', padding: '0.3rem 0.85rem', fontSize: '0.82rem', fontWeight: '700', color: '#16a34a', cursor: 'pointer', fontFamily: 'inherit' }}>
-                                        {w}
-                                    </button>
-                                ))}
+                        <div style={{ flex: 1, overflowY: 'auto', animation: 'fade-up 0.3s ease-out both' }}>
+                            <div style={{ padding: '1.25rem 1.5rem 0.75rem', textAlign: 'center' }}>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6, marginBottom: '0.9rem' }}>
+                                    {isFr ? '4 257 mots et 259 expressions Medumba' : '4,257 words and 259 Medumba expressions'}
+                                </p>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+                                    {(lang === 'french'
+                                        ? ['Eau', 'Feu', 'Maison', 'Enfant', 'Soleil']
+                                        : ['Mbʉ', 'Ntsə', 'Bùsi', 'Nyàm', 'Mɛn']
+                                    ).map(w => (
+                                        <button key={w} onClick={() => setQuery(w)} style={{ background: '#dcfce7', border: '2px solid #bbf7d0', borderRadius: '99px', padding: '0.3rem 0.85rem', fontSize: '0.82rem', fontWeight: '700', color: '#16a34a', cursor: 'pointer', fontFamily: 'inherit' }}>
+                                            {w}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
+
+                            <div style={{ padding: '0.6rem 1rem 0.2rem', fontSize: '0.72rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                {isFr ? 'Mots à découvrir' : 'Words to discover'}
+                            </div>
+                            {DEFAULT_ENTRIES.map((entry, i) => (
+                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} speaking={speaking} onPlay={playEntry} />
+                            ))}
                         </div>
                     )}
 
@@ -230,32 +291,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                 {results.length}{results.length === 80 ? '+' : ''} {isFr ? 'résultats' : 'results'}
                             </div>
                             {results.map((entry, i) => (
-                                <div key={i} className="dict-row" style={{
-                                    display: 'flex', alignItems: 'center', gap: '0.85rem',
-                                    padding: '0.85rem 1rem', borderBottom: '1px solid #f1f5f9',
-                                    backgroundColor: '#fff', transition: 'background 0.15s',
-                                    animation: `fade-up 0.25s ease-out ${Math.min(i * 0.02, 0.25)}s both`,
-                                }}>
-                                    <div style={{ flex: 1, minWidth: 0 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '2px', flexWrap: 'wrap' }}>
-                                            <span style={{ fontWeight: '800', fontSize: '1rem', color: '#16a34a' }}>{entry.medumba}</span>
-                                            {entry.isExpression && (
-                                                <span style={{ fontSize: '0.6rem', fontWeight: '800', color: '#7c3aed', background: '#f3e8ff', borderRadius: '99px', padding: '0.1rem 0.45rem', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-                                                    {isFr ? 'Expression' : 'Phrase'}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div style={{ fontSize: '0.85rem', color: '#334155', fontWeight: '600' }}>🇫🇷 {entry.french}</div>
-                                    </div>
-                                    <button onClick={() => speak(entry.medumba)} style={{
-                                        background: speaking === entry.medumba ? '#dcfce7' : '#f8fafc',
-                                        border: `2px solid ${speaking === entry.medumba ? '#22c55e' : '#e2e8f0'}`,
-                                        borderRadius: '50%', width: '36px', height: '36px',
-                                        cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                                    }}>
-                                        {speaking === entry.medumba ? '🔊' : '🔈'}
-                                    </button>
-                                </div>
+                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} speaking={speaking} onPlay={playEntry} />
                             ))}
                         </div>
                     )}

@@ -3,8 +3,7 @@ import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import SYLLABLE_TONS from '../data/syllableTons.json';
-import RECORDED_SYLLABLES from '../data/recordedSyllables.json';
-import { supabase } from '../config/supabase';
+import { syllableAudioUrl, toneAudioUrl, segmentPhrase, playPhraseAudio } from '../utils/syllableAudio';
 
 const PURPLE = '#7c3aed';
 const LIGHT  = '#faf5ff';
@@ -13,96 +12,6 @@ const TONE_KEYS  = ['bas', 'moyen', 'montant', 'descendant'];
 const TONE_LABEL = { bas: 'Bas', moyen: 'Moyen', montant: 'Montant', descendant: 'Descendant' };
 
 const SYLLABLE_TONS_MAP = new Map(SYLLABLE_TONS.map(s => [s.syllable, s]));
-
-/* ── Audio des syllabes (Supabase Storage) ──
- * La clé d'objet est l'encodage hexadécimal UTF-8 de la syllabe (les
- * caractères IPA comme ŋ, ɛ, α, ə, ʉ, ' sont refusés tels quels par
- * Supabase Storage). Voir upload_syllabes_audio.mjs pour l'upload. */
-function toHexKey(str) {
-  return Array.from(new TextEncoder().encode(str))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
-function syllableAudioUrl(syllable) {
-  return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}.ogg`).data.publicUrl;
-}
-
-/* ── Audio par ton (bas/moyen/montant/descendant) — voir upload_tons.mjs ── */
-function toneAudioUrl(syllable, tone) {
-  return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}_${tone}.ogg`).data.publicUrl;
-}
-
-/* ── Segmentation d'un mot/phrase en syllabes connues (bas/moyen/montant/
- * descendant), pour lire les mots du pool avec les vrais enregistrements
- * plutôt que la synthèse vocale. Les deux corpus (vocabExpressions,
- * syllableTons) n'utilisent pas la même forme Unicode pour les voyelles
- * accentuées (NFD vs NFC) — tout est normalisé en NFC avant comparaison.
- *
- * Seules les 383 syllabes de RECORDED_SYLLABLES ont un enregistrement réel
- * (sur les 1147 de syllableTons.json) : sans ce filtre, une syllabe comme
- * "mα" matcherait le texte mais son audio n'existe pas, et l'échec ne serait
- * détecté qu'au moment du fetch (404), après coup. ── */
-const RECORDED_SET = new Set(RECORDED_SYLLABLES.map(s => s.toLowerCase().normalize('NFC')));
-
-const TONE_VARIANT_MAP = new Map();
-for (const s of SYLLABLE_TONS) {
-  const root = s.syllable.toLowerCase().normalize('NFC');
-  if (!RECORDED_SET.has(root)) continue;
-  for (const tone of TONE_KEYS) {
-    const variant = s[tone];
-    if (variant) TONE_VARIANT_MAP.set(variant.toLowerCase().normalize('NFC'), { root: s.syllable, tone });
-  }
-  // Forme neutre (sans marque de ton) : beaucoup de mots du lexique
-  // n'indiquent pas le ton explicitement. Correspond au segment d'annonce
-  // de l'enregistrement original (avant les 4 tons) — voir split_neutral_tons.mjs.
-  TONE_VARIANT_MAP.set(root, { root: s.syllable, tone: 'neutre' });
-}
-
-const NASAL_PREFIX_RE = /^[nmŋ][̀-ͯ᷀-᷿]?/i;
-
-// Backtracking mémoïsé : essaie tous les découpages possibles plutôt que de
-// s'engager sur le plus long match glouton (qui peut mener à une impasse).
-function segmentSyllables(str, memo = new Map()) {
-  if (str.length === 0) return [];
-  if (memo.has(str)) return memo.get(str);
-  let result = null;
-  for (let len = Math.min(8, str.length); len >= 1; len--) {
-    const candidate = str.slice(0, len);
-    if (TONE_VARIANT_MAP.has(candidate)) {
-      const rest = segmentSyllables(str.slice(len), memo);
-      if (rest !== null) { result = [TONE_VARIANT_MAP.get(candidate), ...rest]; break; }
-    }
-  }
-  memo.set(str, result);
-  return result;
-}
-
-function segmentToken(token) {
-  const w = token.toLowerCase().normalize('NFC');
-  const direct = segmentSyllables(w);
-  if (direct) return direct;
-  const m = w.match(NASAL_PREFIX_RE);
-  if (m && m[0].length < w.length) {
-    const rest = segmentSyllables(w.slice(m[0].length));
-    if (rest) return rest; // préfixe nasal ignoré (pas de clip dédié)
-  }
-  return null;
-}
-
-// Découpe une phrase entière en clips à jouer, ou null si un seul mot est
-// impossible à décomposer avec les syllabes enregistrées.
-function segmentPhrase(phrase) {
-  const tokens = phrase.split(/[\s,.;:!?()/]+/).filter(Boolean).map(t => t.replace(/[’‘]/g, "'"));
-  if (tokens.length === 0) return null;
-  const segments = [];
-  for (const token of tokens) {
-    const result = segmentToken(token);
-    if (!result) return null;
-    segments.push(...result);
-  }
-  return segments;
-}
 
 /* ── Pool de mots : vocab + phrasebook, mots courts prioritaires.
  * Les mots entièrement lisibles avec les vrais enregistrements (voir
@@ -159,29 +68,12 @@ export default function PronunciationPage({ nativeLang, onBack }) {
    *    navigateur si le mot ne peut pas être entièrement décomposé, ou si
    *    un clip audio venait à manquer en cours de lecture. ── */
   const playWord = useCallback((phrase, onEnd) => {
-    const segments = segmentPhrase(phrase);
-    if (!segments || segments.length === 0) {
-      setSpeaking(true);
-      speakWord(phrase, () => { setSpeaking(false); onEnd?.(); });
-      return;
-    }
-
-    if (!audioRef.current) audioRef.current = new Audio();
-    const audio = audioRef.current;
-    audio.pause();
     setSpeaking(true);
-
-    let i = 0;
-    const playNext = () => {
-      if (i >= segments.length) { setSpeaking(false); onEnd?.(); return; }
-      const seg = segments[i++];
-      audio.src = seg.tone ? toneAudioUrl(seg.root, seg.tone) : syllableAudioUrl(seg.root);
-      audio.onended = playNext;
-      audio.onerror = () => { setSpeaking(false); speak(phrase); onEnd?.(); };
-      audio.play().catch(() => { setSpeaking(false); speak(phrase); onEnd?.(); });
-    };
-    playNext();
-  }, [speak]);
+    playPhraseAudio(audioRef, phrase, {
+      onEnd: () => { setSpeaking(false); onEnd?.(); },
+      onFallback: (p) => speakWord(p, () => { setSpeaking(false); onEnd?.(); }),
+    });
+  }, []);
 
   /* ── Jouer l'enregistrement réel d'une syllabe, repli sur la synthèse
    *    vocale si aucun enregistrement n'existe pour cette syllabe. ── */

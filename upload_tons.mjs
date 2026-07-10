@@ -35,7 +35,7 @@ async function upload() {
 
     for (const filename of files) {
         // format: "<syllabe>__<ton>.ogg"
-        const m = filename.match(/^(.*)__(bas|moyen|montant|descendant)\.ogg$/i);
+        const m = filename.match(/^(.*)__(bas|moyen|montant|descendant|neutre)\.ogg$/i);
         if (!m) { console.log(`  ⚠ nom inattendu, ignoré: ${filename}`); fail++; continue; }
         const [, syllable, tone] = m;
 

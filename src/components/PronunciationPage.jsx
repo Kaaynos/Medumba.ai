@@ -3,6 +3,7 @@ import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import SYLLABLE_TONS from '../data/syllableTons.json';
+import RECORDED_SYLLABLES from '../data/recordedSyllables.json';
 import { supabase } from '../config/supabase';
 
 const PURPLE = '#7c3aed';
@@ -32,7 +33,81 @@ function toneAudioUrl(syllable, tone) {
   return supabase.storage.from('medumba-audio').getPublicUrl(`syllabes/${toHexKey(syllable)}_${tone}.ogg`).data.publicUrl;
 }
 
-/* ── Pool de mots : vocab + phrasebook, mots courts prioritaires ── */
+/* ── Segmentation d'un mot/phrase en syllabes connues (bas/moyen/montant/
+ * descendant), pour lire les mots du pool avec les vrais enregistrements
+ * plutôt que la synthèse vocale. Les deux corpus (vocabExpressions,
+ * syllableTons) n'utilisent pas la même forme Unicode pour les voyelles
+ * accentuées (NFD vs NFC) — tout est normalisé en NFC avant comparaison.
+ *
+ * Seules les 383 syllabes de RECORDED_SYLLABLES ont un enregistrement réel
+ * (sur les 1147 de syllableTons.json) : sans ce filtre, une syllabe comme
+ * "mα" matcherait le texte mais son audio n'existe pas, et l'échec ne serait
+ * détecté qu'au moment du fetch (404), après coup. ── */
+const RECORDED_SET = new Set(RECORDED_SYLLABLES.map(s => s.toLowerCase().normalize('NFC')));
+
+const TONE_VARIANT_MAP = new Map();
+for (const s of SYLLABLE_TONS) {
+  const root = s.syllable.toLowerCase().normalize('NFC');
+  if (!RECORDED_SET.has(root)) continue;
+  for (const tone of TONE_KEYS) {
+    const variant = s[tone];
+    if (variant) TONE_VARIANT_MAP.set(variant.toLowerCase().normalize('NFC'), { root: s.syllable, tone });
+  }
+  // Forme neutre (sans marque de ton) : beaucoup de mots du lexique
+  // n'indiquent pas le ton explicitement. Correspond au segment d'annonce
+  // de l'enregistrement original (avant les 4 tons) — voir split_neutral_tons.mjs.
+  TONE_VARIANT_MAP.set(root, { root: s.syllable, tone: 'neutre' });
+}
+
+const NASAL_PREFIX_RE = /^[nmŋ][̀-ͯ᷀-᷿]?/i;
+
+// Backtracking mémoïsé : essaie tous les découpages possibles plutôt que de
+// s'engager sur le plus long match glouton (qui peut mener à une impasse).
+function segmentSyllables(str, memo = new Map()) {
+  if (str.length === 0) return [];
+  if (memo.has(str)) return memo.get(str);
+  let result = null;
+  for (let len = Math.min(8, str.length); len >= 1; len--) {
+    const candidate = str.slice(0, len);
+    if (TONE_VARIANT_MAP.has(candidate)) {
+      const rest = segmentSyllables(str.slice(len), memo);
+      if (rest !== null) { result = [TONE_VARIANT_MAP.get(candidate), ...rest]; break; }
+    }
+  }
+  memo.set(str, result);
+  return result;
+}
+
+function segmentToken(token) {
+  const w = token.toLowerCase().normalize('NFC');
+  const direct = segmentSyllables(w);
+  if (direct) return direct;
+  const m = w.match(NASAL_PREFIX_RE);
+  if (m && m[0].length < w.length) {
+    const rest = segmentSyllables(w.slice(m[0].length));
+    if (rest) return rest; // préfixe nasal ignoré (pas de clip dédié)
+  }
+  return null;
+}
+
+// Découpe une phrase entière en clips à jouer, ou null si un seul mot est
+// impossible à décomposer avec les syllabes enregistrées.
+function segmentPhrase(phrase) {
+  const tokens = phrase.split(/[\s,.;:!?()/]+/).filter(Boolean).map(t => t.replace(/[’‘]/g, "'"));
+  if (tokens.length === 0) return null;
+  const segments = [];
+  for (const token of tokens) {
+    const result = segmentToken(token);
+    if (!result) return null;
+    segments.push(...result);
+  }
+  return segments;
+}
+
+/* ── Pool de mots : vocab + phrasebook, mots courts prioritaires.
+ * Les mots entièrement lisibles avec les vrais enregistrements (voir
+ * segmentPhrase) passent en premier ; le tri est stable donc l'ordre
+ * d'origine est conservé à l'intérieur de chaque groupe. ── */
 const WORD_POOL = [
   ...VOCAB_EXPRESSIONS,
   ...PHRASEBOOK_EXPRESSIONS,
@@ -40,7 +115,8 @@ const WORD_POOL = [
  .reduce((acc, w) => {             // déduplication sur medumba
    if (!acc.seen.has(w.medumba)) { acc.seen.add(w.medumba); acc.list.push(w); }
    return acc;
- }, { seen: new Set(), list: [] }).list;
+ }, { seen: new Set(), list: [] }).list
+ .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null));
 
 /* ── TTS helper ── */
 function speakWord(text, onEnd) {
@@ -78,6 +154,35 @@ export default function PronunciationPage({ nativeLang, onBack }) {
     speakWord(text, () => setSpeaking(false));
   }, []);
 
+  /* ── Lire un mot du pool avec les vrais enregistrements de syllabes,
+   *    en les enchaînant dans l'ordre. Repli sur la synthèse vocale du
+   *    navigateur si le mot ne peut pas être entièrement décomposé, ou si
+   *    un clip audio venait à manquer en cours de lecture. ── */
+  const playWord = useCallback((phrase, onEnd) => {
+    const segments = segmentPhrase(phrase);
+    if (!segments || segments.length === 0) {
+      setSpeaking(true);
+      speakWord(phrase, () => { setSpeaking(false); onEnd?.(); });
+      return;
+    }
+
+    if (!audioRef.current) audioRef.current = new Audio();
+    const audio = audioRef.current;
+    audio.pause();
+    setSpeaking(true);
+
+    let i = 0;
+    const playNext = () => {
+      if (i >= segments.length) { setSpeaking(false); onEnd?.(); return; }
+      const seg = segments[i++];
+      audio.src = seg.tone ? toneAudioUrl(seg.root, seg.tone) : syllableAudioUrl(seg.root);
+      audio.onended = playNext;
+      audio.onerror = () => { setSpeaking(false); speak(phrase); onEnd?.(); };
+      audio.play().catch(() => { setSpeaking(false); speak(phrase); onEnd?.(); });
+    };
+    playNext();
+  }, [speak]);
+
   /* ── Jouer l'enregistrement réel d'une syllabe, repli sur la synthèse
    *    vocale si aucun enregistrement n'existe pour cette syllabe. ── */
   const playSyllable = useCallback((syllable) => {
@@ -107,6 +212,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
     window.speechSynthesis?.cancel();
     setSpeaking(false);
     clearTimeout(timerRef.current);
+    audioRef.current?.pause();
     setWordIdx(i => (i + 1) % WORD_POOL.length);
   }, []);
 
@@ -114,6 +220,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
     window.speechSynthesis?.cancel();
     setSpeaking(false);
     clearTimeout(timerRef.current);
+    audioRef.current?.pause();
     setWordIdx(i => (i - 1 + WORD_POOL.length) % WORD_POOL.length);
   }, []);
 
@@ -121,9 +228,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   useEffect(() => {
     if (!autoPlay || tab !== 'lecture') return;
     if (!word) return;
-    setSpeaking(true);
-    speakWord(word.medumba, () => {
-      setSpeaking(false);
+    playWord(word.medumba, () => {
       timerRef.current = setTimeout(() => {
         setWordIdx(i => (i + 1) % WORD_POOL.length);
       }, 1800);
@@ -143,8 +248,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
 
   /* ── Syllabaire filtré ── */
   const filtered = MEDUMBA_SYLLABLES.filter(s =>
-    s.syllable.toLowerCase().includes(sylSearch.toLowerCase()) ||
-    s.ipa.toLowerCase().includes(sylSearch.toLowerCase())
+    s.syllable.toLowerCase().includes(sylSearch.toLowerCase())
   );
 
   const groups = {};
@@ -244,7 +348,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
 
               {/* Bouton écouter */}
               <button
-                onClick={() => speak(word.medumba)}
+                onClick={() => playWord(word.medumba)}
                 disabled={speaking}
                 style={{
                   background: speaking ? `${PURPLE}12` : LIGHT,
@@ -277,11 +381,11 @@ export default function PronunciationPage({ nativeLang, onBack }) {
               }}>{isFr ? 'Suivant' : 'Next'} →</button>
             </div>
 
-            {/* Note TTS */}
+            {/* Note audio */}
             <div style={{ background: LIGHT, border: `1.5px solid #e9d5ff`, borderRadius: '12px', padding: '0.7rem 1rem', fontSize: '0.75rem', color: '#7c3aed', fontWeight: 600, lineHeight: 1.5 }}>
               💡 {isFr
-                ? 'La lecture utilise la synthèse vocale du navigateur (voix française). Pour l\'IPA et les sons exacts, voir l\'onglet Syllabaire.'
-                : 'Reading uses browser speech synthesis (French voice). For exact IPA sounds, see the Syllabary tab.'}
+                ? 'La lecture combine les enregistrements réels des syllabes. Si un mot ne peut pas être entièrement reconstitué, la synthèse vocale du navigateur prend le relais.'
+                : 'Reading combines real syllable recordings. If a word can\'t be fully reconstructed, browser speech synthesis takes over.'}
             </div>
           </div>
         )}
@@ -295,7 +399,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
               type="text"
               value={sylSearch}
               onChange={e => setSylSearch(e.target.value)}
-              placeholder={isFr ? 'Chercher une syllabe ou son IPA…' : 'Search syllable or IPA sound…'}
+              placeholder={isFr ? 'Chercher une syllabe…' : 'Search syllable…'}
               style={{
                 width: '100%', padding: '0.65rem 1rem', fontSize: '0.95rem',
                 border: `2px solid ${PURPLE}55`, borderRadius: '12px', outline: 'none',

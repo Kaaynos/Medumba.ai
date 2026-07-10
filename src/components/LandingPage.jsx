@@ -361,7 +361,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         <Reveal>
                             <div style={{ display:'inline-flex',alignItems:'center',gap:'.45rem',background:`linear-gradient(135deg,${LIGHT},#dbeafe)`,border:`2px solid #bfdbfe`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.25rem' }}>
                                 <span style={{ width:'7px',height:'7px',borderRadius:'50%',background:'#22c55e',animation:'pulse-dot 1.8s ease-in-out infinite',display:'inline-block',flexShrink:0 }} />
-                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>2 847 apprenants actifs cette semaine</span>
+                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>4 apprenants nous ont déjà rejoints</span>
                             </div>
                         </Reveal>
 
@@ -413,7 +413,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                         <div key={idx} style={{ width:'30px',height:'30px',borderRadius:'50%',background:c,border:`2.5px solid ${CREAM}`,marginLeft:idx>0?'-9px':0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.5rem',fontWeight:800,color:'#fff',zIndex:3-idx }}>{i}</div>
                                     ))}
                                 </div>
-                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>2 847 apprenants</strong> nous font confiance</p>
+                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>4 apprenants</strong> nous font déjà confiance</p>
                             </div>
                         </Reveal>
                     </div>
@@ -464,7 +464,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             {/* ══ STATS ══ */}
             <section style={{ background:B,padding:isMobile?'2.5rem 1.25rem':'3rem 3.5rem' }}>
                 <div className="stats-grid" style={{ maxWidth:'920px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1rem',textAlign:'center' }}>
-                    {[{target:2847,suffix:'+',label:'Apprenants actifs'},{target:17,suffix:'',label:'Leçons interactives'},{target:3,suffix:'',label:'Enseignants CEPOM'},{target:100,suffix:'%',label:"Gratuit d'accès"}].map((s,i) => (
+                    {[{target:4,suffix:'',label:'Apprenants actifs'},{target:15,suffix:'',label:'Leçons interactives'},{target:3,suffix:'',label:'Enseignants CEPOM'},{target:0,suffix:' XAF',label:'Pour commencer'}].map((s,i) => (
                         <Reveal key={i} delay={i*.06}>
                             <div style={{ borderRight:i<3&&!isSmall?'1px solid rgba(255,255,255,.08)':'none',padding:isMobile?'.4rem 0':0 }}>
                                 <div style={{ fontSize:isMobile?'1.8rem':'2.5rem',fontWeight:900,color:'#fff',lineHeight:1,letterSpacing:'-.03em' }}><Counter target={s.target} suffix={s.suffix} /></div>

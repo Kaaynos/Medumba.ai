@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
-import { playPhrasebookChapter, stopMedumbaAudio, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
+import { playPhrasebookChapter, playMedumbaWord, stopMedumbaAudio, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
 import CHAPTER_PHRASES from '../data/chapterPhrases.json';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
@@ -333,8 +333,17 @@ const DashboardPage = ({
     const [pbDir,        setPbDir]          = useState('fr');    // 'fr' | 'medumba'
     const [pbPlaying,    setPbPlaying]      = useState(false);  // chapter audio playing
     const [pbChapterNum, setPbChapterNum]   = useState(null);   // chapitre en cours de lecture
+    const [pbSpeaking,   setPbSpeaking]     = useState(null);   // phrase (medumba) en cours de lecture individuelle
     const [wcCategory,   setWcCategory]     = useState(null);   // selected word-card category
     const [wcCard,       setWcCard]         = useState(null);   // active card index
+    const [wcSpeaking,   setWcSpeaking]     = useState(false);  // lecture de la fiche de mot en cours
+
+    // Stoppe l'audio en cours dès qu'on change de fiche/catégorie (précédent,
+    // suivant, retour) pour éviter qu'un mot continue à jouer par-dessus le suivant.
+    useEffect(() => {
+        stopMedumbaAudio();
+        setWcSpeaking(false);
+    }, [wcCard, wcCategory]);
 
     /* ── daily stories ── */
     const [activeStory,  setActiveStory]  = useState(null);
@@ -1865,6 +1874,22 @@ const DashboardPage = ({
                                                 <div style={{ fontWeight: '600', fontSize: '0.95rem', color: T.text, marginBottom: secondary ? '0.2rem' : 0 }}>{primary}</div>
                                                 {secondary && <div style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '500' }}>{secondary}</div>}
                                             </div>
+                                            <button
+                                                onClick={() => {
+                                                    if (pbSpeaking === p.medumba) { stopMedumbaAudio(); setPbSpeaking(null); return; }
+                                                    setPbSpeaking(p.medumba);
+                                                    playMedumbaWord(p.medumba, null, () => setPbSpeaking(null));
+                                                }}
+                                                style={{
+                                                    flexShrink: 0, width: '30px', height: '30px', borderRadius: '50%',
+                                                    backgroundColor: pbSpeaking === p.medumba ? '#dcfce7' : 'transparent',
+                                                    border: `1.5px solid ${pbSpeaking === p.medumba ? '#22c55e' : T.border}`,
+                                                    cursor: 'pointer', fontSize: '0.8rem',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                }}
+                                            >
+                                                {pbSpeaking === p.medumba ? '🔊' : '🔈'}
+                                            </button>
                                         </div>
                                     </div>
                                 );
@@ -2158,7 +2183,14 @@ const DashboardPage = ({
                                 <div style={{ fontSize: '1.7rem', fontWeight: '900', color: T.text, marginBottom: '0.25rem', letterSpacing: '-0.5px' }}>{word.medumba}</div>
                                 <div style={{ fontSize: '1rem', color: CAT_VISUAL[cat.id]?.accent ?? T.textSub, fontWeight: '600' }}>{word.fr}</div>
                             </div>
-                            <button style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 3px 0 #15803d' }}>🔊</button>
+                            <button
+                                onClick={() => {
+                                    if (wcSpeaking) { stopMedumbaAudio(); setWcSpeaking(false); return; }
+                                    setWcSpeaking(true);
+                                    playMedumbaWord(word.medumba, null, () => setWcSpeaking(false));
+                                }}
+                                style={{ position: 'absolute', bottom: '1.25rem', right: '1.25rem', width: '42px', height: '42px', borderRadius: '50%', backgroundColor: wcSpeaking ? '#16a34a' : '#22c55e', border: 'none', cursor: 'pointer', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 3px 0 #15803d' }}
+                            >{wcSpeaking ? '🔊' : '🔈'}</button>
                         </div>
                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
                             <button disabled={wcCard === 0} onClick={() => setWcCard(wcCard - 1)} style={{ padding: '0.75rem 1.5rem', borderRadius: '10px', border: `2px solid ${T.border}`, backgroundColor: wcCard === 0 ? T.border : T.surface, color: T.text, fontWeight: '700', cursor: wcCard === 0 ? 'default' : 'pointer', fontFamily: 'inherit' }}>← {isFr ? 'Préc.' : 'Prev'}</button>

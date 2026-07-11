@@ -76,14 +76,17 @@ async function getWordUrl(word) {
 /* ── Simple HTML5 Audio player for Storage files ─────────────── */
 let _htmlAudio = null;
 
-function _playUrl(url, onStart, onEnd) {
+// `onError` est appelé si le fichier n'existe pas / ne peut pas être lu
+// (getPublicUrl() renvoie toujours une URL, existence non garantie) — par
+// défaut identique à onEnd si l'appelant ne fournit pas de repli distinct.
+function _playUrl(url, onStart, onError, onEnd) {
     if (_htmlAudio) { _htmlAudio.pause(); _htmlAudio = null; }
     const a = new Audio(url);
     _htmlAudio = a;
     a.oncanplay = () => { onStart?.(); };
     a.onended   = () => { _htmlAudio = null; onEnd?.(); };
-    a.onerror   = () => { _htmlAudio = null; onEnd?.(); };
-    a.play().catch(() => onEnd?.());
+    a.onerror   = () => { _htmlAudio = null; (onError ?? onEnd)?.(); };
+    a.play().catch(() => (onError ?? onEnd)?.());
 }
 
 /* ── Known word → [startSec, endSec] in vocal-count-medumba.ogg ── */
@@ -195,6 +198,14 @@ const _syllableAudioRef = { current: null };
  * mélangées avec TTS mot par mot pour les tokens non couverts (voir
  * syllableAudio.js) → OGG clip (nombres) → TTS de la phrase entière.
  *
+ * IMPORTANT : getPublicUrl() de Supabase renvoie toujours une URL, que le
+ * fichier existe ou non côté serveur (elle ne vérifie rien). Le manifeste
+ * STORAGE_FILES contient des entrées dont le fichier n'a en réalité jamais
+ * été uploadé — si on s'arrêtait dès qu'une URL est construite, ces mots
+ * échouaient en silence (erreur de lecture audio) sans jamais essayer la
+ * suite de la chaîne. On bascule donc vers l'étape suivante à la moindre
+ * erreur de lecture, plutôt que de considérer l'étape 1 comme définitive.
+ *
  * @param {string}   word     The Medumba word/phrase to speak (matches q.audio)
  * @param {Function} onStart  Called when audio begins
  * @param {Function} onEnd    Called when audio ends (or on error)
@@ -205,10 +216,14 @@ export async function playMedumbaWord(word, onStart, onEnd) {
     // 1 — Supabase Storage (native speaker recording, mot exact)
     const url = await getWordUrl(word);
     if (url) {
-        _playUrl(url, onStart, onEnd);
+        _playUrl(url, onStart, () => _playSyllablesThenRest(word, onStart, onEnd), onEnd);
         return;
     }
 
+    _playSyllablesThenRest(word, onStart, onEnd);
+}
+
+function _playSyllablesThenRest(word, onStart, onEnd) {
     // 2 — Syllabes enregistrées, mélangées avec de la synthèse vocale mot
     // par mot pour les tokens non couverts, plutôt que d'abandonner toute
     // la phrase dès qu'un seul mot manque.
@@ -384,7 +399,7 @@ async function _playChapterList(chapters, onStart, onEnd) {
         }
         if (url) {
             // onStart reçoit le numéro du chapitre effectivement joué
-            _playUrl(url, () => onStart?.(num), onEnd);
+            _playUrl(url, () => onStart?.(num), onEnd, onEnd);
             return;
         }
     }

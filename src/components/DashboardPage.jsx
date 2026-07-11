@@ -3,6 +3,7 @@ import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio } from '../utils/medumbaAudio';
+import { segmentPhrase } from '../utils/syllableAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -1824,7 +1825,9 @@ const DashboardPage = ({
             const cat    = PB_CATEGORIES.find(c => c.id === pbCategory);
             const phrases = PHRASEBOOK_EXPRESSIONS.filter(e =>
                 e.lessons && cat.lessons.some(l => e.lessons.includes(l))
-            ).slice(0, 35);
+            )
+                .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null))
+                .slice(0, 35);
             const showMedumba = pbDir === 'medumba';
             return (
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -2096,7 +2099,7 @@ const DashboardPage = ({
             const cat   = WC_CATEGORIES[wcCategory];
             const words = VOCAB_EXPRESSIONS.filter(v =>
                 cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase()))
-            );
+            ).sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null));
             if (wcCard !== null) {
                 const word = words[wcCard] || words[0];
                 return (

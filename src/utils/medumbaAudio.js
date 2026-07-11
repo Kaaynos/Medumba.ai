@@ -7,7 +7,7 @@
  */
 import { supabase } from '../config/supabase';
 import vocalSrc from '../assets/vocal-count-medumba.ogg';
-import { segmentPhrase, playPhraseAudio } from './syllableAudio';
+import { segmentPhraseLenient, playPhraseAudioLenient } from './syllableAudio';
 
 const BUCKET = 'medumba-audio';
 
@@ -190,11 +190,12 @@ function _playTTS(text, onStart, onEnd) {
 const _syllableAudioRef = { current: null };
 
 /**
- * Play a Medumba word.
- * Priority: Firebase Storage recording → syllables enregistrées (bas/moyen/
- * montant/descendant, voir syllableAudio.js) → OGG clip (nombres) → TTS.
+ * Play a Medumba word or phrase.
+ * Priority: Firebase Storage recording (mot exact) → syllabes enregistrées,
+ * mélangées avec TTS mot par mot pour les tokens non couverts (voir
+ * syllableAudio.js) → OGG clip (nombres) → TTS de la phrase entière.
  *
- * @param {string}   word     The Medumba word to speak (matches q.audio)
+ * @param {string}   word     The Medumba word/phrase to speak (matches q.audio)
  * @param {Function} onStart  Called when audio begins
  * @param {Function} onEnd    Called when audio ends (or on error)
  */
@@ -208,16 +209,15 @@ export async function playMedumbaWord(word, onStart, onEnd) {
         return;
     }
 
-    // 2 — Syllabes enregistrées, enchaînées (couvre un sous-ensemble du
-    // lexique — voir syllableAudio.js). On ne tente que si le mot est
-    // entièrement décomposable, sinon on passe directement à la suite.
-    if (segmentPhrase(word) !== null) {
-        const started = playPhraseAudio(_syllableAudioRef, word, {
-            onEnd,
-            onFallback: () => _playNumberClipOrTTS(word, onStart, onEnd),
-        });
-        if (started) { onStart?.(); return; }
-    }
+    // 2 — Syllabes enregistrées, mélangées avec de la synthèse vocale mot
+    // par mot pour les tokens non couverts, plutôt que d'abandonner toute
+    // la phrase dès qu'un seul mot manque.
+    const started = playPhraseAudioLenient(_syllableAudioRef, word, {
+        onEnd,
+        ttsSpeak: (text, onDone) => _playTTS(text, null, onDone),
+        onFallback: () => _playNumberClipOrTTS(word, onStart, onEnd),
+    });
+    if (started) { onStart?.(); return; }
 
     _playNumberClipOrTTS(word, onStart, onEnd);
 }

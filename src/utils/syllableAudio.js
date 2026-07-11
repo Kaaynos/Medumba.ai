@@ -120,3 +120,53 @@ export function playPhraseAudio(audioRef, phrase, { onEnd, onFallback } = {}) {
   playNext();
   return true;
 }
+
+// Découpe "tolérante" : contrairement à segmentPhrase, un mot non couvert ne
+// fait pas échouer toute la phrase — il est simplement marqué pour la
+// synthèse vocale, pendant que le reste garde la vraie voix. Ne renvoie null
+// que si RIEN n'est couvert (dans ce cas une seule synthèse vocale de la
+// phrase entière sonne mieux qu'un TTS mot par mot haché).
+export function segmentPhraseLenient(phrase) {
+  const tokens = phrase.split(/[\s,.;:!?()/]+/).filter(Boolean).map(t => t.replace(/[’‘]/g, "'"));
+  if (tokens.length === 0) return null;
+  const items = [];
+  let anyAudio = false;
+  for (const token of tokens) {
+    const result = segmentToken(token);
+    if (result) { items.push(...result.map(seg => ({ type: 'audio', ...seg }))); anyAudio = true; }
+    else { items.push({ type: 'tts', text: token }); }
+  }
+  return anyAudio ? items : null;
+}
+
+// Joue une phrase en mélangeant vrais clips et synthèse vocale mot par mot
+// selon ce que segmentPhraseLenient a pu couvrir. `ttsSpeak(text, onDone)`
+// doit être fourni par l'appelant (voix/langue différente selon l'écran).
+// Retombe sur `onFallback(phrase)` si rien n'est couvert du tout.
+export function playPhraseAudioLenient(audioRef, phrase, { onEnd, ttsSpeak, onFallback } = {}) {
+  const items = segmentPhraseLenient(phrase);
+  if (!items) {
+    onFallback?.(phrase);
+    return false;
+  }
+
+  if (!audioRef.current) audioRef.current = new Audio();
+  const audio = audioRef.current;
+  audio.pause();
+
+  let i = 0;
+  const playNext = () => {
+    if (i >= items.length) { onEnd?.(); return; }
+    const item = items[i++];
+    if (item.type === 'tts') {
+      ttsSpeak(item.text, playNext);
+      return;
+    }
+    audio.src = toneAudioUrl(item.root, item.tone);
+    audio.onended = playNext;
+    audio.onerror = playNext; // clip manquant : on saute au suivant plutôt que d'abandonner toute la phrase
+    audio.play().catch(playNext);
+  };
+  playNext();
+  return true;
+}

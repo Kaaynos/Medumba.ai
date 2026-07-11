@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
-import { playPhrasebookChapter, playMedumbaWord, stopMedumbaAudio, PHRASEBOOK_CHAPTER_TITLES } from '../utils/medumbaAudio';
-import CHAPTER_PHRASES from '../data/chapterPhrases.json';
+import { playMedumbaWord, stopMedumbaAudio } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -331,8 +330,6 @@ const DashboardPage = ({
     const [challengeTab, setChallengeTab]   = useState('target');
     const [pbCategory,   setPbCategory]     = useState(null);   // selected phrasebook category
     const [pbDir,        setPbDir]          = useState('fr');    // 'fr' | 'medumba'
-    const [pbPlaying,    setPbPlaying]      = useState(false);  // chapter audio playing
-    const [pbChapterNum, setPbChapterNum]   = useState(null);   // chapitre en cours de lecture
     const [pbSpeaking,   setPbSpeaking]     = useState(null);   // phrase (medumba) en cours de lecture individuelle
     const [wcCategory,   setWcCategory]     = useState(null);   // selected word-card category
     const [wcCard,       setWcCard]         = useState(null);   // active card index
@@ -1833,7 +1830,7 @@ const DashboardPage = ({
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
                     {/* Header */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
-                        <button onClick={() => { stopMedumbaAudio(); setPbPlaying(false); setPbCategory(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
+                        <button onClick={() => { stopMedumbaAudio(); setPbCategory(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: T.textSub }}>←</button>
                         <span style={{ flex: 1, fontWeight: '800', fontSize: '1rem', color: T.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {isFr ? cat.fr : cat.en}
                         </span>
@@ -1845,31 +1842,19 @@ const DashboardPage = ({
                         <span style={{ color: T.textSub, fontWeight: '700' }}>⇄</span>
                         <button onClick={() => setPbDir('medumba')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'medumba' ? '#eff6ff' : 'transparent', color: pbDir === 'medumba' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Medumba</button>
                     </div>
-                    {/* Phrase list — chapitre audio si en lecture, sinon catégorie */}
+                    {/* Phrase list */}
                     <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
                         {(() => {
-                            // Si audio en cours → phrases du chapitre exact
-                            const chPhrases = pbChapterNum
-                                ? (CHAPTER_PHRASES[String(pbChapterNum)]?.phrases ?? [])
-                                : null;
-                            const list = chPhrases ?? phrases;
-                            const isChapter = !!chPhrases;
-                            return list.map((p, i) => {
+                            return phrases.map((p, i) => {
                                 const primary   = showMedumba ? p.medumba : p.fr;
                                 const secondary = showMedumba ? p.fr      : p.medumba;
-                                if (!isChapter && primary.length > 120) return null;
+                                if (primary.length > 120) return null;
                                 return (
                                     <div key={i} style={{
                                         padding: '0.85rem 1.25rem',
                                         borderBottom: `1px solid ${T.borderSub}`,
-                                        backgroundColor: isChapter && i % 2 === 0 ? 'rgba(34,197,94,0.04)' : 'transparent',
                                     }}>
                                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
-                                            {isChapter && (
-                                                <span style={{ fontSize: '0.65rem', color: '#16a34a', fontWeight: '800', minWidth: '22px', paddingTop: '2px' }}>
-                                                    {i + 1}.
-                                                </span>
-                                            )}
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontWeight: '600', fontSize: '0.95rem', color: T.text, marginBottom: secondary ? '0.2rem' : 0 }}>{primary}</div>
                                                 {secondary && <div style={{ fontSize: '0.78rem', color: T.textSub, fontWeight: '500' }}>{secondary}</div>}
@@ -1895,60 +1880,6 @@ const DashboardPage = ({
                                 );
                             });
                         })()}
-                    </div>
-                    <div style={{ padding: '0.75rem 1.25rem 1rem', flexShrink: 0, borderTop: `1px solid ${T.border}` }}>
-                        {/* Titre du chapitre en cours */}
-                        {pbPlaying && pbChapterNum && (
-                            <div style={{
-                                marginBottom: '0.6rem',
-                                backgroundColor: isFr ? '#eff6ff' : '#f0fdf4',
-                                borderRadius: '10px', padding: '0.5rem 0.85rem',
-                                borderLeft: '3px solid #22c55e',
-                            }}>
-                                <div style={{ fontSize: '0.62rem', fontWeight: '700', color: '#16a34a', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.15rem' }}>
-                                    {isFr ? `Chapitre ${pbChapterNum}` : `Chapter ${pbChapterNum}`}
-                                </div>
-                                <div style={{ fontSize: '0.82rem', fontWeight: '800', color: '#15803d' }}>
-                                    {isFr
-                                        ? PHRASEBOOK_CHAPTER_TITLES[pbChapterNum]?.fr
-                                        : PHRASEBOOK_CHAPTER_TITLES[pbChapterNum]?.en}
-                                </div>
-                            </div>
-                        )}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '0.75rem', color: T.textSub, fontWeight: '600' }}>
-                                {pbPlaying
-                                    ? (isFr ? '🔊 Lecture en cours…' : '🔊 Playing…')
-                                    : (isFr ? '🎙️ Locuteur natif disponible' : '🎙️ Native speaker available')}
-                            </span>
-                            <button
-                                onClick={() => {
-                                    if (pbPlaying) {
-                                        stopMedumbaAudio();
-                                        setPbPlaying(false);
-                                        setPbChapterNum(null);
-                                    } else {
-                                        setPbPlaying(true);
-                                        setPbChapterNum(null);
-                                        playPhrasebookChapter(
-                                            pbCategory,
-                                            (num) => setPbChapterNum(num),
-                                            () => { setPbPlaying(false); setPbChapterNum(null); }
-                                        );
-                                        THEO.phraseView(pbCategory, 'chapter_audio');
-                                    }
-                                }}
-                                style={{
-                                    width: '52px', height: '52px', borderRadius: '50%',
-                                    backgroundColor: pbPlaying ? '#ef4444' : '#22c55e',
-                                    border: 'none', cursor: 'pointer', fontSize: '1.3rem',
-                                    boxShadow: `0 4px 16px ${pbPlaying ? 'rgba(239,68,68,0.4)' : 'rgba(34,197,94,0.4)'}`,
-                                    transition: 'all 0.2s', flexShrink: 0,
-                                }}
-                            >
-                                {pbPlaying ? '⏹' : '▶'}
-                            </button>
-                        </div>
                     </div>
                 </div>
             );

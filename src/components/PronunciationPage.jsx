@@ -3,7 +3,7 @@ import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import SYLLABLE_TONS from '../data/syllableTons.json';
-import { syllableAudioUrl, toneAudioUrl, segmentPhrase, playPhraseAudio } from '../utils/syllableAudio';
+import { syllableAudioUrl, toneAudioUrl, segmentPhrase, playPhraseAudioLenient } from '../utils/syllableAudio';
 
 const PURPLE = '#7c3aed';
 const LIGHT  = '#faf5ff';
@@ -64,13 +64,15 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   }, []);
 
   /* ── Lire un mot du pool avec les vrais enregistrements de syllabes,
-   *    en les enchaînant dans l'ordre. Repli sur la synthèse vocale du
-   *    navigateur si le mot ne peut pas être entièrement décomposé, ou si
-   *    un clip audio venait à manquer en cours de lecture. ── */
+   *    en les enchaînant dans l'ordre ; les mots non couverts basculent en
+   *    synthèse vocale individuellement sans faire échouer toute la phrase.
+   *    Repli sur la synthèse vocale de la phrase entière si rien n'est
+   *    couvert du tout. ── */
   const playWord = useCallback((phrase, onEnd) => {
     setSpeaking(true);
-    playPhraseAudio(audioRef, phrase, {
+    playPhraseAudioLenient(audioRef, phrase, {
       onEnd: () => { setSpeaking(false); onEnd?.(); },
+      ttsSpeak: (text, onDone) => speakWord(text, onDone),
       onFallback: (p) => speakWord(p, () => { setSpeaking(false); onEnd?.(); }),
     });
   }, []);

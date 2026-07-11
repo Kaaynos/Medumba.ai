@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { DICTIONARY } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
-import { playPhraseAudio, segmentPhrase } from '../utils/syllableAudio';
+import { playPhraseAudioLenient, segmentPhrase } from '../utils/syllableAudio';
 
 const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({
     medumba: e.medumba,
@@ -97,13 +97,22 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
         window.speechSynthesis.speak(u);
     };
 
-    // Joue un mot Medumba avec les vrais enregistrements de syllabes quand
-    // c'est possible, repli sur la synthèse vocale sinon (voir syllableAudio.js).
+    // Joue un mot Medumba avec les vrais enregistrements de syllabes ; les
+    // mots non couverts basculent en synthèse vocale individuellement sans
+    // faire échouer toute l'entrée (voir syllableAudio.js).
     const audioRef = useRef(null);
     const playEntry = (medumba) => {
         setSpeaking(medumba);
-        playPhraseAudio(audioRef, medumba, {
+        playPhraseAudioLenient(audioRef, medumba, {
             onEnd: () => setSpeaking(null),
+            ttsSpeak: (text, onDone) => {
+                if (!window.speechSynthesis) { onDone(); return; }
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'fr-FR'; u.rate = 0.8;
+                u.onend = onDone; u.onerror = onDone;
+                window.speechSynthesis.speak(u);
+            },
             onFallback: (p) => speak(p),
         });
     };

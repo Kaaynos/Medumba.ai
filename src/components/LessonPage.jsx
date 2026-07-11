@@ -255,6 +255,14 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     const [phase, setPhase] = useState('flashcards');
     const [cardIdx, setCardIdx] = useState(0);   // which flashcard is showing
     const [flipped, setFlipped] = useState(false); // show Medumba side
+    const [cardSpeaking, setCardSpeaking] = useState(false); // lecture audio de la flashcard en cours
+
+    // Stoppe l'audio en cours dès qu'on change de carte ou qu'on la retourne,
+    // pour éviter qu'un mot continue à jouer par-dessus le suivant.
+    useEffect(() => {
+        stopMedumbaAudio();
+        setCardSpeaking(false);
+    }, [cardIdx, flipped]);
 
     const startTimeRef = useRef(Date.now());
 
@@ -560,6 +568,27 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         }}>
                             {flipped ? card.medumba : card.fr}
                         </div>
+                        {flipped && (
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (cardSpeaking) { stopMedumbaAudio(); setCardSpeaking(false); return; }
+                                    setCardSpeaking(true);
+                                    playMedumbaWord(card.medumba, null, () => setCardSpeaking(false));
+                                }}
+                                style={{
+                                    width: '42px', height: '42px', borderRadius: '50%',
+                                    backgroundColor: cardSpeaking ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)',
+                                    border: '2px solid rgba(255,255,255,0.5)',
+                                    cursor: 'pointer', fontSize: '1.1rem', color: '#fff',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    marginTop: '0.25rem',
+                                }}
+                            >
+                                {cardSpeaking ? '🔊' : '🔈'}
+                            </button>
+                        )}
                         {!flipped && (
                             <div style={{ fontSize: '0.75rem', color: T.textSub, marginTop: '0.5rem' }}>
                                 {isFr ? '👆 Appuyez pour voir la traduction' : '👆 Tap to see translation'}

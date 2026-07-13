@@ -29,6 +29,7 @@ const IconDict   = () => <Ico><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d
 const IconCalc   = () => <Ico><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></Ico>;
 const IconCal    = () => <Ico><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></Ico>;
 const IconAlpha  = () => <Ico><polyline points="4 20 8 4 12 16 16 8 20 20"/></Ico>;
+const IconCert   = () => <Ico><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></Ico>;
 const IconAndroid = () => (
     <svg width="26" height="26" viewBox="0 0 512 512" fill="currentColor">
         <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l236.6-236.1L47 0zm414.2 180.5l-48.6-28-67.9 67.9 67.9 67.9 49.4-28.7c14-7.8 23.8-22.2 23.8-38.6.1-16.4-9.4-31.2-24.6-40.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
@@ -94,8 +95,9 @@ function GeomPattern({ opacity = 0.04, id = 'geo' }) {
     );
 }
 
-function AppPreview({ small }) {
+function AppPreview({ small, isFr }) {
     const W = small ? 200 : 255;
+    const tr = (fr, en) => isFr ? fr : en;
     return (
         <div style={{ position:'relative', width:`${W}px`, flexShrink:0 }}>
             <div style={{ position:'absolute', inset:'-40px', borderRadius:'50%', background:`radial-gradient(ellipse,rgba(0,86,210,.15) 0%,transparent 65%)`, pointerEvents:'none', zIndex:0 }} />
@@ -122,21 +124,21 @@ function AppPreview({ small }) {
                     </div>
                 </div>
                 <div style={{ margin:'10px 14px 7px', background:'rgba(255,255,255,.06)', borderRadius:'14px', padding:'10px 12px', border:'1px solid rgba(255,255,255,.08)' }}>
-                    <div style={{ fontSize:'.46rem', color:'rgba(255,255,255,.3)', fontWeight:700, letterSpacing:'.8px', textTransform:'uppercase', marginBottom:'5px' }}>Leçon 1 · Salutations</div>
+                    <div style={{ fontSize:'.46rem', color:'rgba(255,255,255,.3)', fontWeight:700, letterSpacing:'.8px', textTransform:'uppercase', marginBottom:'5px' }}>{tr('Leçon 1 · Salutations','Lesson 1 · Greetings')}</div>
                     <div style={{ fontSize:'1rem', color:'#fff', fontWeight:800, marginBottom:'2px' }}>Ó tsɑ̌ʼ nə?</div>
-                    <div style={{ fontSize:'.56rem', color:AMB, fontWeight:500 }}>Comment vas-tu ?</div>
+                    <div style={{ fontSize:'.56rem', color:AMB, fontWeight:500 }}>{tr('Comment vas-tu ?','How are you?')}</div>
                     <div style={{ marginTop:'8px', height:'3px', background:'rgba(255,255,255,.07)', borderRadius:'99px' }}>
                         <div style={{ width:'68%', height:'100%', background:`linear-gradient(90deg,${AMB},${AMB2})`, borderRadius:'99px' }} />
                     </div>
                 </div>
                 <div style={{ padding:'0 14px', display:'flex', flexDirection:'column', gap:'5px' }}>
-                    <div style={{ fontSize:'.55rem', color:'rgba(255,255,255,.4)', fontWeight:600, marginBottom:'2px' }}>Sélectionne la traduction</div>
-                    {['Comment vas-tu ?','Bonne nuit.','Au revoir !'].map((opt,i) => (
+                    <div style={{ fontSize:'.55rem', color:'rgba(255,255,255,.4)', fontWeight:600, marginBottom:'2px' }}>{tr('Sélectionne la traduction','Select the translation')}</div>
+                    {[tr('Comment vas-tu ?','How are you?'),tr('Bonne nuit.','Good night.'),tr('Au revoir !','Goodbye!')].map((opt,i) => (
                         <div key={i} style={{ background:i===0?'rgba(245,158,11,.14)':'rgba(255,255,255,.04)', border:`1.5px solid ${i===0?'rgba(245,158,11,.5)':'rgba(255,255,255,.06)'}`, borderRadius:'9px', padding:'7px 10px', color:i===0?AMB2:'rgba(255,255,255,.45)', fontSize:'.58rem', fontWeight:i===0?700:400 }}>{opt}</div>
                     ))}
                 </div>
                 <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'8px 0 14px', borderTop:'1px solid rgba(255,255,255,.05)', display:'flex', justifyContent:'space-around', background:B }}>
-                    {[{l:'Leçons',a:true},{l:'Dico',a:false},{l:'Classe',a:false},{l:'Profil',a:false}].map(({l,a}) => (
+                    {[{l:tr('Leçons','Lessons'),a:true},{l:tr('Dico','Dict'),a:false},{l:tr('Classe','Class'),a:false},{l:tr('Profil','Profile'),a:false}].map(({l,a}) => (
                         <div key={l} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'2px' }}>
                             <div style={{ width:'16px', height:'2px', borderRadius:'99px', background:a?AMB:'transparent' }} />
                             <span style={{ fontSize:'.46rem', color:a?AMB:'rgba(255,255,255,.22)', fontWeight:a?700:400 }}>{l}</span>
@@ -155,11 +157,11 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
     const [scrolled,  setScrolled]  = useState(false);
     const [vw,        setVw]        = useState(() => window.innerWidth);
     const [activeT,   setActiveT]   = useState(0);
-    const [activePlan,   setActivePlan]   = useState(1);
-    const [bundleModal,  setBundleModal]  = useState(false);
+    // Anglais en langue principale, français disponible via la bascule.
+    const [isFr,      setIsFr]      = useState(false);
+    const tr = (fr, en) => isFr ? fr : en;
 
     const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
-    const waLink = `https://wa.me/${WHATSAPP_NUM.replace('+','')}?text=${encodeURIComponent('Bonjour, je souhaite réserver un cours Medumba.AI avec un enseignant. Pouvez-vous me contacter ?')}`;
 
     const isMobile = vw < 768;
     const isSmall  = vw < 480;
@@ -199,23 +201,29 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
     const TITLE = (sz, extra={}) => ({ fontFamily:SERIF, fontWeight:700, color:INK, lineHeight:1.07, letterSpacing:'-.02em', fontSize:sz, ...extra });
 
     const TESTIMONIALS = [
-        { name:'Amélie K.',       role:'Diaspora camerounaise, Paris', initials:'AK', color:AMB,        text:"Grâce à Medumba.AI j'ai pu parler avec ma grand-mère pour la première fois en Medumba. Les leçons sont courtes et vraiment efficaces !" },
-        { name:'Marc-Aurèle T.', role:'Étudiant, Yaoundé',            initials:'MT', color:B,           text:"Le système de combo et les XP m'ont accroché dès le premier jour. C'est comme un jeu — mais j'apprends vraiment !" },
-        { name:'Sophie N.',       role:'Enseignante, Bafoussam',       initials:'SN', color:'#0891b2',   text:"Les classes en ligne avec les enseignants CEPOM sont d'une qualité exceptionnelle. Je recommande à tous mes élèves." },
+        { name:'Amélie K.',       roleFr:'Diaspora camerounaise, Paris', roleEn:'Cameroonian diaspora, Paris', initials:'AK', color:AMB,
+          textFr:"Grâce à Medumba.AI j'ai pu parler avec ma grand-mère pour la première fois en Medumba. Les leçons sont courtes et vraiment efficaces !",
+          textEn:"Thanks to Medumba.AI I was able to speak with my grandmother for the first time in Medumba. The lessons are short and truly effective!" },
+        { name:'Marc-Aurèle T.', roleFr:'Étudiant, Yaoundé', roleEn:'Student, Yaoundé', initials:'MT', color:B,
+          textFr:"Le système de combo et les XP m'ont accroché dès le premier jour. C'est comme un jeu — mais j'apprends vraiment !",
+          textEn:"The combo system and XP hooked me from day one. It feels like a game — but I'm actually learning!" },
+        { name:'Sophie N.',       roleFr:'Enseignante, Bafoussam', roleEn:'Teacher, Bafoussam', initials:'SN', color:'#0891b2',
+          textFr:"Les classes en ligne avec les enseignants CEPOM sont d'une qualité exceptionnelle. Je recommande à tous mes élèves.",
+          textEn:"The online classes with CEPOM-certified teachers are exceptional quality. I recommend it to all my students." },
     ];
 
     const FEATURES = [
-        { Ico:IconGame,   title:'Leçons gamifiées',     desc:'XP, streaks, diamants et combo. Restez motivé grâce à un système de récompenses qui rend chaque leçon inoubliable.' },
-        { Ico:IconMic,    title:'Prononciation vocale',  desc:"L'IA analyse votre voix et vous donne un score de prononciation instantané — comme un vrai prof de langue." },
-        { Ico:IconBook,   title:'Dictionnaire enrichi',  desc:'Medumba–Français avec traducteur IA, expressions courantes et exemples tirés de textes authentiques.' },
-        { Ico:IconMoon,   title:'Dark & Light mode',     desc:'Interface claire ou sombre selon vos préférences. Votre confort visuel, toujours préservé.' },
-        { Ico:IconTrophy, title:'Classement & Défis',    desc:'Comparez-vous chaque semaine, relevez des défis quotidiens et grimpez dans le classement mondial.' },
-        { Ico:IconVideo,  title:'Vidéos & Culture',      desc:"Tutoriels vidéo, musique traditionnelle et culture bamiléké — la langue et l'âme ensemble." },
+        { Ico:IconGame,   titleFr:'Leçons gamifiées',     titleEn:'Gamified lessons',      descFr:'XP, streaks, diamants et combo. Restez motivé grâce à un système de récompenses qui rend chaque leçon inoubliable.', descEn:'XP, streaks, diamonds and combos. Stay motivated with a reward system that makes every lesson memorable.' },
+        { Ico:IconMic,    titleFr:'Prononciation vocale',  titleEn:'Voice pronunciation',   descFr:"L'IA analyse votre voix et vous donne un score de prononciation instantané — comme un vrai prof de langue.", descEn:"AI analyzes your voice and gives you an instant pronunciation score — like a real language teacher." },
+        { Ico:IconBook,   titleFr:'Dictionnaire enrichi',  titleEn:'Rich dictionary',       descFr:'Medumba–Français avec traducteur IA, expressions courantes et exemples tirés de textes authentiques.', descEn:'Medumba–French with AI translator, common expressions and examples from authentic texts.' },
+        { Ico:IconMoon,   titleFr:'Dark & Light mode',     titleEn:'Dark & Light mode',     descFr:'Interface claire ou sombre selon vos préférences. Votre confort visuel, toujours préservé.', descEn:'Light or dark interface, your choice. Your visual comfort, always preserved.' },
+        { Ico:IconTrophy, titleFr:'Classement & Défis',    titleEn:'Leaderboard & Challenges', descFr:'Comparez-vous chaque semaine, relevez des défis quotidiens et grimpez dans le classement mondial.', descEn:'Compare yourself weekly, take on daily challenges and climb the global leaderboard.' },
+        { Ico:IconVideo,  titleFr:'Vidéos & Culture',      titleEn:'Videos & Culture',      descFr:"Tutoriels vidéo, musique traditionnelle et culture bamiléké — la langue et l'âme ensemble.", descEn:"Video tutorials, traditional music and Bamiléké culture — the language and the soul together." },
     ];
 
     const NAVLINKS = [
-        ['cours','Cours'],['pourquoi','Pourquoi Medumba'],['ressources','Ressources'],
-        ['classes','Classes'],['blog','Blog'],['download','Télécharger'],
+        ['cours', tr('Cours','Courses')], ['pourquoi', tr('Pourquoi Medumba','Why Medumba')], ['ressources', tr('Ressources','Resources')],
+        ['classes', tr('Classes','Classes')], ['blog', tr('Blog','Blog')], ['download', tr('Télécharger','Download')],
     ];
 
     const FLOAT_BADGE = (pos, emoji, label, value, color, anim) => (
@@ -313,12 +321,17 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                 )}
 
                 <div style={{ display:'flex',gap:'.6rem',alignItems:'center' }}>
+                    <button onClick={() => setIsFr(v=>!v)} style={{ padding:isMobile?'.42rem .6rem':'.42rem .8rem',borderRadius:'7px',border:`1.5px solid rgba(0,86,210,.18)`,background:'transparent',color:B,fontWeight:700,fontSize:'.78rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s' }}
+                        onMouseEnter={e=>{e.currentTarget.style.background=LIGHT;e.currentTarget.style.borderColor=B;}}
+                        onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
+                        {isFr ? '🇬🇧 EN' : '🇫🇷 FR'}
+                    </button>
                     <button onClick={onLogin} style={{ padding:'.42rem 1.1rem',borderRadius:'7px',border:`1.5px solid rgba(0,86,210,.18)`,background:'transparent',color:B,fontWeight:600,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s' }}
                         onMouseEnter={e=>{e.currentTarget.style.background=LIGHT;e.currentTarget.style.borderColor=B;}}
                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
-                        Se connecter
+                        {tr('Se connecter','Log in')}
                     </button>
-                    {!isMobile && <button onClick={onStart} className="lp-btn" style={{ padding:'.46rem 1.2rem',fontSize:'.83rem' }}>Commencer ✦</button>}
+                    {!isMobile && <button onClick={onStart} className="lp-btn" style={{ padding:'.46rem 1.2rem',fontSize:'.83rem' }}>{tr('Commencer','Start')} ✦</button>}
                     {isMobile && (
                         <button onClick={() => setMenuOpen(m=>!m)} style={{ background:'none',border:'none',fontSize:'1.25rem',cursor:'pointer',color:INK,padding:'.25rem',lineHeight:1 }}>
                             {menuOpen?'✕':'☰'}
@@ -333,7 +346,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                     {NAVLINKS.map(([id,l]) => (
                         <span key={id} onClick={() => scrollTo(id)} style={{ fontSize:'1rem',fontWeight:700,color:INK,cursor:'pointer',paddingBottom:'.85rem',borderBottom:`1px solid ${SAND}` }}>{l}</span>
                     ))}
-                    <button onClick={onStart} className="lp-btn" style={{ marginTop:'.5rem',width:'100%' }}>Commencer gratuitement ✦</button>
+                    <button onClick={onStart} className="lp-btn" style={{ marginTop:'.5rem',width:'100%' }}>{tr('Commencer gratuitement','Start for free')} ✦</button>
                 </div>
             )}
 
@@ -351,9 +364,9 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
                 {/* Badges flottants — desktop seulement */}
                 {!isMobile && <>
-                    {FLOAT_BADGE({ top:'18%',right:'6%' }, '🔥', 'Streak', '7 jours', '#d97706', 'float-a 5s')}
-                    {FLOAT_BADGE({ top:'44%',left:'3%' },  '⚡', 'XP Gagné', '+340 XP',  B,       'float-b 6s')}
-                    {FLOAT_BADGE({ bottom:'22%',right:'5%' }, '💎', 'Diamants', '50',    '#7c3aed', 'float-a 7s 1.5s')}
+                    {FLOAT_BADGE({ top:'18%',right:'6%' }, '🔥', 'Streak', tr('7 jours','7 days'), '#d97706', 'float-a 5s')}
+                    {FLOAT_BADGE({ top:'44%',left:'3%' },  '⚡', tr('XP Gagné','XP Earned'), '+340 XP',  B,       'float-b 6s')}
+                    {FLOAT_BADGE({ bottom:'22%',right:'5%' }, '💎', tr('Diamants','Diamonds'), '50',    '#7c3aed', 'float-a 7s 1.5s')}
                 </>}
 
                 <div style={{ maxWidth:'1160px',width:'100%',display:'flex',flexDirection:isMobile?'column':'row',alignItems:'center',gap:isMobile?'3.5rem':'7rem',position:'relative',zIndex:1 }}>
@@ -361,23 +374,25 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         <Reveal>
                             <div style={{ display:'inline-flex',alignItems:'center',gap:'.45rem',background:`linear-gradient(135deg,${LIGHT},#dbeafe)`,border:`2px solid #bfdbfe`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.25rem' }}>
                                 <span style={{ width:'7px',height:'7px',borderRadius:'50%',background:'#22c55e',animation:'pulse-dot 1.8s ease-in-out infinite',display:'inline-block',flexShrink:0 }} />
-                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>4 apprenants nous ont déjà rejoints</span>
+                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>{tr('4 apprenants nous ont déjà rejoints','4 learners have already joined us')}</span>
                             </div>
                         </Reveal>
 
                         <Reveal delay={0.08}>
                             <h1 style={{ ...TITLE(isSmall?'2.7rem':isMobile?'3.3rem':'4.6rem'), marginBottom:'1.4rem' }}>
-                                La langue Medumba,<br />
+                                {tr('La langue Medumba,','The Medumba language,')}<br />
                                 <span style={{ background:`linear-gradient(90deg,${B},${AMB},#7c3aed,${B})`,backgroundSize:'300% auto',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',animation:'shimmer 4s linear infinite',display:'inline-block' }}>
-                                    enfin accessible.
+                                    {tr('enfin accessible.','finally accessible.')}
                                 </span>
                             </h1>
                         </Reveal>
 
                         <Reveal delay={0.15}>
                             <p style={{ fontSize:isSmall?'.92rem':isMobile?'.97rem':'1.08rem',color:MUTED,lineHeight:1.8,marginBottom:'2.25rem',maxWidth:'460px' }}>
-                                Leçons gamifiées, classes live avec des enseignants certifiés CEPOM,
-                                et IA vocale — tout pour maîtriser le Medumba, où que vous soyez.
+                                {tr(
+                                    "Leçons gamifiées, classes live avec des enseignants certifiés CEPOM, et IA vocale — tout pour maîtriser le Medumba, où que vous soyez.",
+                                    "Gamified lessons, live classes with CEPOM-certified teachers, and voice AI — everything to master Medumba, wherever you are."
+                                )}
                             </p>
                         </Reveal>
 
@@ -387,7 +402,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                 <div style={{ position:'relative',display:'inline-block',marginBottom:'1rem' }}>
                                     <button onClick={onStart} className="lp-cta" style={{ fontSize:isMobile?'1rem':'1.1rem',padding:isMobile?'1rem 2rem':'1.1rem 2.8rem' }}>
                                         <span style={{ fontSize:'1.1em' }}>🚀</span>
-                                        Commencer le cours — c'est gratuit
+                                        {tr("Commencer le cours — c'est gratuit","Start the course — it's free")}
                                     </button>
                                 </div>
                                 {/* Flèche animée sous le CTA */}
@@ -396,10 +411,10 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                 </div>
                                 {/* Actions secondaires discrètes */}
                                 <div className="hero-ctas" style={{ display:'flex',gap:'.65rem',flexWrap:'wrap' }}>
-                                    <button onClick={() => scrollTo('cours')} className="lp-btn-ghost" style={{ fontSize:'.85rem',padding:'.65rem 1.4rem' }}>📚 Voir les cours</button>
+                                    <button onClick={() => scrollTo('cours')} className="lp-btn-ghost" style={{ fontSize:'.85rem',padding:'.65rem 1.4rem' }}>📚 {tr('Voir les cours','View courses')}</button>
                                     {onDownload && (
                                         <button onClick={onDownload} className="lp-btn-ghost" style={{ fontSize:'.85rem',padding:'.65rem 1.4rem' }}>
-                                            📱 Télécharger l'app
+                                            📱 {tr("Télécharger l'app","Download the app")}
                                         </button>
                                     )}
                                 </div>
@@ -413,14 +428,14 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                         <div key={idx} style={{ width:'30px',height:'30px',borderRadius:'50%',background:c,border:`2.5px solid ${CREAM}`,marginLeft:idx>0?'-9px':0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.5rem',fontWeight:800,color:'#fff',zIndex:3-idx }}>{i}</div>
                                     ))}
                                 </div>
-                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>4 apprenants</strong> nous font déjà confiance</p>
+                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>{tr('4 apprenants','4 learners')}</strong> {tr('nous font déjà confiance','already trust us')}</p>
                             </div>
                         </Reveal>
                     </div>
 
                     {!isSmall && (
                         <Reveal delay={0.1} direction="left" style={{ display:'flex',justifyContent:'center' }}>
-                            <AppPreview small={isMobile} />
+                            <AppPreview small={isMobile} isFr={isFr} />
                         </Reveal>
                     )}
                 </div>
@@ -430,30 +445,31 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section id="ressources" style={{ background:LIGHT,padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
-                        <p style={EYEBROW}>Ressources</p>
+                        <p style={EYEBROW}>{tr('Ressources','Resources')}</p>
                         <div style={{ display:'flex',flexDirection:isMobile?'column':'row',alignItems:isMobile?'flex-start':'flex-end',gap:'1rem',justifyContent:'space-between' }}>
                             <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'460px' })}>
-                                Bien plus<br /><em style={{ color:B,fontStyle:'italic' }}>qu'une simple appli.</em>
+                                {tr('Bien plus','Much more')}<br /><em style={{ color:B,fontStyle:'italic' }}>{tr("qu'une simple appli.",'than just an app.')}</em>
                             </h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>Dictionnaire, comptage, calendrier culturel et vidéos — tout accessible en un clic.</p>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>{tr('Dictionnaire, comptage, calendrier culturel et vidéos — tout accessible en un clic.','Dictionary, counting, cultural calendar and videos — all one click away.')}</p>
                         </div>
                     </Reveal>
 
                     <div className="res-grid" style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'1.1rem' }}>
                         {[
-                            { Ico:IconDict, view:'dictionary',    title:'Dictionnaire',  desc:'Medumba–Français avec plus de 1 000 entrées, traducteur IA et exemples contextuels.', color:B, badge:'1 000+ mots' },
-                            { Ico:IconCalc, view:'counting',      title:'Comptage',      desc:'Apprenez à compter en Medumba — chiffres, ordinaux et système de numération traditionnel.', color:'#7c3aed', badge:'Interactif' },
-                            { Ico:IconMic,  view:'pronunciation', title:'Prononciation', desc:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', color:'#9333ea', badge:'1 147 syllabes' },
-                            { Ico:IconCal,  view:'calendar',      title:'Calendrier',    desc:'Calendrier culturel Bamiléké : fêtes, saisons agricoles et événements traditionnels.', color:'#0891b2', badge:'Culturel' },
-                            { Ico:IconVideo, view:'video',        title:'Vidéos',        desc:'Tutoriels vidéo, chants traditionnels et documentaires sur la culture Medumba.', color:'#15803d', badge:'HD' },
+                            { Ico:IconDict, view:'dictionary',    titleFr:'Dictionnaire',  titleEn:'Dictionary',    descFr:'Medumba–Français avec plus de 1 000 entrées, traducteur IA et exemples contextuels.', descEn:'Medumba–French with over 1,000 entries, AI translator and contextual examples.', color:B, badgeFr:'1 000+ mots', badgeEn:'1,000+ words' },
+                            { Ico:IconCalc, view:'counting',      titleFr:'Comptage',      titleEn:'Counting',      descFr:'Apprenez à compter en Medumba — chiffres, ordinaux et système de numération traditionnel.', descEn:'Learn to count in Medumba — numbers, ordinals and the traditional counting system.', color:'#7c3aed', badgeFr:'Interactif', badgeEn:'Interactive' },
+                            { Ico:IconMic,  view:'pronunciation', titleFr:'Prononciation', titleEn:'Pronunciation', descFr:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', descEn:'Read Medumba words aloud with an IPA syllable guide and 1,147 syllables.', color:'#9333ea', badgeFr:'1 147 syllabes', badgeEn:'1,147 syllables' },
+                            { Ico:IconCal,  view:'calendar',      titleFr:'Calendrier',    titleEn:'Calendar',      descFr:'Calendrier culturel Bamiléké : fêtes, saisons agricoles et événements traditionnels.', descEn:'Bamiléké cultural calendar: festivals, farming seasons and traditional events.', color:'#0891b2', badgeFr:'Culturel', badgeEn:'Cultural' },
+                            { Ico:IconVideo, view:'video',        titleFr:'Vidéos',        titleEn:'Videos',        descFr:'Tutoriels vidéo, chants traditionnels et documentaires sur la culture Medumba.', descEn:'Video tutorials, traditional songs and documentaries on Medumba culture.', color:'#15803d', badgeFr:'HD', badgeEn:'HD' },
+                            { Ico:IconCert, view:'cepom',         titleFr:'Certification CEPOM', titleEn:'CEPOM Certification', descFr:'En savoir plus sur le CEPOM et la certification de nos enseignants.', descEn:'Learn more about CEPOM and our teacher certification.', color:'#b45309', badgeFr:'Officiel', badgeEn:'Official' },
                         ].map((r,i) => (
                             <Reveal key={i} delay={i*.07}>
                                 <div className="res-card" onClick={() => nav(r.view)} style={{ position:'relative' }}>
-                                    <div style={{ position:'absolute',top:'1rem',right:'1rem',background:`${r.color}15`,color:r.color,fontSize:'.62rem',fontWeight:700,borderRadius:'99px',padding:'2px 8px',border:`1px solid ${r.color}30` }}>{r.badge}</div>
+                                    <div style={{ position:'absolute',top:'1rem',right:'1rem',background:`${r.color}15`,color:r.color,fontSize:'.62rem',fontWeight:700,borderRadius:'99px',padding:'2px 8px',border:`1px solid ${r.color}30` }}>{tr(r.badgeFr,r.badgeEn)}</div>
                                     <div style={{ width:'46px',height:'46px',borderRadius:'14px',background:`${r.color}15`,display:'flex',alignItems:'center',justifyContent:'center',color:r.color,marginBottom:'1rem',border:`1.5px solid ${r.color}25` }}><r.Ico /></div>
-                                    <h3 style={{ fontSize:'1rem',fontWeight:800,color:INK,marginBottom:'.4rem' }}>{r.title}</h3>
-                                    <p style={{ fontSize:'.81rem',color:MUTED,lineHeight:1.7,marginBottom:'1rem' }}>{r.desc}</p>
-                                    <span style={{ fontSize:'.8rem',color:r.color,fontWeight:700 }}>Accéder →</span>
+                                    <h3 style={{ fontSize:'1rem',fontWeight:800,color:INK,marginBottom:'.4rem' }}>{tr(r.titleFr,r.titleEn)}</h3>
+                                    <p style={{ fontSize:'.81rem',color:MUTED,lineHeight:1.7,marginBottom:'1rem' }}>{tr(r.descFr,r.descEn)}</p>
+                                    <span style={{ fontSize:'.8rem',color:r.color,fontWeight:700 }}>{tr('Accéder','Access')} →</span>
                                 </div>
                             </Reveal>
                         ))}
@@ -464,11 +480,18 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             {/* ══ STATS ══ */}
             <section style={{ background:B,padding:isMobile?'2.5rem 1.25rem':'3rem 3.5rem' }}>
                 <div className="stats-grid" style={{ maxWidth:'920px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1rem',textAlign:'center' }}>
-                    {[{target:4,suffix:'',label:'Apprenants actifs'},{target:15,suffix:'',label:'Leçons interactives'},{target:3,suffix:'',label:'Enseignants CEPOM'},{target:0,suffix:' XAF',label:'Pour commencer'}].map((s,i) => (
+                    {[
+                        {target:4,suffix:'',labelFr:'Apprenants actifs',labelEn:'Active learners'},
+                        {target:15,suffix:'',labelFr:'Leçons interactives',labelEn:'Interactive lessons'},
+                        {target:3,suffix:'',labelFr:'Enseignants CEPOM',labelEn:'CEPOM teachers'},
+                        {textFr:'Gratuit',textEn:'Free',labelFr:'Pour commencer',labelEn:'To get started'},
+                    ].map((s,i) => (
                         <Reveal key={i} delay={i*.06}>
                             <div style={{ borderRight:i<3&&!isSmall?'1px solid rgba(255,255,255,.08)':'none',padding:isMobile?'.4rem 0':0 }}>
-                                <div style={{ fontSize:isMobile?'1.8rem':'2.5rem',fontWeight:900,color:'#fff',lineHeight:1,letterSpacing:'-.03em' }}><Counter target={s.target} suffix={s.suffix} /></div>
-                                <div style={{ fontSize:isMobile?'.68rem':'.75rem',color:'rgba(255,255,255,.38)',fontWeight:600,marginTop:'5px' }}>{s.label}</div>
+                                <div style={{ fontSize:isMobile?'1.8rem':'2.5rem',fontWeight:900,color:'#fff',lineHeight:1,letterSpacing:'-.03em' }}>
+                                    {s.textFr ? tr(s.textFr,s.textEn) : <Counter target={s.target} suffix={s.suffix} />}
+                                </div>
+                                <div style={{ fontSize:isMobile?'.68rem':'.75rem',color:'rgba(255,255,255,.38)',fontWeight:600,marginTop:'5px' }}>{tr(s.labelFr,s.labelEn)}</div>
                             </div>
                         </Reveal>
                     ))}
@@ -479,33 +502,39 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section id="cours" style={{ background:'#fff',padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2rem':'3rem' }}>
-                        <p style={EYEBROW}>Cours de Medumba</p>
+                        <p style={EYEBROW}>{tr('Cours de Medumba','Medumba Courses')}</p>
                         <div style={{ display:'flex',flexDirection:isMobile?'column':'row',alignItems:isMobile?'flex-start':'flex-end',gap:'1rem',justifyContent:'space-between' }}>
                             <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'480px' })}>
-                                Apprenez à votre rythme,<br /><em style={{ color:B,fontStyle:'italic' }}>étape par étape.</em>
+                                {tr('Apprenez à votre rythme,','Learn at your own pace,')}<br /><em style={{ color:B,fontStyle:'italic' }}>{tr('étape par étape.','step by step.')}</em>
                             </h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'280px' }}>De débutant à avancé — 3 unités, 17+ leçons progressives.</p>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'280px' }}>{tr('De débutant à avancé — 3 unités, 17+ leçons progressives.','From beginner to advanced — 3 units, 17+ progressive lessons.')}</p>
                         </div>
                     </Reveal>
 
                     <div style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(3,1fr)',gap:'1.25rem',marginBottom:'2.5rem' }}>
                         {[
-                            { n:'Unité 1',title:'Premiers pas',color:B,       lessons:['Salutations','Corps humain','Nourriture & Boissons','Couleurs & Vêtements','Chiffres & Argent'] },
-                            { n:'Unité 2',title:'Vie quotidienne',color:'#7c3aed', lessons:['Animaux & Nature','Famille & Relations','Météo & Environnement','Temps & Calendrier','Identité & Origines'] },
-                            { n:'Unité 3',title:'Culture & Expression',color:'#0891b2', lessons:['Maison & Cuisine','Santé & Corps','École & Apprentissage','Travail & Professions','Culture Bamiléké'] },
+                            { nFr:'Unité 1', nEn:'Unit 1', titleFr:'Premiers pas', titleEn:'First Steps', color:B,
+                              lessonsFr:['Salutations','Corps humain','Nourriture & Boissons','Couleurs & Vêtements','Chiffres & Argent'],
+                              lessonsEn:['Greetings','Body Parts','Food & Drinks','Colors & Clothing','Numbers & Money'] },
+                            { nFr:'Unité 2', nEn:'Unit 2', titleFr:'Vie quotidienne', titleEn:'Daily Life', color:'#7c3aed',
+                              lessonsFr:['Animaux & Nature','Famille & Relations','Météo & Environnement','Temps & Calendrier','Identité & Origines'],
+                              lessonsEn:['Animals & Nature','Family & Relationships','Weather & Environment','Time & Calendar','Identity & Origins'] },
+                            { nFr:'Unité 3', nEn:'Unit 3', titleFr:'Culture & Expression', titleEn:'Culture & Expression', color:'#0891b2',
+                              lessonsFr:['Maison & Cuisine','Santé & Corps','École & Apprentissage','Travail & Professions','Culture Bamiléké'],
+                              lessonsEn:['Home & Kitchen','Health & Body','School & Learning','Work & Professions','Bamiléké Culture'] },
                         ].map((u,i) => (
                             <Reveal key={i} delay={i*.08}>
                                 <div style={{ background:'#fff',border:`1.5px solid ${SAND}`,borderRadius:'20px',overflow:'hidden',height:'100%' }}>
                                     <div style={{ background:u.color,padding:'1.25rem 1.5rem' }}>
-                                        <div style={{ fontSize:'.68rem',color:'rgba(255,255,255,.6)',fontWeight:700,letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:'.3rem' }}>{u.n}</div>
-                                        <div style={{ fontSize:isMobile?'1.1rem':'1.25rem',fontWeight:900,color:'#fff',letterSpacing:'-.01em' }}>{u.title}</div>
+                                        <div style={{ fontSize:'.68rem',color:'rgba(255,255,255,.6)',fontWeight:700,letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:'.3rem' }}>{tr(u.nFr,u.nEn)}</div>
+                                        <div style={{ fontSize:isMobile?'1.1rem':'1.25rem',fontWeight:900,color:'#fff',letterSpacing:'-.01em' }}>{tr(u.titleFr,u.titleEn)}</div>
                                     </div>
                                     <div style={{ padding:'1.25rem 1.5rem' }}>
-                                        {u.lessons.map((l,j) => (
-                                            <div key={j} style={{ display:'flex',alignItems:'center',gap:'.6rem',padding:'.42rem 0',borderBottom:j<u.lessons.length-1?`1px solid ${SAND}`:'none' }}>
+                                        {(isFr ? u.lessonsFr : u.lessonsEn).map((l,j) => (
+                                            <div key={j} style={{ display:'flex',alignItems:'center',gap:'.6rem',padding:'.42rem 0',borderBottom:j<u.lessonsFr.length-1?`1px solid ${SAND}`:'none' }}>
                                                 <div style={{ width:'6px',height:'6px',borderRadius:'50%',background:j===0?u.color:SAND,flexShrink:0 }} />
                                                 <span style={{ fontSize:'.82rem',color:j===0?INK:MUTED,fontWeight:j===0?700:400 }}>{l}</span>
-                                                {j===0 && <span style={{ marginLeft:'auto',fontSize:'.65rem',background:LIGHT,color:B,fontWeight:700,borderRadius:'99px',padding:'1px 7px' }}>Actif</span>}
+                                                {j===0 && <span style={{ marginLeft:'auto',fontSize:'.65rem',background:LIGHT,color:B,fontWeight:700,borderRadius:'99px',padding:'1px 7px' }}>{tr('Actif','Active')}</span>}
                                             </div>
                                         ))}
                                     </div>
@@ -515,7 +544,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                     </div>
                     <Reveal delay={0.2}>
                         <div style={{ textAlign:'center' }}>
-                            <button onClick={onStart} className="lp-cta">🚀 Commencer les cours — gratuit</button>
+                            <button onClick={onStart} className="lp-cta">🚀 {tr('Commencer les cours — gratuit','Start the courses — free')}</button>
                         </div>
                     </Reveal>
                 </div>
@@ -526,16 +555,16 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section id="features" style={{ background:'#fff',padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
-                        <p style={EYEBROW}>Pourquoi Medumba.AI</p>
-                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'540px' })}>Tout ce qu'il faut pour<br />maîtriser le Medumba.</h2>
+                        <p style={EYEBROW}>{tr('Pourquoi Medumba.AI','Why Medumba.AI')}</p>
+                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'540px' })}>{tr("Tout ce qu'il faut pour",'Everything you need to')}<br />{tr('maîtriser le Medumba.','master Medumba.')}</h2>
                     </Reveal>
                     <div className="feat-grid" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:SAND,border:`1.5px solid ${SAND}`,borderRadius:'16px',overflow:'hidden' }}>
                         {FEATURES.map((f,i) => (
                             <Reveal key={i} delay={i*.05}>
                                 <div className="feat-card">
                                     <div style={{ width:'40px',height:'40px',borderRadius:'10px',background:LIGHT,display:'flex',alignItems:'center',justifyContent:'center',color:B,marginBottom:'1.1rem' }}><f.Ico /></div>
-                                    <h3 style={{ fontSize:'.97rem',fontWeight:800,color:INK,marginBottom:'.45rem' }}>{f.title}</h3>
-                                    <p style={{ fontSize:'.82rem',color:MUTED,lineHeight:1.72 }}>{f.desc}</p>
+                                    <h3 style={{ fontSize:'.97rem',fontWeight:800,color:INK,marginBottom:'.45rem' }}>{tr(f.titleFr,f.titleEn)}</h3>
+                                    <p style={{ fontSize:'.82rem',color:MUTED,lineHeight:1.72 }}>{tr(f.descFr,f.descEn)}</p>
                                 </div>
                             </Reveal>
                         ))}
@@ -557,10 +586,14 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                             }}>📚</div>
                             <div>
                                 <h3 style={{ fontSize: '.97rem', fontWeight: 800, color: '#15803d', marginBottom: '.45rem' }}>
-                                    Comment se déroule une leçon ?
+                                    {tr('Comment se déroule une leçon ?','How does a lesson work?')}
                                 </h3>
                                 <p style={{ fontSize: '.83rem', color: '#475569', lineHeight: 1.72, margin: 0 }}>
-                                    Avant chaque leçon, vous recevez une <strong style={{ color: '#15803d' }}>série de fiches français → Medumba</strong> pour découvrir le vocabulaire de la session. Ensuite, des exercices interactifs vous permettent de pratiquer et de mémoriser durablement.
+                                    {isFr ? (
+                                        <>Avant chaque leçon, vous recevez une <strong style={{ color: '#15803d' }}>série de fiches français → Medumba</strong> pour découvrir le vocabulaire de la session. Ensuite, des exercices interactifs vous permettent de pratiquer et de mémoriser durablement.</>
+                                    ) : (
+                                        <>Before each lesson, you get a <strong style={{ color: '#15803d' }}>set of French → Medumba flashcards</strong> to discover the session's vocabulary. Then, interactive exercises let you practice and retain it long-term.</>
+                                    )}
                                 </p>
                             </div>
                         </div>
@@ -573,27 +606,27 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section id="classes" style={{ background:'#fff',padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
-                        <p style={EYEBROW}>Classes en ligne</p>
+                        <p style={EYEBROW}>{tr('Classes en ligne','Online Classes')}</p>
                         <div style={{ display:'flex',flexDirection:isMobile?'column':'row',alignItems:isMobile?'flex-start':'flex-end',gap:'1rem',justifyContent:'space-between' }}>
-                            <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'440px' })}>Apprenez avec<br /><em style={{ color:B,fontStyle:'italic' }}>de vrais enseignants.</em></h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>Des cours animés par des enseignants certifiés CEPOM — live, replay ou en 1-à-1.</p>
+                            <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'440px' })}>{tr('Apprenez avec','Learn with')}<br /><em style={{ color:B,fontStyle:'italic' }}>{tr('de vrais enseignants.','real teachers.')}</em></h2>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>{tr('Des cours animés par des enseignants certifiés CEPOM — live, replay ou en 1-à-1.','Classes led by CEPOM-certified teachers — live, replay, or 1-on-1.')}</p>
                         </div>
                     </Reveal>
 
                     <div className="class-grid" style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'.85rem',marginBottom:'2.5rem' }}>
                         {[
-                            {title:'Classes Live',sub:'En direct · max 30',accent:true},
-                            {title:'Replay',sub:'Archives illimitées',accent:false},
-                            {title:'Cours Particuliers',sub:'Sessions 1-à-1',accent:false},
-                            {title:'Ateliers Culturels',sub:'Contes & musique',accent:false},
+                            {titleFr:'Classes Live',titleEn:'Live Classes',subFr:'En direct · max 30',subEn:'Live · max 30',accent:true},
+                            {titleFr:'Replay',titleEn:'Replay',subFr:'Archives illimitées',subEn:'Unlimited archives',accent:false},
+                            {titleFr:'Cours Particuliers',titleEn:'Private Lessons',subFr:'Sessions 1-à-1',subEn:'1-on-1 sessions',accent:false},
+                            {titleFr:'Ateliers Culturels',titleEn:'Cultural Workshops',subFr:'Contes & musique',subEn:'Stories & music',accent:false},
                         ].map((c,i) => (
                             <Reveal key={i} delay={i*.07}>
                                 <div style={{ background:'#fff',border:c.accent?`2px solid ${B}`:`1.5px solid ${SAND}`,borderRadius:'14px',padding:'1.35rem 1.2rem',cursor:'pointer',boxShadow:c.accent?`0 6px 24px rgba(0,86,210,.1)`:'none',transition:'transform .2s,box-shadow .2s' }}
                                     onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow=`0 14px 36px rgba(0,86,210,.1)`;}}
                                     onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow=c.accent?`0 6px 24px rgba(0,86,210,.1)`:'none';}}>
                                     <div style={{ width:'28px',height:'3px',background:c.accent?AMB:SAND,borderRadius:'99px',marginBottom:'1rem' }} />
-                                    <div style={{ fontWeight:800,fontSize:'.9rem',color:INK,marginBottom:'.28rem' }}>{c.title}</div>
-                                    <div style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{c.sub}</div>
+                                    <div style={{ fontWeight:800,fontSize:'.9rem',color:INK,marginBottom:'.28rem' }}>{tr(c.titleFr,c.titleEn)}</div>
+                                    <div style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{tr(c.subFr,c.subEn)}</div>
                                 </div>
                             </Reveal>
                         ))}
@@ -601,9 +634,9 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
                     <div className="teachers-grid" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.25rem' }}>
                         {[
-                            {name:'Kammbem Arthur',   level:'Débutant · Intermédiaire',spec:'Grammaire & Phonologie',  rating:'4.9',students:142,initials:'KA',color:B},
-                            {name:'Kuikeu Franck',    level:'Intermédiaire · Avancé', spec:'Littérature & Proverbes',  rating:'4.8',students:98, initials:'KF',color:AMB},
-                            {name:'Metchezin Francklin',level:'Enfants · Débutant',   spec:'Contes & Culture Medumba',rating:'5.0',students:67, initials:'MF',color:'#0891b2'},
+                            {name:'Kammbem Arthur',   levelFr:'Débutant · Intermédiaire',levelEn:'Beginner · Intermediate', specFr:'Grammaire & Phonologie', specEn:'Grammar & Phonology',  rating:'4.9',students:142,initials:'KA',color:B},
+                            {name:'Kuikeu Franck',    levelFr:'Intermédiaire · Avancé',levelEn:'Intermediate · Advanced', specFr:'Littérature & Proverbes', specEn:'Literature & Proverbs',  rating:'4.8',students:98, initials:'KF',color:AMB},
+                            {name:'Metchezin Francklin',levelFr:'Enfants · Débutant',levelEn:'Kids · Beginner',   specFr:'Contes & Culture Medumba', specEn:'Stories & Medumba Culture',rating:'5.0',students:67, initials:'MF',color:'#0891b2'},
                         ].map((t,i) => (
                             <Reveal key={i} delay={i*.09}>
                                 <div className="teacher-card" style={{ background:'#fff',padding:'1.5rem',border:`1.5px solid ${SAND}` }}>
@@ -611,20 +644,20 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                         <div style={{ width:'46px',height:'46px',borderRadius:'50%',background:t.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.7rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{t.initials}</div>
                                         <div>
                                             <div style={{ fontWeight:800,color:INK,fontSize:'.9rem' }}>{t.name}</div>
-                                            <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500,marginTop:'1px' }}>{t.level}</div>
+                                            <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500,marginTop:'1px' }}>{tr(t.levelFr,t.levelEn)}</div>
                                         </div>
                                     </div>
-                                    <div style={{ fontSize:'.78rem',color:INK,fontWeight:600,marginBottom:'.9rem',paddingBottom:'.9rem',borderBottom:`1px solid ${LIGHT}` }}>{t.spec}</div>
+                                    <div style={{ fontSize:'.78rem',color:INK,fontWeight:600,marginBottom:'.9rem',paddingBottom:'.9rem',borderBottom:`1px solid ${LIGHT}` }}>{tr(t.specFr,t.specEn)}</div>
                                     <div style={{ display:'flex',justifyContent:'space-between',marginBottom:'1.1rem' }}>
                                         <span style={{ fontSize:'.78rem',color:AMB,fontWeight:700 }}>★ {t.rating}</span>
-                                        <span style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{t.students} élèves</span>
+                                        <span style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{t.students} {tr('élèves','students')}</span>
                                     </div>
-                                    <a href={`https://wa.me/${WHATSAPP_NUM.replace('+','')}?text=${encodeURIComponent(`Bonjour, je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`)}`}
+                                    <a href={`https://wa.me/${WHATSAPP_NUM.replace('+','')}?text=${encodeURIComponent(tr(`Bonjour, je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`Hello, I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}`}
                                         target="_blank" rel="noopener noreferrer"
                                         style={{ width:'100%',display:'block',boxSizing:'border-box',textAlign:'center',padding:'.6rem',borderRadius:'8px',background:'transparent',color:B,border:`1.5px solid ${B}`,fontWeight:700,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s',textDecoration:'none' }}
                                         onMouseEnter={e=>{e.currentTarget.style.background=B;e.currentTarget.style.color='#fff';}}
                                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color=B;}}>
-                                        Contacter {t.name.split(' ')[0]}
+                                        {tr('Contacter','Contact')} {t.name.split(' ')[0]}
                                     </a>
                                 </div>
                             </Reveal>
@@ -637,14 +670,14 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section id="how" style={{ background:LIGHT,padding:PH }}>
                 <div style={{ maxWidth:'1000px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3.5rem' }}>
-                        <p style={EYEBROW}>Comment ça marche</p>
-                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>Commencez en 3 étapes.</h2>
+                        <p style={EYEBROW}>{tr('Comment ça marche','How it works')}</p>
+                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>{tr('Commencez en 3 étapes.','Get started in 3 steps.')}</h2>
                     </Reveal>
                     <div style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(3,1fr)',gap:isMobile?'2rem':'3rem' }}>
                         {[
-                            {n:'01',title:'Créez votre profil',   desc:"Choisissez votre niveau et vos objectifs. Aucune carte bancaire requise.",bg:B,   fg:'#fff'},
-                            {n:'02',title:'Suivez vos leçons',    desc:"Progressez à votre rythme, gagnez de l'XP et des diamants à chaque bonne réponse.",bg:AMB, fg:'#fff'},
-                            {n:'03',title:'Rejoignez une classe', desc:"Réservez un cours live ou regardez un replay avec de vrais enseignants certifiés.",bg:LIGHT,fg:INK,border:true},
+                            {n:'01',titleFr:'Créez votre profil',   titleEn:'Create your profile',   descFr:"Choisissez votre niveau et vos objectifs. Aucune carte bancaire requise.", descEn:"Choose your level and goals. No credit card required.",bg:B,   fg:'#fff'},
+                            {n:'02',titleFr:'Suivez vos leçons',    titleEn:'Follow your lessons',    descFr:"Progressez à votre rythme, gagnez de l'XP et des diamants à chaque bonne réponse.", descEn:"Progress at your own pace, earn XP and diamonds with every correct answer.",bg:AMB, fg:'#fff'},
+                            {n:'03',titleFr:'Rejoignez une classe', titleEn:'Join a class', descFr:"Réservez un cours live ou regardez un replay avec de vrais enseignants certifiés.", descEn:"Book a live class or watch a replay with real certified teachers.",bg:LIGHT,fg:INK,border:true},
                         ].map((s,i) => (
                             <Reveal key={i} delay={i*.1}>
                                 <div style={{ display:'flex',flexDirection:isMobile?'row':'column',gap:'1.25rem',alignItems:isMobile?'flex-start':'stretch' }}>
@@ -652,15 +685,15 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                         <span style={{ fontFamily:SERIF,fontSize:'1.1rem',fontWeight:700,color:s.fg,letterSpacing:'-.02em' }}>{s.n}</span>
                                     </div>
                                     <div>
-                                        <h3 style={{ fontSize:'.97rem',fontWeight:800,color:INK,marginBottom:'.4rem' }}>{s.title}</h3>
-                                        <p style={{ fontSize:'.83rem',color:MUTED,lineHeight:1.72 }}>{s.desc}</p>
+                                        <h3 style={{ fontSize:'.97rem',fontWeight:800,color:INK,marginBottom:'.4rem' }}>{tr(s.titleFr,s.titleEn)}</h3>
+                                        <p style={{ fontSize:'.83rem',color:MUTED,lineHeight:1.72 }}>{tr(s.descFr,s.descEn)}</p>
                                     </div>
                                 </div>
                             </Reveal>
                         ))}
                     </div>
                     <Reveal delay={0.3} style={{ marginTop:isMobile?'2.5rem':'3.5rem' }}>
-                        <button onClick={onStart} className="lp-cta" style={{ width:isMobile?'100%':'auto' }}>🚀 Commencer maintenant — c'est gratuit</button>
+                        <button onClick={onStart} className="lp-cta" style={{ width:isMobile?'100%':'auto' }}>🚀 {tr("Commencer maintenant — c'est gratuit","Start now — it's free")}</button>
                     </Reveal>
                 </div>
             </section>
@@ -669,19 +702,19 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section style={{ background:'#fff',padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
-                        <p style={EYEBROW}>Témoignages</p>
-                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>Ce que disent nos apprenants.</h2>
+                        <p style={EYEBROW}>{tr('Témoignages','Testimonials')}</p>
+                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>{tr('Ce que disent nos apprenants.','What our learners say.')}</h2>
                     </Reveal>
                     {isMobile ? (
                         <div>
                             <div style={{ background:LIGHT,border:`1.5px solid ${SAND}`,borderRadius:'20px',padding:'2rem 1.75rem',animation:'fade-up .4s ease' }} key={activeT}>
                                 <div style={{ fontFamily:'Georgia,serif',fontSize:'3.8rem',lineHeight:.75,color:AMB,opacity:.4,marginBottom:'.9rem' }}>"</div>
-                                <p style={{ fontSize:'.92rem',lineHeight:1.8,marginBottom:'1.5rem',color:MUTED,fontStyle:'italic' }}>{TESTIMONIALS[activeT].text}</p>
+                                <p style={{ fontSize:'.92rem',lineHeight:1.8,marginBottom:'1.5rem',color:MUTED,fontStyle:'italic' }}>{tr(TESTIMONIALS[activeT].textFr,TESTIMONIALS[activeT].textEn)}</p>
                                 <div style={{ display:'flex',alignItems:'center',gap:'.75rem' }}>
                                     <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:TESTIMONIALS[activeT].color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{TESTIMONIALS[activeT].initials}</div>
                                     <div>
                                         <div style={{ fontWeight:800,fontSize:'.88rem',color:INK }}>{TESTIMONIALS[activeT].name}</div>
-                                        <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500 }}>{TESTIMONIALS[activeT].role}</div>
+                                        <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500 }}>{tr(TESTIMONIALS[activeT].roleFr,TESTIMONIALS[activeT].roleEn)}</div>
                                     </div>
                                 </div>
                             </div>
@@ -692,16 +725,16 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                     ) : (
                         <div>
                             <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.5rem' }}>
-                                {TESTIMONIALS.map((t,i) => (
+                                {TESTIMONIALS.map((tm,i) => (
                                     <Reveal key={i} delay={i*.1}>
                                         <div onClick={() => setActiveT(i)} style={{ background:i===activeT?B:'#fff',border:`1.5px solid ${i===activeT?'transparent':SAND}`,borderRadius:'20px',padding:'2rem 1.75rem',cursor:'pointer',transition:'all .4s cubic-bezier(.16,1,.3,1)',transform:i===activeT?'scale(1.03)':'scale(1)',boxShadow:i===activeT?`0 28px 60px rgba(0,86,210,.28)`:'none' }}>
                                             <div style={{ fontFamily:'Georgia,serif',fontSize:'3.5rem',lineHeight:.75,color:i===activeT?AMB2:`rgba(245,158,11,.28)`,marginBottom:'.9rem' }}>"</div>
-                                            <p style={{ fontSize:'.88rem',lineHeight:1.8,marginBottom:'1.5rem',color:i===activeT?'rgba(255,255,255,.85)':MUTED,fontStyle:'italic' }}>{t.text}</p>
+                                            <p style={{ fontSize:'.88rem',lineHeight:1.8,marginBottom:'1.5rem',color:i===activeT?'rgba(255,255,255,.85)':MUTED,fontStyle:'italic' }}>{tr(tm.textFr,tm.textEn)}</p>
                                             <div style={{ display:'flex',alignItems:'center',gap:'.75rem' }}>
-                                                <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:i===activeT?'rgba(255,255,255,.15)':t.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{t.initials}</div>
+                                                <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:i===activeT?'rgba(255,255,255,.15)':tm.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{tm.initials}</div>
                                                 <div>
-                                                    <div style={{ fontWeight:800,fontSize:'.88rem',color:i===activeT?'#fff':INK }}>{t.name}</div>
-                                                    <div style={{ fontSize:'.72rem',color:i===activeT?'rgba(255,255,255,.45)':MUTED,fontWeight:500 }}>{t.role}</div>
+                                                    <div style={{ fontWeight:800,fontSize:'.88rem',color:i===activeT?'#fff':INK }}>{tm.name}</div>
+                                                    <div style={{ fontSize:'.72rem',color:i===activeT?'rgba(255,255,255,.45)':MUTED,fontWeight:500 }}>{tr(tm.roleFr,tm.roleEn)}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -724,78 +757,45 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
                 <div style={{ maxWidth:'1100px',margin:'0 auto',position:'relative',zIndex:1 }}>
                     <Reveal style={{ textAlign:'center',marginBottom:isMobile?'2.5rem':'3.5rem' }}>
-                        <p style={{ ...EYEBROW,color:AMB }}>Télécharger</p>
+                        <p style={{ ...EYEBROW,color:AMB }}>{tr('Télécharger','Download')}</p>
                         <h2 style={{ fontFamily:SERIF,fontWeight:700,color:'#fff',lineHeight:1.08,letterSpacing:'-.025em',fontSize:isSmall?'2.2rem':isMobile?'2.6rem':'3.2rem',marginBottom:'.9rem' }}>
-                            Medumba.AI <em style={{ color:AMB2 }}>dans votre poche.</em>
+                            Medumba.AI <em style={{ color:AMB2 }}>{tr('dans votre poche.','in your pocket.')}</em>
                         </h2>
                         <p style={{ color:'rgba(255,255,255,.6)',fontSize:isMobile?'.9rem':'1rem',lineHeight:1.8,maxWidth:'460px',margin:'0 auto' }}>
-                            Disponible sur Android et iOS — choisissez le plan qui vous convient.
+                            {tr('Disponible sur Android et iOS — 100% gratuit pour le lancement.','Available on Android and iOS — 100% free for the launch.')}
                         </p>
                     </Reveal>
 
-                    {/* Plans tarifaires */}
-                    <div className="plans-grid" style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(3,1fr)',gap:'1.1rem',marginBottom:'3rem' }}>
-                        {[
-                            {
-                                label:'Gratuit', price:'0', unit:'pour toujours', active:activePlan===0,
-                                features:['Leçons de base (Unité 1)','Dictionnaire 500 mots','Comptage interactif','5 exercices/jour'],
-                                cta:'Télécharger gratuitement', action:onStart,
-                            },
-                            {
-                                label:'Premium', price:'4 990', unit:'XAF / mois', active:activePlan===1, highlight:true,
-                                features:['Toutes les leçons & unités','Dictionnaire complet (1 000+)','Calendrier culturel','Vidéos & contes','Classes live avec enseignants','IA vocale & prononciation','Classements & défis'],
-                                cta:'Commencer l\'essai gratuit', action:() => setBundleModal(true),
-                            },
-                            {
-                                label:'Annuel', price:'39 900', unit:'XAF / an  (-33%)', active:activePlan===2,
-                                features:['Tout Premium inclus','2 mois offerts','Support prioritaire','Accès bêta fonctionnalités'],
-                                cta:'Souscrire annuellement', action:() => setBundleModal(true),
-                            },
-                        ].map((p,i) => (
-                            <div key={i} className={`plan-card${p.active?' active':''}`} onClick={() => setActivePlan(i)}
-                                style={{ background:p.highlight&&p.active?B2:p.active?'#fff':'rgba(255,255,255,.07)', border:p.active?`2px solid ${AMB}`:'2px solid rgba(255,255,255,.12)', borderRadius:'20px', padding:'2rem 1.75rem', cursor:'pointer', transition:'all .3s', position:'relative', backdropFilter:'blur(8px)' }}>
-                                {p.highlight && <div style={{ position:'absolute',top:'-12px',left:'50%',transform:'translateX(-50%)',background:AMB,color:'#fff',fontSize:'.65rem',fontWeight:800,borderRadius:'99px',padding:'3px 14px',letterSpacing:'.05em',whiteSpace:'nowrap' }}>⭐ POPULAIRE</div>}
-                                <div style={{ marginBottom:'1.25rem' }}>
-                                    <div style={{ fontSize:'.72rem',fontWeight:700,color:p.active?AMB:'rgba(255,255,255,.5)',letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:'.4rem' }}>{p.label}</div>
-                                    <div style={{ display:'flex',alignItems:'baseline',gap:'.3rem' }}>
-                                        <span style={{ fontSize:'2rem',fontWeight:900,color:p.active?INK:'#fff',lineHeight:1 }}>{p.price}</span>
-                                        <span style={{ fontSize:'.75rem',color:p.active?MUTED:'rgba(255,255,255,.45)',fontWeight:600 }}>{p.unit}</span>
-                                    </div>
-                                </div>
-                                <div style={{ display:'flex',flexDirection:'column',gap:'.55rem',marginBottom:'1.5rem' }}>
-                                    {p.features.map((f,j) => (
-                                        <div key={j} style={{ display:'flex',alignItems:'center',gap:'.5rem' }}>
-                                            <span style={{ color:p.active?B:'rgba(255,255,255,.5)',fontSize:'.8rem',fontWeight:700,flexShrink:0 }}>✓</span>
-                                            <span style={{ fontSize:'.82rem',color:p.active?INK:'rgba(255,255,255,.75)',lineHeight:1.4 }}>{f}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <button onClick={e=>{e.stopPropagation();p.action();}} className={p.active&&p.highlight?'lp-btn-amber':'lp-btn-ghost'} style={{ width:'100%',justifyContent:'center',background:p.active&&!p.highlight?B:undefined,color:p.active&&!p.highlight?'#fff':undefined,borderColor:p.active&&!p.highlight?B:undefined }}>
-                                    {p.cta}
-                                </button>
-                            </div>
-                        ))}
-                    </div>
+                    {/* Message gratuit — pas de prix tant que la tarification n'est pas finalisée */}
+                    <Reveal style={{ marginBottom:'3rem' }}>
+                        <div style={{ maxWidth:'480px', margin:'0 auto', textAlign:'center', background:'rgba(255,255,255,.08)', backdropFilter:'blur(8px)', border:'2px solid rgba(245,158,11,.35)', borderRadius:'20px', padding:isMobile?'1.75rem 1.5rem':'2.25rem 2rem' }}>
+                            <div style={{ fontSize:'2.4rem', fontWeight:900, color:'#fff', lineHeight:1, marginBottom:'.5rem' }}>{tr('Gratuit','Free')}</div>
+                            <p style={{ color:'rgba(255,255,255,.7)', fontSize:'.88rem', lineHeight:1.7, marginBottom:'1.5rem' }}>
+                                {tr('Toutes les leçons, le dictionnaire, le comptage et les vidéos — sans frais pour le lancement.','All lessons, the dictionary, counting and videos — free of charge for the launch.')}
+                            </p>
+                            <button onClick={onStart} className="lp-btn-amber" style={{ width:'100%' }}>{tr('Commencer gratuitement','Start for free')}</button>
+                        </div>
+                    </Reveal>
 
                     {/* Boutons store */}
                     <Reveal>
                         <div style={{ textAlign:'center',marginBottom:'1.5rem' }}>
-                            <p style={{ color:'rgba(255,255,255,.55)',fontSize:'.82rem',marginBottom:'1.25rem' }}>Téléchargez l'application sur votre store :</p>
+                            <p style={{ color:'rgba(255,255,255,.55)',fontSize:'.82rem',marginBottom:'1.25rem' }}>{tr("Téléchargez l'application sur votre store :",'Download the app from your store:')}</p>
                             <div className="dl-btns" style={{ display:'flex',gap:'.9rem',justifyContent:'center',flexWrap:'wrap' }}>
-                                {[{Ico:IconAndroid,store:'DISPONIBLE SUR',name:'Google Play'},{Ico:IconApple,store:'TÉLÉCHARGER SUR',name:'App Store'}].map((d,i) => (
+                                {[{Ico:IconAndroid,storeFr:'DISPONIBLE SUR',storeEn:'AVAILABLE ON',name:'Google Play'},{Ico:IconApple,storeFr:'TÉLÉCHARGER SUR',storeEn:'DOWNLOAD ON THE',name:'App Store'}].map((d,i) => (
                                     <div key={i} onClick={onStart} style={{ display:'flex',alignItems:'center',gap:'.85rem',background:'rgba(255,255,255,.09)',backdropFilter:'blur(8px)',border:'1.5px solid rgba(255,255,255,.14)',borderRadius:'10px',padding:'.85rem 1.4rem',cursor:'pointer',transition:'all .18s' }}
                                         onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,255,255,.15)';e.currentTarget.style.transform='translateY(-2px)';}}
                                         onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,.09)';e.currentTarget.style.transform='';}}>
                                         <div style={{ color:'rgba(255,255,255,.65)',flexShrink:0 }}><d.Ico /></div>
                                         <div>
-                                            <div style={{ fontSize:'.5rem',color:'rgba(255,255,255,.35)',fontWeight:600,letterSpacing:'.5px',marginBottom:'1px' }}>{d.store}</div>
+                                            <div style={{ fontSize:'.5rem',color:'rgba(255,255,255,.35)',fontWeight:600,letterSpacing:'.5px',marginBottom:'1px' }}>{tr(d.storeFr,d.storeEn)}</div>
                                             <div style={{ fontSize:'.98rem',fontWeight:800,color:'#fff',lineHeight:1 }}>{d.name}</div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                        <p style={{ textAlign:'center',fontSize:'.72rem',color:'rgba(255,255,255,.25)',fontWeight:500 }}>Android juillet 2026 · iOS via TestFlight (bêta)</p>
+                        <p style={{ textAlign:'center',fontSize:'.72rem',color:'rgba(255,255,255,.25)',fontWeight:500 }}>{tr('Android juillet 2026 · iOS via TestFlight (bêta)','Android July 2026 · iOS via TestFlight (beta)')}</p>
                     </Reveal>
                 </div>
             </section>
@@ -809,7 +809,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                 <img src={logo} alt="" style={{ width:'24px',filter:'brightness(0) invert(1)',opacity:.55 }} />
                                 <span style={{ fontWeight:900,color:'rgba(248,250,252,.75)',fontSize:'.95rem' }}>Medumba<span style={{ color:AMB }}>.AI</span></span>
                             </div>
-                            <p style={{ fontSize:'.76rem',lineHeight:1.8 }}>Juillet 2026 · La langue Medumba, accessible à tous.</p>
+                            <p style={{ fontSize:'.76rem',lineHeight:1.8 }}>{tr('Juillet 2026 · La langue Medumba, accessible à tous.','July 2026 · The Medumba language, accessible to all.')}</p>
                         </div>
                         <div style={{ display:'flex',gap:isMobile?'1.25rem':'2.5rem',flexWrap:'wrap' }}>
                             {NAVLINKS.map(([id,l]) => (
@@ -820,65 +820,11 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         </div>
                     </div>
                     <div style={{ borderTop:'1px solid rgba(255,255,255,.05)',paddingTop:'1.5rem',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:'.75rem' }}>
-                        <span style={{ fontSize:'.72rem' }}>© 2026 Medumba.AI · Tous droits réservés</span>
-                        <span style={{ fontSize:'.72rem' }}>Fait avec soin pour la communauté Medumba</span>
+                        <span style={{ fontSize:'.72rem' }}>{tr('© 2026 Medumba.AI · Tous droits réservés','© 2026 Medumba.AI · All rights reserved')}</span>
+                        <span style={{ fontSize:'.72rem' }}>{tr('Fait avec soin pour la communauté Medumba','Made with care for the Medumba community')}</span>
                     </div>
                 </div>
             </footer>
-
-            {/* ══ MODALE BUNDLE CLASS ══ */}
-            {bundleModal && (
-                <div onClick={() => setBundleModal(false)}
-                    style={{ position:'fixed',inset:0,background:'rgba(0,0,0,.55)',backdropFilter:'blur(4px)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center',padding:'1.25rem' }}>
-                    <div onClick={e => e.stopPropagation()}
-                        style={{ background:'#fff',borderRadius:'24px',padding:isMobile?'2rem 1.5rem':'2.5rem 2.25rem',maxWidth:'420px',width:'100%',position:'relative',boxShadow:'0 32px 80px rgba(0,0,0,.25)' }}>
-
-                        {/* Fermer */}
-                        <button onClick={() => setBundleModal(false)}
-                            style={{ position:'absolute',top:'1rem',right:'1rem',background:'none',border:'none',cursor:'pointer',color:MUTED,fontSize:'1.2rem',lineHeight:1,padding:'.25rem' }}>✕</button>
-
-                        {/* En-tête */}
-                        <div style={{ textAlign:'center',marginBottom:'1.75rem' }}>
-                            <div style={{ width:'52px',height:'52px',borderRadius:'16px',background:LIGHT,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.6rem',margin:'0 auto .9rem' }}>🎓</div>
-                            <h3 style={{ fontFamily:SERIF,fontWeight:700,fontSize:'1.35rem',color:INK,marginBottom:'.4rem',letterSpacing:'-.015em' }}>Accès Bundle</h3>
-                            <p style={{ fontSize:'.84rem',color:MUTED,lineHeight:1.7 }}>
-                                Choisissez ce dont vous avez besoin pour commencer.
-                            </p>
-                        </div>
-
-                        {/* Bouton 1 — Dictionnaire */}
-                        <button onClick={() => { setBundleModal(false); onNavigate ? onNavigate('dictionnaire') : onStart(); }}
-                            style={{ width:'100%',display:'flex',alignItems:'center',gap:'1rem',background:LIGHT,border:`1.5px solid ${SAND}`,borderRadius:'14px',padding:'1.1rem 1.25rem',cursor:'pointer',marginBottom:'.85rem',transition:'all .18s',textAlign:'left' }}
-                            onMouseEnter={e=>{ e.currentTarget.style.borderColor=B; e.currentTarget.style.background=`${B}08`; }}
-                            onMouseLeave={e=>{ e.currentTarget.style.borderColor=SAND; e.currentTarget.style.background=LIGHT; }}>
-                            <span style={{ fontSize:'1.6rem',flexShrink:0 }}>📚</span>
-                            <div>
-                                <div style={{ fontWeight:700,fontSize:'.92rem',color:INK,marginBottom:'2px' }}>Accéder au dictionnaire</div>
-                                <div style={{ fontSize:'.76rem',color:MUTED }}>4 257 mots · Medumba · Français · Anglais</div>
-                            </div>
-                            <span style={{ marginLeft:'auto',color:B,fontWeight:700,flexShrink:0 }}>→</span>
-                        </button>
-
-                        {/* Bouton 2 — Demander un cours */}
-                        <a href={waLink} target="_blank" rel="noopener noreferrer"
-                            onClick={() => setBundleModal(false)}
-                            style={{ width:'100%',display:'flex',alignItems:'center',gap:'1rem',background:'#dcfce7',border:'1.5px solid #bbf7d0',borderRadius:'14px',padding:'1.1rem 1.25rem',cursor:'pointer',textDecoration:'none',transition:'all .18s' }}
-                            onMouseEnter={e=>{ e.currentTarget.style.background='#bbf7d0'; }}
-                            onMouseLeave={e=>{ e.currentTarget.style.background='#dcfce7'; }}>
-                            <span style={{ fontSize:'1.6rem',flexShrink:0 }}>💬</span>
-                            <div>
-                                <div style={{ fontWeight:700,fontSize:'.92rem',color:'#15803d',marginBottom:'2px' }}>Demander un cours</div>
-                                <div style={{ fontSize:'.76rem',color:'#16a34a' }}>Contacter un enseignant via WhatsApp</div>
-                            </div>
-                            <span style={{ marginLeft:'auto',color:'#15803d',fontWeight:700,flexShrink:0 }}>→</span>
-                        </a>
-
-                        <p style={{ textAlign:'center',fontSize:'.7rem',color:MUTED,marginTop:'1.25rem' }}>
-                            Un enseignant certifié CEPOM vous répondra dans les 24h.
-                        </p>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

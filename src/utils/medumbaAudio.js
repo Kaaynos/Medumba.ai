@@ -7,7 +7,7 @@
  */
 import { supabase } from '../config/supabase';
 import vocalSrc from '../assets/vocal-count-medumba.ogg';
-import { segmentPhraseLenient, playPhraseAudioLenient } from './syllableAudio';
+import { segmentPhrase, segmentPhraseLenient, playPhraseAudioLenient } from './syllableAudio';
 
 const BUCKET = 'medumba-audio';
 
@@ -250,6 +250,20 @@ async function _playNumberClipOrTTS(word, onStart, onEnd) {
 
     // 4 — TTS fallback
     _playTTS(word, onStart, onEnd);
+}
+
+/**
+ * True si `word` a une vraie voix disponible via l'une des sources réelles
+ * (enregistrement exact, syllabes enregistrées, clip de nombre) — sans
+ * compter le repli TTS. Sert à filtrer les listes (Phrasebook, Fiches de
+ * vocabulaire) pour le lancement du 26 juillet : moins de mots affichés,
+ * mais 100% fiables plutôt qu'un TTS de secours partout (cf. réunion).
+ */
+export function hasRealVoice(word) {
+    if (!word) return false;
+    if (STORAGE_FILES[word]) return true;
+    if (WORD_CLIPS[word]) return true;
+    return segmentPhrase(word) !== null;
 }
 
 /** Stop any currently playing audio immediately. */

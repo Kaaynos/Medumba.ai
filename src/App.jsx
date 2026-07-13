@@ -30,6 +30,7 @@ import CountingPage             from './components/CountingPage';
 import DictionaryPage           from './components/DictionaryPage';
 import PronunciationPage        from './components/PronunciationPage';
 import AlphabetPage             from './components/AlphabetPage';
+import CepomPage                from './components/CepomPage';
 import AdminPage                from './components/AdminPage';
 import AppDownloadPage          from './components/AppDownloadPage';
 import ErrorBoundary            from './components/ErrorBoundary';
@@ -280,6 +281,7 @@ function App() {
       {step === 14 && hubView === 'dictionary'     && <DictionaryPage    nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'pronunciation' && <PronunciationPage nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'alphabet'      && <AlphabetPage      nativeLang={nativeLang} onBack={() => go(1)} />}
+      {step === 14 && hubView === 'cepom'         && <CepomPage         nativeLang={nativeLang} onBack={() => go(1)} />}
 
       {/* ── Gamified Dashboard ── */}
       {step === 15 && (

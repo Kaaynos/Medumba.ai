@@ -1,23 +1,30 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { DICTIONARY } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
-import { playPhraseAudioLenient, segmentPhrase } from '../utils/syllableAudio';
+import { playPhraseAudio, segmentPhrase } from '../utils/syllableAudio';
 
-const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({
-    medumba: e.medumba,
-    french:  e.fr,
-    isExpression: true,
-}));
+// Lancement du 26 juillet : le dictionnaire n'affiche que les entrées avec
+// une vraie voix complète (ni TTS de secours, ni silence) — cf. décision
+// réunion "less is more" plutôt qu'un dictionnaire large mais peu fiable.
+const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({ medumba: e.medumba, french: e.fr, isExpression: true }));
 
-const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES];
+const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES].filter(e => segmentPhrase(e.medumba) !== null);
 const AI_URL = 'https://medumba-ai.onrender.com/api/translate';
+
+// Paires vérifiées (les deux formes ont une vraie voix complète) pour que
+// les puces de suggestion ne mènent jamais à "aucun résultat".
+const SUGGESTION_CHIPS = [
+    { fr: 'Main',    md: 'Bu' },
+    { fr: 'Pied',    md: 'Kù' },
+    { fr: 'Chien',   md: 'Mbʉ' },
+    { fr: 'Enfant',  md: 'Mɛn' },
+    { fr: 'Rouge',   md: 'Bà' },
+];
 
 // Mots courts affichés par défaut avant que l'utilisateur ne cherche —
 // une page vide au premier chargement donne une mauvaise impression.
-// Les mots avec une vraie voix enregistrée passent en premier.
-const DEFAULT_ENTRIES = DICTIONARY
+const DEFAULT_ENTRIES = ALL_ENTRIES
     .filter(e => e.medumba && e.medumba.length <= 12 && !e.medumba.includes(' '))
-    .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null))
     .slice(0, 24);
 
 // Une ligne d'entrée du dictionnaire (mot + traduction + bouton écouter),
@@ -97,24 +104,13 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
         window.speechSynthesis.speak(u);
     };
 
-    // Joue un mot Medumba avec les vrais enregistrements de syllabes ; les
-    // mots non couverts basculent en synthèse vocale individuellement sans
-    // faire échouer toute l'entrée (voir syllableAudio.js).
+    // Joue un mot Medumba avec les vrais enregistrements de syllabes.
+    // Aucun repli TTS : toutes les entrées affichées ont déjà une couverture
+    // vocale complète garantie par le filtre sur ALL_ENTRIES ci-dessus.
     const audioRef = useRef(null);
     const playEntry = (medumba) => {
         setSpeaking(medumba);
-        playPhraseAudioLenient(audioRef, medumba, {
-            onEnd: () => setSpeaking(null),
-            ttsSpeak: (text, onDone) => {
-                if (!window.speechSynthesis) { onDone(); return; }
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'fr-FR'; u.rate = 0.8;
-                u.onend = onDone; u.onerror = onDone;
-                window.speechSynthesis.speak(u);
-            },
-            onFallback: (p) => speak(p),
-        });
+        playPhraseAudio(audioRef, medumba, { onEnd: () => setSpeaking(null) });
     };
 
     useEffect(() => () => {
@@ -251,17 +247,19 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                         <div style={{ flex: 1, overflowY: 'auto', animation: 'fade-up 0.3s ease-out both' }}>
                             <div style={{ padding: '1.25rem 1.5rem 0.75rem', textAlign: 'center' }}>
                                 <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.6, marginBottom: '0.9rem' }}>
-                                    {isFr ? '4 257 mots et 259 expressions Medumba' : '4,257 words and 259 Medumba expressions'}
+                                    {isFr
+                                        ? `${ALL_ENTRIES.length} mots et expressions Medumba avec vraie voix`
+                                        : `${ALL_ENTRIES.length} Medumba words and expressions with real voice`}
                                 </p>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
-                                    {(lang === 'french'
-                                        ? ['Eau', 'Feu', 'Maison', 'Enfant', 'Soleil']
-                                        : ['Mbʉ', 'Ntsə', 'Bùsi', 'Nyàm', 'Mɛn']
-                                    ).map(w => (
-                                        <button key={w} onClick={() => setQuery(w)} style={{ background: '#dcfce7', border: '2px solid #bbf7d0', borderRadius: '99px', padding: '0.3rem 0.85rem', fontSize: '0.82rem', fontWeight: '700', color: '#16a34a', cursor: 'pointer', fontFamily: 'inherit' }}>
-                                            {w}
-                                        </button>
-                                    ))}
+                                    {SUGGESTION_CHIPS.map(pair => {
+                                        const w = lang === 'french' ? pair.fr : pair.md;
+                                        return (
+                                            <button key={w} onClick={() => setQuery(w)} style={{ background: '#dcfce7', border: '2px solid #bbf7d0', borderRadius: '99px', padding: '0.3rem 0.85rem', fontSize: '0.82rem', fontWeight: '700', color: '#16a34a', cursor: 'pointer', fontFamily: 'inherit' }}>
+                                                {w}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             </div>
 

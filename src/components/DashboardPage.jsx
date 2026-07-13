@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
-import { playMedumbaWord, stopMedumbaAudio } from '../utils/medumbaAudio';
-import { segmentPhrase } from '../utils/syllableAudio';
+import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo.png';
@@ -1818,16 +1817,18 @@ const DashboardPage = ({
         { id: 'school',    icon: '🎓', lessons: ['l13','l14'],premium: true,  en: 'School & Work',              fr: 'École & Travail',              desc_en: 'Navigate school and professional life', desc_fr: 'École et vie professionnelle' },
         { id: 'nature',    icon: '🌿', lessons: ['l6','l8'],  premium: true,  en: 'Nature & Animals',           fr: 'Nature & Animaux',             desc_en: 'Talk about nature and wildlife', desc_fr: 'La nature et les animaux' },
         { id: 'culture',   icon: '🥁', lessons: ['l17'],      premium: true,  en: 'Culture & Rites',            fr: 'Culture & Rites',              desc_en: 'Medumba traditions and rites', desc_fr: 'Traditions et rites Medumba' },
-    ];
+    ].filter(cat => PHRASEBOOK_EXPRESSIONS.some(e =>
+        e.lessons && cat.lessons.some(l => e.lessons.includes(l)) && hasRealVoice(e.medumba)
+    )); // lancement 26 juillet : masquer les catégories sans aucune vraie voix
 
     const renderPhrasebook = () => {
         if (pbCategory) {
             const cat    = PB_CATEGORIES.find(c => c.id === pbCategory);
+            // Lancement du 26 juillet : ne montrer que les phrases avec vraie
+            // voix (fiable), plutôt qu'un repli TTS sur les non couvertes.
             const phrases = PHRASEBOOK_EXPRESSIONS.filter(e =>
-                e.lessons && cat.lessons.some(l => e.lessons.includes(l))
-            )
-                .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null))
-                .slice(0, 35);
+                e.lessons && cat.lessons.some(l => e.lessons.includes(l)) && hasRealVoice(e.medumba)
+            ).slice(0, 35);
             const showMedumba = pbDir === 'medumba';
             return (
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -1919,7 +1920,9 @@ const DashboardPage = ({
         { id: 'numbers',   icon: '🔢',   en: 'Numbers',   fr: 'Chiffres',   premium: false, keywords: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'] },
         { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: true,  keywords: ['champ','arbre','soleil','rivière','montagne','pluie','vent','feu','terre','fleur','forêt','rocher','feuille'] },
         { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: true,  keywords: ['bonjour','salut','merci','oui','non','bienvenue','viens','bonsoir','bonne nuit','au revoir'] },
-    ];
+    ].filter(cat => VOCAB_EXPRESSIONS.some(v =>
+        cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase())) && hasRealVoice(v.medumba)
+    )); // lancement 26 juillet : masquer les catégories sans aucune vraie voix
 
     const WORD_ICONS = {
         // Animals — each gets its own emoji
@@ -2097,9 +2100,11 @@ const DashboardPage = ({
     const renderWordCards = () => {
         if (wcCategory !== null) {
             const cat   = WC_CATEGORIES[wcCategory];
+            // Lancement du 26 juillet : ne montrer que les mots avec vraie
+            // voix (fiable), plutôt qu'un repli TTS sur les non couverts.
             const words = VOCAB_EXPRESSIONS.filter(v =>
-                cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase()))
-            ).sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null));
+                cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase())) && hasRealVoice(v.medumba)
+            );
             if (wcCard !== null) {
                 const word = words[wcCard] || words[0];
                 return (

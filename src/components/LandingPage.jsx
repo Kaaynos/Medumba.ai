@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
 import { getActiveLearnerCount } from '../services/statsService';
+import { submitContactMessage } from '../services/contactService';
 
 /* ── Palette Medumba ── */
 const B    = '#0056D2';
@@ -167,6 +168,23 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
         getActiveLearnerCount().then(n => { if (n !== null) setActiveLearners(n); });
     }, []);
     const learnerCountLabel = activeLearners ?? '…';
+
+    // Formulaire de contact compact dans le footer.
+    const [footerForm, setFooterForm] = useState({ name: '', email: '', message: '' });
+    const [footerStatus, setFooterStatus] = useState('idle'); // idle | sending | sent | error
+    const footerSet = (field) => (e) => setFooterForm(f => ({ ...f, [field]: e.target.value }));
+    const submitFooterForm = async (e) => {
+        e.preventDefault();
+        if (!footerForm.name.trim() || !footerForm.email.trim() || !footerForm.message.trim()) return;
+        setFooterStatus('sending');
+        try {
+            await submitContactMessage(footerForm);
+            setFooterStatus('sent');
+            setFooterForm({ name: '', email: '', message: '' });
+        } catch {
+            setFooterStatus('error');
+        }
+    };
 
     const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
 
@@ -828,6 +846,35 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                             ))}
                         </div>
                     </div>
+                    {/* ── Formulaire de contact compact ── */}
+                    <div style={{ borderTop:'1px solid rgba(255,255,255,.08)',paddingTop:'1.75rem',paddingBottom:'1.75rem' }}>
+                        <p style={{ fontSize:'.78rem',fontWeight:800,color:'rgba(248,250,252,.7)',letterSpacing:'.5px',textTransform:'uppercase',marginBottom:'.9rem' }}>
+                            {tr('Une question ? Écrivez-nous','Have a question? Write to us')}
+                        </p>
+                        {footerStatus === 'sent' ? (
+                            <div style={{ background:'rgba(34,197,94,.12)',border:'1.5px solid rgba(34,197,94,.35)',borderRadius:'12px',padding:'.85rem 1.1rem',color:'#4ade80',fontWeight:700,fontSize:'.85rem',maxWidth:'520px' }}>
+                                ✅ {tr('Message envoyé ! Merci.','Message sent! Thank you.')}
+                            </div>
+                        ) : (
+                            <form onSubmit={submitFooterForm} style={{ display:'flex', flexDirection:isMobile?'column':'row', gap:'.6rem', maxWidth:'720px' }}>
+                                <input required value={footerForm.name} onChange={footerSet('name')} placeholder={tr('Nom','Name')}
+                                    style={{ flex:1, padding:'.65rem .9rem', borderRadius:'10px', border:'1.5px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'#fff', fontFamily:'inherit', fontSize:'.85rem', outline:'none' }} />
+                                <input required type="email" value={footerForm.email} onChange={footerSet('email')} placeholder="Email"
+                                    style={{ flex:1, padding:'.65rem .9rem', borderRadius:'10px', border:'1.5px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'#fff', fontFamily:'inherit', fontSize:'.85rem', outline:'none' }} />
+                                <input required value={footerForm.message} onChange={footerSet('message')} placeholder={tr('Votre message','Your message')}
+                                    style={{ flex:2, padding:'.65rem .9rem', borderRadius:'10px', border:'1.5px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'#fff', fontFamily:'inherit', fontSize:'.85rem', outline:'none' }} />
+                                <button type="submit" disabled={footerStatus==='sending'} className="lp-btn-amber" style={{ padding:'.65rem 1.4rem', fontSize:'.85rem', whiteSpace:'nowrap', opacity: footerStatus==='sending'?0.7:1 }}>
+                                    {footerStatus==='sending' ? (tr('Envoi…','Sending…')) : (tr('Envoyer','Send'))}
+                                </button>
+                            </form>
+                        )}
+                        {footerStatus === 'error' && (
+                            <div style={{ fontSize:'.78rem', color:'#f87171', fontWeight:600, marginTop:'.5rem' }}>
+                                {tr("Erreur d'envoi. Réessayez.",'Failed to send. Please try again.')}
+                            </div>
+                        )}
+                    </div>
+
                     <div style={{ borderTop:'1px solid rgba(255,255,255,.05)',paddingTop:'1.5rem',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:'.75rem' }}>
                         <span style={{ fontSize:'.72rem' }}>{tr('© 2026 Medumba.AI · Tous droits réservés','© 2026 Medumba.AI · All rights reserved')}</span>
                         <span style={{ fontSize:'.72rem' }}>{tr('Fait avec soin pour la communauté Medumba','Made with care for the Medumba community')}</span>

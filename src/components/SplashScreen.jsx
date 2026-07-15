@@ -13,8 +13,8 @@ const SplashScreen = ({ onFinish }) => {
     const unsubscribe = listenAuthState((user) => {
       unsubscribe();
 
-      fadeTimer = setTimeout(() => setVisible(false), 2000);
-      navTimer  = setTimeout(() => onFinish(user), 2500);
+      fadeTimer = setTimeout(() => setVisible(false), 500);
+      navTimer  = setTimeout(() => onFinish(user), 700);
     });
 
     return () => {

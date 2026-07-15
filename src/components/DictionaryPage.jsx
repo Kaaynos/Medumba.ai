@@ -1,14 +1,16 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { DICTIONARY } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
-import { playPhraseAudio, segmentPhrase } from '../utils/syllableAudio';
+import { playPhraseAudio } from '../utils/syllableAudio';
+import { hasRealVoice } from '../utils/medumbaAudio';
 
 // Lancement du 26 juillet : le dictionnaire n'affiche que les entrées avec
-// une vraie voix complète (ni TTS de secours, ni silence) — cf. décision
-// réunion "less is more" plutôt qu'un dictionnaire large mais peu fiable.
+// une vraie voix EXACTE (ni TTS de secours, ni mot "créé" en enchaînant
+// plusieurs syllabes) — cf. décision réunion "less is more" / "Remove the
+// created vocals for words" plutôt qu'un dictionnaire large mais peu fiable.
 const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({ medumba: e.medumba, french: e.fr, isExpression: true }));
 
-const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES].filter(e => segmentPhrase(e.medumba) !== null);
+const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES].filter(e => hasRealVoice(e.medumba));
 const AI_URL = 'https://medumba-ai.onrender.com/api/translate';
 
 // Paires vérifiées (les deux formes ont une vraie voix complète) pour que

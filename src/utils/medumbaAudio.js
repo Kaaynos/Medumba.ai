@@ -253,17 +253,22 @@ async function _playNumberClipOrTTS(word, onStart, onEnd) {
 }
 
 /**
- * True si `word` a une vraie voix disponible via l'une des sources réelles
- * (enregistrement exact, syllabes enregistrées, clip de nombre) — sans
- * compter le repli TTS. Sert à filtrer les listes (Phrasebook, Fiches de
- * vocabulaire) pour le lancement du 26 juillet : moins de mots affichés,
- * mais 100% fiables plutôt qu'un TTS de secours partout (cf. réunion).
+ * True si `word` a une vraie voix EXACTE — un enregistrement exact du mot/
+ * de la phrase entière (STORAGE_FILES, clip de nombre), ou une seule syllabe
+ * enregistrée qui constitue le mot en entier. Exclut délibérément les mots
+ * "créés" en enchaînant plusieurs clips de syllabes bout à bout : ça ne
+ * sonne pas comme un enregistrement naturel et fluide (cf. réunion :
+ * "Remove the created vocals for words" / "Remove the words that don't
+ * have exact vocals"). Sert à filtrer les listes (Dictionnaire, Phrasebook,
+ * Fiches de vocabulaire) pour le lancement du 26 juillet : moins de mots
+ * affichés, mais 100% authentiques plutôt qu'une composition artificielle.
  */
 export function hasRealVoice(word) {
     if (!word) return false;
     if (STORAGE_FILES[word]) return true;
     if (WORD_CLIPS[word]) return true;
-    return segmentPhrase(word) !== null;
+    const seg = segmentPhrase(word);
+    return seg !== null && seg.length === 1;
 }
 
 /** Stop any currently playing audio immediately. */

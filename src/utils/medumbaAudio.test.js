@@ -21,4 +21,12 @@ describe('hasRealVoice', () => {
     it('returns false for a word with no real audio source at all', () => {
         expect(hasRealVoice('zzzzqqqq')).toBe(false);
     });
+
+    it('returns false for a "created" word assembled from 2+ concatenated syllables', () => {
+        // 'Fikɛ̀d' (slowness) decomposes into 2 recorded syllables, but there is
+        // no single natural recording of the whole word — per the meeting
+        // decision ("Remove the created vocals for words"), this must not
+        // count as real voice even though each piece individually exists.
+        expect(hasRealVoice('Fikɛ̀d')).toBe(false);
+    });
 });

@@ -877,6 +877,10 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
                     <div style={{ borderTop:'1px solid rgba(255,255,255,.05)',paddingTop:'1.5rem',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:'.75rem' }}>
                         <span style={{ fontSize:'.72rem' }}>{tr('© 2026 Medumba.AI · Tous droits réservés','© 2026 Medumba.AI · All rights reserved')}</span>
+                        <span style={{ fontSize:'.72rem',display:'flex',gap:'1rem' }}>
+                            <a href="/privacy" style={{ color:'inherit',textDecoration:'none' }}>{tr('Confidentialité','Privacy')}</a>
+                            <a href="/terms" style={{ color:'inherit',textDecoration:'none' }}>{tr("Conditions d'utilisation",'Terms of Service')}</a>
+                        </span>
                         <span style={{ fontSize:'.72rem' }}>{tr('Fait avec soin pour la communauté Medumba','Made with care for the Medumba community')}</span>
                     </div>
                 </div>

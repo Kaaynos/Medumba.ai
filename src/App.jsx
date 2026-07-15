@@ -34,6 +34,8 @@ import CepomPage                from './components/CepomPage';
 import ContactPage              from './components/ContactPage';
 import AdminPage                from './components/AdminPage';
 import AppDownloadPage          from './components/AppDownloadPage';
+import PrivacyPage              from './components/PrivacyPage';
+import TermsPage                from './components/TermsPage';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
 
@@ -168,6 +170,12 @@ function App() {
     _focus:      _zp?.focus      ?? 'vocabulary',
     _motivation: getMotivationMessage(_zp),
   };
+
+  // ── Standalone legal pages (direct URL, outside the step machine) ──
+  // Required so Google's OAuth branding-verification crawler can fetch
+  // /privacy and /terms directly without going through onboarding.
+  if (window.location.pathname === '/privacy') return <PrivacyPage nativeLang={nativeLang} />;
+  if (window.location.pathname === '/terms') return <TermsPage nativeLang={nativeLang} />;
 
   return (
     <ThemeProvider>

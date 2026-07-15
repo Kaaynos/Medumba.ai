@@ -5,6 +5,8 @@ import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { useTheme } from '../context/ThemeContext';
+import CertificationPage from './CertificationPage';
+import { UNIT_CERTIFICATIONS } from '../data/certification';
 import logo from '../assets/logo.png';
 import profileWelcomeVector from '../assets/profile_welcome_vector.png';
 import celebrationImg from '../assets/Auto Layout Vertical.png';
@@ -294,6 +296,12 @@ const DashboardPage = ({
     const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem(lsKey('med_completed')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
     useEffect(() => { localStorage.setItem(lsKey('med_completed'), JSON.stringify([...completedLessons])); }, [completedLessons]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    /* ── unit certifications (CEPOM) persisted in localStorage (per user) ── */
+    const [completedCertifications, setCompletedCertifications] = useState(() => { try { const v = localStorage.getItem(lsKey('med_certifications')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
+    useEffect(() => { localStorage.setItem(lsKey('med_certifications'), JSON.stringify([...completedCertifications])); }, [completedCertifications]); // eslint-disable-line react-hooks/exhaustive-deps
+    const [certFlow,  setCertFlow]  = useState(null);   // null | 'exam'
+    const [activeCert, setActiveCert] = useState(null); // { unitId, titleFr, titleEn, lessonIds }
+
     /* ── linear progression: completing item[i] → item[i+1] becomes active ── */
     const applySessionProgress = (units) => {
         // Flatten all lessons across ALL units in sequence order
@@ -436,7 +444,8 @@ const DashboardPage = ({
             subEn:   'Learn the basics of Medumba',
             subFr:   'Apprenez les bases du Medumba',
             lessons: [
-                { id: 'l1', titleEn: 'Greetings',  titleFr: 'Salutations',   type: 'lesson', status: 'active'  },
+                { id: 'l0', titleEn: 'Alphabet',   titleFr: 'Alphabet',      type: 'lesson', status: 'active'  },
+                { id: 'l1', titleEn: 'Greetings',  titleFr: 'Salutations',   type: 'lesson', status: 'locked'  },
                 { id: 'l2', titleEn: 'Body Parts',  titleFr: 'Corps humain',  type: 'lesson', status: 'locked'  },
                 { id: 'l3', titleEn: 'Food',        titleFr: 'Nourriture',    type: 'lesson', status: 'locked'  },
                 { id: 'c1', titleEn: 'Chest',       titleFr: 'Coffre',        type: 'chest',  status: 'locked'  },
@@ -1525,6 +1534,46 @@ const DashboardPage = ({
                             </div>
                         </div>
 
+                        {/* Certification banner (CEPOM) — Medumba course only */}
+                        {learnLang === 'medumba' && (() => {
+                            const certUnit = UNIT_CERTIFICATIONS.find(c => c.unitId === unit.id);
+                            if (!certUnit) return null;
+                            const certified = completedCertifications.has(unit.id);
+                            const allDone = unit.lessons
+                                .filter(l => l.type === 'lesson')
+                                .every(l => l.status === 'completed');
+                            return (
+                                <div style={{
+                                    margin: isMobile ? '0.75rem 0.75rem 0' : '0.75rem 2rem 0',
+                                    borderRadius: '14px', padding: '0.85rem 1.1rem',
+                                    display: 'flex', alignItems: 'center', gap: '0.75rem',
+                                    backgroundColor: certified ? '#f0fdf4' : allDone ? '#eff6ff' : (isDark ? '#1e2535' : '#f8fafc'),
+                                    border: `1.5px solid ${certified ? '#bbf7d0' : allDone ? '#bfdbfe' : (isDark ? '#334155' : '#e2e8f0')}`,
+                                }}>
+                                    <span style={{ fontSize: '1.3rem' }}>{certified ? '✅' : '🎓'}</span>
+                                    <div style={{ flex: 1, fontSize: '0.8rem', fontWeight: '700', color: certified ? '#15803d' : allDone ? '#0056D2' : (isDark ? '#94a3b8' : '#64748b') }}>
+                                        {certified
+                                            ? (isFr ? 'Certification CEPOM obtenue' : 'CEPOM certification earned')
+                                            : allDone
+                                                ? (isFr ? 'Unité terminée — examen de certification disponible' : 'Unit complete — certification exam available')
+                                                : (isFr ? 'Terminez toutes les leçons pour débloquer la certification' : 'Complete all lessons to unlock certification')}
+                                    </div>
+                                    {(allDone || certified) && (
+                                        <button
+                                            onClick={() => { setActiveCert(certUnit); setCertFlow('exam'); }}
+                                            style={{
+                                                flexShrink: 0, padding: '0.5rem 1rem', borderRadius: '9999px', border: 'none',
+                                                backgroundColor: certified ? '#22c55e' : '#0056D2', color: '#fff',
+                                                fontWeight: '800', fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'inherit',
+                                            }}
+                                        >
+                                            {certified ? (isFr ? 'Revoir' : 'Review') : (isFr ? 'Examen' : 'Exam')}
+                                        </button>
+                                    )}
+                                </div>
+                            );
+                        })()}
+
                         {/* Lesson nodes */}
                         <div style={{
                             display: 'flex', flexDirection: 'column',
@@ -1842,7 +1891,7 @@ const DashboardPage = ({
                     </div>
                     {/* Language toggle */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
-                        <button onClick={() => setPbDir('fr')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'fr' ? '#eff6ff' : 'transparent', color: pbDir === 'fr' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Français</button>
+                        <button onClick={() => setPbDir('fr')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'fr' ? '#eff6ff' : 'transparent', color: pbDir === 'fr' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Français' : 'French'}</button>
                         <span style={{ color: T.textSub, fontWeight: '700' }}>⇄</span>
                         <button onClick={() => setPbDir('medumba')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'medumba' ? '#eff6ff' : 'transparent', color: pbDir === 'medumba' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Medumba</button>
                     </div>
@@ -3149,6 +3198,21 @@ const DashboardPage = ({
             </div>
         </aside>
     );
+
+    /* ════════════════════════════════════════════════════════════════
+       CERTIFICATION FLOW — full-screen take-over
+    ════════════════════════════════════════════════════════════════ */
+    if (certFlow === 'exam' && activeCert) {
+        return (
+            <CertificationPage
+                unit={activeCert}
+                learnerName={userName}
+                isFr={isFr}
+                onBack={() => { setCertFlow(null); setActiveCert(null); }}
+                onPassed={(unitId) => setCompletedCertifications(prev => new Set([...prev, unitId]))}
+            />
+        );
+    }
 
     /* ════════════════════════════════════════════════════════════════
        LESSON FLOW — full-screen take-over

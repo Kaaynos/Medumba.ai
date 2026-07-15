@@ -158,7 +158,7 @@ const VideoPlayer = ({ video, cat, isFr, onClose }) => {
 };
 
 /* ── Horizontal row card ───────────────────────────────────── */
-const VideoCard = ({ video, index, onPlay }) => (
+const VideoCard = ({ video, index, isFr, onPlay }) => (
     <div
         onClick={onPlay}
         style={{
@@ -217,7 +217,7 @@ const VideoCard = ({ video, index, onPlay }) => (
                 lineHeight: 1.25, display: '-webkit-box',
                 WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
             }}>
-                {video.titleFr}
+                {isFr ? video.titleFr : video.titleEn}
             </div>
         </div>
     </div>
@@ -300,18 +300,18 @@ const HeroCard = ({ video, isFr, onPlay }) => (
    SHORTS DATA — TikTok-style 30-sec cards
 ══════════════════════════════════════════════════════════════════ */
 const SHORTS = [
-    { id: 'sh1', word: 'Ndà\'ndà\'', fr: 'Salut !', en: 'Hi!',               color: '#7c3aed', emoji: '👋', cat: 'Salutations', audio: "Ndà'ndà' lα!" },
-    { id: 'sh2', word: 'Mə lὰbtə̌',  fr: 'Merci',   en: 'Thank you',          color: '#0056D2', emoji: '🙏', cat: 'Politesse',   audio: 'Mə lὰbtə̌' },
-    { id: 'sh3', word: 'Mbʉ',        fr: 'Chien',   en: 'Dog',                color: '#d97706', emoji: '🐕', cat: 'Animaux',     audio: 'Mbʉ' },
-    { id: 'sh4', word: 'Ntsə',       fr: 'Eau',     en: 'Water',              color: '#0891b2', emoji: '💧', cat: 'Nature',      audio: 'Ntsə' },
-    { id: 'sh5', word: 'Mɛn',        fr: 'Enfant',  en: 'Child',              color: '#16a34a', emoji: '👶', cat: 'Famille',     audio: 'Mɛn' },
-    { id: 'sh6', word: 'Nyàm',       fr: 'Soleil',  en: 'Sun',                color: '#f59e0b', emoji: '☀️', cat: 'Nature',      audio: 'Nyàm' },
-    { id: 'sh7', word: 'Mbwoge',     fr: 'Feu',     en: 'Fire',               color: '#ef4444', emoji: '🔥', cat: 'Nature',      audio: 'Mbwoge' },
-    { id: 'sh8', word: 'Baꞌ',        fr: 'Maison',  en: 'House',              color: '#059669', emoji: '🏠', cat: 'Maison',      audio: "Baꞌ" },
-    { id: 'sh9', word: 'Ngòn',       fr: 'Fille',   en: 'Girl',               color: '#e11d48', emoji: '👧', cat: 'Famille',     audio: 'Ngòn' },
-    { id: 'sh10', word: 'Bùsi',      fr: 'Chat',    en: 'Cat',                color: '#7c3aed', emoji: '🐱', cat: 'Animaux',     audio: 'Bùsi' },
-    { id: 'sh11', word: 'Mαŋwʉ',     fr: 'Lune',    en: 'Moon',               color: '#1e3a5f', emoji: '🌙', cat: 'Nature',      audio: 'Mαŋwʉ' },
-    { id: 'sh12', word: 'A fi tsə',  fr: 'Ça va bien', en: 'I am fine',       color: '#0f766e', emoji: '😊', cat: 'Salutations', audio: 'A fi tsə.' },
+    { id: 'sh1', word: 'Ndà\'ndà\'', fr: 'Salut !', en: 'Hi!',               color: '#7c3aed', emoji: '👋', catFr: 'Salutations', catEn: 'Greetings',  audio: "Ndà'ndà' lα!" },
+    { id: 'sh2', word: 'Mə lὰbtə̌',  fr: 'Merci',   en: 'Thank you',          color: '#0056D2', emoji: '🙏', catFr: 'Politesse',   catEn: 'Politeness', audio: 'Mə lὰbtə̌' },
+    { id: 'sh3', word: 'Mbʉ',        fr: 'Chien',   en: 'Dog',                color: '#d97706', emoji: '🐕', catFr: 'Animaux',     catEn: 'Animals',    audio: 'Mbʉ' },
+    { id: 'sh4', word: 'Ntsə',       fr: 'Eau',     en: 'Water',              color: '#0891b2', emoji: '💧', catFr: 'Nature',      catEn: 'Nature',     audio: 'Ntsə' },
+    { id: 'sh5', word: 'Mɛn',        fr: 'Enfant',  en: 'Child',              color: '#16a34a', emoji: '👶', catFr: 'Famille',     catEn: 'Family',     audio: 'Mɛn' },
+    { id: 'sh6', word: 'Nyàm',       fr: 'Soleil',  en: 'Sun',                color: '#f59e0b', emoji: '☀️', catFr: 'Nature',      catEn: 'Nature',     audio: 'Nyàm' },
+    { id: 'sh7', word: 'Mbwoge',     fr: 'Feu',     en: 'Fire',               color: '#ef4444', emoji: '🔥', catFr: 'Nature',      catEn: 'Nature',     audio: 'Mbwoge' },
+    { id: 'sh8', word: 'Baꞌ',        fr: 'Maison',  en: 'House',              color: '#059669', emoji: '🏠', catFr: 'Maison',      catEn: 'Home',       audio: "Baꞌ" },
+    { id: 'sh9', word: 'Ngòn',       fr: 'Fille',   en: 'Girl',               color: '#e11d48', emoji: '👧', catFr: 'Famille',     catEn: 'Family',     audio: 'Ngòn' },
+    { id: 'sh10', word: 'Bùsi',      fr: 'Chat',    en: 'Cat',                color: '#7c3aed', emoji: '🐱', catFr: 'Animaux',     catEn: 'Animals',    audio: 'Bùsi' },
+    { id: 'sh11', word: 'Mαŋwʉ',     fr: 'Lune',    en: 'Moon',               color: '#1e3a5f', emoji: '🌙', catFr: 'Nature',      catEn: 'Nature',     audio: 'Mαŋwʉ' },
+    { id: 'sh12', word: 'A fi tsə',  fr: 'Ça va bien', en: 'I am fine',       color: '#0f766e', emoji: '😊', catFr: 'Salutations', catEn: 'Greetings',  audio: 'A fi tsə.' },
 ];
 
 /* ── Single TikTok short card (full-screen vertical) ── */
@@ -340,7 +340,7 @@ const ShortCard = ({ short, isFr, liked, onLike }) => {
                 borderRadius: '99px', padding: '0.25rem 0.8rem',
                 fontSize: '0.7rem', fontWeight: '800', color: '#fff',
                 letterSpacing: '0.5px', textTransform: 'uppercase',
-            }}>{short.cat}</div>
+            }}>{isFr ? short.catFr : short.catEn}</div>
 
             {/* Main emoji */}
             <div style={{ fontSize: '7rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.4))' }}>
@@ -376,7 +376,7 @@ const ShortCard = ({ short, isFr, liked, onLike }) => {
                     boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
                 }}
             >
-                {playing ? '🔊 En cours…' : '🔊 Écouter'}
+                {playing ? (isFr ? '🔊 En cours…' : '🔊 Playing…') : (isFr ? '🔊 Écouter' : '🔊 Listen')}
             </button>
 
             {/* Right action buttons */}
@@ -392,7 +392,7 @@ const ShortCard = ({ short, isFr, liked, onLike }) => {
                     <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', fontWeight: '700' }}>{liked ? '1' : '0'}</span>
                 </button>
                 <button
-                    onClick={() => navigator.share?.({ title: `Medumba: ${short.word}`, text: `${short.word} = ${isFr ? short.fr : short.en} · Apprends le Medumba sur Medumba.AI !` }).catch(() => {})}
+                    onClick={() => navigator.share?.({ title: `Medumba: ${short.word}`, text: `${short.word} = ${isFr ? short.fr : short.en} · ${isFr ? 'Apprends le Medumba sur Medumba.AI !' : 'Learn Medumba on Medumba.AI!'}` }).catch(() => {})}
                     style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}
                 >
                     <span style={{ fontSize: '2rem' }}>📲</span>
@@ -613,6 +613,7 @@ const VideoPage = ({ nativeLang, onBack }) => {
                                     key={vi}
                                     video={vid}
                                     index={vi}
+                                    isFr={isFr}
                                     onPlay={() => setPlaying({ video: vid, cat })}
                                 />
                             ))}

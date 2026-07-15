@@ -504,7 +504,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     max="1000"
                                     value={convInput}
                                     onChange={e => setConvInput(e.target.value)}
-                                    placeholder="ex: 347"
+                                    placeholder={isFr ? 'ex: 347' : 'e.g. 347'}
                                     style={{
                                         width: '100%', boxSizing: 'border-box',
                                         fontSize: '2rem', fontWeight: '900', fontFamily: 'inherit',
@@ -555,6 +555,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                 {tab === 'math' && (() => {
                     const filtered = MEDUMBA_MATH.filter(m =>
                         m.fr.toLowerCase().includes(mathSearch.toLowerCase()) ||
+                        m.en.toLowerCase().includes(mathSearch.toLowerCase()) ||
                         m.medumba.toLowerCase().includes(mathSearch.toLowerCase())
                     );
                     return (
@@ -589,7 +590,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                         {i + 1}
                                     </div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748b' }}>{m.fr}</div>
+                                        <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748b' }}>{isFr ? m.fr : m.en}</div>
                                         <div style={{ fontSize: '1rem', fontWeight: 800, color: '#7c3aed' }}>{m.medumba}</div>
                                     </div>
                                 </div>

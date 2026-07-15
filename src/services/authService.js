@@ -82,6 +82,13 @@ export async function getUserProfile(uid) {
     return data;
 }
 
+/* ── Marque le profil comme vu à l'instant (compteur "apprenants actifs") ── */
+async function _touchLastSeen(uid) {
+    if (!uid) return;
+    try { await supabase.from('profiles').update({ last_seen: new Date().toISOString() }).eq('id', uid); }
+    catch { /* best-effort, ne doit jamais bloquer la connexion */ }
+}
+
 /* ── Écouter les changements d'état auth (même API qu'Firebase) ── */
 export function listenAuthState(callback) {
     // Vérifier la session existante au démarrage
@@ -89,8 +96,10 @@ export function listenAuthState(callback) {
         callback(session?.user ? _toUserShape(session.user) : null);
     });
 
-    // Écouter les changements futurs
+    // Écouter les changements futurs — met à jour last_seen sur une vraie
+    // connexion (email/mot de passe ou Google OAuth), pas sur chaque refresh.
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (_event === 'SIGNED_IN' && session?.user) _touchLastSeen(session.user.id);
         callback(session?.user ? _toUserShape(session.user) : null);
     });
 

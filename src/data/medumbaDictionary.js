@@ -275,6 +275,29 @@ export const THEMES_META = {
 
 /* Thematic lesson questions — imported by LessonPage */
 export const MEDUMBA_QUESTIONS = {
+  "l0": [
+    {
+      "sourceFr": "Maison",
+      "sourceEn": "House",
+      "answer": ["Baꞌ"],
+      "bank": ["Baꞌ", "Cα̂ꞌ", "Nkwǐ", "Mɛn", "Ntsə", "Saŋə"],
+      "audio": "Baꞌ"
+    },
+    {
+      "sourceFr": "Chien",
+      "sourceEn": "Dog",
+      "answer": ["Cα̂ꞌ"],
+      "bank": ["Cα̂ꞌ", "Baꞌ", "Nkwǐ", "Mɛn", "Ntsə", "Saŋə"],
+      "audio": "Cα̂ꞌ"
+    },
+    {
+      "sourceFr": "Enfant",
+      "sourceEn": "Child",
+      "answer": ["Mɛn"],
+      "bank": ["Mɛn", "Baꞌ", "Cα̂ꞌ", "Nkwǐ", "Ntsə", "Saŋə"],
+      "audio": "Mɛn"
+    }
+  ],
   "l1": [
     {
       "sourceFr": "Salut",
@@ -1533,6 +1556,45 @@ export const MEDUMBA_QUESTIONS = {
    to build proficiency-appropriate sessions.
 ════════════════════════════════════════════════════════════════ */
 export const LEVEL_QUESTIONS = {
+
+  /* ── l0 : Alphabet — example words drawn from the 32-letter reference
+     used in AlphabetPage.jsx, so vocabulary stays consistent across
+     the app. ─────────────────────────────────────────────────────── */
+  l0: {
+    meaning: [
+      { type: 'meaning', sourceFr: 'Maison', sourceEn: 'House', audio: 'Baꞌ',
+        options: ['Baꞌ', 'Cα̂ꞌ', 'Nkwǐ', 'Mɛn'],
+        optionsFr: ['Baꞌ', 'Cα̂ꞌ', 'Nkwǐ', 'Mɛn'],
+        answer: 'Baꞌ', answerFr: 'Baꞌ' },
+      { type: 'meaning', sourceFr: 'Chien', sourceEn: 'Dog', audio: 'Cα̂ꞌ',
+        options: ['Cα̂ꞌ', 'Baꞌ', 'Ntsə', 'Saŋə'],
+        optionsFr: ['Cα̂ꞌ', 'Baꞌ', 'Ntsə', 'Saŋə'],
+        answer: 'Cα̂ꞌ', answerFr: 'Cα̂ꞌ' },
+      { type: 'meaning', sourceFr: 'Singe', sourceEn: 'Monkey', audio: 'Nkwǐ',
+        options: ['Nkwǐ', 'Mɛn', 'Cα̂ꞌ', 'Ntsə'],
+        optionsFr: ['Nkwǐ', 'Mɛn', 'Cα̂ꞌ', 'Ntsə'],
+        answer: 'Nkwǐ', answerFr: 'Nkwǐ' },
+      { type: 'meaning', sourceFr: 'Enfant', sourceEn: 'Child', audio: 'Mɛn',
+        options: ['Mɛn', 'Nkwǐ', 'Saŋə', 'Baꞌ'],
+        optionsFr: ['Mɛn', 'Nkwǐ', 'Saŋə', 'Baꞌ'],
+        answer: 'Mɛn', answerFr: 'Mɛn' },
+      { type: 'meaning', sourceFr: 'Eau', sourceEn: 'Water', audio: 'Ntsə',
+        options: ['Ntsə', 'Saŋə', 'Mɛn', 'Cα̂ꞌ'],
+        optionsFr: ['Ntsə', 'Saŋə', 'Mɛn', 'Cα̂ꞌ'],
+        answer: 'Ntsə', answerFr: 'Ntsə' },
+      { type: 'meaning', sourceFr: 'Vache', sourceEn: 'Cow', audio: 'Saŋə',
+        options: ['Saŋə', 'Ntsə', 'Baꞌ', 'Nkwǐ'],
+        optionsFr: ['Saŋə', 'Ntsə', 'Baꞌ', 'Nkwǐ'],
+        answer: 'Saŋə', answerFr: 'Saŋə' },
+    ],
+    match: [{ type: 'match', pairs: [
+      { medumba: 'Baꞌ',  french: 'Maison', english: 'House'  },
+      { medumba: 'Cα̂ꞌ', french: 'Chien',  english: 'Dog'    },
+      { medumba: 'Nkwǐ', french: 'Singe',  english: 'Monkey' },
+      { medumba: 'Mɛn',  french: 'Enfant', english: 'Child'  },
+      { medumba: 'Ntsə', french: 'Eau',    english: 'Water'  },
+    ]}],
+  },
 
   /* ── l1 : Greetings ─────────────────────────────────────────── */
   l1: {

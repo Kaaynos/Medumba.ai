@@ -9,6 +9,8 @@ export default function AppDownloadPage({ onBack }) {
     const [email, setEmail] = useState('');
     const [notified, setNotified] = useState(false);
     const [isMobile] = useState(() => window.innerWidth < 768);
+    const [isFr, setIsFr] = useState(false); // English by default, like the landing page
+    const tr = (fr, en) => isFr ? fr : en;
 
     const handleNotify = (e) => {
         e.preventDefault();
@@ -43,17 +45,30 @@ export default function AppDownloadPage({ onBack }) {
                     <img src={logo} alt="Medumba.AI" style={{ width: '32px', height: 'auto' }} />
                     <span style={{ fontWeight: '900', fontSize: '1.1rem', color: '#0056D2' }}>Medumba.AI</span>
                 </div>
-                <button
-                    onClick={onBack}
-                    style={{
-                        background: 'none', border: `1.5px solid ${T.border}`,
-                        borderRadius: '99px', padding: '0.4rem 1rem',
-                        cursor: 'pointer', fontFamily: 'inherit',
-                        fontWeight: '700', fontSize: '0.85rem', color: T.text,
-                    }}
-                >
-                    ← Retour
-                </button>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <button
+                        onClick={() => setIsFr(v => !v)}
+                        style={{
+                            background: 'none', border: `1.5px solid ${T.border}`,
+                            borderRadius: '99px', padding: '0.4rem 0.7rem',
+                            cursor: 'pointer', fontFamily: 'inherit',
+                            fontWeight: '700', fontSize: '0.78rem', color: T.text,
+                        }}
+                    >
+                        {isFr ? '🇬🇧 EN' : '🇫🇷 FR'}
+                    </button>
+                    <button
+                        onClick={onBack}
+                        style={{
+                            background: 'none', border: `1.5px solid ${T.border}`,
+                            borderRadius: '99px', padding: '0.4rem 1rem',
+                            cursor: 'pointer', fontFamily: 'inherit',
+                            fontWeight: '700', fontSize: '0.85rem', color: T.text,
+                        }}
+                    >
+                        ← {tr('Retour', 'Back')}
+                    </button>
+                </div>
             </header>
 
             {/* ── Hero ── */}
@@ -89,14 +104,16 @@ export default function AppDownloadPage({ onBack }) {
                     fontWeight: '900', marginBottom: '0.75rem',
                     letterSpacing: '-0.03em', lineHeight: 1.15,
                 }}>
-                    Medumba.AI<br />dans votre poche
+                    Medumba.AI<br />{tr('dans votre poche', 'in your pocket')}
                 </h1>
                 <p style={{
                     fontSize: '1.05rem', opacity: 0.9, lineHeight: 1.6,
                     maxWidth: '480px', margin: '0 auto 2rem',
                 }}>
-                    Apprenez le Medumba n'importe où, n'importe quand.
-                    Leçons interactives, audio natif, culture authentique.
+                    {tr(
+                        "Apprenez le Medumba n'importe où, n'importe quand. Leçons interactives, audio natif, culture authentique.",
+                        'Learn Medumba anywhere, anytime. Interactive lessons, native audio, authentic culture.'
+                    )}
                 </p>
 
                 {/* Coming Soon badge */}
@@ -108,7 +125,7 @@ export default function AppDownloadPage({ onBack }) {
                     fontSize: '0.85rem', fontWeight: '700', letterSpacing: '0.5px',
                 }}>
                     <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#fbbf24' }} />
-                    LANCEMENT BIENTÔT — Été 2026
+                    {tr('LANCEMENT BIENTÔT — Été 2026', 'COMING SOON — Summer 2026')}
                 </div>
             </div>
 
@@ -122,7 +139,7 @@ export default function AppDownloadPage({ onBack }) {
                     textAlign: 'center', fontWeight: '800', fontSize: '1.2rem',
                     color: T.text, marginBottom: '1.5rem',
                 }}>
-                    Télécharger l'application
+                    {tr("Télécharger l'application", 'Download the app')}
                 </h2>
                 <div style={{
                     display: 'flex', gap: '1rem', justifyContent: 'center',
@@ -148,7 +165,7 @@ export default function AppDownloadPage({ onBack }) {
                             />
                             <div>
                                 <div style={{ fontSize: '0.65rem', fontWeight: '500', opacity: 0.8, letterSpacing: '0.3px' }}>
-                                    Disponible sur
+                                    {tr('Disponible sur', 'Available on')}
                                 </div>
                                 <div style={{ fontSize: '1.05rem', fontWeight: '800', letterSpacing: '-0.02em' }}>
                                     App Store
@@ -164,7 +181,7 @@ export default function AppDownloadPage({ onBack }) {
                                 backgroundColor: '#f59e0b', color: '#fff',
                                 fontWeight: '800', fontSize: '0.7rem', letterSpacing: '0.5px',
                                 padding: '0.25rem 0.75rem', borderRadius: '99px',
-                            }}>BIENTÔT</span>
+                            }}>{tr('BIENTÔT', 'SOON')}</span>
                         </div>
                     </div>
 
@@ -188,7 +205,7 @@ export default function AppDownloadPage({ onBack }) {
                             />
                             <div>
                                 <div style={{ fontSize: '0.65rem', fontWeight: '500', opacity: 0.8, letterSpacing: '0.3px' }}>
-                                    Télécharger sur
+                                    {tr('Télécharger sur', 'Get it on')}
                                 </div>
                                 <div style={{ fontSize: '1.05rem', fontWeight: '800', letterSpacing: '-0.02em' }}>
                                     Google Play
@@ -204,7 +221,7 @@ export default function AppDownloadPage({ onBack }) {
                                 backgroundColor: '#f59e0b', color: '#fff',
                                 fontWeight: '800', fontSize: '0.7rem', letterSpacing: '0.5px',
                                 padding: '0.25rem 0.75rem', borderRadius: '99px',
-                            }}>BIENTÔT</span>
+                            }}>{tr('BIENTÔT', 'SOON')}</span>
                         </div>
                     </div>
                 </div>
@@ -212,7 +229,7 @@ export default function AppDownloadPage({ onBack }) {
                 {/* Web app CTA */}
                 <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
                     <p style={{ fontSize: '0.85rem', color: T.textSub, marginBottom: '0.75rem' }}>
-                        En attendant, essayez la version web gratuite
+                        {tr('En attendant, essayez la version web gratuite', 'In the meantime, try the free web version')}
                     </p>
                     <button
                         onClick={onBack}
@@ -224,7 +241,7 @@ export default function AppDownloadPage({ onBack }) {
                             boxShadow: '0 4px 16px rgba(0,86,210,0.3)',
                         }}
                     >
-                        Utiliser la version web →
+                        {tr('Utiliser la version web', 'Use the web version')} →
                     </button>
                 </div>
             </div>
@@ -238,10 +255,10 @@ export default function AppDownloadPage({ onBack }) {
             }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🔔</div>
                 <h3 style={{ fontWeight: '800', fontSize: '1.15rem', color: T.text, marginBottom: '0.4rem' }}>
-                    Soyez notifié du lancement
+                    {tr('Soyez notifié du lancement', 'Get notified at launch')}
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: T.textSub, marginBottom: '1.25rem', lineHeight: 1.55 }}>
-                    Laissez votre email et nous vous prévenons dès que l'app est disponible.
+                    {tr("Laissez votre email et nous vous prévenons dès que l'app est disponible.", "Leave your email and we'll let you know as soon as the app is available.")}
                 </p>
 
                 {notified ? (
@@ -251,7 +268,7 @@ export default function AppDownloadPage({ onBack }) {
                         padding: '0.75rem 1.5rem', borderRadius: '16px',
                         color: '#16a34a', fontWeight: '700', fontSize: '0.95rem',
                     }}>
-                        ✅ Parfait ! On vous préviendra.
+                        ✅ {tr('Parfait ! On vous préviendra.', "Perfect! We'll let you know.")}
                     </div>
                 ) : (
                     <form
@@ -266,7 +283,7 @@ export default function AppDownloadPage({ onBack }) {
                             type="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
-                            placeholder="votre@email.com"
+                            placeholder={tr('votre@email.com', 'your@email.com')}
                             required
                             style={{
                                 flex: 1, padding: '0.85rem 1rem', borderRadius: '12px',
@@ -285,7 +302,7 @@ export default function AppDownloadPage({ onBack }) {
                                 whiteSpace: 'nowrap',
                             }}
                         >
-                            Me notifier
+                            {tr('Me notifier', 'Notify me')}
                         </button>
                     </form>
                 )}
@@ -297,7 +314,7 @@ export default function AppDownloadPage({ onBack }) {
                     fontWeight: '800', fontSize: '1.1rem', color: T.text,
                     marginBottom: '1.25rem', textAlign: 'center',
                 }}>
-                    Ce qui vous attend dans l'application
+                    {tr("Ce qui vous attend dans l'application", 'What awaits you in the app')}
                 </h3>
                 <div style={{
                     display: 'grid',
@@ -312,7 +329,7 @@ export default function AppDownloadPage({ onBack }) {
                         }}>
                             <span style={{ fontSize: '1.4rem' }}>{f.emoji}</span>
                             <span style={{ fontSize: '0.87rem', fontWeight: '600', color: T.text, lineHeight: 1.4 }}>
-                                {f.fr}
+                                {tr(f.fr, f.en)}
                             </span>
                         </div>
                     ))}
@@ -327,7 +344,7 @@ export default function AppDownloadPage({ onBack }) {
                 marginTop: 'auto',
             }}>
                 <p style={{ fontSize: '0.78rem', color: T.textSub }}>
-                    © 2026 Medumba.AI — Tous droits réservés
+                    © 2026 Medumba.AI — {tr('Tous droits réservés', 'All rights reserved')}
                 </p>
             </div>
         </div>

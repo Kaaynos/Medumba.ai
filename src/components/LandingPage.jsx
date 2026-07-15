@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
+import { getActiveLearnerCount } from '../services/statsService';
 
 /* ── Palette Medumba ── */
 const B    = '#0056D2';
@@ -29,7 +30,6 @@ const IconDict   = () => <Ico><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d
 const IconCalc   = () => <Ico><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></Ico>;
 const IconCal    = () => <Ico><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></Ico>;
 const IconAlpha  = () => <Ico><polyline points="4 20 8 4 12 16 16 8 20 20"/></Ico>;
-const IconCert   = () => <Ico><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></Ico>;
 const IconAndroid = () => (
     <svg width="26" height="26" viewBox="0 0 512 512" fill="currentColor">
         <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l236.6-236.1L47 0zm414.2 180.5l-48.6-28-67.9 67.9 67.9 67.9 49.4-28.7c14-7.8 23.8-22.2 23.8-38.6.1-16.4-9.4-31.2-24.6-40.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
@@ -161,6 +161,13 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
     const [isFr,      setIsFr]      = useState(false);
     const tr = (fr, en) => isFr ? fr : en;
 
+    // Nombre réel d'apprenants actifs (30 derniers jours) — remplace le "4" en dur.
+    const [activeLearners, setActiveLearners] = useState(null);
+    useEffect(() => {
+        getActiveLearnerCount().then(n => { if (n !== null) setActiveLearners(n); });
+    }, []);
+    const learnerCountLabel = activeLearners ?? '…';
+
     const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
 
     const isMobile = vw < 768;
@@ -189,6 +196,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
 
     const scrollTo = (id) => {
         if (id === 'download' && onDownload) { onDownload(); setMenuOpen(false); return; }
+        if (id === 'cepom' || id === 'contact') { nav(id); setMenuOpen(false); return; }
         document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
         setMenuOpen(false);
     };
@@ -221,9 +229,11 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
         { Ico:IconVideo,  titleFr:'Vidéos & Culture',      titleEn:'Videos & Culture',      descFr:"Tutoriels vidéo, musique traditionnelle et culture bamiléké — la langue et l'âme ensemble.", descEn:"Video tutorials, traditional music and Bamiléké culture — the language and the soul together." },
     ];
 
+    // Ancres qui font défiler la landing page ; 'cepom'/'contact' naviguent
+    // vers une vraie page séparée (pas de scroll) — voir scrollTo().
     const NAVLINKS = [
-        ['cours', tr('Cours','Courses')], ['pourquoi', tr('Pourquoi Medumba','Why Medumba')], ['ressources', tr('Ressources','Resources')],
-        ['classes', tr('Classes','Classes')], ['blog', tr('Blog','Blog')], ['download', tr('Télécharger','Download')],
+        ['cours', tr('Cours','Courses')], ['features', tr('Pourquoi Medumba','Why Medumba')], ['ressources', tr('Ressources','Resources')],
+        ['classes', tr('Classes','Classes')], ['cepom', tr('CEPOM','CEPOM')], ['contact', tr('Contact','Contact')], ['download', tr('Télécharger','Download')],
     ];
 
     const FLOAT_BADGE = (pos, emoji, label, value, color, anim) => (
@@ -374,7 +384,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         <Reveal>
                             <div style={{ display:'inline-flex',alignItems:'center',gap:'.45rem',background:`linear-gradient(135deg,${LIGHT},#dbeafe)`,border:`2px solid #bfdbfe`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.25rem' }}>
                                 <span style={{ width:'7px',height:'7px',borderRadius:'50%',background:'#22c55e',animation:'pulse-dot 1.8s ease-in-out infinite',display:'inline-block',flexShrink:0 }} />
-                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>{tr('4 apprenants nous ont déjà rejoints','4 learners have already joined us')}</span>
+                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>{tr(`${learnerCountLabel} apprenants nous ont déjà rejoints`,`${learnerCountLabel} learners have already joined us`)}</span>
                             </div>
                         </Reveal>
 
@@ -428,7 +438,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                                         <div key={idx} style={{ width:'30px',height:'30px',borderRadius:'50%',background:c,border:`2.5px solid ${CREAM}`,marginLeft:idx>0?'-9px':0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.5rem',fontWeight:800,color:'#fff',zIndex:3-idx }}>{i}</div>
                                     ))}
                                 </div>
-                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>{tr('4 apprenants','4 learners')}</strong> {tr('nous font déjà confiance','already trust us')}</p>
+                                <p style={{ fontSize:'.82rem',color:MUTED,fontWeight:500 }}><strong style={{ color:INK }}>{tr(`${learnerCountLabel} apprenants`,`${learnerCountLabel} learners`)}</strong> {tr('nous font déjà confiance','already trust us')}</p>
                             </div>
                         </Reveal>
                     </div>
@@ -461,7 +471,6 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                             { Ico:IconMic,  view:'pronunciation', titleFr:'Prononciation', titleEn:'Pronunciation', descFr:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', descEn:'Read Medumba words aloud with an IPA syllable guide and 1,147 syllables.', color:'#9333ea', badgeFr:'1 147 syllabes', badgeEn:'1,147 syllables' },
                             { Ico:IconCal,  view:'calendar',      titleFr:'Calendrier',    titleEn:'Calendar',      descFr:'Calendrier culturel Bamiléké : fêtes, saisons agricoles et événements traditionnels.', descEn:'Bamiléké cultural calendar: festivals, farming seasons and traditional events.', color:'#0891b2', badgeFr:'Culturel', badgeEn:'Cultural' },
                             { Ico:IconVideo, view:'video',        titleFr:'Vidéos',        titleEn:'Videos',        descFr:'Tutoriels vidéo, chants traditionnels et documentaires sur la culture Medumba.', descEn:'Video tutorials, traditional songs and documentaries on Medumba culture.', color:'#15803d', badgeFr:'HD', badgeEn:'HD' },
-                            { Ico:IconCert, view:'cepom',         titleFr:'Certification CEPOM', titleEn:'CEPOM Certification', descFr:'En savoir plus sur le CEPOM et la certification de nos enseignants.', descEn:'Learn more about CEPOM and our teacher certification.', color:'#b45309', badgeFr:'Officiel', badgeEn:'Official' },
                         ].map((r,i) => (
                             <Reveal key={i} delay={i*.07}>
                                 <div className="res-card" onClick={() => nav(r.view)} style={{ position:'relative' }}>
@@ -481,7 +490,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section style={{ background:B,padding:isMobile?'2.5rem 1.25rem':'3rem 3.5rem' }}>
                 <div className="stats-grid" style={{ maxWidth:'920px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1rem',textAlign:'center' }}>
                     {[
-                        {target:4,suffix:'',labelFr:'Apprenants actifs',labelEn:'Active learners'},
+                        {target:activeLearners ?? 0,suffix:'',labelFr:'Apprenants actifs',labelEn:'Active learners'},
                         {target:15,suffix:'',labelFr:'Leçons interactives',labelEn:'Interactive lessons'},
                         {target:3,suffix:'',labelFr:'Enseignants CEPOM',labelEn:'CEPOM teachers'},
                         {textFr:'Gratuit',textEn:'Free',labelFr:'Pour commencer',labelEn:'To get started'},
@@ -507,15 +516,15 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                             <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'480px' })}>
                                 {tr('Apprenez à votre rythme,','Learn at your own pace,')}<br /><em style={{ color:B,fontStyle:'italic' }}>{tr('étape par étape.','step by step.')}</em>
                             </h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'280px' }}>{tr('De débutant à avancé — 3 unités, 17+ leçons progressives.','From beginner to advanced — 3 units, 17+ progressive lessons.')}</p>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'280px' }}>{tr('De débutant à avancé — 3 unités, 18+ leçons progressives.','From beginner to advanced — 3 units, 18+ progressive lessons.')}</p>
                         </div>
                     </Reveal>
 
                     <div style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(3,1fr)',gap:'1.25rem',marginBottom:'2.5rem' }}>
                         {[
                             { nFr:'Unité 1', nEn:'Unit 1', titleFr:'Premiers pas', titleEn:'First Steps', color:B,
-                              lessonsFr:['Salutations','Corps humain','Nourriture & Boissons','Couleurs & Vêtements','Chiffres & Argent'],
-                              lessonsEn:['Greetings','Body Parts','Food & Drinks','Colors & Clothing','Numbers & Money'] },
+                              lessonsFr:['Alphabet','Salutations','Corps humain','Nourriture & Boissons','Couleurs & Vêtements','Chiffres & Argent'],
+                              lessonsEn:['Alphabet','Greetings','Body Parts','Food & Drinks','Colors & Clothing','Numbers & Money'] },
                             { nFr:'Unité 2', nEn:'Unit 2', titleFr:'Vie quotidienne', titleEn:'Daily Life', color:'#7c3aed',
                               lessonsFr:['Animaux & Nature','Famille & Relations','Météo & Environnement','Temps & Calendrier','Identité & Origines'],
                               lessonsEn:['Animals & Nature','Family & Relationships','Weather & Environment','Time & Calendar','Identity & Origins'] },

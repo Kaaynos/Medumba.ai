@@ -79,6 +79,16 @@ export async function completeLesson(uid, lessonId) {
     await saveProgress(uid, { completed_lessons: [...completed] });
 }
 
+/* ── Marquer une certification d'unité comme obtenue ── */
+export async function completeCertification(uid, unitId) {
+    const progress = await getProgress(uid);
+    if (!progress) return;
+    const completed = new Set(progress.completed_certifications ?? []);
+    if (completed.has(unitId)) return; // déjà obtenue
+    completed.add(unitId);
+    await saveProgress(uid, { completed_certifications: [...completed] });
+}
+
 /* ── Vérifier si admin ── */
 export async function checkIsAdmin(uid) {
     const { data } = await supabase

@@ -785,7 +785,7 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                 <div style={{ maxWidth:'1100px',margin:'0 auto',position:'relative',zIndex:1 }}>
                     <Reveal style={{ textAlign:'center',marginBottom:isMobile?'2.5rem':'3.5rem' }}>
                         <p style={{ ...EYEBROW,color:AMB }}>{tr('Télécharger','Download')}</p>
-                        <h2 style={{ fontFamily:SERIF,fontWeight:700,color:'#fff',lineHeight:1.08,letterSpacing:'-.025em',fontSize:isSmall?'2.2rem':isMobile?'2.6rem':'3.2rem',marginBottom:'.9rem' }}>
+                        <h2 style={{ fontFamily:SERIF,fontWeight:700,color:'#fff',lineHeight:1.15,letterSpacing:'-.02em',fontSize:isSmall?'1.5rem':isMobile?'1.7rem':'2rem',marginBottom:'.9rem' }}>
                             Medumba.AI <em style={{ color:AMB2 }}>{tr('dans votre poche.','in your pocket.')}</em>
                         </h2>
                         <p style={{ color:'rgba(255,255,255,.6)',fontSize:isMobile?'.9rem':'1rem',lineHeight:1.8,maxWidth:'460px',margin:'0 auto' }}>

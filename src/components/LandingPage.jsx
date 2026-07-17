@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
 import { getActiveLearnerCount } from '../services/statsService';
 import { submitContactMessage } from '../services/contactService';
+import { submitTestimonial, getApprovedTestimonials } from '../services/testimonialService';
 
 /* ── Palette Medumba ── */
 const B    = '#0056D2';
@@ -169,6 +170,28 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
     }, []);
     const learnerCountLabel = activeLearners ?? '…';
 
+    // Vrais témoignages approuvés (plus de faux contenu — cf. réunion du 12/07).
+    const [testimonials, setTestimonials] = useState(null); // null = chargement
+    useEffect(() => {
+        getApprovedTestimonials().then(setTestimonials).catch(() => setTestimonials([]));
+    }, []);
+    const [showTestimonialForm, setShowTestimonialForm] = useState(false);
+    const [testimonialForm, setTestimonialForm] = useState({ name: '', role: '', message: '' });
+    const [testimonialStatus, setTestimonialStatus] = useState('idle'); // idle | sending | sent | error
+    const testimonialSet = (field) => (e) => setTestimonialForm(f => ({ ...f, [field]: e.target.value }));
+    const submitTestimonialForm = async (e) => {
+        e.preventDefault();
+        if (!testimonialForm.name.trim() || !testimonialForm.message.trim()) return;
+        setTestimonialStatus('sending');
+        try {
+            await submitTestimonial(testimonialForm);
+            setTestimonialStatus('sent');
+            setTestimonialForm({ name: '', role: '', message: '' });
+        } catch {
+            setTestimonialStatus('error');
+        }
+    };
+
     // Formulaire de contact compact dans le footer.
     const [footerForm, setFooterForm] = useState({ name: '', email: '', message: '' });
     const [footerStatus, setFooterStatus] = useState('idle'); // idle | sending | sent | error
@@ -226,17 +249,8 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
     const EYEBROW = { fontSize:'.72rem', fontWeight:700, color:AMB, letterSpacing:'2.5px', textTransform:'uppercase', marginBottom:'.8rem' };
     const TITLE = (sz, extra={}) => ({ fontFamily:SERIF, fontWeight:700, color:INK, lineHeight:1.07, letterSpacing:'-.02em', fontSize:sz, ...extra });
 
-    const TESTIMONIALS = [
-        { name:'Amélie K.',       roleFr:'Diaspora camerounaise, Paris', roleEn:'Cameroonian diaspora, Paris', initials:'AK', color:AMB,
-          textFr:"Grâce à Medumba.AI j'ai pu parler avec ma grand-mère pour la première fois en Medumba. Les leçons sont courtes et vraiment efficaces !",
-          textEn:"Thanks to Medumba.AI I was able to speak with my grandmother for the first time in Medumba. The lessons are short and truly effective!" },
-        { name:'Marc-Aurèle T.', roleFr:'Étudiant, Yaoundé', roleEn:'Student, Yaoundé', initials:'MT', color:B,
-          textFr:"Le système de combo et les XP m'ont accroché dès le premier jour. C'est comme un jeu — mais j'apprends vraiment !",
-          textEn:"The combo system and XP hooked me from day one. It feels like a game — but I'm actually learning!" },
-        { name:'Sophie N.',       roleFr:'Enseignante, Bafoussam', roleEn:'Teacher, Bafoussam', initials:'SN', color:'#0891b2',
-          textFr:"Les classes en ligne avec les enseignants CEPOM sont d'une qualité exceptionnelle. Je recommande à tous mes élèves.",
-          textEn:"The online classes with CEPOM-certified teachers are exceptional quality. I recommend it to all my students." },
-    ];
+    const TESTIMONIAL_COLORS = [AMB, B, '#0891b2', '#7c3aed', '#16a34a'];
+    const testimonialInitials = (name) => (name || '?').trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
     const FEATURES = [
         { Ico:IconGame,   titleFr:'Leçons gamifiées',     titleEn:'Gamified lessons',      descFr:'XP, streaks, diamants et combo. Restez motivé grâce à un système de récompenses qui rend chaque leçon inoubliable.', descEn:'XP, streaks, diamonds and combos. Stay motivated with a reward system that makes every lesson memorable.' },
@@ -760,48 +774,93 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             <section style={{ background:'#fff',padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
                     <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
-                        <p style={EYEBROW}>{tr('Témoignages','Testimonials')}</p>
-                        <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>{tr('Ce que disent nos apprenants.','What our learners say.')}</h2>
+                        <div style={{ display:'flex',flexDirection:isMobile?'column':'row',alignItems:isMobile?'flex-start':'flex-end',gap:'1rem',justifyContent:'space-between' }}>
+                            <div>
+                                <p style={EYEBROW}>{tr('Témoignages','Testimonials')}</p>
+                                <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem')}>{tr('Ce que disent nos apprenants.','What our learners say.')}</h2>
+                            </div>
+                            <button onClick={() => setShowTestimonialForm(v => !v)} style={{ flexShrink:0,background:'#fff',border:`2px solid ${B}`,color:B,borderRadius:'99px',padding:'.6rem 1.3rem',fontWeight:700,fontSize:'.85rem',cursor:'pointer',fontFamily:'inherit' }}>
+                                {tr('Partagez votre expérience','Share your experience')}
+                            </button>
+                        </div>
                     </Reveal>
-                    {isMobile ? (
+
+                    {showTestimonialForm && (
+                        <Reveal style={{ marginBottom:'2rem' }}>
+                            <div style={{ background:LIGHT,border:`1.5px solid ${SAND}`,borderRadius:'20px',padding:'1.75rem' }}>
+                                {testimonialStatus === 'sent' ? (
+                                    <p style={{ fontSize:'.9rem',color:INK,fontWeight:700,margin:0 }}>
+                                        {tr('Merci ! Votre témoignage sera publié après vérification.','Thank you! Your testimonial will be published after review.')}
+                                    </p>
+                                ) : (
+                                    <form onSubmit={submitTestimonialForm} style={{ display:'flex',flexDirection:'column',gap:'.75rem' }}>
+                                        <div style={{ display:'flex',gap:'.75rem',flexWrap:'wrap' }}>
+                                            <input required value={testimonialForm.name} onChange={testimonialSet('name')} placeholder={tr('Votre nom','Your name')}
+                                                style={{ flex:'1 1 160px',padding:'.65rem .9rem',borderRadius:'10px',border:`1.5px solid ${SAND}`,fontFamily:'inherit',fontSize:'.85rem' }} />
+                                            <input value={testimonialForm.role} onChange={testimonialSet('role')} placeholder={tr('Ville / rôle (optionnel)','City / role (optional)')}
+                                                style={{ flex:'1 1 160px',padding:'.65rem .9rem',borderRadius:'10px',border:`1.5px solid ${SAND}`,fontFamily:'inherit',fontSize:'.85rem' }} />
+                                        </div>
+                                        <textarea required value={testimonialForm.message} onChange={testimonialSet('message')} placeholder={tr('Votre expérience avec Medumba.AI…','Your experience with Medumba.AI…')} rows={3}
+                                            style={{ padding:'.65rem .9rem',borderRadius:'10px',border:`1.5px solid ${SAND}`,fontFamily:'inherit',fontSize:'.85rem',resize:'vertical' }} />
+                                        {testimonialStatus === 'error' && (
+                                            <p style={{ color:'#dc2626',fontSize:'.8rem',margin:0 }}>{tr("Erreur d'envoi. Réessayez.",'Failed to send. Please try again.')}</p>
+                                        )}
+                                        <button type="submit" disabled={testimonialStatus==='sending'} className="lp-btn-amber" style={{ alignSelf:'flex-start',padding:'.6rem 1.4rem',fontSize:'.85rem',opacity:testimonialStatus==='sending'?0.7:1 }}>
+                                            {testimonialStatus==='sending' ? tr('Envoi…','Sending…') : tr('Envoyer','Send')}
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+                        </Reveal>
+                    )}
+
+                    {testimonials === null ? null : testimonials.length === 0 ? (
+                        <div style={{ background:LIGHT,border:`1.5px solid ${SAND}`,borderRadius:'20px',padding:'2.5rem',textAlign:'center' }}>
+                            <p style={{ fontSize:'.92rem',color:MUTED,margin:0 }}>
+                                {tr('Soyez le premier à partager votre expérience avec Medumba.AI.','Be the first to share your experience with Medumba.AI.')}
+                            </p>
+                        </div>
+                    ) : isMobile ? (
                         <div>
                             <div style={{ background:LIGHT,border:`1.5px solid ${SAND}`,borderRadius:'20px',padding:'2rem 1.75rem',animation:'fade-up .4s ease' }} key={activeT}>
                                 <div style={{ fontFamily:'Georgia,serif',fontSize:'3.8rem',lineHeight:.75,color:AMB,opacity:.4,marginBottom:'.9rem' }}>"</div>
-                                <p style={{ fontSize:'.92rem',lineHeight:1.8,marginBottom:'1.5rem',color:MUTED,fontStyle:'italic' }}>{tr(TESTIMONIALS[activeT].textFr,TESTIMONIALS[activeT].textEn)}</p>
+                                <p style={{ fontSize:'.92rem',lineHeight:1.8,marginBottom:'1.5rem',color:MUTED,fontStyle:'italic' }}>{testimonials[activeT % testimonials.length].message}</p>
                                 <div style={{ display:'flex',alignItems:'center',gap:'.75rem' }}>
-                                    <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:TESTIMONIALS[activeT].color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{TESTIMONIALS[activeT].initials}</div>
+                                    <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:TESTIMONIAL_COLORS[activeT % TESTIMONIAL_COLORS.length],display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{testimonialInitials(testimonials[activeT % testimonials.length].name)}</div>
                                     <div>
-                                        <div style={{ fontWeight:800,fontSize:'.88rem',color:INK }}>{TESTIMONIALS[activeT].name}</div>
-                                        <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500 }}>{tr(TESTIMONIALS[activeT].roleFr,TESTIMONIALS[activeT].roleEn)}</div>
+                                        <div style={{ fontWeight:800,fontSize:'.88rem',color:INK }}>{testimonials[activeT % testimonials.length].name}</div>
+                                        {testimonials[activeT % testimonials.length].role && <div style={{ fontSize:'.72rem',color:MUTED,fontWeight:500 }}>{testimonials[activeT % testimonials.length].role}</div>}
                                     </div>
                                 </div>
                             </div>
                             <div style={{ display:'flex',justifyContent:'center',gap:'.5rem',marginTop:'1.25rem' }}>
-                                {TESTIMONIALS.map((_,i) => <div key={i} onClick={() => setActiveT(i)} style={{ width:i===activeT?'22px':'7px',height:'7px',borderRadius:'99px',background:i===activeT?B:SAND,cursor:'pointer',transition:'all .3s' }} />)}
+                                {testimonials.map((_,i) => <div key={i} onClick={() => setActiveT(i)} style={{ width:i===activeT?'22px':'7px',height:'7px',borderRadius:'99px',background:i===activeT?B:SAND,cursor:'pointer',transition:'all .3s' }} />)}
                             </div>
                         </div>
                     ) : (
                         <div>
-                            <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.5rem' }}>
-                                {TESTIMONIALS.map((tm,i) => (
-                                    <Reveal key={i} delay={i*.1}>
+                            <div style={{ display:'grid',gridTemplateColumns:`repeat(${Math.min(testimonials.length,3)},1fr)`,gap:'1.5rem' }}>
+                                {testimonials.slice(0,3).map((tm,i) => (
+                                    <Reveal key={tm.id ?? i} delay={i*.1}>
                                         <div onClick={() => setActiveT(i)} style={{ background:i===activeT?B:'#fff',border:`1.5px solid ${i===activeT?'transparent':SAND}`,borderRadius:'20px',padding:'2rem 1.75rem',cursor:'pointer',transition:'all .4s cubic-bezier(.16,1,.3,1)',transform:i===activeT?'scale(1.03)':'scale(1)',boxShadow:i===activeT?`0 28px 60px rgba(0,86,210,.28)`:'none' }}>
                                             <div style={{ fontFamily:'Georgia,serif',fontSize:'3.5rem',lineHeight:.75,color:i===activeT?AMB2:`rgba(245,158,11,.28)`,marginBottom:'.9rem' }}>"</div>
-                                            <p style={{ fontSize:'.88rem',lineHeight:1.8,marginBottom:'1.5rem',color:i===activeT?'rgba(255,255,255,.85)':MUTED,fontStyle:'italic' }}>{tr(tm.textFr,tm.textEn)}</p>
+                                            <p style={{ fontSize:'.88rem',lineHeight:1.8,marginBottom:'1.5rem',color:i===activeT?'rgba(255,255,255,.85)':MUTED,fontStyle:'italic' }}>{tm.message}</p>
                                             <div style={{ display:'flex',alignItems:'center',gap:'.75rem' }}>
-                                                <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:i===activeT?'rgba(255,255,255,.15)':tm.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{tm.initials}</div>
+                                                <div style={{ width:'38px',height:'38px',borderRadius:'50%',background:i===activeT?'rgba(255,255,255,.15)':TESTIMONIAL_COLORS[i % TESTIMONIAL_COLORS.length],display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.58rem',fontWeight:800,color:'#fff',flexShrink:0 }}>{testimonialInitials(tm.name)}</div>
                                                 <div>
                                                     <div style={{ fontWeight:800,fontSize:'.88rem',color:i===activeT?'#fff':INK }}>{tm.name}</div>
-                                                    <div style={{ fontSize:'.72rem',color:i===activeT?'rgba(255,255,255,.45)':MUTED,fontWeight:500 }}>{tr(tm.roleFr,tm.roleEn)}</div>
+                                                    {tm.role && <div style={{ fontSize:'.72rem',color:i===activeT?'rgba(255,255,255,.45)':MUTED,fontWeight:500 }}>{tm.role}</div>}
                                                 </div>
                                             </div>
                                         </div>
                                     </Reveal>
                                 ))}
                             </div>
-                            <div style={{ display:'flex',justifyContent:'center',gap:'.5rem',marginTop:'1.5rem' }}>
-                                {TESTIMONIALS.map((_,i) => <div key={i} onClick={() => setActiveT(i)} style={{ width:i===activeT?'22px':'7px',height:'7px',borderRadius:'99px',background:i===activeT?B:SAND,cursor:'pointer',transition:'all .3s' }} />)}
-                            </div>
+                            {testimonials.length > 1 && (
+                                <div style={{ display:'flex',justifyContent:'center',gap:'.5rem',marginTop:'1.5rem' }}>
+                                    {testimonials.slice(0,3).map((_,i) => <div key={i} onClick={() => setActiveT(i)} style={{ width:i===activeT?'22px':'7px',height:'7px',borderRadius:'99px',background:i===activeT?B:SAND,cursor:'pointer',transition:'all .3s' }} />)}
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>

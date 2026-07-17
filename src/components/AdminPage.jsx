@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllUsers } from '../services/adminService';
 import { getContactMessages, updateMessageStatus } from '../services/contactService';
+import { getAllTestimonials, updateTestimonialStatus } from '../services/testimonialService';
 
 const B  = '#1B4FD8';
 const BG = '#f8fafc';
@@ -57,7 +58,7 @@ function isActive(lastSeen) {
 
 export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   const isFr = nativeLang === 'french';
-  const [tab, setTab]             = useState('users'); // 'users' | 'messages'
+  const [tab, setTab]             = useState('users'); // 'users' | 'messages' | 'testimonials'
   const [users, setUsers]         = useState([]);
   const [loading, setLoading]     = useState(true);
   const [search, setSearch]       = useState('');
@@ -66,6 +67,9 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
 
   const [messages, setMessages]         = useState([]);
   const [messagesLoading, setMessagesLoading] = useState(true);
+
+  const [testimonials, setTestimonials]         = useState([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
   useEffect(() => {
     getAllUsers()
@@ -81,12 +85,25 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
       .finally(() => setMessagesLoading(false));
   }, []);
 
+  useEffect(() => {
+    getAllTestimonials()
+      .then(setTestimonials)
+      .catch(() => {})
+      .finally(() => setTestimonialsLoading(false));
+  }, []);
+
   const markStatus = async (id, status) => {
     setMessages(prev => prev.map(m => m.id === id ? { ...m, status } : m));
     try { await updateMessageStatus(id, status); } catch { /* best-effort */ }
   };
 
+  const markTestimonialStatus = async (id, status) => {
+    setTestimonials(prev => prev.map(t => t.id === id ? { ...t, status } : t));
+    try { await updateTestimonialStatus(id, status); } catch { /* best-effort */ }
+  };
+
   const newMessageCount = messages.filter(m => m.status === 'new').length;
+  const pendingTestimonialCount = testimonials.filter(t => t.status === 'pending').length;
 
   const filtered = users.filter(u =>
     (u.name || '').toLowerCase().includes(search.toLowerCase()) ||
@@ -130,6 +147,16 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
               <span style={{ marginLeft: '0.4rem', backgroundColor: '#ef4444', color: '#fff', borderRadius: '9999px', padding: '0.05rem 0.45rem', fontSize: '0.7rem' }}>{newMessageCount}</span>
             )}
           </button>
+          <button onClick={() => setTab('testimonials')} style={{
+            padding: '0.55rem 1.1rem', borderRadius: '9999px', border: `2px solid ${tab === 'testimonials' ? B : '#e2e8f0'}`,
+            backgroundColor: tab === 'testimonials' ? B : '#fff', color: tab === 'testimonials' ? '#fff' : '#64748b',
+            fontWeight: '800', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit', position: 'relative',
+          }}>
+            ⭐ {isFr ? 'Témoignages' : 'Testimonials'}
+            {pendingTestimonialCount > 0 && (
+              <span style={{ marginLeft: '0.4rem', backgroundColor: '#ef4444', color: '#fff', borderRadius: '9999px', padding: '0.05rem 0.45rem', fontSize: '0.7rem' }}>{pendingTestimonialCount}</span>
+            )}
+          </button>
         </div>
 
         {tab === 'messages' && (
@@ -162,6 +189,46 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
                         )}
                         {m.status !== 'replied' && (
                           <button onClick={() => markStatus(m.id, 'replied')} style={{ fontSize: '0.72rem', fontWeight: '700', color: '#15803d', background: '#dcfce7', border: 'none', borderRadius: '8px', padding: '0.35rem 0.7rem', cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Marquer répondu' : 'Mark replied'}</button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === 'testimonials' && (
+          <div>
+            {testimonialsLoading ? (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>{isFr ? 'Chargement...' : 'Loading...'}</div>
+            ) : testimonials.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>{isFr ? 'Aucun témoignage' : 'No testimonials'}</div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {testimonials.map(t => (
+                  <div key={t.id} style={{ backgroundColor: '#fff', borderRadius: '14px', padding: '1rem 1.25rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: t.status === 'pending' ? '2px solid #bfdbfe' : '1px solid #f1f5f9' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem', gap: '0.75rem' }}>
+                      <div>
+                        <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a' }}>{t.name}</div>
+                        {t.role && <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{t.role}</div>}
+                      </div>
+                      <span style={{
+                        flexShrink: 0, fontSize: '0.68rem', fontWeight: '800', padding: '0.15rem 0.6rem', borderRadius: '9999px',
+                        backgroundColor: t.status === 'pending' ? '#dbeafe' : t.status === 'approved' ? '#dcfce7' : '#fee2e2',
+                        color: t.status === 'pending' ? '#1d4ed8' : t.status === 'approved' ? '#15803d' : '#b91c1c',
+                      }}>{t.status}</span>
+                    </div>
+                    <div style={{ fontSize: '0.88rem', color: '#334155', lineHeight: 1.6, marginBottom: '0.75rem', fontStyle: 'italic' }}>"{t.message}"</div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{fmt(t.created_at, isFr)}</span>
+                      <div style={{ display: 'flex', gap: '0.4rem' }}>
+                        {t.status !== 'approved' && (
+                          <button onClick={() => markTestimonialStatus(t.id, 'approved')} style={{ fontSize: '0.72rem', fontWeight: '700', color: '#15803d', background: '#dcfce7', border: 'none', borderRadius: '8px', padding: '0.35rem 0.7rem', cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Approuver' : 'Approve'}</button>
+                        )}
+                        {t.status !== 'rejected' && (
+                          <button onClick={() => markTestimonialStatus(t.id, 'rejected')} style={{ fontSize: '0.72rem', fontWeight: '700', color: '#b91c1c', background: '#fee2e2', border: 'none', borderRadius: '8px', padding: '0.35rem 0.7rem', cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Rejeter' : 'Reject'}</button>
                         )}
                       </div>
                     </div>

@@ -275,22 +275,6 @@ const DashboardPage = ({
     const reasonMeta  = REASON_META[userReason] ?? REASON_META.fun;
     const profMeta    = PROF_LABELS[profLevel]  ?? PROF_LABELS[1];
 
-    /* ── all users always start at lesson 1 (Salutations) regardless of proficiency ── */
-    const applyProgress = (units) => units.map((unit, uIdx) => {
-        if (uIdx > 0) return unit;
-        let first = true;
-        return {
-            ...unit,
-            lessons: unit.lessons.map((lesson) => {
-                if (lesson.type === 'chest' || lesson.type === 'boss') {
-                    return { ...lesson, status: 'locked' };
-                }
-                if (first) { first = false; return { ...lesson, status: 'active' }; }
-                return { ...lesson, status: 'locked' };
-            }),
-        };
-    });
-
     /* ── completed lessons persisted in localStorage (per user) ── */
     const lsKey = (k) => `${currentUid || 'anon'}_${k}`;
     const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem(lsKey('med_completed')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
@@ -556,8 +540,9 @@ const DashboardPage = ({
         }),
     }));
 
-    // Pipeline: proficiency baseline → chest opened state → linear unlock chain
-    const units = applySessionProgress(applyChestUnlocks(applyProgress(learnLang === 'english' ? unitsEnglish : unitsMedumba)));
+    // Pipeline: chest opened state → linear unlock chain (based on real completedLessons,
+    // the static per-lesson `status` fields above are just the fresh-user defaults)
+    const units = applySessionProgress(applyChestUnlocks(learnLang === 'english' ? unitsEnglish : unitsMedumba));
 
     const zigzagFull   = [0, 56, 90, 56, 0, -56, -90, -56, 0, 56, 90];
     const zigzagMobile = [0, 36, 56, 36, 0, -36, -56, -36, 0, 36, 56];

@@ -904,7 +904,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                             {speaking ? '🔊' : '🔈'}
                         </button>
                         <span style={{ fontSize: '1.25rem', fontWeight: '700', color: T.text, lineHeight: 1.4 }}>
-                            {learnLang === 'english' ? (q?.sourceFr ?? '') : (isFr ? (q?.sourceFr ?? '') : (q?.sourceEn ?? ''))}
+                            {isFr ? (q?.sourceFr ?? '') : (q?.sourceEn ?? '')}
                         </span>
                     </div>
 

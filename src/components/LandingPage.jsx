@@ -478,22 +478,47 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             {/* ══ RESSOURCES ══ */}
             <section id="ressources" style={{ background:LIGHT,padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto' }}>
-                    <Reveal style={{ marginBottom:isMobile?'2.5rem':'3rem' }}>
+                    <Reveal style={{ marginBottom:isMobile?'2rem':'2.5rem' }}>
                         <p style={EYEBROW}>{tr('Ressources','Resources')}</p>
                         <div style={{ display:'flex',flexDirection:isMobile?'column':'row',alignItems:isMobile?'flex-start':'flex-end',gap:'1rem',justifyContent:'space-between' }}>
                             <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'3rem',{ maxWidth:'460px' })}>
                                 {tr('Bien plus','Much more')}<br /><em style={{ color:B,fontStyle:'italic' }}>{tr("qu'une simple appli.",'than just an app.')}</em>
                             </h2>
-                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>{tr('Dictionnaire, comptage, calendrier culturel et vidéos — tout accessible en un clic.','Dictionary, counting, cultural calendar and videos — all one click away.')}</p>
+                            <p style={{ color:MUTED,fontSize:'.88rem',lineHeight:1.75,maxWidth:'300px' }}>{tr('Le dictionnaire à voix réelle — sans compte à créer, sans rien à installer.','The real-voice dictionary — no account to create, nothing to install.')}</p>
                         </div>
                     </Reveal>
 
+                    {/* Killer features — dictionnaire et alphabet, en avant */}
+                    <div style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'1.3fr 1fr',gap:'1.1rem',marginBottom:'1.1rem' }}>
+                        <Reveal>
+                            <div className="res-card" onClick={() => nav('dictionary')} style={{ position:'relative', height:'100%', background:'#fff' }}>
+                                <div style={{ position:'absolute',top:'1rem',right:'1rem',background:`${AMB}18`,color:'#92400e',fontSize:'.66rem',fontWeight:800,borderRadius:'99px',padding:'3px 10px',border:`1px solid ${AMB}40` }}>⭐ {tr('Le plus populaire','Most popular')}</div>
+                                <div style={{ width:'52px',height:'52px',borderRadius:'16px',background:`${B}15`,display:'flex',alignItems:'center',justifyContent:'center',color:B,marginBottom:'1.1rem',border:`1.5px solid ${B}25` }}><IconDict /></div>
+                                <h3 style={{ fontSize:'1.2rem',fontWeight:900,color:INK,marginBottom:'.5rem' }}>{tr('Dictionnaire à voix réelle','Real-voice dictionary')}</h3>
+                                <p style={{ fontSize:'.85rem',color:MUTED,lineHeight:1.7,marginBottom:'1.1rem',maxWidth:'420px' }}>
+                                    {tr('Écoutez chaque mot prononcé par un vrai locuteur Medumba — pas une synthèse vocale. Recherchez, écoutez, apprenez, gratuitement.', 'Hear every word spoken by a real Medumba speaker — not text-to-speech. Search, listen, learn, for free.')}
+                                </p>
+                                <span style={{ fontSize:'.85rem',color:B,fontWeight:700 }}>{tr('Ouvrir le dictionnaire','Open the dictionary')} →</span>
+                            </div>
+                        </Reveal>
+                        <Reveal delay={0.07}>
+                            <div className="res-card" onClick={() => nav('alphabet')} style={{ position:'relative', height:'100%', background:'#fff' }}>
+                                <div style={{ width:'52px',height:'52px',borderRadius:'16px',background:`${'#7c3aed'}15`,display:'flex',alignItems:'center',justifyContent:'center',color:'#7c3aed',marginBottom:'1.1rem',border:'1.5px solid #7c3aed25' }}><IconAlpha /></div>
+                                <h3 style={{ fontSize:'1.2rem',fontWeight:900,color:INK,marginBottom:'.5rem' }}>{tr("L'alphabet Medumba",'The Medumba alphabet')}</h3>
+                                <p style={{ fontSize:'.85rem',color:MUTED,lineHeight:1.7,marginBottom:'1.1rem' }}>
+                                    {tr('De nouvelles lettres, de nouveaux sons. Commencez ici avant les mots.', 'New letters, new sounds. Start here before the words.')}
+                                </p>
+                                <span style={{ fontSize:'.85rem',color:'#7c3aed',fontWeight:700 }}>{tr("Découvrir l'alphabet",'Discover the alphabet')} →</span>
+                            </div>
+                        </Reveal>
+                    </div>
+
+                    {/* Le reste — secondaire */}
                     <div className="res-grid" style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'1.1rem' }}>
                         {[
-                            { Ico:IconDict, view:'dictionary',    titleFr:'Dictionnaire',  titleEn:'Dictionary',    descFr:'Medumba–Français avec plus de 1 000 entrées, traducteur IA et exemples contextuels.', descEn:'Medumba–French with over 1,000 entries, AI translator and contextual examples.', color:B, badgeFr:'1 000+ mots', badgeEn:'1,000+ words' },
                             { Ico:IconCalc, view:'counting',      titleFr:'Comptage',      titleEn:'Counting',      descFr:'Apprenez à compter en Medumba — chiffres, ordinaux et système de numération traditionnel.', descEn:'Learn to count in Medumba — numbers, ordinals and the traditional counting system.', color:'#7c3aed', badgeFr:'Interactif', badgeEn:'Interactive' },
-                            { Ico:IconMic,  view:'pronunciation', titleFr:'Prononciation', titleEn:'Pronunciation', descFr:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', descEn:'Read Medumba words aloud with an IPA syllable guide and 1,147 syllables.', color:'#9333ea', badgeFr:'1 147 syllabes', badgeEn:'1,147 syllables' },
                             { Ico:IconCal,  view:'calendar',      titleFr:'Calendrier',    titleEn:'Calendar',      descFr:'Calendrier culturel Bamiléké : fêtes, saisons agricoles et événements traditionnels.', descEn:'Bamiléké cultural calendar: festivals, farming seasons and traditional events.', color:'#0891b2', badgeFr:'Culturel', badgeEn:'Cultural' },
+                            { Ico:IconMic,  view:'pronunciation', titleFr:'Prononciation', titleEn:'Pronunciation', descFr:'Lisez les mots Medumba à voix haute avec guide syllabique IPA et 1 147 syllabes.', descEn:'Read Medumba words aloud with an IPA syllable guide and 1,147 syllables.', color:'#9333ea', badgeFr:'1 147 syllabes', badgeEn:'1,147 syllables' },
                             { Ico:IconVideo, view:'video',        titleFr:'Vidéos',        titleEn:'Videos',        descFr:'Tutoriels vidéo, chants traditionnels et documentaires sur la culture Medumba.', descEn:'Video tutorials, traditional songs and documentaries on Medumba culture.', color:'#15803d', badgeFr:'HD', badgeEn:'HD' },
                         ].map((r,i) => (
                             <Reveal key={i} delay={i*.07}>

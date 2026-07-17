@@ -1,6 +1,7 @@
 // Vercel serverless function — proxies chat messages to the DeepSeek API.
 // Keeps DEEPSEEK_API_KEY server-side only (set in Vercel project env vars),
 // never exposed to the browser bundle.
+// (forced redeploy to pick up latest env vars)
 
 const SYSTEM_PROMPT = `You are the support assistant for Medumba.AI, an app for learning the Medumba language (Bafoussam, Cameroon). Answer briefly and helpfully in the same language the user writes in (French or English). Use only the facts below — if you don't know the answer, say you don't know and suggest the contact form.
 

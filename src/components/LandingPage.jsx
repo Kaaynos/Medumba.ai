@@ -400,9 +400,15 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                 <div style={{ maxWidth:'1160px',width:'100%',display:'flex',flexDirection:isMobile?'column':'row',alignItems:'center',gap:isMobile?'3.5rem':'7rem',position:'relative',zIndex:1 }}>
                     <div style={{ flex:1,minWidth:0 }}>
                         <Reveal>
-                            <div style={{ display:'inline-flex',alignItems:'center',gap:'.45rem',background:`linear-gradient(135deg,${LIGHT},#dbeafe)`,border:`2px solid #bfdbfe`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.25rem' }}>
-                                <span style={{ width:'7px',height:'7px',borderRadius:'50%',background:'#22c55e',animation:'pulse-dot 1.8s ease-in-out infinite',display:'inline-block',flexShrink:0 }} />
-                                <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>{tr(`${learnerCountLabel} apprenants nous ont déjà rejoints`,`${learnerCountLabel} learners have already joined us`)}</span>
+                            <div style={{ display:'flex',flexWrap:'wrap',gap:'.5rem',marginBottom:'1.25rem' }}>
+                                <div style={{ display:'inline-flex',alignItems:'center',gap:'.45rem',background:`linear-gradient(135deg,${LIGHT},#dbeafe)`,border:`2px solid #bfdbfe`,borderRadius:'99px',padding:'.3rem .9rem' }}>
+                                    <span style={{ width:'7px',height:'7px',borderRadius:'50%',background:'#22c55e',animation:'pulse-dot 1.8s ease-in-out infinite',display:'inline-block',flexShrink:0 }} />
+                                    <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:B }}>{tr(`${learnerCountLabel} apprenants nous ont déjà rejoints`,`${learnerCountLabel} learners have already joined us`)}</span>
+                                </div>
+                                <button onClick={() => nav('cepom')} style={{ display:'inline-flex',alignItems:'center',gap:'.4rem',background:'#fff',border:'2px solid #fde68a',borderRadius:'99px',padding:'.3rem .9rem',cursor:'pointer',fontFamily:'inherit' }}>
+                                    <span style={{ fontSize:'.9rem' }}>🎓</span>
+                                    <span style={{ fontSize:isSmall?'.7rem':'.76rem',fontWeight:700,color:'#92400e' }}>{tr('Certifié par le CEPOM','Certified by CEPOM')}</span>
+                                </button>
                             </div>
                         </Reveal>
 

@@ -1862,10 +1862,10 @@ const DashboardPage = ({
         { id: 'food',      icon: '🍜', lessons: ['l3','l11'], premium: false, en: 'Dining & Food',              fr: 'Repas & Nourriture',           desc_en: 'Order food and discuss meals', desc_fr: 'Commander et parler des repas' },
         { id: 'family',    icon: '👨‍👩‍👧', lessons: ['l7','l15'], premium: false, en: 'Family & Social',           fr: 'Famille & Social',             desc_en: 'Talk about family and daily life', desc_fr: 'Parler de la famille et du quotidien' },
         { id: 'numbers',   icon: '🔢', lessons: ['l5','l9'],  premium: false, en: 'Numbers & Time',             fr: 'Chiffres & Temps',             desc_en: 'Count and tell the time', desc_fr: 'Compter et dire l\'heure' },
-        { id: 'body',      icon: '🏃', lessons: ['l2','l12'], premium: true,  en: 'Body & Health',              fr: 'Corps & Santé',                desc_en: 'Describe health and body parts', desc_fr: 'Décrire la santé et le corps' },
-        { id: 'school',    icon: '🎓', lessons: ['l13','l14'],premium: true,  en: 'School & Work',              fr: 'École & Travail',              desc_en: 'Navigate school and professional life', desc_fr: 'École et vie professionnelle' },
-        { id: 'nature',    icon: '🌿', lessons: ['l6','l8'],  premium: true,  en: 'Nature & Animals',           fr: 'Nature & Animaux',             desc_en: 'Talk about nature and wildlife', desc_fr: 'La nature et les animaux' },
-        { id: 'culture',   icon: '🥁', lessons: ['l17'],      premium: true,  en: 'Culture & Rites',            fr: 'Culture & Rites',              desc_en: 'Medumba traditions and rites', desc_fr: 'Traditions et rites Medumba' },
+        { id: 'body',      icon: '🏃', lessons: ['l2','l12'], premium: false, en: 'Body & Health',              fr: 'Corps & Santé',                desc_en: 'Describe health and body parts', desc_fr: 'Décrire la santé et le corps' },
+        { id: 'school',    icon: '🎓', lessons: ['l13','l14'],premium: false, en: 'School & Work',              fr: 'École & Travail',              desc_en: 'Navigate school and professional life', desc_fr: 'École et vie professionnelle' },
+        { id: 'nature',    icon: '🌿', lessons: ['l6','l8'],  premium: false, en: 'Nature & Animals',           fr: 'Nature & Animaux',             desc_en: 'Talk about nature and wildlife', desc_fr: 'La nature et les animaux' },
+        { id: 'culture',   icon: '🥁', lessons: ['l17'],      premium: false, en: 'Culture & Rites',            fr: 'Culture & Rites',              desc_en: 'Medumba traditions and rites', desc_fr: 'Traditions et rites Medumba' },
     ].filter(cat => PHRASEBOOK_EXPRESSIONS.some(e =>
         e.lessons && cat.lessons.some(l => e.lessons.includes(l)) && hasRealVoice(e.medumba)
     )); // lancement 26 juillet : masquer les catégories sans aucune vraie voix
@@ -1967,8 +1967,8 @@ const DashboardPage = ({
         { id: 'food',      icon: '🌽',   en: 'Food',      fr: 'Nourriture', premium: false, keywords: ['lait','eau','manger','boire','riz','maïs','banane','mangue','viande','sel','huile','farine','nourriture','repas','bouillie','légume','fruit'] },
         { id: 'colors',    icon: '🎨',   en: 'Colors',    fr: 'Couleurs',   premium: false, keywords: ['rouge','blanc','noir','bleu','vert','jaune','orange','violet','rose','couleur'] },
         { id: 'numbers',   icon: '🔢',   en: 'Numbers',   fr: 'Chiffres',   premium: false, keywords: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'] },
-        { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: true,  keywords: ['champ','arbre','soleil','rivière','montagne','pluie','vent','feu','terre','fleur','forêt','rocher','feuille'] },
-        { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: true,  keywords: ['bonjour','salut','merci','oui','non','bienvenue','viens','bonsoir','bonne nuit','au revoir'] },
+        { id: 'nature',    icon: '🌿',   en: 'Nature',    fr: 'Nature',     premium: false, keywords: ['champ','arbre','soleil','rivière','montagne','pluie','vent','feu','terre','fleur','forêt','rocher','feuille'] },
+        { id: 'greetings', icon: '👋',   en: 'Greetings', fr: 'Salutations',premium: false, keywords: ['bonjour','salut','merci','oui','non','bienvenue','viens','bonsoir','bonne nuit','au revoir'] },
     ].filter(cat => VOCAB_EXPRESSIONS.some(v =>
         cat.keywords.some(kw => v.fr.toLowerCase().includes(kw.toLowerCase())) && hasRealVoice(v.medumba)
     )); // lancement 26 juillet : masquer les catégories sans aucune vraie voix
@@ -3172,30 +3172,6 @@ const DashboardPage = ({
                     {isFr ? 'VOIR TOUT' : 'VIEW ALL'}
                 </button>
             </div>
-
-            {/* Upgrade card */}
-            <div style={{
-                padding: '1.2rem', borderRadius: '16px',
-                background: 'linear-gradient(135deg, #0056D2 0%, #38bdf8 100%)',
-                color: '#fff', textAlign: 'center',
-            }}>
-                <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>✨</div>
-                <div style={{ fontWeight: '800', fontSize: '0.95rem', marginBottom: '0.35rem' }}>Medumba Plus</div>
-                <div style={{ fontSize: '0.78rem', opacity: 0.9, marginBottom: '1rem', lineHeight: 1.5 }}>
-                    {isFr ? 'Cœurs illimités. Sans publicités. Hors ligne.' : 'Unlimited hearts. No ads. Offline mode.'}
-                </div>
-                <button
-                    onClick={() => setActiveNav('premium')}
-                    style={{
-                        backgroundColor: T.surface, color: '#0056D2',
-                        width: '100%', padding: '0.6rem', borderRadius: '10px',
-                        fontWeight: '800', fontSize: '0.82rem', border: 'none',
-                        cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '0.5px',
-                    }}
-                >
-                    {isFr ? 'METTRE À NIVEAU' : 'UPGRADE'}
-                </button>
-            </div>
         </aside>
     );
 
@@ -4090,8 +4066,7 @@ const DashboardPage = ({
                             border: '2px solid #7dd3fc',
                             borderRadius: '12px', padding: '0.3rem 0.6rem',
                             boxShadow: '0 3px 0 #38bdf8, 0 4px 8px rgba(14,165,233,0.15)',
-                            cursor: 'pointer',
-                        }} onClick={() => { setActiveNav('account'); setPurchaseFlow('gems'); }}>
+                        }}>
                             <D3I name="medal" size="1.35rem" />
                             <span style={{ fontWeight: '800', color: '#0284c7', fontSize: '0.88rem' }}>{gems}</span>
                         </div>

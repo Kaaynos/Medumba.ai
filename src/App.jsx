@@ -36,6 +36,7 @@ import AdminPage                from './components/AdminPage';
 import AppDownloadPage          from './components/AppDownloadPage';
 import PrivacyPage              from './components/PrivacyPage';
 import TermsPage                from './components/TermsPage';
+import ChatWidget                from './components/ChatWidget';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
 
@@ -317,6 +318,9 @@ function App() {
           nativeLang={nativeLang}
         />
       )}
+
+      {/* ── Support chat widget — landing, hub sections, dashboard ── */}
+      {(step === 1 || step === 14 || step === 15) && <ChatWidget nativeLang={nativeLang} />}
 
     </ErrorBoundary>
     </ThemeProvider>

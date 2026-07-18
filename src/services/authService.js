@@ -23,6 +23,15 @@ export async function registerUser({ name, email, password, age, language, reaso
     });
     if (error) throw error;
 
+    // Anti-énumération Supabase : si l'e-mail existe déjà (ex. compte créé
+    // via Google), signUp() répond "succès" sans erreur mais avec un user
+    // fantôme (identities: []) — aucun mot de passe n'est réellement créé.
+    // Sans cette vérification, l'utilisateur croit s'être inscrit puis ne
+    // peut plus jamais se connecter par e-mail/mot de passe.
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        throw new Error('EMAIL_ALREADY_LINKED');
+    }
+
     // Le trigger handle_new_user() crée automatiquement profiles + user_progress
     // On met à jour les champs supplémentaires immédiatement
     if (data.user) {
@@ -66,8 +75,14 @@ export async function logoutUser() {
 /* ── Réinitialisation mot de passe ── */
 export async function resetPassword(email) {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/?reset=true`,
+        redirectTo: window.location.origin,
     });
+    if (error) throw error;
+}
+
+/* ── Définir le nouveau mot de passe (après clic sur le lien de récupération) ── */
+export async function updateUserPassword(newPassword) {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) throw error;
 }
 
@@ -89,18 +104,22 @@ async function _touchLastSeen(uid) {
     catch { /* best-effort, ne doit jamais bloquer la connexion */ }
 }
 
-/* ── Écouter les changements d'état auth (même API qu'Firebase) ── */
+/* ── Écouter les changements d'état auth (même API qu'Firebase) ──
+   callback(user, event) — event vaut notamment 'PASSWORD_RECOVERY' quand
+   la session vient d'un lien de réinitialisation de mot de passe, pour
+   que l'appelant puisse rediriger vers l'écran "nouveau mot de passe"
+   au lieu de traiter ça comme une connexion normale. ── */
 export function listenAuthState(callback) {
     // Vérifier la session existante au démarrage
     supabase.auth.getSession().then(({ data: { session } }) => {
-        callback(session?.user ? _toUserShape(session.user) : null);
+        callback(session?.user ? _toUserShape(session.user) : null, null);
     });
 
     // Écouter les changements futurs — met à jour last_seen sur une vraie
     // connexion (email/mot de passe ou Google OAuth), pas sur chaque refresh.
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        if (_event === 'SIGNED_IN' && session?.user) _touchLastSeen(session.user.id);
-        callback(session?.user ? _toUserShape(session.user) : null);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session?.user) _touchLastSeen(session.user.id);
+        callback(session?.user ? _toUserShape(session.user) : null, event);
     });
 
     // Retourner la fonction d'unsubscribe (comme Firebase)

@@ -26,8 +26,8 @@ const SECTIONS = [
     },
     {
         titleFr: 'Nous contacter', titleEn: 'Contact us',
-        bodyFr: 'Pour toute question sur vos données personnelles : admin@kaaynos.com',
-        bodyEn: 'For any question about your personal data: admin@kaaynos.com',
+        bodyFr: 'Pour toute question sur vos données personnelles : contact@kaaynos.com',
+        bodyEn: 'For any question about your personal data: contact@kaaynos.com',
     },
 ];
 

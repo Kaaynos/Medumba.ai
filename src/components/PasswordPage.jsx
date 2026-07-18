@@ -44,7 +44,11 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
         } catch (e) {
             console.error('[register]', e);
             const msg = (e.message || '').toLowerCase();
-            if (msg.includes('already registered') || msg.includes('already in use') || e.status === 422) {
+            if (e.message === 'EMAIL_ALREADY_LINKED') {
+                setError(isFrench
+                    ? 'Un compte existe déjà avec cet e-mail (peut-être via Google). Connectez-vous avec Google, ou utilisez "Mot de passe oublié" pour en créer un.'
+                    : 'An account already exists with this email (maybe via Google). Sign in with Google instead, or use "Forgot password" to set one.');
+            } else if (msg.includes('already registered') || msg.includes('already in use') || e.status === 422) {
                 setError(isFrench ? 'Cette adresse e-mail est déjà utilisée.' : 'This email is already in use.');
             } else if (msg.includes('invalid email') || msg.includes('email') && msg.includes('invalid')) {
                 setError(isFrench ? 'Adresse e-mail invalide.' : 'Invalid email address.');

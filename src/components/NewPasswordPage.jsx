@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { updateUserPassword } from '../services/authService';
 
 const B = '#1B4FD8';
 
@@ -16,6 +17,8 @@ const NewPasswordPage = ({ onNext, onBack, nativeLang }) => {
     const [confirm, setConfirm]         = useState('');
     const [showPass, setShowPass]       = useState(false);
     const [showConf, setShowConf]       = useState(false);
+    const [loading, setLoading]         = useState(false);
+    const [error, setError]             = useState('');
 
     const isLong  = password.length >= 6;
     const isMatch = password === confirm && confirm.length > 0;
@@ -32,6 +35,21 @@ const NewPasswordPage = ({ onNext, onBack, nativeLang }) => {
         remember:  isFrench ? 'Se souvenir de moi'                   : 'Remember me',
         btn:       isFrench ? 'Continuer'                            : 'Continue',
     };
+
+    async function handleNext() {
+        if (!ok || loading) return;
+        setError('');
+        setLoading(true);
+        try {
+            await updateUserPassword(password);
+            onNext();
+        } catch (e) {
+            console.error('[update-password]', e);
+            setError(isFrench ? 'Erreur lors de la mise à jour. Réessayez.' : 'Failed to update password. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const underline = {
         border: 'none', borderBottom: `2px solid ${B}`, padding: '0.5rem 2.5rem 0.5rem 0',
@@ -71,10 +89,11 @@ const NewPasswordPage = ({ onNext, onBack, nativeLang }) => {
                 </div>
 
                 {confirm && !isMatch && <span style={{ fontSize: '0.82rem', color: '#ef4444', fontWeight: '600' }}>{t.mismatch}</span>}
+                {error && <p style={{ fontSize: '0.9rem', color: '#ef4444', fontWeight: '600', textAlign: 'center', marginTop: '1rem' }}>{error}</p>}
 
                 <div style={{ flex: 1 }} />
-                <button onClick={() => onNext(password)} disabled={!ok} style={{ width: '100%', backgroundColor: ok ? B : '#cbd5e1', color: '#fff', padding: '1.1rem', borderRadius: '9999px', fontSize: '1.05rem', fontWeight: '700', border: 'none', cursor: ok ? 'pointer' : 'not-allowed', boxShadow: ok ? '0 8px 24px rgba(27,79,216,0.3)' : 'none', letterSpacing: '0.4px', fontFamily: 'inherit', marginTop: '2rem' }}>
-                    {t.btn}
+                <button onClick={handleNext} disabled={!ok || loading} style={{ width: '100%', backgroundColor: ok && !loading ? B : '#cbd5e1', color: '#fff', padding: '1.1rem', borderRadius: '9999px', fontSize: '1.05rem', fontWeight: '700', border: 'none', cursor: ok && !loading ? 'pointer' : 'not-allowed', boxShadow: ok && !loading ? '0 8px 24px rgba(27,79,216,0.3)' : 'none', letterSpacing: '0.4px', fontFamily: 'inherit', marginTop: '2rem' }}>
+                    {loading ? '...' : t.btn}
                 </button>
             </div>
         </div>

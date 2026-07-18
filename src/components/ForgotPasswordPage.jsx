@@ -31,8 +31,14 @@ const ForgotPasswordPage = ({ onNext, onBack, nativeLang }) => {
             await resetPassword(email);
             setSent(true);
         } catch (e) {
+            console.error('[forgot-password]', e);
+            const msg = (e.message || '').toLowerCase();
             if (e.code === 'auth/user-not-found') {
                 setError(isFrench ? 'Aucun compte trouvé avec cette adresse.' : 'No account found with this email.');
+            } else if (e.status === 429 || msg.includes('rate limit')) {
+                setError(isFrench
+                    ? "Trop de demandes d'e-mail pour l'instant. Merci de patienter quelques minutes avant de réessayer."
+                    : 'Too many email requests right now. Please wait a few minutes before trying again.');
             } else {
                 setError(isFrench ? "Erreur lors de l'envoi. Réessayez." : 'Failed to send. Please try again.');
             }

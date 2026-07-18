@@ -13,11 +13,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <style>
+      #initial-splash {
+        position: fixed; inset: 0; background-color: #ffffff;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        z-index: 50;
+      }
+      #initial-splash img { width: 140px; height: auto; animation: splash-pulse 2s infinite ease-in-out; }
+      #initial-splash .splash-spinner { position: absolute; bottom: 80px; width: 48px; height: 48px; animation: spin-dots 1.2s linear infinite; }
+      #initial-splash .splash-dot { position: absolute; border-radius: 50%; background: #0056D2; }
+      @keyframes splash-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+      @keyframes spin-dots { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
   </head>
   <body>
     <div id="root">
-      <h1>Medumba.AI</h1>
-      <p>Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon: gamified lessons, a dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers.</p>
+      <div id="initial-splash">
+        <img src="/logo.png" alt="Medumba.AI" />
+        <div class="splash-spinner">
+          <span class="splash-dot" style="left: 42px; top: 22px; width: 4px; height: 4px; opacity: 0.2;"></span>
+          <span class="splash-dot" style="left: 35.77px; top: 35.77px; width: 4.75px; height: 4.75px; opacity: 0.3;"></span>
+          <span class="splash-dot" style="left: 21.25px; top: 41.25px; width: 5.5px; height: 5.5px; opacity: 0.4;"></span>
+          <span class="splash-dot" style="left: 6.73px; top: 35.02px; width: 6.25px; height: 6.25px; opacity: 0.5;"></span>
+          <span class="splash-dot" style="left: 0.5px; top: 20.5px; width: 7px; height: 7px; opacity: 0.6;"></span>
+          <span class="splash-dot" style="left: 5.98px; top: 5.98px; width: 7.75px; height: 7.75px; opacity: 0.7;"></span>
+          <span class="splash-dot" style="left: 19.75px; top: -0.25px; width: 8.5px; height: 8.5px; opacity: 0.8;"></span>
+          <span class="splash-dot" style="left: 33.52px; top: 5.23px; width: 9.25px; height: 9.25px; opacity: 0.9;"></span>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

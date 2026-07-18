@@ -10,21 +10,21 @@ const SplashScreen = ({ onFinish }) => {
     let fadeTimer;
     let done = false;
 
-    const finish = (user) => {
+    const finish = (user, event) => {
       if (done) return;
       done = true;
       fadeTimer = setTimeout(() => setVisible(false), 500);
-      navTimer  = setTimeout(() => onFinish(user), 700);
+      navTimer  = setTimeout(() => onFinish(user, event), 700);
     };
 
     // Wait for Supabase to resolve auth state, then navigate.
     // Safety net: if the network call hangs (offline, blocked, slow),
     // fall back to signed-out after 3s instead of freezing on this screen forever.
     const safetyTimer = setTimeout(() => finish(null), 3000);
-    const unsubscribe = listenAuthState((user) => {
+    const unsubscribe = listenAuthState((user, event) => {
       clearTimeout(safetyTimer);
       unsubscribe();
-      finish(user);
+      finish(user, event);
     });
 
     return () => {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
 import { getPaymentSuccessFromUrl } from './config/stripe';
@@ -127,16 +127,22 @@ function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Supabase auth listener ──────────────────────────────────────
-  // listenAuthState appelle le callback immédiatement avec la session
-  // existante (contrairement à Firebase qui skippait le premier appel).
-  // La SplashScreen gère le premier rendu ; ici on gère les changements
-  // de session ultérieurs (login, logout, OAuth redirect).
-  const authInitialized = useRef(false);
+  // listenAuthState appelle le callback pour la session existante
+  // (event: null) ET pour le fire immédiat 'INITIAL_SESSION' du SDK —
+  // deux appels "snapshot" distincts, pas un seul. La SplashScreen gère
+  // déjà ce premier rendu ; on les ignore tous les deux ici (peu importe
+  // l'ordre) pour ne réagir qu'aux vrais changements ultérieurs. Un ref
+  // "premier appel seulement" sous-comptait ces deux appels et laissait
+  // le second ('INITIAL_SESSION') retomber sur setStep(15), écrasant la
+  // redirection vers l'écran de récupération de mot de passe.
   useEffect(() => {
-    return listenAuthState((user) => {
-      if (!authInitialized.current) {
-        authInitialized.current = true;
+    return listenAuthState((user, event) => {
+      if (!event || event === 'INITIAL_SESSION') {
         return; // SplashScreen handles initial routing
+      }
+      if (event === 'PASSWORD_RECOVERY') {
+        go(22);
+        return;
       }
       if (user) {
         if (user.email) setUserEmail(user.email);
@@ -184,7 +190,11 @@ function App() {
 
       {/* ── Splash ── */}
       {step === 0 && (
-        <SplashScreen onFinish={(user) => {
+        <SplashScreen onFinish={(user, event) => {
+          if (event === 'PASSWORD_RECOVERY') {
+            go(22);
+            return;
+          }
           if (user) {
             if (user.email) setUserEmail(user.email);
             setCurrentUid(user.uid);
@@ -281,8 +291,10 @@ function App() {
         />
       )}
 
-      {/* ── Password reset (Firebase sends email directly, no OTP needed) ── */}
+      {/* ── Password reset (Supabase sends the reset link directly, no OTP needed) ── */}
       {step === 20 && <ForgotPasswordPage onNext={() => go(16)} onBack={back} nativeLang={nativeLang} />}
+      {step === 22 && <NewPasswordPage onNext={() => go(23)} onBack={() => go(16)} nativeLang={nativeLang} />}
+      {step === 23 && <PasswordResetSuccessPage onNext={() => go(15)} nativeLang={nativeLang} />}
 
       {/* ── Section viewer (from Welcome page buttons) ── */}
       {step === 14 && hubView === 'calendar'  && <CalendarPage   nativeLang={nativeLang} onBack={() => go(1)} />}

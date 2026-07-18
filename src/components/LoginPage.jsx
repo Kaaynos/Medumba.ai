@@ -60,7 +60,9 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
             console.error('[login]', e);
             const msg = (e.message || '').toLowerCase();
             if (msg.includes('invalid') || msg.includes('credentials') || msg.includes('not found') || msg.includes('wrong')) {
-                setError(isFrench ? 'E-mail ou mot de passe incorrect.' : 'Incorrect email or password.');
+                setError(isFrench
+                    ? 'E-mail ou mot de passe incorrect. Si vous vous êtes inscrit·e avec Google, utilisez "Continuer avec Google" ci-dessus, ou "Mot de passe oublié ?" pour en créer un.'
+                    : 'Incorrect email or password. If you signed up with Google, use "Continue with Google" above, or "Forgot Password?" to set one.');
             } else if (msg.includes('too many') || msg.includes('rate') || e.status === 429) {
                 setError(isFrench ? 'Trop de tentatives. Réessayez plus tard.' : 'Too many attempts. Try again later.');
             } else {

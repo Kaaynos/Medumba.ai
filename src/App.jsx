@@ -234,7 +234,7 @@ function App() {
       {/* ── Quick setup (niveau + raison + objectif — tout en 1) ── */}
       {step === 3 && (
         <QuickSetupPage
-          onNext={() => go(8)} onBack={back}
+          onNext={() => go(15)} onBack={back}
           nativeLang={nativeLang}
           setConnection={setConnection}
           setProficiency={setProficiency}

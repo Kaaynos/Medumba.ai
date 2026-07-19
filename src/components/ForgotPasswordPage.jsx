@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { resetPassword } from '../services/authService';
 
 const B = '#1B4FD8';
+const RESEND_COOLDOWN = 45;
 
 const ForgotPasswordPage = ({ onNext, onBack, nativeLang }) => {
     const isFrench = nativeLang === 'french';
@@ -9,8 +10,19 @@ const ForgotPasswordPage = ({ onNext, onBack, nativeLang }) => {
     const [loading, setLoading] = useState(false);
     const [sent, setSent]       = useState(false);
     const [error, setError]     = useState('');
+    const [resending, setResending]     = useState(false);
+    const [resendError, setResendError] = useState('');
+    const [resendOk, setResendOk]       = useState(false);
+    const [seconds, setSeconds]         = useState(RESEND_COOLDOWN);
 
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const canResend = seconds <= 0;
+
+    useEffect(() => {
+        if (!sent || seconds <= 0) return;
+        const id = setTimeout(() => setSeconds((s) => s - 1), 1000);
+        return () => clearTimeout(id);
+    }, [sent, seconds]);
 
     const t = {
         title:     isFrench ? 'Mot de passe oublié 🔑'                                          : 'Forgot Password 🔑',
@@ -21,7 +33,35 @@ const ForgotPasswordPage = ({ onNext, onBack, nativeLang }) => {
         sentTitle: isFrench ? 'E-mail envoyé !'                                                   : 'Email sent!',
         sentSub:   isFrench ? `Vérifiez votre boîte mail à ${email} et suivez le lien pour réinitialiser votre mot de passe.` : `Check your inbox at ${email} and follow the link to reset your password.`,
         backLogin: isFrench ? 'Retour à la connexion'                                             : 'Back to login',
+        noEmail:   isFrench ? "Vous n'avez pas reçu l'e-mail ?"                                   : "Didn't receive the email?",
+        resend:    isFrench ? 'Renvoyer le lien'                                                  : 'Resend link',
+        resendIn:  isFrench ? `Renvoyer dans ${seconds}s`                                         : `Resend in ${seconds}s`,
+        resent:    isFrench ? 'E-mail renvoyé !'                                                  : 'Email resent!',
     };
+
+    async function handleResend() {
+        if (!canResend || resending) return;
+        setResendError('');
+        setResendOk(false);
+        setResending(true);
+        try {
+            await resetPassword(email);
+            setResendOk(true);
+            setSeconds(RESEND_COOLDOWN);
+        } catch (e) {
+            console.error('[forgot-password-resend]', e);
+            const msg = (e.message || '').toLowerCase();
+            if (e.status === 429 || msg.includes('rate limit')) {
+                setResendError(isFrench
+                    ? "Trop de demandes. Merci de patienter avant de réessayer."
+                    : 'Too many requests. Please wait before trying again.');
+            } else {
+                setResendError(isFrench ? "Erreur lors de l'envoi. Réessayez." : 'Failed to send. Please try again.');
+            }
+        } finally {
+            setResending(false);
+        }
+    }
 
     async function handleSend() {
         if (!ok || loading) return;
@@ -52,7 +92,21 @@ const ForgotPasswordPage = ({ onNext, onBack, nativeLang }) => {
             <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff', padding: '2rem' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>📧</div>
                 <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem', textAlign: 'center' }}>{t.sentTitle}</h1>
-                <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: '1.7', textAlign: 'center', maxWidth: '380px', marginBottom: '2.5rem' }}>{t.sentSub}</p>
+                <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: '1.7', textAlign: 'center', maxWidth: '380px', marginBottom: '1.5rem' }}>{t.sentSub}</p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem', marginBottom: '2.5rem' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: '500' }}>{t.noEmail}</span>
+                    {canResend ? (
+                        <button onClick={handleResend} disabled={resending} style={{ background: 'none', border: 'none', color: B, fontWeight: '700', fontSize: '0.9rem', cursor: resending ? 'not-allowed' : 'pointer', fontFamily: 'inherit' }}>
+                            {resending ? '...' : t.resend}
+                        </button>
+                    ) : (
+                        <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>{t.resendIn}</span>
+                    )}
+                    {resendOk && <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: '600' }}>✅ {t.resent}</span>}
+                    {resendError && <span style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: '600' }}>{resendError}</span>}
+                </div>
+
                 <button
                     onClick={onNext}
                     style={{ padding: '1rem 2.5rem', backgroundColor: B, color: '#fff', border: 'none', borderRadius: '9999px', fontSize: '1rem', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}

@@ -49,7 +49,9 @@ const SplashScreen = ({ onFinish }) => {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', animation: 'splash-pulse 2s infinite ease-in-out' }}>
         <img src={logo} alt="Medumba.AI" style={{ width: '120px', height: 'auto', marginBottom: '1.25rem' }} />
         <span style={{ fontSize: '2rem', fontWeight: '800', color: '#1e293b', letterSpacing: '-0.02em' }}>Medumba.AI</span>
-        <span style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.4rem' }}>Learn the Medumba language</span>
+        <span style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.4rem', maxWidth: '320px', textAlign: 'center', lineHeight: 1.5 }}>
+          Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon: gamified lessons, dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers.
+        </span>
       </div>
 
       <div style={{ position: 'absolute', bottom: '80px', width: '48px', height: '48px', animation: 'spin-dots 1.2s linear infinite' }}>

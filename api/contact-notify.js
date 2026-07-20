@@ -39,12 +39,14 @@ export default async function handler(req, res) {
         });
 
         if (!upstream.ok) {
-            res.status(502).json({ error: 'Could not send email notification' });
+            const detail = await upstream.text().catch(() => '');
+            // TEMP: surfaced for debugging the current outage — remove once diagnosed.
+            res.status(502).json({ error: 'Could not send email notification', status: upstream.status, detail });
             return;
         }
 
         res.status(200).json({ ok: true });
-    } catch {
-        res.status(502).json({ error: 'Could not send email notification' });
+    } catch (e) {
+        res.status(502).json({ error: 'Could not send email notification', detail: String(e) });
     }
 }

@@ -20,6 +20,8 @@
         z-index: 50;
       }
       #initial-splash img { width: 140px; height: auto; animation: splash-pulse 2s infinite ease-in-out; }
+      #initial-splash h1 { font-family: 'Outfit', system-ui, sans-serif; font-size: 1.75rem; font-weight: 800; color: #0f172a; margin: 1rem 0 0.4rem; }
+      #initial-splash p { font-family: 'Outfit', system-ui, sans-serif; font-size: 0.9rem; color: #64748b; max-width: 320px; text-align: center; margin: 0 1.5rem; line-height: 1.5; }
       #initial-splash .splash-spinner { position: absolute; bottom: 80px; width: 48px; height: 48px; animation: spin-dots 1.2s linear infinite; }
       #initial-splash .splash-dot { position: absolute; border-radius: 50%; background: #0056D2; }
       @keyframes splash-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
@@ -30,6 +32,8 @@
     <div id="root">
       <div id="initial-splash">
         <img src="/logo.png" alt="Medumba.AI" />
+        <h1>Medumba.AI</h1>
+        <p>Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon: gamified lessons, dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers.</p>
         <div class="splash-spinner">
           <span class="splash-dot" style="left: 42px; top: 22px; width: 4px; height: 4px; opacity: 0.2;"></span>
           <span class="splash-dot" style="left: 35.77px; top: 35.77px; width: 4.75px; height: 4.75px; opacity: 0.3;"></span>

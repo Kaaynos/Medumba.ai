@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 /* ════════════════════════════════════════════════════════════════
-   Alphabet Medumba — 32 lettres avec prononciation TTS
+   Alphabet Medumba — 32 lettres (pas d'audio : pas encore de voix Medumba enregistrée)
 ════════════════════════════════════════════════════════════════ */
 
 const LETTERS = [
@@ -46,19 +46,6 @@ const LETTERS = [
 const VOWEL_COUNT     = LETTERS.filter(l => l.type === 'vowel').length;
 const CONSONANT_COUNT = LETTERS.filter(l => l.type === 'consonant').length;
 
-function speakLetter(letter) {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(letter);
-    const voices = window.speechSynthesis.getVoices();
-    const frVoice = voices.find(v => v.lang === 'fr-CM') || voices.find(v => v.lang.startsWith('fr'));
-    if (frVoice) utt.voice = frVoice;
-    utt.lang  = 'fr-FR';
-    utt.rate  = 0.6;
-    utt.pitch = 1.1;
-    window.speechSynthesis.speak(utt);
-}
-
 /* ── Carte d'une lettre ── */
 const LetterCard = ({ item, isFr, active, onSelect }) => {
     const isSpecial = item.letter.length > 1; // gh, sh, ny, ts
@@ -67,7 +54,7 @@ const LetterCard = ({ item, isFr, active, onSelect }) => {
 
     return (
         <div
-            onClick={() => { onSelect(item.letter); speakLetter(item.letter); }}
+            onClick={() => onSelect(item.letter)}
             style={{
                 backgroundColor: active ? item.color : bgColor,
                 border: `2px solid ${active ? item.color : borderCol}`,
@@ -152,18 +139,6 @@ const DetailPanel = ({ item, isFr }) => (
                 {isFr ? item.exMeanFr : item.exMeanEn}
             </div>
         </div>
-        <button
-            onClick={() => speakLetter(item.letter)}
-            style={{
-                backgroundColor: item.color, color: '#fff', border: 'none',
-                borderRadius: '12px', padding: '0.65rem 1.25rem',
-                fontWeight: '800', fontSize: '0.88rem', cursor: 'pointer',
-                fontFamily: 'inherit', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', gap: '0.5rem', width: '100%',
-            }}
-        >
-            🔊 {isFr ? `Écouter « ${item.letter} »` : `Listen to « ${item.letter} »`}
-        </button>
     </div>
 );
 

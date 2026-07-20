@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
 import { getActiveLearnerCount } from '../services/statsService';
-import { submitContactMessage } from '../services/contactService';
+import { submitContactMessage, getLandingComments, listenLandingComments } from '../services/contactService';
 import { submitTestimonial, getApprovedTestimonials } from '../services/testimonialService';
 
 /* ── Palette Medumba ── */
@@ -153,7 +153,7 @@ function AppPreview({ small, isFr }) {
 }
 
 /* ══════════════ COMPOSANT PRINCIPAL ══════════════ */
-export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }) {
+export default function LandingPage({ onStart, onRegister, onNavigate, onDownload }) {
     const nav = onNavigate ?? onStart;
     const [menuOpen,  setMenuOpen]  = useState(false);
     const [scrolled,  setScrolled]  = useState(false);
@@ -191,6 +191,15 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
             setTestimonialStatus('error');
         }
     };
+
+    // Commentaires publics en direct (section "Une question ? Écrivez-nous").
+    const [landingComments, setLandingComments] = useState([]);
+    useEffect(() => {
+        getLandingComments().then(setLandingComments).catch(() => { /* best-effort, la page reste utilisable sans */ });
+        return listenLandingComments((row) => {
+            setLandingComments((prev) => [row, ...prev].slice(0, 20));
+        });
+    }, []);
 
     // Formulaire de contact compact dans le footer.
     const [footerForm, setFooterForm] = useState({ name: '', email: '', message: '' });
@@ -368,10 +377,10 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
                         {isFr ? '🇬🇧 EN' : '🇫🇷 FR'}
                     </button>
-                    <button onClick={onLogin} style={{ padding:'.42rem 1.1rem',borderRadius:'7px',border:`1.5px solid rgba(0,86,210,.18)`,background:'transparent',color:B,fontWeight:600,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s' }}
+                    <button onClick={onRegister} style={{ padding:'.42rem 1.1rem',borderRadius:'7px',border:`1.5px solid rgba(0,86,210,.18)`,background:'transparent',color:B,fontWeight:600,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s' }}
                         onMouseEnter={e=>{e.currentTarget.style.background=LIGHT;e.currentTarget.style.borderColor=B;}}
                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
-                        {tr('Se connecter','Log in')}
+                        {tr("S'inscrire",'Register')}
                     </button>
                     {!isMobile && <button onClick={onStart} className="lp-btn" style={{ padding:'.46rem 1.2rem',fontSize:'.83rem' }}>{tr('Commencer','Start')} ✦</button>}
                     {isMobile && (
@@ -961,6 +970,17 @@ export default function LandingPage({ onStart, onLogin, onNavigate, onDownload }
                         {footerStatus === 'error' && (
                             <div style={{ fontSize:'.78rem', color:'#f87171', fontWeight:600, marginTop:'.5rem' }}>
                                 {tr("Erreur d'envoi. Réessayez.",'Failed to send. Please try again.')}
+                            </div>
+                        )}
+
+                        {landingComments.length > 0 && (
+                            <div style={{ marginTop:'1.5rem', maxWidth:'720px', display:'flex', flexDirection:'column', gap:'.6rem', maxHeight:'260px', overflowY:'auto' }}>
+                                {landingComments.map((c) => (
+                                    <div key={c.id} style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:'10px', padding:'.65rem .9rem' }}>
+                                        <span style={{ fontWeight:800, fontSize:'.8rem', color:'#fff' }}>{c.name}</span>
+                                        <p style={{ margin:'.25rem 0 0', fontSize:'.8rem', color:'rgba(248,250,252,.75)', lineHeight:1.5 }}>{c.message}</p>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </div>

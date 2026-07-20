@@ -16,8 +16,6 @@ import AgePage                  from './components/AgePage';
 import EmailPage                from './components/EmailPage';
 import PasswordPage             from './components/PasswordPage';
 import SuccessPage              from './components/SuccessPage';
-import LoginPage                from './components/LoginPage';
-import ForgotPasswordPage       from './components/ForgotPasswordPage';
 import OTPVerificationPage      from './components/OTPVerificationPage';
 import NewPasswordPage          from './components/NewPasswordPage';
 import PasswordResetSuccessPage from './components/PasswordResetSuccessPage';
@@ -49,17 +47,14 @@ import { ThemeProvider }        from './context/ThemeContext';
 //  5  Reason             │
 //  6  Achieve            │
 //  7  Daily Goal         ┘
-//  8  Profile Welcome  (Skip→15) ┐
-//  9  Name                       │ Account creation
-// 10  Age                        │
-// 11  Email                      │
-// 12  Password                   │
-// 13  Success          (→15)     ┘
-// 16  Login            (→15 | Forgot→20)
-// 20  Forgot Password  (→21)     ┐
-// 21  OTP Verification (→22)     │ Password reset
-// 22  New Password     (→23)     │
-// 23  Reset Success    (→16)     ┘
+//  8  Profile Welcome  (= "Register", reached from landing nav) ┐
+//  9  Name                                                      │ Registration
+// 10  Age                                                       │ (optional — app access
+// 11  Email                                                     │  never requires this)
+// 12  Password                                                  │
+// 13  Success          (→15)                                    ┘
+// 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
+// 23  Reset Success    (→15)  ┘ (no "Log in" screen exists anymore)
 // 14  Section viewer   (calendar | video | counting | dictionary)
 // 15  Gamified Dashboard
 // 99  Admin Panel
@@ -213,7 +208,7 @@ function App() {
       {step === 1 && (
         <LandingPage
           onStart={() => go(2)}
-          onLogin={() => go(16)}
+          onRegister={() => go(8)}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
         />
@@ -274,26 +269,9 @@ function App() {
           onLanding={() => go(1)}
         />}
 
-      {/* ── Login ── */}
-      {step === 16 && (
-        <LoginPage
-          onLogin={({ user }) => {
-            if (user?.email) setUserEmail(user.email);
-            if (user?.uid) getUserProfile(user.uid).then((prof) => {
-              const name = prof?.name || user.displayName || '';
-              if (name) setUserName(name.split(' ')[0]);
-            });
-            go(15);
-          }}
-          onBack={back}
-          onForgotPassword={() => go(20)}
-          nativeLang={nativeLang}
-        />
-      )}
-
-      {/* ── Password reset (Supabase sends the reset link directly, no OTP needed) ── */}
-      {step === 20 && <ForgotPasswordPage onNext={() => go(16)} onBack={back} nativeLang={nativeLang} />}
-      {step === 22 && <NewPasswordPage onNext={() => go(23)} onBack={() => go(16)} nativeLang={nativeLang} />}
+      {/* ── Password reset — plus de flux "connexion" dans l'UI, mais un lien de
+         récupération déjà envoyé (avant ce changement) doit encore fonctionner. ── */}
+      {step === 22 && <NewPasswordPage onNext={() => go(23)} onBack={() => go(1)} nativeLang={nativeLang} />}
       {step === 23 && <PasswordResetSuccessPage onNext={() => go(15)} nativeLang={nativeLang} />}
 
       {/* ── Section viewer (from Welcome page buttons) ── */}

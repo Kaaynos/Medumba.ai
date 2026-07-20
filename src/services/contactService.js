@@ -21,6 +21,35 @@ export async function submitContactMessage({ name, email, phone, subject, messag
     } catch {
         // ignored — the message still landed in contact_messages
     }
+
+    // Best-effort public landing-page comment — name + message only, never
+    // email/phone, since this table is world-readable and streamed live.
+    try {
+        await supabase.from('landing_comments').insert({ name, message });
+    } catch {
+        // ignored — the private contact message above already succeeded
+    }
+}
+
+/* ── Commentaires publics de la landing page (nom + message uniquement) ── */
+export async function getLandingComments(limit = 20) {
+    const { data, error } = await supabase
+        .from('landing_comments')
+        .select('id, name, message, created_at')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+    if (error) throw error;
+    return data ?? [];
+}
+
+/* ── S'abonner aux nouveaux commentaires en temps réel (Supabase Realtime) ── */
+export function listenLandingComments(onInsert) {
+    const channel = supabase
+        .channel('landing_comments_feed')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'landing_comments' },
+            (payload) => onInsert(payload.new))
+        .subscribe();
+    return () => supabase.removeChannel(channel);
 }
 
 /* ── Lire tous les messages (admin uniquement, RLS l'impose) ── */

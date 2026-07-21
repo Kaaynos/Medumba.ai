@@ -443,6 +443,12 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                             </div>
                         </Reveal>
 
+                        <Reveal delay={0.06}>
+                            <h2 style={{ fontSize:'.72rem',fontWeight:700,color:AMB,letterSpacing:'2.5px',textTransform:'uppercase',marginBottom:'.8rem' }}>
+                                Medumba.AI
+                            </h2>
+                        </Reveal>
+
                         <Reveal delay={0.08}>
                             <h1 style={{ ...TITLE(isSmall?'2.7rem':isMobile?'3.3rem':'4.6rem'), marginBottom:'1.4rem' }}>
                                 {tr('La langue Medumba,','The Medumba language,')}<br />
@@ -453,10 +459,16 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         </Reveal>
 
                         <Reveal delay={0.15}>
-                            <p style={{ fontSize:isSmall?'.92rem':isMobile?'.97rem':'1.08rem',color:MUTED,lineHeight:1.8,marginBottom:'2.25rem',maxWidth:'460px' }}>
+                            <p style={{ fontSize:isSmall?'.92rem':isMobile?'.97rem':'1.08rem',color:MUTED,lineHeight:1.8,marginBottom:'.75rem',maxWidth:'460px' }}>
                                 {tr(
                                     "Leçons gamifiées, classes live avec des enseignants certifiés CEPOM, et IA vocale — tout pour maîtriser le Medumba, où que vous soyez.",
                                     "Gamified lessons, live classes with CEPOM-certified teachers, and voice AI — everything to master Medumba, wherever you are."
+                                )}
+                            </p>
+                            <p style={{ fontSize:isSmall?'.8rem':'.85rem',color:MUTED,lineHeight:1.7,marginBottom:'2.25rem',maxWidth:'460px',opacity:0.85 }}>
+                                {tr(
+                                    "Medumba.AI est une application d'apprentissage pour la langue Medumba de Bafoussam, Cameroun. La connexion Google est optionnelle et sert uniquement à créer votre profil apprenant et à sauvegarder votre progression.",
+                                    "Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon. Signing in with Google is optional and is used only to create your learner profile and securely save your course progress."
                                 )}
                             </p>
                         </Reveal>

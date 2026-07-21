@@ -194,12 +194,20 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
 
     // Commentaires publics en direct (section "Une question ? Écrivez-nous").
     const [landingComments, setLandingComments] = useState([]);
+    const [activeComment, setActiveComment] = useState(0);
+    const [showAllComments, setShowAllComments] = useState(false);
     useEffect(() => {
         getLandingComments().then(setLandingComments).catch(() => { /* best-effort, la page reste utilisable sans */ });
         return listenLandingComments((row) => {
             setLandingComments((prev) => [row, ...prev].slice(0, 20));
         });
     }, []);
+    // Défilement auto d'un commentaire à la fois — désactivé dès que la liste complète est ouverte.
+    useEffect(() => {
+        if (showAllComments || landingComments.length <= 1) return;
+        const t = setInterval(() => setActiveComment(p => (p + 1) % landingComments.length), 4000);
+        return () => clearInterval(t);
+    }, [showAllComments, landingComments.length]);
 
     // Formulaire de contact compact dans le footer.
     const [footerForm, setFooterForm] = useState({ name: '', email: '', message: '' });
@@ -974,13 +982,29 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         )}
 
                         {landingComments.length > 0 && (
-                            <div style={{ marginTop:'1.5rem', maxWidth:'720px', display:'flex', flexDirection:'column', gap:'.6rem', maxHeight:'260px', overflowY:'auto' }}>
-                                {landingComments.map((c) => (
-                                    <div key={c.id} style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:'10px', padding:'.65rem .9rem' }}>
-                                        <span style={{ fontWeight:800, fontSize:'.8rem', color:'#fff' }}>{c.name}</span>
-                                        <p style={{ margin:'.25rem 0 0', fontSize:'.8rem', color:'rgba(248,250,252,.75)', lineHeight:1.5 }}>{c.message}</p>
+                            <div style={{ marginTop:'1.5rem', maxWidth:'720px' }}>
+                                {!showAllComments ? (
+                                    <div key={activeComment} style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:'10px', padding:'.65rem .9rem', animation:'fade-up .4s ease' }}>
+                                        <span style={{ fontWeight:800, fontSize:'.8rem', color:'#fff' }}>{landingComments[activeComment % landingComments.length].name}</span>
+                                        <p style={{ margin:'.25rem 0 0', fontSize:'.8rem', color:'rgba(248,250,252,.75)', lineHeight:1.5 }}>{landingComments[activeComment % landingComments.length].message}</p>
                                     </div>
-                                ))}
+                                ) : (
+                                    <div style={{ display:'flex', flexDirection:'column', gap:'.6rem', maxHeight:'260px', overflowY:'auto' }}>
+                                        {landingComments.map((c) => (
+                                            <div key={c.id} style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.08)', borderRadius:'10px', padding:'.65rem .9rem' }}>
+                                                <span style={{ fontWeight:800, fontSize:'.8rem', color:'#fff' }}>{c.name}</span>
+                                                <p style={{ margin:'.25rem 0 0', fontSize:'.8rem', color:'rgba(248,250,252,.75)', lineHeight:1.5 }}>{c.message}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {landingComments.length > 1 && (
+                                    <button onClick={() => setShowAllComments(v => !v)} style={{ marginTop:'.6rem', background:'none', border:'none', color:AMB2, fontWeight:700, fontSize:'.78rem', cursor:'pointer', fontFamily:'inherit', padding:0 }}>
+                                        {showAllComments
+                                            ? tr('Réduire', 'Show less')
+                                            : tr(`Voir les ${landingComments.length} messages →`, `See all ${landingComments.length} messages →`)}
+                                    </button>
+                                )}
                             </div>
                         )}
                     </div>

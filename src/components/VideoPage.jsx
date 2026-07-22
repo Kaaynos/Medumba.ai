@@ -3,8 +3,13 @@ import { playMedumbaWord } from '../utils/medumbaAudio';
 import { supabase } from '../config/supabase';
 
 /* ══════════════════════════════════════════════════════════════════
-   Video catalogue — served from /public/videos/
+   Video catalogue — most videos are served from YouTube (embedded).
+   The videos below with no `youtube` id are served from Supabase
+   Storage instead of /public/videos/ — those local files are tracked
+   via Git LFS, and Vercel's build doesn't resolve LFS pointers, so
+   they'd 404/serve pointer text in production.
 ══════════════════════════════════════════════════════════════════ */
+const STORAGE_BASE = 'https://amhzzwiqlmewghtlmjbm.supabase.co/storage/v1/object/public/videos';
 const CATEGORIES = [
     {
         id: 'intro',
@@ -12,14 +17,14 @@ const CATEGORIES = [
         labelEn: 'Introduction', labelFr: 'Introduction',
         descEn: 'Start here — Medumba basics', descFr: 'Commencez ici — bases du Medumba',
         videos: [
-            { src: '/videos/intro/intro_01_salutation.mp4',  titleFr: "Salutation (Cà'tə̀)",    titleEn: "Greeting (Cà'tə̀)",       descFr: 'Comment saluer',              descEn: 'How to greet',            thumb: '👋', bg: 'linear-gradient(135deg,#7c3aed,#a855f7)' },
-            { src: '/videos/intro/intro_02_7jours.mp4',      titleFr: '7 jours de la semaine', titleEn: '7 days of the week',      descFr: 'Les 7 jours en Medumba',      descEn: '7 days in Medumba',       thumb: '📅', bg: 'linear-gradient(135deg,#0891b2,#06b6d4)' },
-            { src: '/videos/intro/intro_03_bagwud.mp4',      titleFr: 'Bǎgwud',               titleEn: 'Bǎgwud',                  descFr: 'Vocabulaire culturel',        descEn: 'Cultural vocabulary',     thumb: '🏺', bg: 'linear-gradient(135deg,#d97706,#f59e0b)' },
-            { src: '/videos/intro/intro_04_matin.mp4',       titleFr: 'Le matin',              titleEn: 'The morning',             descFr: 'Expressions du matin',        descEn: 'Morning expressions',     thumb: '🌅', bg: 'linear-gradient(135deg,#f97316,#fb923c)' },
-            { src: '/videos/intro/intro_05_8jours.mp4',      titleFr: '8 jours (calendrier)',  titleEn: '8-day calendar',          descFr: 'Calendrier Medumba',          descEn: 'Medumba calendar',        thumb: '🗓️', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
-            { src: '/videos/intro/intro_06_mois.mp4',        titleFr: "Mois de l'année",       titleEn: 'Months of the year',      descFr: 'Les 12 mois en Medumba',      descEn: '12 months in Medumba',    thumb: '📆', bg: 'linear-gradient(135deg,#4f46e5,#818cf8)' },
-            { src: '/videos/intro/intro_07_maison.mp4',      titleFr: 'La maison (Tǔnndα)',    titleEn: 'The house (Tǔnndα)',       descFr: 'Vocabulaire de la maison',    descEn: 'Home vocabulary',         thumb: '🏠', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
-            { src: '/videos/intro/intro_08_mots.mp4',        titleFr: 'Les mots (Tʉntə̀)',     titleEn: 'Words (Tʉntə̀)',           descFr: 'Mots et chiffres de base',    descEn: 'Basic words & numbers',   thumb: '🔢', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },
+            { src: `${STORAGE_BASE}/intro/intro_01_salutation.mp4`,  titleFr: "Salutation (Cà'tə̀)",    titleEn: "Greeting (Cà'tə̀)",       descFr: 'Comment saluer',              descEn: 'How to greet',            thumb: '👋', bg: 'linear-gradient(135deg,#7c3aed,#a855f7)' },
+            { src: `${STORAGE_BASE}/intro/intro_02_7jours.mp4`,      titleFr: '7 jours de la semaine', titleEn: '7 days of the week',      descFr: 'Les 7 jours en Medumba',      descEn: '7 days in Medumba',       thumb: '📅', bg: 'linear-gradient(135deg,#0891b2,#06b6d4)' },
+            { src: `${STORAGE_BASE}/intro/intro_03_bagwud.mp4`,      titleFr: 'Bǎgwud',               titleEn: 'Bǎgwud',                  descFr: 'Vocabulaire culturel',        descEn: 'Cultural vocabulary',     thumb: '🏺', bg: 'linear-gradient(135deg,#d97706,#f59e0b)' },
+            { src: `${STORAGE_BASE}/intro/intro_04_matin.mp4`,       titleFr: 'Le matin',              titleEn: 'The morning',             descFr: 'Expressions du matin',        descEn: 'Morning expressions',     thumb: '🌅', bg: 'linear-gradient(135deg,#f97316,#fb923c)' },
+            { src: `${STORAGE_BASE}/intro/intro_05_8jours.mp4`,      titleFr: '8 jours (calendrier)',  titleEn: '8-day calendar',          descFr: 'Calendrier Medumba',          descEn: 'Medumba calendar',        thumb: '🗓️', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
+            { src: `${STORAGE_BASE}/intro/intro_06_mois.mp4`,        titleFr: "Mois de l'année",       titleEn: 'Months of the year',      descFr: 'Les 12 mois en Medumba',      descEn: '12 months in Medumba',    thumb: '📆', bg: 'linear-gradient(135deg,#4f46e5,#818cf8)' },
+            { src: `${STORAGE_BASE}/intro/intro_07_maison.mp4`,      titleFr: 'La maison (Tǔnndα)',    titleEn: 'The house (Tǔnndα)',       descFr: 'Vocabulaire de la maison',    descEn: 'Home vocabulary',         thumb: '🏠', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
+            { src: `${STORAGE_BASE}/intro/intro_08_mots.mp4`,        titleFr: 'Les mots (Tʉntə̀)',     titleEn: 'Words (Tʉntə̀)',           descFr: 'Mots et chiffres de base',    descEn: 'Basic words & numbers',   thumb: '🔢', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },
         ],
     },
     {
@@ -28,15 +33,15 @@ const CATEGORIES = [
         labelEn: 'Level 1', labelFr: 'Niveau 1',
         descEn: 'Everyday conversations', descFr: 'Conversations du quotidien',
         videos: [
-            { src: '/videos/niveau1/n1_04_salutation1.mp4',  titleFr: 'Salutations 1',          titleEn: 'Greetings 1',             descFr: 'Formules de salutation',      descEn: 'Greeting formulas',       thumb: '🤝', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
-            { src: '/videos/niveau1/n1_05_salutation2.mp4',  titleFr: 'Salutations 2',          titleEn: 'Greetings 2',             descFr: 'Salutations approfondies',    descEn: 'Extended greetings',      thumb: '😊', bg: 'linear-gradient(135deg,#0891b2,#22d3ee)' },
-            { src: '/videos/niveau1/n1_03_monnom.mp4',       titleFr: "Mon nom (Mfǎ' nὰ)",      titleEn: "My name (Mfǎ' nὰ)",       descFr: 'Se présenter',                descEn: 'Introducing yourself',    thumb: '🪪', bg: 'linear-gradient(135deg,#7c3aed,#a78bfa)' },
-            { src: '/videos/niveau1/n1_01_marche1.mp4',      titleFr: 'Au marché — partie 1',   titleEn: 'At the market — part 1',  descFr: 'Dialogue au marché',          descEn: 'Market dialogue',         thumb: '🛒', bg: 'linear-gradient(135deg,#d97706,#fbbf24)' },
-            { src: '/videos/niveau1/n1_02_marche2.mp4',      titleFr: 'Au marché — partie 2',   titleEn: 'At the market — part 2',  descFr: 'Négocier et acheter',         descEn: 'Haggling & buying',       thumb: '💰', bg: 'linear-gradient(135deg,#b45309,#f59e0b)' },
-            { src: '/videos/niveau1/n1_06_demanderju.mp4',   titleFr: 'Demander le jour',       titleEn: 'Asking the day',          descFr: 'Demander la date',            descEn: 'Asking for the date',     thumb: '❓', bg: 'linear-gradient(135deg,#0f766e,#2dd4bf)' },
-            { src: '/videos/niveau1/n1_07_demander.mp4',     titleFr: 'Demander quelque chose', titleEn: 'Asking for something',    descFr: 'Formuler une demande',        descEn: 'Making a request',        thumb: '🙏', bg: 'linear-gradient(135deg,#4f46e5,#6366f1)' },
-            { src: '/videos/niveau1/n1_08_manger.mp4',       titleFr: "Manger un repas",        titleEn: 'Eating a meal',           descFr: 'Vocabulaire des repas',       descEn: 'Meal vocabulary',         thumb: '🍽️', bg: 'linear-gradient(135deg,#dc2626,#fb7185)' },
-            { src: '/videos/niveau1/n1_09_dormir.mp4',       titleFr: 'Dormir (tswǐ wud)',      titleEn: 'Sleeping (tswǐ wud)',     descFr: 'Expressions du soir',         descEn: 'Evening expressions',     thumb: '😴', bg: 'linear-gradient(135deg,#1e3a5f,#3b82f6)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_04_salutation1.mp4`,  titleFr: 'Salutations 1',          titleEn: 'Greetings 1',             descFr: 'Formules de salutation',      descEn: 'Greeting formulas',       thumb: '🤝', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_05_salutation2.mp4`,  titleFr: 'Salutations 2',          titleEn: 'Greetings 2',             descFr: 'Salutations approfondies',    descEn: 'Extended greetings',      thumb: '😊', bg: 'linear-gradient(135deg,#0891b2,#22d3ee)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_03_monnom.mp4`,       titleFr: "Mon nom (Mfǎ' nὰ)",      titleEn: "My name (Mfǎ' nὰ)",       descFr: 'Se présenter',                descEn: 'Introducing yourself',    thumb: '🪪', bg: 'linear-gradient(135deg,#7c3aed,#a78bfa)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_01_marche1.mp4`,      titleFr: 'Au marché — partie 1',   titleEn: 'At the market — part 1',  descFr: 'Dialogue au marché',          descEn: 'Market dialogue',         thumb: '🛒', bg: 'linear-gradient(135deg,#d97706,#fbbf24)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_02_marche2.mp4`,      titleFr: 'Au marché — partie 2',   titleEn: 'At the market — part 2',  descFr: 'Négocier et acheter',         descEn: 'Haggling & buying',       thumb: '💰', bg: 'linear-gradient(135deg,#b45309,#f59e0b)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_06_demanderju.mp4`,   titleFr: 'Demander le jour',       titleEn: 'Asking the day',          descFr: 'Demander la date',            descEn: 'Asking for the date',     thumb: '❓', bg: 'linear-gradient(135deg,#0f766e,#2dd4bf)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_07_demander.mp4`,     titleFr: 'Demander quelque chose', titleEn: 'Asking for something',    descFr: 'Formuler une demande',        descEn: 'Making a request',        thumb: '🙏', bg: 'linear-gradient(135deg,#4f46e5,#6366f1)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_08_manger.mp4`,       titleFr: "Manger un repas",        titleEn: 'Eating a meal',           descFr: 'Vocabulaire des repas',       descEn: 'Meal vocabulary',         thumb: '🍽️', bg: 'linear-gradient(135deg,#dc2626,#fb7185)' },
+            { src: `${STORAGE_BASE}/niveau1/n1_09_dormir.mp4`,       titleFr: 'Dormir (tswǐ wud)',      titleEn: 'Sleeping (tswǐ wud)',     descFr: 'Expressions du soir',         descEn: 'Evening expressions',     thumb: '😴', bg: 'linear-gradient(135deg,#1e3a5f,#3b82f6)' },
         ],
     },
     {
@@ -45,8 +50,8 @@ const CATEGORIES = [
         labelEn: 'Level 2', labelFr: 'Niveau 2',
         descEn: 'Advanced topics', descFr: 'Sujets avancés',
         videos: [
-            { src: '/videos/niveau2/n2_01_chanson.mp4',      titleFr: 'Chanson Medumba (Caŋ)', titleEn: 'Medumba song (Caŋ)',       descFr: 'Apprendre par la chanson',    descEn: 'Learn through song',      thumb: '🎵', bg: 'linear-gradient(135deg,#7c3aed,#c084fc)' },
-            { src: '/videos/niveau2/n2_02_bonnenuit.mp4',    titleFr: 'Bonne nuit, enfant',    titleEn: 'Goodnight, child',         descFr: 'Expressions pour enfants',    descEn: 'For children',            thumb: '🌙', bg: 'linear-gradient(135deg,#1e3a5f,#6366f1)' },
+            { src: `${STORAGE_BASE}/niveau2/n2_01_chanson.mp4`,      titleFr: 'Chanson Medumba (Caŋ)', titleEn: 'Medumba song (Caŋ)',       descFr: 'Apprendre par la chanson',    descEn: 'Learn through song',      thumb: '🎵', bg: 'linear-gradient(135deg,#7c3aed,#c084fc)' },
+            { src: `${STORAGE_BASE}/niveau2/n2_02_bonnenuit.mp4`,    titleFr: 'Bonne nuit, enfant',    titleEn: 'Goodnight, child',         descFr: 'Expressions pour enfants',    descEn: 'For children',            thumb: '🌙', bg: 'linear-gradient(135deg,#1e3a5f,#6366f1)' },
         ],
     },
     {
@@ -55,11 +60,11 @@ const CATEGORIES = [
         labelEn: 'Drawings', labelFr: 'Dessins Medumba',
         descEn: 'Animated visual lessons', descFr: 'Leçons animées visuelles',
         videos: [
-            { src: '/videos/dessin/dessin_01.mp4', titleFr: 'Dessin 01', titleEn: 'Drawing 01', descFr: 'Leçon animée n°1',  descEn: 'Lesson #1',  thumb: '✏️', bg: 'linear-gradient(135deg,#e11d48,#f43f5e)' },
-            { src: '/videos/dessin/dessin_02.mp4', titleFr: 'Dessin 02', titleEn: 'Drawing 02', descFr: 'Leçon animée n°2',  descEn: 'Lesson #2',  thumb: '🖍️', bg: 'linear-gradient(135deg,#d97706,#fb923c)' },
-            { src: '/videos/dessin/dessin_03.mp4', titleFr: 'Dessin 03', titleEn: 'Drawing 03', descFr: 'Leçon animée n°3',  descEn: 'Lesson #3',  thumb: '🎨', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
-            { src: '/videos/dessin/dessin_04.mp4', titleFr: 'Dessin 04', titleEn: 'Drawing 04', descFr: 'Leçon animée n°4',  descEn: 'Lesson #4',  thumb: '🖌️', bg: 'linear-gradient(135deg,#0891b2,#22d3ee)' },
-            { src: '/videos/dessin/dessin_05.mp4', titleFr: 'Dessin 05', titleEn: 'Drawing 05', descFr: 'Leçon animée n°5',  descEn: 'Lesson #5',  thumb: '✏️', bg: 'linear-gradient(135deg,#7c3aed,#a78bfa)' },
+            { src: `${STORAGE_BASE}/dessin/dessin_01.mp4`, titleFr: 'Dessin 01', titleEn: 'Drawing 01', descFr: 'Leçon animée n°1',  descEn: 'Lesson #1',  thumb: '✏️', bg: 'linear-gradient(135deg,#e11d48,#f43f5e)' },
+            { src: `${STORAGE_BASE}/dessin/dessin_02.mp4`, titleFr: 'Dessin 02', titleEn: 'Drawing 02', descFr: 'Leçon animée n°2',  descEn: 'Lesson #2',  thumb: '🖍️', bg: 'linear-gradient(135deg,#d97706,#fb923c)' },
+            { src: `${STORAGE_BASE}/dessin/dessin_03.mp4`, titleFr: 'Dessin 03', titleEn: 'Drawing 03', descFr: 'Leçon animée n°3',  descEn: 'Lesson #3',  thumb: '🎨', bg: 'linear-gradient(135deg,#16a34a,#4ade80)' },
+            { src: `${STORAGE_BASE}/dessin/dessin_04.mp4`, titleFr: 'Dessin 04', titleEn: 'Drawing 04', descFr: 'Leçon animée n°4',  descEn: 'Lesson #4',  thumb: '🖌️', bg: 'linear-gradient(135deg,#0891b2,#22d3ee)' },
+            { src: `${STORAGE_BASE}/dessin/dessin_05.mp4`, titleFr: 'Dessin 05', titleEn: 'Drawing 05', descFr: 'Leçon animée n°5',  descEn: 'Lesson #5',  thumb: '✏️', bg: 'linear-gradient(135deg,#7c3aed,#a78bfa)' },
             { src: '/videos/dessin/dessin_06.mp4', youtube: 'avB2s12HFlY', titleFr: 'Lecture du temps',          titleEn: 'Telling Time',             descFr: 'Lire et dire l\'heure',       descEn: 'Reading & telling time',  thumb: '⏰', bg: 'linear-gradient(135deg,#0f766e,#14b8a6)' },
             { src: '/videos/dessin/dessin_07.mp4', youtube: 'O5eIMhubaQM', titleFr: 'Animaux de la savane',      titleEn: 'Savanna Animals',          descFr: 'Faune de la savane',          descEn: 'African savanna wildlife', thumb: '🦁', bg: 'linear-gradient(135deg,#d97706,#fb923c)' },
             { src: '/videos/dessin/dessin_08.mp4', youtube: 'wcKfYEYkGqA', titleFr: 'Les couleurs',              titleEn: 'Colors',                   descFr: 'Nommer les couleurs',         descEn: 'Naming colors',           thumb: '🌈', bg: 'linear-gradient(135deg,#dc2626,#f87171)' },

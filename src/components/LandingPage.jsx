@@ -42,6 +42,11 @@ const IconApple = () => (
         <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-143-39.3c-58.5 0-81.3 41.3-144.5 41.3-63.2 0-109.5-54.8-163.5-125.2-25.5-32.3-51.3-93.7-51.3-152.6 0-138.7 90.8-212.2 180.1-212.2 46.8 0 86.2 31.1 115.7 31.1s75-32.6 126.4-32.6c20.3 0 113.7 1.9 172.1 74.7zm-234.8-80.2c17.7-24.7 30-58.3 30-91.9 0-4.5-.3-9-1-13.5-28.7 1-63.9 19.7-84 44.7-17 21.3-32.3 55.3-32.3 89.5 0 4.8.7 9.6 1 11.3 1.9.3 5.1.6 8.3.6 25.7 0 58.5-17.3 77.9-40.7z"/>
     </svg>
 );
+const IconWhatsApp = ({ size = 28 }) => (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="currentColor">
+        <path d="M16.004 3C9.375 3 4 8.373 4 15c0 2.234.615 4.325 1.687 6.117L4 29l8.062-1.652A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.8a9.76 9.76 0 0 1-4.98-1.363l-.357-.212-4.783.982.99-4.657-.233-.372A9.76 9.76 0 0 1 6.2 15c0-5.404 4.4-9.8 9.804-9.8 5.403 0 9.796 4.396 9.796 9.8 0 5.404-4.393 9.8-9.796 9.8zm5.37-7.335c-.294-.147-1.738-.858-2.007-.956-.269-.098-.465-.147-.66.147-.196.294-.758.955-.93 1.152-.171.196-.343.22-.636.073-.294-.147-1.24-.457-2.362-1.457-.873-.779-1.463-1.741-1.635-2.035-.171-.294-.018-.453.129-.6.132-.132.294-.343.44-.514.147-.171.196-.294.294-.49.098-.196.049-.367-.024-.514-.073-.147-.66-1.591-.904-2.178-.238-.572-.48-.494-.66-.503l-.562-.01c-.196 0-.514.073-.783.367-.269.294-1.026 1.002-1.026 2.443 0 1.44 1.05 2.833 1.197 3.03.147.196 2.067 3.157 5.008 4.427.7.302 1.246.483 1.672.618.702.223 1.34.192 1.845.117.563-.084 1.738-.71 1.983-1.395.245-.686.245-1.273.171-1.396-.073-.122-.269-.196-.563-.343z"/>
+    </svg>
+);
 
 /* ── Hooks ── */
 function useReveal(threshold = 0.1) {
@@ -227,6 +232,7 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
     };
 
     const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
+    const ENTERPRISE_WHATSAPP = '+237697531413'; // Contact direct entreprise
 
     const isMobile = vw < 768;
     const isSmall  = vw < 480;
@@ -385,9 +391,7 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
                         {isFr ? '🇬🇧 EN' : '🇫🇷 FR'}
                     </button>
-                    <button onClick={onRegister} style={{ padding:'.42rem 1.1rem',borderRadius:'7px',border:`1.5px solid rgba(0,86,210,.18)`,background:'transparent',color:B,fontWeight:600,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s' }}
-                        onMouseEnter={e=>{e.currentTarget.style.background=LIGHT;e.currentTarget.style.borderColor=B;}}
-                        onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(0,86,210,.18)';}}>
+                    <button onClick={onRegister} className="lp-btn-amber" style={{ padding:isMobile?'.42rem .9rem':'.46rem 1.2rem',fontSize:isMobile?'.78rem':'.83rem' }}>
                         {tr("S'inscrire",'Register')}
                     </button>
                     {!isMobile && <button onClick={onStart} className="lp-btn" style={{ padding:'.46rem 1.2rem',fontSize:'.83rem' }}>{tr('Commencer','Start')} ✦</button>}
@@ -405,7 +409,8 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                     {NAVLINKS.map(([id,l]) => (
                         <span key={id} onClick={() => scrollTo(id)} style={{ fontSize:'1rem',fontWeight:700,color:INK,cursor:'pointer',paddingBottom:'.85rem',borderBottom:`1px solid ${SAND}` }}>{l}</span>
                     ))}
-                    <button onClick={onStart} className="lp-btn" style={{ marginTop:'.5rem',width:'100%' }}>{tr('Commencer gratuitement','Start for free')} ✦</button>
+                    <button onClick={onRegister} className="lp-btn-amber" style={{ marginTop:'.5rem',width:'100%' }}>{tr("S'inscrire",'Register')}</button>
+                    <button onClick={onStart} className="lp-btn" style={{ width:'100%' }}>{tr('Commencer gratuitement','Start for free')} ✦</button>
                 </div>
             )}
 
@@ -970,6 +975,13 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         <p style={{ fontSize:'.78rem',fontWeight:800,color:'rgba(248,250,252,.7)',letterSpacing:'.5px',textTransform:'uppercase',marginBottom:'.9rem' }}>
                             {tr('Une question ? Écrivez-nous','Have a question? Write to us')}
                         </p>
+                        <a
+                            href={`https://wa.me/${ENTERPRISE_WHATSAPP.replace('+','')}`}
+                            target="_blank" rel="noopener noreferrer"
+                            style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',marginBottom:'1.1rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(37,211,102,.12)',border:'1.5px solid rgba(37,211,102,.35)',color:'#4ade80',fontWeight:700,fontSize:'.82rem',textDecoration:'none' }}
+                        >
+                            <IconWhatsApp size={17} /> {tr('Ou appelez/écrivez-nous sur WhatsApp :','Or call/message us on WhatsApp:')} {ENTERPRISE_WHATSAPP}
+                        </a>
                         {footerStatus === 'sent' ? (
                             <div style={{ background:'rgba(34,197,94,.12)',border:'1.5px solid rgba(34,197,94,.35)',borderRadius:'12px',padding:'.85rem 1.1rem',color:'#4ade80',fontWeight:700,fontSize:'.85rem',maxWidth:'520px' }}>
                                 ✅ {tr('Message envoyé ! Merci.','Message sent! Thank you.')}
@@ -1031,6 +1043,25 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                     </div>
                 </div>
             </footer>
+
+            {/* ── Bouton flottant WhatsApp — contact direct entreprise ── */}
+            <a
+                href={`https://wa.me/${ENTERPRISE_WHATSAPP.replace('+','')}?text=${encodeURIComponent(tr('Bonjour, je souhaite avoir plus d\'informations sur Medumba.AI.','Hello, I\'d like more information about Medumba.AI.'))}`}
+                target="_blank" rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                style={{
+                    position:'fixed', bottom:'5.5rem', right:'1.25rem', zIndex:200,
+                    width:'56px', height:'56px', borderRadius:'50%',
+                    background:'#25D366', color:'#fff',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    boxShadow:'0 6px 20px rgba(37,211,102,.45)',
+                    textDecoration:'none', transition:'transform .18s,box-shadow .18s',
+                }}
+                onMouseEnter={e=>{e.currentTarget.style.transform='scale(1.08)';}}
+                onMouseLeave={e=>{e.currentTarget.style.transform='';}}
+            >
+                <IconWhatsApp />
+            </a>
         </div>
     );
 }

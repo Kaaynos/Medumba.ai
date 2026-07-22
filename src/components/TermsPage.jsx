@@ -31,8 +31,8 @@ const SECTIONS = [
     },
     {
         titleFr: 'Nous contacter', titleEn: 'Contact us',
-        bodyFr: 'Pour toute question sur ces conditions : contact@kaaynos.com',
-        bodyEn: 'For any question about these terms: contact@kaaynos.com',
+        bodyFr: 'Pour toute question sur ces conditions : medumba.ai@kaaynos.com',
+        bodyEn: 'For any question about these terms: medumba.ai@kaaynos.com',
     },
 ];
 

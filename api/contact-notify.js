@@ -1,8 +1,8 @@
-// Vercel serverless function — emails contact form submissions to contact@kaaynos.com.
+// Vercel serverless function — emails contact form submissions to medumba.ai@kaaynos.com.
 // Keeps RESEND_API_KEY server-side only (set in Vercel project env vars).
 // Sends from the verified kaaynos.com domain (SPF/DKIM/DMARC configured in Resend).
 
-const NOTIFY_TO = 'contact@kaaynos.com';
+const NOTIFY_TO = 'medumba.ai@kaaynos.com';
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {

@@ -228,7 +228,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
             }}>
               {/* Traduction */}
               <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '0.65rem' }}>
-                {word.fr}
+                {isFr ? word.fr : (word.en || word.fr)}
               </div>
 
               {/* Mot Medumba */}

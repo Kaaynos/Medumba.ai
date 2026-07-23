@@ -1,303 +1,1503 @@
 // Vocabulary from 511 expressions — 300 entries
 export const VOCAB_EXPRESSIONS = [
-  { fr: 'Maman', medumba: 'Mα' },
-  { fr: 'Ma mère', medumba: 'Mα̂ α' },
-  { fr: 'Oui', medumba: 'ŋ̂' },
-  { fr: 'Non', medumba: 'Nga' },
-  { fr: 'Pourquoi', medumba: 'Nǔmkə' },
-  { fr: 'Parce que', medumba: 'Nǔmmbə' },
-  { fr: 'Le champ', medumba: 'cwɛd' },
-  { fr: 'Les seins', medumba: 'Mbʉn' },
-  { fr: 'Le lait de vache', medumba: 'Mbʉnnà’' },
-  { fr: 'La tête', medumba: 'Tu' },
-  { fr: 'Les oreilles', medumba: 'Ntòŋ' },
-  { fr: 'Les yeux', medumba: 'Miαg' },
-  { fr: 'Les oreilles', medumba: 'Ntōŋ' },
-  { fr: 'La main', medumba: 'Bu' },
-  { fr: 'La bouche', medumba: 'Ncù' },
-  { fr: 'Les dents', medumba: 'Nsɔ̄' },
-  { fr: 'La langue', medumba: 'Lem' },
-  { fr: 'Le pied', medumba: 'Kù' },
-  { fr: 'Le ventre', medumba: 'Bàm' },
-  { fr: 'Qui ?', medumba: 'Wə?' },
-  { fr: 'C\'est qui ?', medumba: 'Â wə? / À bə α̂ wə?' },
-  { fr: 'C\'est moi', medumba: 'Â mə̀ / À bə α̂ mə̀' },
-  { fr: 'C\'est quoi ?', medumba: 'Â kə? / À bə α̂ kə?' },
-  { fr: 'Rien', medumba: 'Sα̌mju' },
-  { fr: 'Le nom', medumba: 'Lɛn' },
-  { fr: 'Voir', medumba: 'Yənə' },
-  { fr: 'L\'habit', medumba: 'Nzwə' },
-  { fr: 'L\'eau', medumba: 'Ntsə' },
-  { fr: 'Boire de l\'eau', medumba: 'Nu ntsə' },
-  { fr: 'Le chien', medumba: 'Mbʉ' },
-  { fr: 'Viens', medumba: 'Sə̀\'ə' },
-  { fr: 'Le serpent', medumba: 'Nyu' },
-  { fr: 'Donne', medumba: 'Fα lî' },
-  { fr: 'Donne-moi', medumba: 'Fα̂ mə̀' },
-  { fr: 'Quitte de là', medumba: 'Lǒ nzα̂ / Lǒ zənnα' },
-  { fr: 'Ris', medumba: 'Zwǐ' },
-  { fr: 'Pleure', medumba: 'Kuà\'a' },
-  { fr: 'Tais-toi', medumba: 'Mʉm ncù u' },
-  { fr: 'La souris', medumba: 'Cə̌dkù' },
-  { fr: 'Le chat', medumba: 'Bùsi' },
-  { fr: 'Papa', medumba: 'Tα' },
-  { fr: 'Mon père', medumba: 'Tα̂α' },
-  { fr: 'La mère', medumba: 'Mα' },
-  { fr: 'Ma mère', medumba: 'Mα̂α' },
-  { fr: 'Mon frère', medumba: 'Mfɛ̂l ὰm / Mfɛ̂l α̌m zə̀ mαndum' },
-  { fr: 'Ma sœur', medumba: 'Mfɛ̂l ὰm / Mfɛ̂l α̌m zə̀ mɛnnzwi' },
-  { fr: 'Un garçon', medumba: 'Mɛn mαndùm' },
-  { fr: 'Une fille', medumba: 'Mɛn mɛ̀nnzwi' },
-  { fr: 'Un homme', medumba: 'Mαndùm' },
-  { fr: 'Une femme', medumba: 'Mɛ̀nnzwi' },
-  { fr: 'Salue-moi', medumba: 'Cà\'tə̀ αm' },
-  { fr: 'Manger', medumba: 'Nə̀ jʉ' },
-  { fr: 'Mange', medumba: 'Jʉ' },
-  { fr: 'Bois', medumba: 'Nu' },
-  { fr: 'Le verre, le gobelet', medumba: 'Ləd / Ntu\'' },
-  { fr: 'Les chaussures', medumba: 'Nkəto\'o' },
-  { fr: 'Le chapeau', medumba: 'Cə̀\'' },
-  { fr: 'Tiens', medumba: 'Kò' },
-  { fr: 'Lance', medumba: 'Mà\'a' },
-  { fr: 'Jette', medumba: 'ghua\'a' },
-  { fr: 'Applaudis', medumba: 'Bu\' mbu' },
-  { fr: 'Pousse', medumba: 'Tɛnə' },
-  { fr: 'Tire, ramène vers toi', medumba: 'Sòŋə' },
-  { fr: 'Viens prendre', medumba: 'Sə̌\' kò' },
-  { fr: 'Allons', medumba: 'Bə̀ nɛ̂nə' },
-  { fr: 'Zéro', medumba: 'Bα̌nbαn' },
-  { fr: 'Un', medumba: 'Ncʉ\'' },
-  { fr: 'Deux', medumba: 'Bαhα' },
-  { fr: 'Trois', medumba: 'Tad' },
-  { fr: 'Quatre', medumba: 'Kuὰ' },
-  { fr: 'Cinq', medumba: 'Tα̂n' },
-  { fr: 'Dors', medumba: 'Zi' },
-  { fr: 'S\'il te plaît', medumba: 'Nəco\'o' },
-  { fr: 'Sors', medumba: 'Tumə' },
-  { fr: 'Ferme', medumba: 'Fʉ̀nə' },
-  { fr: 'Ouvre', medumba: 'Co\'o' },
-  { fr: 'Ferme la porte', medumba: 'Fʉ̌n nzə̀ndα' },
-  { fr: 'Ouvre la porte', medumba: 'Co\' nzə̀ndα' },
-  { fr: 'Tais-toi', medumba: 'Mʉm ncù u' },
-  { fr: 'Ris', medumba: 'Zwǐ' },
-  { fr: 'Assois-toi', medumba: 'Tswə nsi' },
-  { fr: 'Descend', medumba: 'Swə\'ə' },
-  { fr: 'Monte', medumba: 'Ko\'o' },
-  { fr: 'Tu entends ?', medumba: 'O ju\' ὰ?' },
-  { fr: 'Je', medumba: 'Mə̀, mə' },
-  { fr: 'Tu', medumba: 'Ò, o' },
-  { fr: 'Il, elle', medumba: 'À, a' },
-  { fr: 'Nous', medumba: 'Bᾱg, bα̌g' },
-  { fr: 'Vous', medumba: 'Bīn, bǐn' },
-  { fr: 'Ils, elles', medumba: 'Bò, bo' },
-  { fr: 'J\'ai oublié', medumba: 'Mə làgtə̌' },
-  { fr: 'C\'est qui ?', medumba: 'Â wə? / À bə α̂ wə?' },
-  { fr: 'C\'est quoi ?', medumba: 'Â kə? / À bə α̂ kə?' },
-  { fr: 'Pourquoi', medumba: 'Nǔmkə' },
-  { fr: 'Pour qui ?', medumba: 'Zə̂ wə?' },
-  { fr: 'C\'est pour qui ?', medumba: 'Â zə̂ wə? / À bə α̂ zə̂ wə?' },
-  { fr: 'C\'est pour moi', medumba: 'Â yαm / À bə α̂ yαm' },
-  { fr: 'C\'est pour toi', medumba: 'Â yu / À bə α̂ yu' },
-  { fr: 'C\'est pour lui', medumba: 'Â zə / À bə α̂ zə' },
-  { fr: 'C\'est pour nous', medumba: 'Â yαg / À bə α̂ yαg' },
-  { fr: 'C\'est pour vous', medumba: 'Â zin / À bə α̂ zin' },
-  { fr: 'C\'est pour eux', medumba: 'Â yub / À bə α̂ yub' },
-  { fr: 'Non', medumba: 'Nga' },
-  { fr: 'Oui', medumba: 'ŋ̂' },
-  { fr: 'Peut-être être', medumba: 'Mô\'ndʉ̀' },
-  { fr: 'C\'est comme ça', medumba: 'Â ndʉα̂ / À bə α̂ ndʉα̂ / À bə α̂ ndʉlαlα' },
-  { fr: 'C\'est ça', medumba: 'Â yi / À bə α̂ yi' },
-  { fr: 'C\'est vrai', medumba: 'Â nə̂nʉ̄nə̄ / À bə α̂ nə̂nʉ̄nə̄' },
-  { fr: 'Ce n\'est pas vrai', medumba: 'A kə nə̂nʉ̄nə̄ / À kə̂\' bə α̂ nə̂nʉ̄nə̄' },
-  { fr: 'C\'est faux, c\'est un mensonge', medumba: 'À bə α̂ tadtə̀' },
-  { fr: 'S\'il te plaît maman', medumba: 'Nəcô\' mα̂' },
-  { fr: 'Un peu', medumba: 'Məjuī' },
-  { fr: 'Un tout petit peu', medumba: 'Mə̂ mfēnī' },
-  { fr: 'Beaucoup', medumba: 'Mα̂yαm' },
-  { fr: 'Petit', medumba: 'Mətsìli' },
-  { fr: 'C\'est beaucoup', medumba: 'A yαm' },
-  { fr: 'C\'est petit', medumba: 'A kag' },
-  { fr: 'Faire mal', medumba: 'Nə̀ ya' },
-  { fr: 'Ça fait mal', medumba: 'A cwɛ̌d nja' },
-  { fr: 'S\'il te plaît mon frère, s\'il te plaît ma sœur', medumba: 'Nəcô\' mfɛ̂l ὰm' },
-  { fr: 'C\'est bon', medumba: 'A bwɔ̌' },
-  { fr: 'Sentir', medumba: 'Nə̀ làmə' },
-  { fr: 'Sucré', medumba: 'Dʉ̀mtə̀' },
-  { fr: 'C\'est sucré', medumba: 'A dʉ̀mtə̌' },
-  { fr: 'Amer', medumba: 'Zwə̀' },
-  { fr: 'C\'est amer', medumba: 'A zwə̌' },
-  { fr: 'Parle', medumba: 'Cobə' },
-  { fr: 'Dis', medumba: 'Dʉ' },
-  { fr: 'Écoute', medumba: 'Ju\'u' },
-  { fr: 'Ne dit pas', medumba: 'Kα̂ dʉ' },
-  { fr: 'Dis-moi', medumba: 'Soŋ αm / Côb mə̀' },
-  { fr: 'Dis-lui', medumba: 'Soŋ i / Côb yi' },
-  { fr: 'Ne lui dit pas', medumba: 'Kα̂ soŋ i / Kα̂ côb yi' },
-  { fr: 'N\'entends pas, n\'écoute pas', medumba: 'Kα̂ ju\'' },
-  { fr: 'Écoute-moi', medumba: 'Ju\' αm' },
-  { fr: 'Être fâché, se fâcher', medumba: 'Yantʉ' },
-  { fr: 'Être content', medumba: 'Tsiàŋtə̌' },
-  { fr: 'Je suis content', medumba: 'Nǔ bwɔ̀ αm / Mə tsiàŋtə̌' },
-  { fr: 'Faire', medumba: 'Ghʉ̌' },
-  { fr: 'Que fais-tu ?', medumba: 'Ò ghʉ̀ α̂ kə?' },
-  { fr: 'Je sais', medumba: 'Mə lɛ̀nə' },
-  { fr: 'Je ne sais pas', medumba: 'Mə̀ kə̂\' lɛ̀n' },
-  { fr: 'Aide-moi, stp', medumba: 'Ywìmtə̀ αm, nəcô\'o' },
-  { fr: 'Donne ma part', medumba: 'Fα yαm' },
-  { fr: 'Stp, donne ma part', medumba: 'Nəcô\'o fα yαm' },
-  { fr: 'Regarde', medumba: 'Lɔtə / Yənə' },
-  { fr: 'Voici ça', medumba: 'A lî' },
-  { fr: 'Voilà ça, près de toi', medumba: 'A lα' },
-  { fr: 'Voilà ça loin de toi', medumba: 'A dîn' },
-  { fr: 'Je suis fatigué', medumba: 'Mə bod' },
-  { fr: 'Je mange', medumba: 'Mə̀ jʉ α̂ ju' },
-  { fr: 'Où es-tu ?', medumba: 'Ò bə α̂ yα?' },
-  { fr: 'Je suis dans la chambre', medumba: 'Mə̀ bə α̂ tô\'ndα' },
-  { fr: 'Je suis à la cuisine', medumba: 'Mə̀ bə α̂ fə̌\'mbwogə' },
-  { fr: 'Il est là', medumba: 'À bə nsi lα / A lα nsi' },
-  { fr: 'Je suis là', medumba: 'Mə̀ bə nsi lα' },
-  { fr: 'Tu n\'es pas là', medumba: 'Ò kə̂\' bə nsi' },
-  { fr: 'Elle n\'est pas là', medumba: 'À kə̂\' bə nsi' },
-  { fr: 'Tu ris', medumba: 'O cwɛ̌d nzwî' },
-  { fr: 'Tu pleures', medumba: 'O cwɛ̌d nkuâ\'a' },
-  { fr: 'Pourquoi ris-tu ?', medumba: 'Ò zwì α̂ nǔmkə?' },
-  { fr: 'Parce que je suis content', medumba: 'Nǔmmbə nǔ bwɔ̀ αm' },
-  { fr: 'Je ne sais pas', medumba: 'Mə̀ kə̂\' lɛ̀n' },
-  { fr: 'C\'est exact', medumba: 'Â kuà\' yi (lα)' },
-  { fr: 'Exactement', medumba: 'Kuà\' yi (lα)' },
-  { fr: 'Lève-toi', medumba: 'Lǒ nsi' },
-  { fr: 'Assois-toi', medumba: 'Tswə nsi' },
-  { fr: 'Merci', medumba: 'Mə lὰbtə̌' },
-  { fr: 'Cours', medumba: 'kʉ̌ndə' },
-  { fr: 'Saute', medumba: 'Ywɛlə' },
-  { fr: 'Ne touche pas', medumba: 'Kα̂ kuag' },
-  { fr: 'Réveille-toi', medumba: 'Bàmə' },
-  { fr: 'Va réveiller Nùmi', medumba: 'Nɛ̀n bǎm Nùmi' },
-  { fr: 'Réveille-le', medumba: 'Bàm i' },
-  { fr: 'Ne la réveille pas', medumba: 'Kα̂ bàm i' },
-  { fr: 'Où est ton père ?', medumba: 'Tα̂αn yὰ? / Tα̂αn bə α̂ yα?' },
-  { fr: 'J\'ai', medumba: 'Mə ghʉ̌' },
-  { fr: 'Le jouet', medumba: 'Jûsa' },
-  { fr: 'J\'ai un jouet', medumba: 'Mə ghʉ̌ jûsa' },
-  { fr: 'Il/elle a des jouets', medumba: 'A ghʉ̌ jûsa' },
-  { fr: 'Je n\'ai pas', medumba: 'Mə̀ kə̂\' ghʉ̀' },
-  { fr: 'Je n\'ai pas d\'argent', medumba: 'Mə̀ kə̂\' ghʉ̌ nkαb' },
-  { fr: 'Laisse', medumba: 'Faŋə' },
-  { fr: 'Marche', medumba: 'Zìnə' },
-  { fr: 'Bienvenue', medumba: 'Sə̌\' mə̀bwɔ' },
-  { fr: 'Yich! Ça sent, ça pue', medumba: 'Yîsh, a cwɛ̌d ndâmə' },
-  { fr: 'Ne marche pas', medumba: 'Kα̂ zìn' },
-  { fr: 'Ne t\'assois pas', medumba: 'Kα̂ tswə nsi' },
-  { fr: 'Ne te lève pas', medumba: 'Kα̂ lǒ nsi' },
-  { fr: 'Ne dis pas', medumba: 'Kα̂ cob' },
-  { fr: 'Ne lui dit pas', medumba: 'Kα̂ côb yi' },
-  { fr: 'Se laver', medumba: 'Nə̀ sǒg wud' },
-  { fr: 'Va te laver', medumba: 'Nɛ̀n nsôg wûl u' },
-  { fr: 'Tu t\'es lavé', medumba: 'O sǒg wûl u' },
-  { fr: 'Se brosser les dents', medumba: 'Nə̀ cǔ\' ncù' },
-  { fr: 'Va te brosser les dents', medumba: 'Nɛ̀n ncû\' ncù u' },
-  { fr: 'Les chaussures', medumba: 'Nkəto\'o' },
-  { fr: 'Mes chaussures', medumba: 'Nkətô\' mαm' },
-  { fr: 'Je vais manger', medumba: 'Mə̀ à\' jʉ ju' },
-  { fr: 'Je vais boire de l\'eau', medumba: 'Mə̀ à\' nu ntsə' },
-  { fr: 'Ici', medumba: 'Nzə̌nnî / Nzî' },
-  { fr: 'Là-bas, près de toi', medumba: 'Nzənnα̂ / Nzα̂' },
-  { fr: 'Là-bas, loin de toi et loin de moi', medumba: 'Nzə̌ndin' },
-  { fr: 'Viens ici', medumba: 'Sə̌\' nzî / Sə̌’ nzə̌nnî' },
-  { fr: 'Quitte de là', medumba: 'Lǒ nzα̂ / Lǒ nzənnα' },
-  { fr: 'Va là-bas (en bas)', medumba: 'Nɛ̌n mὰdin' },
-  { fr: 'Mets-toi debout', medumba: 'Tsin tʉ' },
-  { fr: 'Couche-toi', medumba: 'Nɔ̌ nsi' },
-  { fr: 'La poitrine', medumba: 'Ndα̂ntʉ' },
-  { fr: 'Le cou', medumba: 'Tɔ' },
-  { fr: 'La viande', medumba: 'Mbαb' },
-  { fr: 'Manger la viande', medumba: 'Nə̀ fɛd mbαb' },
-  { fr: 'Le plantain', medumba: 'Kə̀lɔ̀' },
-  { fr: 'Aimer', medumba: 'Nə̀ kɔ̌' },
-  { fr: 'Amour', medumba: 'Nkɔ̀nì' },
-  { fr: 'Je t\'aime', medumba: 'Mə kɔ̀ o' },
-  { fr: 'Dieu', medumba: 'Nsi' },
-  { fr: 'Un monstre, un diable', medumba: 'Ndʉ̀m' },
-  { fr: 'N\'oublie pas', medumba: 'Kα̂ làgtə̀' },
-  { fr: 'Le nom', medumba: 'Lɛn' },
-  { fr: 'Mon nom', medumba: 'Lɛ̂n sαm' },
-  { fr: 'Je m\'appelle, mon nom est...', medumba: 'Lɛ̂n sαm bə α̂ ...' },
-  { fr: 'Au nom du père', medumba: 'Nǔm lɛ̂n tα' },
-  { fr: 'L\'enfant', medumba: 'Mɛn' },
-  { fr: 'Donne-lui', medumba: 'Fα̂ yi' },
-  { fr: 'Donne à ton frère/sœur', medumba: 'Fα̂ mfɛl ò' },
-  { fr: 'Moi', medumba: 'Mə̀' },
-  { fr: 'Toi', medumba: 'Wʉ̀' },
-  { fr: 'Lui', medumba: 'Yi' },
-  { fr: 'Nous', medumba: 'Bαg' },
-  { fr: 'Vous', medumba: 'Bin' },
-  { fr: 'Eux', medumba: 'Bo' },
-  { fr: 'Qui est celui-ci ?', medumba: 'Â wə li ὰ ?' },
-  { fr: 'Écrire', medumba: 'Nə̀ kǐ' },
-  { fr: 'Écris', medumba: 'Kǐ' },
-  { fr: 'Lis', medumba: 'Siaŋə' },
-  { fr: 'Chanter', medumba: 'Nə̀ yǒb kwì' },
-  { fr: 'Je chante', medumba: 'Mə̀ yòb α̂ kwì' },
-  { fr: 'Patience (mot de consolation)', medumba: 'bαm mbὰ' },
-  { fr: 'Patience, ne pleure plus', medumba: 'bαm mbὰ, kα̂ nə kuà\'a' },
-  { fr: 'Danse', medumba: 'Nyǎŋsa' },
-  { fr: 'Crie', medumba: 'Tɔ' },
-  { fr: 'Le sang', medumba: 'Ləm' },
-  { fr: 'Mon ventre fait mal', medumba: 'Bàm sαm cwɛ̌d nja' },
-  { fr: 'Chercher', medumba: 'Nə̀ diàgə' },
-  { fr: 'Cherche', medumba: 'Diàgə' },
-  { fr: 'La paix', medumba: 'Fitə̀' },
-  { fr: 'La joie', medumba: 'Tsiàŋtə̀' },
-  { fr: 'Piétiner', medumba: 'Nə̀ nyàŋə' },
-  { fr: 'Ne piétine pas', medumba: 'Kα̂ nyàŋ' },
-  { fr: 'Ne touche pas', medumba: 'Kα̂ kwag' },
-  { fr: 'Taper', medumba: 'Nə̀ làbə' },
-  { fr: 'Je vais te taper', medumba: 'Mə̀ à\' làb o' },
-  { fr: 'Ne la/le tape pas', medumba: 'Kα̂ lὰb i' },
-  { fr: 'Un être humain', medumba: 'Mɛ̀nntʉ̀n' },
-  { fr: 'J\'ai vu', medumba: 'Mə yən' },
-  { fr: 'Je n\'ai pas vu', medumba: 'Mə̀ kə̂\' yən' },
-  { fr: 'Me voici', medumba: 'Mə lî' },
-  { fr: 'Le voilà (près de toi)', medumba: 'A lα' },
-  { fr: 'Le voilà (loin de toi, et loin de moi)', medumba: 'A dîn' },
-  { fr: 'Le voici', medumba: 'A lî' },
-  { fr: 'C\'est lui', medumba: 'Â yi / À bə α̂ yi' },
-  { fr: 'Ce n\'est pas lui', medumba: 'A kə yi / À kə̂\' bə α̂ yi' },
-  { fr: 'Ça suffit', medumba: 'A kù\'u' },
-  { fr: 'C\'est beaucoup', medumba: 'A yαm' },
-  { fr: 'C\'est insuffisant', medumba: 'A kag' },
-  { fr: 'Trop, tellement', medumba: 'Tā\'' },
-  { fr: 'Cinq', medumba: 'Tα̂n' },
-  { fr: 'Six', medumba: 'Ntogə' },
-  { fr: 'Sept', medumba: 'Sαmmbαhα' },
-  { fr: 'Huit', medumba: 'Fomə' },
-  { fr: 'Neuf', medumba: 'Bwə̀\'ə' },
-  { fr: 'Dix', medumba: 'Gham' },
-  { fr: 'Un', medumba: 'Ncʉ̄\'' },
-  { fr: 'Un, article indéfini', medumba: 'Tà\'' },
-  { fr: 'Deux', medumba: 'Bαhα' },
-  { fr: 'Trois', medumba: 'Tad' },
-  { fr: 'Quatre', medumba: 'Kuὰ' },
-  { fr: 'Cherche tes chaussures', medumba: 'Diǎg nkətô\' mu' },
-  { fr: 'Apporte, amène', medumba: 'Sə̂\' yi' },
-  { fr: 'Emmène, va avec', medumba: 'Nɛ̂n yi' },
-  { fr: 'Fait encore', medumba: 'Bɛ̀n ngʉ̂' },
-  { fr: 'Ne fait plus', medumba: 'Kα̂ bɛ̀n ngʉ̂' },
-  { fr: 'J\'ai compris', medumba: 'Mə ju\'' },
-  { fr: 'Merci', medumba: 'Mə lὰbtə̌ / Mə bam' },
-  { fr: 'Tu es très turbulent', medumba: 'O bûm tā\'' },
-  { fr: 'Monte', medumba: 'Ko\'o' },
-  { fr: 'Descends', medumba: 'Swə\'ə' },
-  { fr: 'La cuillère', medumba: 'Du\'' },
-  { fr: 'L\'assiette', medumba: 'Ka' },
-  { fr: 'La porte', medumba: 'Nzə̀ndα' },
-  { fr: 'Le salon', medumba: 'Tô\'mò' },
-  { fr: 'La cuisine', medumba: 'Fə̌\'mbwogə' },
-  { fr: 'Ce n\'est pas comme ça', medumba: 'À kə̂\' bə α̂ ndʉ lα̂' },
-  { fr: 'C\'est comme ça', medumba: 'À bə α̂ ndʉ lα̂' },
-  { fr: 'Bravo', medumba: 'Yahà' },
-  { fr: 'Oh là là, zut, merde, putain', medumba: 'Hàndα' },
-  { fr: 'C\'est bon', medumba: 'A bwɔ̌' },
-  { fr: 'Ce n\'est pas bon', medumba: 'À kə̂\' bwɔ̀' },
-  { fr: 'Allô ! Lorsqu\'on ne sait pas qui est au bout du fil', medumba: 'Yὰm wə!' },
+  {
+    "medumba": "Mα",
+    "fr": "Maman",
+    "en": "Mom"
+  },
+  {
+    "medumba": "Mα̂ α",
+    "fr": "Ma mère",
+    "en": "My mother"
+  },
+  {
+    "medumba": "ŋ̂",
+    "fr": "Oui",
+    "en": "Yes"
+  },
+  {
+    "medumba": "Nga",
+    "fr": "Non",
+    "en": "No"
+  },
+  {
+    "medumba": "Nǔmkə",
+    "fr": "Pourquoi",
+    "en": "Why"
+  },
+  {
+    "medumba": "Nǔmmbə",
+    "fr": "Parce que",
+    "en": "Because"
+  },
+  {
+    "medumba": "cwɛd",
+    "fr": "Le champ",
+    "en": "The field"
+  },
+  {
+    "medumba": "Mbʉn",
+    "fr": "Les seins",
+    "en": "Breasts"
+  },
+  {
+    "medumba": "Mbʉnnà’",
+    "fr": "Le lait de vache",
+    "en": "Cow's milk"
+  },
+  {
+    "medumba": "Tu",
+    "fr": "La tête",
+    "en": "The head"
+  },
+  {
+    "medumba": "Ntòŋ",
+    "fr": "Les oreilles",
+    "en": "The ears"
+  },
+  {
+    "medumba": "Miαg",
+    "fr": "Les yeux",
+    "en": "The eyes"
+  },
+  {
+    "medumba": "Ntōŋ",
+    "fr": "Les oreilles",
+    "en": "The ears"
+  },
+  {
+    "medumba": "Bu",
+    "fr": "La main",
+    "en": "The hand"
+  },
+  {
+    "medumba": "Ncù",
+    "fr": "La bouche",
+    "en": "The mouth"
+  },
+  {
+    "medumba": "Nsɔ̄",
+    "fr": "Les dents",
+    "en": "Teeth"
+  },
+  {
+    "medumba": "Lem",
+    "fr": "La langue",
+    "en": "The language"
+  },
+  {
+    "medumba": "Kù",
+    "fr": "Le pied",
+    "en": "The foot"
+  },
+  {
+    "medumba": "Bàm",
+    "fr": "Le ventre",
+    "en": "The stomach"
+  },
+  {
+    "medumba": "Wə?",
+    "fr": "Qui ?",
+    "en": "Who?"
+  },
+  {
+    "medumba": "Â wə? / À bə α̂ wə?",
+    "fr": "C'est qui ?",
+    "en": "Who is it ?"
+  },
+  {
+    "medumba": "Â mə̀ / À bə α̂ mə̀",
+    "fr": "C'est moi",
+    "en": "It's me"
+  },
+  {
+    "medumba": "Â kə? / À bə α̂ kə?",
+    "fr": "C'est quoi ?",
+    "en": "What is it?"
+  },
+  {
+    "medumba": "Sα̌mju",
+    "fr": "Rien",
+    "en": "Nothing"
+  },
+  {
+    "medumba": "Lɛn",
+    "fr": "Le nom",
+    "en": "The name"
+  },
+  {
+    "medumba": "Yənə",
+    "fr": "Voir",
+    "en": "See"
+  },
+  {
+    "medumba": "Nzwə",
+    "fr": "L'habit",
+    "en": "The outfit"
+  },
+  {
+    "medumba": "Ntsə",
+    "fr": "L'eau",
+    "en": "Water"
+  },
+  {
+    "medumba": "Nu ntsə",
+    "fr": "Boire de l'eau",
+    "en": "Drink water"
+  },
+  {
+    "medumba": "Mbʉ",
+    "fr": "Le chien",
+    "en": "The dog"
+  },
+  {
+    "medumba": "Sə̀'ə",
+    "fr": "Viens",
+    "en": "Come"
+  },
+  {
+    "medumba": "Nyu",
+    "fr": "Le serpent",
+    "en": "The snake"
+  },
+  {
+    "medumba": "Fα lî",
+    "fr": "Donne",
+    "en": "Give"
+  },
+  {
+    "medumba": "Fα̂ mə̀",
+    "fr": "Donne-moi",
+    "en": "Give me"
+  },
+  {
+    "medumba": "Lǒ nzα̂ / Lǒ zənnα",
+    "fr": "Quitte de là",
+    "en": "Get out of there"
+  },
+  {
+    "medumba": "Zwǐ",
+    "fr": "Ris",
+    "en": "Ris"
+  },
+  {
+    "medumba": "Kuà'a",
+    "fr": "Pleure",
+    "en": "Cry"
+  },
+  {
+    "medumba": "Mʉm ncù u",
+    "fr": "Tais-toi",
+    "en": "Shut up"
+  },
+  {
+    "medumba": "Cə̌dkù",
+    "fr": "La souris",
+    "en": "The mouse"
+  },
+  {
+    "medumba": "Bùsi",
+    "fr": "Le chat",
+    "en": "The cat"
+  },
+  {
+    "medumba": "Tα",
+    "fr": "Papa",
+    "en": "Dad"
+  },
+  {
+    "medumba": "Tα̂α",
+    "fr": "Mon père",
+    "en": "My father"
+  },
+  {
+    "medumba": "Mα",
+    "fr": "La mère",
+    "en": "The mother"
+  },
+  {
+    "medumba": "Mα̂α",
+    "fr": "Ma mère",
+    "en": "My mother"
+  },
+  {
+    "medumba": "Mfɛ̂l ὰm / Mfɛ̂l α̌m zə̀ mαndum",
+    "fr": "Mon frère",
+    "en": "My brother"
+  },
+  {
+    "medumba": "Mfɛ̂l ὰm / Mfɛ̂l α̌m zə̀ mɛnnzwi",
+    "fr": "Ma sœur",
+    "en": "My sister"
+  },
+  {
+    "medumba": "Mɛn mαndùm",
+    "fr": "Un garçon",
+    "en": "A boy"
+  },
+  {
+    "medumba": "Mɛn mɛ̀nnzwi",
+    "fr": "Une fille",
+    "en": "A girl"
+  },
+  {
+    "medumba": "Mαndùm",
+    "fr": "Un homme",
+    "en": "A man"
+  },
+  {
+    "medumba": "Mɛ̀nnzwi",
+    "fr": "Une femme",
+    "en": "A woman"
+  },
+  {
+    "medumba": "Cà'tə̀ αm",
+    "fr": "Salue-moi",
+    "en": "greet me"
+  },
+  {
+    "medumba": "Nə̀ jʉ",
+    "fr": "Manger",
+    "en": "Eat"
+  },
+  {
+    "medumba": "Jʉ",
+    "fr": "Mange",
+    "en": "Eat"
+  },
+  {
+    "medumba": "Nu",
+    "fr": "Bois",
+    "en": "Wood"
+  },
+  {
+    "medumba": "Ləd / Ntu'",
+    "fr": "Le verre, le gobelet",
+    "en": "The glass, the goblet"
+  },
+  {
+    "medumba": "Nkəto'o",
+    "fr": "Les chaussures",
+    "en": "The shoes"
+  },
+  {
+    "medumba": "Cə̀'",
+    "fr": "Le chapeau",
+    "en": "The hat"
+  },
+  {
+    "medumba": "Kò",
+    "fr": "Tiens",
+    "en": "Here"
+  },
+  {
+    "medumba": "Mà'a",
+    "fr": "Lance",
+    "en": "Lance"
+  },
+  {
+    "medumba": "ghua'a",
+    "fr": "Jette",
+    "en": "Throw"
+  },
+  {
+    "medumba": "Bu' mbu",
+    "fr": "Applaudis",
+    "en": "Applause"
+  },
+  {
+    "medumba": "Tɛnə",
+    "fr": "Pousse",
+    "en": "Shoot"
+  },
+  {
+    "medumba": "Sòŋə",
+    "fr": "Tire, ramène vers toi",
+    "en": "Pull, bring back to you"
+  },
+  {
+    "medumba": "Sə̌' kò",
+    "fr": "Viens prendre",
+    "en": "Come and take"
+  },
+  {
+    "medumba": "Bə̀ nɛ̂nə",
+    "fr": "Allons",
+    "en": "Let's go"
+  },
+  {
+    "medumba": "Bα̌nbαn",
+    "fr": "Zéro",
+    "en": "Zero"
+  },
+  {
+    "medumba": "Ncʉ'",
+    "fr": "Un",
+    "en": "A"
+  },
+  {
+    "medumba": "Bαhα",
+    "fr": "Deux",
+    "en": "Two"
+  },
+  {
+    "medumba": "Tad",
+    "fr": "Trois",
+    "en": "Three"
+  },
+  {
+    "medumba": "Kuὰ",
+    "fr": "Quatre",
+    "en": "Four"
+  },
+  {
+    "medumba": "Tα̂n",
+    "fr": "Cinq",
+    "en": "Five"
+  },
+  {
+    "medumba": "Zi",
+    "fr": "Dors",
+    "en": "Sleep"
+  },
+  {
+    "medumba": "Nəco'o",
+    "fr": "S'il te plaît",
+    "en": "Please"
+  },
+  {
+    "medumba": "Tumə",
+    "fr": "Sors",
+    "en": "Get out"
+  },
+  {
+    "medumba": "Fʉ̀nə",
+    "fr": "Ferme",
+    "en": "Farm"
+  },
+  {
+    "medumba": "Co'o",
+    "fr": "Ouvre",
+    "en": "Open"
+  },
+  {
+    "medumba": "Fʉ̌n nzə̀ndα",
+    "fr": "Ferme la porte",
+    "en": "Close the door"
+  },
+  {
+    "medumba": "Co' nzə̀ndα",
+    "fr": "Ouvre la porte",
+    "en": "Open the door"
+  },
+  {
+    "medumba": "Mʉm ncù u",
+    "fr": "Tais-toi",
+    "en": "Shut up"
+  },
+  {
+    "medumba": "Zwǐ",
+    "fr": "Ris",
+    "en": "Ris"
+  },
+  {
+    "medumba": "Tswə nsi",
+    "fr": "Assois-toi",
+    "en": "Sit down"
+  },
+  {
+    "medumba": "Swə'ə",
+    "fr": "Descend",
+    "en": "Go down"
+  },
+  {
+    "medumba": "Ko'o",
+    "fr": "Monte",
+    "en": "Go up"
+  },
+  {
+    "medumba": "O ju' ὰ?",
+    "fr": "Tu entends ?",
+    "en": "Do you hear?"
+  },
+  {
+    "medumba": "Mə̀, mə",
+    "fr": "Je",
+    "en": "I"
+  },
+  {
+    "medumba": "Ò, o",
+    "fr": "Tu",
+    "en": "You"
+  },
+  {
+    "medumba": "À, a",
+    "fr": "Il, elle",
+    "en": "He, she"
+  },
+  {
+    "medumba": "Bᾱg, bα̌g",
+    "fr": "Nous",
+    "en": "We"
+  },
+  {
+    "medumba": "Bīn, bǐn",
+    "fr": "Vous",
+    "en": "You"
+  },
+  {
+    "medumba": "Bò, bo",
+    "fr": "Ils, elles",
+    "en": "They, they"
+  },
+  {
+    "medumba": "Mə làgtə̌",
+    "fr": "J'ai oublié",
+    "en": "I forgot"
+  },
+  {
+    "medumba": "Â wə? / À bə α̂ wə?",
+    "fr": "C'est qui ?",
+    "en": "Who is it?"
+  },
+  {
+    "medumba": "Â kə? / À bə α̂ kə?",
+    "fr": "C'est quoi ?",
+    "en": "It's what ?"
+  },
+  {
+    "medumba": "Nǔmkə",
+    "fr": "Pourquoi",
+    "en": "Why"
+  },
+  {
+    "medumba": "Zə̂ wə?",
+    "fr": "Pour qui ?",
+    "en": "For whom?"
+  },
+  {
+    "medumba": "Â zə̂ wə? / À bə α̂ zə̂ wə?",
+    "fr": "C'est pour qui ?",
+    "en": "Who is it for?"
+  },
+  {
+    "medumba": "Â yαm / À bə α̂ yαm",
+    "fr": "C'est pour moi",
+    "en": "It's for me"
+  },
+  {
+    "medumba": "Â yu / À bə α̂ yu",
+    "fr": "C'est pour toi",
+    "en": "It's for you"
+  },
+  {
+    "medumba": "Â zə / À bə α̂ zə",
+    "fr": "C'est pour lui",
+    "en": "It's for him"
+  },
+  {
+    "medumba": "Â yαg / À bə α̂ yαg",
+    "fr": "C'est pour nous",
+    "en": "It's for us"
+  },
+  {
+    "medumba": "Â zin / À bə α̂ zin",
+    "fr": "C'est pour vous",
+    "en": "It's for you"
+  },
+  {
+    "medumba": "Â yub / À bə α̂ yub",
+    "fr": "C'est pour eux",
+    "en": "It's for them"
+  },
+  {
+    "medumba": "Nga",
+    "fr": "Non",
+    "en": "No"
+  },
+  {
+    "medumba": "ŋ̂",
+    "fr": "Oui",
+    "en": "Yes"
+  },
+  {
+    "medumba": "Mô'ndʉ̀",
+    "fr": "Peut-être être",
+    "en": "Maybe be"
+  },
+  {
+    "medumba": "Â ndʉα̂ / À bə α̂ ndʉα̂ / À bə α̂ ndʉlαlα",
+    "fr": "C'est comme ça",
+    "en": "It's like this"
+  },
+  {
+    "medumba": "Â yi / À bə α̂ yi",
+    "fr": "C'est ça",
+    "en": "That's it"
+  },
+  {
+    "medumba": "Â nə̂nʉ̄nə̄ / À bə α̂ nə̂nʉ̄nə̄",
+    "fr": "C'est vrai",
+    "en": "It's true"
+  },
+  {
+    "medumba": "A kə nə̂nʉ̄nə̄ / À kə̂' bə α̂ nə̂nʉ̄nə̄",
+    "fr": "Ce n'est pas vrai",
+    "en": "This is not true"
+  },
+  {
+    "medumba": "À bə α̂ tadtə̀",
+    "fr": "C'est faux, c'est un mensonge",
+    "en": "It's false, it's a lie"
+  },
+  {
+    "medumba": "Nəcô' mα̂",
+    "fr": "S'il te plaît maman",
+    "en": "Please mom"
+  },
+  {
+    "medumba": "Məjuī",
+    "fr": "Un peu",
+    "en": "A little"
+  },
+  {
+    "medumba": "Mə̂ mfēnī",
+    "fr": "Un tout petit peu",
+    "en": "A little bit"
+  },
+  {
+    "medumba": "Mα̂yαm",
+    "fr": "Beaucoup",
+    "en": "A lot"
+  },
+  {
+    "medumba": "Mətsìli",
+    "fr": "Petit",
+    "en": "Small"
+  },
+  {
+    "medumba": "A yαm",
+    "fr": "C'est beaucoup",
+    "en": "It's a lot"
+  },
+  {
+    "medumba": "A kag",
+    "fr": "C'est petit",
+    "en": "It's small"
+  },
+  {
+    "medumba": "Nə̀ ya",
+    "fr": "Faire mal",
+    "en": "Hurt"
+  },
+  {
+    "medumba": "A cwɛ̌d nja",
+    "fr": "Ça fait mal",
+    "en": "It hurts"
+  },
+  {
+    "medumba": "Nəcô' mfɛ̂l ὰm",
+    "fr": "S'il te plaît mon frère, s'il te plaît ma sœur",
+    "en": "Please my brother, please my sister"
+  },
+  {
+    "medumba": "A bwɔ̌",
+    "fr": "C'est bon",
+    "en": "It's good"
+  },
+  {
+    "medumba": "Nə̀ làmə",
+    "fr": "Sentir",
+    "en": "Feel"
+  },
+  {
+    "medumba": "Dʉ̀mtə̀",
+    "fr": "Sucré",
+    "en": "Sweet"
+  },
+  {
+    "medumba": "A dʉ̀mtə̌",
+    "fr": "C'est sucré",
+    "en": "It's sweet"
+  },
+  {
+    "medumba": "Zwə̀",
+    "fr": "Amer",
+    "en": "Bitter"
+  },
+  {
+    "medumba": "A zwə̌",
+    "fr": "C'est amer",
+    "en": "It's bitter"
+  },
+  {
+    "medumba": "Cobə",
+    "fr": "Parle",
+    "en": "Speak"
+  },
+  {
+    "medumba": "Dʉ",
+    "fr": "Dis",
+    "en": "Say"
+  },
+  {
+    "medumba": "Ju'u",
+    "fr": "Écoute",
+    "en": "Listen"
+  },
+  {
+    "medumba": "Kα̂ dʉ",
+    "fr": "Ne dit pas",
+    "en": "Don't say"
+  },
+  {
+    "medumba": "Soŋ αm / Côb mə̀",
+    "fr": "Dis-moi",
+    "en": "Tell me"
+  },
+  {
+    "medumba": "Soŋ i / Côb yi",
+    "fr": "Dis-lui",
+    "en": "Tell him"
+  },
+  {
+    "medumba": "Kα̂ soŋ i / Kα̂ côb yi",
+    "fr": "Ne lui dit pas",
+    "en": "Don't tell him"
+  },
+  {
+    "medumba": "Kα̂ ju'",
+    "fr": "N'entends pas, n'écoute pas",
+    "en": "Don't hear, don't listen"
+  },
+  {
+    "medumba": "Ju' αm",
+    "fr": "Écoute-moi",
+    "en": "Listen to me"
+  },
+  {
+    "medumba": "Yantʉ",
+    "fr": "Être fâché, se fâcher",
+    "en": "To be angry, to be angry"
+  },
+  {
+    "medumba": "Tsiàŋtə̌",
+    "fr": "Être content",
+    "en": "Be happy"
+  },
+  {
+    "medumba": "Nǔ bwɔ̀ αm / Mə tsiàŋtə̌",
+    "fr": "Je suis content",
+    "en": "I'm happy"
+  },
+  {
+    "medumba": "Ghʉ̌",
+    "fr": "Faire",
+    "en": "Do"
+  },
+  {
+    "medumba": "Ò ghʉ̀ α̂ kə?",
+    "fr": "Que fais-tu ?",
+    "en": "What are you doing?"
+  },
+  {
+    "medumba": "Mə lɛ̀nə",
+    "fr": "Je sais",
+    "en": "I know"
+  },
+  {
+    "medumba": "Mə̀ kə̂' lɛ̀n",
+    "fr": "Je ne sais pas",
+    "en": "I don't know"
+  },
+  {
+    "medumba": "Ywìmtə̀ αm, nəcô'o",
+    "fr": "Aide-moi, stp",
+    "en": "Help me, please"
+  },
+  {
+    "medumba": "Fα yαm",
+    "fr": "Donne ma part",
+    "en": "Give my share"
+  },
+  {
+    "medumba": "Nəcô'o fα yαm",
+    "fr": "Stp, donne ma part",
+    "en": "Please give my share"
+  },
+  {
+    "medumba": "Lɔtə / Yənə",
+    "fr": "Regarde",
+    "en": "Look"
+  },
+  {
+    "medumba": "A lî",
+    "fr": "Voici ça",
+    "en": "Here it is"
+  },
+  {
+    "medumba": "A lα",
+    "fr": "Voilà ça, près de toi",
+    "en": "Here it is, near you"
+  },
+  {
+    "medumba": "A dîn",
+    "fr": "Voilà ça loin de toi",
+    "en": "That's far from you"
+  },
+  {
+    "medumba": "Mə bod",
+    "fr": "Je suis fatigué",
+    "en": "I'm tired"
+  },
+  {
+    "medumba": "Mə̀ jʉ α̂ ju",
+    "fr": "Je mange",
+    "en": "I eat"
+  },
+  {
+    "medumba": "Ò bə α̂ yα?",
+    "fr": "Où es-tu ?",
+    "en": "Where are you?"
+  },
+  {
+    "medumba": "Mə̀ bə α̂ tô'ndα",
+    "fr": "Je suis dans la chambre",
+    "en": "I'm in the room"
+  },
+  {
+    "medumba": "Mə̀ bə α̂ fə̌'mbwogə",
+    "fr": "Je suis à la cuisine",
+    "en": "I'm in the kitchen"
+  },
+  {
+    "medumba": "À bə nsi lα / A lα nsi",
+    "fr": "Il est là",
+    "en": "He is there"
+  },
+  {
+    "medumba": "Mə̀ bə nsi lα",
+    "fr": "Je suis là",
+    "en": "I am here"
+  },
+  {
+    "medumba": "Ò kə̂' bə nsi",
+    "fr": "Tu n'es pas là",
+    "en": "You are not there"
+  },
+  {
+    "medumba": "À kə̂' bə nsi",
+    "fr": "Elle n'est pas là",
+    "en": "She's not here"
+  },
+  {
+    "medumba": "O cwɛ̌d nzwî",
+    "fr": "Tu ris",
+    "en": "You laugh"
+  },
+  {
+    "medumba": "O cwɛ̌d nkuâ'a",
+    "fr": "Tu pleures",
+    "en": "You cry"
+  },
+  {
+    "medumba": "Ò zwì α̂ nǔmkə?",
+    "fr": "Pourquoi ris-tu ?",
+    "en": "Why are you laughing?"
+  },
+  {
+    "medumba": "Nǔmmbə nǔ bwɔ̀ αm",
+    "fr": "Parce que je suis content",
+    "en": "Because I'm happy"
+  },
+  {
+    "medumba": "Mə̀ kə̂' lɛ̀n",
+    "fr": "Je ne sais pas",
+    "en": "I don't know"
+  },
+  {
+    "medumba": "Â kuà' yi (lα)",
+    "fr": "C'est exact",
+    "en": "That's right"
+  },
+  {
+    "medumba": "Kuà' yi (lα)",
+    "fr": "Exactement",
+    "en": "Exactly"
+  },
+  {
+    "medumba": "Lǒ nsi",
+    "fr": "Lève-toi",
+    "en": "Get up"
+  },
+  {
+    "medumba": "Tswə nsi",
+    "fr": "Assois-toi",
+    "en": "Sit down"
+  },
+  {
+    "medumba": "Mə lὰbtə̌",
+    "fr": "Merci",
+    "en": "Thank you"
+  },
+  {
+    "medumba": "kʉ̌ndə",
+    "fr": "Cours",
+    "en": "Courses"
+  },
+  {
+    "medumba": "Ywɛlə",
+    "fr": "Saute",
+    "en": "Jump"
+  },
+  {
+    "medumba": "Kα̂ kuag",
+    "fr": "Ne touche pas",
+    "en": "Don't touch"
+  },
+  {
+    "medumba": "Bàmə",
+    "fr": "Réveille-toi",
+    "en": "Wake up"
+  },
+  {
+    "medumba": "Nɛ̀n bǎm Nùmi",
+    "fr": "Va réveiller Nùmi",
+    "en": "Go wake up Nùmi"
+  },
+  {
+    "medumba": "Bàm i",
+    "fr": "Réveille-le",
+    "en": "Wake him up"
+  },
+  {
+    "medumba": "Kα̂ bàm i",
+    "fr": "Ne la réveille pas",
+    "en": "Don't wake her"
+  },
+  {
+    "medumba": "Tα̂αn yὰ? / Tα̂αn bə α̂ yα?",
+    "fr": "Où est ton père ?",
+    "en": "Where is your father?"
+  },
+  {
+    "medumba": "Mə ghʉ̌",
+    "fr": "J'ai",
+    "en": "I have"
+  },
+  {
+    "medumba": "Jûsa",
+    "fr": "Le jouet",
+    "en": "The toy"
+  },
+  {
+    "medumba": "Mə ghʉ̌ jûsa",
+    "fr": "J'ai un jouet",
+    "en": "I have a toy"
+  },
+  {
+    "medumba": "A ghʉ̌ jûsa",
+    "fr": "Il/elle a des jouets",
+    "en": "He/she has toys"
+  },
+  {
+    "medumba": "Mə̀ kə̂' ghʉ̀",
+    "fr": "Je n'ai pas",
+    "en": "I don't have"
+  },
+  {
+    "medumba": "Mə̀ kə̂' ghʉ̌ nkαb",
+    "fr": "Je n'ai pas d'argent",
+    "en": "I have no money"
+  },
+  {
+    "medumba": "Faŋə",
+    "fr": "Laisse",
+    "en": "Leave alone"
+  },
+  {
+    "medumba": "Zìnə",
+    "fr": "Marche",
+    "en": "Walk"
+  },
+  {
+    "medumba": "Sə̌' mə̀bwɔ",
+    "fr": "Bienvenue",
+    "en": "Welcome"
+  },
+  {
+    "medumba": "Yîsh, a cwɛ̌d ndâmə",
+    "fr": "Yich! Ça sent, ça pue",
+    "en": "Yich! It smells, it stinks"
+  },
+  {
+    "medumba": "Kα̂ zìn",
+    "fr": "Ne marche pas",
+    "en": "Doesn't work"
+  },
+  {
+    "medumba": "Kα̂ tswə nsi",
+    "fr": "Ne t'assois pas",
+    "en": "Don't sit down"
+  },
+  {
+    "medumba": "Kα̂ lǒ nsi",
+    "fr": "Ne te lève pas",
+    "en": "Don't get up"
+  },
+  {
+    "medumba": "Kα̂ cob",
+    "fr": "Ne dis pas",
+    "en": "Don't say"
+  },
+  {
+    "medumba": "Kα̂ côb yi",
+    "fr": "Ne lui dit pas",
+    "en": "Don't tell him"
+  },
+  {
+    "medumba": "Nə̀ sǒg wud",
+    "fr": "Se laver",
+    "en": "Wash"
+  },
+  {
+    "medumba": "Nɛ̀n nsôg wûl u",
+    "fr": "Va te laver",
+    "en": "Go wash yourself"
+  },
+  {
+    "medumba": "O sǒg wûl u",
+    "fr": "Tu t'es lavé",
+    "en": "You washed yourself"
+  },
+  {
+    "medumba": "Nə̀ cǔ' ncù",
+    "fr": "Se brosser les dents",
+    "en": "Brush your teeth"
+  },
+  {
+    "medumba": "Nɛ̀n ncû' ncù u",
+    "fr": "Va te brosser les dents",
+    "en": "Go brush your teeth"
+  },
+  {
+    "medumba": "Nkəto'o",
+    "fr": "Les chaussures",
+    "en": "The shoes"
+  },
+  {
+    "medumba": "Nkətô' mαm",
+    "fr": "Mes chaussures",
+    "en": "My shoes"
+  },
+  {
+    "medumba": "Mə̀ à' jʉ ju",
+    "fr": "Je vais manger",
+    "en": "I'm going to eat"
+  },
+  {
+    "medumba": "Mə̀ à' nu ntsə",
+    "fr": "Je vais boire de l'eau",
+    "en": "I'm going to drink some water"
+  },
+  {
+    "medumba": "Nzə̌nnî / Nzî",
+    "fr": "Ici",
+    "en": "Here"
+  },
+  {
+    "medumba": "Nzənnα̂ / Nzα̂",
+    "fr": "Là-bas, près de toi",
+    "en": "There, near you"
+  },
+  {
+    "medumba": "Nzə̌ndin",
+    "fr": "Là-bas, loin de toi et loin de moi",
+    "en": "There, far from you and far from me"
+  },
+  {
+    "medumba": "Sə̌' nzî / Sə̌’ nzə̌nnî",
+    "fr": "Viens ici",
+    "en": "Come here"
+  },
+  {
+    "medumba": "Lǒ nzα̂ / Lǒ nzənnα",
+    "fr": "Quitte de là",
+    "en": "Get out of there"
+  },
+  {
+    "medumba": "Nɛ̌n mὰdin",
+    "fr": "Va là-bas (en bas)",
+    "en": "Go over there (down)"
+  },
+  {
+    "medumba": "Tsin tʉ",
+    "fr": "Mets-toi debout",
+    "en": "Stand up"
+  },
+  {
+    "medumba": "Nɔ̌ nsi",
+    "fr": "Couche-toi",
+    "en": "lie down"
+  },
+  {
+    "medumba": "Ndα̂ntʉ",
+    "fr": "La poitrine",
+    "en": "The chest"
+  },
+  {
+    "medumba": "Tɔ",
+    "fr": "Le cou",
+    "en": "The neck"
+  },
+  {
+    "medumba": "Mbαb",
+    "fr": "La viande",
+    "en": "The meat"
+  },
+  {
+    "medumba": "Nə̀ fɛd mbαb",
+    "fr": "Manger la viande",
+    "en": "Eat the meat"
+  },
+  {
+    "medumba": "Kə̀lɔ̀",
+    "fr": "Le plantain",
+    "en": "The plantain"
+  },
+  {
+    "medumba": "Nə̀ kɔ̌",
+    "fr": "Aimer",
+    "en": "Love"
+  },
+  {
+    "medumba": "Nkɔ̀nì",
+    "fr": "Amour",
+    "en": "Love"
+  },
+  {
+    "medumba": "Mə kɔ̀ o",
+    "fr": "Je t'aime",
+    "en": "I love you"
+  },
+  {
+    "medumba": "Nsi",
+    "fr": "Dieu",
+    "en": "God"
+  },
+  {
+    "medumba": "Ndʉ̀m",
+    "fr": "Un monstre, un diable",
+    "en": "A monster, a devil"
+  },
+  {
+    "medumba": "Kα̂ làgtə̀",
+    "fr": "N'oublie pas",
+    "en": "Don't forget"
+  },
+  {
+    "medumba": "Lɛn",
+    "fr": "Le nom",
+    "en": "The name"
+  },
+  {
+    "medumba": "Lɛ̂n sαm",
+    "fr": "Mon nom",
+    "en": "My name"
+  },
+  {
+    "medumba": "Lɛ̂n sαm bə α̂ ...",
+    "fr": "Je m'appelle, mon nom est...",
+    "en": "My name is, my name is..."
+  },
+  {
+    "medumba": "Nǔm lɛ̂n tα",
+    "fr": "Au nom du père",
+    "en": "In the name of the father"
+  },
+  {
+    "medumba": "Mɛn",
+    "fr": "L'enfant",
+    "en": "The child"
+  },
+  {
+    "medumba": "Fα̂ yi",
+    "fr": "Donne-lui",
+    "en": "Give him"
+  },
+  {
+    "medumba": "Fα̂ mfɛl ò",
+    "fr": "Donne à ton frère/sœur",
+    "en": "Give to your brother/sister"
+  },
+  {
+    "medumba": "Mə̀",
+    "fr": "Moi",
+    "en": "Me"
+  },
+  {
+    "medumba": "Wʉ̀",
+    "fr": "Toi",
+    "en": "You"
+  },
+  {
+    "medumba": "Yi",
+    "fr": "Lui",
+    "en": "Him"
+  },
+  {
+    "medumba": "Bαg",
+    "fr": "Nous",
+    "en": "We"
+  },
+  {
+    "medumba": "Bin",
+    "fr": "Vous",
+    "en": "You"
+  },
+  {
+    "medumba": "Bo",
+    "fr": "Eux",
+    "en": "They"
+  },
+  {
+    "medumba": "Â wə li ὰ ?",
+    "fr": "Qui est celui-ci ?",
+    "en": "Who is this one?"
+  },
+  {
+    "medumba": "Nə̀ kǐ",
+    "fr": "Écrire",
+    "en": "Write"
+  },
+  {
+    "medumba": "Kǐ",
+    "fr": "Écris",
+    "en": "Write"
+  },
+  {
+    "medumba": "Siaŋə",
+    "fr": "Lis",
+    "en": "Read"
+  },
+  {
+    "medumba": "Nə̀ yǒb kwì",
+    "fr": "Chanter",
+    "en": "Sing"
+  },
+  {
+    "medumba": "Mə̀ yòb α̂ kwì",
+    "fr": "Je chante",
+    "en": "I sing"
+  },
+  {
+    "medumba": "bαm mbὰ",
+    "fr": "Patience (mot de consolation)",
+    "en": "Patience (word of consolation)"
+  },
+  {
+    "medumba": "bαm mbὰ, kα̂ nə kuà'a",
+    "fr": "Patience, ne pleure plus",
+    "en": "Patience, don't cry anymore"
+  },
+  {
+    "medumba": "Nyǎŋsa",
+    "fr": "Danse",
+    "en": "Dance"
+  },
+  {
+    "medumba": "Tɔ",
+    "fr": "Crie",
+    "en": "Scream"
+  },
+  {
+    "medumba": "Ləm",
+    "fr": "Le sang",
+    "en": "The blood"
+  },
+  {
+    "medumba": "Bàm sαm cwɛ̌d nja",
+    "fr": "Mon ventre fait mal",
+    "en": "My stomach hurts"
+  },
+  {
+    "medumba": "Nə̀ diàgə",
+    "fr": "Chercher",
+    "en": "Search"
+  },
+  {
+    "medumba": "Diàgə",
+    "fr": "Cherche",
+    "en": "Search"
+  },
+  {
+    "medumba": "Fitə̀",
+    "fr": "La paix",
+    "en": "Peace"
+  },
+  {
+    "medumba": "Tsiàŋtə̀",
+    "fr": "La joie",
+    "en": "Joy"
+  },
+  {
+    "medumba": "Nə̀ nyàŋə",
+    "fr": "Piétiner",
+    "en": "Trample"
+  },
+  {
+    "medumba": "Kα̂ nyàŋ",
+    "fr": "Ne piétine pas",
+    "en": "Don't trample"
+  },
+  {
+    "medumba": "Kα̂ kwag",
+    "fr": "Ne touche pas",
+    "en": "Don't touch"
+  },
+  {
+    "medumba": "Nə̀ làbə",
+    "fr": "Taper",
+    "en": "Type"
+  },
+  {
+    "medumba": "Mə̀ à' làb o",
+    "fr": "Je vais te taper",
+    "en": "I'm going to hit you"
+  },
+  {
+    "medumba": "Kα̂ lὰb i",
+    "fr": "Ne la/le tape pas",
+    "en": "Don't hit him/her"
+  },
+  {
+    "medumba": "Mɛ̀nntʉ̀n",
+    "fr": "Un être humain",
+    "en": "A human being"
+  },
+  {
+    "medumba": "Mə yən",
+    "fr": "J'ai vu",
+    "en": "I saw"
+  },
+  {
+    "medumba": "Mə̀ kə̂' yən",
+    "fr": "Je n'ai pas vu",
+    "en": "I didn't see"
+  },
+  {
+    "medumba": "Mə lî",
+    "fr": "Me voici",
+    "en": "Here I am"
+  },
+  {
+    "medumba": "A lα",
+    "fr": "Le voilà (près de toi)",
+    "en": "There he is (near you)"
+  },
+  {
+    "medumba": "A dîn",
+    "fr": "Le voilà (loin de toi, et loin de moi)",
+    "en": "There he is (far from you, and far from me)"
+  },
+  {
+    "medumba": "A lî",
+    "fr": "Le voici",
+    "en": "Here it is"
+  },
+  {
+    "medumba": "Â yi / À bə α̂ yi",
+    "fr": "C'est lui",
+    "en": "It's him"
+  },
+  {
+    "medumba": "A kə yi / À kə̂' bə α̂ yi",
+    "fr": "Ce n'est pas lui",
+    "en": "It's not him"
+  },
+  {
+    "medumba": "A kù'u",
+    "fr": "Ça suffit",
+    "en": "That's enough"
+  },
+  {
+    "medumba": "A yαm",
+    "fr": "C'est beaucoup",
+    "en": "It's a lot"
+  },
+  {
+    "medumba": "A kag",
+    "fr": "C'est insuffisant",
+    "en": "It's insufficient"
+  },
+  {
+    "medumba": "Tā'",
+    "fr": "Trop, tellement",
+    "en": "Too much, so much"
+  },
+  {
+    "medumba": "Tα̂n",
+    "fr": "Cinq",
+    "en": "Five"
+  },
+  {
+    "medumba": "Ntogə",
+    "fr": "Six",
+    "en": "Six"
+  },
+  {
+    "medumba": "Sαmmbαhα",
+    "fr": "Sept",
+    "en": "Seven"
+  },
+  {
+    "medumba": "Fomə",
+    "fr": "Huit",
+    "en": "Eight"
+  },
+  {
+    "medumba": "Bwə̀'ə",
+    "fr": "Neuf",
+    "en": "Nine"
+  },
+  {
+    "medumba": "Gham",
+    "fr": "Dix",
+    "en": "Ten"
+  },
+  {
+    "medumba": "Ncʉ̄'",
+    "fr": "Un",
+    "en": "A"
+  },
+  {
+    "medumba": "Tà'",
+    "fr": "Un, article indéfini",
+    "en": "A, indefinite article"
+  },
+  {
+    "medumba": "Bαhα",
+    "fr": "Deux",
+    "en": "Two"
+  },
+  {
+    "medumba": "Tad",
+    "fr": "Trois",
+    "en": "Three"
+  },
+  {
+    "medumba": "Kuὰ",
+    "fr": "Quatre",
+    "en": "Four"
+  },
+  {
+    "medumba": "Diǎg nkətô' mu",
+    "fr": "Cherche tes chaussures",
+    "en": "Look for your shoes"
+  },
+  {
+    "medumba": "Sə̂' yi",
+    "fr": "Apporte, amène",
+    "en": "Bring, bring"
+  },
+  {
+    "medumba": "Nɛ̂n yi",
+    "fr": "Emmène, va avec",
+    "en": "Take, go with"
+  },
+  {
+    "medumba": "Bɛ̀n ngʉ̂",
+    "fr": "Fait encore",
+    "en": "Done again"
+  },
+  {
+    "medumba": "Kα̂ bɛ̀n ngʉ̂",
+    "fr": "Ne fait plus",
+    "en": "Don't do it anymore"
+  },
+  {
+    "medumba": "Mə ju'",
+    "fr": "J'ai compris",
+    "en": "Got it"
+  },
+  {
+    "medumba": "Mə lὰbtə̌ / Mə bam",
+    "fr": "Merci",
+    "en": "THANKS"
+  },
+  {
+    "medumba": "O bûm tā'",
+    "fr": "Tu es très turbulent",
+    "en": "You are very turbulent"
+  },
+  {
+    "medumba": "Ko'o",
+    "fr": "Monte",
+    "en": "Mounted"
+  },
+  {
+    "medumba": "Swə'ə",
+    "fr": "Descends",
+    "en": "Come down"
+  },
+  {
+    "medumba": "Du'",
+    "fr": "La cuillère",
+    "en": "The spoon"
+  },
+  {
+    "medumba": "Ka",
+    "fr": "L'assiette",
+    "en": "The plate"
+  },
+  {
+    "medumba": "Nzə̀ndα",
+    "fr": "La porte",
+    "en": "The door"
+  },
+  {
+    "medumba": "Tô'mò",
+    "fr": "Le salon",
+    "en": "The living room"
+  },
+  {
+    "medumba": "Fə̌'mbwogə",
+    "fr": "La cuisine",
+    "en": "The kitchen"
+  },
+  {
+    "medumba": "À kə̂' bə α̂ ndʉ lα̂",
+    "fr": "Ce n'est pas comme ça",
+    "en": "It's not like that"
+  },
+  {
+    "medumba": "À bə α̂ ndʉ lα̂",
+    "fr": "C'est comme ça",
+    "en": "It's like this"
+  },
+  {
+    "medumba": "Yahà",
+    "fr": "Bravo",
+    "en": "Well done"
+  },
+  {
+    "medumba": "Hàndα",
+    "fr": "Oh là là, zut, merde, putain",
+    "en": "Oh dear, damn, damn, damn"
+  },
+  {
+    "medumba": "A bwɔ̌",
+    "fr": "C'est bon",
+    "en": "It's good"
+  },
+  {
+    "medumba": "À kə̂' bwɔ̀",
+    "fr": "Ce n'est pas bon",
+    "en": "It's not good"
+  },
+  {
+    "medumba": "Yὰm wə!",
+    "fr": "Allô ! Lorsqu'on ne sait pas qui est au bout du fil",
+    "en": "Hello ! When you don't know who is on the other end of the line"
+  }
 ];

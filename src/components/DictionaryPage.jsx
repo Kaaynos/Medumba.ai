@@ -8,7 +8,7 @@ import { hasRealVoice } from '../utils/medumbaAudio';
 // une vraie voix EXACTE (ni TTS de secours, ni mot "créé" en enchaînant
 // plusieurs syllabes) — cf. décision réunion "less is more" / "Remove the
 // created vocals for words" plutôt qu'un dictionnaire large mais peu fiable.
-const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({ medumba: e.medumba, french: e.fr, isExpression: true }));
+const EXPR_ENTRIES = MEDUMBA_EXPRESSIONS.map(e => ({ medumba: e.medumba, french: e.fr, english: e.en, isExpression: true }));
 
 const ALL_ENTRIES = [...DICTIONARY, ...EXPR_ENTRIES].filter(e => hasRealVoice(e.medumba));
 const AI_URL = 'https://medumba-ai.onrender.com/api/translate';
@@ -16,11 +16,11 @@ const AI_URL = 'https://medumba-ai.onrender.com/api/translate';
 // Paires vérifiées (les deux formes ont une vraie voix complète) pour que
 // les puces de suggestion ne mènent jamais à "aucun résultat".
 const SUGGESTION_CHIPS = [
-    { fr: 'Main',    md: 'Bu' },
-    { fr: 'Pied',    md: 'Kù' },
-    { fr: 'Chien',   md: 'Mbʉ' },
-    { fr: 'Enfant',  md: 'Mɛn' },
-    { fr: 'Rouge',   md: 'Bà' },
+    { fr: 'Main',    en: 'Hand',  md: 'Bu' },
+    { fr: 'Pied',    en: 'Foot',  md: 'Kù' },
+    { fr: 'Chien',   en: 'Dog',   md: 'Mbʉ' },
+    { fr: 'Enfant',  en: 'Child', md: 'Mɛn' },
+    { fr: 'Rouge',   en: 'Red',   md: 'Bà' },
 ];
 
 // Mots courts affichés par défaut avant que l'utilisateur ne cherche —
@@ -31,7 +31,11 @@ const DEFAULT_ENTRIES = ALL_ENTRIES
 
 // Une ligne d'entrée du dictionnaire (mot + traduction + bouton écouter),
 // partagée entre la liste de résultats et les mots affichés par défaut.
-const EntryRow = ({ entry, i, isFr, speaking, onPlay }) => (
+// `displayLang` ('french' | 'english') controls which translation shows —
+// tied to the current search direction, not just the app's UI language, so
+// a French search always shows French even for an English-UI user and vice
+// versa.
+const EntryRow = ({ entry, i, isFr, displayLang, speaking, onPlay }) => (
     <div className="dict-row" style={{
         display: 'flex', alignItems: 'center', gap: '0.85rem',
         padding: '0.85rem 1rem', borderBottom: '1px solid #f1f5f9',
@@ -47,7 +51,9 @@ const EntryRow = ({ entry, i, isFr, speaking, onPlay }) => (
                     </span>
                 )}
             </div>
-            <div style={{ fontSize: '0.85rem', color: '#334155', fontWeight: '600' }}>🇫🇷 {entry.french}</div>
+            <div style={{ fontSize: '0.85rem', color: '#334155', fontWeight: '600' }}>
+                {displayLang === 'french' ? '🇫🇷' : '🇬🇧'} {displayLang === 'french' ? entry.french : (entry.english || entry.french)}
+            </div>
         </div>
         <button onClick={() => onPlay(entry.medumba)} style={{
             background: speaking === entry.medumba ? '#dcfce7' : '#f8fafc',
@@ -73,13 +79,25 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
 
     /* ══ TAB 1 — DICTIONNAIRE ══ */
     const [query,    setQuery]    = useState('');
+    // 'french' | 'english' | 'medumba' — both non-Medumba languages are
+    // always available, independent of the app's own UI language, so a
+    // French-speaking user can still look up in English and vice versa.
     const [lang,     setLang]     = useState('french');
     const [speaking, setSpeaking] = useState(null);
+
+    // For the reverse (Medumba -> native language) direction, "native
+    // language" follows the app's own UI language (isFr).
+    const nativeKey = isFr ? 'french' : 'english';
+    // Which translation to actually display for the current search
+    // direction (independent of nativeKey when searching French/English
+    // directly).
+    const displayLang = lang === 'english' ? 'english' : lang === 'french' ? 'french' : nativeKey;
 
     const results = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return [];
-        const key = lang === 'medumba' ? 'medumba' : 'french';
+        const key = lang === 'medumba' ? 'medumba' : lang === 'english' ? 'english' : 'french';
+        const val = (e) => (e[key] || e.french || '');
         const rank = (w) => {
             const lw = w.toLowerCase();
             if (lw === q)         return 0;
@@ -87,10 +105,10 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
             return 2;
         };
         return ALL_ENTRIES
-            .filter(e => e[key].toLowerCase().includes(q))
+            .filter(e => val(e).toLowerCase().includes(q))
             .sort((a, b) => {
-                const d = rank(a[key]) - rank(b[key]);
-                return d !== 0 ? d : a[key].localeCompare(b[key]);
+                const d = rank(val(a)) - rank(val(b));
+                return d !== 0 ? d : val(a).localeCompare(val(b));
             })
             .slice(0, 80);
     }, [query, lang]);
@@ -218,9 +236,11 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                             <input
                                 value={query}
                                 onChange={e => setQuery(e.target.value)}
-                                placeholder={lang === 'french'
-                                    ? (isFr ? 'Chercher en français…' : 'Search in French…')
-                                    : (isFr ? 'Chercher un mot Medumba…' : 'Search a Medumba word…')}
+                                placeholder={
+                                    lang === 'french'  ? (isFr ? 'Chercher en français…' : 'Search in French…') :
+                                    lang === 'english' ? (isFr ? 'Chercher en anglais…'  : 'Search in English…') :
+                                    (isFr ? 'Chercher un mot Medumba…' : 'Search a Medumba word…')
+                                }
                                 style={{ flex: 1, border: 'none', outline: 'none', fontSize: '1rem', fontWeight: '600', color: '#0f172a', backgroundColor: 'transparent', fontFamily: 'inherit' }}
                                 autoFocus
                             />
@@ -229,16 +249,17 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                             )}
                         </div>
 
-                        <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.55rem', background: '#f1f5f9', borderRadius: '10px', padding: '0.2rem' }}>
+                        <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.55rem', background: '#f1f5f9', borderRadius: '10px', padding: '0.2rem', flexWrap: 'wrap' }}>
                             {[
+                                { id: 'english', label: '🇬🇧 ' + (isFr ? 'Anglais → Medumba' : 'English → Medumba') },
                                 { id: 'french',  label: '🇫🇷 ' + (isFr ? 'Français → Medumba' : 'French → Medumba') },
-                                { id: 'medumba', label: '🇨🇲 ' + (isFr ? 'Medumba → Français' : 'Medumba → French') },
+                                { id: 'medumba', label: '🇨🇲 ' + (isFr ? 'Medumba → Français' : 'Medumba → English') },
                             ].map(opt => (
                                 <button key={opt.id} onClick={() => { setLang(opt.id); setQuery(''); }} style={{
-                                    flex: 1, padding: '0.4rem', borderRadius: '8px', border: 'none', cursor: 'pointer',
+                                    flex: '1 1 30%', minWidth: '90px', padding: '0.4rem', borderRadius: '8px', border: 'none', cursor: 'pointer',
                                     background: lang === opt.id ? '#16a34a' : 'transparent',
                                     color:      lang === opt.id ? '#fff'    : '#64748b',
-                                    fontWeight: '700', fontSize: '0.78rem', fontFamily: 'inherit', transition: 'all 0.15s',
+                                    fontWeight: '700', fontSize: '0.72rem', fontFamily: 'inherit', transition: 'all 0.15s',
                                 }}>{opt.label}</button>
                             ))}
                         </div>
@@ -255,7 +276,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                 </p>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
                                     {SUGGESTION_CHIPS.map(pair => {
-                                        const w = lang === 'french' ? pair.fr : pair.md;
+                                        const w = lang === 'french' ? pair.fr : lang === 'english' ? pair.en : pair.md;
                                         return (
                                             <button key={w} onClick={() => setQuery(w)} style={{ background: '#dcfce7', border: '2px solid #bbf7d0', borderRadius: '99px', padding: '0.3rem 0.85rem', fontSize: '0.82rem', fontWeight: '700', color: '#16a34a', cursor: 'pointer', fontFamily: 'inherit' }}>
                                                 {w}
@@ -269,7 +290,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                 {isFr ? 'Mots à découvrir' : 'Words to discover'}
                             </div>
                             {DEFAULT_ENTRIES.map((entry, i) => (
-                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} speaking={speaking} onPlay={playEntry} />
+                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} displayLang={displayLang} speaking={speaking} onPlay={playEntry} />
                             ))}
                         </div>
                     )}
@@ -285,7 +306,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                 {isFr ? `"${query}" n'est pas dans le dictionnaire.` : `"${query}" is not in the dictionary.`}
                             </div>
                             <button
-                                onClick={() => { setTab('ai'); setAiInput(query); setAiDir(lang === 'french' ? 'fr-md' : 'md-fr'); }}
+                                onClick={() => { setTab('ai'); setAiInput(query); setAiDir(lang === 'medumba' ? 'md-fr' : 'fr-md'); }}
                                 style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: '#fff', border: 'none', borderRadius: '12px', padding: '0.7rem 1.4rem', fontWeight: '800', fontSize: '0.9rem', cursor: 'pointer', fontFamily: 'inherit' }}
                             >
                                 🤖 {isFr ? 'Essayer avec le Traducteur IA' : 'Try AI Translator'}
@@ -300,7 +321,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                 {results.length}{results.length === 80 ? '+' : ''} {isFr ? 'résultats' : 'results'}
                             </div>
                             {results.map((entry, i) => (
-                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} speaking={speaking} onPlay={playEntry} />
+                                <EntryRow key={i} entry={entry} i={i} isFr={isFr} displayLang={displayLang} speaking={speaking} onPlay={playEntry} />
                             ))}
                         </div>
                     )}

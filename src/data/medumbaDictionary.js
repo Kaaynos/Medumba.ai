@@ -2191,17030 +2191,21287 @@ export const LEVEL_QUESTIONS = {
 export const DICTIONARY = [
   {
     "medumba": "Ngàfαncʉꞌ",
-    "french": "Le̍gislateur"
+    "french": "Le̍gislateur",
+    "english": "Legislator"
   },
   {
     "medumba": "Njὰb",
-    "french": "Le̍gume"
+    "french": "Le̍gume",
+    "english": "Vegetable"
   },
   {
     "medumba": "Nə̀fikɛlə",
-    "french": "Lent"
+    "french": "Lent",
+    "english": "Slow"
   },
   {
     "medumba": "Fikɛ̀d",
-    "french": "Lenteur"
+    "french": "Lenteur",
+    "english": "Slowness"
   },
   {
     "medumba": "Nə̀fikɛlə",
-    "french": "Lenteur"
+    "french": "Lenteur",
+    "english": "Slowness"
   },
   {
     "medumba": "Nkinə",
-    "french": "Lèpre"
+    "french": "Lèpre",
+    "english": "Leprosy"
   },
   {
     "medumba": "Ngànkinə",
-    "french": "Le̍preux"
+    "french": "Le̍preux",
+    "english": "Le̍preux"
   },
   {
     "medumba": "Dʉ̌ꞌghǎnkin",
-    "french": "Le̍priserie"
+    "french": "Le̍priserie",
+    "english": "Le̍priserie"
   },
   {
     "medumba": "Ndǎmnjʉ",
-    "french": "Lendemain"
+    "french": "Lendemain",
+    "english": "Next day"
   },
   {
     "medumba": "Lα̂gŋwàꞌni",
-    "french": "Lettre"
+    "french": "Lettre",
+    "english": "Letter"
   },
   {
     "medumba": "Ŋwàꞌni",
-    "french": "Lettre"
+    "french": "Lettre",
+    "english": "Letter"
   },
   {
     "medumba": "Ncàꞌ",
-    "french": "Levain"
+    "french": "Levain",
+    "english": "Sourdough"
   },
   {
     "medumba": "Nə̀ bʉꞌ nsi",
-    "french": "Lever"
+    "french": "Lever",
+    "english": "Lift"
   },
   {
     "medumba": "Nə̀ lǒtʉ",
-    "french": "Lever"
+    "french": "Lever",
+    "english": "Lift"
   },
   {
     "medumba": "Nə̀ lǒnsi",
-    "french": "Lever"
+    "french": "Lever",
+    "english": "Lift"
   },
   {
     "medumba": "Nə̀ koꞌo",
-    "french": "Lever"
+    "french": "Lever",
+    "english": "Lift"
   },
   {
     "medumba": "Kə̀kǔbncù",
-    "french": "Lèvre"
+    "french": "Lèvre",
+    "english": "Lip"
   },
   {
     "medumba": "Lə̀",
-    "french": "Liane"
+    "french": "Liane",
+    "english": "Liane"
   },
   {
     "medumba": "Shudnyὰm",
-    "french": "Lièvre"
+    "french": "Lièvre",
+    "english": "Hare"
   },
   {
     "medumba": "Nkʉ",
-    "french": "Lien"
+    "french": "Lien",
+    "english": "Link"
   },
   {
     "medumba": "Nga",
-    "french": "Lien"
+    "french": "Lien",
+    "english": "Link"
   },
   {
     "medumba": "Nə̀ kwul",
-    "french": "Lier"
+    "french": "Lier",
+    "english": "Link"
   },
   {
     "medumba": "Nə̀ làlə",
-    "french": "Lier"
+    "french": "Lier",
+    "english": "Link"
   },
   {
     "medumba": "Nə̀ tàŋ",
-    "french": "Lier"
+    "french": "Lier",
+    "english": "Link"
   },
   {
     "medumba": "Dʉꞌ",
-    "french": "Lieu"
+    "french": "Lieu",
+    "english": "Location"
   },
   {
     "medumba": "Dʉ̌ꞌzìꞌ",
-    "french": "Lieu d’apprantissage"
+    "french": "Lieu d’apprantissage",
+    "english": "Learning place"
   },
   {
     "medumba": "Dʉ̌ꞌbeb",
-    "french": "Lieu d’attente"
+    "french": "Lieu d’attente",
+    "english": "Waiting place"
   },
   {
     "medumba": "Dʉ̌ꞌjuα",
-    "french": "Lieu de fête"
+    "french": "Lieu de fête",
+    "english": "Party location"
   },
   {
     "medumba": "Dʉ̌ꞌkàꞌ",
-    "french": "Lieu de rendez-vous"
+    "french": "Lieu de rendez-vous",
+    "english": "Meeting place"
   },
   {
     "medumba": "Nka",
-    "french": "Ligne"
+    "french": "Ligne",
+    "english": "Line"
   },
   {
     "medumba": "Ndʉ",
-    "french": "Limite"
+    "french": "Limite",
+    "english": "Limit"
   },
   {
     "medumba": "Nə̀ tə ndʉ",
-    "french": "Limiter"
+    "french": "Limiter",
+    "english": "Limit"
   },
   {
     "medumba": "Kə̀bɛ̀n",
-    "french": "Limpide"
+    "french": "Limpide",
+    "english": "Clear"
   },
   {
     "medumba": "Nə̀lαn",
-    "french": "Limpide"
+    "french": "Limpide",
+    "english": "Clear"
   },
   {
     "medumba": "Ngwα̌yid",
-    "french": "Lion"
+    "french": "Lion",
+    "english": "Leo"
   },
   {
     "medumba": "Nyαmkə̀màꞌ",
-    "french": "Lion"
+    "french": "Lion",
+    "english": "Leo"
   },
   {
     "medumba": "Ntə̌ntsə",
-    "french": "Liquide"
+    "french": "Liquide",
+    "english": "Liquid"
   },
   {
     "medumba": "Nə̀ siaŋə",
-    "french": "Lire"
+    "french": "Lire",
+    "english": "Read"
   },
   {
     "medumba": "Kun",
-    "french": "Lit"
+    "french": "Lit",
+    "english": "Bed"
   },
   {
     "medumba": "Làkunndα",
-    "french": "Lit (dessous)"
+    "french": "Lit (dessous)",
+    "english": "Bed (underneath)"
   },
   {
     "medumba": "Kòŋntsə",
-    "french": "Lit d’eau"
+    "french": "Lit d’eau",
+    "english": "Water bed"
   },
   {
     "medumba": "Nsintsə",
-    "french": "Lit d’eau"
+    "french": "Lit d’eau",
+    "english": "Water bed"
   },
   {
     "medumba": "Cûkun",
-    "french": "Literie"
+    "french": "Literie",
+    "english": "Bedding"
   },
   {
     "medumba": "Buꞌŋwàꞌnì",
-    "french": "Livre"
+    "french": "Livre",
+    "english": "Book"
   },
   {
     "medumba": "Buꞌŋwàꞌnicɔ̀ (1/6",
-    "french": "Livre (de contre)"
+    "french": "Livre (de contre)",
+    "english": "Book (against)"
   },
   {
     "medumba": "Buꞌŋwàꞌninkʉd (5/4",
-    "french": "Livre (de proverbes)"
+    "french": "Livre (de proverbes)",
+    "english": "Book (of proverbs)"
   },
   {
     "medumba": "Nə̀ swɛ̀n",
-    "french": "Livrer"
+    "french": "Livrer",
+    "english": "Deliver"
   },
   {
     "medumba": "Nə̀ fα",
-    "french": "Livrer"
+    "french": "Livrer",
+    "english": "Deliver"
   },
   {
     "medumba": "Kὰn",
-    "french": "Loi"
+    "french": "Loi",
+    "english": "Law"
   },
   {
     "medumba": "Ncʉꞌ",
-    "french": "Loi"
+    "french": "Loi",
+    "english": "Law"
   },
   {
     "medumba": "Nə̀sὰ",
-    "french": "Loin"
+    "french": "Loin",
+    "english": "Far away"
   },
   {
     "medumba": "Ngʉanə̀sὰ",
-    "french": "Loin"
+    "french": "Loin",
+    "english": "Far away"
   },
   {
     "medumba": "Nə̀sàgə",
-    "french": "Long"
+    "french": "Long",
+    "english": "Long"
   },
   {
     "medumba": "Nsὰ",
-    "french": "Long"
+    "french": "Long",
+    "english": "Long"
   },
   {
     "medumba": "Nə̀sàgə",
-    "french": "Longueur"
+    "french": "Longueur",
+    "english": "Length"
   },
   {
     "medumba": "Tsə̂bàꞌ",
-    "french": "Lot (à batir)"
+    "french": "Lot (à batir)",
+    "english": "Lot (to be built)"
   },
   {
     "medumba": "Ghamtə̀",
-    "french": "Louange"
+    "french": "Louange",
+    "english": "Praise"
   },
   {
     "medumba": "Nə̀ ghamte",
-    "french": "Louer"
+    "french": "Louer",
+    "english": "Rent"
   },
   {
     "medumba": "Nə̀ cwiꞌi",
-    "french": "Louer(location)"
+    "french": "Louer(location)",
+    "english": "Rent (rental)"
   },
   {
     "medumba": "Swəncù",
-    "french": "Loup"
+    "french": "Loup",
+    "english": "Wolf"
   },
   {
     "medumba": "Nə̀lɛ̀lə",
-    "french": "Lourd"
+    "french": "Lourd",
+    "english": "Heavy"
   },
   {
     "medumba": "Lɛ̀dwud",
-    "french": "Lourdeur"
+    "french": "Lourdeur",
+    "english": "Heaviness"
   },
   {
     "medumba": "Məsěkàꞌ",
-    "french": "Lueur"
+    "french": "Lueur",
+    "english": "Glow"
   },
   {
     "medumba": "Nə̀ kèꞌe",
-    "french": "Luire"
+    "french": "Luire",
+    "english": "Glow"
   },
   {
     "medumba": "Nə̀kèꞌe",
-    "french": "Luisant"
+    "french": "Luisant",
+    "english": "Glowing"
   },
   {
     "medumba": "Nkàꞌ",
-    "french": "Lumière"
+    "french": "Lumière",
+    "english": "Light"
   },
   {
     "medumba": "Nkàꞌlα̂gmyàm",
-    "french": "Lumière (du soleil)"
+    "french": "Lumière (du soleil)",
+    "english": "Light (of the sun)"
   },
   {
     "medumba": "Nə̀sɛ̂nmbwogə (3/6",
-    "french": "Lumignon"
+    "french": "Lumignon",
+    "english": "Candle"
   },
   {
     "medumba": "Mαŋwʉ",
-    "french": "Lune"
+    "french": "Lune",
+    "english": "Moon"
   },
   {
     "medumba": "Zwə̀ꞌ",
-    "french": "Lutte"
+    "french": "Lutte",
+    "english": "Wrestling"
   },
   {
     "medumba": "Diaŋzwə̀",
-    "french": "Lutte (compe̍tition)"
+    "french": "Lutte (compe̍tition)",
+    "english": "Wrestling (competition)"
   },
   {
     "medumba": "Nə̀ zwə̌ zwəꞌ",
-    "french": "Lutter"
+    "french": "Lutter",
+    "english": "Fight"
   },
   {
     "medumba": "Ngàzwə̌zwə̀ꞌ",
-    "french": "Lutteur"
+    "french": "Lutteur",
+    "english": "Wrestler"
   },
   {
     "medumba": "Nzwə̀zwə̀ꞌ",
-    "french": "Lutteur"
+    "french": "Lutteur",
+    "english": "Wrestler"
   },
   {
     "medumba": "Ngʉa",
-    "french": "Luxe"
+    "french": "Luxe",
+    "english": "Luxury"
   },
   {
     "medumba": "Jûngʉa",
-    "french": "Luxe"
+    "french": "Luxe",
+    "english": "Luxury"
   },
   {
     "medumba": "Jûngʉa",
-    "french": "Luxueux"
+    "french": "Luxueux",
+    "english": "Luxurious"
   },
   {
     "medumba": "Dʉ̌ꞌŋwàꞌni tɛ̀dkʉlə",
-    "french": "Lyce̍e"
+    "french": "Lyce̍e",
+    "english": "High school"
   },
   {
     "medumba": "Kûꞌkà",
-    "french": "Macabo"
+    "french": "Macabo",
+    "english": "Macabo"
   },
   {
     "medumba": "Lòŋ",
-    "french": "Machine"
+    "french": "Machine",
+    "english": "Machine"
   },
   {
     "medumba": "Ntαg",
-    "french": "Mâchoire"
+    "french": "Mâchoire",
+    "english": "Jaw"
   },
   {
     "medumba": "Mα",
-    "french": "Madame"
+    "french": "Madame",
+    "english": "Madam"
   },
   {
     "medumba": "Məko",
-    "french": "Mademoiselle"
+    "french": "Mademoiselle",
+    "english": "Miss"
   },
   {
     "medumba": "Fəꞌ",
-    "french": "Magasin"
+    "french": "Magasin",
+    "english": "Store"
   },
   {
     "medumba": "Ngàkà",
-    "french": "Magicien"
+    "french": "Magicien",
+    "english": "Magician"
   },
   {
     "medumba": "Kà",
-    "french": "Magie"
+    "french": "Magie",
+    "english": "Magic"
   },
   {
     "medumba": "Jûkà",
-    "french": "Magique"
+    "french": "Magique",
+    "english": "Magic"
   },
   {
     "medumba": "Njʉàfoŋ",
-    "french": "Magne̍tophone"
+    "french": "Magne̍tophone",
+    "english": "Tape recorder"
   },
   {
     "medumba": "Nə̀ jum",
-    "french": "Maigrir"
+    "french": "Maigrir",
+    "english": "Lose weight"
   },
   {
     "medumba": "Bu",
-    "french": "Main"
+    "french": "Main",
+    "english": "Hand"
   },
   {
     "medumba": "Bûfàꞌ",
-    "french": "Main d’oeuvre"
+    "french": "Main d’oeuvre",
+    "english": "Labor"
   },
   {
     "medumba": "Nkα̂bfàꞌ",
-    "french": "Main d’oeuvre"
+    "french": "Main d’oeuvre",
+    "english": "Labor"
   },
   {
     "medumba": "Ncoꞌfàꞌ",
-    "french": "Main d’oeuvre"
+    "french": "Main d’oeuvre",
+    "english": "Labor"
   },
   {
     "medumba": "Ndɔ̌nnî",
-    "french": "Maintenant"
+    "french": "Maintenant",
+    "english": "Now"
   },
   {
     "medumba": "Baꞌ",
-    "french": "Maison"
+    "french": "Maison",
+    "english": "House"
   },
   {
     "medumba": "Ndα",
-    "french": "Maison"
+    "french": "Maison",
+    "english": "House"
   },
   {
     "medumba": "Tunndα",
-    "french": "Maison"
+    "french": "Maison",
+    "english": "House"
   },
   {
     "medumba": "Dʉ̌ꞌfoŋ",
-    "french": "Maison (de radio)"
+    "french": "Maison (de radio)",
+    "english": "House (of radio)"
   },
   {
     "medumba": "Ndα̂foŋ",
-    "french": "Maison (de radio)"
+    "french": "Maison (de radio)",
+    "english": "House (of radio)"
   },
   {
     "medumba": "Ndα̂nsàfoŋ",
-    "french": "Maison (de radio )"
+    "french": "Maison (de radio )",
+    "english": "House (of radio)"
   },
   {
     "medumba": "Ndα̂kwαn",
-    "french": "Maison (de̍portation"
+    "french": "Maison (de̍portation",
+    "english": "House (deportation"
   },
   {
     "medumba": "Ngə̀fələ",
-    "french": "Maïs"
+    "french": "Maïs",
+    "english": "Corn"
   },
   {
     "medumba": "Ngàtswìtə̀",
-    "french": "Maître"
+    "french": "Maître",
+    "english": "Master"
   },
   {
     "medumba": "Tα",
-    "french": "Maître"
+    "french": "Maître",
+    "english": "Master"
   },
   {
     "medumba": "Tα̂ndα",
-    "french": "Maître (maison)"
+    "french": "Maître (maison)",
+    "english": "Master (house)"
   },
   {
     "medumba": "Mα̂fàꞌ",
-    "french": "Maîtresse"
+    "french": "Maîtresse",
+    "english": "Mistress"
   },
   {
     "medumba": "Mαndα",
-    "french": "Maîtresse"
+    "french": "Maîtresse",
+    "english": "Mistress"
   },
   {
     "medumba": "Mɛ̀nnzwîndα",
-    "french": "Maîtresse"
+    "french": "Maîtresse",
+    "english": "Mistress"
   },
   {
     "medumba": "Nsὰhntubu",
-    "french": "Majeur (doigt)"
+    "french": "Majeur (doigt)",
+    "english": "Middle finger (finger)"
   },
   {
     "medumba": "Nə̀kùꞌu",
-    "french": "Majeur"
+    "french": "Majeur",
+    "english": "Major"
   },
   {
     "medumba": "Nə̀kǔꞌntse",
-    "french": "Majorite̍"
+    "french": "Majorite̍",
+    "english": "Majority"
   },
   {
     "medumba": "Bèn yαmə",
-    "french": "Majorite̍"
+    "french": "Majorite̍",
+    "english": "Majority"
   },
   {
     "medumba": "Kə̀bwɔ̀",
-    "french": "Mal"
+    "french": "Mal",
+    "english": "Evil"
   },
   {
     "medumba": "Ngə̀",
-    "french": "Mal"
+    "french": "Mal",
+    "english": "Evil"
   },
   {
     "medumba": "Nə nywìlə",
-    "french": "Mal(de̍guise̍ en bien"
+    "french": "Mal(de̍guise̍ en bien",
+    "english": "Evil (disguised as good)"
   },
   {
     "medumba": "Nə̀ ghʉ̌ ngeꞌ",
-    "french": "Mal (faire du)"
+    "french": "Mal (faire du)",
+    "english": "Hurt (do)"
   },
   {
     "medumba": "Nə̀ ka ngəꞌ",
-    "french": "Mal (faire du)"
+    "french": "Mal (faire du)",
+    "english": "Hurt (do)"
   },
   {
     "medumba": "Nə̀ yab ngəꞌ",
-    "french": "Mal (faire du)"
+    "french": "Mal (faire du)",
+    "english": "Hurt (do)"
   },
   {
     "medumba": "Nə̀ nywìlə",
-    "french": "Mal (parler de qqn)"
+    "french": "Mal (parler de qqn)",
+    "english": "Evil (talking about someone)"
   },
   {
     "medumba": "Nùkə̀bwɔ̀",
-    "french": "Mal (quelque chose"
+    "french": "Mal (quelque chose",
+    "english": "Bad (something"
   },
   {
     "medumba": "Ngàngòkɛd",
-    "french": "Malade"
+    "french": "Malade",
+    "english": "Sick"
   },
   {
     "medumba": "Ngòkɛd",
-    "french": "Maladie"
+    "french": "Maladie",
+    "english": "Disease"
   },
   {
     "medumba": "Ngòkɛd kə̀yàtə̀",
-    "french": "Maladie chronique"
+    "french": "Maladie chronique",
+    "english": "Chronic illness"
   },
   {
     "medumba": "Nə̀ tebtə",
-    "french": "Malaxer"
+    "french": "Malaxer",
+    "english": "Mix"
   },
   {
     "medumba": "Len",
-    "french": "Malchance"
+    "french": "Malchance",
+    "english": "Bad luck"
   },
   {
     "medumba": "Ngàlen",
-    "french": "Malchanceux"
+    "french": "Malchanceux",
+    "english": "Unlucky"
   },
   {
     "medumba": "Ndu",
-    "french": "Mâle"
+    "french": "Mâle",
+    "english": "Male"
   },
   {
     "medumba": "Fod",
-    "french": "Mâle (animaux)"
+    "french": "Mâle (animaux)",
+    "english": "Male (animals)"
   },
   {
     "medumba": "Kʉꞌ",
-    "french": "Mâle (oiseaux)"
+    "french": "Mâle (oiseaux)",
+    "english": "Male (birds)"
   },
   {
     "medumba": "Bα̂glinə",
-    "french": "Malchance"
+    "french": "Malchance",
+    "english": "Bad luck"
   },
   {
     "medumba": "Nə̀ bαglinə",
-    "french": "Malchance (avoir la"
+    "french": "Malchance (avoir la",
+    "english": "Bad luck (having"
   },
   {
     "medumba": "Ndon",
-    "french": "Male̍diction"
+    "french": "Male̍diction",
+    "english": "Curse"
   },
   {
     "medumba": "Ngàghʉ̌kə̀bwɔ̀",
-    "french": "Malfaiteur"
+    "french": "Malfaiteur",
+    "english": "Malefactor"
   },
   {
     "medumba": "Ngəꞌ",
-    "french": "Malheur"
+    "french": "Malheur",
+    "english": "Misfortune"
   },
   {
     "medumba": "Ngàyənngəꞌ",
-    "french": "Malheureux"
+    "french": "Malheureux",
+    "english": "Unhappy"
   },
   {
     "medumba": "Zətə̀",
-    "french": "Malice"
+    "french": "Malice",
+    "english": "Malice"
   },
   {
     "medumba": "Ngàzətə̀",
-    "french": "Maliciaeux"
+    "french": "Maliciaeux",
+    "english": "Malicious"
   },
   {
     "medumba": "Mɛ̀nnkə̀kwɔ̀",
-    "french": "Malin"
+    "french": "Malin",
+    "english": "Clever"
   },
   {
     "medumba": "Ngàzətə̀ 1/6",
-    "french": "Malin"
+    "french": "Malin",
+    "english": "Clever"
   },
   {
     "medumba": "Nə̀ kα̌gngə'",
-    "french": "Maltraiter"
+    "french": "Maltraiter",
+    "english": "Mistreat"
   },
   {
     "medumba": "Nə̀ ghʉ̀dnǐ",
-    "french": "Maltraiter"
+    "french": "Maltraiter",
+    "english": "Mistreat"
   },
   {
     "medumba": "Nə̀ coꞌnkukə̀mbαn",
-    "french": "Maltraiter"
+    "french": "Maltraiter",
+    "english": "Mistreat"
   },
   {
     "medumba": "Mbʉn",
-    "french": "Mamelles"
+    "french": "Mamelles",
+    "english": "Udders"
   },
   {
     "medumba": "Ngud",
-    "french": "Manche"
+    "french": "Manche",
+    "english": "Sleeve"
   },
   {
     "medumba": "Nə̀ jʉ ju",
-    "french": "Manger"
+    "french": "Manger",
+    "english": "Eat"
   },
   {
     "medumba": "Nə̀ fɛlə",
-    "french": "Manger"
+    "french": "Manger",
+    "english": "Eat"
   },
   {
     "medumba": "Ngàjʉju",
-    "french": "Mangeur"
+    "french": "Mangeur",
+    "english": "Eater"
   },
   {
     "medumba": "Ngànzi",
-    "french": "Mangeur"
+    "french": "Mangeur",
+    "english": "Eater"
   },
   {
     "medumba": "Njʉ̂ju",
-    "french": "Mangeur"
+    "french": "Mangeur",
+    "english": "Eater"
   },
   {
     "medumba": "Màd",
-    "french": "Manière"
+    "french": "Manière",
+    "english": "Manner"
   },
   {
     "medumba": "Nə̀ ghòmtə̌",
-    "french": "Manière (faire des)"
+    "french": "Manière (faire des)",
+    "english": "Manner (to do)"
   },
   {
     "medumba": "Ghòmtə̀",
-    "french": "Manles"
+    "french": "Manles",
+    "english": "Manles"
   },
   {
     "medumba": "Kὰsαlàꞌ",
-    "french": "Manioc"
+    "french": "Manioc",
+    "english": "Cassava"
   },
   {
     "medumba": "Sə̀mbʉ̀n",
-    "french": "Manioc"
+    "french": "Manioc",
+    "english": "Cassava"
   },
   {
     "medumba": "Mαnὰ",
-    "french": "Manne"
+    "french": "Manne",
+    "english": "Manna"
   },
   {
     "medumba": "Nə̀ tsǐ",
-    "french": "Manquer"
+    "french": "Manquer",
+    "english": "Miss"
   },
   {
     "medumba": "Nə̀ bwoŋə",
-    "french": "Manquer"
+    "french": "Manquer",
+    "english": "Miss"
   },
   {
     "medumba": "Kǔmmbàŋ",
-    "french": "Manteau"
+    "french": "Manteau",
+    "english": "Coat"
   },
   {
     "medumba": "Fɛ̀n",
-    "french": "Maquis"
+    "french": "Maquis",
+    "english": "Maquis"
   },
   {
     "medumba": "Zəfɛ̀n",
-    "french": "Maquisard"
+    "french": "Maquisard",
+    "english": "Maquisard"
   },
   {
     "medumba": "Màꞌncǒfɛ̀n",
-    "french": "Maquisard"
+    "french": "Maquisard",
+    "english": "Maquisard"
   },
   {
     "medumba": "Marmɔ̀ (",
-    "french": "Marbre"
+    "french": "Marbre",
+    "english": "Marble"
   },
   {
     "medumba": "Ngàtantαn",
-    "french": "Marchand"
+    "french": "Marchand",
+    "english": "Merchant"
   },
   {
     "medumba": "Ntântαnə",
-    "french": "Marchand"
+    "french": "Marchand",
+    "english": "Merchant"
   },
   {
     "medumba": "Ntâ",
-    "french": "Marchand de"
+    "french": "Marchand de",
+    "english": "Merchant of"
   },
   {
     "medumba": "Nə̀ ta",
-    "french": "Marchander"
+    "french": "Marchander",
+    "english": "Haggle"
   },
   {
     "medumba": "Nə̀ ta ntαn",
-    "french": "Marchander"
+    "french": "Marchander",
+    "english": "Haggle"
   },
   {
     "medumba": "Jûntαnə",
-    "french": "Marchandise"
+    "french": "Marchandise",
+    "english": "Merchandise"
   },
   {
     "medumba": "Zìn",
-    "french": "Marche"
+    "french": "Marche",
+    "english": "Walk"
   },
   {
     "medumba": "Nə̀bɛ̀ntə̀ tùntùn",
-    "french": "Marche arrière"
+    "french": "Marche arrière",
+    "english": "Reverse"
   },
   {
     "medumba": "Ntαnə",
-    "french": "Marche̍"
+    "french": "Marche̍",
+    "english": "Walk"
   },
   {
     "medumba": "Wa",
-    "french": "Marche̍ (espace )"
+    "french": "Marche̍ (espace )",
+    "english": "Walk (space)"
   },
   {
     "medumba": "Wǎnzwə",
-    "french": "Marche̍ de tissu"
+    "french": "Marche̍ de tissu",
+    "english": "Fabric walk"
   },
   {
     "medumba": "Kàmnkòꞌ",
-    "french": "Marchepied"
+    "french": "Marchepied",
+    "english": "Footboard"
   },
   {
     "medumba": "Nə̀ zìn",
-    "french": "Marcher"
+    "french": "Marcher",
+    "english": "Walk"
   },
   {
     "medumba": "Tǎmntsə",
-    "french": "Mare d’eau"
+    "french": "Mare d’eau",
+    "english": "Pool of water"
   },
   {
     "medumba": "Ndu",
-    "french": "Mari"
+    "french": "Mari",
+    "english": "Husband"
   },
   {
     "medumba": "Nândα",
-    "french": "Mariage"
+    "french": "Mariage",
+    "english": "Wedding"
   },
   {
     "medumba": "Nzwighʉ̀n",
-    "french": "Marie̍ (nouvelle)"
+    "french": "Marie̍ (nouvelle)",
+    "english": "Marie̍ (new)"
   },
   {
     "medumba": "Nə̀ nandα",
-    "french": "Marier (se)"
+    "french": "Marier (se)",
+    "english": "Get married"
   },
   {
     "medumba": "Nə̀ sǒ mɛ̀nnzwi",
-    "french": "Marier (se)"
+    "french": "Marier (se)",
+    "english": "Get married"
   },
   {
     "medumba": "Mba",
-    "french": "Marmite"
+    "french": "Marmite",
+    "english": "Pot"
   },
   {
     "medumba": "Kəkì",
-    "french": "Marque"
+    "french": "Marque",
+    "english": "Brand"
   },
   {
     "medumba": "Lɛ̀n",
-    "french": "Marque"
+    "french": "Marque",
+    "english": "Brand"
   },
   {
     "medumba": "Nə̀ kìꞌi",
-    "french": "Marquer"
+    "french": "Marquer",
+    "english": "Mark"
   },
   {
     "medumba": "Mα̂",
-    "french": "Marraine (de bap"
+    "french": "Marraine (de bap",
+    "english": "Godmother (of bap"
   },
   {
     "medumba": "Zwìd",
-    "french": "Massue"
+    "french": "Massue",
+    "english": "Club"
   },
   {
     "medumba": "Lə̂kunə",
-    "french": "Matelas"
+    "french": "Matelas",
+    "english": "Mattresses"
   },
   {
     "medumba": "Ndα̂bwə",
-    "french": "Maternite̍"
+    "french": "Maternite̍",
+    "english": "Maternity"
   },
   {
     "medumba": "Ndα̂ mαbwə",
-    "french": "Maternite̍"
+    "french": "Maternite̍",
+    "english": "Maternity"
   },
   {
     "medumba": "Nə̀ bə ndα̂bwə",
-    "french": "Maternite̍ ( être en)"
+    "french": "Maternite̍ ( être en)",
+    "english": "Motherhood (to be in)"
   },
   {
     "medumba": "Nkə̂bnjʉ",
-    "french": "Matin"
+    "french": "Matin",
+    "english": "Morning"
   },
   {
     "medumba": "Mfognjʉ",
-    "french": "Matin"
+    "french": "Matin",
+    "english": "Morning"
   },
   {
     "medumba": "Nə̀ naŋndon",
-    "french": "Maudire"
+    "french": "Maudire",
+    "english": "Curse"
   },
   {
     "medumba": "Nə̀ sǒ ndon",
-    "french": "Maudire"
+    "french": "Maudire",
+    "english": "Curse"
   },
   {
     "medumba": "Ngàndon",
-    "french": "Maudit (e)"
+    "french": "Maudit (e)",
+    "english": "Cursed"
   },
   {
     "medumba": "Cʉagkɛ̂dntʉ",
-    "french": "Me̍chancete̍"
+    "french": "Me̍chancete̍",
+    "english": "Me̍chancete̍"
   },
   {
     "medumba": "Mɛ̀nkə̀bwɔ̀",
-    "french": "Me̍chant"
+    "french": "Me̍chant",
+    "english": "Mean"
   },
   {
     "medumba": "Ngàbαg",
-    "french": "Me̍chant"
+    "french": "Me̍chant",
+    "english": "Mean"
   },
   {
     "medumba": "Ngàyabngeꞌ",
-    "french": "Me̍chant"
+    "french": "Me̍chant",
+    "english": "Mean"
   },
   {
     "medumba": "Cʉagkɛdntʉmɛ̀n (1/6",
-    "french": "Me̍chant"
+    "french": "Me̍chant",
+    "english": "Mean"
   },
   {
     "medumba": "Cʉagntʉmɛ̀n",
-    "french": "Me̍chant"
+    "french": "Me̍chant",
+    "english": "Mean"
   },
   {
     "medumba": "Nə̀bilɛ̀n",
-    "french": "Me̍connaissable"
+    "french": "Me̍connaissable",
+    "english": "Unrecognizable"
   },
   {
     "medumba": "Nə̀ sələ",
-    "french": "Me̍connaître"
+    "french": "Me̍connaître",
+    "english": "Know myself"
   },
   {
     "medumba": "Cʉὰgtə̌ wud",
-    "french": "Me̍contentement"
+    "french": "Me̍contentement",
+    "english": "Discontent"
   },
   {
     "medumba": "Ndɛ̀nghòn",
-    "french": "Me̍decin"
+    "french": "Me̍decin",
+    "english": "Doctor"
   },
   {
     "medumba": "Ncwimghòn",
-    "french": "Me̍decin"
+    "french": "Me̍decin",
+    "english": "Doctor"
   },
   {
     "medumba": "Ngànzə̀",
-    "french": "Me̍diateur"
+    "french": "Me̍diateur",
+    "english": "Mediator"
   },
   {
     "medumba": "Fu",
-    "french": "Me̍dicament"
+    "french": "Me̍dicament",
+    "english": "Medicine"
   },
   {
     "medumba": "Nə̀ coꞌ",
-    "french": "Me̍dire"
+    "french": "Me̍dire",
+    "english": "Tell me"
   },
   {
     "medumba": "Nə̀coꞌ kùd mɛ̀n",
-    "french": "Me̍disance"
+    "french": "Me̍disance",
+    "english": "Mediation"
   },
   {
     "medumba": "Nə̀ləꞌtə",
-    "french": "Me̍fiance"
+    "french": "Me̍fiance",
+    "english": "Distrust"
   },
   {
     "medumba": "Nə̀bαmə",
-    "french": "Me̍fiance"
+    "french": "Me̍fiance",
+    "english": "Distrust"
   },
   {
     "medumba": "Zətə̀",
-    "french": "Me̍fiance"
+    "french": "Me̍fiance",
+    "english": "Mistrust"
   },
   {
     "medumba": "Nə̀ ləꞌtə",
-    "french": "Me̍fier (se)"
+    "french": "Me̍fier (se)",
+    "english": "Beware (oneself)"
   },
   {
     "medumba": "Nə̀ zətə",
-    "french": "Me̍fier (se)"
+    "french": "Me̍fier (se)",
+    "english": "Beware (oneself)"
   },
   {
     "medumba": "Bwətə",
-    "french": "Me̍lange"
+    "french": "Me̍lange",
+    "english": "Mixture"
   },
   {
     "medumba": "Bwəntam",
-    "french": "Me̍lange"
+    "french": "Me̍lange",
+    "english": "Mixture"
   },
   {
     "medumba": "Tὰbwə̌",
-    "french": "Me̍lange"
+    "french": "Me̍lange",
+    "english": "Mixture"
   },
   {
     "medumba": "Nə̀ bwə̌",
-    "french": "Mêler"
+    "french": "Mêler",
+    "english": "Mix"
   },
   {
     "medumba": "Nə̀ bwə̌̀ꞌtə̌",
-    "french": "Menacer"
+    "french": "Menacer",
+    "english": "Threaten"
   },
   {
     "medumba": "Nə̀ cobtə",
-    "french": "Menacer (parole)"
+    "french": "Menacer (parole)",
+    "english": "Threaten (speech)"
   },
   {
     "medumba": "Màꞌmbu",
-    "french": "Mendiant"
+    "french": "Mendiant",
+    "english": "Beggar"
   },
   {
     "medumba": "Ngàlonndone",
-    "french": "Mendiant"
+    "french": "Mendiant",
+    "english": "Beggar"
   },
   {
     "medumba": "Ncʉ̀ju",
-    "french": "Mendiant"
+    "french": "Mendiant",
+    "english": "Beggar"
   },
   {
     "medumba": "Nə̀mǎꞌmbu",
-    "french": "Mendicite̍"
+    "french": "Mendicite̍",
+    "english": "Beg"
   },
   {
     "medumba": "Cʉ̀ju",
-    "french": "Mendicite̍"
+    "french": "Mendicite̍",
+    "english": "Beg"
   },
   {
     "medumba": "N ə̀ mǎꞌmbu",
-    "french": "Mendier"
+    "french": "Mendier",
+    "english": "Beg"
   },
   {
     "medumba": "Tadtə̀",
-    "french": "Mensonge"
+    "french": "Mensonge",
+    "english": "Lie"
   },
   {
     "medumba": "Nə̀ tadtə",
-    "french": "Mensonge (dire)"
+    "french": "Mensonge (dire)",
+    "english": "Lie (tell)"
   },
   {
     "medumba": "Nə̀ cob tadtə̀",
-    "french": "Mensonge (dire)"
+    "french": "Mensonge (dire)",
+    "english": "Lie (tell)"
   },
   {
     "medumba": "Ngatàdtə",
-    "french": "Menteur"
+    "french": "Menteur",
+    "english": "Liar"
   },
   {
     "medumba": "Nə̀ Tadtə",
-    "french": "Mentir"
+    "french": "Mentir",
+    "english": "Lying"
   },
   {
     "medumba": "Tǔnncù",
-    "french": "Menton"
+    "french": "Menton",
+    "english": "Chin"
   },
   {
     "medumba": "Wag",
-    "french": "Me̍pris"
+    "french": "Me̍pris",
+    "english": "Scorned"
   },
   {
     "medumba": "Nə̀ wagə",
-    "french": "Me̍priser"
+    "french": "Me̍priser",
+    "english": "Despise"
   },
   {
     "medumba": "Dibαntsə",
-    "french": "Mer"
+    "french": "Mer",
+    "english": "Sea"
   },
   {
     "medumba": "Tɛ̀dntə",
-    "french": "Mer (milieu, large)"
+    "french": "Mer (milieu, large)",
+    "english": "Sea (middle, wide)"
   },
   {
     "medumba": "Mα",
-    "french": "Mère"
+    "french": "Mère",
+    "english": "Mother"
   },
   {
     "medumba": "Mαkwiꞌ",
-    "french": "Mère de l’epouse"
+    "french": "Mère de l’epouse",
+    "english": "Mother of the bride"
   },
   {
     "medumba": "Mαntsə",
-    "french": "Mère del’epouse"
+    "french": "Mère del’epouse",
+    "english": "Mother of the bride"
   },
   {
     "medumba": "Mα̂ntuꞌkam",
-    "french": "Mère du 1er fills du roi"
+    "french": "Mère du 1er fills du roi",
+    "english": "Mother of the king's 1st daughter"
   },
   {
     "medumba": "Mα̂bǒꞌkam",
-    "french": "Mère du 2e fils du roi"
+    "french": "Mère du 2e fils du roi",
+    "english": "Mother of the king's 2nd son"
   },
   {
     "medumba": "Mα̂mdu",
-    "french": "Mère du mari"
+    "french": "Mère du mari",
+    "english": "Husband's mother"
   },
   {
     "medumba": "Mα̂fə̀n",
-    "french": "Mère du roi"
+    "french": "Mère du roi",
+    "english": "mother of the king"
   },
   {
     "medumba": "Nkʉ̀n",
-    "french": "Message"
+    "french": "Message",
+    "english": "Message"
   },
   {
     "medumba": "Ngàntum",
-    "french": "Messager"
+    "french": "Messager",
+    "english": "Messenger"
   },
   {
     "medumba": "Ngàtswǐnkʉ̀n",
-    "french": "Messager"
+    "french": "Messager",
+    "english": "Messenger"
   },
   {
     "medumba": "Ntswìnkʉ̀n",
-    "french": "Messager"
+    "french": "Messager",
+    "english": "Messenger"
   },
   {
     "medumba": "Mfiꞌ",
-    "french": "Mesure"
+    "french": "Mesure",
+    "english": "Measurement"
   },
   {
     "medumba": "Nə̀ fiꞌi",
-    "french": "Mesurer"
+    "french": "Mesurer",
+    "english": "Measure"
   },
   {
     "medumba": "Nə̀kaŋə",
-    "french": "Me̍tamorphose"
+    "french": "Me̍tamorphose",
+    "english": "Metamorphosis"
   },
   {
     "medumba": "Nəfèlə",
-    "french": "Me̍tamorphose"
+    "french": "Me̍tamorphose",
+    "english": "Metamorphosis"
   },
   {
     "medumba": "Nə̀ kaŋə",
-    "french": "Me̍tamorphoser"
+    "french": "Me̍tamorphoser",
+    "english": "Metamorphose"
   },
   {
     "medumba": "Nə̀ fə̀lə",
-    "french": "Me̍tamorphoser"
+    "french": "Me̍tamorphoser",
+    "english": "Metamorphose"
   },
   {
     "medumba": "Maꞌ",
-    "french": "Mètre"
+    "french": "Mètre",
+    "english": "Meter"
   },
   {
     "medumba": "Nə̀ yαbə",
-    "french": "Mèttre"
+    "french": "Mèttre",
+    "english": "Put"
   },
   {
     "medumba": "Nə̀ tα tʉ",
-    "french": "Mettre debout"
+    "french": "Mettre debout",
+    "english": "Stand up"
   },
   {
     "medumba": "Lǒŋkʉὰ",
-    "french": "Meule"
+    "french": "Meule",
+    "english": "Grindstone"
   },
   {
     "medumba": "Lǒŋbαn",
-    "french": "Meule (moulin)"
+    "french": "Meule (moulin)",
+    "english": "Grindstone (mill)"
   },
   {
     "medumba": "Nə̀ zwimɛ̀n",
-    "french": "Meurtre (commettre)"
+    "french": "Meurtre (commettre)",
+    "english": "Murder (commit)"
   },
   {
     "medumba": "Ngàzwimɛ̀n",
-    "french": "Meurtrier"
+    "french": "Meurtrier",
+    "english": "Murderer"
   },
   {
     "medumba": "Ngafɛ̀dtə̌ləm",
-    "french": "Meurtrier"
+    "french": "Meurtrier",
+    "english": "Murderer"
   },
   {
     "medumba": "Njα̌gnyàm",
-    "french": "Midi"
+    "french": "Midi",
+    "english": "Noon"
   },
   {
     "medumba": "Ndʉ̌ŋwaꞌa",
-    "french": "Miel"
+    "french": "Miel",
+    "english": "Honey"
   },
   {
     "medumba": "Nsa",
-    "french": "Mil"
+    "french": "Mil",
+    "english": "Mil"
   },
   {
     "medumba": "Nə̀tɛ̀d",
-    "french": "Milieu"
+    "french": "Milieu",
+    "english": "Middle"
   },
   {
     "medumba": "Tɛ̀d",
-    "french": "Milieu"
+    "french": "Milieu",
+    "english": "Middle"
   },
   {
     "medumba": "Dʉꞌ",
-    "french": "Milieu"
+    "french": "Milieu",
+    "english": "Middle"
   },
   {
     "medumba": "Ncaꞌ",
-    "french": "Mille"
+    "french": "Mille",
+    "english": "Thousand"
   },
   {
     "medumba": "Ncaꞌmbʉm",
-    "french": "Mille (monnaie)"
+    "french": "Mille (monnaie)",
+    "english": "Thousand (currency)"
   },
   {
     "medumba": "Càŋtɛ̀dtswəꞌ",
-    "french": "Minuit"
+    "french": "Minuit",
+    "english": "Midnight"
   },
   {
     "medumba": "Fə̀nyam",
-    "french": "Minute"
+    "french": "Minute",
+    "english": "Minute"
   },
   {
     "medumba": "Nsα",
-    "french": "Miracle"
+    "french": "Miracle",
+    "english": "Miracle"
   },
   {
     "medumba": "Nǔnsα",
-    "french": "Miraculeux"
+    "french": "Miraculeux",
+    "english": "Miraculous"
   },
   {
     "medumba": "Jûnsα",
-    "french": "Miraculeux"
+    "french": "Miraculeux",
+    "english": "Miraculous"
   },
   {
     "medumba": "Nə̀ yəntə sə",
-    "french": "Mirer (se)"
+    "french": "Mirer (se)",
+    "english": "Mire (oneself)"
   },
   {
     "medumba": "Yəntə̀sə",
-    "french": "Mirioir"
+    "french": "Mirioir",
+    "english": "Mirror"
   },
   {
     "medumba": "Ngəꞌ",
-    "french": "Misère"
+    "french": "Misère",
+    "english": "Misery"
   },
   {
     "medumba": "Kôndɛ̀n",
-    "french": "Mise̍ricordieux"
+    "french": "Mise̍ricordieux",
+    "english": "Merciful"
   },
   {
     "medumba": "Ngakondɛ̀n",
-    "french": "Mise̍ricordieux"
+    "french": "Mise̍ricordieux",
+    "english": "Merciful"
   },
   {
     "medumba": "Cαmmbwoŋ",
-    "french": "Moelle"
+    "french": "Moelle",
+    "english": "Marrow"
   },
   {
     "medumba": "Nzidvogə",
-    "french": "Moi"
+    "french": "Moi",
+    "english": "Me"
   },
   {
     "medumba": "Mə̀",
-    "french": "Moindre"
+    "french": "Moindre",
+    "english": "Lesser"
   },
   {
     "medumba": "Metsid",
-    "french": "Moindre"
+    "french": "Moindre",
+    "english": "Lesser"
   },
   {
     "medumba": "Mətsill",
-    "french": "Mois"
+    "french": "Mois",
+    "english": "Month"
   },
   {
     "medumba": "Ŋwʉ",
-    "french": "Moisir"
+    "french": "Moisir",
+    "english": "Mold"
   },
   {
     "medumba": "Nə fàmə",
-    "french": "Moisissure"
+    "french": "Moisissure",
+    "english": "Mold"
   },
   {
     "medumba": "Mfam",
-    "french": "Moisson"
+    "french": "Moisson",
+    "english": "Harvest"
   },
   {
     "medumba": "Ncôꞌcu",
-    "french": "Moissonner"
+    "french": "Moissonner",
+    "english": "Harvest"
   },
   {
     "medumba": "Nə̀ coꞌcu",
-    "french": "Moissonneur"
+    "french": "Moissonneur",
+    "english": "Harvester"
   },
   {
     "medumba": "Bàg",
-    "french": "Moitie̍"
+    "french": "Moitie̍",
+    "english": "Half"
   },
   {
     "medumba": "Bàgkɛd",
-    "french": "Moite̍"
+    "french": "Moite̍",
+    "english": "Sweaty"
   },
   {
     "medumba": "Kàm",
-    "french": "Motie̍"
+    "french": "Motie̍",
+    "english": "Motie̍"
   },
   {
     "medumba": "Kamkɛ̀d",
-    "french": "Motie̍"
+    "french": "Motie̍",
+    "english": "Motie̍"
   },
   {
     "medumba": "Tàŋkɛd",
-    "french": "Moitie̍"
+    "french": "Moitie̍",
+    "english": "Half"
   },
   {
     "medumba": "Njàmkù",
-    "french": "Mollet"
+    "french": "Mollet",
+    "english": "Calf"
   },
   {
     "medumba": "Fə̌ntɔ̀ngɔ̀",
-    "french": "Monarchie"
+    "french": "Monarchie",
+    "english": "Monarchy"
   },
   {
     "medumba": "Njʉ",
-    "french": "Monde"
+    "french": "Monde",
+    "english": "World"
   },
   {
     "medumba": "Njʉ̂nsicaꞌa",
-    "french": "Monde"
+    "french": "Monde",
+    "english": "World"
   },
   {
     "medumba": "Nsicaꞌa",
-    "french": "Monde"
+    "french": "Monde",
+    "english": "World"
   },
   {
     "medumba": "Njʉ̂sɛ̂nnî",
-    "french": "Monde(aujourd’hui)"
+    "french": "Monde(aujourd’hui)",
+    "english": "World (today)"
   },
   {
     "medumba": "Bwôŋbə̀nntʉ̀n",
-    "french": "Monde (foule)"
+    "french": "Monde (foule)",
+    "english": "World (crowd)"
   },
   {
     "medumba": "Njʉ̂mə̀kelə",
-    "french": "Monde (moderne)"
+    "french": "Monde (moderne)",
+    "english": "World (modern)"
   },
   {
     "medumba": "Tα",
-    "french": "Monsieur"
+    "french": "Monsieur",
+    "english": "Sir"
   },
   {
     "medumba": "Kôngà",
-    "french": "Mont"
+    "french": "Mont",
+    "english": "Mount"
   },
   {
     "medumba": "Mbalə",
-    "french": "Montagne"
+    "french": "Montagne",
+    "english": "Mountain"
   },
   {
     "medumba": "Nə̀ koꞌo",
-    "french": "Monter"
+    "french": "Monter",
+    "english": "Go up"
   },
   {
     "medumba": "Nyàm",
-    "french": "Montre"
+    "french": "Montre",
+    "english": "Watch"
   },
   {
     "medumba": "Nə̀ làꞌtə̌",
-    "french": "Montrer"
+    "french": "Montrer",
+    "english": "Show"
   },
   {
     "medumba": "Nə̀ tswǐ",
-    "french": "Montrer"
+    "french": "Montrer",
+    "english": "Show"
   },
   {
     "medumba": "Jûə̀koꞌo",
-    "french": "Monture"
+    "french": "Monture",
+    "english": "Mount"
   },
   {
     "medumba": "Nə̀ cα̌bncù",
-    "french": "Moquer (se)"
+    "french": "Moquer (se)",
+    "english": "Make fun of"
   },
   {
     "medumba": "Nə̀ tu mɛ̀n",
-    "french": "Moquer (se)"
+    "french": "Moquer (se)",
+    "english": "Make fun of"
   },
   {
     "medumba": "Cὰbncù",
-    "french": "Moquerie"
+    "french": "Moquerie",
+    "english": "Mockery"
   },
   {
     "medumba": "Ngàcα̌bncù",
-    "french": "Moqueur"
+    "french": "Moqueur",
+    "english": "Mockingbird"
   },
   {
     "medumba": "Ncὰbncù",
-    "french": "Moqueur"
+    "french": "Moqueur",
+    "english": "Mockingbird"
   },
   {
     "medumba": "Kàm",
-    "french": "Morceau"
+    "french": "Morceau",
+    "english": "Piece"
   },
   {
     "medumba": "Kə̀",
-    "french": "Morceau"
+    "french": "Morceau",
+    "english": "Piece"
   },
   {
     "medumba": "Tàŋkɛd",
-    "french": "Morceau"
+    "french": "Morceau",
+    "english": "Piece"
   },
   {
     "medumba": "Məkəꞌ",
-    "french": "Morceau (petit)"
+    "french": "Morceau (petit)",
+    "english": "Piece (small)"
   },
   {
     "medumba": "Nə̀ cogə",
-    "french": "Mordre"
+    "french": "Mordre",
+    "english": "bite"
   },
   {
     "medumba": "Tʉnncù",
-    "french": "Mors"
+    "french": "Mors",
+    "english": "Bit"
   },
   {
     "medumba": "Nə̀kwʉ",
-    "french": "Mort"
+    "french": "Mort",
+    "english": "Death"
   },
   {
     "medumba": "Vʉ",
-    "french": "Mort (la)"
+    "french": "Mort (la)",
+    "english": "Death (the)"
   },
   {
     "medumba": "Vʉkob",
-    "french": "Mort (la)"
+    "french": "Mort (la)",
+    "english": "Death (the)"
   },
   {
     "medumba": "Fə̂mɛ̀n",
-    "french": "Mort (un)"
+    "french": "Mort (un)",
+    "english": "Death (one)"
   },
   {
     "medumba": "Vʉ̂fà",
-    "french": "Mort accidentel"
+    "french": "Mort accidentel",
+    "english": "Accidental death"
   },
   {
     "medumba": "Mbαgmbα̂gwvʉ",
-    "french": "Mort subite"
+    "french": "Mort subite",
+    "english": "Sudden death"
   },
   {
     "medumba": "Lɔ̂ntsəlαg",
-    "french": "Morveux"
+    "french": "Morveux",
+    "english": "Snotty"
   },
   {
     "medumba": "Tûnù",
-    "french": "Motif"
+    "french": "Motif",
+    "english": "Pattern"
   },
   {
     "medumba": "Tûju",
-    "french": "Motif"
+    "french": "Motif",
+    "english": "Pattern"
   },
   {
     "medumba": "Mag",
-    "french": "Motif"
+    "french": "Motif",
+    "english": "Pattern"
   },
   {
     "medumba": "Nzə̀nzə̀",
-    "french": "Mouche"
+    "french": "Mouche",
+    "english": "Fly"
   },
   {
     "medumba": "Nə̀ ghòꞌo",
-    "french": "Moudre"
+    "french": "Moudre",
+    "english": "Grind"
   },
   {
     "medumba": "Ngoꞌbαn",
-    "french": "Moulin"
+    "french": "Moulin",
+    "english": "Mill"
   },
   {
     "medumba": "Nə̀ kwʉ",
-    "french": "Mourir"
+    "french": "Mourir",
+    "english": "Die"
   },
   {
     "medumba": "Nə̀ kwʉtə",
-    "french": "Mourir nombreux"
+    "french": "Mourir nombreux",
+    "english": "Many die"
   },
   {
     "medumba": "Mvɛ̀dmvɛ̀d",
-    "french": "Moustique"
+    "french": "Moustique",
+    "english": "Mosquito"
   },
   {
     "medumba": "Njʉ̀mbwə",
-    "french": "Mouton"
+    "french": "Mouton",
+    "english": "Sheep"
   },
   {
     "medumba": "Mbàbwwud",
-    "french": "Muscle"
+    "french": "Muscle",
+    "english": "Muscle"
   },
   {
     "medumba": "Kə̀cob",
-    "french": "Muet"
+    "french": "Muet",
+    "english": "Mute"
   },
   {
     "medumba": "Kǔmbàꞌ",
-    "french": "Maçon"
+    "french": "Maçon",
+    "english": "Mason"
   },
   {
     "medumba": "Nə̀bǎ",
-    "french": "Murrir"
+    "french": "Murrir",
+    "english": "Murrir"
   },
   {
     "medumba": "Nə̀tswə",
-    "french": "Mûr"
+    "french": "Mûr",
+    "english": "Ripe"
   },
   {
     "medumba": "Nə̀sɛnə",
-    "french": "Noisir"
+    "french": "Noisir",
+    "english": "Blacken"
   },
   {
     "medumba": "Nə̀ bǎ",
-    "french": "Mûr"
+    "french": "Mûr",
+    "english": "Ripe"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Mûrir"
+    "french": "Mûrir",
+    "english": "Ripen"
   },
   {
     "medumba": "Nə̀ sɛnə",
-    "french": "Noisir"
+    "french": "Noisir",
+    "english": "Blacken"
   },
   {
     "medumba": "Nə̀ cobtə tûmtɔ",
-    "french": "Mûrir"
+    "french": "Mûrir",
+    "english": "Ripen"
   },
   {
     "medumba": "Nə̀ ywɛdtə tǔntɔ",
-    "french": "Murmurer"
+    "french": "Murmurer",
+    "english": "Whisper"
   },
   {
     "medumba": "Nə̀ kòtə̌",
-    "french": "Murmurer"
+    "french": "Murmurer",
+    "english": "Whisper"
   },
   {
     "medumba": "Nə̀ zimtə",
-    "french": "Murmurer"
+    "french": "Murmurer",
+    "english": "Whisper"
   },
   {
     "medumba": "Mbûꞌloŋə",
-    "french": "Murmurer"
+    "french": "Murmurer",
+    "english": "Whisper"
   },
   {
     "medumba": "Ngabuꞌloŋə",
-    "french": "Musicien"
+    "french": "Musicien",
+    "english": "Musician"
   },
   {
     "medumba": "Ncùniꞌi",
-    "french": "Mutisme"
+    "french": "Mutisme",
+    "english": "Mutism"
   },
   {
     "medumba": "Ngαmnsi",
-    "french": "Mygale"
+    "french": "Mygale",
+    "english": "Mygale"
   },
   {
     "medumba": "Ncûꞌncuꞌ",
-    "french": "Myriade"
+    "french": "Myriade",
+    "english": "Myriad"
   },
   {
     "medumba": "Miro",
-    "french": "Myrrhe"
+    "french": "Myrrhe",
+    "english": "Myrrh"
   },
   {
     "medumba": "Nsα",
-    "french": "Mystère"
+    "french": "Mystère",
+    "english": "Mystery"
   },
   {
     "medumba": "Jûnsα",
-    "french": "Myste̍rieux"
+    "french": "Myste̍rieux",
+    "english": "Mysterious"
   },
   {
     "medumba": "Nǔnsα",
-    "french": "Myste̍rieux"
+    "french": "Myste̍rieux",
+    "english": "Mysterious"
   },
   {
     "medumba": "Nə̀lǎntsə",
-    "french": "Nage"
+    "french": "Nage",
+    "english": "Swimming"
   },
   {
     "medumba": "Nə̀ lǎntsə",
-    "french": "Nager"
+    "french": "Nager",
+    "english": "Swim"
   },
   {
     "medumba": "Ngàlǎntsə",
-    "french": "Nageur"
+    "french": "Nageur",
+    "english": "Swimmer"
   },
   {
     "medumba": "Fɛ̌nnsi",
-    "french": "Nain"
+    "french": "Nain",
+    "english": "Dwarf"
   },
   {
     "medumba": "Məkàmmɛ̀n",
-    "french": "Nain"
+    "french": "Nain",
+    "english": "Dwarf"
   },
   {
     "medumba": "Bwə",
-    "french": "Naissance"
+    "french": "Naissance",
+    "english": "Birth"
   },
   {
     "medumba": "Mfǎŋŋtsəlαg",
-    "french": "Narine"
+    "french": "Narine",
+    "english": "Nostril"
   },
   {
     "medumba": "Nə̀ bwə",
-    "french": "Naître"
+    "french": "Naître",
+    "english": "To be born"
   },
   {
     "medumba": "Ca",
-    "french": "Natte"
+    "french": "Natte",
+    "english": "Mat"
   },
   {
     "medumba": "Mαtὰ",
-    "french": "Natte"
+    "french": "Natte",
+    "english": "Mat"
   },
   {
     "medumba": "Làntsəbàꞌ",
-    "french": "Navire"
+    "french": "Navire",
+    "english": "Ship"
   },
   {
     "medumba": "Sitimὰ",
-    "french": "Navire"
+    "french": "Navire",
+    "english": "Ship"
   },
   {
     "medumba": "Ncǎncag",
-    "french": "Ne̍gligence"
+    "french": "Ne̍gligence",
+    "english": "Negligence"
   },
   {
     "medumba": "Ncǎncɛ̌gmɛ̀n",
-    "french": "Ne̍gligent"
+    "french": "Ne̍gligent",
+    "english": "Negligent"
   },
   {
     "medumba": "Nga",
-    "french": "Nerf"
+    "french": "Nerf",
+    "english": "Nerve"
   },
   {
     "medumba": "Mbwə̀ꞌə",
-    "french": "Neuf"
+    "french": "Neuf",
+    "english": "New"
   },
   {
     "medumba": "Nswə",
-    "french": "Neuf"
+    "french": "Neuf",
+    "english": "New"
   },
   {
     "medumba": "Mbadtə̀ mbwə̀ꞌə",
-    "french": "Neuvième"
+    "french": "Neuvième",
+    "english": "Ninth"
   },
   {
     "medumba": "Nkɔ̀ntsəlαg",
-    "french": "Nez"
+    "french": "Nez",
+    "english": "Nose"
   },
   {
     "medumba": "Ntsəlαg",
-    "french": "Nez"
+    "french": "Nez",
+    "english": "Nose"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Nier"
+    "french": "Nier",
+    "english": "Deny"
   },
   {
     "medumba": "Ləbngòn",
-    "french": "Noce"
+    "french": "Noce",
+    "english": "Wedding"
   },
   {
     "medumba": "Nândα",
-    "french": "Noces"
+    "french": "Noces",
+    "english": "Wedding"
   },
   {
     "medumba": "Ncoŋ",
-    "french": "Noeud"
+    "french": "Noeud",
+    "english": "Knot"
   },
   {
     "medumba": "Mɛ̀nnə̀sɛn",
-    "french": "Noir"
+    "french": "Noir",
+    "english": "Black"
   },
   {
     "medumba": "Nəsɛn",
-    "french": "Noir"
+    "french": "Noir",
+    "english": "Black"
   },
   {
     "medumba": "Sɛnnkɛd",
-    "french": "Noir"
+    "french": "Noir",
+    "english": "Black"
   },
   {
     "medumba": "Nə̀ ghʉ̀ ju sɛ̀n",
-    "french": "Noircir"
+    "french": "Noircir",
+    "english": "Blacken"
   },
   {
     "medumba": "Nə̀ kà̀ŋ sɛnə",
-    "french": "Noircir"
+    "french": "Noircir",
+    "english": "Blacken"
   },
   {
     "medumba": "Mba",
-    "french": "Noix"
+    "french": "Noix",
+    "english": "Nuts"
   },
   {
     "medumba": "Lɛn",
-    "french": "Nom"
+    "french": "Nom",
+    "english": "Name"
   },
   {
     "medumba": "Kə̀tətùn",
-    "french": "Nomade"
+    "french": "Nomade",
+    "english": "Nomad"
   },
   {
     "medumba": "Tʉntə̀",
-    "french": "Nombre"
+    "french": "Nombre",
+    "english": "Number"
   },
   {
     "medumba": "Tɔ̀",
-    "french": "Nombril"
+    "french": "Nombril",
+    "english": "Navel"
   },
   {
     "medumba": "Nə̀sǒlɛn",
-    "french": "Nomination"
+    "french": "Nomination",
+    "english": "Appointment"
   },
   {
     "medumba": "Nə̀ twǐ lɛn",
-    "french": "Nommer"
+    "french": "Nommer",
+    "english": "Name"
   },
   {
     "medumba": "Nə̀ yαb lɛn",
-    "french": "Nommer"
+    "french": "Nommer",
+    "english": "Name"
   },
   {
     "medumba": "Nə̀ tsiaŋ lɛn",
-    "french": "Nommer"
+    "french": "Nommer",
+    "english": "Name"
   },
   {
     "medumba": "Nə̀ fαlɛn",
-    "french": "Nommer"
+    "french": "Nommer",
+    "english": "Name"
   },
   {
     "medumba": "Nga",
-    "french": "Non"
+    "french": "Non",
+    "english": "No"
   },
   {
     "medumba": "Ŋŋ̀",
-    "french": "Non"
+    "french": "Non",
+    "english": "No"
   },
   {
     "medumba": "Nkamə",
-    "french": "Notable"
+    "french": "Notable",
+    "english": "Notable"
   },
   {
     "medumba": "Nkɔ̂bà",
-    "french": "Note"
+    "french": "Note",
+    "english": "Note"
   },
   {
     "medumba": "Nə̀ coŋə",
-    "french": "Nouer"
+    "french": "Nouer",
+    "english": "Tie"
   },
   {
     "medumba": "Nə̀ kemə",
-    "french": "Nourrir"
+    "french": "Nourrir",
+    "english": "Feed"
   },
   {
     "medumba": "Mɛ̂nmbu",
-    "french": "Nourrisson"
+    "french": "Nourrisson",
+    "english": "Infant"
   },
   {
     "medumba": "Mɛ̂nfi",
-    "french": "Nourrisson"
+    "french": "Nourrisson",
+    "english": "Infant"
   },
   {
     "medumba": "Jûjʉ",
-    "french": "Nourriture"
+    "french": "Nourriture",
+    "english": "Food"
   },
   {
     "medumba": "Caŋ",
-    "french": "Nourriture"
+    "french": "Nourriture",
+    "english": "Food"
   },
   {
     "medumba": "Bαg",
-    "french": "Nous"
+    "french": "Nous",
+    "english": "We"
   },
   {
     "medumba": "Bə̀",
-    "french": "Nous"
+    "french": "Nous",
+    "english": "We"
   },
   {
     "medumba": "Bὰgαbo",
-    "french": "Nous (eux et moi)"
+    "french": "Nous (eux et moi)",
+    "english": "We (them and me)"
   },
   {
     "medumba": "Bὰgαbinαbo",
-    "french": "Nous (eux vous et moi)"
+    "french": "Nous (eux vous et moi)",
+    "english": "We (them you and me)"
   },
   {
     "medumba": "Njàmtu",
-    "french": "Nuque"
+    "french": "Nuque",
+    "english": "Neck"
   },
   {
     "medumba": "Bὰgyi",
-    "french": "Nous (lui et moi)"
+    "french": "Nous (lui et moi)",
+    "english": "We (him and me)"
   },
   {
     "medumba": "Bαgwʉ̀",
-    "french": "Nous (toi et moi)"
+    "french": "Nous (toi et moi)",
+    "english": "We (you and me)"
   },
   {
     "medumba": "Bὰgαbin",
-    "french": "Nous (vous et moi)"
+    "french": "Nous (vous et moi)",
+    "english": "We (you and me)"
   },
   {
     "medumba": "Foŋə",
-    "french": "Nouvelle"
+    "french": "Nouvelle",
+    "english": "News"
   },
   {
     "medumba": "Nkʉ̀n",
-    "french": "Nouvelle"
+    "french": "Nouvelle",
+    "english": "News"
   },
   {
     "medumba": "Cɔ̀",
-    "french": "Nouvelle"
+    "french": "Nouvelle",
+    "english": "News"
   },
   {
     "medumba": "Nkʉ̀nmə̀bwɔ",
-    "french": "Nouvelle (bonne)"
+    "french": "Nouvelle (bonne)",
+    "english": "News (good)"
   },
   {
     "medumba": "Ntǒgtùn",
-    "french": "Nu"
+    "french": "Nu",
+    "english": "Naked"
   },
   {
     "medumba": "Tùnntog",
-    "french": "Nu"
+    "french": "Nu",
+    "english": "Naked"
   },
   {
     "medumba": "Ndod",
-    "french": "Nuage"
+    "french": "Nuage",
+    "english": "Cloud"
   },
   {
     "medumba": "Nə̀bêntǒgtùn",
-    "french": "Nudite̍"
+    "french": "Nudite̍",
+    "english": "Nudity"
   },
   {
     "medumba": "Tswəꞌ",
-    "french": "Nuit"
+    "french": "Nuit",
+    "english": "Night"
   },
   {
     "medumba": "Tɛ̀dtswəꞌ",
-    "french": "Nuit"
+    "french": "Nuit",
+    "english": "Night"
   },
   {
     "medumba": "Càŋtɛ̀dtswəꞌ",
-    "french": "Nuit (mi)"
+    "french": "Nuit (mi)",
+    "english": "Night (mid)"
   },
   {
     "medumba": "Njàmtu",
-    "french": "Nuque"
+    "french": "Nuque",
+    "english": "Neck"
   },
   {
     "medumba": "Bèncə̂n",
-    "french": "O hommesi"
+    "french": "O hommesi",
+    "english": "O meni"
   },
   {
     "medumba": "Ntsəkônkwa",
-    "french": "Oasi"
+    "french": "Oasi",
+    "english": "Oasi"
   },
   {
     "medumba": "Nə̀ juꞌ ncù",
-    "french": "Obe̍ir"
+    "french": "Obe̍ir",
+    "english": "Obey"
   },
   {
     "medumba": "Nə̀juꞌ ncù",
-    "french": "Obe̍isance"
+    "french": "Obe̍isance",
+    "english": "Obedience"
   },
   {
     "medumba": "Jûꞌncù",
-    "french": "Obe̍issance"
+    "french": "Obe̍issance",
+    "english": "Obedience"
   },
   {
     "medumba": "Ngàjuꞌncù",
-    "french": "Obe̍issant"
+    "french": "Obe̍issant",
+    "english": "Obedient"
   },
   {
     "medumba": "Ju",
-    "french": "Objet"
+    "french": "Objet",
+    "english": "Purpose"
   },
   {
     "medumba": "Jungʉa",
-    "french": "Objet de luxe"
+    "french": "Objet de luxe",
+    "english": "Luxury item"
   },
   {
     "medumba": "Judiaŋə",
-    "french": "Objet de luxe"
+    "french": "Objet de luxe",
+    "english": "Luxury item"
   },
   {
     "medumba": "Nukekônkô",
-    "french": "Obligation"
+    "french": "Obligation",
+    "english": "Obligation"
   },
   {
     "medumba": "Kə̀kɔnkô",
-    "french": "Obligation"
+    "french": "Obligation",
+    "english": "Obligation"
   },
   {
     "medumba": "Nə nαnə",
-    "french": "Obliger"
+    "french": "Obliger",
+    "english": "Force"
   },
   {
     "medumba": "Ngwâŋnkʉꞌʉ",
-    "french": "Obliquer"
+    "french": "Obliquer",
+    "english": "Oblique"
   },
   {
     "medumba": "Ngwâŋnkʉꞌʉ",
-    "french": "Obliquement"
+    "french": "Obliquement",
+    "english": "Obliquely"
   },
   {
     "medumba": "Kələꞌə",
-    "french": "Obstacle"
+    "french": "Obstacle",
+    "english": "Obstacle"
   },
   {
     "medumba": "Nə̀ sɛntə",
-    "french": "Obscurcir"
+    "french": "Obscurcir",
+    "english": "Obscure"
   },
   {
     "medumba": "Nə̀ tam njamə",
-    "french": "Obscurcir"
+    "french": "Obscurcir",
+    "english": "Obscure"
   },
   {
     "medumba": "Njamə",
-    "french": "Obscurité"
+    "french": "Obscurité",
+    "english": "Darkness"
   },
   {
     "medumba": "Kùmnjâmnjamə",
-    "french": "Obscurité"
+    "french": "Obscurité",
+    "english": "Darkness"
   },
   {
     "medumba": "Nə̀ lɔtə",
-    "french": "Observer"
+    "french": "Observer",
+    "english": "Observe"
   },
   {
     "medumba": "Nə̀ tə lαg",
-    "french": "Observer"
+    "french": "Observer",
+    "english": "Observe"
   },
   {
     "medumba": "Nə̀ zədʉ",
-    "french": "Observer longtemps"
+    "french": "Observer longtemps",
+    "english": "Observe for a long time"
   },
   {
     "medumba": "Ngàghub",
-    "french": "Obstine̍"
+    "french": "Obstine̍",
+    "english": "Obstinate"
   },
   {
     "medumba": "Ngàkutu",
-    "french": "Obstiné"
+    "french": "Obstiné",
+    "english": "Obstinate"
   },
   {
     "medumba": "Mbînyàm",
-    "french": "Obstiner ̍(sꞌ)"
+    "french": "Obstiner ̍(sꞌ)",
+    "english": "Obstinate ̍(sꞌ)"
   },
   {
     "medumba": "Dibαntsə",
-    "french": "Océan"
+    "french": "Océan",
+    "english": "Ocean"
   },
   {
     "medumba": "Ndǎmju",
-    "french": "Odeur"
+    "french": "Odeur",
+    "english": "Odor"
   },
   {
     "medumba": "Nsèm",
-    "french": "Odeur"
+    "french": "Odeur",
+    "english": "Odor"
   },
   {
     "medumba": "Ywɛdju",
-    "french": "Odeur"
+    "french": "Odeur",
+    "english": "Odor"
   },
   {
     "medumba": "Nəlàmtə̌",
-    "french": "Odorant"
+    "french": "Odorant",
+    "english": "Odorous"
   },
   {
     "medumba": "Lαg",
-    "french": "Œil"
+    "french": "Œil",
+    "english": "Eye"
   },
   {
     "medumba": "ngwàlαg",
-    "french": "Œil (clin)"
+    "french": "Œil (clin)",
+    "english": "Eye (wink)"
   },
   {
     "medumba": "Sǎlαg",
-    "french": "Œil (tale dans)"
+    "french": "Œil (tale dans)",
+    "english": "Eye (tale in)"
   },
   {
     "medumba": "Lα̂g bα̌nbαn",
-    "french": "Oeil nu"
+    "french": "Oeil nu",
+    "english": "Naked eye"
   },
   {
     "medumba": "Bum",
-    "french": "Oeuf"
+    "french": "Oeuf",
+    "english": "Egg"
   },
   {
     "medumba": "Fàꞌ",
-    "french": "Oeuvre"
+    "french": "Oeuvre",
+    "english": "Work"
   },
   {
     "medumba": "Ncà",
-    "french": "Offense"
+    "french": "Offense",
+    "english": "Offense"
   },
   {
     "medumba": "Mfα̌nnù",
-    "french": "Offense"
+    "french": "Offense",
+    "english": "Offense"
   },
   {
     "medumba": "Nə̀ diα̌g ncà",
-    "french": "Offenser"
+    "french": "Offenser",
+    "english": "Offend"
   },
   {
     "medumba": "Nə̀ fα̌nnù",
-    "french": "Offenser"
+    "french": "Offenser",
+    "english": "Offend"
   },
   {
     "medumba": "Ngàbebndα̂ncà",
-    "french": "Offenser de justice"
+    "french": "Offenser de justice",
+    "english": "Offend justice"
   },
   {
     "medumba": "Kǎla",
-    "french": "Officine"
+    "french": "Officine",
+    "english": "Pharmacy"
   },
   {
     "medumba": "Ndα̂kà",
-    "french": "Officine"
+    "french": "Officine",
+    "english": "Pharmacy"
   },
   {
     "medumba": "Fαbwɔ̌ntʉ",
-    "french": "Offrande"
+    "french": "Offrande",
+    "english": "Offering"
   },
   {
     "medumba": "Jûbwɔ̌ntʉ",
-    "french": "Offrande"
+    "french": "Offrande",
+    "english": "Offering"
   },
   {
     "medumba": "Nə̀ yoꞌo",
-    "french": "Oindre"
+    "french": "Oindre",
+    "english": "Anoint"
   },
   {
     "medumba": "Nə̀ bèꞌtə̌",
-    "french": "Oindre"
+    "french": "Oindre",
+    "english": "Anoint"
   },
   {
     "medumba": "Nə̀ sèꞌe",
-    "french": "Oindre"
+    "french": "Oindre",
+    "english": "Anoint"
   },
   {
     "medumba": "Saŋə",
-    "french": "Oiseau"
+    "french": "Oiseau",
+    "english": "Bird"
   },
   {
     "medumba": "Tʉmvɛd",
-    "french": "Olivier"
+    "french": "Olivier",
+    "english": "Olivier"
   },
   {
     "medumba": "Nə̀caŋ̀",
-    "french": "Ombre"
+    "french": "Ombre",
+    "english": "Shadow"
   },
   {
     "medumba": "Ncuǎꞌnkə̀mbòꞌ",
-    "french": "Omoplates"
+    "french": "Omoplates",
+    "english": "Shoulder blades"
   },
   {
     "medumba": "Bo",
-    "french": "On"
+    "french": "On",
+    "english": "We"
   },
   {
     "medumba": "Nkib",
-    "french": "Ongle"
+    "french": "Ongle",
+    "english": "Nail"
   },
   {
     "medumba": "Nkibkù",
-    "french": "Ongle de l’orteil"
+    "french": "Ongle de l’orteil",
+    "english": "Toenail"
   },
   {
     "medumba": "Nkibbu",
-    "french": "Ongle du doigt"
+    "french": "Ongle du doigt",
+    "english": "Fingernail"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Opposer"
+    "french": "Opposer",
+    "english": "Oppose"
   },
   {
     "medumba": "Bàgwuα",
-    "french": "Opposition"
+    "french": "Opposition",
+    "english": "Opposition"
   },
   {
     "medumba": "Ndʉ̀",
-    "french": "Or"
+    "french": "Or",
+    "english": "Gold"
   },
   {
     "medumba": "Tʉngol",
-    "french": "Or"
+    "french": "Or",
+    "english": "Gold"
   },
   {
     "medumba": "Nə̀tâmbàŋ",
-    "french": "Orage"
+    "french": "Orage",
+    "english": "Thunderstorm"
   },
   {
     "medumba": "Nzwə̌ꞌnzwəꞌ",
-    "french": "Orageux"
+    "french": "Orageux",
+    "english": "Stormy"
   },
   {
     "medumba": "Kǔmbuꞌ",
-    "french": "Orchestre"
+    "french": "Orchestre",
+    "english": "Orchestra"
   },
   {
     "medumba": "Mαndɔ",
-    "french": "Orchestre"
+    "french": "Orchestre",
+    "english": "Orchestra"
   },
   {
     "medumba": "Nènὰ",
-    "french": "Ordure"
+    "french": "Ordure",
+    "english": "Garbage"
   },
   {
     "medumba": "Nə̀nα̌nsîndα",
-    "french": "Ordure"
+    "french": "Ordure",
+    "english": "Garbage"
   },
   {
     "medumba": "Toŋ",
-    "french": "Oreille"
+    "french": "Oreille",
+    "english": "Ear"
   },
   {
     "medumba": "Kʉ̌ꞌkunə",
-    "french": "Oreiller"
+    "french": "Oreiller",
+    "english": "Pillow"
   },
   {
     "medumba": "Sedgheꞌ",
-    "french": "Orellons"
+    "french": "Orellons",
+    "english": "Orellons"
   },
   {
     "medumba": "Ngàvə̀",
-    "french": "Orfèvre"
+    "french": "Orfèvre",
+    "english": "Goldsmith"
   },
   {
     "medumba": "Kôꞌtə̀wud",
-    "french": "Orgueille"
+    "french": "Orgueille",
+    "english": "Pride"
   },
   {
     "medumba": "Ngàkôꞌtəwud",
-    "french": "Orguilleux"
+    "french": "Orguilleux",
+    "english": "Proud"
   },
   {
     "medumba": "Ntûmnyàm",
-    "french": "Orient"
+    "french": "Orient",
+    "english": "East"
   },
   {
     "medumba": "Bǎgntûmnyàm (",
-    "french": "Orient (en)"
+    "french": "Orient (en)",
+    "english": "Orient"
   },
   {
     "medumba": "Mənntse",
-    "french": "Orphelin"
+    "french": "Orphelin",
+    "english": "Orphan"
   },
   {
     "medumba": "Ndα̂bôntse",
-    "french": "Orphelinat"
+    "french": "Orphelinat",
+    "english": "Orphanage"
   },
   {
     "medumba": "Ntûkù",
-    "french": "Orteil"
+    "french": "Orteil",
+    "english": "Toe"
   },
   {
     "medumba": "Mfêꞌkù",
-    "french": "Orteil (entre les )"
+    "french": "Orteil (entre les )",
+    "english": "Toe (between)"
   },
   {
     "medumba": "Ntûkù mα̂dùꞌ",
-    "french": "Orteil (gros)"
+    "french": "Orteil (gros)",
+    "english": "Toe (big)"
   },
   {
     "medumba": "Nkêdkù",
-    "french": "Orteil (petit)"
+    "french": "Orteil (petit)",
+    "english": "Toe (small)"
   },
   {
     "medumba": "Nə̀ sɔ̌",
-    "french": "Ôter"
+    "french": "Ôter",
+    "english": "Remove"
   },
   {
     "medumba": "Voge",
-    "french": "Os"
+    "french": "Os",
+    "english": "Bones"
   },
   {
     "medumba": "Nə̀ bǎb",
-    "french": "Oser"
+    "french": "Oser",
+    "english": "Dare"
   },
   {
     "medumba": "Nə̀ bǎb ndʉꞌ",
-    "french": "Oser"
+    "french": "Oser",
+    "english": "Dare"
   },
   {
     "medumba": "Nə̀ kə̀mtě",
-    "french": "Oser"
+    "french": "Oser",
+    "english": "Dare"
   },
   {
     "medumba": "Nə̀ kutu",
-    "french": "Oser"
+    "french": "Oser",
+    "english": "Dare"
   },
   {
     "medumba": "Mvoge",
-    "french": "Ossement"
+    "french": "Ossement",
+    "english": "Bone"
   },
   {
     "medumba": "Làgtə̀",
-    "french": "Oubli"
+    "french": "Oubli",
+    "english": "Forgetfulness"
   },
   {
     "medumba": "Nə̀ làgtə̌",
-    "french": "Oublier"
+    "french": "Oublier",
+    "english": "Forget"
   },
   {
     "medumba": "Mbînyàm",
-    "french": "Ouest"
+    "french": "Ouest",
+    "english": "West"
   },
   {
     "medumba": "Bǎgmbînyàm",
-    "french": "Ouest (à)"
+    "french": "Ouest (à)",
+    "english": "West (to)"
   },
   {
     "medumba": "Ŋ̂",
-    "french": "Oui"
+    "french": "Oui",
+    "english": "Yes"
   },
   {
     "medumba": "Jûfàꞌ",
-    "french": "Outil"
+    "french": "Outil",
+    "english": "Tool"
   },
   {
     "medumba": "Cὰbtə̀",
-    "french": "Outrage"
+    "french": "Outrage",
+    "english": "Contempt"
   },
   {
     "medumba": "Nə̀ cὰbtə̌",
-    "french": "Outrer"
+    "french": "Outrer",
+    "english": "Outer"
   },
   {
     "medumba": "Nə̀ghàꞌ ntə ngə",
-    "french": "Ouvert"
+    "french": "Ouvert",
+    "english": "Open"
   },
   {
     "medumba": "Ngə",
-    "french": "Ouvert"
+    "french": "Ouvert",
+    "english": "Open"
   },
   {
     "medumba": "Nə̀ tə ngə",
-    "french": "Ouvert(laisser)"
+    "french": "Ouvert(laisser)",
+    "english": "Open(leave)"
   },
   {
     "medumba": "Nzə̀",
-    "french": "Ouverture"
+    "french": "Ouverture",
+    "english": "Opening"
   },
   {
     "medumba": "Tɔ",
-    "french": "Ouverture"
+    "french": "Ouverture",
+    "english": "Opening"
   },
   {
     "medumba": "Ngàfàꞌ",
-    "french": "Ouvrier"
+    "french": "Ouvrier",
+    "english": "Worker"
   },
   {
     "medumba": "Nə̀ coꞌo",
-    "french": "Ouvrir"
+    "french": "Ouvrir",
+    "english": "Open"
   },
   {
     "medumba": "Nə̀ ghaꞌa",
-    "french": "Ouvrir"
+    "french": "Ouvrir",
+    "english": "Open"
   },
   {
     "medumba": "Nə̀ ghab ntə ngə",
-    "french": "Ouvrir"
+    "french": "Ouvrir",
+    "english": "Open"
   },
   {
     "medumba": "Bǎgŋwàꞌni",
-    "french": "Page"
+    "french": "Page",
+    "english": "Page"
   },
   {
     "medumba": "Nkαbfàꞌ",
-    "french": "Paiement"
+    "french": "Paiement",
+    "english": "Payment"
   },
   {
     "medumba": "Kə̀lɛ̌nnsi",
-    "french": "Païen"
+    "french": "Païen",
+    "english": "Pagan"
   },
   {
     "medumba": "Dʉ̌ꞌnkα̂bfàꞌ",
-    "french": "Paierie"
+    "french": "Paierie",
+    "english": "Payroll"
   },
   {
     "medumba": "Nyîꞌngà",
-    "french": "Paille"
+    "french": "Paille",
+    "english": "Straw"
   },
   {
     "medumba": "Bɛnə",
-    "french": "Paille"
+    "french": "Paille",
+    "english": "Straw"
   },
   {
     "medumba": "Ntαb",
-    "french": "Paillotte"
+    "french": "Paillotte",
+    "english": "straw hut"
   },
   {
     "medumba": "Fitə̌mɛ̀n",
-    "french": "Paisible"
+    "french": "Paisible",
+    "english": "Peaceful"
   },
   {
     "medumba": "Nə̀fitə",
-    "french": "Paisible"
+    "french": "Paisible",
+    "english": "Peaceful"
   },
   {
     "medumba": "Fitə̀",
-    "french": "Paix"
+    "french": "Paix",
+    "english": "Peace"
   },
   {
     "medumba": "Ncà",
-    "french": "Palable"
+    "french": "Palable",
+    "english": "Palable"
   },
   {
     "medumba": "Nə̀ saꞌncà",
-    "french": "Palabrer"
+    "french": "Palabrer",
+    "english": "Palaver"
   },
   {
     "medumba": "Ngàsaꞌncà",
-    "french": "Palabreur"
+    "french": "Palabreur",
+    "english": "Palaver"
   },
   {
     "medumba": "Ndα̂ncà",
-    "french": "Palais de justice"
+    "french": "Palais de justice",
+    "english": "Courthouse"
   },
   {
     "medumba": "Nzwə̌ꞌnzwəꞌ",
-    "french": "Pâle"
+    "french": "Pâle",
+    "english": "Pale"
   },
   {
     "medumba": "Câtənə",
-    "french": "Palme"
+    "french": "Palme",
+    "english": "Palm"
   },
   {
     "medumba": "Cânkʉα",
-    "french": "Palme du raphia"
+    "french": "Palme du raphia",
+    "english": "Raffia palm"
   },
   {
     "medumba": "Tənə",
-    "french": "Palmier"
+    "french": "Palmier",
+    "english": "Palm tree"
   },
   {
     "medumba": "Mba",
-    "french": "Palmiste"
+    "french": "Palmiste",
+    "english": "Palm kernel"
   },
   {
     "medumba": "Ntsì",
-    "french": "Panier"
+    "french": "Panier",
+    "english": "Shopping cart"
   },
   {
     "medumba": "Kə̀soŋə",
-    "french": "Panier"
+    "french": "Panier",
+    "english": "Shopping cart"
   },
   {
     "medumba": "Cə̌ꞌnkù",
-    "french": "Pantalon"
+    "french": "Pantalon",
+    "english": "Pants"
   },
   {
     "medumba": "Nzwìmα̂ntɔ̀",
-    "french": "Panthère"
+    "french": "Panthère",
+    "english": "Panther"
   },
   {
     "medumba": "Nzwì",
-    "french": "Panthère"
+    "french": "Panthère",
+    "english": "Panther"
   },
   {
     "medumba": "Sitimὰ",
-    "french": "Paquebot"
+    "french": "Paquebot",
+    "english": "Liner"
   },
   {
     "medumba": "Buꞌu",
-    "french": "Paquet"
+    "french": "Paquet",
+    "english": "Package"
   },
   {
     "medumba": "Buꞌmfʉm",
-    "french": "Paquet vide"
+    "french": "Paquet vide",
+    "english": "Empty package"
   },
   {
     "medumba": "Ngʉmə (",
-    "french": "Parabole"
+    "french": "Parabole",
+    "english": "Parable"
   },
   {
     "medumba": "Tα̂nkʉd",
-    "french": "Parabole"
+    "french": "Parabole",
+    "english": "Parable"
   },
   {
     "medumba": "Nə̀ ŋwàg◌",
-    "french": "Paraitre"
+    "french": "Paraitre",
+    "english": "Appear"
   },
   {
     "medumba": "Beꞌtə̀wud",
-    "french": "Paralysie"
+    "french": "Paralysie",
+    "english": "Paralysis"
   },
   {
     "medumba": "Kə̀kalə",
-    "french": "Paralytique"
+    "french": "Paralytique",
+    "english": "Paralytic"
   },
   {
     "medumba": "Nǔmmbə̂",
-    "french": "Parce que"
+    "french": "Parce que",
+    "english": "Because"
   },
   {
     "medumba": "Ŋwàꞌ ningùb",
-    "french": "Parchemin"
+    "french": "Parchemin",
+    "english": "Parchment"
   },
   {
     "medumba": "Nzwə̂nùmtʉ",
-    "french": "Pardessus"
+    "french": "Pardessus",
+    "english": "Overcoat"
   },
   {
     "medumba": "Làgtə",
-    "french": "Pardon"
+    "french": "Pardon",
+    "english": "Sorry"
   },
   {
     "medumba": "Nə̀ làgtə̀ mfα",
-    "french": "Pardonner"
+    "french": "Pardonner",
+    "english": "forgive"
   },
   {
     "medumba": "Ndǎŋndaŋ",
-    "french": "Pareil"
+    "french": "Pareil",
+    "english": "Same"
   },
   {
     "medumba": "Bə̂ndǎŋndaŋ",
-    "french": "Pareillement"
+    "french": "Pareillement",
+    "english": "Likewise"
   },
   {
     "medumba": "Lɔ",
-    "french": "Paresse"
+    "french": "Paresse",
+    "english": "Laziness"
   },
   {
     "medumba": "Ywɛnə",
-    "french": "Paresse"
+    "french": "Paresse",
+    "english": "Laziness"
   },
   {
     "medumba": "Nə̀ lɔ",
-    "french": "Paresser"
+    "french": "Paresser",
+    "english": "Laze"
   },
   {
     "medumba": "Nə̀ ko ywɛnə",
-    "french": "Paresser"
+    "french": "Paresser",
+    "english": "Laze"
   },
   {
     "medumba": "Ndɔ",
-    "french": "Paresseux"
+    "french": "Paresseux",
+    "english": "Lazy"
   },
   {
     "medumba": "Ngàlɛ̌dwud",
-    "french": "Paresseux"
+    "french": "Paresseux",
+    "english": "Lazy"
   },
   {
     "medumba": "Ngàywɛnə",
-    "french": "Paresseux"
+    "french": "Paresseux",
+    "english": "Lazy"
   },
   {
     "medumba": "Bwɔ̀niâgtə",
-    "french": "Parfait"
+    "french": "Parfait",
+    "english": "Perfect"
   },
   {
     "medumba": "Lὰnbindὰ (",
-    "french": "Parfun"
+    "french": "Parfun",
+    "english": "Perfume"
   },
   {
     "medumba": "Nkwὰ",
-    "french": "Pari"
+    "french": "Pari",
+    "english": "Bet"
   },
   {
     "medumba": "Ti",
-    "french": "Paria"
+    "french": "Paria",
+    "english": "Outcast"
   },
   {
     "medumba": "Nə̀ fiag nkwὰ",
-    "french": "Parier"
+    "french": "Parier",
+    "english": "Bet"
   },
   {
     "medumba": "Mfə",
-    "french": "Parjure"
+    "french": "Parjure",
+    "english": "Perjury"
   },
   {
     "medumba": "Nə̀ kǎnmfə",
-    "french": "Parjurer"
+    "french": "Parjurer",
+    "english": "Perjure"
   },
   {
     "medumba": "nə̀ cobə",
-    "french": "Parler"
+    "french": "Parler",
+    "english": "Talk"
   },
   {
     "medumba": "nə̀ tαgtə nù",
-    "french": "Parler à l’oreille"
+    "french": "Parler à l’oreille",
+    "english": "Talking in your ear"
   },
   {
     "medumba": "Nə̀ sǔ ncǔ nsi",
-    "french": "Parler en cachette"
+    "french": "Parler en cachette",
+    "english": "Talking in secret"
   },
   {
     "medumba": "Nə̀ tsin càm",
-    "french": "Parler en secret"
+    "french": "Parler en secret",
+    "english": "Talk in secret"
   },
   {
     "medumba": "Nə̀ tswə̀ꞌtə̌",
-    "french": "Parler en insistant"
+    "french": "Parler en insistant",
+    "english": "Speak insistently"
   },
   {
     "medumba": "Ncobə",
-    "french": "Parole"
+    "french": "Parole",
+    "english": "Word"
   },
   {
     "medumba": "Ncobnsi",
-    "french": "Parole de dieu"
+    "french": "Parole de dieu",
+    "english": "word of god"
   },
   {
     "medumba": "Ncob kə̀tùn",
-    "french": "Parole vaine"
+    "french": "Parole vaine",
+    "english": "Vain word"
   },
   {
     "medumba": "Nzwiaŋtə ncobə",
-    "french": "Parole vaine"
+    "french": "Parole vaine",
+    "english": "Vain word"
   },
   {
     "medumba": "Bàg",
-    "french": "Part"
+    "french": "Part",
+    "english": "Share"
   },
   {
     "medumba": "Ghὰbtə̀",
-    "french": "Partage"
+    "french": "Partage",
+    "english": "Sharing"
   },
   {
     "medumba": "Nə̀ghὰbtə̌",
-    "french": "Partage"
+    "french": "Partage",
+    "english": "Sharing"
   },
   {
     "medumba": "Nə̀ ghὰbtə̌",
-    "french": "Partager"
+    "french": "Partager",
+    "english": "Share"
   },
   {
     "medumba": "Nə̀ gὰbtə̌ tɔ̀bu",
-    "french": "Partager (de façon discrim)"
+    "french": "Partager (de façon discrim)",
+    "english": "Share (discriminately)"
   },
   {
     "medumba": "Kum",
-    "french": "Parti"
+    "french": "Parti",
+    "english": "Gone"
   },
   {
     "medumba": "Kǔmmfʉngɔ̀",
-    "french": "Partie politique"
+    "french": "Partie politique",
+    "english": "Political part"
   },
   {
     "medumba": "Kǔmnkʉ̂nkʉ",
-    "french": "Parti politique"
+    "french": "Parti politique",
+    "english": "Political party"
   },
   {
     "medumba": "Bàg",
-    "french": "Partie"
+    "french": "Partie",
+    "english": "Part"
   },
   {
     "medumba": "Nə̀ nɛ̀ne",
-    "french": "Partir"
+    "french": "Partir",
+    "english": "Leave"
   },
   {
     "medumba": "Njǒŋdʉ̀ꞌfa",
-    "french": "Partout"
+    "french": "Partout",
+    "english": "Everywhere"
   },
   {
     "medumba": "Bǎgbàg",
-    "french": "Part (toutes)"
+    "french": "Part (toutes)",
+    "english": "Share (all)"
   },
   {
     "medumba": "Nèŋwàgə",
-    "french": "Parution"
+    "french": "Parution",
+    "english": "Publication"
   },
   {
     "medumba": "Nə̀ ncuὰ nkumə",
-    "french": "Parvenir"
+    "french": "Parvenir",
+    "english": "Reach"
   },
   {
     "medumba": "Nə̀ ncʉὰ nco",
-    "french": "Parvenir"
+    "french": "Parvenir",
+    "english": "Reach"
   },
   {
     "medumba": "Ncʉὰnzə̀",
-    "french": "Passant"
+    "french": "Passant",
+    "english": "Passerby"
   },
   {
     "medumba": "Nə̀ cʉα̌",
-    "french": "Passer"
+    "french": "Passer",
+    "english": "Pass"
   },
   {
     "medumba": "Nə̀ togə",
-    "french": "Passer"
+    "french": "Passer",
+    "english": "Pass"
   },
   {
     "medumba": "Nə̀ zwi ngə̀laŋ",
-    "french": "Passer du temps"
+    "french": "Passer du temps",
+    "english": "Spend time"
   },
   {
     "medumba": "Togzinə",
-    "french": "Passereau"
+    "french": "Passereau",
+    "english": "Passerine"
   },
   {
     "medumba": "Bαsitɔ̀",
-    "french": "Pasteur"
+    "french": "Pasteur",
+    "english": "Pastor"
   },
   {
     "medumba": "Ngàbəbmbwə",
-    "french": "Pasteur"
+    "french": "Pasteur",
+    "english": "Pastor"
   },
   {
     "medumba": "Bèlòŋ",
-    "french": "Patate"
+    "french": "Patate",
+    "english": "Potato"
   },
   {
     "medumba": "Fɛ̌nntʉ",
-    "french": "Patience"
+    "french": "Patience",
+    "english": "Patience"
   },
   {
     "medumba": "Ghǔbntʉ",
-    "french": "Patience"
+    "french": "Patience",
+    "english": "Patience"
   },
   {
     "medumba": "Nə̀ fɛntə",
-    "french": "Patienter"
+    "french": "Patienter",
+    "english": "Wait"
   },
   {
     "medumba": "Nə̀ ghubtə",
-    "french": "Patienter"
+    "french": "Patienter",
+    "english": "Wait"
   },
   {
     "medumba": "Ngàtengɔ̀",
-    "french": "Patriarche"
+    "french": "Patriarche",
+    "english": "Patriarch"
   },
   {
     "medumba": "Ngɔ̀",
-    "french": "Patrie"
+    "french": "Patrie",
+    "english": "Homeland"
   },
   {
     "medumba": "Ngɔ̌ bὰmmɛ̀n",
-    "french": "Patrie"
+    "french": "Patrie",
+    "english": "Homeland"
   },
   {
     "medumba": "Nkwàtənù",
-    "french": "Patron"
+    "french": "Patron",
+    "english": "Boss"
   },
   {
     "medumba": "Nə̀ kwàtə̌",
-    "french": "Pensée"
+    "french": "Pensée",
+    "english": "Thought"
   },
   {
     "medumba": "Ngàkwǎnù",
-    "french": "Penser"
+    "french": "Penser",
+    "english": "Think"
   },
   {
     "medumba": "Ngàkwentscùb",
-    "french": "Penseur"
+    "french": "Penseur",
+    "english": "Thinker"
   },
   {
     "medumba": "Ndα̂ncùb",
-    "french": "Percepteur"
+    "french": "Percepteur",
+    "english": "Collector"
   },
   {
     "medumba": "Nəjuꞌu",
-    "french": "Perception"
+    "french": "Perception",
+    "english": "Perception"
   },
   {
     "medumba": "Nə̀ sòbə",
-    "french": "Percer"
+    "french": "Percer",
+    "english": "Drill"
   },
   {
     "medumba": "Nə̀ to",
-    "french": "Percer"
+    "french": "Percer",
+    "english": "Drill"
   },
   {
     "medumba": "Nə̀bi",
-    "french": "Perdition"
+    "french": "Perdition",
+    "english": "Perdition"
   },
   {
     "medumba": "Nə̀ bi",
-    "french": "Perdre"
+    "french": "Perdre",
+    "english": "Lose"
   },
   {
     "medumba": "Nə̀ wuaꞌa",
-    "french": "Perdre"
+    "french": "Perdre",
+    "english": "Lose"
   },
   {
     "medumba": "Nə̀ vǔ ncà",
-    "french": "Perdre procès"
+    "french": "Perdre procès",
+    "english": "Lose court case"
   },
   {
     "medumba": "Saŋngab",
-    "french": "Perdrix"
+    "french": "Perdrix",
+    "english": "Partridge"
   },
   {
     "medumba": "Tα",
-    "french": "Père"
+    "french": "Père",
+    "english": "Father"
   },
   {
     "medumba": "Ntsə",
-    "french": "Père (beau)"
+    "french": "Père (beau)",
+    "english": "Father (handsome)"
   },
   {
     "medumba": "Tα̂ndu",
-    "french": "Père (beau)"
+    "french": "Père (beau)",
+    "english": "Father (handsome)"
   },
   {
     "medumba": "Tα̂nzwi",
-    "french": "Père (beau)"
+    "french": "Père (beau)",
+    "english": "Father (handsome)"
   },
   {
     "medumba": "Ŋuꞌtə̂nù",
-    "french": "Perfide"
+    "french": "Perfide",
+    "english": "Perfidious"
   },
   {
     "medumba": "Nə̀ kwʉ",
-    "french": "Périr"
+    "french": "Périr",
+    "english": "Perish"
   },
   {
     "medumba": "Nə̀ bi",
-    "french": "Périr"
+    "french": "Périr",
+    "english": "Perish"
   },
   {
     "medumba": "Ntogntse",
-    "french": "Perles"
+    "french": "Perles",
+    "english": "Beads"
   },
   {
     "medumba": "Ncɛ̀n",
-    "french": "Perles"
+    "french": "Perles",
+    "english": "Beads"
   },
   {
     "medumba": "Nə̀ ghʉdnǐ mɛ̀n",
-    "french": "Persécuter"
+    "french": "Persécuter",
+    "english": "Persecute"
   },
   {
     "medumba": "nə̀ coꞌnkù kə̀bὰn",
-    "french": "Persécuter"
+    "french": "Persécuter",
+    "english": "Persecute"
   },
   {
     "medumba": "Fɛntə̀",
-    "french": "Persévérance"
+    "french": "Persévérance",
+    "english": "Perseverance"
   },
   {
     "medumba": "Fɛ̌nntʉ",
-    "french": "Persévérance"
+    "french": "Persévérance",
+    "english": "Perseverance"
   },
   {
     "medumba": "Kàgtʉ̀n",
-    "french": "Persévérance"
+    "french": "Persévérance",
+    "english": "Perseverance"
   },
   {
     "medumba": "Nə̀ fɛntə",
-    "french": "Persévérer"
+    "french": "Persévérer",
+    "english": "Persevere"
   },
   {
     "medumba": "Nə̀ cʉbntʉ",
-    "french": "Persévérer"
+    "french": "Persévérer",
+    "english": "Persevere"
   },
   {
     "medumba": "Nə̀ kagtʉ̀n",
-    "french": "Persévérer"
+    "french": "Persévérer",
+    "english": "Persevere"
   },
   {
     "medumba": "Mɛ̀nntʉ̀n",
-    "french": "Personne"
+    "french": "Personne",
+    "english": "Nobody"
   },
   {
     "medumba": "Sα̌mmɛ̀n",
-    "french": "Personne"
+    "french": "Personne",
+    "english": "Nobody"
   },
   {
     "medumba": "Nsα kʉlə",
-    "french": "Personne très instruite"
+    "french": "Personne très instruite",
+    "english": "Highly educated person"
   },
   {
     "medumba": "Nə̀lɛ̀lə",
-    "french": "Posant"
+    "french": "Posant",
+    "english": "Posing"
   },
   {
     "medumba": "Məcǒg",
-    "french": "Petit"
+    "french": "Petit",
+    "english": "Small"
   },
   {
     "medumba": "Metsǐd",
-    "french": "Petit"
+    "french": "Petit",
+    "english": "Small"
   },
   {
     "medumba": "Nə̀kagə",
-    "french": "Petit"
+    "french": "Petit",
+    "english": "Small"
   },
   {
     "medumba": "Zə̀nkəꞌə",
-    "french": "Petit"
+    "french": "Petit",
+    "english": "Small"
   },
   {
     "medumba": "Mɛ̀nnkəꞌə",
-    "french": "Petit (en valeur)"
+    "french": "Petit (en valeur)",
+    "english": "Small (in value)"
   },
   {
     "medumba": "Kʉdfoŋə",
-    "french": "Petite antenne radio"
+    "french": "Petite antenne radio",
+    "english": "Small radio antenna"
   },
   {
     "medumba": "Kʉdngʉαyən",
-    "french": "Petit antenne tele"
+    "french": "Petit antenne tele",
+    "english": "Small TV antenna"
   },
   {
     "medumba": "Kàmmɛ̀n",
-    "french": "Petite taille (de)"
+    "french": "Petite taille (de)",
+    "english": "Small size (of)"
   },
   {
     "medumba": "Ngɔ̀",
-    "french": "Peuple"
+    "french": "Peuple",
+    "english": "People"
   },
   {
     "medumba": "Ngɔ̀ngɔ̀",
-    "french": "Peuple"
+    "french": "Peuple",
+    "english": "People"
   },
   {
     "medumba": "Bwog",
-    "french": "Peur"
+    "french": "Peur",
+    "english": "Fear"
   },
   {
     "medumba": "Mbwôgtùn",
-    "french": "Peureux"
+    "french": "Peureux",
+    "english": "Fearful"
   },
   {
     "medumba": "Ngàbwog",
-    "french": "Peureux"
+    "french": "Peureux",
+    "english": "Fearful"
   },
   {
     "medumba": "Ndα̂ntα̂nmfu",
-    "french": "Pharmacie"
+    "french": "Pharmacie",
+    "english": "Pharmacy"
   },
   {
     "medumba": "Ndɛ̀nngα̂mmfu",
-    "french": "Pharmacien"
+    "french": "Pharmacien",
+    "english": "Pharmacist"
   },
   {
     "medumba": "Ngàswɛ̌nmfu",
-    "french": "Pharmacien"
+    "french": "Pharmacien",
+    "english": "Pharmacist"
   },
   {
     "medumba": "Nswɛnmfu",
-    "french": "Pharmacien"
+    "french": "Pharmacien",
+    "english": "Pharmacist"
   },
   {
     "medumba": "Cammbwoŋə",
-    "french": "Philanthrope"
+    "french": "Philanthrope",
+    "english": "Philanthropist"
   },
   {
     "medumba": "Kǔncobə",
-    "french": "Phrase"
+    "french": "Phrase",
+    "english": "Sentence"
   },
   {
     "medumba": "Caꞌtɔ̀ngɔ̀",
-    "french": "Physiocratie"
+    "french": "Physiocratie",
+    "english": "Physiocracy"
   },
   {
     "medumba": "Sə",
-    "french": "Physionomie"
+    "french": "Physionomie",
+    "english": "Physiognomy"
   },
   {
     "medumba": "kǎmŋwàꞌnì",
-    "french": "Pièce d’un dossier"
+    "french": "Pièce d’un dossier",
+    "english": "Part of a file"
   },
   {
     "medumba": "Kɔ̂nkαb",
-    "french": "Pièce d’arrgent"
+    "french": "Pièce d’arrgent",
+    "english": "Silver coin"
   },
   {
     "medumba": "Nə̀ bʉ̌n ywì",
-    "french": "Pie̍ger"
+    "french": "Pie̍ger",
+    "english": "Trap"
   },
   {
     "medumba": "Kù",
-    "french": "Pied"
+    "french": "Pied",
+    "english": "Foot"
   },
   {
     "medumba": "Tùn",
-    "french": "Pied"
+    "french": "Pied",
+    "english": "Foot"
   },
   {
     "medumba": "Ywìꞌ",
-    "french": "Piège"
+    "french": "Piège",
+    "english": "Trap"
   },
   {
     "medumba": "Lòŋ",
-    "french": "Pierre"
+    "french": "Pierre",
+    "english": "Peter"
   },
   {
     "medumba": "Lǒŋfaꞌtə̀",
-    "french": "Pierre d’achopement"
+    "french": "Pierre d’achopement",
+    "english": "Stumbling block"
   },
   {
     "medumba": "Ndòŋtânjòŋ",
-    "french": "Pierres pre̍cieuses"
+    "french": "Pierres pre̍cieuses",
+    "english": "Precious stones"
   },
   {
     "medumba": "Nə̀ tὰbtə nkù",
-    "french": "Pie̍tiner"
+    "french": "Pie̍tiner",
+    "english": "Stomp"
   },
   {
     "medumba": "Nə̀ nyàŋtə̀ nkù",
-    "french": "Pie̍tiner"
+    "french": "Pie̍tiner",
+    "english": "Stomp"
   },
   {
     "medumba": "Kə̀ŋuꞌu",
-    "french": "Pieux"
+    "french": "Pieux",
+    "english": "Piles"
   },
   {
     "medumba": "Ngàbwognsi",
-    "french": "Pieux"
+    "french": "Pieux",
+    "english": "Piles"
   },
   {
     "medumba": "bwòŋsaŋə",
-    "french": "Pigeon"
+    "french": "Pigeon",
+    "english": "Pigeon"
   },
   {
     "medumba": "Ngàsoŋ",
-    "french": "Pilote"
+    "french": "Pilote",
+    "english": "Pilot"
   },
   {
     "medumba": "Ngàcàgtə̀",
-    "french": "Pilote"
+    "french": "Pilote",
+    "english": "Pilot"
   },
   {
     "medumba": "Sàto",
-    "french": "Piment"
+    "french": "Piment",
+    "english": "Chili pepper"
   },
   {
     "medumba": "Sogə",
-    "french": "Piment"
+    "french": "Piment",
+    "english": "Chili pepper"
   },
   {
     "medumba": "Tâmcɛd",
-    "french": "Ping pong"
+    "french": "Ping pong",
+    "english": "Ping pong"
   },
   {
     "medumba": "Kənu",
-    "french": "Pirogue"
+    "french": "Pirogue",
+    "english": "Canoe"
   },
   {
     "medumba": "Ngàsǒŋkə̀nu",
-    "french": "Piroguier"
+    "french": "Piroguier",
+    "english": "Canoeist"
   },
   {
     "medumba": "Nzoꞌ",
-    "french": "Pistache"
+    "french": "Pistache",
+    "english": "Pistachio"
   },
   {
     "medumba": "Kôndɛ̀n",
-    "french": "Pitie̍"
+    "french": "Pitie̍",
+    "english": "Pity"
   },
   {
     "medumba": "Ndɛ̀n",
-    "french": "Pitie̍"
+    "french": "Pitie̍",
+    "english": "Pity"
   },
   {
     "medumba": "Ndɛ̌nnko",
-    "french": "Pitie̍"
+    "french": "Pitie̍",
+    "english": "Pity"
   },
   {
     "medumba": "Nə̀ kondɛ̀n",
-    "french": "Pitie̍ (avoir )"
+    "french": "Pitie̍ (avoir )",
+    "english": "Pity (to have)"
   },
   {
     "medumba": "Dʉ",
-    "french": "Place"
+    "french": "Place",
+    "english": "Square"
   },
   {
     "medumba": "Nsem",
-    "french": "Place publique"
+    "french": "Place publique",
+    "english": "Public square"
   },
   {
     "medumba": "Kekoꞌo",
-    "french": "Plaie"
+    "french": "Plaie",
+    "english": "Wound"
   },
   {
     "medumba": "Lèkètè",
-    "french": "Plaine"
+    "french": "Plaine",
+    "english": "Plain"
   },
   {
     "medumba": "Nə̀ bwɔ̌",
-    "french": "Plaire"
+    "french": "Plaire",
+    "english": "Please"
   },
   {
     "medumba": "Nə̀ kǒmzwì",
-    "french": "Plaisanter"
+    "french": "Plaisanter",
+    "english": "Joking"
   },
   {
     "medumba": "Fiǎŋsoŋə",
-    "french": "Plaisanterie"
+    "french": "Plaisanterie",
+    "english": "Joke"
   },
   {
     "medumba": "Mfìꞌ",
-    "french": "Plan"
+    "french": "Plan",
+    "english": "Map"
   },
   {
     "medumba": "Nsîndα",
-    "french": "Plancher"
+    "french": "Plancher",
+    "english": "Floor"
   },
   {
     "medumba": "Tɛ̌dndα",
-    "french": "Plancher"
+    "french": "Plancher",
+    "english": "Floor"
   },
   {
     "medumba": "Nə̀, siaŋtə nù nǔm",
-    "french": "Plancher sur"
+    "french": "Plancher sur",
+    "english": "Floor on"
   },
   {
     "medumba": "Mbwə̌jum",
-    "french": "Plant"
+    "french": "Plant",
+    "english": "plant"
   },
   {
     "medumba": "Nzwìdju",
-    "french": "Plant"
+    "french": "Plant",
+    "english": "plant"
   },
   {
     "medumba": "Kə̀lɔntʉ̀n",
-    "french": "Plantain"
+    "french": "Plantain",
+    "english": "Plantain"
   },
   {
     "medumba": "Nzwǐntʉ",
-    "french": "Plante (jeune)"
+    "french": "Plante (jeune)",
+    "english": "Plant (young)"
   },
   {
     "medumba": "Bǎnkù",
-    "french": "Plante du pied"
+    "french": "Plante du pied",
+    "english": "Sole of the foot"
   },
   {
     "medumba": "Nzə̌nyì",
-    "french": "Plante (d’hysope)"
+    "french": "Plante (d’hysope)",
+    "english": "Plant (hyssop)"
   },
   {
     "medumba": "Nə̀ ywìlə",
-    "french": "Planter"
+    "french": "Planter",
+    "english": "Plant"
   },
   {
     "medumba": "Nə̀ bwə̌",
-    "french": "Planter"
+    "french": "Planter",
+    "english": "Plant"
   },
   {
     "medumba": "Nə̀ jαgə",
-    "french": "Planter"
+    "french": "Planter",
+    "english": "Plant"
   },
   {
     "medumba": "Ka",
-    "french": "Plat"
+    "french": "Plat",
+    "english": "Dish"
   },
   {
     "medumba": "Nə̀vʉ̌",
-    "french": "Plat"
+    "french": "Plat",
+    "english": "Dish"
   },
   {
     "medumba": "Nə̀nɔ̌nsi",
-    "french": "Plat"
+    "french": "Plat",
+    "english": "Dish"
   },
   {
     "medumba": "Kôngàkəꞌə",
-    "french": "Plateau"
+    "french": "Plateau",
+    "english": "Tray"
   },
   {
     "medumba": "Məkôngà",
-    "french": "Plateau"
+    "french": "Plateau",
+    "english": "Tray"
   },
   {
     "medumba": "Ndunə",
-    "french": "Plein"
+    "french": "Plein",
+    "english": "Full"
   },
   {
     "medumba": "Nə̀dunə",
-    "french": "Plénitude"
+    "french": "Plénitude",
+    "english": "Fullness"
   },
   {
     "medumba": "Kunì",
-    "french": "Plénitude"
+    "french": "Plénitude",
+    "english": "Fullness"
   },
   {
     "medumba": "Nə̀kwaꞌa",
-    "french": "Pleur"
+    "french": "Pleur",
+    "english": "Cry"
   },
   {
     "medumba": "Nə̀ kwaꞌa",
-    "french": "Pleurer"
+    "french": "Pleurer",
+    "english": "Cry"
   },
   {
     "medumba": "Nə̀ lὰnə",
-    "french": "Pleurer"
+    "french": "Pleurer",
+    "english": "Cry"
   },
   {
     "medumba": "Lα̌nnyα",
-    "french": "Pleureur"
+    "french": "Pleureur",
+    "english": "Weeper"
   },
   {
     "medumba": "Nə̀ lo",
-    "french": "Pleuvoir"
+    "french": "Pleuvoir",
+    "english": "Rain"
   },
   {
     "medumba": "Nə̀ bǎmntsə",
-    "french": "Plonger"
+    "french": "Plonger",
+    "english": "Dive"
   },
   {
     "medumba": "Nə̀ nyuꞌntsə",
-    "french": "Plonger"
+    "french": "Plonger",
+    "english": "Dive"
   },
   {
     "medumba": "Nə̀ bi làm",
-    "french": "Plonger"
+    "french": "Plonger",
+    "english": "Dive"
   },
   {
     "medumba": "Mbàŋ",
-    "french": "Pluie"
+    "french": "Pluie",
+    "english": "Rain"
   },
   {
     "medumba": "Ndʉ̌sαnə",
-    "french": "Pluie (saison)"
+    "french": "Pluie (saison)",
+    "english": "Rain (season)"
   },
   {
     "medumba": "Kʉdŋwàꞌni",
-    "french": "Plume"
+    "french": "Plume",
+    "english": "Feather"
   },
   {
     "medumba": "Fə",
-    "french": "Plume (s)"
+    "french": "Plume (s)",
+    "english": "Feather(s)"
   },
   {
     "medumba": "MVƏ̀Ꞌ",
-    "french": "Poche"
+    "french": "Poche",
+    "english": "Pocket"
   },
   {
     "medumba": "Tôꞌbὰm",
-    "french": "Poche"
+    "french": "Poche",
+    "english": "Pocket"
   },
   {
     "medumba": "Ndɛ̀nkʉlə",
-    "french": "Poète"
+    "french": "Poète",
+    "english": "Poet"
   },
   {
     "medumba": "Lɛd",
-    "french": "Poids"
+    "french": "Poids",
+    "english": "Weight"
   },
   {
     "medumba": "Ntòbi",
-    "french": "Poignard"
+    "french": "Poignard",
+    "english": "Dagger"
   },
   {
     "medumba": "Nsὰbi",
-    "french": "Poignard"
+    "french": "Poignard",
+    "english": "Dagger"
   },
   {
     "medumba": "Nə̀ sòbə",
-    "french": "Poignarder"
+    "french": "Poignarder",
+    "english": "Stabbing"
   },
   {
     "medumba": "Bu",
-    "french": "Poigne̍e"
+    "french": "Poigne̍e",
+    "english": "Handle"
   },
   {
     "medumba": "Ndâŋbu (",
-    "french": "Poignet"
+    "french": "Poignet",
+    "english": "Wrist"
   },
   {
     "medumba": "Nyaŋ",
-    "french": "Poil"
+    "french": "Poil",
+    "english": "Hair"
   },
   {
     "medumba": "Nyaŋnyaŋ",
-    "french": "Poilu"
+    "french": "Poilu",
+    "english": "Hairy"
   },
   {
     "medumba": "Tsinə",
-    "french": "Point (.)"
+    "french": "Point (.)",
+    "english": "Period (.)"
   },
   {
     "medumba": "Lα̂gntsə",
-    "french": "Point d’eau"
+    "french": "Point d’eau",
+    "english": "Water point"
   },
   {
     "medumba": "Tsin ncαmə",
-    "french": "Point d’exclamation"
+    "french": "Point d’exclamation",
+    "english": "Exclamation point"
   },
   {
     "medumba": "Tsin mbɛdtə",
-    "french": "Point d’interrogation"
+    "french": "Point d’interrogation",
+    "english": "Question mark"
   },
   {
     "medumba": "Mbumtə̀",
-    "french": "Point d’intersection"
+    "french": "Point d’intersection",
+    "english": "Intersection point"
   },
   {
     "medumba": "Tsin mfaŋə",
-    "french": "Point de supension"
+    "french": "Point de supension",
+    "english": "Suspension point"
   },
   {
     "medumba": "Tsinyoŋ ncʉꞌ",
-    "french": "Point final"
+    "french": "Point final",
+    "english": "Full stop"
   },
   {
     "medumba": "Kʉdfi",
-    "french": "Pointe à bille"
+    "french": "Pointe à bille",
+    "english": "Ball point"
   },
   {
     "medumba": "Kʉ̀lə",
-    "french": "Pointe à e̍crire"
+    "french": "Pointe à e̍crire",
+    "english": "Writing point"
   },
   {
     "medumba": "Kʉdŋwàꞌni",
-    "french": "Pointe à e̍crire"
+    "french": "Pointe à e̍crire",
+    "english": "Writing point"
   },
   {
     "medumba": "Tsin tʉntə",
-    "french": "Points (:) (deux)"
+    "french": "Points (:) (deux)",
+    "english": "Periods (:) (two)"
   },
   {
     "medumba": "Nə̀betə",
-    "french": "Pointu"
+    "french": "Pointu",
+    "english": "Pointed"
   },
   {
     "medumba": "Tsin zwiagə (",
-    "french": "Point-virgule (;)"
+    "french": "Point-virgule (;)",
+    "english": "Semicolon (;)"
   },
   {
     "medumba": "Còŋ",
-    "french": "Poire"
+    "french": "Poire",
+    "english": "Pear"
   },
   {
     "medumba": "Cə̀b",
-    "french": "Poison"
+    "french": "Poison",
+    "english": "Poison"
   },
   {
     "medumba": "Ngǒntsə",
-    "french": "Poisson"
+    "french": "Poisson",
+    "english": "Fish"
   },
   {
     "medumba": "Mbʉ̀m",
-    "french": "Poitrine"
+    "french": "Poitrine",
+    "english": "Chest"
   },
   {
     "medumba": "Ndα̂ntʉ",
-    "french": "Poitrine"
+    "french": "Poitrine",
+    "english": "Chest"
   },
   {
     "medumba": "Mfʉὰgncù",
-    "french": "Poli"
+    "french": "Poli",
+    "english": "Polished"
   },
   {
     "medumba": "Ngàfʉα̌gncu",
-    "french": "Poli"
+    "french": "Poli",
+    "english": "Polished"
   },
   {
     "medumba": "Ngàyǎncù",
-    "french": "Poli"
+    "french": "Poli",
+    "english": "Polished"
   },
   {
     "medumba": "Njàncù",
-    "french": "Poli"
+    "french": "Poli",
+    "english": "Polished"
   },
   {
     "medumba": "Fʉὰgncù (",
-    "french": "Politesse"
+    "french": "Politesse",
+    "english": "Politeness"
   },
   {
     "medumba": "Ngànkʉ̂nkʉ",
-    "french": "Politicien"
+    "french": "Politicien",
+    "english": "Politician"
   },
   {
     "medumba": "Nkʉ̂nkʉ",
-    "french": "Politique"
+    "french": "Politique",
+    "english": "Politics"
   },
   {
     "medumba": "Mfʉ",
-    "french": "Politique"
+    "french": "Politique",
+    "english": "Politics"
   },
   {
     "medumba": "Nǔngɔ̀",
-    "french": "Politique"
+    "french": "Politique",
+    "english": "Politics"
   },
   {
     "medumba": "Nə̀ maꞌa",
-    "french": "Pondre (oeuf)"
+    "french": "Pondre (oeuf)",
+    "english": "Lay (egg)"
   },
   {
     "medumba": "Nkǒꞌntsə",
-    "french": "Pont"
+    "french": "Pont",
+    "english": "Bridge"
   },
   {
     "medumba": "Ngɔ̀",
-    "french": "Population"
+    "french": "Population",
+    "english": "Population"
   },
   {
     "medumba": "Bə̀nntʉ̀n",
-    "french": "Population"
+    "french": "Population",
+    "english": "Population"
   },
   {
     "medumba": "Ngʉ̌nyὰm",
-    "french": "Porc"
+    "french": "Porc",
+    "english": "Pork"
   },
   {
     "medumba": "Nkaꞌngʉ̌nyὰm",
-    "french": "Porcherie"
+    "french": "Porcherie",
+    "english": "Pigsty"
   },
   {
     "medumba": "Ncùntsə (",
-    "french": "Port"
+    "french": "Port",
+    "english": "Port"
   },
   {
     "medumba": "Nzə̀ndα",
-    "french": "Porte"
+    "french": "Porte",
+    "english": "Door"
   },
   {
     "medumba": "Mvvə̀ꞌnkαb",
-    "french": "Porte-monnale"
+    "french": "Porte-monnale",
+    "english": "Wallet"
   },
   {
     "medumba": "Nə̀ kə̀lə",
-    "french": "Porter"
+    "french": "Porter",
+    "english": "Carry"
   },
   {
     "medumba": "Nə̀ ŋaꞌa",
-    "french": "Porter"
+    "french": "Porter",
+    "english": "Carry"
   },
   {
     "medumba": "Nə̀ bǎd mvɛ̀n",
-    "french": "Porter (au dos)"
+    "french": "Porter (au dos)",
+    "english": "Wear (back)"
   },
   {
     "medumba": "Nə̀ yam ntαmə",
-    "french": "Porter (fruit)"
+    "french": "Porter (fruit)",
+    "english": "Bear (fruit)"
   },
   {
     "medumba": "Ngàbenbnzə̀ndα (1/6",
-    "french": "Portier"
+    "french": "Portier",
+    "english": "Doorman"
   },
   {
     "medumba": "Nə̀ yαbə",
-    "french": "Poser"
+    "french": "Poser",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ yαb nsi",
-    "french": "Poser"
+    "french": "Poser",
+    "english": "Ask"
   },
   {
     "medumba": "Ndα̂nkʉ̌nŋwàꞌni",
-    "french": "Poste"
+    "french": "Poste",
+    "english": "Post"
   },
   {
     "medumba": "Nzwìd",
-    "french": "Poste̍rite̍"
+    "french": "Poste̍rite̍",
+    "english": "Posterite"
   },
   {
     "medumba": "Tʉ̌nndα",
-    "french": "Poste̍rite̍"
+    "french": "Poste̍rite̍",
+    "english": "Posterite"
   },
   {
     "medumba": "Kab",
-    "french": "Pot"
+    "french": "Pot",
+    "english": "Jar"
   },
   {
     "medumba": "Ngàtəkab",
-    "french": "Potier"
+    "french": "Potier",
+    "english": "Potter"
   },
   {
     "medumba": "Ngàtecaꞌa",
-    "french": "Potier"
+    "french": "Potier",
+    "english": "Potter"
   },
   {
     "medumba": "Ntə̂kab",
-    "french": "Potier"
+    "french": "Potier",
+    "english": "Potter"
   },
   {
     "medumba": "Ntə̂caꞌa",
-    "french": "Potier"
+    "french": "Potier",
+    "english": "Potter"
   },
   {
     "medumba": "Ncɛ̀d",
-    "french": "Pou"
+    "french": "Pou",
+    "english": "Pou"
   },
   {
     "medumba": "Bwə",
-    "french": "Poudre"
+    "french": "Poudre",
+    "english": "Powder"
   },
   {
     "medumba": "Njòg",
-    "french": "Poudre (à canon)"
+    "french": "Poudre (à canon)",
+    "english": "Powder (gun)"
   },
   {
     "medumba": "Mbâbmbabe",
-    "french": "Poudre (en)"
+    "french": "Poudre (en)",
+    "english": "Powder (in)"
   },
   {
     "medumba": "Ngab",
-    "french": "Poule"
+    "french": "Poule",
+    "english": "Hen"
   },
   {
     "medumba": "Mα̂ngab",
-    "french": "Poule mère"
+    "french": "Poule mère",
+    "english": "Mother hen"
   },
   {
     "medumba": "Bǎgtʉꞌ",
-    "french": "Poumons"
+    "french": "Poumons",
+    "english": "Lungs"
   },
   {
     "medumba": "Cǔꞌntʉ",
-    "french": "Pour"
+    "french": "Pour",
+    "english": "For"
   },
   {
     "medumba": "Nǔm",
-    "french": "Pour"
+    "french": "Pour",
+    "english": "For"
   },
   {
     "medumba": "Mɛ̂nngʉ̌nyὰm",
-    "french": "Pourceau"
+    "french": "Pourceau",
+    "english": "Pig"
   },
   {
     "medumba": "Ŋwǎꞌŋwaꞌ",
-    "french": "Pourpe"
+    "french": "Pourpe",
+    "english": "Purple"
   },
   {
     "medumba": "Nǔmkə̂",
-    "french": "Pourquoi"
+    "french": "Pourquoi",
+    "english": "Why"
   },
   {
     "medumba": "Yaŋkàg",
-    "french": "Pousse-pousse"
+    "french": "Pousse-pousse",
+    "english": "Rickshaw"
   },
   {
     "medumba": "Nə̀ bilə",
-    "french": "Décoler"
+    "french": "Décoler",
+    "english": "Take off"
   },
   {
     "medumba": "Nə̀ tɛnə",
-    "french": "Pousser"
+    "french": "Pousser",
+    "english": "Push"
   },
   {
     "medumba": "Nə̀ cwɛnə",
-    "french": "Pousser"
+    "french": "Pousser",
+    "english": "Push"
   },
   {
     "medumba": "Mbabə",
-    "french": "Poussiere"
+    "french": "Poussiere",
+    "english": "Dust"
   },
   {
     "medumba": "Mɛ̂nngab",
-    "french": "Poussin"
+    "french": "Poussin",
+    "english": "Chick"
   },
   {
     "medumba": "Kǎmncwɛn",
-    "french": "Poutre"
+    "french": "Poutre",
+    "english": "Beam"
   },
   {
     "medumba": "Mbwoŋncwɛn",
-    "french": "Poutre"
+    "french": "Poutre",
+    "english": "Beam"
   },
   {
     "medumba": "Mbàꞌ",
-    "french": "Pouvoir"
+    "french": "Pouvoir",
+    "english": "Power"
   },
   {
     "medumba": "Nə̀ kùꞌnǐ",
-    "french": "Pouvoir"
+    "french": "Pouvoir",
+    "english": "Power"
   },
   {
     "medumba": "Nə̀ta",
-    "french": "Pouvoir"
+    "french": "Pouvoir",
+    "english": "Power"
   },
   {
     "medumba": "Nzə̀mɛn",
-    "french": "Pre̍cepteur"
+    "french": "Pre̍cepteur",
+    "english": "Preceptor"
   },
   {
     "medumba": "Nə̀ cob nǔ nsi",
-    "french": "Prêcher"
+    "french": "Prêcher",
+    "english": "Preach"
   },
   {
     "medumba": "Jûtànjòŋ",
-    "french": "Pre̍cieux"
+    "french": "Pre̍cieux",
+    "english": "Precious"
   },
   {
     "medumba": "Jûkə̀njòŋ",
-    "french": "Pre̍cieux"
+    "french": "Pre̍cieux",
+    "english": "Precious"
   },
   {
     "medumba": "Ghe̍mə",
-    "french": "Pre̍cipice"
+    "french": "Pre̍cipice",
+    "english": "Precipice"
   },
   {
     "medumba": "Nαntə̀",
-    "french": "Pre̍cipitation"
+    "french": "Pre̍cipitation",
+    "english": "Precipitation"
   },
   {
     "medumba": "Faꞌtə̀",
-    "french": "Pre̍cipitation"
+    "french": "Pre̍cipitation",
+    "english": "Precipitation"
   },
   {
     "medumba": "Vògtə̌",
-    "french": "Pre̍cipitation"
+    "french": "Pre̍cipitation",
+    "english": "Precipitation"
   },
   {
     "medumba": "Nə̀ nαntə",
-    "french": "Pre̍cipiter"
+    "french": "Pre̍cipiter",
+    "english": "Rush"
   },
   {
     "medumba": "Nə̀ faꞌtə",
-    "french": "Pre̍cipiter"
+    "french": "Pre̍cipiter",
+    "english": "Rush"
   },
   {
     "medumba": "Nə̀ vògtə̌",
-    "french": "Pre̍cipiter"
+    "french": "Pre̍cipiter",
+    "english": "Rush"
   },
   {
     "medumba": "Ngàcobncobnsi",
-    "french": "Pre̍dicateur"
+    "french": "Pre̍dicateur",
+    "english": "Preacher"
   },
   {
     "medumba": "Ncobnsi",
-    "french": "Pre̍dication"
+    "french": "Pre̍dication",
+    "english": "Preaching"
   },
   {
     "medumba": "Mbwə̀tαmtʉ",
-    "french": "Pre̍mice"
+    "french": "Pre̍mice",
+    "english": "First"
   },
   {
     "medumba": "Mbwə̀",
-    "french": "Premier"
+    "french": "Premier",
+    "english": "First"
   },
   {
     "medumba": "Mbwə̀mɛn",
-    "french": "Premier fils"
+    "french": "Premier fils",
+    "english": "First son"
   },
   {
     "medumba": "Tûswə",
-    "french": "Premier fils"
+    "french": "Premier fils",
+    "english": "First son"
   },
   {
     "medumba": "Nə̀ kwe",
-    "french": "Prendre"
+    "french": "Prendre",
+    "english": "Take"
   },
   {
     "medumba": "Nə̀ lòꞌo",
-    "french": "Prendre"
+    "french": "Prendre",
+    "english": "Take"
   },
   {
     "medumba": "Nə̀ fedtə",
-    "french": "Prendre de force"
+    "french": "Prendre de force",
+    "english": "Take by force"
   },
   {
     "medumba": "Nə̀ kwə nə̀ta",
-    "french": "Prendre de force"
+    "french": "Prendre de force",
+    "english": "Take by force"
   },
   {
     "medumba": "Nə̀ kwə tʉ̀n",
-    "french": "Prendre de force"
+    "french": "Prendre de force",
+    "english": "Take by force"
   },
   {
     "medumba": "Nə̀ mǐ",
-    "french": "Prendre fin"
+    "french": "Prendre fin",
+    "english": "End"
   },
   {
     "medumba": "Ngansα",
-    "french": "Presdigitateur"
+    "french": "Presdigitateur",
+    "english": "Presdigitator"
   },
   {
     "medumba": "Ngaghʉ̌məsin",
-    "french": "Presdigitation"
+    "french": "Presdigitation",
+    "english": "Presdigitation"
   },
   {
     "medumba": "Nsα",
-    "french": "Presdigitation"
+    "french": "Presdigitation",
+    "english": "Presdigitation"
   },
   {
     "medumba": "Məsin",
-    "french": "Pre̍sent"
+    "french": "Pre̍sent",
+    "english": "Present"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Pre̍sent (le)"
+    "french": "Pre̍sent (le)",
+    "english": "Present (the)"
   },
   {
     "medumba": "Ndɔ̌nni",
-    "french": "Pre̍sent (le)"
+    "french": "Pre̍sent (le)",
+    "english": "Present (the)"
   },
   {
     "medumba": "Fìm",
-    "french": "Pre̍sservatif"
+    "french": "Pre̍sservatif",
+    "english": "Condom"
   },
   {
     "medumba": "Tα̂kum",
-    "french": "Président"
+    "french": "Président",
+    "english": "President"
   },
   {
     "medumba": "Tα̂mαnjɔ̀",
-    "french": "Président"
+    "french": "Président",
+    "english": "President"
   },
   {
     "medumba": "Tα̂ndα",
-    "french": "Président"
+    "french": "Président",
+    "english": "President"
   },
   {
     "medumba": "Tα̂ngɔ̀",
-    "french": "Président"
+    "french": "Président",
+    "english": "President"
   },
   {
     "medumba": "Nə̀nαntə",
-    "french": "Pressant"
+    "french": "Pressant",
+    "english": "Pressing"
   },
   {
     "medumba": "Ntsənetamə",
-    "french": "Pressentiment"
+    "french": "Pressentiment",
+    "english": "Presentiment"
   },
   {
     "medumba": "Nə̀ nαntə",
-    "french": "Presser"
+    "french": "Presser",
+    "english": "Squeeze"
   },
   {
     "medumba": "Nə̀ nyi",
-    "french": "Presser"
+    "french": "Presser",
+    "english": "Squeeze"
   },
   {
     "medumba": "Cὰb",
-    "french": "Pressoir"
+    "french": "Pressoir",
+    "english": "Press"
   },
   {
     "medumba": "Nə̀ lôꞌfα",
-    "french": "Prêt (être)"
+    "french": "Prêt (être)",
+    "english": "Ready (to be)"
   },
   {
     "medumba": "Nə̀ bǎb ndʉ",
-    "french": "Pre̍tendre"
+    "french": "Pre̍tendre",
+    "english": "Pretend"
   },
   {
     "medumba": "Nə̀ buꞌbum",
-    "french": "Pre̍tencieux"
+    "french": "Pre̍tencieux",
+    "english": "Pretentious"
   },
   {
     "medumba": "Nə fǒ",
-    "french": "Prêter"
+    "french": "Prêter",
+    "english": "Lend"
   },
   {
     "medumba": "Nə̀ kʉꞌ ntoŋ",
-    "french": "Prêter attention"
+    "french": "Prêter attention",
+    "english": "Pay attention"
   },
   {
     "medumba": "Nə̀ cwɛ̀lə",
-    "french": "Prêter sur gage"
+    "french": "Prêter sur gage",
+    "english": "Pawn"
   },
   {
     "medumba": "Nə̀ yαb cwɛd",
-    "french": "Prêter sur gage"
+    "french": "Prêter sur gage",
+    "english": "Pawn"
   },
   {
     "medumba": "Lǎdnta",
-    "french": "Prétexte"
+    "french": "Prétexte",
+    "english": "Pretext"
   },
   {
     "medumba": "Nə̀ lǎdnta",
-    "french": "Prétexter"
+    "french": "Prétexter",
+    "english": "Pretext"
   },
   {
     "medumba": "Nkâmnsi",
-    "french": "Prête"
+    "french": "Prête",
+    "english": "Ready"
   },
   {
     "medumba": "Kə̀ki",
-    "french": "Preuve"
+    "french": "Preuve",
+    "english": "Proof"
   },
   {
     "medumba": "Mf̀ꞌ",
-    "french": "Preuve"
+    "french": "Preuve",
+    "english": "Proof"
   },
   {
     "medumba": "Nə̀ lə̀ꞌtə̌",
-    "french": "Prier"
+    "french": "Prier",
+    "english": "Pray"
   },
   {
     "medumba": "Nə̀ mǎꞌmbu",
-    "french": "Prier"
+    "french": "Prier",
+    "english": "Pray"
   },
   {
     "medumba": "Nə̀ buꞌmbu",
-    "french": "Prier"
+    "french": "Prier",
+    "english": "Pray"
   },
   {
     "medumba": "Nə̀ lə̀ꞌtə̌ Nsi",
-    "french": "Prier dieu"
+    "french": "Prier dieu",
+    "english": "pray to god"
   },
   {
     "medumba": "Lə̀ꞌtə̀",
-    "french": "Prière"
+    "french": "Prière",
+    "english": "Prayer"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Prime"
+    "french": "Prime",
+    "english": "Bonus"
   },
   {
     "medumba": "Nə̀ jʉǎ mɛ̀n",
-    "french": "Primer"
+    "french": "Primer",
+    "english": "Primer"
   },
   {
     "medumba": "Nə̀ fα ndà",
-    "french": "Primer"
+    "french": "Primer",
+    "english": "Primer"
   },
   {
     "medumba": "Mɛ̂nmfə̀n",
-    "french": "Prince"
+    "french": "Prince",
+    "english": "Prince"
   },
   {
     "medumba": "Mɛ̀nndʉb",
-    "french": "Principal"
+    "french": "Principal",
+    "english": "Main"
   },
   {
     "medumba": "Ndα̂ca",
-    "french": "Prison"
+    "french": "Prison",
+    "english": "Jail"
   },
   {
     "medumba": "Ca",
-    "french": "Prison"
+    "french": "Prison",
+    "english": "Jail"
   },
   {
     "medumba": "Ngàndα̂ca",
-    "french": "Prisonnier"
+    "french": "Prisonnier",
+    "english": "Prisoner"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Prix"
+    "french": "Prix",
+    "english": "Price"
   },
   {
     "medumba": "Njòŋ",
-    "french": "Prix"
+    "french": "Prix",
+    "english": "Price"
   },
   {
     "medumba": "Cǒꞌnguꞌ",
-    "french": "Prix"
+    "french": "Prix",
+    "english": "Price"
   },
   {
     "medumba": "Kamə",
-    "french": "Procès"
+    "french": "Procès",
+    "english": "Trial"
   },
   {
     "medumba": "Ncà",
-    "french": "Procès"
+    "french": "Procès",
+    "english": "Trial"
   },
   {
     "medumba": "Nə̀ soŋə",
-    "french": "Proclamer"
+    "french": "Proclamer",
+    "english": "Proclaim"
   },
   {
     "medumba": "Ngàbαgtὰkə̀siaŋ",
-    "french": "Prodigue"
+    "french": "Prodigue",
+    "english": "Prodigal"
   },
   {
     "medumba": "Bìn",
-    "french": "Profit"
+    "french": "Profit",
+    "english": "Profit"
   },
   {
     "medumba": "Nə̀ jʉbin",
-    "french": "Profiter"
+    "french": "Profiter",
+    "english": "Enjoy"
   },
   {
     "medumba": "Ngàjʉnbìn",
-    "french": "Profiteur"
+    "french": "Profiteur",
+    "english": "Profiteer"
   },
   {
     "medumba": "Njʉ̂bìn",
-    "french": "Profiteur"
+    "french": "Profiteur",
+    "english": "Profiteer"
   },
   {
     "medumba": "Co",
-    "french": "Profond"
+    "french": "Profond",
+    "english": "Deep"
   },
   {
     "medumba": "Mαnjàmnsi",
-    "french": "Profondeur"
+    "french": "Profondeur",
+    "english": "Depth"
   },
   {
     "medumba": "Nə̀co",
-    "french": "Profondeur"
+    "french": "Profondeur",
+    "english": "Depth"
   },
   {
     "medumba": "Lǎmntsə",
-    "french": "Profondeu d’eau"
+    "french": "Profondeu d’eau",
+    "english": "Water depth"
   },
   {
     "medumba": "Nyînnso",
-    "french": "Prognate"
+    "french": "Prognate",
+    "english": "Prognate"
   },
   {
     "medumba": "Mfîꞌnə̀maꞌa",
-    "french": "Projet"
+    "french": "Projet",
+    "english": "Project"
   },
   {
     "medumba": "Nə̀ maꞌa mfìꞌ",
-    "french": "Projet (avoir un)"
+    "french": "Projet (avoir un)",
+    "english": "Project (have one)"
   },
   {
     "medumba": "Nkadtə̀",
-    "french": "Promenade"
+    "french": "Promenade",
+    "english": "Walk"
   },
   {
     "medumba": "Nə̀ kadtə",
-    "french": "Promener"
+    "french": "Promener",
+    "english": "Walk"
   },
   {
     "medumba": "Nə̀ zìnə",
-    "french": "Promener"
+    "french": "Promener",
+    "english": "Walk"
   },
   {
     "medumba": "Nə̀ zintə̌",
-    "french": "Promener"
+    "french": "Promener",
+    "english": "Walk"
   },
   {
     "medumba": "Ngàzìn",
-    "french": "Promeneur"
+    "french": "Promeneur",
+    "english": "Walker"
   },
   {
     "medumba": "Nkàꞌnì",
-    "french": "Promesse"
+    "french": "Promesse",
+    "english": "Promise"
   },
   {
     "medumba": "Nə̀ kaꞌa",
-    "french": "Promettre"
+    "french": "Promettre",
+    "english": "Promise"
   },
   {
     "medumba": "Nə̀ bʉ",
-    "french": "Promettre"
+    "french": "Promettre",
+    "english": "Promise"
   },
   {
     "medumba": "Ncobnsi",
-    "french": "Prophe̍tie"
+    "french": "Prophe̍tie",
+    "english": "Prophecy"
   },
   {
     "medumba": "Ngàntûmnsi",
-    "french": "Prophète"
+    "french": "Prophète",
+    "english": "Prophet"
   },
   {
     "medumba": "Lαnə",
-    "french": "Proprete̍"
+    "french": "Proprete̍",
+    "english": "Clean"
   },
   {
     "medumba": "Ced",
-    "french": "Proprete̍̍"
+    "french": "Proprete̍̍",
+    "english": "Clean"
   },
   {
     "medumba": "Nə̀ kwǐmntunkə̀kwiꞌnsi",
-    "french": "Prosterner"
+    "french": "Prosterner",
+    "english": "Prostrate"
   },
   {
     "medumba": "Nə̀ vʉ̌nsi mbwə̌ mɛ̀n",
-    "french": "Prosterner"
+    "french": "Prosterner",
+    "english": "Prostrate"
   },
   {
     "medumba": "Kâdtʉ",
-    "french": "Prostitue̍e"
+    "french": "Prostitue̍e",
+    "english": "Prostitute"
   },
   {
     "medumba": "Taα̂nkʉd",
-    "french": "Proverbe"
+    "french": "Proverbe",
+    "english": "Proverb"
   },
   {
     "medumba": "Kǎmnɔ̀",
-    "french": "Province"
+    "french": "Province",
+    "english": "Province"
   },
   {
     "medumba": "Nə̀kǎm ncà",
-    "french": "Provocation"
+    "french": "Provocation",
+    "english": "Provocation"
   },
   {
     "medumba": "Nə̀ kàmə ncà",
-    "french": "Provoquer"
+    "french": "Provoquer",
+    "english": "Provoke"
   },
   {
     "medumba": "Zətə̀",
-    "french": "Prudence"
+    "french": "Prudence",
+    "english": "Caution"
   },
   {
     "medumba": "Com",
-    "french": "Prune"
+    "french": "Prune",
+    "english": "Plum"
   },
   {
     "medumba": "Tʉcom",
-    "french": "Prunier"
+    "french": "Prunier",
+    "english": "Plum tree"
   },
   {
     "medumba": "Nə̀ sǎ kʉ̀n",
-    "french": "Publier une nouvelle"
+    "french": "Publier une nouvelle",
+    "english": "Publish a news"
   },
   {
     "medumba": "Nə̀ ŋwàlə",
-    "french": "Puiser"
+    "french": "Puiser",
+    "english": "Draw"
   },
   {
     "medumba": "Nə̀ tuꞌu",
-    "french": "Puiser"
+    "french": "Puiser",
+    "english": "Draw"
   },
   {
     "medumba": "Ngàtuꞌ",
-    "french": "Puiseur"
+    "french": "Puiseur",
+    "english": "Drawer"
   },
   {
     "medumba": "Nə̀ta",
-    "french": "Puissance"
+    "french": "Puissance",
+    "english": "Power"
   },
   {
     "medumba": "Mbàꞌ",
-    "french": "Puissance"
+    "french": "Puissance",
+    "english": "Power"
   },
   {
     "medumba": "Fə̀d",
-    "french": "Puissance"
+    "french": "Puissance",
+    "english": "Power"
   },
   {
     "medumba": "Mɛ̀nmbàꞌ",
-    "french": "Puissant"
+    "french": "Puissant",
+    "english": "Powerful"
   },
   {
     "medumba": "Nə̀ta",
-    "french": "Puissant"
+    "french": "Puissant",
+    "english": "Powerful"
   },
   {
     "medumba": "Ngànə̀ta",
-    "french": "Puissant"
+    "french": "Puissant",
+    "english": "Powerful"
   },
   {
     "medumba": "Tɔntsə",
-    "french": "Puits"
+    "french": "Puits",
+    "english": "Well"
   },
   {
     "medumba": "Cǎŋntsə",
-    "french": "Pure̍e"
+    "french": "Pure̍e",
+    "english": "Pure̍e"
   },
   {
     "medumba": "Nswə",
-    "french": "Pus"
+    "french": "Pus",
+    "english": "Pus"
   },
   {
     "medumba": "Nyὰmnkùnkuα",
-    "french": "Quadrupède"
+    "french": "Quadrupède",
+    "english": "Quadruped"
   },
   {
     "medumba": "Ŋâmnkuα",
-    "french": "Quarante"
+    "french": "Quarante",
+    "english": "Forty"
   },
   {
     "medumba": "Tǎŋlaꞌ",
-    "french": "Quartier"
+    "french": "Quartier",
+    "english": "Neighborhood"
   },
   {
     "medumba": "Kuὰ",
-    "french": "Quatre"
+    "french": "Quatre",
+    "english": "Four"
   },
   {
     "medumba": "Mbadtə̀ kuὰ",
-    "french": "Quatrième"
+    "french": "Quatrième",
+    "english": "Fourth"
   },
   {
     "medumba": "Mbə",
-    "french": "Que"
+    "french": "Que",
+    "english": "What"
   },
   {
     "medumba": "Mi",
-    "french": "Que"
+    "french": "Que",
+    "english": "What"
   },
   {
     "medumba": "Tsə",
-    "french": "Que"
+    "french": "Que",
+    "english": "What"
   },
   {
     "medumba": "Zə",
-    "french": "Que"
+    "french": "Que",
+    "english": "What"
   },
   {
     "medumba": "Mîlə",
-    "french": "Quel"
+    "french": "Quel",
+    "english": "What"
   },
   {
     "medumba": "Sîlə",
-    "french": "Quel"
+    "french": "Quel",
+    "english": "What"
   },
   {
     "medumba": "Zîlə",
-    "french": "Quel"
+    "french": "Quel",
+    "english": "What"
   },
   {
     "medumba": "Tsîlə",
-    "french": "Quels"
+    "french": "Quels",
+    "english": "What"
   },
   {
     "medumba": "Mǒꞌ mɛ̀n",
-    "french": "Quelqu’un"
+    "french": "Quelqu’un",
+    "english": "someone"
   },
   {
     "medumba": "Môꞌ , môꞌ",
-    "french": "Quelque"
+    "french": "Quelque",
+    "english": "Some"
   },
   {
     "medumba": "Môꞌdʉꞌ",
-    "french": "Quelque part"
+    "french": "Quelque part",
+    "english": "Somewhere"
   },
   {
     "medumba": "Mimôꞌ",
-    "french": "Quelques"
+    "french": "Quelques",
+    "english": "Some"
   },
   {
     "medumba": "Tsə̀môꞌ",
-    "french": "Quelques"
+    "french": "Quelques",
+    "english": "Some"
   },
   {
     "medumba": "Nə̀ mǎꞌ mbu",
-    "french": "Que̍mander"
+    "french": "Que̍mander",
+    "english": "What to ask"
   },
   {
     "medumba": "Màꞌ mbu",
-    "french": "Que̍mandeur"
+    "french": "Que̍mandeur",
+    "english": "Que̍demander"
   },
   {
     "medumba": "Ndà",
-    "french": "Querelle"
+    "french": "Querelle",
+    "english": "Quarrel"
   },
   {
     "medumba": "Ntànta",
-    "french": "Querelle"
+    "french": "Querelle",
+    "english": "Quarrel"
   },
   {
     "medumba": "Ncà",
-    "french": "Querelle"
+    "french": "Querelle",
+    "english": "Quarrel"
   },
   {
     "medumba": "Nə̀ caŋ ncà",
-    "french": "Quereller"
+    "french": "Quereller",
+    "english": "Quarrel"
   },
   {
     "medumba": "Nə̀ cog ndà",
-    "french": "Quereller"
+    "french": "Quereller",
+    "english": "Quarrel"
   },
   {
     "medumba": "Nə̀ saꞌ ncà",
-    "french": "Quereller (se)"
+    "french": "Quereller (se)",
+    "english": "Quarrel"
   },
   {
     "medumba": "Ngàntàntà",
-    "french": "Querelleur"
+    "french": "Querelleur",
+    "english": "Quarrelsome"
   },
   {
     "medumba": "Ngàcaŋncà",
-    "french": "Querelleur"
+    "french": "Querelleur",
+    "english": "Quarrelsome"
   },
   {
     "medumba": "Nkùn",
-    "french": "Queue"
+    "french": "Queue",
+    "english": "Tail"
   },
   {
     "medumba": "Swa",
-    "french": "Queue"
+    "french": "Queue",
+    "english": "Tail"
   },
   {
     "medumba": "Swadiaŋə",
-    "french": "Queue de parade"
+    "french": "Queue de parade",
+    "english": "Parade tail"
   },
   {
     "medumba": "Tsə",
-    "french": "Qui"
+    "french": "Qui",
+    "english": "Who"
   },
   {
     "medumba": "Wə",
-    "french": "Qui"
+    "french": "Qui",
+    "english": "Who"
   },
   {
     "medumba": "Zə",
-    "french": "Qui"
+    "french": "Qui",
+    "english": "Who"
   },
   {
     "medumba": "Bə twə nzə",
-    "french": "Qui vive"
+    "french": "Qui vive",
+    "english": "Who lives"
   },
   {
     "medumba": "Mɛ̌nzə",
-    "french": "Quiconque"
+    "french": "Quiconque",
+    "english": "Anyone"
   },
   {
     "medumba": "Mbὰ welo ze",
-    "french": "Quiconque"
+    "french": "Quiconque",
+    "english": "Anyone"
   },
   {
     "medumba": "Nə̀ lǒ",
-    "french": "Quitter"
+    "french": "Quitter",
+    "english": "Exit"
   },
   {
     "medumba": "Kə",
-    "french": "Quoi"
+    "french": "Quoi",
+    "english": "What"
   },
   {
     "medumba": "Nə̀ komə",
-    "french": "Raboter"
+    "french": "Raboter",
+    "english": "Plane"
   },
   {
     "medumba": "Nzwìd",
-    "french": "Race"
+    "french": "Race",
+    "english": "Breed"
   },
   {
     "medumba": "Nə̀cùꞌu",
-    "french": "Rachat"
+    "french": "Rachat",
+    "english": "Redemption"
   },
   {
     "medumba": "Nə̀ cuꞌu",
-    "french": "Racheter"
+    "french": "Racheter",
+    "english": "Redeem"
   },
   {
     "medumba": "Nga",
-    "french": "Racine"
+    "french": "Racine",
+    "english": "Root"
   },
   {
     "medumba": "Ngǎtʉ",
-    "french": "Racine (arbre)"
+    "french": "Racine (arbre)",
+    "english": "Root (tree)"
   },
   {
     "medumba": "Ngǎnkʉα",
-    "french": "Racine de raphia"
+    "french": "Racine de raphia",
+    "english": "Raffia root"
   },
   {
     "medumba": "Nə̀ soŋə",
-    "french": "Raconter"
+    "french": "Raconter",
+    "english": "Tell"
   },
   {
     "medumba": "Nsàfoŋə",
-    "french": "Radio diffusion"
+    "french": "Radio diffusion",
+    "english": "Radio broadcasting"
   },
   {
     "medumba": "Ndα̂nsàfoŋə",
-    "french": "Radio (maison de la)"
+    "french": "Radio (maison de la)",
+    "english": "Radio (home of)"
   },
   {
     "medumba": "Nkwə̂foŋə",
-    "french": "Radio (re̍cepteur)"
+    "french": "Radio (re̍cepteur)",
+    "english": "Radio (receiver)"
   },
   {
     "medumba": "Saŋntâ",
-    "french": "Raide"
+    "french": "Raide",
+    "english": "Stiff"
   },
   {
     "medumba": "Nə̀ saŋntâ",
-    "french": "Raidir"
+    "french": "Raidir",
+    "english": "Stiffen"
   },
   {
     "medumba": "Mbǎtsi",
-    "french": "Raisin"
+    "french": "Raisin",
+    "english": "Grape"
   },
   {
     "medumba": "Buꞌmfə",
-    "french": "Rame paplers"
+    "french": "Rame paplers",
+    "english": "Oar paplers"
   },
   {
     "medumba": "Cuꞌwud",
-    "french": "Rac̩on"
+    "french": "Rac̩on",
+    "english": "Rac̩on"
   },
   {
     "medumba": "Mbaŋə",
-    "french": "Rancune"
+    "french": "Rancune",
+    "english": "Grudge"
   },
   {
     "medumba": "Nə̀ laŋ mbaŋə",
-    "french": "Rancune (garder)"
+    "french": "Rancune (garder)",
+    "english": "Grudge (keep)"
   },
   {
     "medumba": "Ngà laŋmbaŋə",
-    "french": "Rancunier"
+    "french": "Rancunier",
+    "english": "Resentful"
   },
   {
     "medumba": "Nka",
-    "french": "Rang"
+    "french": "Rang",
+    "english": "Rank"
   },
   {
     "medumba": "Nə̀ tə nka",
-    "french": "Ranger"
+    "french": "Ranger",
+    "english": "Put away"
   },
   {
     "medumba": "Nkʉα",
-    "french": "Raphia"
+    "french": "Raphia",
+    "english": "Raffia"
   },
   {
     "medumba": "Nkʉα labə",
-    "french": "Raphia du mare̍cage"
+    "french": "Raphia du mare̍cage",
+    "english": "Swamp raffia"
   },
   {
     "medumba": "Nkʉα tɛ̀dbenə",
-    "french": "Raphia de haute tèrre"
+    "french": "Raphia de haute tèrre",
+    "english": "high earth raffia"
   },
   {
     "medumba": "Nə̀ diaŋ nkʉα",
-    "french": "Raphia vigner le"
+    "french": "Raphia vigner le",
+    "english": "Raffia vine"
   },
   {
     "medumba": "Nə̀ to nkʉα",
-    "french": "Raphia faire le trou"
+    "french": "Raphia faire le trou",
+    "english": "Raffia make the hole"
   },
   {
     "medumba": "Nə̀ coꞌnkʉα",
-    "french": "Raphia enleve̍"
+    "french": "Raphia enleve̍",
+    "english": "Raffia removed"
   },
   {
     "medumba": "Nə̀ kα̌g nkʉα",
-    "french": "Raphia laisser au repos"
+    "french": "Raphia laisser au repos",
+    "english": "Raffia leave to rest"
   },
   {
     "medumba": "Tα̂fàꞌ",
-    "french": "Patron"
+    "french": "Patron",
+    "english": "Boss"
   },
   {
     "medumba": "Ntɛ̂nnkʉα",
-    "french": "Raphia pied de"
+    "french": "Raphia pied de",
+    "english": "Raffia foot"
   },
   {
     "medumba": "Nə̀kwimtə",
-    "french": "Rappel"
+    "french": "Rappel",
+    "english": "Reminder"
   },
   {
     "medumba": "Nə̀ kwimtə",
-    "french": "Rappeller"
+    "french": "Rappeller",
+    "english": "Remind"
   },
   {
     "medumba": "Nə̀ komə",
-    "french": "Raser"
+    "french": "Raser",
+    "english": "Shave"
   },
   {
     "medumba": "Nə̀ kom tu",
-    "french": "Raser (tête)"
+    "french": "Raser (tête)",
+    "english": "Shave (head)"
   },
   {
     "medumba": "Shuaꞌ",
-    "french": "Rasoir (lame)"
+    "french": "Rasoir (lame)",
+    "english": "Razor (blade)"
   },
   {
     "medumba": "Lisὰ",
-    "french": "Rasoir (lame)"
+    "french": "Rasoir (lame)",
+    "english": "Razor (blade)"
   },
   {
     "medumba": "Nə̀ywɛlə",
-    "french": "Rassasie̍"
+    "french": "Rassasie̍",
+    "english": "Satisfied"
   },
   {
     "medumba": "Nə̀ kʉmtə",
-    "french": "Rassembler"
+    "french": "Rassembler",
+    "english": "Gather"
   },
   {
     "medumba": "Nə̀ tsəꞌtə",
-    "french": "Rassembler"
+    "french": "Rassembler",
+    "english": "Gather"
   },
   {
     "medumba": "Nsàm",
-    "french": "Rassi"
+    "french": "Rassi",
+    "english": "Rassi"
   },
   {
     "medumba": "Mbα̂bndun",
-    "french": "Rat"
+    "french": "Rat",
+    "english": "Rat"
   },
   {
     "medumba": "Nsame",
-    "french": "Ravin"
+    "french": "Ravin",
+    "english": "Ravine"
   },
   {
     "medumba": "Nkǒꞌndα",
-    "french": "Rayons"
+    "french": "Rayons",
+    "english": "Rays"
   },
   {
     "medumba": "Nkòꞌ",
-    "french": "Rayon (boutique)"
+    "french": "Rayon (boutique)",
+    "english": "Department (store)"
   },
   {
     "medumba": "Kǒnyàm",
-    "french": "Rayon (soleil)"
+    "french": "Rayon (soleil)",
+    "english": "Ray (sun)"
   },
   {
     "medumba": "Nkɔ",
-    "french": "Rayons"
+    "french": "Rayons",
+    "english": "Rays"
   },
   {
     "medumba": "Ngatǎtu",
-    "french": "Rebelle"
+    "french": "Rebelle",
+    "english": "Rebel"
   },
   {
     "medumba": "Tǎtu",
-    "french": "Rebellion"
+    "french": "Rebellion",
+    "english": "Rebellion"
   },
   {
     "medumba": "Nə̀ kwe",
-    "french": "Recevoir"
+    "french": "Recevoir",
+    "english": "Receive"
   },
   {
     "medumba": "Nə̀ lǒꞌmɛ̀n ngʉ̀n",
-    "french": "Recevoir qqn"
+    "french": "Recevoir qqn",
+    "english": "Receive someone"
   },
   {
     "medumba": "Nə̀ tatə ngʉ̀n",
-    "french": "Recevoir qqn"
+    "french": "Recevoir qqn",
+    "english": "Receive someone"
   },
   {
     "medumba": "Côbtu",
-    "french": "Re̍cit"
+    "french": "Re̍cit",
+    "english": "Story"
   },
   {
     "medumba": "Côbtu",
-    "french": "Re̍citation"
+    "french": "Re̍citation",
+    "english": "Recitation"
   },
   {
     "medumba": "Jûntsə",
-    "french": "Re̍cipient"
+    "french": "Re̍cipient",
+    "english": "Container"
   },
   {
     "medumba": "Cûnə̀coꞌo",
-    "french": "Re̍colte"
+    "french": "Re̍colte",
+    "english": "Harvest"
   },
   {
     "medumba": "Nə̀ coꞌcu",
-    "french": "Re̍colter"
+    "french": "Re̍colter",
+    "english": "Harvest"
   },
   {
     "medumba": "Nt̀hgə",
-    "french": "Recommandation"
+    "french": "Recommandation",
+    "english": "Recommendation"
   },
   {
     "medumba": "Nə̀ tswə̀ꞌtə̌",
-    "french": "Recommander"
+    "french": "Recommander",
+    "english": "Recommend"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Re̍compense"
+    "french": "Re̍compense",
+    "english": "Reward"
   },
   {
     "medumba": "Ndàꞌntum",
-    "french": "Re̍compense"
+    "french": "Re̍compense",
+    "english": "Reward"
   },
   {
     "medumba": "Côꞌfàꞌ",
-    "french": "Re̍compense"
+    "french": "Re̍compense",
+    "english": "Reward"
   },
   {
     "medumba": "Nə̀ fα ndàꞌ",
-    "french": "Re̍compenser"
+    "french": "Re̍compenser",
+    "english": "Reward"
   },
   {
     "medumba": "Nə̀ coꞌ faꞌ",
-    "french": "Re̍compenser"
+    "french": "Re̍compenser",
+    "english": "Reward"
   },
   {
     "medumba": "Mfɛdni",
-    "french": "Re̍concilliation"
+    "french": "Re̍concilliation",
+    "english": "Reconciliation"
   },
   {
     "medumba": "Nə̀ bə ncùncʉꞌ",
-    "french": "Re̍concilliation"
+    "french": "Re̍concilliation",
+    "english": "Reconciliation"
   },
   {
     "medumba": "Nə kam nèyabe",
-    "french": "Re̍concilliation"
+    "french": "Re̍concilliation",
+    "english": "Reconciliation"
   },
   {
     "medumba": "Nə̀ nkɔ̀nì nèsǒ",
-    "french": "Re̍concillietion"
+    "french": "Re̍concillietion",
+    "english": "Reconciliation"
   },
   {
     "medumba": "Nə̀ ghǒꞌ mfɛdnì",
-    "french": "Re̍concilier"
+    "french": "Re̍concilier",
+    "english": "Reconcile"
   },
   {
     "medumba": "Nə̀ sǒ nkɔ̀nì",
-    "french": "Re̍concilier"
+    "french": "Re̍concilier",
+    "english": "Reconcile"
   },
   {
     "medumba": "Nə̀ yab kamə",
-    "french": "Re̍concilier"
+    "french": "Re̍concilier",
+    "english": "Reconcile"
   },
   {
     "medumba": "Nə̀ lǒ ntʉ̀ nɛ̂n càm",
-    "french": "Re̍concilier (se)"
+    "french": "Re̍concilier (se)",
+    "english": "Reconcile"
   },
   {
     "medumba": "Nə̀ tswə ncùncʉꞌ (V",
-    "french": "Re̍concilier"
+    "french": "Re̍concilier",
+    "english": "Reconcile"
   },
   {
     "medumba": "Nə̀tsiagte",
-    "french": "Rectification"
+    "french": "Rectification",
+    "english": "Rectification"
   },
   {
     "medumba": "Nə̀ tsiagtə",
-    "french": "Rectifier"
+    "french": "Rectifier",
+    "english": "Rectify"
   },
   {
     "medumba": "Nə̀ lǒꞌ ntʉ̀ nɛ̂n càm",
-    "french": "Recueillement"
+    "french": "Recueillement",
+    "english": "Collection"
   },
   {
     "medumba": "Nə̀ lədtə",
-    "french": "Recueillir"
+    "french": "Recueillir",
+    "english": "Collect"
   },
   {
     "medumba": "nə̀ kʉmtə",
-    "french": "Recueillir"
+    "french": "Recueillir",
+    "english": "Collect"
   },
   {
     "medumba": "Nə̀ bɛ̂nnjàmnjàm",
-    "french": "Reculer"
+    "french": "Reculer",
+    "english": "Back"
   },
   {
     "medumba": "Ne kʉꞌtə",
-    "french": "Reculer"
+    "french": "Reculer",
+    "english": "Back"
   },
   {
     "medumba": "Nə̀ bɛ̀ntə̀ tùntùn",
-    "french": "Reculer"
+    "french": "Reculer",
+    "english": "Back"
   },
   {
     "medumba": "Kwànkî",
-    "french": "Re̍daction"
+    "french": "Re̍daction",
+    "english": "Writing"
   },
   {
     "medumba": "Lɛ̀nnkî",
-    "french": "Re̍daction"
+    "french": "Re̍daction",
+    "english": "Writing"
   },
   {
     "medumba": "Nə̀kǐ",
-    "french": "Re̍daction"
+    "french": "Re̍daction",
+    "english": "Writing"
   },
   {
     "medumba": "Ngàcǔꞌmɛ̀n",
-    "french": "Re̍dempteur"
+    "french": "Re̍dempteur",
+    "english": "Redeemer"
   },
   {
     "medumba": "Ngàyǒgmɛ̀n",
-    "french": "Re̍dempteur"
+    "french": "Re̍dempteur",
+    "english": "Redeemer"
   },
   {
     "medumba": "Ncùꞌmɛ̀n",
-    "french": "Re̍dempteur"
+    "french": "Re̍dempteur",
+    "english": "Redeemer"
   },
   {
     "medumba": "Nəcǔꞌwud",
-    "french": "Re̍demption"
+    "french": "Re̍demption",
+    "english": "Redemption"
   },
   {
     "medumba": "Ngànjo",
-    "french": "Redevable"
+    "french": "Redevable",
+    "english": "Accountable"
   },
   {
     "medumba": "Nə̀tsiagtə",
-    "french": "Redressement"
+    "french": "Redressement",
+    "english": "Recovery"
   },
   {
     "medumba": "Nə̀ tsiagtə",
-    "french": "Redresser"
+    "french": "Redresser",
+    "english": "Straighten"
   },
   {
     "medumba": "Nə̀ bʉꞌ ntətʉ",
-    "french": "Redresser"
+    "french": "Redresser",
+    "english": "Straighten"
   },
   {
     "medumba": "Nə tə ndǎŋndaŋ",
-    "french": "Redresser"
+    "french": "Redresser",
+    "english": "Straighten"
   },
   {
     "medumba": "Nə̀ kwàtə̌",
-    "french": "Re̍flechir"
+    "french": "Re̍flechir",
+    "english": "Reflect"
   },
   {
     "medumba": "Nə̀bɛ̌n nùm kǒ nù (1/6",
-    "french": "Re̍forme"
+    "french": "Re̍forme",
+    "english": "Reform"
   },
   {
     "medumba": "Nə̀ tsiagtə nte dʉ̀ꞌi",
-    "french": "Re̍former"
+    "french": "Re̍former",
+    "english": "Reform"
   },
   {
     "medumba": "Nə̀bɛ̌n nùm kǒꞌ nù",
-    "french": "Re̍former"
+    "french": "Re̍former",
+    "english": "Reform"
   },
   {
     "medumba": "Nə̀tsiagte ntə dʉ̩ꞌi",
-    "french": "Reformer"
+    "french": "Reformer",
+    "english": "Reform"
   },
   {
     "medumba": "Nə̀ nywìnə",
-    "french": "Refroidir"
+    "french": "Refroidir",
+    "english": "Cool"
   },
   {
     "medumba": "Nə̀ fi",
-    "french": "Refroidir"
+    "french": "Refroidir",
+    "english": "Cool"
   },
   {
     "medumba": "nə̀ ghʉ̀ a fi",
-    "french": "Refroidir"
+    "french": "Refroidir",
+    "english": "Cool"
   },
   {
     "medumba": "Nə̀fi",
-    "french": "Refroidissement"
+    "french": "Refroidissement",
+    "english": "Cooling"
   },
   {
     "medumba": "Nə̀nywinə",
-    "french": "Refroidissement"
+    "french": "Refroidissement",
+    "english": "Cooling"
   },
   {
     "medumba": "Nə̀gha",
-    "french": "Refus"
+    "french": "Refus",
+    "english": "Refusal"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Refuser"
+    "french": "Refuser",
+    "english": "Refuse"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Refuter"
+    "french": "Refuter",
+    "english": "Reject"
   },
   {
     "medumba": "Nə̀ ta nù",
-    "french": "Refuter"
+    "french": "Refuter",
+    "english": "Reject"
   },
   {
     "medumba": "Ngwàdlαg",
-    "french": "Regard"
+    "french": "Regard",
+    "english": "Look"
   },
   {
     "medumba": "Nə̀ lɔtə",
-    "french": "Regarder"
+    "french": "Regarder",
+    "english": "Watch"
   },
   {
     "medumba": "Tûmba",
-    "french": "Re̍gime (de noix)"
+    "french": "Re̍gime (de noix)",
+    "english": "Diet (of nuts)"
   },
   {
     "medumba": "Ncàkə̀lɔ̀",
-    "french": "Re̍gime de plantain"
+    "french": "Re̍gime de plantain",
+    "english": "Plantain diet"
   },
   {
     "medumba": "Njʉmɛ̀n",
-    "french": "Re̍gime alimentaire"
+    "french": "Re̍gime alimentaire",
+    "english": "Diet"
   },
   {
     "medumba": "Màd netǒngɔ̀",
-    "french": "Re̍gime politique"
+    "french": "Re̍gime politique",
+    "english": "Political regime"
   },
   {
     "medumba": "Kə̂bnka",
-    "french": "Règle"
+    "french": "Règle",
+    "english": "Rule"
   },
   {
     "medumba": "Kǔzin",
-    "french": "Règle"
+    "french": "Règle",
+    "english": "Rule"
   },
   {
     "medumba": "Nə̀ yən ŋwʉ",
-    "french": "Règle menstrues"
+    "french": "Règle menstrues",
+    "english": "Menstrual period"
   },
   {
     "medumba": "Ntə̂nù",
-    "french": "Règlement"
+    "french": "Règlement",
+    "english": "Regulations"
   },
   {
     "medumba": "Ncʉꞌkum",
-    "french": "Règlement"
+    "french": "Règlement",
+    "english": "Regulations"
   },
   {
     "medumba": "Ntswəndα",
-    "french": "Règlement"
+    "french": "Règlement",
+    "english": "Regulations"
   },
   {
     "medumba": "Nətǒ",
-    "french": "Règne"
+    "french": "Règne",
+    "english": "Reign"
   },
   {
     "medumba": "Nǔfə̀n",
-    "french": "Règne"
+    "french": "Règne",
+    "english": "Reign"
   },
   {
     "medumba": "Fə̀n",
-    "french": "Règne"
+    "french": "Règne",
+    "english": "Reign"
   },
   {
     "medumba": "Nə̀ tɔ̌",
-    "french": "Re̍gner"
+    "french": "Re̍gner",
+    "english": "Reign"
   },
   {
     "medumba": "Fem",
-    "french": "Regret"
+    "french": "Regret",
+    "english": "Regret"
   },
   {
     "medumba": "Nə̀ feme",
-    "french": "Regretter"
+    "french": "Regretter",
+    "english": "Regret"
   },
   {
     "medumba": "Ntʉ̂ mɛ̀n nə̀ saꞌi",
-    "french": "Regretter"
+    "french": "Regretter",
+    "english": "Regret"
   },
   {
     "medumba": "Mbâzwəꞌ",
-    "french": "Rein"
+    "french": "Rein",
+    "english": "Kidney"
   },
   {
     "medumba": "Zwəꞌ",
-    "french": "Reine"
+    "french": "Reine",
+    "english": "Queen"
   },
   {
     "medumba": "Mα̂mfə̀n",
-    "french": "Reine"
+    "french": "Reine",
+    "english": "Queen"
   },
   {
     "medumba": "Nə̀ kotə",
-    "french": "Rejoindre"
+    "french": "Rejoindre",
+    "english": "Join"
   },
   {
     "medumba": "Tsiàŋtə̀",
-    "french": "Re̍jouissance"
+    "french": "Re̍jouissance",
+    "english": "Rejoicing"
   },
   {
     "medumba": "Jʉα",
-    "french": "Re̍jouissance"
+    "french": "Re̍jouissance",
+    "english": "Rejoicing"
   },
   {
     "medumba": "Nə̀ bàꞌa",
-    "french": "Rembousser"
+    "french": "Rembousser",
+    "english": "Refund"
   },
   {
     "medumba": "Nə̀ tɔ̌ nkαb",
-    "french": "Rembousser"
+    "french": "Rembousser",
+    "english": "Refund"
   },
   {
     "medumba": "Nə̀ bǎꞌnjàm",
-    "french": "Remède"
+    "french": "Remède",
+    "english": "Remedy"
   },
   {
     "medumba": "Fu",
-    "french": "Reme̍dier"
+    "french": "Reme̍dier",
+    "english": "Remedy"
   },
   {
     "medumba": "Nə̀ tsiagtə",
-    "french": "Reme̍dier"
+    "french": "Reme̍dier",
+    "english": "Remedy"
   },
   {
     "medumba": "Nə̀ diǎg fu",
-    "french": "Remerciement"
+    "french": "Remerciement",
+    "english": "Thanks"
   },
   {
     "medumba": "Lὰbtə̀",
-    "french": "Remercier"
+    "french": "Remercier",
+    "english": "Thank"
   },
   {
     "medumba": "Nə̀ lα̌bncù",
-    "french": "Remercier"
+    "french": "Remercier",
+    "english": "Thank"
   },
   {
     "medumba": "Nə̀ lαbtə̌",
-    "french": "Remords"
+    "french": "Remords",
+    "english": "Remorse"
   },
   {
     "medumba": "Zwentʉ",
-    "french": "Remplac̩ant"
+    "french": "Remplac̩ant",
+    "english": "Substitute"
   },
   {
     "medumba": "Kwîbtu",
-    "french": "Remplacement"
+    "french": "Remplacement",
+    "english": "Replacement"
   },
   {
     "medumba": "Bàtə",
-    "french": "Remplacement"
+    "french": "Remplacement",
+    "english": "Replacement"
   },
   {
     "medumba": "Nə̀batə̌",
-    "french": "Remplacer"
+    "french": "Remplacer",
+    "english": "Replace"
   },
   {
     "medumba": "Nə̀ dune",
-    "french": "Remplir"
+    "french": "Remplir",
+    "english": "Fill"
   },
   {
     "medumba": "Nə̀ zwiagtə",
-    "french": "Remplir"
+    "french": "Remplir",
+    "english": "Fill"
   },
   {
     "medumba": "Nkâbtfà",
-    "french": "Remunération"
+    "french": "Remunération",
+    "english": "Remuneration"
   },
   {
     "medumba": "Nə̀ tʉ nkab fàꞌ",
-    "french": "Remunérer"
+    "french": "Remunérer",
+    "english": "Pay"
   },
   {
     "medumba": "Nkàꞌwune",
-    "french": "Renard"
+    "french": "Renard",
+    "english": "Fox"
   },
   {
     "medumba": "Nə̀ koꞌ jòŋ ju",
-    "french": "Renchérir"
+    "french": "Renchérir",
+    "english": "Increase"
   },
   {
     "medumba": "Nə̀ kwìꞌtə̌ joŋ ju",
-    "french": "Renchérir"
+    "french": "Renchérir",
+    "english": "Increase"
   },
   {
     "medumba": "Nə̀ tǎnjòŋ ju",
-    "french": "Renchérir"
+    "french": "Renchérir",
+    "english": "Increase"
   },
   {
     "medumba": "Mbùmtə̀",
-    "french": "Renchérir"
+    "french": "Renchérir",
+    "english": "Increase"
   },
   {
     "medumba": "Nəbùmtə̌",
-    "french": "Rencontre"
+    "french": "Rencontre",
+    "english": "Meeting"
   },
   {
     "medumba": "Nə̀ bùmtə",
-    "french": "Rencontre"
+    "french": "Rencontre",
+    "english": "Meeting"
   },
   {
     "medumba": "Nkàꞌnì",
-    "french": "Rencontrer"
+    "french": "Rencontrer",
+    "english": "Meet"
   },
   {
     "medumba": "Nə̀kàꞌa",
-    "french": "Rendez-vous"
+    "french": "Rendez-vous",
+    "english": "Appointment"
   },
   {
     "medumba": "Nə̀ bàꞌa",
-    "french": "Rendez-vous"
+    "french": "Rendez-vous",
+    "english": "Appointment"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Rendre"
+    "french": "Rendre",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Renier"
+    "french": "Renier",
+    "english": "Deny"
   },
   {
     "medumba": "Nə̀gha",
-    "french": "Renoncer"
+    "french": "Renoncer",
+    "english": "Give up"
   },
   {
     "medumba": "Tǔnnù",
-    "french": "Reonciation"
+    "french": "Reonciation",
+    "english": "Renunciation"
   },
   {
     "medumba": "Nə̀ soŋe",
-    "french": "Renseignement"
+    "french": "Renseignement",
+    "english": "Intelligence"
   },
   {
     "medumba": "Nə̀ bedtə",
-    "french": "Renseigner"
+    "french": "Renseigner",
+    "english": "Inform"
   },
   {
     "medumba": "Nə̀bɛ̌nnjàm",
-    "french": "Renseigner (se)"
+    "french": "Renseigner (se)",
+    "english": "Find out"
   },
   {
     "medumba": "Nə̀ bɛ̌nnjàm",
-    "french": "Rentrée"
+    "french": "Rentrée",
+    "english": "Back to school"
   },
   {
     "medumba": "Nə fə",
-    "french": "Rentrer"
+    "french": "Rentrer",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ sɔ̌",
-    "french": "Rentrer"
+    "french": "Rentrer",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Renvoi"
+    "french": "Renvoi",
+    "english": "Referral"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Renvoi"
+    "french": "Renvoi",
+    "english": "Referral"
   },
   {
     "medumba": "Ngàb",
-    "french": "Renvoyer"
+    "french": "Renvoyer",
+    "english": "Resend"
   },
   {
     "medumba": "Nə̀ sǎ",
-    "french": "Repaire"
+    "french": "Repaire",
+    "english": "Lair"
   },
   {
     "medumba": "Nə̀ fɛ̀dtə̌",
-    "french": "Répandre"
+    "french": "Répandre",
+    "english": "Spread"
   },
   {
     "medumba": "Nə̀ naŋə",
-    "french": "Répandre"
+    "french": "Répandre",
+    "english": "Spread"
   },
   {
     "medumba": "Nə̀ kǎŋntʉ",
-    "french": "Répentance"
+    "french": "Répentance",
+    "english": "Repentance"
   },
   {
     "medumba": "Nə̀ kǎŋntʉ",
-    "french": "Répentir"
+    "french": "Répentir",
+    "english": "Repent"
   },
   {
     "medumba": "Nə̀ bʉ̀ntə̌",
-    "french": "Répondre"
+    "french": "Répondre",
+    "english": "Reply"
   },
   {
     "medumba": "Mbʉ̀ntə̂nù",
-    "french": "Réponse"
+    "french": "Réponse",
+    "english": "Response"
   },
   {
     "medumba": "Mbʉ̀ntə̂ncobe",
-    "french": "Réponse"
+    "french": "Réponse",
+    "english": "Response"
   },
   {
     "medumba": "Fitə̀",
-    "french": "Répos"
+    "french": "Répos",
+    "english": "Rest"
   },
   {
     "medumba": "Nə̀ fitə",
-    "french": "Reposer (se)"
+    "french": "Reposer (se)",
+    "english": "Rest"
   },
   {
     "medumba": "Cobtə̀",
-    "french": "Reprimande"
+    "french": "Reprimande",
+    "english": "Reprimand"
   },
   {
     "medumba": "Nə̀ cobtə",
-    "french": "Reprimander"
+    "french": "Reprimander",
+    "english": "Reprimand"
   },
   {
     "medumba": "Nə̀sɔ̌",
-    "french": "Réputation"
+    "french": "Réputation",
+    "english": "Reputation"
   },
   {
     "medumba": "Nə̀taꞌa",
-    "french": "Réputation"
+    "french": "Réputation",
+    "english": "Reputation"
   },
   {
     "medumba": "Nə̀ sɔ̌",
-    "french": "Répudier"
+    "french": "Répudier",
+    "english": "Repudiate"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Répudier"
+    "french": "Répudier",
+    "english": "Repudiate"
   },
   {
     "medumba": "Nə̀ lèꞌdʉ",
-    "french": "Réservation"
+    "french": "Réservation",
+    "english": "Reservation"
   },
   {
     "medumba": "Nə̀ leꞌe",
-    "french": "Réserver"
+    "french": "Réserver",
+    "english": "Reserve"
   },
   {
     "medumba": "Ne tǎ ngʉꞌ",
-    "french": "Résister"
+    "french": "Résister",
+    "english": "Resist"
   },
   {
     "medumba": "Nə̀ tǎ tu",
-    "french": "Résister"
+    "french": "Résister",
+    "english": "Resist"
   },
   {
     "medumba": "Zwiàg",
-    "french": "Respirer"
+    "french": "Respirer",
+    "english": "Breathe"
   },
   {
     "medumba": "Nə̀ zwiàge",
-    "french": "Respiration"
+    "french": "Respiration",
+    "english": "Breathing"
   },
   {
     "medumba": "Mbìꞌnù",
-    "french": "Responsabilité"
+    "french": "Responsabilité",
+    "english": "Responsibility"
   },
   {
     "medumba": "Ngànù",
-    "french": "Responsable"
+    "french": "Responsable",
+    "english": "Responsible"
   },
   {
     "medumba": "Tu",
-    "french": "Responsable"
+    "french": "Responsable",
+    "english": "Responsible"
   },
   {
     "medumba": "Ngàlɔtə̀",
-    "french": "Responsable"
+    "french": "Responsable",
+    "english": "Responsible"
   },
   {
     "medumba": "Nə̀ ghǒm wud",
-    "french": "Ressaisir (se)"
+    "french": "Ressaisir (se)",
+    "english": "Pull yourself together"
   },
   {
     "medumba": "Mfuni",
-    "french": "Ressemblance"
+    "french": "Ressemblance",
+    "english": "Similarity"
   },
   {
     "medumba": "Lɛ̀n",
-    "french": "Ressamblace"
+    "french": "Ressamblace",
+    "english": "resembling"
   },
   {
     "medumba": "Nə̀ fu",
-    "french": "Ressembler"
+    "french": "Ressembler",
+    "english": "Look like"
   },
   {
     "medumba": "Nə̀ futə",
-    "french": "Ressembler"
+    "french": "Ressembler",
+    "english": "Look like"
   },
   {
     "medumba": "Nə̀ bǎm nǔm vʉ",
-    "french": "Ressusciter"
+    "french": "Ressusciter",
+    "english": "Resurrect"
   },
   {
     "medumba": "Nə̀ bàme",
-    "french": "Ressusciter"
+    "french": "Ressusciter",
+    "english": "Resurrect"
   },
   {
     "medumba": "Ceꞌe",
-    "french": "Reste"
+    "french": "Reste",
+    "english": "Rest"
   },
   {
     "medumba": "Mbwə̀ꞌ",
-    "french": "Reste"
+    "french": "Reste",
+    "english": "Rest"
   },
   {
     "medumba": "Nə̀ bwə̀ꞌe",
-    "french": "Rester"
+    "french": "Rester",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ ghɔ",
-    "french": "Rester"
+    "french": "Rester",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ tswe",
-    "french": "Rester"
+    "french": "Rester",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ tʉꞌʉ",
-    "french": "Rester"
+    "french": "Rester",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀lǒ nǔm vʉ",
-    "french": "Résurection"
+    "french": "Résurection",
+    "english": "Resurrection"
   },
   {
     "medumba": "Nə̀sɛne",
-    "french": "Retard"
+    "french": "Retard",
+    "english": "Delay"
   },
   {
     "medumba": "Ngàsɛn",
-    "french": "Retardataire"
+    "french": "Retardataire",
+    "english": "Latecomer"
   },
   {
     "medumba": "Nə̀ lὰtə́",
-    "french": "Retarder"
+    "french": "Retarder",
+    "english": "Delay"
   },
   {
     "medumba": "Nə̀ cʉbe",
-    "french": "Retenir"
+    "french": "Retenir",
+    "english": "Remember"
   },
   {
     "medumba": "Nə̀ sɔ̌",
-    "french": "Retirer"
+    "french": "Retirer",
+    "english": "Remove"
   },
   {
     "medumba": "Nə̀ lòꞌo",
-    "french": "Prendre"
+    "french": "Prendre",
+    "english": "Take"
   },
   {
     "medumba": "Nə̀fə",
-    "french": "Retour"
+    "french": "Retour",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀bɛ̀nə",
-    "french": "Retour"
+    "french": "Retour",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀kàŋə",
-    "french": "Retournement"
+    "french": "Retournement",
+    "english": "Turnaround"
   },
   {
     "medumba": "Nə̀bʉ̀nə",
-    "french": "Retournement"
+    "french": "Retournement",
+    "english": "Turnaround"
   },
   {
     "medumba": "Nə̀ fə",
-    "french": "Retourner"
+    "french": "Retourner",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ kàŋə",
-    "french": "Retourner"
+    "french": "Retourner",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ bʉ̀nə",
-    "french": "Retourner"
+    "french": "Retourner",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ felə",
-    "french": "Retrécir"
+    "french": "Retrécir",
+    "english": "Shrink"
   },
   {
     "medumba": "Nə̀ meme",
-    "french": "Retrecir"
+    "french": "Retrecir",
+    "english": "Shrink"
   },
   {
     "medumba": "Nə̀ fα ndàꞌ",
-    "french": "Retribuer"
+    "french": "Retribuer",
+    "english": "Retribute"
   },
   {
     "medumba": "Ncôꞌfàꞌ",
-    "french": "Retribution"
+    "french": "Retribution",
+    "english": "Retribution"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Retribution"
+    "french": "Retribution",
+    "english": "Retribution"
   },
   {
     "medumba": "Kum",
-    "french": "Réunion"
+    "french": "Réunion",
+    "english": "Meeting"
   },
   {
     "medumba": "Mbùntə̀",
-    "french": "Réunion"
+    "french": "Réunion",
+    "english": "Meeting"
   },
   {
     "medumba": "Ntsəꞌtə̀",
-    "french": "Réunion"
+    "french": "Réunion",
+    "english": "Meeting"
   },
   {
     "medumba": "Nə̀ tàmtə̌",
-    "french": "Réunir"
+    "french": "Réunir",
+    "english": "Reunite"
   },
   {
     "medumba": "Nə̀ tsəꞌtə",
-    "french": "Réunir"
+    "french": "Réunir",
+    "english": "Reunite"
   },
   {
     "medumba": "Nə̀ ncʉα̌",
-    "french": "Réussir"
+    "french": "Réussir",
+    "english": "Succeed"
   },
   {
     "medumba": "Njèm",
-    "french": "Rêve"
+    "french": "Rêve",
+    "english": "Dream"
   },
   {
     "medumba": "Zwìd ju kə̀bwɔ̀",
-    "french": "Révélation"
+    "french": "Révélation",
+    "english": "Revelation"
   },
   {
     "medumba": "Nə̀làꞌtə̌",
-    "french": "Révéler"
+    "french": "Révéler",
+    "english": "Reveal"
   },
   {
     "medumba": "Nə̀ làꞌtə̌",
-    "french": "Révéler"
+    "french": "Révéler",
+    "english": "Reveal"
   },
   {
     "medumba": "Nə̀ tswìtə̌ wud",
-    "french": "Réveil"
+    "french": "Réveil",
+    "english": "Alarm clock"
   },
   {
     "medumba": "Nyàm",
-    "french": "Réveiller (se)"
+    "french": "Réveiller (se)",
+    "english": "Wake up"
   },
   {
     "medumba": "Nə̀ bamə",
-    "french": "Rêver"
+    "french": "Rêver",
+    "english": "Dream"
   },
   {
     "medumba": "Nə̀ zi njèm",
-    "french": "Rêver"
+    "french": "Rêver",
+    "english": "Dream"
   },
   {
     "medumba": "Nə̀ yen njèm",
-    "french": "Rêverie"
+    "french": "Rêverie",
+    "english": "Daydream"
   },
   {
     "medumba": "Njèm",
-    "french": "Revers (échec)"
+    "french": "Revers (échec)",
+    "english": "Setback (failure)"
   },
   {
     "medumba": "Bi",
-    "french": "Revers (habits)"
+    "french": "Revers (habits)",
+    "english": "Lapel (clothes)"
   },
   {
     "medumba": "Njamnzwə",
-    "french": "Revers (main)"
+    "french": "Revers (main)",
+    "english": "Backhand (hand)"
   },
   {
     "medumba": "Njàmbu",
-    "french": "Revers (main)"
+    "french": "Revers (main)",
+    "english": "Backhand (hand)"
   },
   {
     "medumba": "Mvɛ̀nbu",
-    "french": "Réviser"
+    "french": "Réviser",
+    "english": "Revise"
   },
   {
     "medumba": "Nə̀ bwogtə",
-    "french": "Révision"
+    "french": "Révision",
+    "english": "Revision"
   },
   {
     "medumba": "Nə̀bwogtə",
-    "french": "Révolte"
+    "french": "Révolte",
+    "english": "Revolt"
   },
   {
     "medumba": "Tǎtu",
-    "french": "Révolte"
+    "french": "Révolte",
+    "english": "Revolt"
   },
   {
     "medumba": "Cùꞌtə̀",
-    "french": "Révolter"
+    "french": "Révolter",
+    "english": "Revolt"
   },
   {
     "medumba": "Nə̀ kα̌g ncà",
-    "french": "Révolter"
+    "french": "Révolter",
+    "english": "Revolt"
   },
   {
     "medumba": "Nə tam mvɛ̀d",
-    "french": "Révolter"
+    "french": "Révolter",
+    "english": "Revolt"
   },
   {
     "medumba": "Nə̀ kǎm ntàntà",
-    "french": "Révolter (se)"
+    "french": "Révolter (se)",
+    "english": "Revolt (oneself)"
   },
   {
     "medumba": "Nə̀ tem mvɛ̀d",
-    "french": "Révolter (se)"
+    "french": "Révolter (se)",
+    "english": "Revolt (oneself)"
   },
   {
     "medumba": "Ntàntà",
-    "french": "Révolution"
+    "french": "Révolution",
+    "english": "Revolution"
   },
   {
     "medumba": "Nə̀gha",
-    "french": "Révolution"
+    "french": "Révolution",
+    "english": "Revolution"
   },
   {
     "medumba": "Nə̀tammvɛ̀d",
-    "french": "Révolution"
+    "french": "Révolution",
+    "english": "Revolution"
   },
   {
     "medumba": "Ngàntàntà",
-    "french": "Révolutionnaire"
+    "french": "Révolutionnaire",
+    "english": "Revolutionary"
   },
   {
     "medumba": "Ngàcǔꞌtu",
-    "french": "Révolutionnaire"
+    "french": "Révolutionnaire",
+    "english": "Revolutionary"
   },
   {
     "medumba": "Ngàtammvɛ̀d",
-    "french": "Révolutionnaire"
+    "french": "Révolutionnaire",
+    "english": "Revolutionary"
   },
   {
     "medumba": "Ngʉ̌nyὰm ntsə",
-    "french": "Rhinocéroce"
+    "french": "Rhinocéroce",
+    "english": "Rhinocerocosis"
   },
   {
     "medumba": "M̀αŋwʉ",
-    "french": "Rhume"
+    "french": "Rhume",
+    "english": "Cold"
   },
   {
     "medumba": "Ngànkαb",
-    "french": "Riche"
+    "french": "Riche",
+    "english": "Rich"
   },
   {
     "medumba": "Cûdnk̀αb",
-    "french": "Richesse"
+    "french": "Richesse",
+    "english": "Wealth"
   },
   {
     "medumba": "Ŋuꞌtəsə (",
-    "french": "Ride"
+    "french": "Ride",
+    "english": "Ride"
   },
   {
     "medumba": "Nzwə̂nzə̀ndα",
-    "french": "Rideau"
+    "french": "Rideau",
+    "english": "Curtain"
   },
   {
     "medumba": "Cɛ̂dndα",
-    "french": "Rideau"
+    "french": "Rideau",
+    "english": "Curtain"
   },
   {
     "medumba": "Nzwə̂tɔndα",
-    "french": "Rideau"
+    "french": "Rideau",
+    "english": "Curtain"
   },
   {
     "medumba": "Nə̀ ŋuꞌtə",
-    "french": "Rider"
+    "french": "Rider",
+    "english": "Rider"
   },
   {
     "medumba": "Bα̌nbαn",
-    "french": "Rein"
+    "french": "Rein",
+    "english": "Kidney"
   },
   {
     "medumba": "Sα̌mju",
-    "french": "Rein"
+    "french": "Rein",
+    "english": "Kidney"
   },
   {
     "medumba": "Ngàzwì",
-    "french": "Rieur"
+    "french": "Rieur",
+    "english": "Laughing"
   },
   {
     "medumba": "Nə̀ zwǐ",
-    "french": "Rire"
+    "french": "Rire",
+    "english": "Laugh"
   },
   {
     "medumba": "Zwì",
-    "french": "Rire d’un condamner"
+    "french": "Rire d’un condamner",
+    "english": "Laugh at a condemner"
   },
   {
     "medumba": "Nə̀ siag nù",
-    "french": "Rire d’un condamner"
+    "french": "Rire d’un condamner",
+    "english": "Laugh at a condemner"
   },
   {
     "medumba": "Nə̀ siag mɛ̀n",
-    "french": "Rivage"
+    "french": "Rivage",
+    "english": "Shore"
   },
   {
     "medumba": "Nkaŋntsə",
-    "french": "Rival"
+    "french": "Rival",
+    "english": "Rival"
   },
   {
     "medumba": "Ngàmaŋndʉꞌ",
-    "french": "Rival"
+    "french": "Rival",
+    "english": "Rival"
   },
   {
     "medumba": "Ngàsaꞌmbà",
-    "french": "Rivaliser"
+    "french": "Rivaliser",
+    "english": "Compete"
   },
   {
     "medumba": "Nə̀ bǎb ndʉꞌ",
-    "french": "Rivaliser"
+    "french": "Rivaliser",
+    "english": "Compete"
   },
   {
     "medumba": "Nə̀ maŋ nd̀uꞌ",
-    "french": "Rivaliser"
+    "french": "Rivaliser",
+    "english": "Compete"
   },
   {
     "medumba": "Nə̀ maŋə",
-    "french": "Rivaliser"
+    "french": "Rivaliser",
+    "english": "Compete"
   },
   {
     "medumba": "Nə̀ saꞌ mbàꞌ",
-    "french": "Rivaliser"
+    "french": "Rivaliser",
+    "english": "Compete"
   },
   {
     "medumba": "Nə̀ sab ndʉꞌ",
-    "french": "Rivaliser qqn"
+    "french": "Rivaliser qqn",
+    "english": "Compete with someone"
   },
   {
     "medumba": "Maŋ",
-    "french": "Rivalité"
+    "french": "Rivalité",
+    "english": "Rivalry"
   },
   {
     "medumba": "Maŋtə̀",
-    "french": "Rivalité"
+    "french": "Rivalité",
+    "english": "Rivalry"
   },
   {
     "medumba": "Mbàꞌ",
-    "french": "Rivalité"
+    "french": "Rivalité",
+    "english": "Rivalry"
   },
   {
     "medumba": "Ndʉꞌ",
-    "french": "Rivalité"
+    "french": "Rivalité",
+    "english": "Rivalry"
   },
   {
     "medumba": "Ntàntà",
-    "french": "Rivalité"
+    "french": "Rivalité",
+    "english": "Rivalry"
   },
   {
     "medumba": "Nkaŋntsə",
-    "french": "Rive"
+    "french": "Rive",
+    "english": "Shore"
   },
   {
     "medumba": "Taꞌntsə",
-    "french": "Rivière"
+    "french": "Rivière",
+    "english": "River"
   },
   {
     "medumba": "Nkûnmèkale",
-    "french": "Riz"
+    "french": "Riz",
+    "english": "Rice"
   },
   {
     "medumba": "Nα̌nkûnmèkale",
-    "french": "Rizière"
+    "french": "Rizière",
+    "english": "Rice field"
   },
   {
     "medumba": "Cěmntsə",
-    "french": "Robinet"
+    "french": "Robinet",
+    "english": "Faucet"
   },
   {
     "medumba": "Mbâzweꞌ",
-    "french": "Rognon"
+    "french": "Rognon",
+    "english": "Kidney"
   },
   {
     "medumba": "Mfə̀n",
-    "french": "Roi"
+    "french": "Roi",
+    "english": "King"
   },
   {
     "medumba": "Nə̀ kəbe",
-    "french": "Rompre"
+    "french": "Rompre",
+    "english": "Break up"
   },
   {
     "medumba": "Nə̀ sɔ̌ wud",
-    "french": "Rompre (avec)"
+    "french": "Rompre (avec)",
+    "english": "Break up (with)"
   },
   {
     "medumba": "Nə̀ bəꞌtə",
-    "french": "Rompre (pain)"
+    "french": "Rompre (pain)",
+    "english": "Break (bread)"
   },
   {
     "medumba": "Nèsòŋ",
-    "french": "Roseau"
+    "french": "Roseau",
+    "english": "Reed"
   },
   {
     "medumba": "Nkǎꞌnə̀soŋ",
-    "french": "Roseau"
+    "french": "Roseau",
+    "english": "Reed"
   },
   {
     "medumba": "Bà",
-    "french": "Rouge"
+    "french": "Rouge",
+    "english": "Red"
   },
   {
     "medumba": "Nə̀ bǎ",
-    "french": "Rougir"
+    "french": "Rougir",
+    "english": "Blush"
   },
   {
     "medumba": "Nə̀ kǎŋ ncʉ̀ mi",
-    "french": "Rougir (colère)"
+    "french": "Rougir (colère)",
+    "english": "Blush (anger)"
   },
   {
     "medumba": "Banngʉa",
-    "french": "Rouille"
+    "french": "Rouille",
+    "english": "Rust"
   },
   {
     "medumba": "Kʉàfə",
-    "french": "Rouille"
+    "french": "Rouille",
+    "english": "Rust"
   },
   {
     "medumba": "Nə̀ cʉb banngʉa",
-    "french": "Rouiller"
+    "french": "Rouiller",
+    "english": "Rust"
   },
   {
     "medumba": "Nə̀ bwoŋtə",
-    "french": "Rouler"
+    "french": "Rouler",
+    "english": "Roll"
   },
   {
     "medumba": "Nə̀ yaŋə",
-    "french": "Rouler"
+    "french": "Rouler",
+    "english": "Roll"
   },
   {
     "medumba": "Nə̀ yaŋtə",
-    "french": "Roule plusieur foi"
+    "french": "Roule plusieur foi",
+    "english": "Roll several times"
   },
   {
     "medumba": "Nə̀ bwoŋə",
-    "french": "Rouler qqch"
+    "french": "Rouler qqch",
+    "english": "Roll something"
   },
   {
     "medumba": "Nə̀ bwoŋə",
-    "french": "Rouler qqn"
+    "french": "Rouler qqn",
+    "english": "Roll sb"
   },
   {
     "medumba": "Mα̂nzə̀",
-    "french": "Route"
+    "french": "Route",
+    "english": "Road"
   },
   {
     "medumba": "Nzə̀",
-    "french": "Route"
+    "french": "Route",
+    "english": "Road"
   },
   {
     "medumba": "Zǐnfə̀n",
-    "french": "Royal démarche"
+    "french": "Royal démarche",
+    "english": "Royal approach"
   },
   {
     "medumba": "Ngʉ̌fə̀n",
-    "french": "Royal fac̩on"
+    "french": "Royal fac̩on",
+    "english": "Royal style"
   },
   {
     "medumba": "Ngɔ̌mfə̀n",
-    "french": "Royaume"
+    "french": "Royaume",
+    "english": "Kingdom"
   },
   {
     "medumba": "Nǔfə̀n",
-    "french": "Royauté"
+    "french": "Royauté",
+    "english": "Royalty"
   },
   {
     "medumba": "Nəcâꞌntə",
-    "french": "Ruisseau"
+    "french": "Ruisseau",
+    "english": "Stream"
   },
   {
     "medumba": "Fin",
-    "french": "Rumeur"
+    "french": "Rumeur",
+    "english": "Rumor"
   },
   {
     "medumba": "Mfʉ",
-    "french": "Ruse"
+    "french": "Ruse",
+    "english": "Cunning"
   },
   {
     "medumba": "Nkʉ̂nkʉ",
-    "french": "Ruse"
+    "french": "Ruse",
+    "english": "Cunning"
   },
   {
     "medumba": "Mɛ̀nmfʉ",
-    "french": "Rusé"
+    "french": "Rusé",
+    "english": "Cunning"
   },
   {
     "medumba": "Ngànkʉ̂nkʉ",
-    "french": "Rusé"
+    "french": "Rusé",
+    "english": "Cunning"
   },
   {
     "medumba": "Bὰm 3/6)",
-    "french": "Sac"
+    "french": "Sac",
+    "english": "Bag"
   },
   {
     "medumba": "Nə̀yoꞌo",
-    "french": "Sacre"
+    "french": "Sacre",
+    "english": "Sacre"
   },
   {
     "medumba": "Nə̀ yoꞌo",
-    "french": "Sacrer"
+    "french": "Sacrer",
+    "english": "Sacre"
   },
   {
     "medumba": "Ngàkangeꞌ",
-    "french": "Sadique"
+    "french": "Sadique",
+    "english": "Sadist"
   },
   {
     "medumba": "NgàyabngəꞋ",
-    "french": "Sadique"
+    "french": "Sadique",
+    "english": "Sadist"
   },
   {
     "medumba": "Njǎbngeꞌ",
-    "french": "Sadique"
+    "french": "Sadique",
+    "english": "Sadist"
   },
   {
     "medumba": "Nkûmmɛ̀n",
-    "french": "Sage"
+    "french": "Sage",
+    "english": "Wise"
   },
   {
     "medumba": "Nzə̂nù",
-    "french": "Sage"
+    "french": "Sage",
+    "english": "Wise"
   },
   {
     "medumba": "Zə̂nù",
-    "french": "Sagesse"
+    "french": "Sagesse",
+    "english": "Wisdom"
   },
   {
     "medumba": "Kə̀mbɛ̀n",
-    "french": "Sain"
+    "french": "Sain",
+    "english": "Healthy"
   },
   {
     "medumba": "Kə̀ŋuꞌu",
-    "french": "Sain"
+    "french": "Sain",
+    "english": "Healthy"
   },
   {
     "medumba": "Kə̀ghòn",
-    "french": "Sain"
+    "french": "Sain",
+    "english": "Healthy"
   },
   {
     "medumba": "Mɛ̀nnelαnə",
-    "french": "Saint"
+    "french": "Saint",
+    "english": "Holy"
   },
   {
     "medumba": "Ywɛnəlαne",
-    "french": "Saint-esprit"
+    "french": "Saint-esprit",
+    "english": "holy spirit"
   },
   {
     "medumba": "Lαn",
-    "french": "Sainteté"
+    "french": "Sainteté",
+    "english": "Holiness"
   },
   {
     "medumba": "Nèlαnə",
-    "french": "Sainteté"
+    "french": "Sainteté",
+    "english": "Holiness"
   },
   {
     "medumba": "Ngə̀ləŋ",
-    "french": "Saison"
+    "french": "Saison",
+    "english": "Season"
   },
   {
     "medumba": "Ndʉ",
-    "french": "Saison"
+    "french": "Saison",
+    "english": "Season"
   },
   {
     "medumba": "Ndʉ̌sαnə",
-    "french": "Saison de pluie"
+    "french": "Saison de pluie",
+    "english": "Rainy season"
   },
   {
     "medumba": "Ndʉ̌dùm",
-    "french": "Saison sèche"
+    "french": "Saison sèche",
+    "english": "Dry season"
   },
   {
     "medumba": "Nkα̂fbfàꞌ",
-    "french": "Salaire"
+    "french": "Salaire",
+    "english": "Salary"
   },
   {
     "medumba": "Ncôꞌfàꞌ",
-    "french": "Salaire"
+    "french": "Salaire",
+    "english": "Salary"
   },
   {
     "medumba": "Ngàlǒꞌnkα̂bŋwʉ (1/6",
-    "french": "Salarié"
+    "french": "Salarié",
+    "english": "Employee"
   },
   {
     "medumba": "Ntsi",
-    "french": "Salive"
+    "french": "Salive",
+    "english": "Saliva"
   },
   {
     "medumba": "Ntsi nə̀ sə̌ꞌ ncù",
-    "french": "Saliver"
+    "french": "Saliver",
+    "english": "Salivate"
   },
   {
     "medumba": "Ndα",
-    "french": "Salle"
+    "french": "Salle",
+    "english": "Room"
   },
   {
     "medumba": "Tôꞌndα",
-    "french": "Salle"
+    "french": "Salle",
+    "english": "Room"
   },
   {
     "medumba": "Ndα̂diaŋyən",
-    "french": "Salle de cinéma"
+    "french": "Salle de cinéma",
+    "english": "Cinema room"
   },
   {
     "medumba": "Tôꞌjûjʉ",
-    "french": "Salle à manger"
+    "french": "Salle à manger",
+    "english": "Dining room"
   },
   {
     "medumba": "Ndα̂nsα",
-    "french": "Salle cabalistique"
+    "french": "Salle cabalistique",
+    "english": "Cabalistic room"
   },
   {
     "medumba": "Ndα̂nkʉ̀n",
-    "french": "Salle d’annonce"
+    "french": "Salle d’annonce",
+    "english": "Announcement room"
   },
   {
     "medumba": "Ndα̂beb",
-    "french": "Salle d’attente"
+    "french": "Salle d’attente",
+    "english": "Waiting room"
   },
   {
     "medumba": "Ndα̂ncà",
-    "french": "Salle d’audience"
+    "french": "Salle d’audience",
+    "english": "Courtroom"
   },
   {
     "medumba": "Fə̌ꞌ ntsə",
-    "french": "Salle d’eau"
+    "french": "Salle d’eau",
+    "english": "Powder room"
   },
   {
     "medumba": "Ndα̂nto",
-    "french": "Salle d’injections"
+    "french": "Salle d’injections",
+    "english": "Injection room"
   },
   {
     "medumba": "Ndα̂nùbαhα",
-    "french": "Salle d’urgence"
+    "french": "Salle d’urgence",
+    "english": "Emergency room"
   },
   {
     "medumba": "Fěꞌntsə",
-    "french": "Salle de bain"
+    "french": "Salle de bain",
+    "english": "Bathroom"
   },
   {
     "medumba": "Fə̌ꞌsògwud",
-    "french": "Salle de bain"
+    "french": "Salle de bain",
+    "english": "Bathroom"
   },
   {
     "medumba": "Ndα̂ŋwàꞌnì",
-    "french": "Salle de classe"
+    "french": "Salle de classe",
+    "english": "Classroom"
   },
   {
     "medumba": "Ndα̂ki",
-    "french": "Salle de dactylographie"
+    "french": "Salle de dactylographie",
+    "english": "Typing room"
   },
   {
     "medumba": "Ndα̂mfaŋə",
-    "french": "Salle de pansement"
+    "french": "Salle de pansement",
+    "english": "Dressing room"
   },
   {
     "medumba": "Ndα̂fiꞌ",
-    "french": "Salle de pesée"
+    "french": "Salle de pesée",
+    "english": "Weighing room"
   },
   {
     "medumba": "Ndα̂mαbwə",
-    "french": "Salle des nouveaux-nés"
+    "french": "Salle des nouveaux-nés",
+    "english": "Newborn room"
   },
   {
     "medumba": "Nə̀ càꞌtə",
-    "french": "Saluer"
+    "french": "Saluer",
+    "english": "Greet"
   },
   {
     "medumba": "Nə̀ bʉ mɛ̀n",
-    "french": "Saluer"
+    "french": "Saluer",
+    "english": "Greet"
   },
   {
     "medumba": "Càꞌtə̀",
-    "french": "Salut"
+    "french": "Salut",
+    "english": "Hi"
   },
   {
     "medumba": "Yòg",
-    "french": "Salut"
+    "french": "Salut",
+    "english": "Hi"
   },
   {
     "medumba": "Càꞌtə",
-    "french": "Salutation"
+    "french": "Salutation",
+    "english": "Greeting"
   },
   {
     "medumba": "Ləm",
-    "french": "Sang"
+    "french": "Sang",
+    "english": "Blood"
   },
   {
     "medumba": "Ngʉ̌nyαmcwɛd",
-    "french": "Sanglier"
+    "french": "Sanglier",
+    "english": "Boar"
   },
   {
     "medumba": "Nkǎmnkù",
-    "french": "Sanglier"
+    "french": "Sanglier",
+    "english": "Boar"
   },
   {
     "medumba": "Kə̀shʉꞌ",
-    "french": "Sanglot"
+    "french": "Sanglot",
+    "english": "Sob"
   },
   {
     "medumba": "Nə̀ tam kə̀shʉꞌ",
-    "french": "Sangloter"
+    "french": "Sangloter",
+    "english": "Sobbing"
   },
   {
     "medumba": "Ngàfɛ̀dtə̌ ləm",
-    "french": "Sanguinaire"
+    "french": "Sanguinaire",
+    "english": "Bloodthirsty"
   },
   {
     "medumba": "Ntsəꞌtə ghǎncoꞌtə̀ ncà",
-    "french": "Sanhédrin"
+    "french": "Sanhédrin",
+    "english": "Sanhedrin"
   },
   {
     "medumba": "Kə̀",
-    "french": "Sans"
+    "french": "Sans",
+    "english": "Without"
   },
   {
     "medumba": "Kə̀ndα",
-    "french": "Sans abri"
+    "french": "Sans abri",
+    "english": "Homeless"
   },
   {
     "medumba": "Kə̀juꞌnzə̀",
-    "french": "Sans discernement"
+    "french": "Sans discernement",
+    "english": "Without discernment"
   },
   {
     "medumba": "Nyaꞌ",
-    "french": "Sauce"
+    "french": "Sauce",
+    "english": "Sauce"
   },
   {
     "medumba": "Sogə",
-    "french": "Sauce"
+    "french": "Sauce",
+    "english": "Sauce"
   },
   {
     "medumba": "Kə̀càd",
-    "french": "Saut"
+    "french": "Saut",
+    "english": "Jump"
   },
   {
     "medumba": "Nə̀ laŋ nɛ̂n tʉ",
-    "french": "Sauter"
+    "french": "Sauter",
+    "english": "Jump"
   },
   {
     "medumba": "Nə̀ coꞌkə̀càd",
-    "french": "Sauter"
+    "french": "Sauter",
+    "english": "Jump"
   },
   {
     "medumba": "Nə̀ ywɛlə",
-    "french": "Sauter"
+    "french": "Sauter",
+    "english": "Jump"
   },
   {
     "medumba": "Ngamntαn",
-    "french": "Sauterelle"
+    "french": "Sauterelle",
+    "english": "Grasshopper"
   },
   {
     "medumba": "Ngàcoꞌ kə̀càb",
-    "french": "Sauteur"
+    "french": "Sauteur",
+    "english": "Jumper"
   },
   {
     "medumba": "Nə̀ yògə",
-    "french": "Sauver"
+    "french": "Sauver",
+    "english": "Save"
   },
   {
     "medumba": "Ngàyòg",
-    "french": "Sauveur"
+    "french": "Sauveur",
+    "english": "Savior"
   },
   {
     "medumba": "Zəmətə",
-    "french": "Savant"
+    "french": "Savant",
+    "english": "Scholar"
   },
   {
     "medumba": "Ndʉ̌mju",
-    "french": "Saveur"
+    "french": "Saveur",
+    "english": "Flavor"
   },
   {
     "medumba": "Nə̀ lɛ̀nə",
-    "french": "Savoir"
+    "french": "Savoir",
+    "english": "Know"
   },
   {
     "medumba": "Sòg",
-    "french": "Savon"
+    "french": "Savon",
+    "english": "Soap"
   },
   {
     "medumba": "Sògnzwə",
-    "french": "Savon à linge"
+    "french": "Savon à linge",
+    "english": "Laundry soap"
   },
   {
     "medumba": "Sògwud",
-    "french": "Savon de toillette"
+    "french": "Savon de toillette",
+    "english": "Toilet soap"
   },
   {
     "medumba": "Kələꞌə",
-    "french": "Scandale"
+    "french": "Scandale",
+    "english": "Scandal"
   },
   {
     "medumba": "Lǒŋfaꞌtə̀",
-    "french": "Scandale"
+    "french": "Scandale",
+    "english": "Scandal"
   },
   {
     "medumba": "Nùkə̀bwɔ̀",
-    "french": "Scandale"
+    "french": "Scandale",
+    "english": "Scandal"
   },
   {
     "medumba": "Ywiꞌ",
-    "french": "Scandale"
+    "french": "Scandale",
+    "english": "Scandal"
   },
   {
     "medumba": "Mα̂kwa",
-    "french": "Sceau"
+    "french": "Sceau",
+    "english": "Seal"
   },
   {
     "medumba": "Sitαm",
-    "french": "Sceau"
+    "french": "Sceau",
+    "english": "Seal"
   },
   {
     "medumba": "Nə̀ fʉ̀nə",
-    "french": "Sceller"
+    "french": "Sceller",
+    "english": "Seal"
   },
   {
     "medumba": "Nə̀ tə sitαm",
-    "french": "Sceller"
+    "french": "Sceller",
+    "english": "Seal"
   },
   {
     "medumba": "Dʉ̌ꞌ diaŋə",
-    "french": "Scène"
+    "french": "Scène",
+    "english": "Scene"
   },
   {
     "medumba": "Diaŋə",
-    "french": "Scène spectacle"
+    "french": "Scène spectacle",
+    "english": "Stage show"
   },
   {
     "medumba": "Diaŋmàꞌ",
-    "french": "Scène de tire"
+    "french": "Scène de tire",
+    "english": "Shooting scene"
   },
   {
     "medumba": "Diaŋjʉ",
-    "french": "Scène gastronomique"
+    "french": "Scène gastronomique",
+    "english": "Food scene"
   },
   {
     "medumba": "Kogfə̀n",
-    "french": "Sceptre"
+    "french": "Sceptre",
+    "english": "Scepter"
   },
   {
     "medumba": "Sɔ",
-    "french": "Scie"
+    "french": "Scie",
+    "english": "Saw"
   },
   {
     "medumba": "Ngαmə",
-    "french": "Science"
+    "french": "Science",
+    "english": "Science"
   },
   {
     "medumba": "Nə̀ ziαgə",
-    "french": "Scintiller"
+    "french": "Scintiller",
+    "english": "Sparkle"
   },
   {
     "medumba": "Nənyaꞌcum",
-    "french": "Scorpion"
+    "french": "Scorpion",
+    "english": "Scorpio"
   },
   {
     "medumba": "Nə̀ komə",
-    "french": "Sculpter"
+    "french": "Sculpter",
+    "english": "Sculpt"
   },
   {
     "medumba": "Nə̀ vɛnə",
-    "french": "Déssiner"
+    "french": "Déssiner",
+    "english": "Draw"
   },
   {
     "medumba": "Nəto",
-    "french": "Sculpture"
+    "french": "Sculpture",
+    "english": "Sculpture"
   },
   {
     "medumba": "Jum",
-    "french": "Sec"
+    "french": "Sec",
+    "english": "Dry"
   },
   {
     "medumba": "Nə̀ yagə",
-    "french": "Sécher"
+    "french": "Sécher",
+    "english": "Dry"
   },
   {
     "medumba": "Nə̀ jumə",
-    "french": "Sécher"
+    "french": "Sécher",
+    "english": "Dry"
   },
   {
     "medumba": "Dùm",
-    "french": "Sécheresse"
+    "french": "Sécheresse",
+    "english": "Drought"
   },
   {
     "medumba": "Nə̀ nyìꞌtə̌",
-    "french": "Secouer"
+    "french": "Secouer",
+    "english": "Shake"
   },
   {
     "medumba": "Nə̀ ywìmtə̌",
-    "french": "Secourir"
+    "french": "Secourir",
+    "english": "Rescue"
   },
   {
     "medumba": "Ywìntə̀",
-    "french": "Secours"
+    "french": "Secours",
+    "english": "Rescue"
   },
   {
     "medumba": "Càm",
-    "french": "Secret"
+    "french": "Secret",
+    "english": "Secret"
   },
   {
     "medumba": "Njàm càm",
-    "french": "Secret (en)"
+    "french": "Secret (en)",
+    "english": "Secret"
   },
   {
     "medumba": "Ndèꞌcàm",
-    "french": "Secrétaire"
+    "french": "Secrétaire",
+    "english": "Secretary"
   },
   {
     "medumba": "Ngàkitə̀",
-    "french": "Secrétaire"
+    "french": "Secrétaire",
+    "english": "Secretary"
   },
   {
     "medumba": "Ndα̂càm",
-    "french": "Secrétariat"
+    "french": "Secrétariat",
+    "english": "Secretariat"
   },
   {
     "medumba": "Ndα̂kì",
-    "french": "Secrétariat"
+    "french": "Secrétariat",
+    "english": "Secretariat"
   },
   {
     "medumba": "Njàm càm",
-    "french": "Secrètement"
+    "french": "Secrètement",
+    "english": "Secretly"
   },
   {
     "medumba": "Ghǎfagtə̀",
-    "french": "Sectaires"
+    "french": "Sectaires",
+    "english": "Sectarians"
   },
   {
     "medumba": "Fàgtə",
-    "french": "Secte"
+    "french": "Secte",
+    "english": "Sect"
   },
   {
     "medumba": "Ngàcǔꞌtù",
-    "french": "Séducteur"
+    "french": "Séducteur",
+    "english": "Seducer"
   },
   {
     "medumba": "Cùꞌtu",
-    "french": "Séduction"
+    "french": "Séduction",
+    "english": "Seduction"
   },
   {
     "medumba": "Nə̀ kwabtə mɛ̀n",
-    "french": "Séduire"
+    "french": "Séduire",
+    "english": "Seduce"
   },
   {
     "medumba": "Nə̀ cǔꞌ tu",
-    "french": "Séduire"
+    "french": "Séduire",
+    "english": "Seduce"
   },
   {
     "medumba": "Bʉn",
-    "french": "Sein"
+    "french": "Sein",
+    "english": "Breast"
   },
   {
     "medumba": "Tʉ̂mbàm",
-    "french": "Sein dans le ventre"
+    "french": "Sein dans le ventre",
+    "english": "Breast in the stomach"
   },
   {
     "medumba": "Ntʉ̀m",
-    "french": "Sein dans,parmi"
+    "french": "Sein dans,parmi",
+    "english": "Breast in,among"
   },
   {
     "medumba": "Ngwa",
-    "french": "Sel"
+    "french": "Sel",
+    "english": "Salt"
   },
   {
     "medumba": "Ndǎŋndaŋ",
-    "french": "Selon"
+    "french": "Selon",
+    "english": "According to"
   },
   {
     "medumba": "Ngὰbnjʉ",
-    "french": "Semaine"
+    "french": "Semaine",
+    "english": "Week"
   },
   {
     "medumba": "Ngὰbnju diaŋntsiꞌi",
-    "french": "Semaine culturelle"
+    "french": "Semaine culturelle",
+    "english": "Cultural week"
   },
   {
     "medumba": "Mfunì",
-    "french": "Semblable"
+    "french": "Semblable",
+    "english": "Similar"
   },
   {
     "medumba": "Nzwid",
-    "french": "Semence"
+    "french": "Semence",
+    "english": "Seed"
   },
   {
     "medumba": "Nə̀ ywilə",
-    "french": "Semer"
+    "french": "Semer",
+    "english": "Sow"
   },
   {
     "medumba": "Ngàmǎꞌnsa",
-    "french": "Semeur"
+    "french": "Semeur",
+    "english": "Sower"
   },
   {
     "medumba": "Ngàywìd",
-    "french": "Semeur"
+    "french": "Semeur",
+    "english": "Sower"
   },
   {
     "medumba": "Nə̀ ghù ləm",
-    "french": "Sentiment"
+    "french": "Sentiment",
+    "english": "Feeling"
   },
   {
     "medumba": "Ntsə",
-    "french": "Sentiment"
+    "french": "Sentiment",
+    "english": "Feeling"
   },
   {
     "medumba": "Nə̀ làmtə̌",
-    "french": "Sentir bon"
+    "french": "Sentir bon",
+    "english": "Feel good"
   },
   {
     "medumba": "Nə̀ làmə",
-    "french": "Sentir mauvais"
+    "french": "Sentir mauvais",
+    "english": "Feel bad"
   },
   {
     "medumba": "Fàgtə̀",
-    "french": "Séparation"
+    "french": "Séparation",
+    "english": "Separation"
   },
   {
     "medumba": "Nə̀ fàgtə̌",
-    "french": "Séparer"
+    "french": "Séparer",
+    "english": "Separate"
   },
   {
     "medumba": "Sὰmmbαhα",
-    "french": "Sept"
+    "french": "Sept",
+    "english": "Seven"
   },
   {
     "medumba": "Mbattə̀ sὰmmbαhα",
-    "french": "Septième"
+    "french": "Septième",
+    "english": "Seventh"
   },
   {
     "medumba": "Fì",
-    "french": "Sépulcre"
+    "french": "Sépulcre",
+    "english": "Sepulcher"
   },
   {
     "medumba": "Tûfì",
-    "french": "Sépulcre"
+    "french": "Sépulcre",
+    "english": "Sepulcher"
   },
   {
     "medumba": "Mfə",
-    "french": "Serment"
+    "french": "Serment",
+    "english": "Oath"
   },
   {
     "medumba": "Nə̀ kǎnmfə",
-    "french": "Serment prêter"
+    "french": "Serment prêter",
+    "english": "Oath to take"
   },
   {
     "medumba": "Nyu",
-    "french": "Serpent"
+    "french": "Serpent",
+    "english": "Snake"
   },
   {
     "medumba": "Nə̀ faꞌa",
-    "french": "Servir"
+    "french": "Servir",
+    "english": "Serve"
   },
   {
     "medumba": "Mɔnkəꞌ",
-    "french": "Serviteur"
+    "french": "Serviteur",
+    "english": "Servant"
   },
   {
     "medumba": "Ngàfaꞌ",
-    "french": "Serviteur"
+    "french": "Serviteur",
+    "english": "Servant"
   },
   {
     "medumba": "Nkʉꞌ",
-    "french": "Seuil"
+    "french": "Seuil",
+    "english": "Threshold"
   },
   {
     "medumba": "Tʉ̀ꞌ",
-    "french": "Seuil"
+    "french": "Seuil",
+    "english": "Threshold"
   },
   {
     "medumba": "Tʉꞌmə",
-    "french": "Seul moi"
+    "french": "Seul moi",
+    "english": "Only me"
   },
   {
     "medumba": "Ŋα",
-    "french": "Sève"
+    "french": "Sève",
+    "english": "Sap"
   },
   {
     "medumba": "Ngàcʉag",
-    "french": "Sevère (qqn)"
+    "french": "Sevère (qqn)",
+    "english": "Severe (sb)"
   },
   {
     "medumba": "Nə̀cʉag",
-    "french": "Sévère"
+    "french": "Sévère",
+    "english": "Severe"
   },
   {
     "medumba": "Cʉag",
-    "french": "Sévérité"
+    "french": "Sévérité",
+    "english": "Severity"
   },
   {
     "medumba": "Ngǔꞌnkʉ",
-    "french": "Siècle"
+    "french": "Siècle",
+    "english": "Century"
   },
   {
     "medumba": "Ngǔꞌnguꞌ",
-    "french": "Siècle"
+    "french": "Siècle",
+    "english": "Century"
   },
   {
     "medumba": "Kòꞌ",
-    "french": "Siège"
+    "french": "Siège",
+    "english": "Headquarters"
   },
   {
     "medumba": "Ntshaŋ mbùmtə̀",
-    "french": "Siège association"
+    "french": "Siège association",
+    "english": "Association headquarters"
   },
   {
     "medumba": "Ntshaŋ dʉꞌfàꞌ",
-    "french": "Siège entreprise"
+    "french": "Siège entreprise",
+    "english": "Company headquarters"
   },
   {
     "medumba": "Kàmnkòꞌ",
-    "french": "Siège en bois"
+    "french": "Siège en bois",
+    "english": "Wooden seat"
   },
   {
     "medumba": "Fin",
-    "french": "Sifflement"
+    "french": "Sifflement",
+    "english": "Hissing"
   },
   {
     "medumba": "Nə tɔ",
-    "french": "Siffler"
+    "french": "Siffler",
+    "english": "Whistle"
   },
   {
     "medumba": "Nə̀ tɔ fin",
-    "french": "Siffler"
+    "french": "Siffler",
+    "english": "Whistle"
   },
   {
     "medumba": "Nə̀ tɔ fin",
-    "french": "Siffler"
+    "french": "Siffler",
+    "english": "Whistle"
   },
   {
     "medumba": "Ndɔ",
-    "french": "Sifflet"
+    "french": "Sifflet",
+    "english": "Whistle"
   },
   {
     "medumba": "Ngàŋoꞌtùn",
-    "french": "Signataire"
+    "french": "Signataire",
+    "english": "Signatory"
   },
   {
     "medumba": "Ngàshan",
-    "french": "Signataire"
+    "french": "Signataire",
+    "english": "Signatory"
   },
   {
     "medumba": "Kə̀kì",
-    "french": "Signe"
+    "french": "Signe",
+    "english": "Sign"
   },
   {
     "medumba": "L̀ɛ̀n",
-    "french": "Signe"
+    "french": "Signe",
+    "english": "Sign"
   },
   {
     "medumba": "Nə̀ ŋuꞌtùn",
-    "french": "Signer"
+    "french": "Signer",
+    "english": "Sign"
   },
   {
     "medumba": "Mbagtə̀",
-    "french": "Signification"
+    "french": "Signification",
+    "english": "Meaning"
   },
   {
     "medumba": "Tùn",
-    "french": "Signification"
+    "french": "Signification",
+    "english": "Meaning"
   },
   {
     "medumba": "Nə̀ bàgtə̌",
-    "french": "Signifier"
+    "french": "Signifier",
+    "english": "Meaning"
   },
   {
     "medumba": "Nə̀ tswìtə̌",
-    "french": "Signifier"
+    "french": "Signifier",
+    "english": "Meaning"
   },
   {
     "medumba": "Nkαnmαkə̀",
-    "french": "Signe"
+    "french": "Signe",
+    "english": "Sign"
   },
   {
     "medumba": "Mbǎbngò",
-    "french": "Silure"
+    "french": "Silure",
+    "english": "Catfish"
   },
   {
     "medumba": "Ngǒntsə",
-    "french": "Sirène"
+    "french": "Sirène",
+    "english": "Mermaid"
   },
   {
     "medumba": "Ntoge",
-    "french": "Six"
+    "french": "Six",
+    "english": "Six"
   },
   {
     "medumba": "Mbadtə̀ ntogə",
-    "french": "Sixième"
+    "french": "Sixième",
+    "english": "Sixth"
   },
   {
     "medumba": "Kum",
-    "french": "Société"
+    "french": "Société",
+    "english": "Company"
   },
   {
     "medumba": "Kumfàꞌ",
-    "french": "Société"
+    "french": "Société",
+    "english": "Company"
   },
   {
     "medumba": "Mαnjɔ̀",
-    "french": "Société"
+    "french": "Société",
+    "english": "Company"
   },
   {
     "medumba": "Ngɔ̀",
-    "french": "Société"
+    "french": "Société",
+    "english": "Company"
   },
   {
     "medumba": "Njʉ",
-    "french": "Société"
+    "french": "Société",
+    "english": "Company"
   },
   {
     "medumba": "Ngònmα",
-    "french": "Sœur"
+    "french": "Sœur",
+    "english": "Sister"
   },
   {
     "medumba": "Ngòntα",
-    "french": "Soeur"
+    "french": "Soeur",
+    "english": "Sister"
   },
   {
     "medumba": "Mαdu",
-    "french": "Sœur du mari"
+    "french": "Sœur du mari",
+    "english": "Husband's sister"
   },
   {
     "medumba": "Silige",
-    "french": "Sole"
+    "french": "Sole",
+    "english": "Sole"
   },
   {
     "medumba": "Nzì",
-    "french": "Soif"
+    "french": "Soif",
+    "english": "Thirst"
   },
   {
     "medumba": "Kʉntʉ",
-    "french": "Soif"
+    "french": "Soif",
+    "english": "Thirst"
   },
   {
     "medumba": "Nzintse (",
-    "french": "Soif d’eau"
+    "french": "Soif d’eau",
+    "english": "Thirst for water"
   },
   {
     "medumba": "Nzindùꞌ",
-    "french": "Soif de vin"
+    "french": "Soif de vin",
+    "english": "Thirst for wine"
   },
   {
     "medumba": "Mfə̌dnjʉ",
-    "french": "Soir"
+    "french": "Soir",
+    "english": "Evening"
   },
   {
     "medumba": "Ndʉ̌mfə̌dnjʉ",
-    "french": "Soirée"
+    "french": "Soirée",
+    "english": "Evening"
   },
   {
     "medumba": "Tɛ̌ndndα",
-    "french": "Sol de la maison"
+    "french": "Sol de la maison",
+    "english": "House floor"
   },
   {
     "medumba": "Nsîndα",
-    "french": "Sol de la maison"
+    "french": "Sol de la maison",
+    "english": "House floor"
   },
   {
     "medumba": "Nsi",
-    "french": "Sol"
+    "french": "Sol",
+    "english": "Ground"
   },
   {
     "medumba": "Caꞌa",
-    "french": "Sol"
+    "french": "Sol",
+    "english": "Ground"
   },
   {
     "medumba": "Màꞌncò",
-    "french": "Soldat"
+    "french": "Soldat",
+    "english": "Soldier"
   },
   {
     "medumba": "Nkə̀tuꞌu",
-    "french": "Soldat"
+    "french": "Soldat",
+    "english": "Soldier"
   },
   {
     "medumba": "Soyè",
-    "french": "Soldat"
+    "french": "Soldat",
+    "english": "Soldier"
   },
   {
     "medumba": "Nyàm",
-    "french": "Soleil"
+    "french": "Soleil",
+    "english": "Sun"
   },
   {
     "medumba": "Nyàm nə̀ bi",
-    "french": "Soleil disparaître"
+    "french": "Soleil disparaître",
+    "english": "Sun disappear"
   },
   {
     "medumba": "Nə̀ ta nyàm",
-    "french": "Soleil faire"
+    "french": "Soleil faire",
+    "english": "Sun do"
   },
   {
     "medumba": "Miaglo",
-    "french": "Sommeil"
+    "french": "Sommeil",
+    "english": "Sleep"
   },
   {
     "medumba": "Nə̀ mə̌ miɛglo",
-    "french": "Sommeiller"
+    "french": "Sommeiller",
+    "english": "Sleep"
   },
   {
     "medumba": "Ngàmə̌ꞌmiαglo",
-    "french": "Sommeilleuŗ"
+    "french": "Sommeilleuŗ",
+    "english": "Sleepy"
   },
   {
     "medumba": "Miαglo",
-    "french": "Somnolence"
+    "french": "Somnolence",
+    "english": "Drowsiness"
   },
   {
     "medumba": "Nə̀ mə̌ꞌmiαglo",
-    "french": "Somnoler"
+    "french": "Somnoler",
+    "english": "Dozing"
   },
   {
     "medumba": "Nə̀ càŋtə̌ miαglo",
-    "french": "Somnoler"
+    "french": "Somnoler",
+    "english": "Dozing"
   },
   {
     "medumba": "Nzə̀",
-    "french": "Son"
+    "french": "Son",
+    "english": "Sound"
   },
   {
     "medumba": "Fin",
-    "french": "Son"
+    "french": "Son",
+    "english": "Sound"
   },
   {
     "medumba": "Cùꞌtə̀",
-    "french": "Son"
+    "french": "Son",
+    "english": "Sound"
   },
   {
     "medumba": "Nə̀ diàg ntùn",
-    "french": "Sonder"
+    "french": "Sonder",
+    "english": "Probe"
   },
   {
     "medumba": "Nə̀ mùmtə̌",
-    "french": "Sonder"
+    "french": "Sonder",
+    "english": "Probe"
   },
   {
     "medumba": "Nə̀ toŋnù",
-    "french": "Sonder"
+    "french": "Sonder",
+    "english": "Probe"
   },
   {
     "medumba": "Nə̀ zwəꞌtə",
-    "french": "Sonder"
+    "french": "Sonder",
+    "english": "Probe"
   },
   {
     "medumba": "Nə̀ zwəꞌtə",
-    "french": "Sonder"
+    "french": "Sonder",
+    "english": "Probe"
   },
   {
     "medumba": "Nə̀ yən njèm",
-    "french": "Songe"
+    "french": "Songe",
+    "english": "Dream"
   },
   {
     "medumba": "Nə̀ lab ŋwa",
-    "french": "Songer"
+    "french": "Songer",
+    "english": "Think"
   },
   {
     "medumba": "Nə̀ buꞌŋwa",
-    "french": "Sonner"
+    "french": "Sonner",
+    "english": "Ring"
   },
   {
     "medumba": "Nə̀ tamŋwa",
-    "french": "Sonner"
+    "french": "Sonner",
+    "english": "Ring"
   },
   {
     "medumba": "Ŋwa",
-    "french": "Sonner"
+    "french": "Sonner",
+    "english": "Ring"
   },
   {
     "medumba": "Nzə̀ŋwa",
-    "french": "Sonnerie"
+    "french": "Sonnerie",
+    "english": "Ringtone"
   },
   {
     "medumba": "Nsα",
-    "french": "Sonnerie"
+    "french": "Sonnerie",
+    "english": "Ringtone"
   },
   {
     "medumba": "Ngàkà",
-    "french": "Sorcellerie"
+    "french": "Sorcellerie",
+    "english": "Witchcraft"
   },
   {
     "medumba": "Ngà̀nsὰ",
-    "french": "Socier"
+    "french": "Socier",
+    "english": "Social"
   },
   {
     "medumba": "Nǔ mɛ̀n",
-    "french": "Sort"
+    "french": "Sort",
+    "english": "Fate"
   },
   {
     "medumba": "Tɔ̀",
-    "french": "Sort"
+    "french": "Sort",
+    "english": "Fate"
   },
   {
     "medumba": "Nə̀ tumə",
-    "french": "Sortie"
+    "french": "Sortie",
+    "english": "Exit"
   },
   {
     "medumba": "Nzə̀ndα",
-    "french": "Sortie"
+    "french": "Sortie",
+    "english": "Exit"
   },
   {
     "medumba": "Nzə̀netumə",
-    "french": "Sortie"
+    "french": "Sortie",
+    "english": "Exit"
   },
   {
     "medumba": "Nə̀ tumə",
-    "french": "Sortir"
+    "french": "Sortir",
+    "english": "Go out"
   },
   {
     "medumba": "Cən",
-    "french": "Sot"
+    "french": "Sot",
+    "english": "Fool"
   },
   {
     "medumba": "Ngàfèmni",
-    "french": "Sot"
+    "french": "Sot",
+    "english": "Fool"
   },
   {
     "medumba": "Nkὰgnì",
-    "french": "Sot"
+    "french": "Sot",
+    "english": "Fool"
   },
   {
     "medumba": "Lə",
-    "french": "Soubassement"
+    "french": "Soubassement",
+    "english": "Basement"
   },
   {
     "medumba": "Tǔnbàꞌ",
-    "french": "Soubassement"
+    "french": "Soubassement",
+    "english": "Basement"
   },
   {
     "medumba": "Kɔ̌tùn",
-    "french": "Souche"
+    "french": "Souche",
+    "english": "Strain"
   },
   {
     "medumba": "Fəꞌnkʉα",
-    "french": "Souche de palme de raphia"
+    "french": "Souche de palme de raphia",
+    "english": "Raffia palm strain"
   },
   {
     "medumba": "Vênkʉα",
-    "french": "Souche de raphia mort"
+    "french": "Souche de raphia mort",
+    "english": "Dead raffia stump"
   },
   {
     "medumba": "Nzwiàg",
-    "french": "Souffle"
+    "french": "Souffle",
+    "english": "Breath"
   },
   {
     "medumba": "Ywɛlə",
-    "french": "Souffle"
+    "french": "Souffle",
+    "english": "Breath"
   },
   {
     "medumba": "Nə̀ fʉαgə",
-    "french": "Souffler"
+    "french": "Souffler",
+    "english": "Blowing"
   },
   {
     "medumba": "Ngàfʉαg",
-    "french": "Souffleur"
+    "french": "Souffleur",
+    "english": "Blower"
   },
   {
     "medumba": "Ngəꞌ",
-    "french": "Souffrance"
+    "french": "Souffrance",
+    "english": "Suffering"
   },
   {
     "medumba": "Ngʉ̀dnì",
-    "french": "Souffrance"
+    "french": "Souffrance",
+    "english": "Suffering"
   },
   {
     "medumba": "Nsòbnì",
-    "french": "Souffrance"
+    "french": "Souffrance",
+    "english": "Suffering"
   },
   {
     "medumba": "Ntobnì",
-    "french": "Souffrance"
+    "french": "Souffrance",
+    "english": "Suffering"
   },
   {
     "medumba": "Nə̀ fɛd nsɔ",
-    "french": "Souffrir"
+    "french": "Souffrir",
+    "english": "Suffer"
   },
   {
     "medumba": "Nə̀ yənngəꞌ",
-    "french": "Souffrir"
+    "french": "Souffrir",
+    "english": "Suffer"
   },
   {
     "medumba": "Solfὰ",
-    "french": "Soufre"
+    "french": "Soufre",
+    "english": "Sulfur"
   },
   {
     "medumba": "Nə̀ sαgtə",
-    "french": "Souiller"
+    "french": "Souiller",
+    "english": "Defile"
   },
   {
     "medumba": "Nə̀ tam tûmə",
-    "french": "Souiller"
+    "french": "Souiller",
+    "english": "Defile"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Souillure"
+    "french": "Souillure",
+    "english": "Defilement"
   },
   {
     "medumba": "Mbɛ̀n",
-    "french": "Souillure"
+    "french": "Souillure",
+    "english": "Defilement"
   },
   {
     "medumba": "Nə̀ bʉꞌʉ",
-    "french": "Soulever"
+    "french": "Soulever",
+    "english": "Lift"
   },
   {
     "medumba": "Mkətoꞌo",
-    "french": "Soupir"
+    "french": "Soupir",
+    "english": "Sigh"
   },
   {
     "medumba": "Zwiὰg",
-    "french": "Soupirer"
+    "french": "Soupirer",
+    "english": "Sigh"
   },
   {
     "medumba": "Nə̀ zwiὰgə",
-    "french": "Source point d’eau"
+    "french": "Source point d’eau",
+    "english": "Source water point"
   },
   {
     "medumba": "Lα̂ntsə",
-    "french": "Source"
+    "french": "Source",
+    "english": "Source"
   },
   {
     "medumba": "Tûmnsntsə",
-    "french": "Source endroit"
+    "french": "Source endroit",
+    "english": "Source location"
   },
   {
     "medumba": "Lα̂gbwə",
-    "french": "Source"
+    "french": "Source",
+    "english": "Source"
   },
   {
     "medumba": "Kaŋlαg",
-    "french": "Sourcil"
+    "french": "Sourcil",
+    "english": "Eyebrow"
   },
   {
     "medumba": "Mbuꞌntoŋ",
-    "french": "Sourd"
+    "french": "Sourd",
+    "english": "Deaf"
   },
   {
     "medumba": "Mbuꞌntoŋkə̀cob",
-    "french": "Sourd-muet"
+    "french": "Sourd-muet",
+    "english": "Deaf-mute"
   },
   {
     "medumba": "Nə̀ nyǔꞌzwì",
-    "french": "Sourire"
+    "french": "Sourire",
+    "english": "Smile"
   },
   {
     "medumba": "Cə̌dkù",
-    "french": "Souris"
+    "french": "Souris",
+    "english": "Mouse"
   },
   {
     "medumba": "Fiaŋmα̂mbà",
-    "french": "Sournois"
+    "french": "Sournois",
+    "english": "Sneaky"
   },
   {
     "medumba": "Mfənntəꞌ",
-    "french": "Sous-chef"
+    "french": "Sous-chef",
+    "english": "Sous chef"
   },
   {
     "medumba": "Zǐkum",
-    "french": "Sous-vêtement"
+    "french": "Sous-vêtement",
+    "english": "Underwear"
   },
   {
     "medumba": "Màꞌtə̀",
-    "french": "Souscription"
+    "french": "Souscription",
+    "english": "Subscription"
   },
   {
     "medumba": "Nə̀ màꞌtə̌",
-    "french": "Souscrire"
+    "french": "Souscrire",
+    "english": "Subscribe"
   },
   {
     "medumba": "Nə̀ tomtə",
-    "french": "Soutenir"
+    "french": "Soutenir",
+    "english": "Support"
   },
   {
     "medumba": "Ntom",
-    "french": "Soutien"
+    "french": "Soutien",
+    "english": "Support"
   },
   {
     "medumba": "Nə̀kwimtə",
-    "french": "Souvenir"
+    "french": "Souvenir",
+    "english": "Memory"
   },
   {
     "medumba": "Nə̀ kwimtə",
-    "french": "Souvenir se"
+    "french": "Souvenir se",
+    "english": "Memory"
   },
   {
     "medumba": "Tûmlam",
-    "french": "Spécial"
+    "french": "Spécial",
+    "english": "Special"
   },
   {
     "medumba": "Diaŋyən",
-    "french": "Spectacle"
+    "french": "Spectacle",
+    "english": "Show"
   },
   {
     "medumba": "Nəto",
-    "french": "Statue"
+    "french": "Statue",
+    "english": "Statue"
   },
   {
     "medumba": "Ntsəmɛ̀n",
-    "french": "Stature"
+    "french": "Stature",
+    "english": "Stature"
   },
   {
     "medumba": "Ngǎncʉꞌ",
-    "french": "Statut"
+    "french": "Statut",
+    "english": "Status"
   },
   {
     "medumba": "Kə̀bwə",
-    "french": "Stérile"
+    "french": "Stérile",
+    "english": "Sterile"
   },
   {
     "medumba": "Bûvə̀",
-    "french": "Style artistique"
+    "french": "Style artistique",
+    "english": "Artistic style"
   },
   {
     "medumba": "Kʉdfi",
-    "french": "Stylo"
+    "french": "Stylo",
+    "english": "Pen"
   },
   {
     "medumba": "Nə̀ jʉ ndα",
-    "french": "Succéder"
+    "french": "Succéder",
+    "english": "Succeed"
   },
   {
     "medumba": "Njʉndα",
-    "french": "Successeur"
+    "french": "Successeur",
+    "english": "Successor"
   },
   {
     "medumba": "Nə̀ finə",
-    "french": "Sucer"
+    "french": "Sucer",
+    "english": "Suck"
   },
   {
     "medumba": "Nə̀ nyo",
-    "french": "Sucer"
+    "french": "Sucer",
+    "english": "Suck"
   },
   {
     "medumba": "Dʉ̀mtə̀",
-    "french": "Sucre"
+    "french": "Sucre",
+    "english": "Sugar"
   },
   {
     "medumba": "Ntɛ̀n",
-    "french": "Sud"
+    "french": "Sud",
+    "english": "South"
   },
   {
     "medumba": "Mα ntɛ̀n",
-    "french": "Sud  au"
+    "french": "Sud  au",
+    "english": "South to"
   },
   {
     "medumba": "Nə̀ bɛd zəꞌnì",
-    "french": "Suer"
+    "french": "Suer",
+    "english": "Sweat"
   },
   {
     "medumba": "Nə̀ kwiaŋ zə̀ꞌni",
-    "french": "Suer"
+    "french": "Suer",
+    "english": "Sweat"
   },
   {
     "medumba": "Zəꞌnì",
-    "french": "Sueur"
+    "french": "Sueur",
+    "english": "Sweat"
   },
   {
     "medumba": "Nə̀ kùꞌu",
-    "french": "Suffir"
+    "french": "Suffir",
+    "english": "Enough"
   },
   {
     "medumba": "Nəkuꞌu",
-    "french": "Suffisance"
+    "french": "Suffisance",
+    "english": "Sufficiency"
   },
   {
     "medumba": "Mbì",
-    "french": "Suicide"
+    "french": "Suicide",
+    "english": "Suicide"
   },
   {
     "medumba": "Nə̀ ghə̌d mbì",
-    "french": "Suicider se"
+    "french": "Suicider se",
+    "english": "Commit suicide"
   },
   {
     "medumba": "Nə̀ bə̀lə",
-    "french": "Suivre"
+    "french": "Suivre",
+    "english": "Follow"
   },
   {
     "medumba": "Nə̀ bwə̌",
-    "french": "Suivre"
+    "french": "Suivre",
+    "english": "Follow"
   },
   {
     "medumba": "Nə̀ tam njàm",
-    "french": "Suivre"
+    "french": "Suivre",
+    "english": "Follow"
   },
   {
     "medumba": "Tûnù",
-    "french": "Sujet"
+    "french": "Sujet",
+    "english": "Subject"
   },
   {
     "medumba": "Mɔnkəꞌ",
-    "french": "Sujet"
+    "french": "Sujet",
+    "english": "Subject"
   },
   {
     "medumba": "Bùꞌ",
-    "french": "Sujet"
+    "french": "Sujet",
+    "english": "Subject"
   },
   {
     "medumba": "Nkwan",
-    "french": "Sujet"
+    "french": "Sujet",
+    "english": "Subject"
   },
   {
     "medumba": "Mɛ̀nndʉb",
-    "french": "Supérieur"
+    "french": "Supérieur",
+    "english": "Superior"
   },
   {
     "medumba": "Ndʉb",
-    "french": "Supérieur"
+    "french": "Supérieur",
+    "english": "Superior"
   },
   {
     "medumba": "Nə̀ bàtə̌",
-    "french": "Suppléer"
+    "french": "Suppléer",
+    "english": "Substitute"
   },
   {
     "medumba": "Lə̀ꞌtə̀",
-    "french": "Supplication"
+    "french": "Supplication",
+    "english": "supplication"
   },
   {
     "medumba": "Nə̀ mǎꞌmbu",
-    "french": "Supplier"
+    "french": "Supplier",
+    "english": "Supplier"
   },
   {
     "medumba": "Ntom",
-    "french": "Supplier"
+    "french": "Supplier",
+    "english": "Supplier"
   },
   {
     "medumba": "Nə̀ fɛntə",
-    "french": "Sopportet"
+    "french": "Sopportet",
+    "english": "Soportet"
   },
   {
     "medumba": "Nə̀ tomtə",
-    "french": "Supporter"
+    "french": "Supporter",
+    "english": "Support"
   },
   {
     "medumba": "Nùm",
-    "french": "Supporter"
+    "french": "Supporter",
+    "english": "Support"
   },
   {
     "medumba": "Nə̀ cob kὰn mfə",
-    "french": "Sûr"
+    "french": "Sûr",
+    "english": "Safe"
   },
   {
     "medumba": "Nə̀ cob nsôbvə",
-    "french": "Sûr"
+    "french": "Sûr",
+    "english": "Safe"
   },
   {
     "medumba": "Ndébàꞌ",
-    "french": "Tabac"
+    "french": "Tabac",
+    "english": "Tobacco"
   },
   {
     "medumba": "Nə̀ ghud tǔn mɛ̀n",
-    "french": "Tabac passer à"
+    "french": "Tabac passer à",
+    "english": "Tobacco move to"
   },
   {
     "medumba": "Nkòꞌ",
-    "french": "Table"
+    "french": "Table",
+    "english": "Table"
   },
   {
     "medumba": "Teblè",
-    "french": "Table"
+    "french": "Table",
+    "english": "Table"
   },
   {
     "medumba": "Nkòꞌjujʉ",
-    "french": "Table à manger"
+    "french": "Table à manger",
+    "english": "Dining table"
   },
   {
     "medumba": "Nkòꞌcaŋ",
-    "french": "Table à manger"
+    "french": "Table à manger",
+    "english": "Dining table"
   },
   {
     "medumba": "Nkǒꞌfàꞌ",
-    "french": "Table de travail"
+    "french": "Table de travail",
+    "english": "Work table"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Tache"
+    "french": "Tache",
+    "english": "Stain"
   },
   {
     "medumba": "Fàꞌ",
-    "french": "Tache"
+    "french": "Tache",
+    "english": "Stain"
   },
   {
     "medumba": "Ncǒbncob",
-    "french": "Tacheté"
+    "french": "Tacheté",
+    "english": "Spotted"
   },
   {
     "medumba": "Ncǒbncob fogtab",
-    "french": "Tacheté de blanc"
+    "french": "Tacheté de blanc",
+    "english": "Spotted with white"
   },
   {
     "medumba": "Ncǒbncob nəsɛn",
-    "french": "Tacheté de noir"
+    "french": "Tacheté de noir",
+    "english": "Black spotted"
   },
   {
     "medumba": "Ntsəwud",
-    "french": "Taille"
+    "french": "Taille",
+    "english": "Size"
   },
   {
     "medumba": "Ntaŋkob",
-    "french": "Taille hanche"
+    "french": "Taille hanche",
+    "english": "Hip size"
   },
   {
     "medumba": "Nə̀ sitə",
-    "french": "Tailler"
+    "french": "Tailler",
+    "english": "Prune"
   },
   {
     "medumba": "Nə̀ sitə tu",
-    "french": "Tailler cheveux"
+    "french": "Tailler cheveux",
+    "english": "Trim hair"
   },
   {
     "medumba": "Nə̀ mi ntswə",
-    "french": "Taire se"
+    "french": "Taire se",
+    "english": "Shut up"
   },
   {
     "medumba": "Nə̀ miꞌi",
-    "french": "Taire se"
+    "french": "Taire se",
+    "english": "Shut up"
   },
   {
     "medumba": "Nə̀ tswə ncù miꞌi",
-    "french": "Taire se"
+    "french": "Taire se",
+    "english": "Shut up"
   },
   {
     "medumba": "Tǔnkù",
-    "french": "Talon"
+    "french": "Talon",
+    "english": "Heel"
   },
   {
     "medumba": "Làmmbè",
-    "french": "Tambour"
+    "french": "Tambour",
+    "english": "Drum"
   },
   {
     "medumba": "Kèꞌtə̀",
-    "french": "Tamis"
+    "french": "Tamis",
+    "english": "Sieve"
   },
   {
     "medumba": "Nə̀ kètə̌",
-    "french": "Tamiser"
+    "french": "Tamiser",
+    "english": "Sieve"
   },
   {
     "medumba": "Nkàg",
-    "french": "Tam-tam"
+    "french": "Tam-tam",
+    "english": "Drum"
   },
   {
     "medumba": "Tɔ",
-    "french": "Tannière"
+    "french": "Tannière",
+    "english": "Den"
   },
   {
     "medumba": "Yàꞌyàꞌ",
-    "french": "Tapage"
+    "french": "Tapage",
+    "english": "Uproar"
   },
   {
     "medumba": "Nə̀ tam yàꞌyàl",
-    "french": "Tapage faire le"
+    "french": "Tapage faire le",
+    "english": "Fucking do it"
   },
   {
     "medumba": "Nə̀ tswe taꞌ",
-    "french": "Tarder"
+    "french": "Tarder",
+    "english": "Delay"
   },
   {
     "medumba": "Ne tswe yαmə",
-    "french": "Tarder"
+    "french": "Tarder",
+    "english": "Delay"
   },
   {
     "medumba": "Lòꞌ",
-    "french": "Tare"
+    "french": "Tare",
+    "english": "Tare"
   },
   {
     "medumba": "Nə̀ zwimə",
-    "french": "Tarir"
+    "french": "Tarir",
+    "english": "Dry up"
   },
   {
     "medumba": "Kûꞌbαn",
-    "french": "Taro"
+    "french": "Taro",
+    "english": "Taro"
   },
   {
     "medumba": "Bα̂nkuꞌu",
-    "french": "Taro pilé"
+    "french": "Taro pilé",
+    "english": "Pounded taro"
   },
   {
     "medumba": "Tswəꞌtə",
-    "french": "Tas"
+    "french": "Tas",
+    "english": "Heap"
   },
   {
     "medumba": "Fɛd sə",
-    "french": "Tas"
+    "french": "Tas",
+    "english": "Heap"
   },
   {
     "medumba": "Nə̀ mòmtə̌",
-    "french": "Tâtonner"
+    "french": "Tâtonner",
+    "english": "grope"
   },
   {
     "medumba": "Nə̀ nɛ̂n bǎgbàg",
-    "french": "Tâtonner"
+    "french": "Tâtonner",
+    "english": "grope"
   },
   {
     "medumba": "Nsaꞌ",
-    "french": "Tatouage"
+    "french": "Tatouage",
+    "english": "Tattoo"
   },
   {
     "medumba": "Nə̀ vɛn nsaꞌ",
-    "french": "Tatuoer"
+    "french": "Tatuoer",
+    "english": "Tattoo"
   },
   {
     "medumba": "Fǒdmfɔ",
-    "french": "Taureau"
+    "french": "Taureau",
+    "english": "Taurus"
   },
   {
     "medumba": "Fǒdnaꞌ",
-    "french": "Taureau"
+    "french": "Taureau",
+    "english": "Taurus"
   },
   {
     "medumba": "Fəꞌ",
-    "french": "Taxe"
+    "french": "Taxe",
+    "english": "Tax"
   },
   {
     "medumba": "Nə̀ làꞌa",
-    "french": "Taxer"
+    "french": "Taxer",
+    "english": "Tax"
   },
   {
     "medumba": "Mbα̂ntu",
-    "french": "Taigne"
+    "french": "Taigne",
+    "english": "Ringworm"
   },
   {
     "medumba": "Ncʉ̀",
-    "french": "Teint"
+    "french": "Teint",
+    "english": "Complexion"
   },
   {
     "medumba": "Nə̀lαnbà",
-    "french": "Teint clair"
+    "french": "Teint clair",
+    "english": "Light complexion"
   },
   {
     "medumba": "Nə̀sɛnə",
-    "french": "Teint noir"
+    "french": "Teint noir",
+    "english": "Black complexion"
   },
   {
     "medumba": "Nə̀sɛnə nzidtə",
-    "french": "Teint noir ciré"
+    "french": "Teint noir ciré",
+    "english": "Waxed black complexion"
   },
   {
     "medumba": "Nə̀bǎ",
-    "french": "Teint bronzé"
+    "french": "Teint bronzé",
+    "english": "Tanned complexion"
   },
   {
     "medumba": "Nta",
-    "french": "Témoignage"
+    "french": "Témoignage",
+    "english": "Testimony"
   },
   {
     "medumba": "Nə̀ mbǎꞌnkwαn",
-    "french": "Témoigner"
+    "french": "Témoigner",
+    "english": "Testify"
   },
   {
     "medumba": "Nə̀ kwenta",
-    "french": "Témoigner"
+    "french": "Témoigner",
+    "english": "Testify"
   },
   {
     "medumba": "Mbaꞌnkwαn",
-    "french": "Témoin"
+    "french": "Témoin",
+    "english": "Witness"
   },
   {
     "medumba": "Nkwênta",
-    "french": "Témoin"
+    "french": "Témoin",
+    "english": "Witness"
   },
   {
     "medumba": "Nkaŋtu",
-    "french": "Tempe"
+    "french": "Tempe",
+    "english": "Temple"
   },
   {
     "medumba": "Nə̀tâ fə̀mbàŋ",
-    "french": "Tempête"
+    "french": "Tempête",
+    "english": "Storm"
   },
   {
     "medumba": "Nə̀ shʉm fə̀dmbàŋ",
-    "french": "Tempêter"
+    "french": "Tempêter",
+    "english": "Storm"
   },
   {
     "medumba": "Nə̀ cob lα tum",
-    "french": "Tempêter"
+    "french": "Tempêter",
+    "english": "Storm"
   },
   {
     "medumba": "Ndα̂mətə̀",
-    "french": "Temple"
+    "french": "Temple",
+    "english": "Temple"
   },
   {
     "medumba": "Ndα̂nsi",
-    "french": "Temple"
+    "french": "Temple",
+    "english": "Temple"
   },
   {
     "medumba": "Ngə̀laŋ",
-    "french": "Temps"
+    "french": "Temps",
+    "english": "Time"
   },
   {
     "medumba": "Njʉ",
-    "french": "Temps"
+    "french": "Temps",
+    "english": "Time"
   },
   {
     "medumba": "Nga",
-    "french": "Tendon"
+    "french": "Tendon",
+    "english": "Tendon"
   },
   {
     "medumba": "Ngǎkù",
-    "french": "Tendon d’achille"
+    "french": "Tendon d’achille",
+    "english": "Achilles tendon"
   },
   {
     "medumba": "Njamə",
-    "french": "Ténèbre"
+    "french": "Ténèbre",
+    "english": "Darkness"
   },
   {
     "medumba": "Nə̀ cʉbə",
-    "french": "Ténir"
+    "french": "Ténir",
+    "english": "Hold"
   },
   {
     "medumba": "Nə̀ cʉb ndǎŋndaŋ",
-    "french": "Tenir droit"
+    "french": "Tenir droit",
+    "english": "Stand straight"
   },
   {
     "medumba": "Tâmcɛd",
-    "french": "Tennis"
+    "french": "Tennis",
+    "english": "Tennis"
   },
   {
     "medumba": "Tâmcɛd",
-    "french": "Tennis de table"
+    "french": "Tennis de table",
+    "english": "Table tennis"
   },
   {
     "medumba": "Ngàlàŋtə̀",
-    "french": "Tentateur"
+    "french": "Tentateur",
+    "english": "Tempter"
   },
   {
     "medumba": "Ntαb",
-    "french": "Tente"
+    "french": "Tente",
+    "english": "Tent"
   },
   {
     "medumba": "Ntα̌bnzwə",
-    "french": "Tente"
+    "french": "Tente",
+    "english": "Tent"
   },
   {
     "medumba": "Nə̀ làŋtə̌",
-    "french": "Tenter"
+    "french": "Tenter",
+    "english": "Try"
   },
   {
     "medumba": "Nə̀ miàgtə̌",
-    "french": "Terminer"
+    "french": "Terminer",
+    "english": "Finish"
   },
   {
     "medumba": "Ngoꞌo",
-    "french": "Termite"
+    "french": "Termite",
+    "english": "Termite"
   },
   {
     "medumba": "Njʉ",
-    "french": "Terre"
+    "french": "Terre",
+    "english": "Earth"
   },
   {
     "medumba": "Caꞌa",
-    "french": "Terre"
+    "french": "Terre",
+    "english": "Earth"
   },
   {
     "medumba": "Nsicaꞌa",
-    "french": "Terre monde"
+    "french": "Terre monde",
+    "english": "earth world"
   },
   {
     "medumba": "Bwog ndʉb",
-    "french": "Terreur"
+    "french": "Terreur",
+    "english": "Terror"
   },
   {
     "medumba": "Fə̀dwud",
-    "french": "Terreur"
+    "french": "Terreur",
+    "english": "Terror"
   },
   {
     "medumba": "Ntʉ̂mngɔ̀",
-    "french": "Territoire"
+    "french": "Territoire",
+    "english": "Territory"
   },
   {
     "medumba": "Nə̀ kag fə̀dwud",
-    "french": "Terroriser"
+    "french": "Terroriser",
+    "english": "Terrorize"
   },
   {
     "medumba": "Ntὰgmfə",
-    "french": "Testament"
+    "french": "Testament",
+    "english": "Will"
   },
   {
     "medumba": "Ntαgvʉ",
-    "french": "Testament"
+    "french": "Testament",
+    "english": "Will"
   },
   {
     "medumba": "Tu",
-    "french": "Tête"
+    "french": "Tête",
+    "english": "Head"
   },
   {
     "medumba": "Səsə̂",
-    "french": "Tête à tête"
+    "french": "Tête à tête",
+    "english": "Head to head"
   },
   {
     "medumba": "Nə̀ bǔm ncù",
-    "french": "Tête à tête"
+    "french": "Tête à tête",
+    "english": "Head to head"
   },
   {
     "medumba": "Nə̀ nyo bʉn",
-    "french": "Téter"
+    "french": "Téter",
+    "english": "Sucking"
   },
   {
     "medumba": "Nə̀ tam bô tu",
-    "french": "Têter"
+    "french": "Têter",
+    "english": "Feed"
   },
   {
     "medumba": "Ngàtǎtu",
-    "french": "Têtu"
+    "french": "Têtu",
+    "english": "Stubborn"
   },
   {
     "medumba": "Nə̀ tǎtu",
-    "french": "Têtu être"
+    "french": "Têtu être",
+    "english": "stubborn be"
   },
   {
     "medumba": "Diaŋsa",
-    "french": "Théâtre"
+    "french": "Théâtre",
+    "english": "Theater"
   },
   {
     "medumba": "Diaŋzwì",
-    "french": "Théâtre comique"
+    "french": "Théâtre comique",
+    "english": "Comedy theater"
   },
   {
     "medumba": "Diaŋnyα",
-    "french": "Théâtre tragique"
+    "french": "Théâtre tragique",
+    "english": "Tragic theater"
   },
   {
     "medumba": "Diaŋnzwə",
-    "french": "Théâtre tragique"
+    "french": "Théâtre tragique",
+    "english": "Tragic theater"
   },
   {
     "medumba": "Fʉnkù",
-    "french": "Tibia"
+    "french": "Tibia",
+    "english": "Shin"
   },
   {
     "medumba": "Nəyobtə",
-    "french": "Tiède"
+    "french": "Tiède",
+    "english": "Lukewarm"
   },
   {
     "medumba": "Yobtə̀",
-    "french": "Tiédeur"
+    "french": "Tiédeur",
+    "english": "Lukewarmness"
   },
   {
     "medumba": "Nə̀ yobtə",
-    "french": "Tiédir"
+    "french": "Tiédir",
+    "english": "Warm"
   },
   {
     "medumba": "Ncʉ̌ꞌ nùm tad",
-    "french": "Tiers"
+    "french": "Tiers",
+    "english": "Third parties"
   },
   {
     "medumba": "Mɛ̀nwα",
-    "french": "Tiers un"
+    "french": "Tiers un",
+    "english": "Third one"
   },
   {
     "medumba": "Tɔ̀",
-    "french": "Tir au sort"
+    "french": "Tir au sort",
+    "english": "Draw"
   },
   {
     "medumba": "Nə̀ baꞌa",
-    "french": "Tisser"
+    "french": "Tisser",
+    "english": "Weave"
   },
   {
     "medumba": "Mbâꞌnzwə",
-    "french": "Tisserand"
+    "french": "Tisserand",
+    "english": "Weaver"
   },
   {
     "medumba": "Nzwə",
-    "french": "Tissu"
+    "french": "Tissu",
+    "english": "Fabric"
   },
   {
     "medumba": "Lɛ̀n",
-    "french": "Titre appelation"
+    "french": "Titre appelation",
+    "english": "Title appellation"
   },
   {
     "medumba": "Tu",
-    "french": "Titre texte"
+    "french": "Titre texte",
+    "english": "Text title"
   },
   {
     "medumba": "Nə̀ sǒg sə",
-    "french": "Toilette faire la"
+    "french": "Toilette faire la",
+    "english": "Toilet do the"
   },
   {
     "medumba": "Mfìꞌntəmɛ̀n",
-    "french": "Toise"
+    "french": "Toise",
+    "english": "Height chart"
   },
   {
     "medumba": "Tûbaꞌ",
-    "french": "Toit"
+    "french": "Toit",
+    "english": "Roof"
   },
   {
     "medumba": "Fì",
-    "french": "Tombe"
+    "french": "Tombe",
+    "english": "Grave"
   },
   {
     "medumba": "Nə̀ tamnsi",
-    "french": "Tomber"
+    "french": "Tomber",
+    "english": "Fall"
   },
   {
     "medumba": "Nə̀ vʉ̌",
-    "french": "Tomber"
+    "french": "Tomber",
+    "english": "Fall"
   },
   {
     "medumba": "Nə̀ cʉmnsi",
-    "french": "Tomber liquide"
+    "french": "Tomber liquide",
+    "english": "Falling liquid"
   },
   {
     "medumba": "Nə̀ vǔnsi",
-    "french": "Tomber à plat"
+    "french": "Tomber à plat",
+    "english": "Fall flat"
   },
   {
     "medumba": "Nə̀ fogtə",
-    "french": "Tomberen cascarde"
+    "french": "Tomberen cascarde",
+    "english": "Fallen waterfall"
   },
   {
     "medumba": "Tɔ̀",
-    "french": "Tombola"
+    "french": "Tombola",
+    "english": "Raffle"
   },
   {
     "medumba": "Taŋə",
-    "french": "Tonneau"
+    "french": "Tonneau",
+    "english": "Barrel"
   },
   {
     "medumba": "Fǎmbàŋ",
-    "french": "Tonnerre"
+    "french": "Tonnerre",
+    "english": "Thunder"
   },
   {
     "medumba": "Ncuaꞌ",
-    "french": "Tontine"
+    "french": "Tontine",
+    "english": "Tontine"
   },
   {
     "medumba": "Bə̀bǎꞌmbwogə",
-    "french": "Torche"
+    "french": "Torche",
+    "english": "Torch"
   },
   {
     "medumba": "Nkàꞌ",
-    "french": "Torche"
+    "french": "Torche",
+    "english": "Torch"
   },
   {
     "medumba": "Nkǎꞌvə̀",
-    "french": "Torche"
+    "french": "Torche",
+    "english": "Torch"
   },
   {
     "medumba": "Nə̀ ba",
-    "french": "Tordre"
+    "french": "Tordre",
+    "english": "twist"
   },
   {
     "medumba": "Nə̀ ŋamə",
-    "french": "Tordre"
+    "french": "Tordre",
+    "english": "twist"
   },
   {
     "medumba": "Nə̀ ŋamə",
-    "french": "Tordu"
+    "french": "Tordu",
+    "english": "Twisted"
   },
   {
     "medumba": "Ntsǐdmbàŋ",
-    "french": "Torrent"
+    "french": "Torrent",
+    "english": "Torrent"
   },
   {
     "medumba": "Mfα̌nnù",
-    "french": "Tort"
+    "french": "Tort",
+    "english": "Wrong"
   },
   {
     "medumba": "Tswəmα̂nk̀òꞌ",
-    "french": "Tortue"
+    "french": "Tortue",
+    "english": "Turtle"
   },
   {
     "medumba": "Ngʉ̀dnǐ",
-    "french": "Torture"
+    "french": "Torture",
+    "english": "Torture"
   },
   {
     "medumba": "Nə̀ kwagə",
-    "french": "Torturer"
+    "french": "Torturer",
+    "english": "Torture"
   },
   {
     "medumba": "Nkʉ̂nkʉ",
-    "french": "Toucher"
+    "french": "Toucher",
+    "english": "Touch"
   },
   {
     "medumba": "Nghʉdnǐ",
-    "french": "Tour joué"
+    "french": "Tour joué",
+    "english": "Trick played"
   },
   {
     "medumba": "Nə̀ ghʉ̀dnǐ",
-    "french": "Tourment"
+    "french": "Tourment",
+    "english": "Torment"
   },
   {
     "medumba": "Nə̀ lǎbwud",
-    "french": "Tourmenter"
+    "french": "Tourmenter",
+    "english": "Torment"
   },
   {
     "medumba": "Ŋûꞌnzə̀",
-    "french": "Tournant"
+    "french": "Tournant",
+    "english": "Turning point"
   },
   {
     "medumba": "Nə̀ kàŋə",
-    "french": "Tourner"
+    "french": "Tourner",
+    "english": "Turn"
   },
   {
     "medumba": "Nə̀ bǎꞌkwiag",
-    "french": "Tousser"
+    "french": "Tousser",
+    "english": "Cough"
   },
   {
     "medumba": "Nə̀ kwiagə",
-    "french": "Tousser"
+    "french": "Tousser",
+    "english": "Cough"
   },
   {
     "medumba": "Fa",
-    "french": "Tout"
+    "french": "Tout",
+    "english": "Everything"
   },
   {
     "medumba": "Fafa",
-    "french": "Tout"
+    "french": "Tout",
+    "english": "Everything"
   },
   {
     "medumba": "Nzə̌nzə̌",
-    "french": "Toutes sortes"
+    "french": "Toutes sortes",
+    "english": "All kinds"
   },
   {
     "medumba": "Kə̀nguan",
-    "french": "Tout puissant"
+    "french": "Tout puissant",
+    "english": "Almighty"
   },
   {
     "medumba": "Ngànə̀ta",
-    "french": "Tout puissant"
+    "french": "Tout puissant",
+    "english": "Almighty"
   },
   {
     "medumba": "Nsi",
-    "french": "Tout puissant"
+    "french": "Tout puissant",
+    "english": "Almighty"
   },
   {
     "medumba": "Kwiag",
-    "french": "Toux"
+    "french": "Toux",
+    "english": "Cough"
   },
   {
     "medumba": "Nə̀ site kùd mɛ̀n (V",
-    "french": "Trahir"
+    "french": "Trahir",
+    "english": "Betray"
   },
   {
     "medumba": "Nə̀ swɛ̌n mɛ̀n",
-    "french": "Trahir"
+    "french": "Trahir",
+    "english": "Betray"
   },
   {
     "medumba": "Nə̀ to tǔn mɛ̀n",
-    "french": "Trahir"
+    "french": "Trahir",
+    "english": "Betray"
   },
   {
     "medumba": "Nə̀ zwə ncàm mɛ̀n",
-    "french": "Trahir"
+    "french": "Trahir",
+    "english": "Betray"
   },
   {
     "medumba": "Nə̀swɛ̌n mɛ̀n",
-    "french": "Trahison"
+    "french": "Trahison",
+    "english": "Betrayal"
   },
   {
     "medumba": "Nə̀ zwəncàmmɛ̀n",
-    "french": "Trahison"
+    "french": "Trahison",
+    "english": "Betrayal"
   },
   {
     "medumba": "nganzwəncὰn",
-    "french": "Traître"
+    "french": "Traître",
+    "english": "Traitor"
   },
   {
     "medumba": "Nswɛ̀nngɔ̀",
-    "french": "Traître"
+    "french": "Traître",
+    "english": "Traitor"
   },
   {
     "medumba": "Nà",
-    "french": "Traîtrisse"
+    "french": "Traîtrisse",
+    "english": "Traitor"
   },
   {
     "medumba": "Cʉag",
-    "french": "Tranchant"
+    "french": "Tranchant",
+    "english": "Sharp"
   },
   {
     "medumba": "Nsam",
-    "french": "Tranchée"
+    "french": "Tranchée",
+    "english": "Trench"
   },
   {
     "medumba": "Nə̀ kəbə",
-    "french": "Trancher"
+    "french": "Trancher",
+    "english": "Slice"
   },
   {
     "medumba": "Nə̀ fǎn ncʉ̀ꞌ",
-    "french": "Transgresser"
+    "french": "Transgresser",
+    "english": "Transgress"
   },
   {
     "medumba": "Kə̀bwɔ̀",
-    "french": "Transgression"
+    "french": "Transgression",
+    "english": "Transgression"
   },
   {
     "medumba": "Nə̀yəntə",
-    "french": "Transparent"
+    "french": "Transparent",
+    "english": "Clear"
   },
   {
     "medumba": "Nə̀ to ntogə",
-    "french": "Transpercer"
+    "french": "Transpercer",
+    "english": "Pierce"
   },
   {
     "medumba": "Nə̀ tam ntogə",
-    "french": "Transpercer"
+    "french": "Transpercer",
+    "english": "Pierce"
   },
   {
     "medumba": "Ywìꞌ",
-    "french": "Trappe"
+    "french": "Trappe",
+    "english": "Hatch"
   },
   {
     "medumba": "Fàꞌ",
-    "french": "Travail"
+    "french": "Travail",
+    "english": "Work"
   },
   {
     "medumba": "Ncʉ̂ꞌnὰ",
-    "french": "Travail en e̍quipe"
+    "french": "Travail en e̍quipe",
+    "english": "Teamwork"
   },
   {
     "medumba": "Njôgmαsi",
-    "french": "Travail forcé"
+    "french": "Travail forcé",
+    "english": "Forced labor"
   },
   {
     "medumba": "Fǎꞌmbu",
-    "french": "Trvail manuel"
+    "french": "Trvail manuel",
+    "english": "Manual work"
   },
   {
     "medumba": "Nə̀ fàꞌa",
-    "french": "Travailler"
+    "french": "Travailler",
+    "english": "Work"
   },
   {
     "medumba": "Ngàfàꞌ",
-    "french": "Travailleur"
+    "french": "Travailleur",
+    "english": "Worker"
   },
   {
     "medumba": "Fǎꞌndα",
-    "french": "Traveaux domestique"
+    "french": "Traveaux domestique",
+    "english": "Domestic work"
   },
   {
     "medumba": "Nə̀ dùlə",
-    "french": "Traverser"
+    "french": "Traverser",
+    "english": "Cross"
   },
   {
     "medumba": "Nə̀ yaꞌa",
-    "french": "Traverser"
+    "french": "Traverser",
+    "english": "Cross"
   },
   {
     "medumba": "Nə̀ faꞌtə",
-    "french": "Trébucher"
+    "french": "Trébucher",
+    "english": "Stumble"
   },
   {
     "medumba": "Tshaꞌnenyiꞌi",
-    "french": "Trenblement de terre"
+    "french": "Trenblement de terre",
+    "english": "Earthquake"
   },
   {
     "medumba": "Nə̀ vɛdtə̌",
-    "french": "Trembler"
+    "french": "Trembler",
+    "english": "Tremble"
   },
   {
     "medumba": "Nə̀ nyǔꞌntsə",
-    "french": "Tremper"
+    "french": "Tremper",
+    "english": "Soak"
   },
   {
     "medumba": "Nə̀ ywɛ̀lə",
-    "french": "Tremper"
+    "french": "Tremper",
+    "english": "Soak"
   },
   {
     "medumba": "Nəshù",
-    "french": "Très"
+    "french": "Très",
+    "english": "Very"
   },
   {
     "medumba": "Fùꞌ",
-    "french": "Trésor"
+    "french": "Trésor",
+    "english": "Treasure"
   },
   {
     "medumba": "Jûnkαb",
-    "french": "Trésor"
+    "french": "Trésor",
+    "english": "Treasure"
   },
   {
     "medumba": "Ndɔ̀tu",
-    "french": "Trésor"
+    "french": "Trésor",
+    "english": "Treasure"
   },
   {
     "medumba": "Ndɔ̀tu",
-    "french": "Tresse"
+    "french": "Tresse",
+    "english": "Braid"
   },
   {
     "medumba": "Nə̀ baꞌa",
-    "french": "Tresser"
+    "french": "Tresser",
+    "english": "Braid"
   },
   {
     "medumba": "Nə̀ zwimə",
-    "french": "Tresser"
+    "french": "Tresser",
+    "english": "Braid"
   },
   {
     "medumba": "Nə̀ baꞌtu",
-    "french": "Tresse tête"
+    "french": "Tresse tête",
+    "english": "Head braid"
   },
   {
     "medumba": "Nzwìd",
-    "french": "Tribu"
+    "french": "Tribu",
+    "english": "Tribe"
   },
   {
     "medumba": "Tǔnndα",
-    "french": "Tribu"
+    "french": "Tribu",
+    "english": "Tribe"
   },
   {
     "medumba": "Ngə̀",
-    "french": "Tribulation"
+    "french": "Tribulation",
+    "english": "Tribulation"
   },
   {
     "medumba": "Ndα̂ncà",
-    "french": "Tribunal"
+    "french": "Tribunal",
+    "english": "Court"
   },
   {
     "medumba": "Ncùb",
-    "french": "Tribut"
+    "french": "Tribut",
+    "english": "Tribute"
   },
   {
     "medumba": "Nə̀ tswidtə",
-    "french": "Trier"
+    "french": "Trier",
+    "english": "Sort"
   },
   {
     "medumba": "Nə̀ nywinə",
-    "french": "Triste être"
+    "french": "Triste être",
+    "english": "sad to be"
   },
   {
     "medumba": "Nywin",
-    "french": "Tristesse"
+    "french": "Tristesse",
+    "english": "Sadness"
   },
   {
     "medumba": "Zwə",
-    "french": "Tristesse"
+    "french": "Tristesse",
+    "english": "Sadness"
   },
   {
     "medumba": "Zwə̌ntʉ",
-    "french": "Tristesse"
+    "french": "Tristesse",
+    "english": "Sadness"
   },
   {
     "medumba": "Diǎŋfə̀n",
-    "french": "Trône"
+    "french": "Trône",
+    "english": "Throne"
   },
   {
     "medumba": "Diǎŋkwa",
-    "french": "Trône"
+    "french": "Trône",
+    "english": "Throne"
   },
   {
     "medumba": "Kǒꞌfə̀n",
-    "french": "Trône"
+    "french": "Trône",
+    "english": "Throne"
   },
   {
     "medumba": "Tad",
-    "french": "Trois"
+    "french": "Trois",
+    "english": "Three"
   },
   {
     "medumba": "Mbadtə̀ tad",
-    "french": "Troisième"
+    "french": "Troisième",
+    "english": "Third"
   },
   {
     "medumba": "Ntà",
-    "french": "Trompête"
+    "french": "Trompête",
+    "english": "Trumpet"
   },
   {
     "medumba": "Nə̀ fʉ̌mɛ̀n",
-    "french": "Tromper"
+    "french": "Tromper",
+    "english": "Deceive"
   },
   {
     "medumba": "Nə̀ tadtə",
-    "french": "Tromper"
+    "french": "Tromper",
+    "english": "Deceive"
   },
   {
     "medumba": "Fʉ̀ꞌtə̀",
-    "french": "Tromperie"
+    "french": "Tromperie",
+    "english": "Deception"
   },
   {
     "medumba": "Nkǒꞌtʉ",
-    "french": "Trompette"
+    "french": "Trompette",
+    "english": "Trumpet"
   },
   {
     "medumba": "Mα̂ntuꞌ",
-    "french": "Tronc d’arbre"
+    "french": "Tronc d’arbre",
+    "english": "Tree trunk"
   },
   {
     "medumba": "Nə̀ cuadtə",
-    "french": "Trophée"
+    "french": "Trophée",
+    "english": "Trophy"
   },
   {
     "medumba": "Tɔ",
-    "french": "Trou"
+    "french": "Trou",
+    "english": "Hole"
   },
   {
     "medumba": "Cuꞌtu",
-    "french": "Trouble"
+    "french": "Trouble",
+    "english": "Trouble"
   },
   {
     "medumba": "Nə̀ cǔꞌtu",
-    "french": "Troubler"
+    "french": "Troubler",
+    "english": "Disturb"
   },
   {
     "medumba": "Ngàcǔꞌtu",
-    "french": "Troubleur"
+    "french": "Troubleur",
+    "english": "Troublesome"
   },
   {
     "medumba": "Nə̀ tswə̌ꞌtɔ",
-    "french": "Trouer"
+    "french": "Trouer",
+    "english": "Hole"
   },
   {
     "medumba": "Mfə̀ꞌkʉlə",
-    "french": "Trousse d’ecolier"
+    "french": "Trousse d’ecolier",
+    "english": "School kit"
   },
   {
     "medumba": "Fɛn",
-    "french": "Trouvaille"
+    "french": "Trouvaille",
+    "english": "Find"
   },
   {
     "medumba": "Jûnfɛn",
-    "french": "Trouvaille en"
+    "french": "Trouvaille en",
+    "english": "Find in"
   },
   {
     "medumba": "Nə̀ fònə",
-    "french": "Trouver"
+    "french": "Trouver",
+    "english": "Find"
   },
   {
     "medumba": "Wʉ̀",
-    "french": "Tu"
+    "french": "Tu",
+    "english": "You"
   },
   {
     "medumba": "Nə̀ zwi",
-    "french": "Tuer"
+    "french": "Tuer",
+    "english": "Kill"
   },
   {
     "medumba": "Ngàzwi",
-    "french": "Tueur"
+    "french": "Tueur",
+    "english": "Killer"
   },
   {
     "medumba": "Ncùꞌtə̀",
-    "french": "Tumulte"
+    "french": "Tumulte",
+    "english": "Tumult"
   },
   {
     "medumba": "Nzwə",
-    "french": "Tunique"
+    "french": "Tunique",
+    "english": "Tunic"
   },
   {
     "medumba": "Ngàtəntom",
-    "french": "Tuteur"
+    "french": "Tuteur",
+    "english": "Tutor"
   },
   {
     "medumba": "Ngacagte",
-    "french": "Tuteur"
+    "french": "Tuteur",
+    "english": "Tutor"
   },
   {
     "medumba": "Ntom",
-    "french": "Tuteur"
+    "french": "Tuteur",
+    "english": "Tutor"
   },
   {
     "medumba": "Ngʉꞌ tɔ̀ngɔ̀",
-    "french": "Tyranie"
+    "french": "Tyranie",
+    "english": "Tyranny"
   },
   {
     "medumba": "Kəkoꞌo",
-    "french": "Ulcère"
+    "french": "Ulcère",
+    "english": "Ulcer"
   },
   {
     "medumba": "Mfaŋə",
-    "french": "Ulcère"
+    "french": "Ulcère",
+    "english": "Ulcer"
   },
   {
     "medumba": "Ndʉ̌jàm",
-    "french": "Ulterieur"
+    "french": "Ulterieur",
+    "english": "Subsequent"
   },
   {
     "medumba": "Ncʉ̌ꞌncʉꞌ",
-    "french": "Un à un"
+    "french": "Un à un",
+    "english": "One by one"
   },
   {
     "medumba": "Ncʉꞌ",
-    "french": "Un; une"
+    "french": "Un; une",
+    "english": "A; a"
   },
   {
     "medumba": "Tàꞌ",
-    "french": "Un; une"
+    "french": "Un; une",
+    "english": "A; a"
   },
   {
     "medumba": "Jûncʉꞌ",
-    "french": "Uniforme"
+    "french": "Uniforme",
+    "english": "Uniform"
   },
   {
     "medumba": "Nzwə̂fà",
-    "french": "Uniforme tenue"
+    "french": "Uniforme tenue",
+    "english": "Uniform outfit"
   },
   {
     "medumba": "Ntàmtə̀",
-    "french": "Union"
+    "french": "Union",
+    "english": "Union"
   },
   {
     "medumba": "Nə̀ tàmtə",
-    "french": "Unir"
+    "french": "Unir",
+    "english": "Unite"
   },
   {
     "medumba": "Ncʉꞌ",
-    "french": "Unitaire"
+    "french": "Unitaire",
+    "english": "Unitary"
   },
   {
     "medumba": "Kǎmmfìꞌ",
-    "french": "Unité"
+    "french": "Unité",
+    "english": "Unit"
   },
   {
     "medumba": "Màꞌ",
-    "french": "Unité"
+    "french": "Unité",
+    "english": "Unit"
   },
   {
     "medumba": "Ncùncʉꞌ",
-    "french": "Unité"
+    "french": "Unité",
+    "english": "Unit"
   },
   {
     "medumba": "Njʉ",
-    "french": "Univers"
+    "french": "Univers",
+    "english": "Universe"
   },
   {
     "medumba": "Nsicaꞌa",
-    "french": "Univers"
+    "french": "Univers",
+    "english": "Universe"
   },
   {
     "medumba": "Njʉfa",
-    "french": "Universel"
+    "french": "Universel",
+    "english": "Universal"
   },
   {
     "medumba": "Ŋwaꞌnìnsὰkʉlə",
-    "french": "Université"
+    "french": "Université",
+    "english": "University"
   },
   {
     "medumba": "Nûnkund̀e",
-    "french": "Urgence"
+    "french": "Urgence",
+    "english": "Emergency"
   },
   {
     "medumba": "Nkǔndenkǔndə",
-    "french": "Urgence de toute"
+    "french": "Urgence de toute",
+    "english": "Emergency of all"
   },
   {
     "medumba": "Ndαnùbαhα",
-    "french": "Urgence salle des"
+    "french": "Urgence salle des",
+    "english": "Emergency room"
   },
   {
     "medumba": "Nkǔndə",
-    "french": "Urgent"
+    "french": "Urgent",
+    "english": "Urgent"
   },
   {
     "medumba": "Nə̀tsin",
-    "french": "Urine"
+    "french": "Urine",
+    "english": "Urine"
   },
   {
     "medumba": "Nə̀ tsìntə̌",
-    "french": "Uriner"
+    "french": "Uriner",
+    "english": "Urinate"
   },
   {
     "medumba": "Dʉ̌ꞌnə̀tsìn",
-    "french": "Urinoir"
+    "french": "Urinoir",
+    "english": "Urinal"
   },
   {
     "medumba": "Kânə̀tsìn",
-    "french": "Urinoir"
+    "french": "Urinoir",
+    "english": "Urinal"
   },
   {
     "medumba": "Nyαmnaꞌ",
-    "french": "Vache"
+    "french": "Vache",
+    "english": "Cow"
   },
   {
     "medumba": "Mfɔ",
-    "french": "Vache boeuf"
+    "french": "Vache boeuf",
+    "english": "Cow beef"
   },
   {
     "medumba": "Kâdtʉ",
-    "french": "Vagabond"
+    "french": "Vagabond",
+    "english": "Vagabond"
   },
   {
     "medumba": "Ncǎkαnncù",
-    "french": "Vagabond"
+    "french": "Vagabond",
+    "english": "Vagabond"
   },
   {
     "medumba": "Ncǎkə̌ndα",
-    "french": "Vagabond"
+    "french": "Vagabond",
+    "english": "Vagabond"
   },
   {
     "medumba": "Kad",
-    "french": "Vagabondage"
+    "french": "Vagabondage",
+    "english": "Vagrancy"
   },
   {
     "medumba": "Cà",
-    "french": "Vagabondage"
+    "french": "Vagabondage",
+    "english": "Vagrancy"
   },
   {
     "medumba": "Nə̀ kalə",
-    "french": "Vagabonder"
+    "french": "Vagabonder",
+    "english": "Wander"
   },
   {
     "medumba": "Nə̀ cǎ",
-    "french": "Vagabonder"
+    "french": "Vagabonder",
+    "english": "Wander"
   },
   {
     "medumba": "Tuꞌntsə",
-    "french": "Vague"
+    "french": "Vague",
+    "english": "Wave"
   },
   {
     "medumba": "Ŋwatə̀",
-    "french": "Vaillance"
+    "french": "Vaillance",
+    "english": "Valor"
   },
   {
     "medumba": "Nə̀ ŋwatə",
-    "french": "Vaillant"
+    "french": "Vaillant",
+    "english": "Valiant"
   },
   {
     "medumba": "Nə̀ cʉǎ ncò",
-    "french": "Vaincre guerre"
+    "french": "Vaincre guerre",
+    "english": "Win war"
   },
   {
     "medumba": "Nə̀ ncʉǎ",
-    "french": "Vaincre réussir"
+    "french": "Vaincre réussir",
+    "english": "Overcome succeed"
   },
   {
     "medumba": "Vʉ̀ncò",
-    "french": "Vaincu guerre"
+    "french": "Vaincu guerre",
+    "english": "Defeated war"
   },
   {
     "medumba": "Ncʉ̀ncò",
-    "french": "Vainqueur"
+    "french": "Vainqueur",
+    "english": "Winner"
   },
   {
     "medumba": "Njòŋ",
-    "french": "Valeur"
+    "french": "Valeur",
+    "english": "Value"
   },
   {
     "medumba": "Konnzwə",
-    "french": "Valise"
+    "french": "Valise",
+    "english": "Suitcase"
   },
   {
     "medumba": "Tɔ̌mboꞌ",
-    "french": "Valée"
+    "french": "Valée",
+    "english": "Valley"
   },
   {
     "medumba": "Lə̀kə̀tə̀",
-    "french": "Valée"
+    "french": "Valée",
+    "english": "Valley"
   },
   {
     "medumba": "Nə̀ be njǒŋ",
-    "french": "Valoir"
+    "french": "Valoir",
+    "english": "Value"
   },
   {
     "medumba": "Ywɛlə",
-    "french": "Vapeur"
+    "french": "Vapeur",
+    "english": "Steam"
   },
   {
     "medumba": "Sitimàꞌ",
-    "french": "Vapeur bateau"
+    "french": "Vapeur bateau",
+    "english": "Steam boat"
   },
   {
     "medumba": "Ntəꞌ",
-    "french": "Vassal"
+    "french": "Vassal",
+    "english": "Vassal"
   },
   {
     "medumba": "Mɛ̂nmfɔ",
-    "french": "Veau"
+    "french": "Veau",
+    "english": "Veal"
   },
   {
     "medumba": "Fɛ̀ntə̂leꞌnjʉ",
-    "french": "Veille"
+    "french": "Veille",
+    "english": "Sleep"
   },
   {
     "medumba": "Mù",
-    "french": "Veillée"
+    "french": "Veillée",
+    "english": "Vigil"
   },
   {
     "medumba": "Nə̀ mǔ",
-    "french": "Veiller"
+    "french": "Veiller",
+    "english": "Watch"
   },
   {
     "medumba": "Nə̀ zi mù",
-    "french": "Veiller"
+    "french": "Veiller",
+    "english": "Watch"
   },
   {
     "medumba": "Nə̀ zi cʉâlo",
-    "french": "Veiller"
+    "french": "Veiller",
+    "english": "Watch"
   },
   {
     "medumba": "Ngǎləm",
-    "french": "Veine"
+    "french": "Veine",
+    "english": "Vein"
   },
   {
     "medumba": "Ba",
-    "french": "Vélo"
+    "french": "Vélo",
+    "english": "Bike"
   },
   {
     "medumba": "Bânkù",
-    "french": "Vélo"
+    "french": "Vélo",
+    "english": "Bike"
   },
   {
     "medumba": "Ngàswɛ̀n",
-    "french": "Vendeur"
+    "french": "Vendeur",
+    "english": "Seller"
   },
   {
     "medumba": "Nə̀ sɛ̀nə",
-    "french": "Vendre"
+    "french": "Vendre",
+    "english": "Sell"
   },
   {
     "medumba": "Mbaꞌa",
-    "french": "Vengeance"
+    "french": "Vengeance",
+    "english": "Revenge"
   },
   {
     "medumba": "Kǒꞌ",
-    "french": "Véritable"
+    "french": "Véritable",
+    "english": "Genuine"
   },
   {
     "medumba": "Nenʉnə",
-    "french": "Vérité"
+    "french": "Vérité",
+    "english": "Truth"
   },
   {
     "medumba": "Nə̀ yαgtə mbaꞌa",
-    "french": "Venger"
+    "french": "Venger",
+    "english": "Avenge"
   },
   {
     "medumba": "Nə̀ səꞌə",
-    "french": "Venir"
+    "french": "Venir",
+    "english": "Come"
   },
   {
     "medumba": "Fə̀dmbàŋ",
-    "french": "Vent"
+    "french": "Vent",
+    "english": "Wind"
   },
   {
     "medumba": "Nə̀swɛ̀nə",
-    "french": "Vente"
+    "french": "Vente",
+    "english": "Sale"
   },
   {
     "medumba": "Ndα̂ndùꞌ",
-    "french": "Vente à emporter"
+    "french": "Vente à emporter",
+    "english": "Takeaway"
   },
   {
     "medumba": "Nə̀sə̀ꞌə",
-    "french": "Venue"
+    "french": "Venue",
+    "english": "Coming"
   },
   {
     "medumba": "Mαnyaoŋə",
-    "french": "Ver"
+    "french": "Ver",
+    "english": "Worm"
   },
   {
     "medumba": "Tαn",
-    "french": "Ver"
+    "french": "Ver",
+    "english": "Worm"
   },
   {
     "medumba": "Mbə̀ꞌ",
-    "french": "Ver de terre"
+    "french": "Ver de terre",
+    "english": "Earthworm"
   },
   {
     "medumba": "Tα̌nnkʉα",
-    "french": "Ver de raphia"
+    "french": "Ver de raphia",
+    "english": "Raffia worm"
   },
   {
     "medumba": "Mbǎncobe",
-    "french": "Verbe"
+    "french": "Verbe",
+    "english": "Verb"
   },
   {
     "medumba": "Kə̂bnca",
-    "french": "Verdict"
+    "french": "Verdict",
+    "english": "Verdict"
   },
   {
     "medumba": "Shuaꞌa",
-    "french": "Verge"
+    "french": "Verge",
+    "english": "Rod"
   },
   {
     "medumba": "Kǒꞌ",
-    "french": "Véritable"
+    "french": "Véritable",
+    "english": "Genuine"
   },
   {
     "medumba": "Nənʉne",
-    "french": "Vérité"
+    "french": "Vérité",
+    "english": "Truth"
   },
   {
     "medumba": "Yəntə̀",
-    "french": "Verre vitre"
+    "french": "Verre vitre",
+    "english": "Window glass"
   },
   {
     "medumba": "Ntuꞌ",
-    "french": "Verre à boire"
+    "french": "Verre à boire",
+    "english": "Drinking glass"
   },
   {
     "medumba": "Nə̀ fɛ̀dtə̌",
-    "french": "Verser"
+    "french": "Verser",
+    "english": "Pour"
   },
   {
     "medumba": "Nə̀ naŋə",
-    "french": "Verser"
+    "french": "Verser",
+    "english": "Pour"
   },
   {
     "medumba": "Nə̀ nəꞌə",
-    "french": "Verser"
+    "french": "Verser",
+    "english": "Pour"
   },
   {
     "medumba": "Nə̀ cwɛ̀lə",
-    "french": "Verser"
+    "french": "Verser",
+    "english": "Pour"
   },
   {
     "medumba": "Nka",
-    "french": "Verset"
+    "french": "Verset",
+    "english": "Verse"
   },
   {
     "medumba": "Kôꞌkoꞌ",
-    "french": "Vertical"
+    "french": "Vertical",
+    "english": "Vertical"
   },
   {
     "medumba": "Swəꞌswəꞌ",
-    "french": "Vertical"
+    "french": "Vertical",
+    "english": "Vertical"
   },
   {
     "medumba": "Nə̀ kə̌dnzwə",
-    "french": "Vêtir"
+    "french": "Vêtir",
+    "english": "Clothing"
   },
   {
     "medumba": "Nə̀ mǎꞌzwə",
-    "french": "Vêtir"
+    "french": "Vêtir",
+    "english": "Clothing"
   },
   {
     "medumba": "Mefogmαdùm",
-    "french": "Veuf"
+    "french": "Veuf",
+    "english": "Widower"
   },
   {
     "medumba": "Fogə nə tswə",
-    "french": "Veuvage"
+    "french": "Veuvage",
+    "english": "Widowed"
   },
   {
     "medumba": "Məfogmɛ̀nnzwi",
-    "french": "Veuve"
+    "french": "Veuve",
+    "english": "Widow"
   },
   {
     "medumba": "Mbαb",
-    "french": "Viande"
+    "french": "Viande",
+    "english": "Meat"
   },
   {
     "medumba": "Mbαb fi",
-    "french": "Viande fraiche"
+    "french": "Viande fraiche",
+    "english": "Fresh meat"
   },
   {
     "medumba": "Bǐmbαb",
-    "french": "Viande pourrie"
+    "french": "Viande pourrie",
+    "english": "Rotten meat"
   },
   {
     "medumba": "Yâgmbὰb",
-    "french": "Viande séchée"
+    "french": "Viande séchée",
+    "english": "Dried meat"
   },
   {
     "medumba": "Ngə",
-    "french": "Vide"
+    "french": "Vide",
+    "english": "Empty"
   },
   {
     "medumba": "Ghəlaŋə",
-    "french": "Vide"
+    "french": "Vide",
+    "english": "Empty"
   },
   {
     "medumba": "Mbû ndaŋ",
-    "french": "Vide"
+    "french": "Vide",
+    "english": "Empty"
   },
   {
     "medumba": "Njɔ̀sɔ",
-    "french": "Vide entre 2 dents"
+    "french": "Vide entre 2 dents",
+    "english": "Empty between 2 teeth"
   },
   {
     "medumba": "Fogtu",
-    "french": "Vieillard"
+    "french": "Vieillard",
+    "english": "Old man"
   },
   {
     "medumba": "Njwɛ̀nmɛ̀n",
-    "french": "Vieillard"
+    "french": "Vieillard",
+    "english": "Old man"
   },
   {
     "medumba": "Teloŋe",
-    "french": "Vieillard"
+    "french": "Vieillard",
+    "english": "Old man"
   },
   {
     "medumba": "Tsəncù",
-    "french": "Vieillard"
+    "french": "Vieillard",
+    "english": "Old man"
   },
   {
     "medumba": "Ywɛ̀n",
-    "french": "Vieillesse"
+    "french": "Vieillesse",
+    "english": "Old age"
   },
   {
     "medumba": "Nə̀ ywɛ̀nə",
-    "french": "Vieillir"
+    "french": "Vieillir",
+    "english": "Getting old"
   },
   {
     "medumba": "Njwɛ̀nmɛ̀n",
-    "french": "Vieux"
+    "french": "Vieux",
+    "english": "Old"
   },
   {
     "medumba": "Nkʉα",
-    "french": "Vigne"
+    "french": "Vigne",
+    "english": "Vine"
   },
   {
     "medumba": "Nə̀ diǎŋ nkʉα",
-    "french": "Vigner"
+    "french": "Vigner",
+    "english": "Vine"
   },
   {
     "medumba": "Ndiàŋnkʉα",
-    "french": "Vigneron"
+    "french": "Vigneron",
+    "english": "Winemaker"
   },
   {
     "medumba": "Laꞌ",
-    "french": "Village"
+    "french": "Village",
+    "english": "Village"
   },
   {
     "medumba": "Ngɔ̀",
-    "french": "Village"
+    "french": "Village",
+    "english": "Village"
   },
   {
     "medumba": "Tʉsɔ",
-    "french": "Ville"
+    "french": "Ville",
+    "english": "City"
   },
   {
     "medumba": "Ndʉꞌ",
-    "french": "Violence"
+    "french": "Violence",
+    "english": "Violence"
   },
   {
     "medumba": "Ntànt̀",
-    "french": "Violence"
+    "french": "Violence",
+    "english": "Violence"
   },
   {
     "medumba": "Mfǎmfa",
-    "french": "Violence"
+    "french": "Violence",
+    "english": "Violence"
   },
   {
     "medumba": "Ndùꞌ",
-    "french": "Vin"
+    "french": "Vin",
+    "english": "Wine"
   },
   {
     "medumba": "Ndùꞌnkʉα",
-    "french": "Vin de raphia"
+    "french": "Vin de raphia",
+    "english": "Raffia wine"
   },
   {
     "medumba": "Mbêdnkʉα",
-    "french": "Vin de raphia sucré"
+    "french": "Vin de raphia sucré",
+    "english": "Sweet raffia wine"
   },
   {
     "medumba": "Njʉαkʉα",
-    "french": "Vin de raphia sucré"
+    "french": "Vin de raphia sucré",
+    "english": "Sweet raffia wine"
   },
   {
     "medumba": "Cɛ̀n",
-    "french": "Vinaigre"
+    "french": "Vinaigre",
+    "english": "Vinegar"
   },
   {
     "medumba": "Cʉaggkɛdndùꞌ",
-    "french": "Vinaigre"
+    "french": "Vinaigre",
+    "english": "Vinegar"
   },
   {
     "medumba": "Ngàbuꞌloŋə",
-    "french": "Violoniste"
+    "french": "Violoniste",
+    "english": "Violinist"
   },
   {
     "medumba": "Zwiὰgə",
-    "french": "Virgule"
+    "french": "Virgule",
+    "english": "Comma"
   },
   {
     "medumba": "Mibləm",
-    "french": "Vitamine"
+    "french": "Vitamine",
+    "english": "Vitamin"
   },
   {
     "medumba": "Ndə̂ndə",
-    "french": "Vite"
+    "french": "Vite",
+    "english": "Quickly"
   },
   {
     "medumba": "Nde",
-    "french": "Vitesse"
+    "french": "Vitesse",
+    "english": "Speed"
   },
   {
     "medumba": "Ndə̂ndə",
-    "french": "Vitesse"
+    "french": "Vitesse",
+    "english": "Speed"
   },
   {
     "medumba": "Ntʉ̀n",
-    "french": "Vivant"
+    "french": "Vivant",
+    "english": "Alive"
   },
   {
     "medumba": "Nə̀ be ntʉ̀n",
-    "french": "Vivant être"
+    "french": "Vivant être",
+    "english": "Alive to be"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Vivre"
+    "french": "Vivre",
+    "english": "Live"
   },
   {
     "medumba": "Nə̀ tswə ntʉ̀n",
-    "french": "Vivre"
+    "french": "Vivre",
+    "english": "Live"
   },
   {
     "medumba": "Nə̀ yògə",
-    "french": "Vivre"
+    "french": "Vivre",
+    "english": "Live"
   },
   {
     "medumba": "Jûjʉ",
-    "french": "Vivres"
+    "french": "Vivres",
+    "english": "Live"
   },
   {
     "medumba": "Mα̂nzə̀",
-    "french": "Voie"
+    "french": "Voie",
+    "english": "Lane"
   },
   {
     "medumba": "Nzə̀",
-    "french": "Voie"
+    "french": "Voie",
+    "english": "Lane"
   },
   {
     "medumba": "Fìm",
-    "french": "Viole"
+    "french": "Viole",
+    "english": "Viol"
   },
   {
     "medumba": "Nkua",
-    "french": "Viole"
+    "french": "Viole",
+    "english": "Viol"
   },
   {
     "medumba": "Nə̀ fimə",
-    "french": "Violer"
+    "french": "Violer",
+    "english": "Violate"
   },
   {
     "medumba": "Nə̀ mǎꞌ-nkua",
-    "french": "Violer"
+    "french": "Violer",
+    "english": "Violate"
   },
   {
     "medumba": "Nə̀ yənə",
-    "french": "Voir"
+    "french": "Voir",
+    "english": "See"
   },
   {
     "medumba": "Nə̀ yə̌n ntǎdntad",
-    "french": "Voir flou"
+    "french": "Voir flou",
+    "english": "See blurred"
   },
   {
     "medumba": "Mɛ̀nmbaŋndα",
-    "french": "Voisin"
+    "french": "Voisin",
+    "english": "Neighbor"
   },
   {
     "medumba": "Mɛ̀nndʉ̌laꞌ",
-    "french": "Voisin"
+    "french": "Voisin",
+    "english": "Neighbor"
   },
   {
     "medumba": "Mὰtuα",
-    "french": "Voiture"
+    "french": "Voiture",
+    "english": "Car"
   },
   {
     "medumba": "Yaŋbàꞌ",
-    "french": "Voiture"
+    "french": "Voiture",
+    "english": "Car"
   },
   {
     "medumba": "Yaŋbàꞌncoꞌ",
-    "french": "Voiture militaire"
+    "french": "Voiture militaire",
+    "english": "Military car"
   },
   {
     "medumba": "Nzə̀mɛ̀n",
-    "french": "Voix"
+    "french": "Voix",
+    "english": "Voice"
   },
   {
     "medumba": "Nə̀fʉlə",
-    "french": "Vol"
+    "french": "Vol",
+    "english": "Flight"
   },
   {
     "medumba": "Cɔ",
-    "french": "Vol oiseau"
+    "french": "Vol oiseau",
+    "english": "Bird flight"
   },
   {
     "medumba": "Sitia",
-    "french": "Volant"
+    "french": "Volant",
+    "english": "Steering wheel"
   },
   {
     "medumba": "Nə̀ yǐ",
-    "french": "Voler"
+    "french": "Voler",
+    "english": "Fly"
   },
   {
     "medumba": "Nə̀ fʉlə",
-    "french": "Voler oiseau"
+    "french": "Voler oiseau",
+    "english": "Flying bird"
   },
   {
     "medumba": "Ncɔ",
-    "french": "Voleur"
+    "french": "Voleur",
+    "english": "Thief"
   },
   {
     "medumba": "Kʉ̂ntʉ",
-    "french": "Volonté"
+    "french": "Volonté",
+    "english": "Will"
   },
   {
     "medumba": "Nə̀kɔ̌",
-    "french": "Volonté"
+    "french": "Volonté",
+    "english": "Will"
   },
   {
     "medumba": "Ghag",
-    "french": "Volupté"
+    "french": "Volupté",
+    "english": "Voluptuousness"
   },
   {
     "medumba": "Nə̀ kǒ",
-    "french": "Vouloir"
+    "french": "Vouloir",
+    "english": "Want"
   },
   {
     "medumba": "Bin",
-    "french": "Vous"
+    "french": "Vous",
+    "english": "You"
   },
   {
     "medumba": "Binαbo",
-    "french": "Vous toi et eux"
+    "french": "Vous toi et eux",
+    "english": "You and them"
   },
   {
     "medumba": "Nkadtə̀",
-    "french": "Vous toi et lui"
+    "french": "Vous toi et lui",
+    "english": "You and him"
   },
   {
     "medumba": "Ngàkadtə̀",
-    "french": "Voyage"
+    "french": "Voyage",
+    "english": "Travel"
   },
   {
     "medumba": "Nə̀ kadtə",
-    "french": "Voyager"
+    "french": "Voyager",
+    "english": "Travel"
   },
   {
     "medumba": "Ngàkadtə̀",
-    "french": "Voyageur"
+    "french": "Voyageur",
+    "english": "Traveler"
   },
   {
     "medumba": "Miagnkuὰ",
-    "french": "Voyant"
+    "french": "Voyant",
+    "english": "LED"
   },
   {
     "medumba": "Njə̂nnzə̀",
-    "french": "Voyant"
+    "french": "Voyant",
+    "english": "LED"
   },
   {
     "medumba": "Ghagha",
-    "french": "Voyou"
+    "french": "Voyou",
+    "english": "Thug"
   },
   {
     "medumba": "Kaligə",
-    "french": "Wagon"
+    "french": "Wagon",
+    "english": "Wagon"
   },
   {
     "medumba": "Kalig dʉ̌ꞌndùꞌ",
-    "french": "Wagon-bar"
+    "french": "Wagon-bar",
+    "english": "Bar car"
   },
   {
     "medumba": "Kalig ntsə",
-    "french": "Wagon-citerne"
+    "french": "Wagon-citerne",
+    "english": "Tank car"
   },
   {
     "medumba": "Kaligzi",
-    "french": "Wagon-lit"
+    "french": "Wagon-lit",
+    "english": "Sleeper car"
   },
   {
     "medumba": "Kalig dʉ̌ꞌnə̀ jʉju",
-    "french": "Wagon-restaurant"
+    "french": "Wagon-restaurant",
+    "english": "Dining car"
   },
   {
     "medumba": "Kod",
-    "french": "W-c"
+    "french": "W-c",
+    "english": "W-c"
   },
   {
     "medumba": "Fitə̀ngabnjù",
-    "french": "Week-end"
+    "french": "Week-end",
+    "english": "Weekend"
   },
   {
     "medumba": "Kə̀kɔ̂ghʉ̀n",
-    "french": "Xénophobe"
+    "french": "Xénophobe",
+    "english": "Xenophobic"
   },
   {
     "medumba": "Ngàkɔ̌ghʉ̀n",
-    "french": "Xénophyle"
+    "french": "Xénophyle",
+    "english": "Xenophyll"
   },
   {
     "medumba": "Mfam",
-    "french": "Xylocope"
+    "french": "Xylocope",
+    "english": "Xylocope"
   },
   {
     "medumba": "Nja",
-    "french": "Xylophone"
+    "french": "Xylophone",
+    "english": "Xylophone"
   },
   {
     "medumba": "miαg",
-    "french": "Yeux"
+    "french": "Yeux",
+    "english": "Eyes"
   },
   {
     "medumba": "Bitə miαg",
-    "french": "Yeux petits"
+    "french": "Yeux petits",
+    "english": "Small eyes"
   },
   {
     "medumba": "Nkɔ miαg",
-    "french": "Yeux gros"
+    "french": "Yeux gros",
+    "english": "Big eyes"
   },
   {
     "medumba": "Fʉagwud",
-    "french": "Zéle"
+    "french": "Zéle",
+    "english": "Zeal"
   },
   {
     "medumba": "Ngàfʉagwud",
-    "french": "Zélé"
+    "french": "Zélé",
+    "english": "Zealous"
   },
   {
     "medumba": "Bα̌nbαn",
-    "french": "Zéro"
+    "french": "Zéro",
+    "english": "Zero"
   },
   {
     "medumba": "Bǎgbàb",
-    "french": "Zigazg (en)"
+    "french": "Zigazg (en)",
+    "english": "Zigazg"
   },
   {
     "medumba": "Ŋwâŋŋwaŋ",
-    "french": "Zigzag (en)"
+    "french": "Zigzag (en)",
+    "english": "Zigzag"
   },
   {
     "medumba": "Nə̀ nɛn bǎgbàg",
-    "french": "Zigzaguer"
+    "french": "Zigzaguer",
+    "english": "Zigzag"
   },
   {
     "medumba": "Tòꞌtə̀",
-    "french": "Zizanie"
+    "french": "Zizanie",
+    "english": "Zizanie"
   },
   {
     "medumba": "Zwìd ju kə̀bwɔ̀",
-    "french": "Zizanie"
+    "french": "Zizanie",
+    "english": "Zizanie"
   },
   {
     "medumba": "Bǎgtʉꞌ",
-    "french": "Zone"
+    "french": "Zone",
+    "english": "Area"
   },
   {
     "medumba": "Ndə",
-    "french": "Zone pubienne"
+    "french": "Zone pubienne",
+    "english": "Pubic area"
   },
   {
     "medumba": "Kaꞌ bὰ nyαm",
-    "french": "Zoo"
+    "french": "Zoo",
+    "english": "Zoo"
   },
   {
     "medumba": "Ngα̂mnyὰn",
-    "french": "Zoologie"
+    "french": "Zoologie",
+    "english": "Zoology"
   },
   {
     "medumba": "Ndɛ̀nngα̂nnyὰm",
-    "french": "Zoologiste"
+    "french": "Zoologiste",
+    "english": "Zoologist"
   },
   {
     "medumba": "Ŋwâŋŋwaŋ",
-    "french": "Abandonner"
+    "french": "Abandonner",
+    "english": "Give up"
   },
   {
     "medumba": "Nə̀ nɛn bǎgbàg",
-    "french": "Abandonner"
+    "french": "Abandonner",
+    "english": "Give up"
   },
   {
     "medumba": "Tòꞌtə̀",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Nə̀ faŋə",
-    "french": "Abattre"
+    "french": "Abattre",
+    "english": "Cut down"
   },
   {
     "medumba": "Nə̀ yɛ̀nə",
-    "french": "Abolir"
+    "french": "Abolir",
+    "english": "Abolish"
   },
   {
     "medumba": "Nə̀ wàlə",
-    "french": "Avaler"
+    "french": "Avaler",
+    "english": "Swallow"
   },
   {
     "medumba": "Nə̀ biagə",
-    "french": "Accompagner"
+    "french": "Accompagner",
+    "english": "Accompany"
   },
   {
     "medumba": "Nə̀ mǐ",
-    "french": "Accoucher"
+    "french": "Accoucher",
+    "english": "Give birth"
   },
   {
     "medumba": "Nə̀ càgə",
-    "french": "Acheter"
+    "french": "Acheter",
+    "english": "Buy"
   },
   {
     "medumba": "Nə̀ bwə",
-    "french": "Achever"
+    "french": "Achever",
+    "english": "Complete"
   },
   {
     "medumba": "Nə̀ junə",
-    "french": "Accepter"
+    "french": "Accepter",
+    "english": "Accept"
   },
   {
     "medumba": "Nə̀ miàgtə̌",
-    "french": "Adorer"
+    "french": "Adorer",
+    "english": "worship"
   },
   {
     "medumba": "Nə̀ bamə",
-    "french": "Affûter"
+    "french": "Affûter",
+    "english": "Sharpen"
   },
   {
     "medumba": "Nə̀ ghamtə",
-    "french": "S’agiter"
+    "french": "S’agiter",
+    "english": "Get agitated"
   },
   {
     "medumba": "Nə̀ kʉα̌",
-    "french": "Agiter"
+    "french": "Agiter",
+    "english": "Shake"
   },
   {
     "medumba": "Nə̀ nyǐꞌtə̌",
-    "french": "Aider"
+    "french": "Aider",
+    "english": "Help"
   },
   {
     "medumba": "Nə̀ ywimtə̌",
-    "french": "Aimer"
+    "french": "Aimer",
+    "english": "Love"
   },
   {
     "medumba": "Nə̀ kɔ̌",
-    "french": "Augmenter"
+    "french": "Augmenter",
+    "english": "Increase"
   },
   {
     "medumba": "Nə̀ nyɔ mɛn",
-    "french": "Allaiter"
+    "french": "Allaiter",
+    "english": "Breastfeed"
   },
   {
     "medumba": "Nə̀ nɛ̀nə",
-    "french": "Aller"
+    "french": "Aller",
+    "english": "Go"
   },
   {
     "medumba": "Nə̀ nyǐlə",
-    "french": "Allonger"
+    "french": "Allonger",
+    "english": "Lengthen"
   },
   {
     "medumba": "Nə̀ kwəꞌtə",
-    "french": "Allumer"
+    "french": "Allumer",
+    "english": "Turn on"
   },
   {
     "medumba": "Nə̀ tsəꞌtə",
-    "french": "Amasser"
+    "french": "Amasser",
+    "english": "Amass"
   },
   {
     "medumba": "Nə̀ ghʉ̌ sa",
-    "french": "S’amuser"
+    "french": "S’amuser",
+    "english": "Have fun"
   },
   {
     "medumba": "Nə̀ ŋwatə",
-    "french": "Animer"
+    "french": "Animer",
+    "english": "Animate"
   },
   {
     "medumba": "Nə̀ soŋə",
-    "french": "Annoncer"
+    "french": "Annoncer",
+    "english": "Announce"
   },
   {
     "medumba": "Nə̀ làtə̌",
-    "french": "Aplanir"
+    "french": "Aplanir",
+    "english": "Flatten"
   },
   {
     "medumba": "Nə̀ ŋwàgə",
-    "french": "Apparaitre"
+    "french": "Apparaitre",
+    "english": "Appear"
   },
   {
     "medumba": "Nə̀ tsiaŋə",
-    "french": "Appeler"
+    "french": "Appeler",
+    "english": "Call"
   },
   {
     "medumba": "Nə̀ ghəbtə",
-    "french": "S’approcher"
+    "french": "S’approcher",
+    "english": "Approach"
   },
   {
     "medumba": "Nə̀ fiàŋə",
-    "french": "Arracher"
+    "french": "Arracher",
+    "english": "Tear off"
   },
   {
     "medumba": "Nə̀ ghòmə",
-    "french": "Arrêter"
+    "french": "Arrêter",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ twənsi",
-    "french": "S’asseoir"
+    "french": "S’asseoir",
+    "english": "Sit down"
   },
   {
     "medumba": "Nə̀ kulə",
-    "french": "Attacher"
+    "french": "Attacher",
+    "english": "Attach"
   },
   {
     "medumba": "Nə̀ kùmə",
-    "french": "Arriver"
+    "french": "Arriver",
+    "english": "Arrive"
   },
   {
     "medumba": "Nə̀ bebə",
-    "french": "Attendre"
+    "french": "Attendre",
+    "english": "Wait"
   },
   {
     "medumba": "Ǹə̀ mîntʉ̀n",
-    "french": "Avaler"
+    "french": "Avaler",
+    "english": "Swallow"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Avoir"
+    "french": "Avoir",
+    "english": "Have"
   },
   {
     "medumba": "Nə̀ bèꞌtə̌",
-    "french": "Balayer"
+    "french": "Balayer",
+    "english": "Sweep"
   },
   {
     "medumba": "Nə̀ cobtə",
-    "french": "Parler"
+    "french": "Parler",
+    "english": "Talk"
   },
   {
     "medumba": "Nə̀ cuꞌu",
-    "french": "Bavarder"
+    "french": "Bavarder",
+    "english": "Chat"
   },
   {
     "medumba": "Nə̀ cὰbtə̌",
-    "french": "Insulter"
+    "french": "Insulter",
+    "english": "Insult"
   },
   {
     "medumba": "Nə̀ ləmə",
-    "french": "Blesser"
+    "french": "Blesser",
+    "english": "Hurt"
   },
   {
     "medumba": "Nə̀ nu",
-    "french": "Boire"
+    "french": "Boire",
+    "english": "Drink"
   },
   {
     "medumba": "Nə̀ na",
-    "french": "Cuire"
+    "french": "Cuire",
+    "english": "Cook"
   },
   {
     "medumba": "Nə̀ lə̀mə",
-    "french": "Cacher"
+    "french": "Cacher",
+    "english": "Hide"
   },
   {
     "medumba": "Nə̀ kʉ",
-    "french": "Brûler"
+    "french": "Brûler",
+    "english": "Burn"
   },
   {
     "medumba": "Nə̀ tsilə",
-    "french": "Casser"
+    "french": "Casser",
+    "english": "Break"
   },
   {
     "medumba": "Nə̀ tsinə",
-    "french": "S’arrêtter"
+    "french": "S’arrêtter",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ kàŋə",
-    "french": "Transformer"
+    "french": "Transformer",
+    "english": "Transform"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Chasser"
+    "french": "Chasser",
+    "english": "Hunt"
   },
   {
     "medumba": "Nə̀ diàgə",
-    "french": "Chercher"
+    "french": "Chercher",
+    "english": "Search"
   },
   {
     "medumba": "Nə̀ coꞌo",
-    "french": "Choisir"
+    "french": "Choisir",
+    "english": "Choose"
   },
   {
     "medumba": "Nə̀ kǎ",
-    "french": "Choisir"
+    "french": "Choisir",
+    "english": "Choose"
   },
   {
     "medumba": "Nə̀ siaŋə",
-    "french": "Compter"
+    "french": "Compter",
+    "english": "Count"
   },
   {
     "medumba": "Nə̀ tʉntə",
-    "french": "Énumérer"
+    "french": "Énumérer",
+    "english": "List"
   },
   {
     "medumba": "Nə̀ kwàtə̌",
-    "french": "Penser"
+    "french": "Penser",
+    "english": "Think"
   },
   {
     "medumba": "Nə̀ sòŋə",
-    "french": "Tirer"
+    "french": "Tirer",
+    "english": "Pull"
   },
   {
     "medumba": "Nə̀ càgtə̈",
-    "french": "Conduire"
+    "french": "Conduire",
+    "english": "Drive"
   },
   {
     "medumba": "Nə̀ yǒbkwǐ",
-    "french": "Chanter"
+    "french": "Chanter",
+    "english": "Sing"
   },
   {
     "medumba": "Nə̀ taꞌyòŋ",
-    "french": "Chasser"
+    "french": "Chasser",
+    "english": "Hunt"
   },
   {
     "medumba": "Nə̀ caŋə",
-    "french": "Chercher"
+    "french": "Chercher",
+    "english": "Search"
   },
   {
     "medumba": "Nə̀ tαgə",
-    "french": "Conseiller"
+    "french": "Conseiller",
+    "english": "Advisor"
   },
   {
     "medumba": "Nə̀ nαnə",
-    "french": "Contraindre"
+    "french": "Contraindre",
+    "english": "Constrain"
   },
   {
     "medumba": "Nə̀ kəbə",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Nə̀ nyàŋə",
-    "french": "Danser"
+    "french": "Danser",
+    "english": "Dancing"
   },
   {
     "medumba": "Nə̀ bɛdtə",
-    "french": "Demander"
+    "french": "Demander",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Demeurer"
+    "french": "Demeurer",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ ghɔ",
-    "french": "Demeurer"
+    "french": "Demeurer",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ togə",
-    "french": "Passer"
+    "french": "Passer",
+    "english": "Pass"
   },
   {
     "medumba": "Nə̀ yǐ",
-    "french": "Dérober"
+    "french": "Dérober",
+    "english": "Steal"
   },
   {
     "medumba": "Nə̀ swəꞌə",
-    "french": "Décendre"
+    "french": "Décendre",
+    "english": "Decend"
   },
   {
     "medumba": "Nə̀ yagə",
-    "french": "Sécher"
+    "french": "Sécher",
+    "english": "Dry"
   },
   {
     "medumba": "Nə̀ kiαgə",
-    "french": "Détacher"
+    "french": "Détacher",
+    "english": "Detach"
   },
   {
     "medumba": "Nə̀ lamtə",
-    "french": "Detouner"
+    "french": "Detouner",
+    "english": "Detoner"
   },
   {
     "medumba": "Nə̀ ghὰbtə̀",
-    "french": "Partager"
+    "french": "Partager",
+    "english": "Share"
   },
   {
     "medumba": "Nə̀ fα",
-    "french": "Donner"
+    "french": "Donner",
+    "english": "Give"
   },
   {
     "medumba": "Nə̀ zi",
-    "french": "Dormir"
+    "french": "Dormir",
+    "english": "Sleep"
   },
   {
     "medumba": "Nə̀ mὰgtə̌",
-    "french": "Douter"
+    "french": "Douter",
+    "english": "Doubt"
   },
   {
     "medumba": "Nə̀ vʉ̌",
-    "french": "Échouer"
+    "french": "Échouer",
+    "english": "Fail"
   },
   {
     "medumba": "Nə̀ kèꞌe",
-    "french": "Éclairer"
+    "french": "Éclairer",
+    "english": "Light up"
   },
   {
     "medumba": "Nə̀ kitə̌",
-    "french": "Écrire"
+    "french": "Écrire",
+    "english": "Write"
   },
   {
     "medumba": "Nə̀ kǐ",
-    "french": "Écrire"
+    "french": "Écrire",
+    "english": "Write"
   },
   {
     "medumba": "Nə̀ bwə̀tə̌",
-    "french": "Éffacer"
+    "french": "Éffacer",
+    "english": "Clear"
   },
   {
     "medumba": "Nə̀ bi",
-    "french": "Pendre"
+    "french": "Pendre",
+    "english": "hang"
   },
   {
     "medumba": "Nə̀ kwǐtə̌",
-    "french": "Égrainer"
+    "french": "Égrainer",
+    "english": "Seed"
   },
   {
     "medumba": "Nə̀ sǒ",
-    "french": "Enfoncer"
+    "french": "Enfoncer",
+    "english": "Fucking"
   },
   {
     "medumba": "Nə̀ kàꞌtə̌",
-    "french": "S’énorgueillir"
+    "french": "S’énorgueillir",
+    "english": "Be proud"
   },
   {
     "medumba": "Nə̀ twǐtə̌",
-    "french": "Enseigner"
+    "french": "Enseigner",
+    "english": "Teach"
   },
   {
     "medumba": "Nə̀ bə",
-    "french": "Étre"
+    "french": "Étre",
+    "english": "To be"
   },
   {
     "medumba": "Nə̀ làntə̌",
-    "french": "Tenter"
+    "french": "Tenter",
+    "english": "Try"
   },
   {
     "medumba": "Nə̀ cʉα̌",
-    "french": "Passer"
+    "french": "Passer",
+    "english": "Pass"
   },
   {
     "medumba": "Nə̀ bàgtə̌",
-    "french": "Expliquer"
+    "french": "Expliquer",
+    "english": "Explain"
   },
   {
     "medumba": "Nə̀ làꞌa",
-    "french": "Se fâcher"
+    "french": "Se fâcher",
+    "english": "Get angry"
   },
   {
     "medumba": "Nə̀ yantʉ",
-    "french": "Se fâcher"
+    "french": "Se fâcher",
+    "english": "Get angry"
   },
   {
     "medumba": "Nə̀ bolə",
-    "french": "Faiblir"
+    "french": "Faiblir",
+    "english": "Weaken"
   },
   {
     "medumba": "Nə̀ bàgə",
-    "french": "Fendre"
+    "french": "Fendre",
+    "english": "Split"
   },
   {
     "medumba": "Nə̀ fʉ̀nə",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ məmə",
-    "french": "Étreindre"
+    "french": "Étreindre",
+    "english": "Hug"
   },
   {
     "medumba": "Nə̀ yɛ̀ntə̌",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ kabtə",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ cələ",
-    "french": "Filtrer"
+    "french": "Filtrer",
+    "english": "Filter"
   },
   {
     "medumba": "Nə̀ badtə",
-    "french": "Flatter"
+    "french": "Flatter",
+    "english": "Flatter"
   },
   {
     "medumba": "Nə̀ cʉbə",
-    "french": "Arrêter"
+    "french": "Arrêter",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ buꞌu",
-    "french": "Frapper"
+    "french": "Frapper",
+    "english": "Hit"
   },
   {
     "medumba": "Nə̀ làbə",
-    "french": "Frapper"
+    "french": "Frapper",
+    "english": "Hit"
   },
   {
     "medumba": "Nə̀ ka",
-    "french": "Frire"
+    "french": "Frire",
+    "english": "Fry"
   },
   {
     "medumba": "Nə̀ saŋtə",
-    "french": "Frissonner"
+    "french": "Frissonner",
+    "english": "Shiver"
   },
   {
     "medumba": "Nə̀ yamə",
-    "french": "Fructifier"
+    "french": "Fructifier",
+    "english": "Fruit"
   },
   {
     "medumba": "Nə̀ kʉ̌",
-    "french": "Fuir"
+    "french": "Fuir",
+    "english": "Run away"
   },
   {
     "medumba": "Nə̀ jʉ",
-    "french": "Manger"
+    "french": "Manger",
+    "english": "Eat"
   },
   {
     "medumba": "Nə̀ bilə",
-    "french": "Germer"
+    "french": "Germer",
+    "english": "Sprout"
   },
   {
     "medumba": "Nə̀ kuꞌu",
-    "french": "Grandir"
+    "french": "Grandir",
+    "english": "Growing up"
   },
   {
     "medumba": "Nə̀ yàtə̌",
-    "french": "Guérir"
+    "french": "Guérir",
+    "english": "Heal"
   },
   {
     "medumba": "Nə̀ mǎ nzwə",
-    "french": "Habiller"
+    "french": "Habiller",
+    "english": "Dress up"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Mûrir"
+    "french": "Mûrir",
+    "english": "Ripen"
   },
   {
     "medumba": "Nə̀ bὰnə",
-    "french": "Hair"
+    "french": "Hair",
+    "english": "Hair"
   },
   {
     "medumba": "Nə̀ faꞌtə",
-    "french": "Se heurter"
+    "french": "Se heurter",
+    "english": "Collide"
   },
   {
     "medumba": "Nə̀ fiꞌtə̌",
-    "french": "Imiter"
+    "french": "Imiter",
+    "english": "Imitate"
   },
   {
     "medumba": "Nə̀ kwiαgə",
-    "french": "Tousser"
+    "french": "Tousser",
+    "english": "Cough"
   },
   {
     "medumba": "Nə̀ beꞌtə",
-    "french": "Décrire"
+    "french": "Décrire",
+    "english": "Describe"
   },
   {
     "medumba": "Nə̀ cʉ̀ꞌʉ",
-    "french": "Interdire"
+    "french": "Interdire",
+    "english": "Ban"
   },
   {
     "medumba": "Nə̀ bɛdtə",
-    "french": "Interroger"
+    "french": "Interroger",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ maꞌa",
-    "french": "Jeter"
+    "french": "Jeter",
+    "english": "Throw"
   },
   {
     "medumba": "Nə̀ yoŋə",
-    "french": "Joindre"
+    "french": "Joindre",
+    "english": "Join"
   },
   {
     "medumba": "Nə̀ tàmtə̌",
-    "french": "Unir"
+    "french": "Unir",
+    "english": "Unite"
   },
   {
     "medumba": "Nə̀ coꞌtə",
-    "french": "Juger"
+    "french": "Juger",
+    "english": "Judge"
   },
   {
     "medumba": "Nə̀ naŋə",
-    "french": "Verser"
+    "french": "Verser",
+    "english": "Pour"
   },
   {
     "medumba": "Nə̀ kαgə",
-    "french": "Lacher"
+    "french": "Lacher",
+    "english": "Let go"
   },
   {
     "medumba": "Nə̀ kwaꞌa",
-    "french": "Pleurer"
+    "french": "Pleurer",
+    "english": "Cry"
   },
   {
     "medumba": "Nə̀ maꞌa",
-    "french": "Lancer"
+    "french": "Lancer",
+    "english": "Throw"
   },
   {
     "medumba": "Nə̀ bolə",
-    "french": "Languir"
+    "french": "Languir",
+    "english": "Languish"
   },
   {
     "medumba": "Nə̀ sogə",
-    "french": "Laver"
+    "french": "Laver",
+    "english": "Wash"
   },
   {
     "medumba": "Nə̀ siaŋə",
-    "french": "Lire"
+    "french": "Lire",
+    "english": "Read"
   },
   {
     "medumba": "Nə̀ swɛ̀nə",
-    "french": "Vendre"
+    "french": "Vendre",
+    "english": "Sell"
   },
   {
     "medumba": "Nə̀ zwə̌zwə̀ꞌ",
-    "french": "Lutter"
+    "french": "Lutter",
+    "english": "Fight"
   },
   {
     "medumba": "Nə̀ tebtə",
-    "french": "Malaxer"
+    "french": "Malaxer",
+    "english": "Mix"
   },
   {
     "medumba": "Nə̀ ghʉ̀dnǐ",
-    "french": "Ennuyer,nuir"
+    "french": "Ennuyer,nuir",
+    "english": "Bore, harm"
   },
   {
     "medumba": "Nə̀ tsǐ",
-    "french": "Manquer"
+    "french": "Manquer",
+    "english": "Miss"
   },
   {
     "medumba": "Nə̀ zətə",
-    "french": "Se méfier"
+    "french": "Se méfier",
+    "english": "Be wary"
   },
   {
     "medumba": "Nə̀ tadtə",
-    "french": "Mentir"
+    "french": "Mentir",
+    "english": "Lying"
   },
   {
     "medumba": "Nə̀ fèlə",
-    "french": "Se métarmorphoser"
+    "french": "Se métarmorphoser",
+    "english": "Transform"
   },
   {
     "medumba": "Nə̀ fiꞌi",
-    "french": "Mesurer"
+    "french": "Mesurer",
+    "english": "Measure"
   },
   {
     "medumba": "Nə̀ yαbə",
-    "french": "Poser"
+    "french": "Poser",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ yəntəsə",
-    "french": "Se mirer"
+    "french": "Se mirer",
+    "english": "To look at yourself"
   },
   {
     "medumba": "Nə̀ famə",
-    "french": "Moisir"
+    "french": "Moisir",
+    "english": "Mold"
   },
   {
     "medumba": "Nə̀ coꞌcu",
-    "french": "Moissonner"
+    "french": "Moissonner",
+    "english": "Harvest"
   },
   {
     "medumba": "Nə̀ koꞌo",
-    "french": "Monter"
+    "french": "Monter",
+    "english": "Go up"
   },
   {
     "medumba": "Nə̀ làꞌtə̌",
-    "french": "Montrer"
+    "french": "Montrer",
+    "english": "Show"
   },
   {
     "medumba": "Nə̀ cogə",
-    "french": "Mordre"
+    "french": "Mordre",
+    "english": "bite"
   },
   {
     "medumba": "Nə̀ ghoꞌo",
-    "french": "Moudre"
+    "french": "Moudre",
+    "english": "Grind"
   },
   {
     "medumba": "Nə̀ kwʉ",
-    "french": "Mourir"
+    "french": "Mourir",
+    "english": "Die"
   },
   {
     "medumba": "Nə̀ juꞌu",
-    "french": "Entendre"
+    "french": "Entendre",
+    "english": "Hear"
   },
   {
     "medumba": "Nə̀ coŋə",
-    "french": "Enterrer"
+    "french": "Enterrer",
+    "english": "Bury"
   },
   {
     "medumba": "Nə̀ co",
-    "french": "Entrer"
+    "french": "Entrer",
+    "english": "Enter"
   },
   {
     "medumba": "Nə̀ sàtə̌",
-    "french": "Éparpiller"
+    "french": "Éparpiller",
+    "english": "Scatter"
   },
   {
     "medumba": "Nə̀ cǎ",
-    "french": "Errer"
+    "french": "Errer",
+    "english": "Wander"
   },
   {
     "medumba": "Nə̀ fὰntə̌",
-    "french": "Se tromper"
+    "french": "Se tromper",
+    "english": "Make a mistake"
   },
   {
     "medumba": "Nə̀ nywintə",
-    "french": "Espérer"
+    "french": "Espérer",
+    "english": "Hope"
   },
   {
     "medumba": "Nə̀ zimtə",
-    "french": "Murmurer"
+    "french": "Murmurer",
+    "english": "Whisper"
   },
   {
     "medumba": "Nə̀ lǎntsə",
-    "french": "Nager"
+    "french": "Nager",
+    "english": "Swim"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Refuser"
+    "french": "Refuser",
+    "english": "Refuse"
   },
   {
     "medumba": "Nə̀ kemə",
-    "french": "Nourrir"
+    "french": "Nourrir",
+    "english": "Feed"
   },
   {
     "medumba": "Nə̀ sɛntə",
-    "french": "Obscurcir"
+    "french": "Obscurcir",
+    "english": "Obscure"
   },
   {
     "medumba": "Nə̀ lɔtə",
-    "french": "Regarder"
+    "french": "Regarder",
+    "english": "Watch"
   },
   {
     "medumba": "Nə̀ kèmtə̌",
-    "french": "Oser"
+    "french": "Oser",
+    "english": "Dare"
   },
   {
     "medumba": "Nə̀ lɔtə",
-    "french": "Ôter"
+    "french": "Ôter",
+    "english": "Remove"
   },
   {
     "medumba": "Nə̀ ghaꞌa",
-    "french": "Oublier"
+    "french": "Oublier",
+    "english": "Forget"
   },
   {
     "medumba": "Nə̀ ghabə",
-    "french": "Ouvrir"
+    "french": "Ouvrir",
+    "english": "Open"
   },
   {
     "medumba": "Nə̀saꞌncà",
-    "french": "Palabrer"
+    "french": "Palabrer",
+    "english": "Palaver"
   },
   {
     "medumba": "Nə̀ lɔ",
-    "french": "Paresser"
+    "french": "Paresser",
+    "english": "Laze"
   },
   {
     "medumba": "Nə̀ kα̌nmfə",
-    "french": "Parjurer"
+    "french": "Parjurer",
+    "english": "Perjure"
   },
   {
     "medumba": "Nə̀ fɛntə",
-    "french": "Patienter"
+    "french": "Patienter",
+    "english": "Wait"
   },
   {
     "medumba": "Nə̀ yən ngəꞌ",
-    "french": "Souffrir"
+    "french": "Souffrir",
+    "english": "Suffer"
   },
   {
     "medumba": "Nə̀ sòbə",
-    "french": "Poignarder"
+    "french": "Poignarder",
+    "english": "Stabbing"
   },
   {
     "medumba": "Nə̀ to",
-    "french": "Percer"
+    "french": "Percer",
+    "english": "Drill"
   },
   {
     "medumba": "Nə̀ bwɔ̌",
-    "french": "Plaire"
+    "french": "Plaire",
+    "english": "Please"
   },
   {
     "medumba": "Nə̀ ywǐlə",
-    "french": "Planter"
+    "french": "Planter",
+    "english": "Plant"
   },
   {
     "medumba": "Nə̀ tɛnə",
-    "french": "Pousser"
+    "french": "Pousser",
+    "english": "Push"
   },
   {
     "medumba": "Nə̀ tomtə",
-    "french": "Soutenir"
+    "french": "Soutenir",
+    "english": "Support"
   },
   {
     "medumba": "Nə̀ kwe",
-    "french": "Prendre"
+    "french": "Prendre",
+    "english": "Take"
   },
   {
     "medumba": "Nə̀ fǒ",
-    "french": "Prêter"
+    "french": "Prêter",
+    "english": "Lend"
   },
   {
     "medumba": "Nə̀ kwimtə",
-    "french": "Se rappeler"
+    "french": "Se rappeler",
+    "english": "Remember"
   },
   {
     "medumba": "Nə̀ komə",
-    "french": "Raser"
+    "french": "Raser",
+    "english": "Shave"
   },
   {
     "medumba": "Nə̀ kʉmtə",
-    "french": "Rassembler"
+    "french": "Rassembler",
+    "english": "Gather"
   },
   {
     "medumba": "Nə̀ lə̀ꞌtə̌",
-    "french": "Prier"
+    "french": "Prier",
+    "english": "Pray"
   },
   {
     "medumba": "Nə̀ kʉꞌtə",
-    "french": "Réculer"
+    "french": "Réculer",
+    "english": "Back"
   },
   {
     "medumba": "Nə̀ fi",
-    "french": "Refroidir"
+    "french": "Refroidir",
+    "english": "Cool"
   },
   {
     "medumba": "Nə̀ tɔ̌",
-    "french": "Régner"
+    "french": "Régner",
+    "english": "Reign"
   },
   {
     "medumba": "Nə̀ tsiàntə̌",
-    "french": "Se rejouir"
+    "french": "Se rejouir",
+    "english": "Rejoice"
   },
   {
     "medumba": "Nə̀ làbtə̌",
-    "french": "Remercier"
+    "french": "Remercier",
+    "english": "Thank"
   },
   {
     "medumba": "Nə̀ dunə",
-    "french": "Remplir"
+    "french": "Remplir",
+    "english": "Fill"
   },
   {
     "medumba": "Nə̀ fə",
-    "french": "Rentrer"
+    "french": "Rentrer",
+    "english": "Return"
   },
   {
     "medumba": "Nə̀ bʉ̀ntə̌",
-    "french": "Répondre"
+    "french": "Répondre",
+    "english": "Reply"
   },
   {
     "medumba": "Nə̀ fitə",
-    "french": "Se reposer"
+    "french": "Se reposer",
+    "english": "Rest"
   },
   {
     "medumba": "Nə̀ zwiagə",
-    "french": "Respirer"
+    "french": "Respirer",
+    "english": "Breathe"
   },
   {
     "medumba": "Nə̀ bamə",
-    "french": "Accepter"
+    "french": "Accepter",
+    "english": "Accept"
   },
   {
     "medumba": "Nə̀ sɛnə",
-    "french": "Être enretard"
+    "french": "Être enretard",
+    "english": "Being late"
   },
   {
     "medumba": "Nə̀ cʉbə",
-    "french": "Tenir"
+    "french": "Tenir",
+    "english": "Hold"
   },
   {
     "medumba": "Nə̀ bwoŋtə",
-    "french": "Repéter"
+    "french": "Repéter",
+    "english": "Repeat"
   },
   {
     "medumba": "Nə̀ bwoŋtə",
-    "french": "Rouler"
+    "french": "Rouler",
+    "english": "Roll"
   },
   {
     "medumba": "Nə̀ caꞌtə̌",
-    "french": "Saluer"
+    "french": "Saluer",
+    "english": "Greet"
   },
   {
     "medumba": "Nə̀ ziagə",
-    "french": "Scintiller"
+    "french": "Scintiller",
+    "english": "Sparkle"
   },
   {
     "medumba": "Nə̀ vɛnə",
-    "french": "Sculpter"
+    "french": "Sculpter",
+    "english": "Sculpt"
   },
   {
     "medumba": "Nə̀ yagə",
-    "french": "Sécher"
+    "french": "Sécher",
+    "english": "Dry"
   },
   {
     "medumba": "Nə̀ ywǐlə",
-    "french": "Semer"
+    "french": "Semer",
+    "english": "Sow"
   },
   {
     "medumba": "Nə̀ làmə",
-    "french": "Sentir"
+    "french": "Sentir",
+    "english": "Feel"
   },
   {
     "medumba": "Nə̀ mfàgtə̌",
-    "french": "Séparer"
+    "french": "Séparer",
+    "english": "Separate"
   },
   {
     "medumba": "Nə̀ tɔ",
-    "french": "Siffler"
+    "french": "Siffler",
+    "english": "Whistle"
   },
   {
     "medumba": "Nə̀ ḳɔ̌",
-    "french": "Aimer"
+    "french": "Aimer",
+    "english": "Love"
   },
   {
     "medumba": "Mbaŋbwe",
-    "french": "A cote̍"
+    "french": "A cote̍",
+    "english": "Next to it"
   },
   {
     "medumba": "Mbaŋ bwe",
-    "french": "A cote̍ de"
+    "french": "A cote̍ de",
+    "english": "Next to"
   },
   {
     "medumba": "Bû zwim",
-    "french": "A droite"
+    "french": "A droite",
+    "english": "On the right"
   },
   {
     "medumba": "Bû kwèb",
-    "french": "A gauche"
+    "french": "A gauche",
+    "english": "On the left"
   },
   {
     "medumba": "Bα̌g ntûmnyàm",
-    "french": "A l’est"
+    "french": "A l’est",
+    "english": "To the east"
   },
   {
     "medumba": "Njʉ",
-    "french": "A l’exterieur"
+    "french": "A l’exterieur",
+    "english": "Outside"
   },
   {
     "medumba": "Njàmnjʉ",
-    "french": "A l’exterieur"
+    "french": "A l’exterieur",
+    "english": "Outside"
   },
   {
     "medumba": "Ntʉ̂m bwe",
-    "french": "A l’interieur"
+    "french": "A l’interieur",
+    "english": "Inside"
   },
   {
     "medumba": "Bα̌g mbînyàm",
-    "french": "A l’ouest"
+    "french": "A l’ouest",
+    "english": "To the west"
   },
   {
     "medumba": "Nə̀toʼte",
-    "french": "A partir de"
+    "french": "A partir de",
+    "english": "From"
   },
   {
     "medumba": "Fə̀",
-    "french": "A partir de"
+    "french": "A partir de",
+    "english": "From"
   },
   {
     "medumba": "Nə̀faŋəw",
-    "french": "Abandon"
+    "french": "Abandon",
+    "english": "Abandonment"
   },
   {
     "medumba": "Nə́ faŋe",
-    "french": "Abandonner"
+    "french": "Abandonner",
+    "english": "Give up"
   },
   {
     "medumba": "Nə̀ yɛ̀nə",
-    "french": "Abandonner"
+    "french": "Abandonner",
+    "english": "Give up"
   },
   {
     "medumba": "Nə̀ nyα",
-    "french": "Abandonner"
+    "french": "Abandonner",
+    "english": "Give up"
   },
   {
     "medumba": "Nə̀ kəbə",
-    "french": "Abattre"
+    "french": "Abattre",
+    "english": "Cut down"
   },
   {
     "medumba": "Nə̀ kəꞌə",
-    "french": "Abattre"
+    "french": "Abattre",
+    "english": "Cut down"
   },
   {
     "medumba": "Nə̀ wàlə",
-    "french": "Abattre"
+    "french": "Abattre",
+    "english": "Cut down"
   },
   {
     "medumba": "Nèyob",
-    "french": "Abattu"
+    "french": "Abattu",
+    "english": "Shot down"
   },
   {
     "medumba": "Ŋwaꞌa",
-    "french": "Abeille"
+    "french": "Abeille",
+    "english": "Bee"
   },
   {
     "medumba": "Nè blagə",
-    "french": "Abolir"
+    "french": "Abolir",
+    "english": "Abolish"
   },
   {
     "medumba": "Nə̀ bagtə",
-    "french": "Abolir"
+    "french": "Abolir",
+    "english": "Abolish"
   },
   {
     "medumba": "Nǔndɛ̌nnko",
-    "french": "Abomination"
+    "french": "Abomination",
+    "english": "Abomination"
   },
   {
     "medumba": "Nùkə̀bwɔ̀",
-    "french": "Abomination"
+    "french": "Abomination",
+    "english": "Abomination"
   },
   {
     "medumba": "nǔŋuꞌu",
-    "french": "Abomination"
+    "french": "Abomination",
+    "english": "Abomination"
   },
   {
     "medumba": "Fùꞌ",
-    "french": "Abondance"
+    "french": "Abondance",
+    "english": "Abundance"
   },
   {
     "medumba": "Nə̀ sə̀btə̌",
-    "french": "Abre̍ger"
+    "french": "Abre̍ger",
+    "english": "Abbreviate"
   },
   {
     "medumba": "A kə bətə",
-    "french": "Abre̍ger"
+    "french": "Abre̍ger",
+    "english": "Abbreviate"
   },
   {
     "medumba": "A kə nsi",
-    "french": "Absent (il est)"
+    "french": "Absent (il est)",
+    "english": "Absent (he is)"
   },
   {
     "medumba": "A tàgə",
-    "french": "Absent (il est)"
+    "french": "Absent (il est)",
+    "english": "Absent (he is)"
   },
   {
     "medumba": "A siìꞌl",
-    "french": "Absent (il est)"
+    "french": "Absent (il est)",
+    "english": "Absent (he is)"
   },
   {
     "medumba": "Nə̀ mǐ",
-    "french": "Absenter (sꞌ)"
+    "french": "Absenter (sꞌ)",
+    "english": "Absent (sꞌ)"
   },
   {
     "medumba": "Nə̀ mǐntùn",
-    "french": "Absorber"
+    "french": "Absorber",
+    "english": "Absorb"
   },
   {
     "medumba": "Fʉ̀mwud",
-    "french": "Abus"
+    "french": "Abus",
+    "english": "Abuse"
   },
   {
     "medumba": "Nə̀yaꞌ nkaꞌ",
-    "french": "Abus"
+    "french": "Abus",
+    "english": "Abuse"
   },
   {
     "medumba": "Nə̀ fʉ̌mwud",
-    "french": "Abuser"
+    "french": "Abuser",
+    "english": "Abuse"
   },
   {
     "medumba": "Nə̀ yaꞌ nkaꞌ",
-    "french": "Abuser"
+    "french": "Abuser",
+    "english": "Abuse"
   },
   {
     "medumba": "Nə̀ bamə",
-    "french": "Accepter"
+    "french": "Accepter",
+    "english": "Accept"
   },
   {
     "medumba": "Fà",
-    "french": "Accident"
+    "french": "Accident",
+    "english": "Accident"
   },
   {
     "medumba": "vʉ̂fa",
-    "french": "Accident mortel"
+    "french": "Accident mortel",
+    "english": "Fatal accident"
   },
   {
     "medumba": "Nə̀ ladtə̌",
-    "french": "Accoler"
+    "french": "Accoler",
+    "english": "Attach"
   },
   {
     "medumba": "Nə̀ làdtə̌ wud",
-    "french": "Acoler(sꞌ)ꞌ"
+    "french": "Acoler(sꞌ)ꞌ",
+    "english": "Acoler(sꞌ)ꞌ"
   },
   {
     "medumba": "Nə̀ làd wud",
-    "french": "Acoler (sꞌ)"
+    "french": "Acoler (sꞌ)",
+    "english": "Acoler (sꞌ)"
   },
   {
     "medumba": "Ǹə̀ bwə̌",
-    "french": "Accompagner"
+    "french": "Accompagner",
+    "english": "Accompany"
   },
   {
     "medumba": "Nə̀ tam njàm",
-    "french": "Accompagner"
+    "french": "Accompagner",
+    "english": "Accompany"
   },
   {
     "medumba": "Nə̀ càgə",
-    "french": "Accompagner"
+    "french": "Accompagner",
+    "english": "Accompany"
   },
   {
     "medumba": "Nə̀ tə",
-    "french": "Acompagner"
+    "french": "Acompagner",
+    "english": "Accompany"
   },
   {
     "medumba": "Nə̀ bùmtə̌",
-    "french": "Acomplir"
+    "french": "Acomplir",
+    "english": "Accomplish"
   },
   {
     "medumba": "Nə̀ sαgtə",
-    "french": "Accomplir (sꞌ)"
+    "french": "Accomplir (sꞌ)",
+    "english": "Accomplish (sꞌ)"
   },
   {
     "medumba": "Ncùncʉꞌ",
-    "french": "Accord"
+    "french": "Accord",
+    "english": "Agreement"
   },
   {
     "medumba": "Nə̀ bə ncùncʉꞌ",
-    "french": "Accord (être d́ꞌ)"
+    "french": "Accord (être d́ꞌ)",
+    "english": "Agreement (to be d́ꞌ)"
   },
   {
     "medumba": "Nə̀ bamə",
-    "french": "Accorder"
+    "french": "Accorder",
+    "english": "Grant"
   },
   {
     "medumba": "Bwə",
-    "french": "Accouchement"
+    "french": "Accouchement",
+    "english": "Childbirth"
   },
   {
     "medumba": "Nə̀mbwə",
-    "french": "Accouchement"
+    "french": "Accouchement",
+    "english": "Childbirth"
   },
   {
     "medumba": "Nə̀ bwə",
-    "french": "Accocher"
+    "french": "Accocher",
+    "english": "Hang"
   },
   {
     "medumba": "nkwêmɛn",
-    "french": "Accoucheur"
+    "french": "Accoucheur",
+    "english": "Midwife"
   },
   {
     "medumba": "Nə̀ felə",
-    "french": "Acculer"
+    "french": "Acculer",
+    "english": "Corner"
   },
   {
     "medumba": "Nə̀ tɛntə ncâgə",
-    "french": "Acculer"
+    "french": "Acculer",
+    "english": "Corner"
   },
   {
     "medumba": "Nə̀ tsiag bwə",
-    "french": "Acculer"
+    "french": "Acculer",
+    "english": "Corner"
   },
   {
     "medumba": "Mbotə̀mɛ̀n",
-    "french": "Accusateur"
+    "french": "Accusateur",
+    "english": "Accuser"
   },
   {
     "medumba": "Ngàbotə̀mɛ̀n",
-    "french": "Accusateur"
+    "french": "Accusateur",
+    "english": "Accuser"
   },
   {
     "medumba": "Botə̀",
-    "french": "Accusation"
+    "french": "Accusation",
+    "english": "Accusation"
   },
   {
     "medumba": "Nə̀botə",
-    "french": "Accusation"
+    "french": "Accusation",
+    "english": "Accusation"
   },
   {
     "medumba": "Nə̀ coꞌ kùd mɛ̀n",
-    "french": "Accusation (fausse)"
+    "french": "Accusation (fausse)",
+    "english": "Accusation (false)"
   },
   {
     "medumba": "Nə̀ botə mɛ̀n",
-    "french": "Accuser"
+    "french": "Accuser",
+    "english": "Accuse"
   },
   {
     "medumba": "Nə̀june",
-    "french": "Achat"
+    "french": "Achat",
+    "english": "Purchase"
   },
   {
     "medumba": "Nə̀ june",
-    "french": "Acheter"
+    "french": "Acheter",
+    "english": "Buy"
   },
   {
     "medumba": "Ngàjun",
-    "french": "Acheteur"
+    "french": "Acheteur",
+    "english": "Buyer"
   },
   {
     "medumba": "Njûnju",
-    "french": "Acheteur"
+    "french": "Acheteur",
+    "english": "Buyer"
   },
   {
     "medumba": "nə̀miàgtə̌",
-    "french": "Achèvement"
+    "french": "Achèvement",
+    "english": "Completion"
   },
   {
     "medumba": "Nə̀ mǐ",
-    "french": "Achever"
+    "french": "Achever",
+    "english": "Complete"
   },
   {
     "medumba": "Nə̀ miàgtə̌",
-    "french": "Achever"
+    "french": "Achever",
+    "english": "Complete"
   },
   {
     "medumba": "Nə̀ bètə̌",
-    "french": "Affùter(tailler)"
+    "french": "Affùter(tailler)",
+    "english": "Sharpen (cut)"
   },
   {
     "medumba": "Nə̀ nὰbtə̌",
-    "french": "Affùter(ses armes)"
+    "french": "Affùter(ses armes)",
+    "english": "Sharpen(his weapons)"
   },
   {
     "medumba": "Ndʉ",
-    "french": "Afin que"
+    "french": "Afin que",
+    "english": "So that"
   },
   {
     "medumba": "Ngǔꞌnjʉ̂",
-    "french": "Age"
+    "french": "Age",
+    "english": "Age"
   },
   {
     "medumba": "Ngǔꞌnjʉ̂fàꞌ",
-    "french": "Age de travail"
+    "french": "Age de travail",
+    "english": "Working age"
   },
   {
     "medumba": "Ngǔꞌnjʉ̂nandα",
-    "french": "Age nubile"
+    "french": "Age nubile",
+    "english": "Marriageable age"
   },
   {
     "medumba": "Nə̀ kwǐm ntûnkə̀kwiꞌ nsi",
-    "french": "Agenouiller"
+    "french": "Agenouiller",
+    "english": "Kneel"
   },
   {
     "medumba": "Vògtə̀",
-    "french": "Agitation"
+    "french": "Agitation",
+    "english": "Agitation"
   },
   {
     "medumba": "Faꞌtə̀",
-    "french": "Agitation"
+    "french": "Agitation",
+    "english": "Agitation"
   },
   {
     "medumba": "Bum",
-    "french": "Agitation"
+    "french": "Agitation",
+    "english": "Agitation"
   },
   {
     "medumba": "Ngàvògtə̀",
-    "french": "Agite̍"
+    "french": "Agite̍",
+    "english": "Shake"
   },
   {
     "medumba": "Ngàfaꞌtə̀",
-    "french": "Agite̍"
+    "french": "Agite̍",
+    "english": "Shake"
   },
   {
     "medumba": "Ngàbum",
-    "french": "Agite̍"
+    "french": "Agite̍",
+    "english": "Shake"
   },
   {
     "medumba": "Nə̀ nyiꞌtə̌",
-    "french": "Agiter"
+    "french": "Agiter",
+    "english": "Shake"
   },
   {
     "medumba": "Nə̀ bumə",
-    "french": "Agiter (sꞌ)"
+    "french": "Agiter (sꞌ)",
+    "english": "Shake (sꞌ)"
   },
   {
     "medumba": "Nə̀ faꞌtə",
-    "french": "Agiter (sꞌ)"
+    "french": "Agiter (sꞌ)",
+    "english": "Shake (sꞌ)"
   },
   {
     "medumba": "Nə̀ vògtə̌",
-    "french": "Agiter (sꞌ)"
+    "french": "Agiter (sꞌ)",
+    "english": "Shake (sꞌ)"
   },
   {
     "medumba": "Mɛnjʉ̀mbwə",
-    "french": "Agneau"
+    "french": "Agneau",
+    "english": "Lamb"
   },
   {
     "medumba": "Ncùncò",
-    "french": "Arme̍e"
+    "french": "Arme̍e",
+    "english": "Weapon"
   },
   {
     "medumba": "Mvɛd mə̀bwɔ",
-    "french": "Aromate"
+    "french": "Aromate",
+    "english": "Aromatic"
   },
   {
     "medumba": "Làmtə̂la",
-    "french": "Aromate"
+    "french": "Aromate",
+    "english": "Aromatic"
   },
   {
     "medumba": "Nə̀ còvo",
-    "french": "Arracher"
+    "french": "Arracher",
+    "english": "Tear off"
   },
   {
     "medumba": "Nə̀ fià̀ŋə",
-    "french": "Arracher"
+    "french": "Arracher",
+    "english": "Tear off"
   },
   {
     "medumba": "Nə̀ghòmə",
-    "french": "Arrestation"
+    "french": "Arrestation",
+    "english": "Arrest"
   },
   {
     "medumba": "Nə̀tsinə",
-    "french": "Arrêt (stop)"
+    "french": "Arrêt (stop)",
+    "english": "Stop (stop)"
   },
   {
     "medumba": "ŋwàꞌnikə̂bncà",
-    "french": "Arrêt (de justice)"
+    "french": "Arrêt (de justice)",
+    "english": "Judgment (of justice)"
   },
   {
     "medumba": "Ncʉꞌ",
-    "french": "Arrête̍"
+    "french": "Arrête̍",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ cʉbə",
-    "french": "Arrêter"
+    "french": "Arrêter",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ tsine",
-    "french": "Arrêter"
+    "french": "Arrêter",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀kùmə",
-    "french": "Arrive̍e"
+    "french": "Arrive̍e",
+    "english": "Arrival"
   },
   {
     "medumba": "Nə̀ kùꞌu",
-    "french": "Arriver"
+    "french": "Arriver",
+    "english": "Arrive"
   },
   {
     "medumba": "Nə̀ kumə",
-    "french": "Arriver"
+    "french": "Arriver",
+    "english": "Arrive"
   },
   {
     "medumba": "Nə̀ sə̀ꞌə",
-    "french": "Arriver"
+    "french": "Arriver",
+    "english": "Arrive"
   },
   {
     "medumba": "Fědmɛ̀n",
-    "french": "Arriviste"
+    "french": "Arriviste",
+    "english": "Careerist"
   },
   {
     "medumba": "Ncʉὰnco",
-    "french": "Arriviste"
+    "french": "Arriviste",
+    "english": "Careerist"
   },
   {
     "medumba": "Fid",
-    "french": "Arrogance"
+    "french": "Arrogance",
+    "english": "Arrogance"
   },
   {
     "medumba": "Koꞌ tə̀wud",
-    "french": "Arrogance"
+    "french": "Arrogance",
+    "english": "Arrogance"
   },
   {
     "medumba": "Ntâꞌ nku",
-    "french": "Arrogance"
+    "french": "Arrogance",
+    "english": "Arrogance"
   },
   {
     "medumba": "Cὰbncù",
-    "french": "Arrogance"
+    "french": "Arrogance",
+    "english": "Arrogance"
   },
   {
     "medumba": "Ngàcα̌bncù",
-    "french": "Arrogant"
+    "french": "Arrogant",
+    "english": "Arrogant"
   },
   {
     "medumba": "Ngàfid",
-    "french": "Arrogant"
+    "french": "Arrogant",
+    "english": "Arrogant"
   },
   {
     "medumba": "Ngàkoꞌtəwud",
-    "french": "Arrogant"
+    "french": "Arrogant",
+    "english": "Arrogant"
   },
   {
     "medumba": "Ngàntâꞌ nkù",
-    "french": "Arrogant"
+    "french": "Arrogant",
+    "english": "Arrogant"
   },
   {
     "medumba": "Tǎŋngɔ̀",
-    "french": "Arrondissement"
+    "french": "Arrondissement",
+    "english": "District"
   },
   {
     "medumba": "Nə̀ zwìꞌi",
-    "french": "Arroser"
+    "french": "Arroser",
+    "english": "Water"
   },
   {
     "medumba": "Nə̀ ywɛlə̀",
-    "french": "Arroser"
+    "french": "Arroser",
+    "english": "Water"
   },
   {
     "medumba": "Tsîntsə",
-    "french": "Arrosoir"
+    "french": "Arrosoir",
+    "english": "Watering can"
   },
   {
     "medumba": "Mbwôŋnc̩a",
-    "french": "Artère"
+    "french": "Artère",
+    "english": "Artery"
   },
   {
     "medumba": "Njǒŋvogə",
-    "french": "Articulation"
+    "french": "Articulation",
+    "english": "Joint"
   },
   {
     "medumba": "Ngàvə̀",
-    "french": "Artiste"
+    "french": "Artiste",
+    "english": "Artist"
   },
   {
     "medumba": "Nə̀ femə",
-    "french": "Asperger"
+    "french": "Asperger",
+    "english": "Asperger's"
   },
   {
     "medumba": "Nə̀ file",
-    "french": "Aspirer"
+    "french": "Aspirer",
+    "english": "Aspire"
   },
   {
     "medumba": "Nə̀ ghəbtə",
-    "french": "Aspirer"
+    "french": "Aspirer",
+    "english": "Aspire"
   },
   {
     "medumba": "Nə̀ sǒŋə",
-    "french": "Apirer(un fluide)"
+    "french": "Apirer(un fluide)",
+    "english": "Aspirate (a fluid)"
   },
   {
     "medumba": "Mαnjô",
-    "french": "Assemblée"
+    "french": "Assemblée",
+    "english": "Assembly"
   },
   {
     "medumba": "Mbǔntə",
-    "french": "Assemblée"
+    "french": "Assemblée",
+    "english": "Assembly"
   },
   {
     "medumba": "Ntsəꞌtə̀",
-    "french": "Assemblée"
+    "french": "Assemblée",
+    "english": "Assembly"
   },
   {
     "medumba": "Nə̀ təwə nsi",
-    "french": "Assoseoir(sꞌ)"
+    "french": "Assoseoir(sꞌ)",
+    "english": "Seat(sꞌ)"
   },
   {
     "medumba": "Nə̀ tətùn",
-    "french": "Asseoir(sʼ)"
+    "french": "Asseoir(sʼ)",
+    "english": "Sit(s)"
   },
   {
     "medumba": "Kà",
-    "french": "Assiette"
+    "french": "Assiette",
+    "english": "Plate"
   },
   {
     "medumba": "Bàgko",
-    "french": "Assiette(plat)"
+    "french": "Assiette(plat)",
+    "english": "Plate (dish)"
   },
   {
     "medumba": "Nə̀tswənsi",
-    "french": "Assis"
+    "french": "Assis",
+    "english": "Sitting"
   },
   {
     "medumba": "Bwoŋbinntʉ̀m",
-    "french": "Assistance"
+    "french": "Assistance",
+    "english": "Support"
   },
   {
     "medumba": "Ywìmtə̀",
-    "french": "Assistance"
+    "french": "Assistance",
+    "english": "Support"
   },
   {
     "medumba": "Nə̀ bə bwə",
-    "french": "Assister"
+    "french": "Assister",
+    "english": "Assist"
   },
   {
     "medumba": "Nə̀ ywìmtə̌",
-    "french": "Assister"
+    "french": "Assister",
+    "english": "Assist"
   },
   {
     "medumba": "Kum",
-    "french": "Association"
+    "french": "Association",
+    "english": "Association"
   },
   {
     "medumba": "Tsəꞌ tə̀",
-    "french": "Association"
+    "french": "Association",
+    "english": "Association"
   },
   {
     "medumba": "ngàlɛ̌nnsa",
-    "french": "Astrologue"
+    "french": "Astrologue",
+    "english": "Astrologer"
   },
   {
     "medumba": "Nkʉ̂nkʉ",
-    "french": "Astuce"
+    "french": "Astuce",
+    "english": "Tip"
   },
   {
     "medumba": "Mfʉ",
-    "french": "Astuce"
+    "french": "Astuce",
+    "english": "Tip"
   },
   {
     "medumba": "ngànkʉ̂nkʉ",
-    "french": "Astucieux"
+    "french": "Astucieux",
+    "english": "Clever"
   },
   {
     "medumba": "Dʉ̌ꞌ fàꞌ",
-    "french": "Atelier"
+    "french": "Atelier",
+    "english": "Workshop"
   },
   {
     "medumba": "Nə̀ kulə \\",
-    "french": "Attacher"
+    "french": "Attacher",
+    "english": "Attach"
   },
   {
     "medumba": "nə̀lǎd wud",
-    "french": "Attacher  (sꞌ)"
+    "french": "Attacher  (sꞌ)",
+    "english": "Attach (sꞌ)"
   },
   {
     "medumba": "Nə̀ sǒ wud",
-    "french": "Attacher  (sꞌ)"
+    "french": "Attacher  (sꞌ)",
+    "english": "Attach (sꞌ)"
   },
   {
     "medumba": "Ne kùma",
-    "french": "Atteindre"
+    "french": "Atteindre",
+    "english": "Reach"
   },
   {
     "medumba": "Nə̀ bebə",
-    "french": "Attendre"
+    "french": "Attendre",
+    "english": "Wait"
   },
   {
     "medumba": "Nə̀ zwiꞌtə",
-    "french": "Attendre"
+    "french": "Attendre",
+    "english": "Wait"
   },
   {
     "medumba": "Nə̀bebə",
-    "french": "Attente"
+    "french": "Attente",
+    "english": "Waiting"
   },
   {
     "medumba": "Bαmnα",
-    "french": "Attention"
+    "french": "Attention",
+    "english": "Caution"
   },
   {
     "medumba": "Nə̀ bαmnα",
-    "french": "Attention  (faire)"
+    "french": "Attention  (faire)",
+    "english": "Be careful (do)"
   },
   {
     "medumba": "Nə̀ zetə",
-    "french": "Attention  (faire)"
+    "french": "Attention  (faire)",
+    "english": "Be careful (do)"
   },
   {
     "medumba": "Nə̀ sòŋə",
-    "french": "Attirer"
+    "french": "Attirer",
+    "english": "Attract"
   },
   {
     "medumba": "Nə̀ kwαbtə",
-    "french": "Attirer"
+    "french": "Attirer",
+    "english": "Attract"
   },
   {
     "medumba": "Nə̀ fə̀dtə̌",
-    "french": "Attisser"
+    "french": "Attisser",
+    "english": "Attract"
   },
   {
     "medumba": "Nə̀ ghomə",
-    "french": "Attraper"
+    "french": "Attraper",
+    "english": "Catch"
   },
   {
     "medumba": "Nə nywinə",
-    "french": "Attrister"
+    "french": "Attrister",
+    "english": "Sadden"
   },
   {
     "medumba": "Nə̀ nyamtə sə",
-    "french": "Attrister"
+    "french": "Attrister",
+    "english": "Sadden"
   },
   {
     "medumba": "Njàmnjʉ",
-    "french": "Au dehors"
+    "french": "Au dehors",
+    "english": "Outside"
   },
   {
     "medumba": "Ncùndα",
-    "french": "Au dehors"
+    "french": "Au dehors",
+    "english": "Outside"
   },
   {
     "medumba": "Ghaꞌtə̀ wud",
-    "french": "Au large"
+    "french": "Au large",
+    "english": "Offshore"
   },
   {
     "medumba": "Ndʉsə",
-    "french": "Au moment"
+    "french": "Au moment",
+    "english": "At the moment"
   },
   {
     "medumba": "bǎg tu, tu",
-    "french": "Au nord"
+    "french": "Au nord",
+    "english": "To the north"
   },
   {
     "medumba": "Mfə tu",
-    "french": "Au nord"
+    "french": "Au nord",
+    "english": "To the north"
   },
   {
     "medumba": "Fɛn",
-    "french": "Aubaine"
+    "french": "Aubaine",
+    "english": "Bargain"
   },
   {
     "medumba": "mαnkə̂bnjʉ",
-    "french": "Aube"
+    "french": "Aube",
+    "english": "Dawn"
   },
   {
     "medumba": "mαghâtswəꞌ",
-    "french": "Aube"
+    "french": "Aube",
+    "english": "Dawn"
   },
   {
     "medumba": "mfôgnjʉ",
-    "french": "Aube"
+    "french": "Aube",
+    "english": "Dawn"
   },
   {
     "medumba": "ndα̂ghʉ̀n",
-    "french": "Auberge"
+    "french": "Auberge",
+    "english": "Hostel"
   },
   {
     "medumba": "sα̌mmɛ̀n",
-    "french": "Aucun (personne)"
+    "french": "Aucun (personne)",
+    "english": "None (person)"
   },
   {
     "medumba": "sα̌mju",
-    "french": "Aucun objet, rien"
+    "french": "Aucun objet, rien",
+    "english": "No object, nothing"
   },
   {
     "medumba": "Kutu",
-    "french": "Audace"
+    "french": "Audace",
+    "english": "Audacity"
   },
   {
     "medumba": "Nə̀kutu",
-    "french": "Audacieux (être)"
+    "french": "Audacieux (être)",
+    "english": "Bold (to be)"
   },
   {
     "medumba": "Kutumɛ̀n",
-    "french": "Audacieux"
+    "french": "Audacieux",
+    "english": "Bold"
   },
   {
     "medumba": "mǒꞌyoŋ",
-    "french": "Au-delà"
+    "french": "Au-delà",
+    "english": "Beyond"
   },
   {
     "medumba": "lə̂dntsə̌nyὰm",
-    "french": "Auge"
+    "french": "Auge",
+    "english": "Trough"
   },
   {
     "medumba": "Nə̀ kwìꞌtə̌",
-    "french": "Augmenter"
+    "french": "Augmenter",
+    "english": "Increase"
   },
   {
     "medumba": "Nə̀ cùba",
-    "french": "Augmenter"
+    "french": "Augmenter",
+    "english": "Increase"
   },
   {
     "medumba": "sɛ̂nnî",
-    "french": "Aujourdꞌhui"
+    "french": "Aujourdꞌhui",
+    "english": "Today"
   },
   {
     "medumba": "Fə sɛ̂nnî",
-    "french": "Aujourd’hui (dès̀)"
+    "french": "Aujourd’hui (dès̀)",
+    "english": "Today (from)"
   },
   {
     "medumba": "Lò sɛ̂nnî",
-    "french": "Aujourd’hui (dès)"
+    "french": "Aujourd’hui (dès)",
+    "english": "Today (from)"
   },
   {
     "medumba": "Nə̀ toꞌtə sɛ̂nnî",
-    "french": "Aujourd’hui (dès)"
+    "french": "Aujourd’hui (dès)",
+    "english": "Today (from)"
   },
   {
     "medumba": "Mbwə̌mbwə̀",
-    "french": "Auparavant"
+    "french": "Auparavant",
+    "english": "Previously"
   },
   {
     "medumba": "Coꞌ nguꞌu",
-    "french": "Aure̍ole"
+    "french": "Aure̍ole",
+    "english": "Aureole"
   },
   {
     "medumba": "Nkêdntubu",
-    "french": "Auriculaire (doigt)"
+    "french": "Auriculaire (doigt)",
+    "english": "Little finger (finger)"
   },
   {
     "medumba": "Nkêdntukù",
-    "french": "Auriculaire (orteil)"
+    "french": "Auriculaire (orteil)",
+    "english": "Little finger (toe)"
   },
   {
     "medumba": "Nkə̂bnjʉ",
-    "french": "Aurore"
+    "french": "Aurore",
+    "english": "Aurora"
   },
   {
     "medumba": "Ndə̂ndə",
-    "french": "Aussitôt"
+    "french": "Aussitôt",
+    "english": "Immediately"
   },
   {
     "medumba": "Bə̂ ndə̂ndə",
-    "french": "Aussitôt"
+    "french": "Aussitôt",
+    "english": "Immediately"
   },
   {
     "medumba": "Ndʉ̀sə",
-    "french": "Ausssitôt"
+    "french": "Ausssitôt",
+    "english": "Immediately"
   },
   {
     "medumba": "Bə̂ ndʉ̀sə",
-    "french": "Aussitôt"
+    "french": "Aussitôt",
+    "english": "Immediately"
   },
   {
     "medumba": "tǒmbwogə",
-    "french": "Autel"
+    "french": "Autel",
+    "english": "Altar"
   },
   {
     "medumba": "Mὰtuὰ",
-    "french": "Auto"
+    "french": "Auto",
+    "english": "Auto"
   },
   {
     "medumba": "Yaŋbàꞌ",
-    "french": "Auto"
+    "french": "Auto",
+    "english": "Auto"
   },
   {
     "medumba": "Mbaꞌ ngʉ̀",
-    "french": "Autorite̍"
+    "french": "Autorite̍",
+    "english": "Authority"
   },
   {
     "medumba": "Nsaꞌngɔ̀",
-    "french": "Autorite̍"
+    "french": "Autorite̍",
+    "english": "Authority"
   },
   {
     "medumba": "Kòŋnzə̀",
-    "french": "Autoroute"
+    "french": "Autoroute",
+    "english": "Highway"
   },
   {
     "medumba": "Moꞌ",
-    "french": "Autre"
+    "french": "Autre",
+    "english": "Other"
   },
   {
     "medumba": "Zə̀wα",
-    "french": "Autre"
+    "french": "Autre",
+    "english": "Other"
   },
   {
     "medumba": "Mɛ̀nwα",
-    "french": "Autre (personne)"
+    "french": "Autre (personne)",
+    "english": "Other (person)"
   },
   {
     "medumba": "Juwα",
-    "french": "Autre chose"
+    "french": "Autre chose",
+    "english": "something else"
   },
   {
     "medumba": "Mbwə̌mbwə̀",
-    "french": "Autrefois"
+    "french": "Autrefois",
+    "english": "Formerly"
   },
   {
     "medumba": "Moꞌ ngə̀laŋ",
-    "french": "Autrefois"
+    "french": "Autrefois",
+    "english": "Formerly"
   },
   {
     "medumba": "Tǔnntsə",
-    "french": "Aval"
+    "french": "Aval",
+    "english": "Downstream"
   },
   {
     "medumba": "Nkwêntə",
-    "french": "Aval"
+    "french": "Aval",
+    "english": "Downstream"
   },
   {
     "medumba": "Nə̀ mî",
-    "french": "Avaler"
+    "french": "Avaler",
+    "english": "Swallow"
   },
   {
     "medumba": "Nə̀ mî ntʉ̀n",
-    "french": "Avaler"
+    "french": "Avaler",
+    "english": "Swallow"
   },
   {
     "medumba": "Bìn",
-    "french": "Avantage"
+    "french": "Avantage",
+    "english": "Advantage"
   },
   {
     "medumba": "Fùꞌ",
-    "french": "Avantage"
+    "french": "Avantage",
+    "english": "Advantage"
   },
   {
     "medumba": "Bô",
-    "french": "Avec"
+    "french": "Avec",
+    "english": "With"
   },
   {
     "medumba": "Ndʉ̀mαnjàms",
-    "french": "Avenir"
+    "french": "Avenir",
+    "english": "Future"
   },
   {
     "medumba": "tôŋnzə̀",
-    "french": "Avenue"
+    "french": "Avenue",
+    "english": "Avenue"
   },
   {
     "medumba": "mfʉ̌miαg",
-    "french": "Aveugle"
+    "french": "Aveugle",
+    "english": "Blind"
   },
   {
     "medumba": "Fʉ",
-    "french": "Aveuglement"
+    "french": "Aveuglement",
+    "english": "Blindness"
   },
   {
     "medumba": "Nə̀ kα̌g fʉ",
-    "french": "Aveugler"
+    "french": "Aveugler",
+    "english": "Blind"
   },
   {
     "medumba": "Nə̀ sɛntə miαg",
-    "french": "Aveugler"
+    "french": "Aveugler",
+    "english": "Blind"
   },
   {
     "medumba": "Nǔsaŋvə̀",
-    "french": "Aviation"
+    "french": "Aviation",
+    "english": "Aviation"
   },
   {
     "medumba": "Bià",
-    "french": "Avocat"
+    "french": "Avocat",
+    "english": "Lawyer"
   },
   {
     "medumba": "cǒmmə̀kalə",
-    "french": "Avocat"
+    "french": "Avocat",
+    "english": "Lawyer"
   },
   {
     "medumba": "Mbàꞌ kamə",
-    "french": "Avocat"
+    "french": "Avocat",
+    "english": "Lawyer"
   },
   {
     "medumba": "Mbàꞌ saꞌ",
-    "french": "Avocat"
+    "french": "Avocat",
+    "english": "Lawyer"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Avoir"
+    "french": "Avoir",
+    "english": "Have"
   },
   {
     "medumba": "Nə̀ kondɛ̀m",
-    "french": "Avoir pitie̍"
+    "french": "Avoir pitie̍",
+    "english": "Have mercy"
   },
   {
     "medumba": "Cu",
-    "french": "Avoirs"
+    "french": "Avoirs",
+    "english": "Assets"
   },
   {
     "medumba": "Nkab",
-    "french": "Avoirs"
+    "french": "Avoirs",
+    "english": "Assets"
   },
   {
     "medumba": "Nə̀ sɔ̌ bàm",
-    "french": "Avorter"
+    "french": "Avorter",
+    "english": "Abort"
   },
   {
     "medumba": "Nə̀ nyìnə",
-    "french": "B.a.(bonne action)"
+    "french": "B.a.(bonne action)",
+    "english": "B.a.(good deed)"
   },
   {
     "medumba": "Ncà",
-    "french": "Bagarre"
+    "french": "Bagarre",
+    "english": "Fight"
   },
   {
     "medumba": "Ne kǎm ncà",
-    "french": "Bagarrer"
+    "french": "Bagarrer",
+    "english": "Fight"
   },
   {
     "medumba": "Nə̀ zwězwə̀",
-    "french": "Bagarrer"
+    "french": "Bagarrer",
+    "english": "Fight"
   },
   {
     "medumba": "Ngàdiα̌gncà",
-    "french": "Bagarreur"
+    "french": "Bagarreur",
+    "english": "Brawler"
   },
   {
     "medumba": "Ngàncà",
-    "french": "Bagarreur"
+    "french": "Bagarreur",
+    "english": "Brawler"
   },
   {
     "medumba": "Ngàdiagndcà",
-    "french": "Bagarreur"
+    "french": "Bagarreur",
+    "english": "Brawler"
   },
   {
     "medumba": "Ngàcaŋncà",
-    "french": "Bagarreur"
+    "french": "Bagarreur",
+    "english": "Brawler"
   },
   {
     "medumba": "Nə̀ sǒg wud",
-    "french": "Baigner (se)"
+    "french": "Baigner (se)",
+    "english": "Bathe"
   },
   {
     "medumba": "Nə̀ yegə",
-    "french": "Bâiller"
+    "french": "Bâiller",
+    "english": "Yawn"
   },
   {
     "medumba": "Swαndα",
-    "french": "Balai"
+    "french": "Balai",
+    "english": "Broom"
   },
   {
     "medumba": "Nə̀ bèꞌ tə̌",
-    "french": "Balayer"
+    "french": "Balayer",
+    "english": "Sweep"
   },
   {
     "medumba": "Nə̀nα̌nsîndα",
-    "french": "Balayure"
+    "french": "Balayure",
+    "english": "Sweep"
   },
   {
     "medumba": "Ndiaŋ",
-    "french": "Bambou"
+    "french": "Bambou",
+    "english": "Bamboo"
   },
   {
     "medumba": "nkǒꞌ lə̀",
-    "french": "Bambou"
+    "french": "Bambou",
+    "english": "Bamboo"
   },
   {
     "medumba": "Bàmntʉnə",
-    "french": "Bambou(moellede)"
+    "french": "Bambou(moellede)",
+    "english": "Bamboo (pith)"
   },
   {
     "medumba": "Kəlɔ̀ bàkə̀lɔ̀",
-    "french": "Banane"
+    "french": "Banane",
+    "english": "Banana"
   },
   {
     "medumba": "Tǔnkə̀lɔ",
-    "french": "Bananier"
+    "french": "Bananier",
+    "english": "Banana tree"
   },
   {
     "medumba": "ntɛ̂ntkə̀lɔ̀",
-    "french": "Bananier"
+    "french": "Bananier",
+    "english": "Banana tree"
   },
   {
     "medumba": "ndα̂nkαb",
-    "french": "Banque"
+    "french": "Banque",
+    "english": "Bank"
   },
   {
     "medumba": "Dʉ nkαb",
-    "french": "Banque"
+    "french": "Banque",
+    "english": "Bank"
   },
   {
     "medumba": "ndα̂mbʉm",
-    "french": "Banque"
+    "french": "Banque",
+    "english": "Bank"
   },
   {
     "medumba": "kwêntsə",
-    "french": "Baptême"
+    "french": "Baptême",
+    "english": "Baptism"
   },
   {
     "medumba": "Nə̀ fα kwêntsə",
-    "french": "Baptiser(administrer)"
+    "french": "Baptiser(administrer)",
+    "english": "Baptize(administer)"
   },
   {
     "medumba": "Nə kwêntsə",
-    "french": "Baptiser (se faire)"
+    "french": "Baptiser (se faire)",
+    "english": "Baptize (become)"
   },
   {
     "medumba": "Nə̀ fα lɛn",
-    "french": "Baptiser (donner un nom)"
+    "french": "Baptiser (donner un nom)",
+    "english": "Baptize (give a name)"
   },
   {
     "medumba": "ndα̂ndùꞌ",
-    "french": "Bar"
+    "french": "Bar",
+    "english": "Bar"
   },
   {
     "medumba": "dʉncù",
-    "french": "Barbe"
+    "french": "Barbe",
+    "english": "Beard"
   },
   {
     "medumba": "nyǎŋncù",
-    "french": "Barbe"
+    "french": "Barbe",
+    "english": "Beard"
   },
   {
     "medumba": "Làntsəbaꞌ",
-    "french": "Barque"
+    "french": "Barque",
+    "english": "Boat"
   },
   {
     "medumba": "tâmntsì",
-    "french": "Basket ball"
+    "french": "Basket ball",
+    "english": "Basketball"
   },
   {
     "medumba": "nə̀ndiàŋ",
-    "french": "Bas ventre"
+    "french": "Bas ventre",
+    "english": "Lower abdomen"
   },
   {
     "medumba": "Làntsəbaꞌ",
-    "french": "Bateau"
+    "french": "Bateau",
+    "english": "Boat"
   },
   {
     "medumba": "Kog, shuaꞌa",
-    "french": "Bâton"
+    "french": "Bâton",
+    "english": "Stick"
   },
   {
     "medumba": "Kʉlə",
-    "french": "Bâtonnet"
+    "french": "Bâtonnet",
+    "english": "Stick"
   },
   {
     "medumba": "nsôŋcɔ",
-    "french": "Bavard"
+    "french": "Bavard",
+    "english": "Talkative"
   },
   {
     "medumba": "Nə̀ cobtə",
-    "french": "Bavarder"
+    "french": "Bavarder",
+    "english": "Chat"
   },
   {
     "medumba": "Nə̀ cùꞌu",
-    "french": "Bavarder"
+    "french": "Bavarder",
+    "english": "Chat"
   },
   {
     "medumba": "Nə̀ndʉ",
-    "french": "Bave"
+    "french": "Bave",
+    "english": "Drool"
   },
   {
     "medumba": "Nkə̀kə̀",
-    "french": "Bave (sèche)"
+    "french": "Bave (sèche)",
+    "english": "Drool (dry)"
   },
   {
     "medumba": "bwɔ̌",
-    "french": "Beau (belle)"
+    "french": "Beau (belle)",
+    "english": "Beautiful (beautiful)"
   },
   {
     "medumba": "Yαmə",
-    "french": "Beaucoup"
+    "french": "Beaucoup",
+    "english": "A lot"
   },
   {
     "medumba": "mɛ̂nndu",
-    "french": "Beau-fils"
+    "french": "Beau-fils",
+    "english": "Son-in-law"
   },
   {
     "medumba": "mɛ̂nnzwi",
-    "french": "Beau-fils"
+    "french": "Beau-fils",
+    "english": "Son-in-law"
   },
   {
     "medumba": "Ntsə",
-    "french": "Beau-fils"
+    "french": "Beau-fils",
+    "english": "Son-in-law"
   },
   {
     "medumba": "Mɛnndu",
-    "french": "Beau-frère"
+    "french": "Beau-frère",
+    "english": "Brother-in-law"
   },
   {
     "medumba": "Ntsə,tαndu",
-    "french": "Beau-père"
+    "french": "Beau-père",
+    "english": "Father-in-law"
   },
   {
     "medumba": "Bwɔ̀",
-    "french": "Beauté̍"
+    "french": "Beauté̍",
+    "english": "Beauty"
   },
   {
     "medumba": "Nə̀ shʉꞌtə",
-    "french": "Be̍gayer"
+    "french": "Be̍gayer",
+    "english": "Be̍gayer"
   },
   {
     "medumba": "Ngàshʉꞌtə̀",
-    "french": "Bègue"
+    "french": "Bègue",
+    "english": "Stutterer"
   },
   {
     "medumba": "kǒnjʉ̀",
-    "french": "Be̍lier"
+    "french": "Be̍lier",
+    "english": "Aries"
   },
   {
     "medumba": "Nzwimɛ̀n",
-    "french": "Belle-fille"
+    "french": "Belle-fille",
+    "english": "Daughter-in-law"
   },
   {
     "medumba": "mɛ̂nndu",
-    "french": "Belle-fille"
+    "french": "Belle-fille",
+    "english": "Daughter-in-law"
   },
   {
     "medumba": "mɛ̂nnzwi",
-    "french": "Belle-fille"
+    "french": "Belle-fille",
+    "english": "Daughter-in-law"
   },
   {
     "medumba": "Mαndu",
-    "french": "Belle-mère"
+    "french": "Belle-mère",
+    "english": "Mother-in-law"
   },
   {
     "medumba": "Mantsə",
-    "french": "Belle-mère"
+    "french": "Belle-mère",
+    "english": "Mother-in-law"
   },
   {
     "medumba": "Mαdu",
-    "french": "Belle-sœur"
+    "french": "Belle-sœur",
+    "english": "Sister-in-law"
   },
   {
     "medumba": "Mαntsə",
-    "french": "Belle-sœur"
+    "french": "Belle-sœur",
+    "english": "Sister-in-law"
   },
   {
     "medumba": "nyὰm",
-    "french": "Bête"
+    "french": "Bête",
+    "english": "Beast"
   },
   {
     "medumba": "cən",
-    "french": "Bête"
+    "french": "Bête",
+    "english": "Beast"
   },
   {
     "medumba": "Kʉ̂dfi",
-    "french": "Bic (stylo)"
+    "french": "Bic (stylo)",
+    "english": "Bic (pen)"
   },
   {
     "medumba": "Ngàfen",
-    "french": "Bienheureux"
+    "french": "Bienheureux",
+    "english": "Blessed"
   },
   {
     "medumba": "ngàsǒgnzwə",
-    "french": "Blanchisseur"
+    "french": "Blanchisseur",
+    "english": "Launderer"
   },
   {
     "medumba": "Nsògnzwə",
-    "french": "Blanchisseur"
+    "french": "Blanchisseur",
+    "english": "Launderer"
   },
   {
     "medumba": "Nə̀ cὰbtə̌",
-    "french": "Blasphémer"
+    "french": "Blasphémer",
+    "english": "Blaspheme"
   },
   {
     "medumba": "Nsa",
-    "french": "Blé̍"
+    "french": "Blé̍",
+    "english": "Wheat"
   },
   {
     "medumba": "Nə̀ kəꞌə",
-    "french": "Blesser"
+    "french": "Blesser",
+    "english": "Hurt"
   },
   {
     "medumba": "Nə̀ ləmə",
-    "french": "Blesser"
+    "french": "Blesser",
+    "english": "Hurt"
   },
   {
     "medumba": "Mfaŋə",
-    "french": "Blessure"
+    "french": "Blessure",
+    "english": "Injury"
   },
   {
     "medumba": "Ncùmfaŋə",
-    "french": "Blessure"
+    "french": "Blessure",
+    "english": "Injury"
   },
   {
     "medumba": "lα̂faŋe",
-    "french": "Blessure"
+    "french": "Blessure",
+    "english": "Injury"
   },
   {
     "medumba": "Nyὰmnaꞌ",
-    "french": "Bœuf"
+    "french": "Bœuf",
+    "english": "Beef"
   },
   {
     "medumba": "Naꞌ",
-    "french": "Bœuf"
+    "french": "Bœuf",
+    "english": "Beef"
   },
   {
     "medumba": "Koŋ",
-    "french": "Boîte"
+    "french": "Boîte",
+    "english": "Box"
   },
   {
     "medumba": "Toꞌ",
-    "french": "Boite"
+    "french": "Boite",
+    "english": "Box"
   },
   {
     "medumba": "Nə̀ kəꞌə",
-    "french": "Boiter"
+    "french": "Boiter",
+    "english": "Limp"
   },
   {
     "medumba": "mbàŋlôkʉꞌ",
-    "french": "Boiteux"
+    "french": "Boiteux",
+    "english": "Lame"
   },
   {
     "medumba": "Nkə̀ꞌkɛ̀d",
-    "french": "Boiteux"
+    "french": "Boiteux",
+    "english": "Lame"
   },
   {
     "medumba": "Nə̀ nu",
-    "french": "Boire"
+    "french": "Boire",
+    "english": "Drink"
   },
   {
     "medumba": "ncwɛn",
-    "french": "Bois"
+    "french": "Bois",
+    "english": "Wood"
   },
   {
     "medumba": "Fɛ̀n",
-    "french": "Bois"
+    "french": "Bois",
+    "english": "Wood"
   },
   {
     "medumba": "Ncwɛn jum",
-    "french": "Bois sec"
+    "french": "Bois sec",
+    "english": "Dry wood"
   },
   {
     "medumba": "Ncwɛ̂n fi",
-    "french": "Bois vert"
+    "french": "Bois vert",
+    "english": "Green wood"
   },
   {
     "medumba": "jûnu",
-    "french": "Boisson"
+    "french": "Boisson",
+    "english": "Drink"
   },
   {
     "medumba": "bwɔ̂",
-    "french": "Bon"
+    "french": "Bon",
+    "english": "Good"
   },
   {
     "medumba": "Mə̀bwɔ",
-    "french": "Bon"
+    "french": "Bon",
+    "english": "Good"
   },
   {
     "medumba": "Mɛ̀nmə̀bwɔ",
-    "french": "Bon"
+    "french": "Bon",
+    "english": "Good"
   },
   {
     "medumba": "Mbwɔ̀ju",
-    "french": "Bon (chose)"
+    "french": "Bon (chose)",
+    "english": "Good (thing)"
   },
   {
     "medumba": "Mbwɔ̀mɛ̀n",
-    "french": "Bon (personne)"
+    "french": "Bon (personne)",
+    "english": "Good (person)"
   },
   {
     "medumba": "Fən",
-    "french": "Bonheur"
+    "french": "Bonheur",
+    "english": "Happiness"
   },
   {
     "medumba": "Fùꞌ",
-    "french": "Bonheur"
+    "french": "Bonheur",
+    "english": "Happiness"
   },
   {
     "medumba": "ntswə̂mə̀bwɔ",
-    "french": "Bonheur"
+    "french": "Bonheur",
+    "english": "Happiness"
   },
   {
     "medumba": "bwɔ̌ntʉ",
-    "french": "Bonte̍"
+    "french": "Bonte̍",
+    "english": "Goodness"
   },
   {
     "medumba": "Nkaŋ",
-    "french": "Bord"
+    "french": "Bord",
+    "english": "Edge"
   },
   {
     "medumba": "Ngǒŋ",
-    "french": "Bord"
+    "french": "Bord",
+    "english": "Edge"
   },
   {
     "medumba": "tǒdiαg",
-    "french": "Borgne"
+    "french": "Borgne",
+    "english": "One-eyed"
   },
   {
     "medumba": "Tuꞌ mvɛ̀n",
-    "french": "Bossu"
+    "french": "Bossu",
+    "english": "Hunchback"
   },
   {
     "medumba": "Ngaŋə",
-    "french": "Boubou"
+    "french": "Boubou",
+    "english": "Boubou"
   },
   {
     "medumba": "fǒdmbẁe",
-    "french": "Bouc"
+    "french": "Bouc",
+    "english": "Goat"
   },
   {
     "medumba": "Cùꞌtə̀",
-    "french": "Boucan"
+    "french": "Boucan",
+    "english": "Boucan"
   },
   {
     "medumba": "yâg mbαb",
-    "french": "Boucane̍e ( viande)"
+    "french": "Boucane̍e ( viande)",
+    "english": "Boucane̍e (meat)"
   },
   {
     "medumba": "Ncù",
-    "french": "Bouche"
+    "french": "Bouche",
+    "english": "Mouth"
   },
   {
     "medumba": "ncǔncù",
-    "french": "Bouche à bouche"
+    "french": "Bouche à bouche",
+    "english": "Mouth to mouth"
   },
   {
     "medumba": "Ncù miꞌi",
-    "french": "Bouche be̍e"
+    "french": "Bouche be̍e",
+    "english": "Sweet mouth"
   },
   {
     "medumba": "Nswɛn mbαb",
-    "french": "Boucher"
+    "french": "Boucher",
+    "english": "Butcher"
   },
   {
     "medumba": "wǎ mbαb",
-    "french": "Bouche̍rie"
+    "french": "Bouche̍rie",
+    "english": "Butchery"
   },
   {
     "medumba": "cɛ̂dncò",
-    "french": "Bouclier"
+    "french": "Bouclier",
+    "english": "Shield"
   },
   {
     "medumba": "Nə̀ cʉàgtə̀wud",
-    "french": "Bouder(par desgestes"
+    "french": "Bouder(par desgestes",
+    "english": "Sulk (by gestures"
   },
   {
     "medumba": "Cʉàgtə̀wud",
-    "french": "Bouderie"
+    "french": "Bouderie",
+    "english": "Sulking"
   },
   {
     "medumba": "Nə̀tòb",
-    "french": "Boue"
+    "french": "Boue",
+    "english": "Mud"
   },
   {
     "medumba": "tòbtə̌",
-    "french": "Boueux"
+    "french": "Boueux",
+    "english": "Muddy"
   },
   {
     "medumba": "Nə̀bʉ̀nə",
-    "french": "Bouillant"
+    "french": "Bouillant",
+    "english": "Boiling"
   },
   {
     "medumba": "ndûmmɛ̀n",
-    "french": "Bouillant (homme)"
+    "french": "Bouillant (homme)",
+    "english": "Boiling (man)"
   },
   {
     "medumba": "Nə̀ ne",
-    "french": "Bouillir"
+    "french": "Bouillir",
+    "english": "Boil"
   },
   {
     "medumba": "K̀òŋnzə̀",
-    "french": "Boulevard"
+    "french": "Boulevard",
+    "english": "Boulevard"
   },
   {
     "medumba": "tɔ̌nə̀tòb",
-    "french": "Bourbier"
+    "french": "Bourbier",
+    "english": "Quagmire"
   },
   {
     "medumba": "Ntòn",
-    "french": "Bourgeon"
+    "french": "Bourgeon",
+    "english": "Bud"
   },
   {
     "medumba": "Ntònnkʉα",
-    "french": "Bourgeon (raphia)"
+    "french": "Bourgeon (raphia)",
+    "english": "Bud (raffia)"
   },
   {
     "medumba": "Nə̀ bɛd nkaŋə",
-    "french": "Bourgeonner"
+    "french": "Bourgeonner",
+    "english": "Budding"
   },
   {
     "medumba": "Nə̀ zwiαgə",
-    "french": "Bourrer"
+    "french": "Bourrer",
+    "english": "Stuff"
   },
   {
     "medumba": "Mvə̀ꞌ,ywimtə̀",
-    "french": "Bourse"
+    "french": "Bourse",
+    "english": "Stock market"
   },
   {
     "medumba": "Tudtə",
-    "french": "Bousculade"
+    "french": "Bousculade",
+    "english": "Hustle"
   },
   {
     "medumba": "Nètɛndʉꞌ",
-    "french": "Bousculade"
+    "french": "Bousculade",
+    "english": "Hustle"
   },
   {
     "medumba": "Nə̀ tudtə",
-    "french": "Bouscuer"
+    "french": "Bouscuer",
+    "english": "Hustle"
   },
   {
     "medumba": "Nə̀ tɛnə",
-    "french": "Bousculer"
+    "french": "Bousculer",
+    "english": "hustle"
   },
   {
     "medumba": "Ncaŋ",
-    "french": "Bouteille"
+    "french": "Bouteille",
+    "english": "Bottle"
   },
   {
     "medumba": "ndα̂ntαnə",
-    "french": "Boutique"
+    "french": "Boutique",
+    "english": "Shop"
   },
   {
     "medumba": "ngàndα̂ntαnə",
-    "french": "Boutiquier"
+    "french": "Boutiquier",
+    "english": "Shopkeeper"
   },
   {
     "medumba": "mbâꞌnzwə",
-    "french": "Bouton"
+    "french": "Bouton",
+    "english": "Button"
   },
   {
     "medumba": "Nyadnyὰm",
-    "french": "Buffle"
+    "french": "Buffle",
+    "english": "Buffalo"
   },
   {
     "medumba": "Tswəꞌfiaŋə",
-    "french": "Buisson"
+    "french": "Buisson",
+    "english": "Bush"
   },
   {
     "medumba": "Tswəꞌnə̀nὰ",
-    "french": "Buisson"
+    "french": "Buisson",
+    "english": "Bush"
   },
   {
     "medumba": "Dʉ̌ꞌfàꞌ",
-    "french": "Bureau"
+    "french": "Bureau",
+    "english": "Office"
   },
   {
     "medumba": "Nkǒꞌfàꞌ",
-    "french": "Bureau"
+    "french": "Bureau",
+    "english": "Office"
   },
   {
     "medumba": "Kʉdtɔ̀ngɔ̀",
-    "french": "Bureaucratie"
+    "french": "Bureaucratie",
+    "english": "Bureaucracy"
   },
   {
     "medumba": "Ndα̂ndùꞌ",
-    "french": "Buvette"
+    "french": "Buvette",
+    "english": "Refreshment bar"
   },
   {
     "medumba": "Nûndùꞌ",
-    "french": "Buveur"
+    "french": "Buveur",
+    "english": "Drinker"
   },
   {
     "medumba": "Ngànu",
-    "french": "Buveur"
+    "french": "Buveur",
+    "english": "Drinker"
   },
   {
     "medumba": "Mənyitɔtɔ",
-    "french": "Cache-cache"
+    "french": "Cache-cache",
+    "english": "Hide and seek"
   },
   {
     "medumba": "Nə̀ lə̀mə",
-    "french": "Cacher"
+    "french": "Cacher",
+    "english": "Hide"
   },
   {
     "medumba": "Mα̂kwa",
-    "french": "Cachet"
+    "french": "Cachet",
+    "english": "Stamp"
   },
   {
     "medumba": "Sitαme",
-    "french": "Cachet"
+    "french": "Cachet",
+    "english": "Stamp"
   },
   {
     "medumba": "Nə̀ tə mα̂kwa",
-    "french": "Cacheter"
+    "french": "Cacheter",
+    "english": "Seal"
   },
   {
     "medumba": "Nə̀ tesitαme",
-    "french": "Cacheter"
+    "french": "Cacheter",
+    "english": "Seal"
   },
   {
     "medumba": "Fə",
-    "french": "Ccadavre"
+    "french": "Ccadavre",
+    "english": "Corpse"
   },
   {
     "medumba": "Ndàꞌ",
-    "french": "Cadeau"
+    "french": "Cadeau",
+    "english": "Gift"
   },
   {
     "medumba": "Ndàꞌntum",
-    "french": "Cadeau"
+    "french": "Cadeau",
+    "english": "Gift"
   },
   {
     "medumba": "Nə̀ fα ndàꞌ",
-    "french": "Cadeau(faire)"
+    "french": "Cadeau(faire)",
+    "english": "Gift(make)"
   },
   {
     "medumba": "fʉ̀n",
-    "french": "Cadenas"
+    "french": "Cadenas",
+    "english": "Padlock"
   },
   {
     "medumba": "ntʉ̂ꞌnjàm",
-    "french": "Cadet"
+    "french": "Cadet",
+    "english": "Cadet"
   },
   {
     "medumba": "Ngù",
-    "french": "Cadi"
+    "french": "Cadi",
+    "english": "Cadi"
   },
   {
     "medumba": "Nə̀ nu ngù",
-    "french": "Cadi(boire le)"
+    "french": "Cadi(boire le)",
+    "english": "Cadi (drink it)"
   },
   {
     "medumba": "bâdndα",
-    "french": "Cadre"
+    "french": "Cadre",
+    "english": "Frame"
   },
   {
     "medumba": "Ndʉ",
-    "french": "Cadre"
+    "french": "Cadre",
+    "english": "Frame"
   },
   {
     "medumba": "Ngàcàgtə̀",
-    "french": "Cadre"
+    "french": "Cadre",
+    "english": "Frame"
   },
   {
     "medumba": "Tu",
-    "french": "Cadre"
+    "french": "Cadre",
+    "english": "Frame"
   },
   {
     "medumba": "Toꞌ",
-    "french": "Cadre (tableau)"
+    "french": "Cadre (tableau)",
+    "english": "Frame (table)"
   },
   {
     "medumba": "Buꞌkì",
-    "french": "Cahier"
+    "french": "Cahier",
+    "english": "Notebook"
   },
   {
     "medumba": "Kwangòꞌ",
-    "french": "Caillou"
+    "french": "Caillou",
+    "english": "Caillou"
   },
   {
     "medumba": "Ngoꞌ",
-    "french": "Caillou"
+    "french": "Caillou",
+    "english": "Caillou"
   },
   {
     "medumba": "ngα̌mntsə",
-    "french": "Caïman"
+    "french": "Caïman",
+    "english": "Cayman"
   },
   {
     "medumba": "Nə̀tata",
-    "french": "Calcul"
+    "french": "Calcul",
+    "english": "Calculation"
   },
   {
     "medumba": "Loŋta",
-    "french": "Calculatrice"
+    "french": "Calculatrice",
+    "english": "Calculator"
   },
   {
     "medumba": "Nə̀ ta",
-    "french": "Calculer"
+    "french": "Calculer",
+    "english": "Calculate"
   },
   {
     "medumba": "Ntuꞌ",
-    "french": "Calebasse"
+    "french": "Calebasse",
+    "english": "Calabash"
   },
   {
     "medumba": "tə̂nntsə",
-    "french": "Calebasse"
+    "french": "Calebasse",
+    "english": "Calabash"
   },
   {
     "medumba": "shâꞌ nkʉα",
-    "french": "Calebasse (pour vigner)"
+    "french": "Calebasse (pour vigner)",
+    "english": "Calabash (for vineyard)"
   },
   {
     "medumba": "ngandαm",
-    "french": "Calomniateur"
+    "french": "Calomniateur",
+    "english": "Slanderer"
   },
   {
     "medumba": "ndαm",
-    "french": "Calomnie"
+    "french": "Calomnie",
+    "english": "Slander"
   },
   {
     "medumba": "Nə̀ saꞌ ndαm",
-    "french": "Calomnier"
+    "french": "Calomnier",
+    "english": "Slander"
   },
   {
     "medumba": "Nə̀ tana",
-    "french": "Calomnier"
+    "french": "Calomnier",
+    "english": "Slander"
   },
   {
     "medumba": "běꞌ nùmnzwìn",
-    "french": "Calvitie"
+    "french": "Calvitie",
+    "english": "Baldness"
   },
   {
     "medumba": "Tu nə̀tonsoꞌ",
-    "french": "Calvitie en m"
+    "french": "Calvitie en m",
+    "english": "Baldness in m"
   },
   {
     "medumba": "Nkoŋkàg",
-    "french": "Camion"
+    "french": "Camion",
+    "english": "Truck"
   },
   {
     "medumba": "Nə̀ lǎb zwì kog",
-    "french": "Camoufler le rire"
+    "french": "Camoufler le rire",
+    "english": "Hide the laughter"
   },
   {
     "medumba": "Ngâbntsə, lòd",
-    "french": "Canard (cane)"
+    "french": "Canard (cane)",
+    "english": "Duck (duck)"
   },
   {
     "medumba": "kâbcaꞌa",
-    "french": "Canari"
+    "french": "Canari",
+    "english": "Canary"
   },
   {
     "medumba": "Kətuꞌu",
-    "french": "Canari"
+    "french": "Canari",
+    "english": "Canary"
   },
   {
     "medumba": "Mbɛnmbɛnəꞌ",
-    "french": "Cancrelat"
+    "french": "Cancrelat",
+    "english": "Cockroach"
   },
   {
     "medumba": "Fubntsə",
-    "french": "Caniveau"
+    "french": "Caniveau",
+    "english": "Gutter"
   },
   {
     "medumba": "Kog",
-    "french": "Canne"
+    "french": "Canne",
+    "english": "Cane"
   },
   {
     "medumba": "Nkə̀ku",
-    "french": "Canne à sucre"
+    "french": "Canne à sucre",
+    "english": "Sugar cane"
   },
   {
     "medumba": "kwǐywɛlə",
-    "french": "Cantique"
+    "french": "Cantique",
+    "english": "Song"
   },
   {
     "medumba": "yǒbkwi",
-    "french": "Cantique"
+    "french": "Cantique",
+    "english": "Song"
   },
   {
     "medumba": "A ghʉ ngʉꞌ",
-    "french": "Capable ( il est)"
+    "french": "Capable ( il est)",
+    "english": "Capable (he is)"
   },
   {
     "medumba": "A kùꞌnǐ",
-    "french": "Capable ( il est)"
+    "french": "Capable ( il est)",
+    "english": "Capable (he is)"
   },
   {
     "medumba": "Mbàꞌ",
-    "french": "Capacité̍"
+    "french": "Capacité̍",
+    "english": "Capacity"
   },
   {
     "medumba": "Nə̀kùꞌnǐ",
-    "french": "Capacité"
+    "french": "Capacité",
+    "english": "Capacity"
   },
   {
     "medumba": "Nə̀kuꞌ nǐ",
-    "french": "Capacité"
+    "french": "Capacité",
+    "english": "Capacity"
   },
   {
     "medumba": "Ngʉꞌ",
-    "french": "Capacité"
+    "french": "Capacité",
+    "english": "Capacity"
   },
   {
     "medumba": "Ntəd",
-    "french": "Capital"
+    "french": "Capital",
+    "english": "Capital"
   },
   {
     "medumba": "Mα̂ntəd",
-    "french": "Capital (initial)"
+    "french": "Capital (initial)",
+    "english": "Capital (initial)"
   },
   {
     "medumba": "Tɛ̀dlaꞌ",
-    "french": "Capitale"
+    "french": "Capitale",
+    "english": "Capital"
   },
   {
     "medumba": "Tɛdngɔ,ncwɛd",
-    "french": "Capitale"
+    "french": "Capitale",
+    "english": "Capital"
   },
   {
     "medumba": "Bùꞌ",
-    "french": "Captif"
+    "french": "Captif",
+    "english": "Captive"
   },
   {
     "medumba": "Nə̀ ghòmə",
-    "french": "Captiver"
+    "french": "Captiver",
+    "english": "Captivate"
   },
   {
     "medumba": "Yaŋbàꞌ",
-    "french": "Capturer"
+    "french": "Capturer",
+    "english": "Capture"
   },
   {
     "medumba": "nǔmmbə̂",
-    "french": "Car (automobile)"
+    "french": "Car (automobile)",
+    "english": "Car (automobile)"
   },
   {
     "medumba": "Nbùmtə̀nzə̀",
-    "french": "Car (conjonction)"
+    "french": "Car (conjonction)",
+    "english": "Because (conjunction)"
   },
   {
     "medumba": "Mbùmtə̀nzə",
-    "french": "Carrefour"
+    "french": "Carrefour",
+    "english": "Crossroads"
   },
   {
     "medumba": "Mfàgtənzə̀",
-    "french": "Carrefour"
+    "french": "Carrefour",
+    "english": "Crossroads"
   },
   {
     "medumba": "Bàꞌ",
-    "french": "Case"
+    "french": "Case",
+    "english": "Box"
   },
   {
     "medumba": "bǎꞌ ghʉ̀n",
-    "french": "Case de passage"
+    "french": "Case de passage",
+    "english": "Passage box"
   },
   {
     "medumba": "Kag",
-    "french": "Casier"
+    "french": "Casier",
+    "english": "Locker"
   },
   {
     "medumba": "Nə̀ tsilə",
-    "french": "Casser"
+    "french": "Casser",
+    "english": "Break"
   },
   {
     "medumba": "sǎlαg",
-    "french": "Cataracte"
+    "french": "Cataracte",
+    "english": "Cataract"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Causer(occasionner)"
+    "french": "Causer(occasionner)",
+    "english": "Cause(cause)"
   },
   {
     "medumba": "Nə̀ cobtə",
-    "french": "Causer (parler)"
+    "french": "Causer (parler)",
+    "english": "Cause (speak)"
   },
   {
     "medumba": "Cwɛ̀d",
-    "french": "Caution"
+    "french": "Caution",
+    "english": "Deposit"
   },
   {
     "medumba": "Nə tomtə nu",
-    "french": "Cautionner"
+    "french": "Cautionner",
+    "english": "Bail"
   },
   {
     "medumba": "Nə̀ yab cwɛ̀d",
-    "french": "Cautionner"
+    "french": "Cautionner",
+    "english": "Bail"
   },
   {
     "medumba": "Ngàblòŋ",
-    "french": "Caverne"
+    "french": "Caverne",
+    "english": "Cave"
   },
   {
     "medumba": "Ju ze",
-    "french": "Ce que"
+    "french": "Ce que",
+    "english": "What"
   },
   {
     "medumba": "Fʉ",
-    "french": "Ce̍cite̍"
+    "french": "Ce̍cite̍",
+    "english": "Cecite"
   },
   {
     "medumba": "Nə̀ kὰgə",
-    "french": "Ceder"
+    "french": "Ceder",
+    "english": "Give in"
   },
   {
     "medumba": "Nə̀ faŋe, nə̀ nyα",
-    "french": "Ceder"
+    "french": "Ceder",
+    "english": "Give in"
   },
   {
     "medumba": "Kòb",
-    "french": "Ceinture"
+    "french": "Ceinture",
+    "english": "Belt"
   },
   {
     "medumba": "Nə̀ tsiàŋtə̌",
-    "french": "Ce̍le̍brer"
+    "french": "Ce̍le̍brer",
+    "english": "Celebrate"
   },
   {
     "medumba": "Nə̀ fα nkùꞌ nì",
-    "french": "Ce̍le̍brer"
+    "french": "Ce̍le̍brer",
+    "english": "Celebrate"
   },
   {
     "medumba": "ndûmmɛ̀n",
-    "french": "Ce̍lèbre"
+    "french": "Ce̍lèbre",
+    "english": "Famous"
   },
   {
     "medumba": "Ghàꞌju",
-    "french": "Ce̍lèbre"
+    "french": "Ce̍lèbre",
+    "english": "Famous"
   },
   {
     "medumba": "Nkwì",
-    "french": "Ce̍libat"
+    "french": "Ce̍libat",
+    "english": "Celibate"
   },
   {
     "medumba": "nkwimbâ",
-    "french": "Ce̍libataire"
+    "french": "Ce̍libataire",
+    "english": "Single"
   },
   {
     "medumba": "Koŋfəmɛ̀n",
-    "french": "Cercueil"
+    "french": "Cercueil",
+    "english": "Coffin"
   },
   {
     "medumba": "Mbuꞌmfə",
-    "french": "Cercueil"
+    "french": "Cercueil",
+    "english": "Coffin"
   },
   {
     "medumba": "njuαnyὰm",
-    "french": "Cerf"
+    "french": "Cerf",
+    "english": "Deer"
   },
   {
     "medumba": "ndǎŋndaŋ",
-    "french": "Certain"
+    "french": "Certain",
+    "english": "Certain"
   },
   {
     "medumba": "Nənʉnə",
-    "french": "Certain"
+    "french": "Certain",
+    "english": "Certain"
   },
   {
     "medumba": "Moꞌ",
-    "french": "Certain"
+    "french": "Certain",
+    "english": "Certain"
   },
   {
     "medumba": "Tsə̀moꞌ o",
-    "french": "Certain (s)"
+    "french": "Certain (s)",
+    "english": "Certain(s)"
   },
   {
     "medumba": "Nzə̀ꞌ tu",
-    "french": "Cerveau"
+    "french": "Cerveau",
+    "english": "Brain"
   },
   {
     "medumba": "Nə̀ tsinə",
-    "french": "Cesser"
+    "french": "Cesser",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ fan̍e,nə̀ nyα",
-    "french": "Cesser"
+    "french": "Cesser",
+    "english": "Stop"
   },
   {
     "medumba": "Nə̀ cua",
-    "french": "Cesser"
+    "french": "Cesser",
+    "english": "Stop"
   },
   {
     "medumba": "zwə̂ntʉ",
-    "french": "Chagrin"
+    "french": "Chagrin",
+    "english": "Grief"
   },
   {
     "medumba": "Zwə",
-    "french": "Chagrin"
+    "french": "Chagrin",
+    "english": "Grief"
   },
   {
     "medumba": "Mbὰbwud",
-    "french": "Chair"
+    "french": "Chair",
+    "english": "Flesh"
   },
   {
     "medumba": "Dʉꞌ nə̀ tsin ncon nù",
-    "french": "Chaire"
+    "french": "Chaire",
+    "english": "Chair"
   },
   {
     "medumba": "Diaŋ",
-    "french": "Chaise"
+    "french": "Chaise",
+    "english": "Chair"
   },
   {
     "medumba": "tôꞌ ndα",
-    "french": "Chambre"
+    "french": "Chambre",
+    "english": "Room"
   },
   {
     "medumba": "Toꞌ zi",
-    "french": "Chambre à coucher"
+    "french": "Chambre à coucher",
+    "english": "Bedroom"
   },
   {
     "medumba": "ndαnǔnὰ",
-    "french": "Chambre d’agriculture"
+    "french": "Chambre d’agriculture",
+    "english": "Chamber of Agriculture"
   },
   {
     "medumba": "Tôꞌ ntsə",
-    "french": "Chambre d’eau"
+    "french": "Chambre d’eau",
+    "english": "Water room"
   },
   {
     "medumba": "ndα̂nǔntαnə",
-    "french": "Chambre de commerce"
+    "french": "Chambre de commerce",
+    "english": "Chamber of Commerce"
   },
   {
     "medumba": "Kαmɛl",
-    "french": "Chameau"
+    "french": "Chameau",
+    "english": "Camel"
   },
   {
     "medumba": "Nὰ",
-    "french": "Champ"
+    "french": "Champ",
+    "english": "Field"
   },
   {
     "medumba": "cwɛd",
-    "french": "Champ"
+    "french": "Champ",
+    "english": "Field"
   },
   {
     "medumba": "kǒbnkʉα",
-    "french": "Champ (de raphia)"
+    "french": "Champ (de raphia)",
+    "english": "Field (of raffia)"
   },
   {
     "medumba": "bə̂ ndʉ̀sə",
-    "french": "Champ (sur le)"
+    "french": "Champ (sur le)",
+    "english": "Field (on the)"
   },
   {
     "medumba": "Tsə̂ bwə",
-    "french": "Champ (sur le)"
+    "french": "Champ (sur le)",
+    "english": "Field (on the)"
   },
   {
     "medumba": "Bwɔ̀linə",
-    "french": "Chance"
+    "french": "Chance",
+    "english": "Luck"
   },
   {
     "medumba": "Nə̀ bàtə̌",
-    "french": "Changer"
+    "french": "Changer",
+    "english": "Change"
   },
   {
     "medumba": "Nə̀ kàŋe",
-    "french": "Changer"
+    "french": "Changer",
+    "english": "Change"
   },
   {
     "medumba": "Ngàbàtə̀",
-    "french": "Changeur"
+    "french": "Changeur",
+    "english": "Changer"
   },
   {
     "medumba": "Kwì",
-    "french": "Chant"
+    "french": "Chant",
+    "english": "Singing"
   },
   {
     "medumba": "yǒbkwì",
-    "french": "Chant"
+    "french": "Chant",
+    "english": "Singing"
   },
   {
     "medumba": "Nə̀ yǒb kwì",
-    "french": "Chanter"
+    "french": "Chanter",
+    "english": "Sing"
   },
   {
     "medumba": "Nə̀ tɔ",
-    "french": "Chanter ( coq)"
+    "french": "Chanter ( coq)",
+    "english": "Sing (rooster)"
   },
   {
     "medumba": "Nə̀ t̀otə vʉ",
-    "french": "Chant(complantes)"
+    "french": "Chant(complantes)",
+    "english": "Song (plants)"
   },
   {
     "medumba": "Ngàyǒbkwi",
-    "french": "Chanteur"
+    "french": "Chanteur",
+    "english": "Singer"
   },
   {
     "medumba": "Ndə̀bàꞌ nkαnə",
-    "french": "Chanvre indien"
+    "french": "Chanvre indien",
+    "english": "Indian hemp"
   },
   {
     "medumba": "Kαlige",
-    "french": "Char"
+    "french": "Char",
+    "english": "Chariot"
   },
   {
     "medumba": "kə̀kîmbwogə",
-    "french": "Charbon"
+    "french": "Charbon",
+    "english": "Coal"
   },
   {
     "medumba": "Ngəꞌ mbwogə",
-    "french": "Charbon ardent"
+    "french": "Charbon ardent",
+    "english": "Burning coal"
   },
   {
     "medumba": "ngâꞌ loŋə",
-    "french": "Chardon"
+    "french": "Chardon",
+    "english": "Thistle"
   },
   {
     "medumba": "Nǔ nköndɛ̀n",
-    "french": "Charitable"
+    "french": "Charitable",
+    "english": "Charitable"
   },
   {
     "medumba": "kôndɛ̀n",
-    "french": "Charite̍"
+    "french": "Charite̍",
+    "english": "Charity"
   },
   {
     "medumba": "Nkɔ̀nì",
-    "french": "Charite̍"
+    "french": "Charite̍",
+    "english": "Charity"
   },
   {
     "medumba": "Zə̂mbὰbwud",
-    "french": "Charnel"
+    "french": "Charnel",
+    "english": "Carnal"
   },
   {
     "medumba": "Nconyαm",
-    "french": "Charnu"
+    "french": "Charnu",
+    "english": "Meaty"
   },
   {
     "medumba": "Ngàswə̌bàꞌ",
-    "french": "Charpentier"
+    "french": "Charpentier",
+    "english": "Carpenter"
   },
   {
     "medumba": "Nkìm tûbàꞌ",
-    "french": "Charpentier"
+    "french": "Charpentier",
+    "english": "Carpenter"
   },
   {
     "medumba": "Yòŋ",
-    "french": "Chasse"
+    "french": "Chasse",
+    "english": "Hunting"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Chasser"
+    "french": "Chasser",
+    "english": "Hunt"
   },
   {
     "medumba": "Nə̀ taꞌyòŋ",
-    "french": "Chasser"
+    "french": "Chasser",
+    "english": "Hunt"
   },
   {
     "medumba": "Ngàtaꞌ yòŋ",
-    "french": "Chasseur"
+    "french": "Chasseur",
+    "english": "Hunter"
   },
   {
     "medumba": "Ntâꞌ yòŋ",
-    "french": "Chasseur"
+    "french": "Chasseur",
+    "english": "Hunter"
   },
   {
     "medumba": "Kə̀lɛ̌n mènnzwi",
-    "french": "Chaste"
+    "french": "Chaste",
+    "english": "Chaste"
   },
   {
     "medumba": "Kə̀lɛ̌n mαndùm",
-    "french": "Chaste"
+    "french": "Chaste",
+    "english": "Chaste"
   },
   {
     "medumba": "Bùsi",
-    "french": "Chat"
+    "french": "Chat",
+    "english": "Cat"
   },
   {
     "medumba": "Ntŋntsə",
-    "french": "Chateau"
+    "french": "Chateau",
+    "english": "Castle"
   },
   {
     "medumba": "Nə̀ nyàŋtə̌",
-    "french": "Chatouiller"
+    "french": "Chatouiller",
+    "english": "Tickle"
   },
   {
     "medumba": "Nə̀dum",
-    "french": "Chaud"
+    "french": "Chaud",
+    "english": "Hot"
   },
   {
     "medumba": "Nə̀ dùmtə̌",
-    "french": "Chauffer"
+    "french": "Chauffer",
+    "english": "Heat"
   },
   {
     "medumba": "Nə̀ dùmə",
-    "french": "Chauffer"
+    "french": "Chauffer",
+    "english": "Heat"
   },
   {
     "medumba": "Ngàsòŋ",
-    "french": "Chauffeur"
+    "french": "Chauffeur",
+    "english": "Driver"
   },
   {
     "medumba": "Bɛnə",
-    "french": "Chaume"
+    "french": "Chaume",
+    "english": "Thatch"
   },
   {
     "medumba": "Nyiꞌ",
-    "french": "Chaume"
+    "french": "Chaume",
+    "english": "Thatch"
   },
   {
     "medumba": "Nyǐꞌ ngà",
-    "french": "Chaume"
+    "french": "Chaume",
+    "english": "Thatch"
   },
   {
     "medumba": "Nə̀ sǒ nkətoꞌo",
-    "french": "Chausser"
+    "french": "Chausser",
+    "english": "Put on"
   },
   {
     "medumba": "Nkətoꞌo",
-    "french": "Chaussure"
+    "french": "Chaussure",
+    "english": "Shoe"
   },
   {
     "medumba": "Běꞌ nùmnzwìn",
-    "french": "Chauve"
+    "french": "Chauve",
+    "english": "Bald"
   },
   {
     "medumba": "Nə̀lʉnə",
-    "french": "Chauve-souris"
+    "french": "Chauve-souris",
+    "english": "Bat"
   },
   {
     "medumba": "Mbəmə",
-    "french": "Chaux"
+    "french": "Chaux",
+    "english": "Lime"
   },
   {
     "medumba": "Mfə̀n",
-    "french": "Chef"
+    "french": "Chef",
+    "english": "Chief"
   },
   {
     "medumba": "Tα̂ngɔ̀",
-    "french": "Chef ( de l’etat)"
+    "french": "Chef ( de l’etat)",
+    "english": "Head (of state)"
   },
   {
     "medumba": "Tα̂fàꞌ/mα̂fàꞌ",
-    "french": "Chef de service"
+    "french": "Chef de service",
+    "english": "Head of department"
   },
   {
     "medumba": "Ncwɛd",
-    "french": "Chefferie"
+    "french": "Chefferie",
+    "english": "Chiefdom"
   },
   {
     "medumba": "Famncwɛd",
-    "french": "Chefferie  abandonne̍e"
+    "french": "Chefferie  abandonne̍e",
+    "english": "Abandoned chiefdom"
   },
   {
     "medumba": "Mα̂nzə̀",
-    "french": "Chemin"
+    "french": "Chemin",
+    "english": "Path"
   },
   {
     "medumba": "Nzə̀",
-    "french": "Chemin"
+    "french": "Chemin",
+    "english": "Path"
   },
   {
     "medumba": "Tànjòŋ",
-    "french": "Cher"
+    "french": "Cher",
+    "english": "Dear"
   },
   {
     "medumba": "Nə̀ diàgə",
-    "french": "Chercher"
+    "french": "Chercher",
+    "english": "Search"
   },
   {
     "medumba": "Nə̀ caŋə",
-    "french": "Chercher"
+    "french": "Chercher",
+    "english": "Search"
   },
   {
     "medumba": "Ngàdiὰg",
-    "french": "Chercheur"
+    "french": "Chercheur",
+    "english": "Researcher"
   },
   {
     "medumba": "Ngàcaŋntùn",
-    "french": "Chercheur"
+    "french": "Chercheur",
+    "english": "Researcher"
   },
   {
     "medumba": "Ncâŋntùn",
-    "french": "Chercheur"
+    "french": "Chercheur",
+    "english": "Researcher"
   },
   {
     "medumba": "Nyὰmndiaŋə",
-    "french": "Cheval"
+    "french": "Cheval",
+    "english": "Horse"
   },
   {
     "medumba": "Nyǎŋtu",
-    "french": "Cheveux"
+    "french": "Cheveux",
+    "english": "Hair"
   },
   {
     "medumba": "Fôgtu",
-    "french": "Cheveux– blanc"
+    "french": "Cheveux– blanc",
+    "english": "Hair – white"
   },
   {
     "medumba": "Mbâkù",
-    "french": "Cheville"
+    "french": "Cheville",
+    "english": "Ankle"
   },
   {
     "medumba": "Mbwə",
-    "french": "Chèvre"
+    "french": "Chèvre",
+    "english": "Goat"
   },
   {
     "medumba": "Ŋwàg",
-    "french": "Chicotte"
+    "french": "Chicotte",
+    "english": "Chicotte"
   },
   {
     "medumba": "Shuaꞌa",
-    "french": "Chicote"
+    "french": "Chicote",
+    "english": "Chicote"
   },
   {
     "medumba": "Mbʉ",
-    "french": "Chien"
+    "french": "Chien",
+    "english": "Dog"
   },
   {
     "medumba": "Mbʉ̂yòŋ",
-    "french": "Chien (de chasse)"
+    "french": "Chien (de chasse)",
+    "english": "Dog (hunting)"
   },
   {
     "medumba": "Lα̂gtʉntə̀",
-    "french": "Chiffre"
+    "french": "Chiffre",
+    "english": "Figure"
   },
   {
     "medumba": "Cαmnjə̀ꞌ",
-    "french": "Chimpanze̍"
+    "french": "Chimpanze̍",
+    "english": "Chimpanzee"
   },
   {
     "medumba": "Ngwa",
-    "french": "Chique"
+    "french": "Chique",
+    "english": "Chic"
   },
   {
     "medumba": "Bwoŋ̍",
-    "french": "Chœur (en)"
+    "french": "Chœur (en)",
+    "english": "Choir (en)"
   },
   {
     "medumba": "Nə̀ kǎ",
-    "french": "Choisir"
+    "french": "Choisir",
+    "english": "Choose"
   },
   {
     "medumba": "Nə̀ coꞌo",
-    "french": "Choisir"
+    "french": "Choisir",
+    "english": "Choose"
   },
   {
     "medumba": "Nə̀coꞌo /nə̀kǎ",
-    "french": "Choix"
+    "french": "Choix",
+    "english": "Choice"
   },
   {
     "medumba": "Kǔmkwì",
-    "french": "Chorale"
+    "french": "Chorale",
+    "english": "Choir"
   },
   {
     "medumba": "Ju",
-    "french": "Chose"
+    "french": "Chose",
+    "english": "Thing"
   },
   {
     "medumba": "Fogfogntsə",
-    "french": "Chute d’eau"
+    "french": "Chute d’eau",
+    "english": "Waterfall"
   },
   {
     "medumba": "Zogzogntsə",
-    "french": "Chute d’eau (point de )"
+    "french": "Chute d’eau (point de )",
+    "english": "Waterfall (point of )"
   },
   {
     "medumba": "Mαtùn",
-    "french": "Ci-dessous"
+    "french": "Ci-dessous",
+    "english": "Below"
   },
   {
     "medumba": "Mfətʉ",
-    "french": "Ci-dessous"
+    "french": "Ci-dessous",
+    "english": "Below"
   },
   {
     "medumba": "Nùntʉ",
-    "french": "Ci-dessus"
+    "french": "Ci-dessus",
+    "english": "Above"
   },
   {
     "medumba": "Kǎmαnyàm",
-    "french": "Ciel"
+    "french": "Ciel",
+    "english": "Sky"
   },
   {
     "medumba": "Nyǎŋmiαg",
-    "french": "Cils"
+    "french": "Cils",
+    "english": "Eyelashes"
   },
   {
     "medumba": "Ncʉa",
-    "french": "Cime"
+    "french": "Cime",
+    "english": "Top"
   },
   {
     "medumba": "Tu",
-    "french": "Cime"
+    "french": "Cime",
+    "english": "Top"
   },
   {
     "medumba": "Dʉ̌ꞌ tǔfì",
-    "french": "Cimetière"
+    "french": "Cimetière",
+    "english": "Cemetery"
   },
   {
     "medumba": "Diaŋyən",
-    "french": "Cinema"
+    "french": "Cinema",
+    "english": "Cinema"
   },
   {
     "medumba": "Zwiaŋtə̀",
-    "french": "Cingle̍"
+    "french": "Cingle̍",
+    "english": "Cingle"
   },
   {
     "medumba": "Tα̂n",
-    "french": "Cinq"
+    "french": "Cinq",
+    "english": "Five"
   },
   {
     "medumba": "Madtə̀ tα̂n",
-    "french": "Cinquième"
+    "french": "Cinquième",
+    "english": "Fifth"
   },
   {
     "medumba": "Ncʉ̌ꞌ nǔm tsə̀ tα̂n",
-    "french": "Cinquième (1/5)"
+    "french": "Cinquième (1/5)",
+    "english": "Fifth (1/5)"
   },
   {
     "medumba": "Nə̀ mǎꞌ mɛ̀n njà",
-    "french": "Circoncire"
+    "french": "Circoncire",
+    "english": "Circumcise"
   },
   {
     "medumba": "Nὰ si kəd",
-    "french": "Circoncire"
+    "french": "Circoncire",
+    "english": "Circumcise"
   },
   {
     "medumba": "Nὰconjà",
-    "french": "Circoncision"
+    "french": "Circoncision",
+    "english": "Circumcision"
   },
   {
     "medumba": "Mɛnlaꞌ/mɛ̂nngɔ̀(1/6",
-    "french": "Citoyen"
+    "french": "Citoyen",
+    "english": "Citizen"
   },
   {
     "medumba": "Nə̀lαnə",
-    "french": "Clair"
+    "french": "Clair",
+    "english": "Clear"
   },
   {
     "medumba": "Nə̀lαnbà",
-    "french": "Clair (teint)"
+    "french": "Clair (teint)",
+    "english": "Light (complexioned)"
   },
   {
     "medumba": "Njə̂nnzə̀",
-    "french": "Clairvoyant"
+    "french": "Clairvoyant",
+    "english": "Clairvoyant"
   },
   {
     "medumba": "Nzə̂nù",
-    "french": "Clairvoyant"
+    "french": "Clairvoyant",
+    "english": "Clairvoyant"
   },
   {
     "medumba": "Ndα̂ŋwàꞌnì",
-    "french": "Classe"
+    "french": "Classe",
+    "english": "Class"
   },
   {
     "medumba": "Ghuαn",
-    "french": "Classe"
+    "french": "Classe",
+    "english": "Class"
   },
   {
     "medumba": "Bàꞌfʉ̀n",
-    "french": "Cle̍"
+    "french": "Cle̍",
+    "english": "Key"
   },
   {
     "medumba": "Nə̀ghuagnù",
-    "french": "Cle̍mence"
+    "french": "Cle̍mence",
+    "english": "Clemence"
   },
   {
     "medumba": "Ngwâgnù",
-    "french": "Cle̍ment"
+    "french": "Cle̍ment",
+    "english": "Clement"
   },
   {
     "medumba": "Ngàntαnə",
-    "french": "Client"
+    "french": "Client",
+    "english": "Customer"
   },
   {
     "medumba": "Ŋwa",
-    "french": "Cloche"
+    "french": "Cloche",
+    "english": "Bell"
   },
   {
     "medumba": "Nƴlò",
-    "french": "Clou"
+    "french": "Clou",
+    "english": "Nail"
   },
   {
     "medumba": "Nə̀ kwìmə",
-    "french": "Clouer"
+    "french": "Clouer",
+    "english": "Nail"
   },
   {
     "medumba": "Mbǎmə̀kalə",
-    "french": "Coco (noix de)"
+    "french": "Coco (noix de)",
+    "english": "Coco (nuts)"
   },
   {
     "medumba": "Ntʉ",
-    "french": "Cœur"
+    "french": "Cœur",
+    "english": "Heart"
   },
   {
     "medumba": "Kɔ̌ntʉ",
-    "french": "Cœur"
+    "french": "Cœur",
+    "english": "Heart"
   },
   {
     "medumba": "Njὰm",
-    "french": "Cogne̍e"
+    "french": "Cogne̍e",
+    "english": "Clash"
   },
   {
     "medumba": "Nə̀ kom tu",
-    "french": "Coiffer"
+    "french": "Coiffer",
+    "english": "Hair styling"
   },
   {
     "medumba": "Nə̀ baꞌ tu",
-    "french": "Coiffer"
+    "french": "Coiffer",
+    "english": "Hair styling"
   },
   {
     "medumba": "Nə̀ tə cə̀ꞌ",
-    "french": "Coiffer (se)"
+    "french": "Coiffer (se)",
+    "english": "Hairstyle"
   },
   {
     "medumba": "Ngàkomtu",
-    "french": "Coiffeur"
+    "french": "Coiffeur",
+    "english": "Hairdresser"
   },
   {
     "medumba": "Nkômtu",
-    "french": "Coiffeur"
+    "french": "Coiffeur",
+    "english": "Hairdresser"
   },
   {
     "medumba": "Cə̀ꞌ",
-    "french": "Coiffure"
+    "french": "Coiffure",
+    "english": "Hairstyle"
   },
   {
     "medumba": "lαg",
-    "french": "Coin"
+    "french": "Coin",
+    "english": "Corner"
   },
   {
     "medumba": "Tog",
-    "french": "Coin"
+    "french": "Coin",
+    "english": "Corner"
   },
   {
     "medumba": "Yântʉ",
-    "french": "Colère"
+    "french": "Colère",
+    "english": "Anger"
   },
   {
     "medumba": "Ngàyantʉ",
-    "french": "Cole̍reux"
+    "french": "Cole̍reux",
+    "english": "Angry"
   },
   {
     "medumba": "Ngàzwə",
-    "french": "Cole̍reux"
+    "french": "Cole̍reux",
+    "english": "Angry"
   },
   {
     "medumba": "Nshûnfaꞌ",
-    "french": "Collaborateur"
+    "french": "Collaborateur",
+    "english": "Collaborator"
   },
   {
     "medumba": "Ŋα , zìn",
-    "french": "Colle"
+    "french": "Colle",
+    "english": "Glue"
   },
   {
     "medumba": "Ŋαbtə̀",
-    "french": "Colle"
+    "french": "Colle",
+    "english": "Glue"
   },
   {
     "medumba": "Màꞌ tə̀",
-    "french": "Collecte"
+    "french": "Collecte",
+    "english": "Collection"
   },
   {
     "medumba": "Nə̀ kʉmt̀ə",
-    "french": "Collecter"
+    "french": "Collecter",
+    "english": "Collect"
   },
   {
     "medumba": "Ndα̂ŋwaꞌni tɛ̀dkʉlə",
-    "french": "Collège"
+    "french": "Collège",
+    "english": "College"
   },
   {
     "medumba": "Nshûnfàꞌ",
-    "french": "Collègue"
+    "french": "Collègue",
+    "english": "Colleague"
   },
   {
     "medumba": "Nə̀ ŋαbə",
-    "french": "Coller"
+    "french": "Coller",
+    "english": "Paste"
   },
   {
     "medumba": "Nə̀ ŋαbt̀ə",
-    "french": "Coller"
+    "french": "Coller",
+    "english": "Paste"
   },
   {
     "medumba": "Kɔ̂ngà",
-    "french": "Colline"
+    "french": "Colline",
+    "english": "Hill"
   },
   {
     "medumba": "Kǎꞌ mvɛ̀n",
-    "french": "Colonne verte̍brale"
+    "french": "Colonne verte̍brale",
+    "english": "Spine"
   },
   {
     "medumba": "Ncò",
-    "french": "Combat"
+    "french": "Combat",
+    "english": "Combat"
   },
   {
     "medumba": "Nzwə̀ꞌ",
-    "french": "Combat"
+    "french": "Combat",
+    "english": "Combat"
   },
   {
     "medumba": "Ngàləꞌncò",
-    "french": "Combattant"
+    "french": "Combattant",
+    "english": "Fighter"
   },
   {
     "medumba": "Nə̀ ləꞌə",
-    "french": "Combattre"
+    "french": "Combattre",
+    "english": "Fight"
   },
   {
     "medumba": "Siꞌi",
-    "french": "Combien"
+    "french": "Combien",
+    "english": "How much"
   },
   {
     "medumba": "Nə̀ koŋ yαmə",
-    "french": "Combler"
+    "french": "Combler",
+    "english": "Fill"
   },
   {
     "medumba": "Nə̀ zwiαgtə",
-    "french": "Combler"
+    "french": "Combler",
+    "english": "Fill"
   },
   {
     "medumba": "Cûzwì",
-    "french": "Comedie"
+    "french": "Comedie",
+    "english": "Comedy"
   },
   {
     "medumba": "Diaŋzwi",
-    "french": "Come̍di"
+    "french": "Come̍di",
+    "english": "Comedi"
   },
   {
     "medumba": "Nǔzwì",
-    "french": "Come̍die"
+    "french": "Come̍die",
+    "english": "Comedy"
   },
   {
     "medumba": "Nkòmzwì",
-    "french": "Come̍dien"
+    "french": "Come̍dien",
+    "english": "Comedian"
   },
   {
     "medumba": "Ngàkǒmzwì",
-    "french": "Come̍dien"
+    "french": "Come̍dien",
+    "english": "Comedian"
   },
   {
     "medumba": "Tswə̂kum",
-    "french": "Comite̍"
+    "french": "Comite̍",
+    "english": "Committee"
   },
   {
     "medumba": "Mαtswə̂ꞌ kum",
-    "french": "Comite̍ central"
+    "french": "Comite̍ central",
+    "english": "Central Committee"
   },
   {
     "medumba": "Kǔmdiàgfù",
-    "french": "Comite̍ de developpement"
+    "french": "Comite̍ de developpement",
+    "english": "Development Committee"
   },
   {
     "medumba": "Nə̀tǒ",
-    "french": "Commandement"
+    "french": "Commandement",
+    "english": "Command"
   },
   {
     "medumba": "Nə̀ tǒ",
-    "french": "Commander"
+    "french": "Commander",
+    "english": "Order"
   },
   {
     "medumba": "Kwʉncàŋ",
-    "french": "Commando"
+    "french": "Commando",
+    "english": "Commando"
   },
   {
     "medumba": "Nə̀toꞌtə",
-    "french": "Commencement"
+    "french": "Commencement",
+    "english": "Beginning"
   },
   {
     "medumba": "Nə̀toꞌo",
-    "french": "Commencer"
+    "french": "Commencer",
+    "english": "Get started"
   },
   {
     "medumba": "Tα̂ŋtoŋnkù",
-    "french": "Commissaire"
+    "french": "Commissaire",
+    "english": "Commissioner"
   },
   {
     "medumba": "Ndα̂ntoŋkù",
-    "french": "Commissariat"
+    "french": "Commissariat",
+    "english": "Police station"
   },
   {
     "medumba": "Ntswìnkʉ̀n",
-    "french": "Communicateur"
+    "french": "Communicateur",
+    "english": "Communicator"
   },
   {
     "medumba": "Nkʉ̀n",
-    "french": "Communication"
+    "french": "Communication",
+    "english": "Communication"
   },
   {
     "medumba": "Nkʉ̀n",
-    "french": "Communique̍"
+    "french": "Communique̍",
+    "english": "Communicate"
   },
   {
     "medumba": "Nə̀ tswǐ nkʉ̀n",
-    "french": "Communiquer"
+    "french": "Communiquer",
+    "english": "Communicate"
   },
   {
     "medumba": "Shunzìn",
-    "french": "Compagnon"
+    "french": "Compagnon",
+    "english": "Companion"
   },
   {
     "medumba": "Kôndɛn",
-    "french": "Compassion"
+    "french": "Compassion",
+    "english": "Compassion"
   },
   {
     "medumba": "Ndɛ̀n",
-    "french": "Compassion"
+    "french": "Compassion",
+    "english": "Compassion"
   },
   {
     "medumba": "Maŋ",
-    "french": "Compétition"
+    "french": "Compétition",
+    "english": "Competition"
   },
   {
     "medumba": "Maŋndə",
-    "french": "Compétition de course"
+    "french": "Compétition de course",
+    "english": "Running competition"
   },
   {
     "medumba": "Mìb",
-    "french": "Complément"
+    "french": "Complément",
+    "english": "Supplement"
   },
   {
     "medumba": "Nə̀ kwìꞌtə̌",
-    "french": "Completer"
+    "french": "Completer",
+    "english": "Complete"
   },
   {
     "medumba": "Nə̀ mìbe",
-    "french": "Completer"
+    "french": "Completer",
+    "english": "Complete"
   },
   {
     "medumba": "Nə̀ zwiagtə",
-    "french": "Completer"
+    "french": "Completer",
+    "english": "Complete"
   },
   {
     "medumba": "Lα̌bncù",
-    "french": "Compliment"
+    "french": "Compliment",
+    "english": "Compliment"
   },
   {
     "medumba": "Ndàb",
-    "french": "Compliment"
+    "french": "Compliment",
+    "english": "Compliment"
   },
   {
     "medumba": "Nə̀ lὰbə̌",
-    "french": "Complimenter"
+    "french": "Complimenter",
+    "english": "Compliment"
   },
   {
     "medumba": "Nə̀ tʉn ndὰb",
-    "french": "Complimenter"
+    "french": "Complimenter",
+    "english": "Compliment"
   },
   {
     "medumba": "Nə̀ zencὰm",
-    "french": "Complot"
+    "french": "Complot",
+    "english": "Conspiracy"
   },
   {
     "medumba": "Nə̀ ncὰm",
-    "french": "Comploter"
+    "french": "Comploter",
+    "english": "Plotting"
   },
   {
     "medumba": "Ngà ze ncὰm",
-    "french": "Comploteur"
+    "french": "Comploteur",
+    "english": "Plotter"
   },
   {
     "medumba": "Kǔzìn",
-    "french": "Comportement"
+    "french": "Comportement",
+    "english": "Behavior"
   },
   {
     "medumba": "Màd",
-    "french": "Comportement"
+    "french": "Comportement",
+    "english": "Behavior"
   },
   {
     "medumba": "Mbə",
-    "french": "Comportement"
+    "french": "Comportement",
+    "english": "Behavior"
   },
   {
     "medumba": "Ngʉ̀ninu",
-    "french": "Comportement"
+    "french": "Comportement",
+    "english": "Behavior"
   },
   {
     "medumba": "Ntswəndα",
-    "french": "Comportement"
+    "french": "Comportement",
+    "english": "Behavior"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Comporter"
+    "french": "Comporter",
+    "english": "Behave"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Comporter (se)"
+    "french": "Comporter (se)",
+    "english": "Behave"
   },
   {
     "medumba": "Màdnə̀juꞌnù",
-    "french": "Compre̍hension"
+    "french": "Compre̍hension",
+    "english": "Understanding"
   },
   {
     "medumba": "Nə̀siaŋtə",
-    "french": "Comprehension"
+    "french": "Comprehension",
+    "english": "Comprehension"
   },
   {
     "medumba": "Nə̀ juꞌu",
-    "french": "Comprendre"
+    "french": "Comprendre",
+    "english": "Understand"
   },
   {
     "medumba": "Nsiâŋnαb",
-    "french": "Comptable"
+    "french": "Comptable",
+    "english": "Accountant"
   },
   {
     "medumba": "Nə̀ sian̍ə",
-    "french": "Compter"
+    "french": "Compter",
+    "english": "Count"
   },
   {
     "medumba": "Nə̀ tʉntə",
-    "french": "Compter"
+    "french": "Compter",
+    "english": "Count"
   },
   {
     "medumba": "Nkoꞌ",
-    "french": "Comptoir"
+    "french": "Comptoir",
+    "english": "Counter"
   },
   {
     "medumba": "Nkoꞌ ntαnə",
-    "french": "Comptoir"
+    "french": "Comptoir",
+    "english": "Counter"
   },
   {
     "medumba": "Wǎntαnə",
-    "french": "Comptoir"
+    "french": "Comptoir",
+    "english": "Counter"
   },
   {
     "medumba": "Laꞌ",
-    "french": "Concession"
+    "french": "Concession",
+    "english": "Concession"
   },
   {
     "medumba": "Benə",
-    "french": "Concession"
+    "french": "Concession",
+    "english": "Concession"
   },
   {
     "medumba": "Nə̀ kwàtə̌",
-    "french": "Concevoir (qqch)"
+    "french": "Concevoir (qqch)",
+    "english": "Design (sth)"
   },
   {
     "medumba": "Nə̀ lelə",
-    "french": "Concevoir (bebe)"
+    "french": "Concevoir (bebe)",
+    "english": "Conceive (baby)"
   },
   {
     "medumba": "Nə̀ jʉmə",
-    "french": "Concevoir (bebe)"
+    "french": "Concevoir (bebe)",
+    "english": "Conceive (baby)"
   },
   {
     "medumba": "Mɛnlaꞌ",
-    "french": "Concitoyen"
+    "french": "Concitoyen",
+    "english": "Fellow citizen"
   },
   {
     "medumba": "Mɛ̂nngɔ̀",
-    "french": "Concitoyen"
+    "french": "Concitoyen",
+    "english": "Fellow citizen"
   },
   {
     "medumba": "Maŋ",
-    "french": "Concurrence"
+    "french": "Concurrence",
+    "english": "Competition"
   },
   {
     "medumba": "Nə̀mǎꞌncà",
-    "french": "Condamnation"
+    "french": "Condamnation",
+    "english": "Conviction"
   },
   {
     "medumba": "Mǎꞌ ncà",
-    "french": "Condamnation"
+    "french": "Condamnation",
+    "english": "Conviction"
   },
   {
     "medumba": "Nə̀ mǎꞌncà",
-    "french": "Condamner"
+    "french": "Condamner",
+    "english": "Condemn"
   },
   {
     "medumba": "Fìmmdə",
-    "french": "Condom"
+    "french": "Condom",
+    "english": "Condom"
   },
   {
     "medumba": "Ngàsòŋ",
-    "french": "Conducteur"
+    "french": "Conducteur",
+    "english": "Driver"
   },
   {
     "medumba": "Ngàcàgtə̌",
-    "french": "Conducteur"
+    "french": "Conducteur",
+    "english": "Driver"
   },
   {
     "medumba": "Nə̀ sòŋə",
-    "french": "Conduire"
+    "french": "Conduire",
+    "english": "Drive"
   },
   {
     "medumba": "Nə̀ càgtə̌",
-    "french": "Conduire"
+    "french": "Conduire",
+    "english": "Drive"
   },
   {
     "medumba": "Diaŋncobə",
-    "french": "Conference"
+    "french": "Conference",
+    "english": "Conference"
   },
   {
     "medumba": "Nə̀ bam nùkèbwɔ̀",
-    "french": "Confesser"
+    "french": "Confesser",
+    "english": "Confess"
   },
   {
     "medumba": "Nə̀ mǎꞌ njom",
-    "french": "Confesser"
+    "french": "Confesser",
+    "english": "Confess"
   },
   {
     "medumba": "Njòm",
-    "french": "Confession"
+    "french": "Confession",
+    "english": "Confession"
   },
   {
     "medumba": "Mbùmtə̀ntsə",
-    "french": "Confluent"
+    "french": "Confluent",
+    "english": "Confluence"
   },
   {
     "medumba": "Nə̀ tswəꞌtə ntʉ",
-    "french": "Confondre"
+    "french": "Confondre",
+    "english": "Confuse"
   },
   {
     "medumba": "Cùꞌ tu",
-    "french": "Confusion"
+    "french": "Confusion",
+    "english": "Confusion"
   },
   {
     "medumba": "Tὰbtə",
-    "french": "Confusion"
+    "french": "Confusion",
+    "english": "Confusion"
   },
   {
     "medumba": "Mα̂kum",
-    "french": "Congrès"
+    "french": "Congrès",
+    "english": "Congress"
   },
   {
     "medumba": "Nə̀ lɛ̀nə",
-    "french": "Connaître"
+    "french": "Connaître",
+    "english": "Know"
   },
   {
     "medumba": "Nə̀ zə",
-    "french": "Connaître"
+    "french": "Connaître",
+    "english": "Know"
   },
   {
     "medumba": "Ntʉmɛ̀n",
-    "french": "Conscience"
+    "french": "Conscience",
+    "english": "Consciousness"
   },
   {
     "medumba": "Nzə̀ntʉ",
-    "french": "Conscience"
+    "french": "Conscience",
+    "english": "Consciousness"
   },
   {
     "medumba": "Sâꞌntʉ",
-    "french": "Conscience"
+    "french": "Conscience",
+    "english": "Consciousness"
   },
   {
     "medumba": "Ntαgə",
-    "french": "Conseil"
+    "french": "Conseil",
+    "english": "Advice"
   },
   {
     "medumba": "Ntsəꞌtə̀",
-    "french": "Conseil (reunion)"
+    "french": "Conseil (reunion)",
+    "english": "Council (meeting)"
   },
   {
     "medumba": "Nə̀ tαgə",
-    "french": "Conseiller"
+    "french": "Conseiller",
+    "english": "Advisor"
   },
   {
     "medumba": "Nə̀ tαgtə",
-    "french": "Conseiller"
+    "french": "Conseiller",
+    "english": "Advisor"
   },
   {
     "medumba": "Ngàfαntαgə",
-    "french": "Conseiller"
+    "french": "Conseiller",
+    "english": "Advisor"
   },
   {
     "medumba": "Ngàtαgtə̀",
-    "french": "Conseiller"
+    "french": "Conseiller",
+    "english": "Advisor"
   },
   {
     "medumba": "Fitə̀ntʉ",
-    "french": "Consolation"
+    "french": "Consolation",
+    "english": "Consolation"
   },
   {
     "medumba": "Nə̀ fiœ tʉ",
-    "french": "Consoler"
+    "french": "Consoler",
+    "english": "Console"
   },
   {
     "medumba": "Nə̀ twwəꞌtə ntʉ",
-    "french": "Consoler"
+    "french": "Consoler",
+    "english": "Console"
   },
   {
     "medumba": "Nə̀ zibtə",
-    "french": "Consoler"
+    "french": "Consoler",
+    "english": "Console"
   },
   {
     "medumba": "Cʉbnkwʉ",
-    "french": "Constant"
+    "french": "Constant",
+    "english": "Constant"
   },
   {
     "medumba": "Nə̀ kwʉlə",
-    "french": "Construire"
+    "french": "Construire",
+    "english": "Build"
   },
   {
     "medumba": "Nə̀ kʉ",
-    "french": "Consument"
+    "french": "Consument",
+    "english": "Consume"
   },
   {
     "medumba": "Cɔ̀",
-    "french": "Conte"
+    "french": "Conte",
+    "english": "Tale"
   },
   {
     "medumba": "Nə̀ gha",
-    "french": "Contester"
+    "french": "Contester",
+    "english": "Challenge"
   },
   {
     "medumba": "Nə̀ sòŋtə̌ ncobe",
-    "french": "Contester"
+    "french": "Contester",
+    "english": "Challenge"
   },
   {
     "medumba": "Nsôŋcɔ̀",
-    "french": "Conteur"
+    "french": "Conteur",
+    "english": "Storyteller"
   },
   {
     "medumba": "Dibαcaꞌa",
-    "french": "Continent"
+    "french": "Continent",
+    "english": "Continent"
   },
   {
     "medumba": "Kàŋ",
-    "french": "Contour"
+    "french": "Contour",
+    "english": "Outline"
   },
   {
     "medumba": "Nə̀ bìntə̌",
-    "french": "Contourner"
+    "french": "Contourner",
+    "english": "Bypass"
   },
   {
     "medumba": "Nə̀ diaŋ mbûmə",
-    "french": "Contourner"
+    "french": "Contourner",
+    "english": "Bypass"
   },
   {
     "medumba": "Nə̀ kàŋtə̌",
-    "french": "Contourner"
+    "french": "Contourner",
+    "english": "Bypass"
   },
   {
     "medumba": "Nə̀ nαnə",
-    "french": "Contraindre"
+    "french": "Contraindre",
+    "english": "Constrain"
   },
   {
     "medumba": "Ngò",
-    "french": "Contree"
+    "french": "Contree",
+    "english": "Against"
   },
   {
     "medumba": "Nə̀ ywìmtə̌",
-    "french": "Contribuer"
+    "french": "Contribuer",
+    "english": "Contribute"
   },
   {
     "medumba": "Nə̀ maꞌtə̌",
-    "french": "Contribuer"
+    "french": "Contribuer",
+    "english": "Contribute"
   },
   {
     "medumba": "Màꞌtə̀",
-    "french": "Contribution"
+    "french": "Contribution",
+    "english": "Contribution"
   },
   {
     "medumba": "Mfαbwɔ̀",
-    "french": "Contribution"
+    "french": "Contribution",
+    "english": "Contribution"
   },
   {
     "medumba": "Nə̀ nkùꞌu",
-    "french": "Convenir"
+    "french": "Convenir",
+    "english": "Agree"
   },
   {
     "medumba": "Nə̀ bolə",
-    "french": "Convenir"
+    "french": "Convenir",
+    "english": "Agree"
   },
   {
     "medumba": "Nə̀ ghə̀ꞌtə̌",
-    "french": "Convoiter"
+    "french": "Convoiter",
+    "english": "Covet"
   },
   {
     "medumba": "Ghə̀ꞌtə̀",
-    "french": "Convoitise"
+    "french": "Convoitise",
+    "english": "Lust"
   },
   {
     "medumba": "Kǔmfàꞌ",
-    "french": "Cooperative"
+    "french": "Cooperative",
+    "english": "Cooperative"
   },
   {
     "medumba": "Nə̀ œàm mfâꞌa",
-    "french": "Cooperer"
+    "french": "Cooperer",
+    "english": "Cooperate"
   },
   {
     "medumba": "Kʉ̌ꞌngab",
-    "french": "Coq"
+    "french": "Coq",
+    "english": "Rooster"
   },
   {
     "medumba": "Mαla",
-    "french": "Corbeau"
+    "french": "Corbeau",
+    "english": "Raven"
   },
   {
     "medumba": "Kèsoŋə",
-    "french": "Corbeille"
+    "french": "Corbeille",
+    "english": "Trash"
   },
   {
     "medumba": "Kàg",
-    "french": "Corbeille"
+    "french": "Corbeille",
+    "english": "Trash"
   },
   {
     "medumba": "Nkʉ",
-    "french": "Corde"
+    "french": "Corde",
+    "english": "Rope"
   },
   {
     "medumba": "Mvɛ̀d",
-    "french": "Corde"
+    "french": "Corde",
+    "english": "Rope"
   },
   {
     "medumba": "Ndɔ -",
-    "french": "Corne"
+    "french": "Corne",
+    "english": "Horn"
   },
   {
     "medumba": "Wud",
-    "french": "Corps"
+    "french": "Corps",
+    "english": "Body"
   },
   {
     "medumba": "Wûdmɛ̀nntʉ̀n",
-    "french": "Corps"
+    "french": "Corps",
+    "english": "Body"
   },
   {
     "medumba": "Ghǎ",
-    "french": "Corps (corporation"
+    "french": "Corps (corporation",
+    "english": "Body (corporation"
   },
   {
     "medumba": "Tʉnwud",
-    "french": "Corps constitution du"
+    "french": "Corps constitution du",
+    "english": "Body constitution of"
   },
   {
     "medumba": "Nkǎmwud",
-    "french": "Corps (partie du)"
+    "french": "Corps (partie du)",
+    "english": "Body (part of)"
   },
   {
     "medumba": "Bǔꞌwud",
-    "french": "Corpulence"
+    "french": "Corpulence",
+    "english": "Corpulence"
   },
   {
     "medumba": "Nə̀tsiαgtə",
-    "french": "Correction"
+    "french": "Correction",
+    "english": "Correction"
   },
   {
     "medumba": "Nə̀ tə bàkʉlə",
-    "french": "Correction"
+    "french": "Correction",
+    "english": "Correction"
   },
   {
     "medumba": "Nə̀ tswid nkʉnə",
-    "french": "Correction"
+    "french": "Correction",
+    "english": "Correction"
   },
   {
     "medumba": "Côꞌkʉ̂ dfi",
-    "french": "Corrector"
+    "french": "Corrector",
+    "english": "Correction"
   },
   {
     "medumba": "Ngàŋuꞌu",
-    "french": "Corrompu"
+    "french": "Corrompu",
+    "english": "Corrupted"
   },
   {
     "medumba": "Nkò jubαnbαn",
-    "french": "Corrompu"
+    "french": "Corrompu",
+    "english": "Corrupted"
   },
   {
     "medumba": "Jʉkə̀ jùb",
-    "french": "Corrompu"
+    "french": "Corrompu",
+    "english": "Corrupted"
   },
   {
     "medumba": "Ngànὰbtə̌ngùb",
-    "french": "Corroyeur"
+    "french": "Corroyeur",
+    "english": "Grinder"
   },
   {
     "medumba": "Mbɛ̀n",
-    "french": "Corruption"
+    "french": "Corruption",
+    "english": "Bribery"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Corruption"
+    "french": "Corruption",
+    "english": "Bribery"
   },
   {
     "medumba": "Jʉkə̀ jùb",
-    "french": "Corruption"
+    "french": "Corruption",
+    "english": "Bribery"
   },
   {
     "medumba": "Njogə",
-    "french": "Corve̍e"
+    "french": "Corve̍e",
+    "english": "Chore"
   },
   {
     "medumba": "Fǎꞌ kə̀kɔ̀nkô",
-    "french": "Corve̍e"
+    "french": "Corve̍e",
+    "english": "Chore"
   },
   {
     "medumba": "Kaŋntsə",
-    "french": "Côte"
+    "french": "Côte",
+    "english": "Coast"
   },
   {
     "medumba": "Nkǐdnsa",
-    "french": "Côte"
+    "french": "Côte",
+    "english": "Coast"
   },
   {
     "medumba": "Bàg",
-    "french": "Côte̍"
+    "french": "Côte̍",
+    "english": "Coast"
   },
   {
     "medumba": "Mbaŋə",
-    "french": "Côte̍"
+    "french": "Côte̍",
+    "english": "Coast"
   },
   {
     "medumba": "Mbaŋbwə",
-    "french": "Côte̍ (à côte̍ de )"
+    "french": "Côte̍ (à côte̍ de )",
+    "english": "Side (next to)"
   },
   {
     "medumba": "Tɔ",
-    "french": "Cou"
+    "french": "Cou",
+    "english": "Neck"
   },
   {
     "medumba": "Kəkod",
-    "french": "Cou"
+    "french": "Cou",
+    "english": "Neck"
   },
   {
     "medumba": "Sàŋ",
-    "french": "Cou (partie dorsale)"
+    "french": "Cou (partie dorsale)",
+    "english": "Neck (dorsal part)"
   },
   {
     "medumba": "Fiàŋ",
-    "french": "Cou (partie dorsale)"
+    "french": "Cou (partie dorsale)",
+    "english": "Neck (dorsal part)"
   },
   {
     "medumba": "Nə̀ nɔ̌nsi",
-    "french": "Coucher"
+    "french": "Coucher",
+    "english": "Sunset"
   },
   {
     "medumba": "Nə̀ zi",
-    "french": "Coucher (avec)"
+    "french": "Coucher (avec)",
+    "english": "Sleep (with)"
   },
   {
     "medumba": "Tǔnbu",
-    "french": "Coude"
+    "french": "Coude",
+    "english": "Elbow"
   },
   {
     "medumba": "Mfìꞌ",
-    "french": "Coudee"
+    "french": "Coudee",
+    "english": "Elbow"
   },
   {
     "medumba": "Nə̀ kwidtə",
-    "french": "Coudre"
+    "french": "Coudre",
+    "english": "Sew"
   },
   {
     "medumba": "Nə̀ tamə",
-    "french": "Coudre"
+    "french": "Coudre",
+    "english": "Sew"
   },
   {
     "medumba": "Ntònnkʉα",
-    "french": "Couleuvre"
+    "french": "Couleuvre",
+    "english": "Snake"
   },
   {
     "medumba": "Ntòꞌ",
-    "french": "Coup"
+    "french": "Coup",
+    "english": "Blow"
   },
   {
     "medumba": "Nkɔ",
-    "french": "Coup (de poing)"
+    "french": "Coup (de poing)",
+    "english": "Punch (punch)"
   },
   {
     "medumba": "Ntoꞌ",
-    "french": "Coup de poing)"
+    "french": "Coup de poing)",
+    "english": "Punch)"
   },
   {
     "medumba": "Ngwàlαg",
-    "french": "Coup d’œil"
+    "french": "Coup d’œil",
+    "english": "Glance"
   },
   {
     "medumba": "Ntuꞌ",
-    "french": "Coupe"
+    "french": "Coupe",
+    "english": "Cup"
   },
   {
     "medumba": "Mα̂mtuꞌ",
-    "french": "Coupe (trophe̍e)"
+    "french": "Coupe (trophe̍e)",
+    "english": "Cup (trophy)"
   },
   {
     "medumba": "Ntûꞌmbodnì",
-    "french": "Coupe de be̍ne̍didtion"
+    "french": "Coupe de be̍ne̍didtion",
+    "english": "Cup of blessing"
   },
   {
     "medumba": "Ŋwi / nywi",
-    "french": "Coupe-coupe"
+    "french": "Coupe-coupe",
+    "english": "Cutter"
   },
   {
     "medumba": "Nə̀ kəbə",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Nə̀ kəꞌə",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Ǹə̀ sə̂",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Nə̀ si",
-    "french": "Couper"
+    "french": "Couper",
+    "english": "Cut"
   },
   {
     "medumba": "Ncùndα",
-    "french": "Cour"
+    "french": "Cour",
+    "english": "Court"
   },
   {
     "medumba": "Tɛ̌dlaꞌ",
-    "french": "Cour"
+    "french": "Cour",
+    "english": "Court"
   },
   {
     "medumba": "Fɛ̌nntʉ",
-    "french": "Courage"
+    "french": "Courage",
+    "english": "Courage"
   },
   {
     "medumba": "Kàgtʉ̀n",
-    "french": "Courage"
+    "french": "Courage",
+    "english": "Courage"
   },
   {
     "medumba": "Tǎnntʉ",
-    "french": "Courage"
+    "french": "Courage",
+    "english": "Courage"
   },
   {
     "medumba": "Ngàfɛ̌nntʉ",
-    "french": "Courageux"
+    "french": "Courageux",
+    "english": "Courageous"
   },
   {
     "medumba": "Mfɛ̀nntʉ",
-    "french": "Courageux"
+    "french": "Courageux",
+    "english": "Courageous"
   },
   {
     "medumba": "Fə̀d",
-    "french": "Courant"
+    "french": "Courant",
+    "english": "Current"
   },
   {
     "medumba": "Fə̀dntsə",
-    "french": "Courant (d’eau)"
+    "french": "Courant (d’eau)",
+    "english": "Current (water)"
   },
   {
     "medumba": "Ŋwagntsə",
-    "french": "Courant (d’eau)"
+    "french": "Courant (d’eau)",
+    "english": "Current (water)"
   },
   {
     "medumba": "Fə̀dmbwogvə̀",
-    "french": "Courant (d’eau)"
+    "french": "Courant (d’eau)",
+    "english": "Current (water)"
   },
   {
     "medumba": "Cə̌ꞌmbʉm",
-    "french": "Couronne"
+    "french": "Couronne",
+    "english": "Crown"
   },
   {
     "medumba": "Cə̌ꞌnguꞌu",
-    "french": "Couronne"
+    "french": "Couronne",
+    "english": "Crown"
   },
   {
     "medumba": "Nə̀ kudtu",
-    "french": "Couronner"
+    "french": "Couronner",
+    "english": "Crown"
   },
   {
     "medumba": "Nə̀ mǎꞌtu",
-    "french": "Couronner"
+    "french": "Couronner",
+    "english": "Crown"
   },
   {
     "medumba": "Nə̀ coꞌnku",
-    "french": "Couronner"
+    "french": "Couronner",
+    "english": "Crown"
   },
   {
     "medumba": "Nə̀ yoꞌmfə̀n",
-    "french": "Couronner"
+    "french": "Couronner",
+    "english": "Crown"
   },
   {
     "medumba": "Yǎntʉ",
-    "french": "Courroux"
+    "french": "Courroux",
+    "english": "Wrath"
   },
   {
     "medumba": "Ndə",
-    "french": "Course"
+    "french": "Course",
+    "english": "Race"
   },
   {
     "medumba": "Kàm",
-    "french": "Court"
+    "french": "Court",
+    "english": "Short"
   },
   {
     "medumba": "Nəvogə",
-    "french": "Court"
+    "french": "Court",
+    "english": "Short"
   },
   {
     "medumba": "Nsěm tâmcɛd",
-    "french": "Court (de tennis)"
+    "french": "Court (de tennis)",
+    "english": "Court (tennis)"
   },
   {
     "medumba": "Məmbʉ̂sαsα",
-    "french": "Courtelière"
+    "french": "Courtelière",
+    "english": "Courtelier"
   },
   {
     "medumba": "Bαn",
-    "french": "Couscous"
+    "french": "Couscous",
+    "english": "Couscous"
   },
   {
     "medumba": "Fàd",
-    "french": "Cousin"
+    "french": "Cousin",
+    "english": "Cousin"
   },
   {
     "medumba": "Lə̂diaŋ",
-    "french": "Coussin"
+    "french": "Coussin",
+    "english": "Cushion"
   },
   {
     "medumba": "Lə̂kòꞌ",
-    "french": "Coussin"
+    "french": "Coussin",
+    "english": "Cushion"
   },
   {
     "medumba": "Njǒŋju",
-    "french": "Coût"
+    "french": "Coût",
+    "english": "Cost"
   },
   {
     "medumba": "Bi",
-    "french": "Couteau"
+    "french": "Couteau",
+    "english": "Knife"
   },
   {
     "medumba": "Njòŋ",
-    "french": "Coûter"
+    "french": "Coûter",
+    "english": "Cost"
   },
   {
     "medumba": "Tànjòŋ",
-    "french": "Coûteux"
+    "french": "Coûteux",
+    "english": "Expensive"
   },
   {
     "medumba": "Màdngɔ̀",
-    "french": "Coutume"
+    "french": "Coutume",
+    "english": "Custom"
   },
   {
     "medumba": "Ntengɔ̀",
-    "french": "Coutume"
+    "french": "Coutume",
+    "english": "Custom"
   },
   {
     "medumba": "Nə̀ kwidtə",
-    "french": "Couture"
+    "french": "Couture",
+    "english": "Sewing"
   },
   {
     "medumba": "Nə̀ tamə",
-    "french": "Couture"
+    "french": "Couture",
+    "english": "Sewing"
   },
   {
     "medumba": "Ngàtanzwə",
-    "french": "Couturier"
+    "french": "Couturier",
+    "english": "Fashion designer"
   },
   {
     "medumba": "Ntâmnzwə",
-    "french": "Couturier"
+    "french": "Couturier",
+    "english": "Fashion designer"
   },
   {
     "medumba": "Nə̀zika",
-    "french": "Couvaison"
+    "french": "Couvaison",
+    "english": "Brooding"
   },
   {
     "medumba": "Nə̀ zika",
-    "french": "Couver"
+    "french": "Couver",
+    "english": "Cover"
   },
   {
     "medumba": "Nə̀ moꞌo",
-    "french": "Couver (en latence)"
+    "french": "Couver (en latence)",
+    "english": "Brood (latency)"
   },
   {
     "medumba": "Ncɛdka",
-    "french": "Couvercle"
+    "french": "Couvercle",
+    "english": "Lid"
   },
   {
     "medumba": "Njɛ̂dbum",
-    "french": "Couvi"
+    "french": "Couvi",
+    "english": "Couvi"
   },
   {
     "medumba": "Nə̀ kabtə",
-    "french": "Couvrir"
+    "french": "Couvrir",
+    "english": "Cover"
   },
   {
     "medumba": "Nə̀ bòmtə̌",
-    "french": "Couvrir"
+    "french": "Couvrir",
+    "english": "Cover"
   },
   {
     "medumba": "Nə̀ cɛdtə",
-    "french": "Couvrir"
+    "french": "Couvrir",
+    "english": "Cover"
   },
   {
     "medumba": "Ngòkɛ̂dnzwəꞌə (1/6",
-    "french": "Coxalgle"
+    "french": "Coxalgle",
+    "english": "Coxalgle"
   },
   {
     "medumba": "Kanntod",
-    "french": "Crabe"
+    "french": "Crabe",
+    "english": "Crab"
   },
   {
     "medumba": "Kə̀kà (",
-    "french": "Crachat"
+    "french": "Crachat",
+    "english": "Spit"
   },
   {
     "medumba": "Nə̀ tògə",
-    "french": "Cracher"
+    "french": "Cracher",
+    "english": "Spit"
   },
   {
     "medumba": "Mbə̂mkì",
-    "french": "Craie"
+    "french": "Craie",
+    "english": "Chalk"
   },
   {
     "medumba": "Nə̀ bwoge",
-    "french": "Craindre"
+    "french": "Craindre",
+    "english": "Fear"
   },
   {
     "medumba": "Bwog",
-    "french": "Crainte"
+    "french": "Crainte",
+    "english": "Fear"
   },
   {
     "medumba": "Mbwôgtùn",
-    "french": "Craintif"
+    "french": "Craintif",
+    "english": "Fearful"
   },
   {
     "medumba": "Ntὰntὰn",
-    "french": "Crampe"
+    "french": "Crampe",
+    "english": "Cramp"
   },
   {
     "medumba": "Mbǔꞌtʉ",
-    "french": "Cran"
+    "french": "Cran",
+    "english": "Cran"
   },
   {
     "medumba": "Kât",
-    "french": "Crâne"
+    "french": "Crâne",
+    "english": "Skull"
   },
   {
     "medumba": "Mətùꞌ",
-    "french": "Crapaud"
+    "french": "Crapaud",
+    "english": "Toad"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Crasse"
+    "french": "Crasse",
+    "english": "Grime"
   },
   {
     "medumba": "Kûdtɔ (1/",
-    "french": "Cravate"
+    "french": "Cravate",
+    "english": "Tie"
   },
   {
     "medumba": "Kʉ̂dnjumə",
-    "french": "Crayon"
+    "french": "Crayon",
+    "english": "Pencil"
   },
   {
     "medumba": "Njo",
-    "french": "Créance"
+    "french": "Créance",
+    "english": "Claim"
   },
   {
     "medumba": "Ngànjo",
-    "french": "Créancier"
+    "french": "Créancier",
+    "english": "Creditor"
   },
   {
     "medumba": "Mbom",
-    "french": "Créateur"
+    "french": "Créateur",
+    "english": "Creator"
   },
   {
     "medumba": "Bamnə̀bamə",
-    "french": "Crédule"
+    "french": "Crédule",
+    "english": "Gullible"
   },
   {
     "medumba": "Nə̀ bomə/ nə̀ fìꞌi",
-    "french": "Créer"
+    "french": "Créer",
+    "english": "Create"
   },
   {
     "medumba": "Ncem",
-    "french": "Credit (confiance)"
+    "french": "Credit (confiance)",
+    "english": "Credit (trust)"
   },
   {
     "medumba": "Nə̀ yàꞌa",
-    "french": "Credit (prendre à )"
+    "french": "Credit (prendre à )",
+    "english": "Credit (take from )"
   },
   {
     "medumba": "Neton fə̌mɛ̀n",
-    "french": "Cremation"
+    "french": "Cremation",
+    "english": "Cremation"
   },
   {
     "medumba": "Dʉꞌnə̀tǒnfə̂mə̀n",
-    "french": "Crematoire"
+    "french": "Crematoire",
+    "english": "Crematory"
   },
   {
     "medumba": "Nə̀ sǎŋ bàꞌ",
-    "french": "Crepir"
+    "french": "Crepir",
+    "english": "Crepir"
   },
   {
     "medumba": "Nə̀coŋtə",
-    "french": "Crepu (cheveux )"
+    "french": "Crepu (cheveux )",
+    "english": "Frizzy (hair)"
   },
   {
     "medumba": "Ndʉmfědnjʉ",
-    "french": "Crepuscule"
+    "french": "Crepuscule",
+    "english": "Twilight"
   },
   {
     "medumba": "Nə̀ tswəꞌə",
-    "french": "Creuser"
+    "french": "Creuser",
+    "english": "Digging"
   },
   {
     "medumba": "Nə̀ toŋə",
-    "french": "Creuser"
+    "french": "Creuser",
+    "english": "Digging"
   },
   {
     "medumba": "Nə̀ to / nə̀ bɛtə",
-    "french": "Crever"
+    "french": "Crever",
+    "english": "Die"
   },
   {
     "medumba": "La",
-    "french": "Crème"
+    "french": "Crème",
+    "english": "Cream"
   },
   {
     "medumba": "Nə̀tɔ / ngòŋ",
-    "french": "Cri"
+    "french": "Cri",
+    "english": "Scream"
   },
   {
     "medumba": "Nə̀ tɔ",
-    "french": "Crier"
+    "french": "Crier",
+    "english": "Scream"
   },
   {
     "medumba": "Nə̀buꞌngòŋ",
-    "french": "Crier"
+    "french": "Crier",
+    "english": "Scream"
   },
   {
     "medumba": "Ngamtα",
-    "french": "Criquet"
+    "french": "Criquet",
+    "english": "Cricket"
   },
   {
     "medumba": "Nə̀tswidnkʉn",
-    "french": "Critique (la)"
+    "french": "Critique (la)",
+    "english": "Criticism (the)"
   },
   {
     "medumba": "Ngàtswidnkʉn",
-    "french": "Critique (le)"
+    "french": "Critique (le)",
+    "english": "Criticize (the)"
   },
   {
     "medumba": "Nə̀ tswidnkʉm",
-    "french": "Critiquer"
+    "french": "Critiquer",
+    "english": "Criticize"
   },
   {
     "medumba": "Tα̂kə̀n jàmbὰm",
-    "french": "Critiqueur"
+    "french": "Critiqueur",
+    "english": "Critic"
   },
   {
     "medumba": "Ngùb",
-    "french": "Cuir"
+    "french": "Cuir",
+    "english": "Leather"
   },
   {
     "medumba": "Ngùbtu",
-    "french": "Cuir chevelu"
+    "french": "Cuir chevelu",
+    "english": "Scalp"
   },
   {
     "medumba": "Nə̀ na",
-    "french": "Cuire"
+    "french": "Cuire",
+    "english": "Cook"
   },
   {
     "medumba": "Fə̌ꞌmbwogə",
-    "french": "Cuisine"
+    "french": "Cuisine",
+    "english": "Kitchen"
   },
   {
     "medumba": "Ngànacaŋ",
-    "french": "Cuisinier"
+    "french": "Cuisinier",
+    "english": "Cook"
   },
   {
     "medumba": "Tàmmbwə̀",
-    "french": "Cuisse"
+    "french": "Cuisse",
+    "english": "Thigh"
   },
   {
     "medumba": "Kutu",
-    "french": "Culot"
+    "french": "Culot",
+    "english": "Base"
   },
   {
     "medumba": "Kàmcə̌ꞌnkù",
-    "french": "Culotte"
+    "french": "Culotte",
+    "english": "Panties"
   },
   {
     "medumba": "Mbwogmbwə̀",
-    "french": "D’abord"
+    "french": "D’abord",
+    "english": "First"
   },
   {
     "medumba": "Nkαnə",
-    "french": "D’abord"
+    "french": "D’abord",
+    "english": "First"
   },
   {
     "medumba": "Fə̀dwukob",
-    "french": "Danger"
+    "french": "Danger",
+    "english": "Danger"
   },
   {
     "medumba": "Mûm",
-    "french": "Dans"
+    "french": "Dans",
+    "english": "In"
   },
   {
     "medumba": "Ntʉ̂m",
-    "french": "Dans"
+    "french": "Dans",
+    "english": "In"
   },
   {
     "medumba": "Tɔ̀",
-    "french": "Dans"
+    "french": "Dans",
+    "english": "In"
   },
   {
     "medumba": "Jûnə̀nyàŋə",
-    "french": "Danse"
+    "french": "Danse",
+    "english": "Dance"
   },
   {
     "medumba": "Nə̀ nyàŋə",
-    "french": "Danser"
+    "french": "Danser",
+    "english": "Dancing"
   },
   {
     "medumba": "Ngànyǎŋsa",
-    "french": "Danseur"
+    "french": "Danseur",
+    "english": "Dancer"
   },
   {
     "medumba": "Nyànsa",
-    "french": "Danseur"
+    "french": "Danseur",
+    "english": "Dancer"
   },
   {
     "medumba": "Bibi",
-    "french": "Dartre"
+    "french": "Dartre",
+    "english": "Dartre"
   },
   {
     "medumba": "Leꞌe / leꞌnjʉ",
-    "french": "Date"
+    "french": "Date",
+    "english": "Date"
   },
   {
     "medumba": "Nə̀siaŋtənù",
-    "french": "Debat"
+    "french": "Debat",
+    "english": "Debate"
   },
   {
     "medumba": "Nə̀ siaŋtə nù",
-    "french": "Debattre"
+    "french": "Debattre",
+    "english": "Debate"
   },
   {
     "medumba": "Ghαnə",
-    "french": "Debauche"
+    "french": "Debauche",
+    "english": "Debauchery"
   },
   {
     "medumba": "Kad",
-    "french": "Debauche"
+    "french": "Debauche",
+    "english": "Debauchery"
   },
   {
     "medumba": "Càkə̀ndα",
-    "french": "Debauche €"
+    "french": "Debauche €",
+    "english": "Debauchery €"
   },
   {
     "medumba": "Ngàbwɔ̌ntʉ",
-    "french": "Debonnaire"
+    "french": "Debonnaire",
+    "english": "Debonnaire"
   },
   {
     "medumba": "Nə̀ tsintʉ",
-    "french": "Debout"
+    "french": "Debout",
+    "english": "Standing"
   },
   {
     "medumba": "Nə̀ fàge",
-    "french": "Dechirer"
+    "french": "Dechirer",
+    "english": "Tear"
   },
   {
     "medumba": "Mə̀nntʉ̌ncʉꞌ",
-    "french": "Decisif"
+    "french": "Decisif",
+    "english": "Decisive"
   },
   {
     "medumba": "Cʉbnkwʉ",
-    "french": "Decisif"
+    "french": "Decisif",
+    "english": "Decisive"
   },
   {
     "medumba": "Nsoŋ",
-    "french": "Declaration"
+    "french": "Declaration",
+    "english": "Statement"
   },
   {
     "medumba": "Nə̀ soŋə",
-    "french": "Declarer"
+    "french": "Declarer",
+    "english": "Declare"
   },
   {
     "medumba": "Nə̀ cobe",
-    "french": "Declarer"
+    "french": "Declarer",
+    "english": "Declare"
   },
   {
     "medumba": "Nesǒ kùꞌni",
-    "french": "Dedicace"
+    "french": "Dedicace",
+    "english": "Dedication"
   },
   {
     "medumba": "Nesǒ kùꞌni",
-    "french": "Dedier"
+    "french": "Dedier",
+    "english": "Dedicate"
   },
   {
     "medumba": "Nə̀ keꞌe",
-    "french": "Defaire"
+    "french": "Defaire",
+    "english": "Undo"
   },
   {
     "medumba": "Nə̀ nyamtə sə",
-    "french": "Defaire"
+    "french": "Defaire",
+    "english": "Undo"
   },
   {
     "medumba": "Nə ŋuꞌte sə",
-    "french": "Defaire"
+    "french": "Defaire",
+    "english": "Undo"
   },
   {
     "medumba": "Lòꞌ",
-    "french": "Defaire (visage)"
+    "french": "Defaire (visage)",
+    "english": "Undo (face)"
   },
   {
     "medumba": "Mbìd / mbɛ̀n",
-    "french": "Defaire (visage)"
+    "french": "Defaire (visage)",
+    "english": "Undo (face)"
   },
   {
     "medumba": "Nə̀ bǎꞌ kamə",
-    "french": "Defaut"
+    "french": "Defaut",
+    "english": "Default"
   },
   {
     "medumba": "Nə̀ kwebu",
-    "french": "Defendre"
+    "french": "Defendre",
+    "english": "Defend"
   },
   {
     "medumba": "Nə̀ kwe wud",
-    "french": "Defendre"
+    "french": "Defendre",
+    "english": "Defend"
   },
   {
     "medumba": "Nə̀ kwe nta",
-    "french": "Defendre"
+    "french": "Defendre",
+    "english": "Defend"
   },
   {
     "medumba": "Nə̀ t nù",
-    "french": "Defendre"
+    "french": "Defendre",
+    "english": "Defend"
   },
   {
     "medumba": "Nə̀tanù",
-    "french": "Defense"
+    "french": "Defense",
+    "english": "Defense"
   },
   {
     "medumba": "Mbàꞌsaꞌ",
-    "french": "Defenseur"
+    "french": "Defenseur",
+    "english": "Defender"
   },
   {
     "medumba": "Mbàꞌkam",
-    "french": "Defenseur"
+    "french": "Defenseur",
+    "english": "Defender"
   },
   {
     "medumba": "Ŋwatəmɛ̀n",
-    "french": "Degourdi"
+    "french": "Degourdi",
+    "english": "Dauntless"
   },
   {
     "medumba": "Ŋwatə̀",
-    "french": "Degourdissement"
+    "french": "Degourdissement",
+    "english": "Relaxation"
   },
   {
     "medumba": "Njʉ",
-    "french": "Dehors"
+    "french": "Dehors",
+    "english": "Outside"
   },
   {
     "medumba": "Cǎŋmbwogcʉ",
-    "french": "Dejeuner"
+    "french": "Dejeuner",
+    "english": "Lunch"
   },
   {
     "medumba": "Kə̂bntsi",
-    "french": "Dejeuner (petit)"
+    "french": "Dejeuner (petit)",
+    "english": "Lunch (small)"
   },
   {
     "medumba": "Nə̀ kiὰgtə̌",
-    "french": "Delier"
+    "french": "Delier",
+    "english": "Delier"
   },
   {
     "medumba": "Ngàmfʉm",
-    "french": "Deloyal"
+    "french": "Deloyal",
+    "english": "Disloyal"
   },
   {
     "medumba": "Dibὰmbàŋ",
-    "french": "Deluge"
+    "french": "Deluge",
+    "english": "Deluge"
   },
   {
     "medumba": "Ndǎmnjʉ",
-    "french": "Demain"
+    "french": "Demain",
+    "english": "Tomorrow"
   },
   {
     "medumba": "Nə̀ bɛdtə",
-    "french": "Demander"
+    "french": "Demander",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ kʉα",
-    "french": "Demander"
+    "french": "Demander",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ lonə",
-    "french": "Demander"
+    "french": "Demander",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ zwiǎg mɛ̀n",
-    "french": "Demander (1femme pr qqn)"
+    "french": "Demander (1femme pr qqn)",
+    "english": "Ask (1 woman for sb)"
   },
   {
     "medumba": "Nə̀cagni",
-    "french": "Démangeaison"
+    "french": "Démangeaison",
+    "english": "Itch"
   },
   {
     "medumba": "Nə̀ cagni",
-    "french": "Démanger"
+    "french": "Démanger",
+    "english": "Itch"
   },
   {
     "medumba": "Nə̀ yògə",
-    "french": "Déranger"
+    "french": "Déranger",
+    "english": "Disturb"
   },
   {
     "medumba": "Zwiaŋtə̀",
-    "french": "Démence"
+    "french": "Démence",
+    "english": "Dementia"
   },
   {
     "medumba": "Ngàzwiaŋtə̀",
-    "french": "Dément"
+    "french": "Dément",
+    "english": "Insane"
   },
   {
     "medumba": "Nə̀ kǒg ncobə",
-    "french": "Démentir"
+    "french": "Démentir",
+    "english": "Deny"
   },
   {
     "medumba": "Nə̀ tanù /ghanù",
-    "french": "Démentir"
+    "french": "Démentir",
+    "english": "Deny"
   },
   {
     "medumba": "Dʉ̌ ntswə",
-    "french": "Demeurer"
+    "french": "Demeurer",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ ghɔ",
-    "french": "Demeurer"
+    "french": "Demeurer",
+    "english": "Stay"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Demeurer"
+    "french": "Demeurer",
+    "english": "Stay"
   },
   {
     "medumba": "Kàm",
-    "french": "Demi"
+    "french": "Demi",
+    "english": "Half"
   },
   {
     "medumba": "Kǎmnyàm",
-    "french": "Demi heure"
+    "french": "Demi heure",
+    "english": "Half hour"
   },
   {
     "medumba": "Ngɔ̌tɔ̀ngɔ̀",
-    "french": "Démocratie"
+    "french": "Démocratie",
+    "english": "Democracy"
   },
   {
     "medumba": "Yẁadkə̀bwɔ̀",
-    "french": "Démon"
+    "french": "Démon",
+    "english": "Demon"
   },
   {
     "medumba": "Kə̀bà",
-    "french": "Denier"
+    "french": "Denier",
+    "english": "Denarius"
   },
   {
     "medumba": "Nə̀ bʉlə",
-    "french": "Dénoncer"
+    "french": "Dénoncer",
+    "english": "Report"
   },
   {
     "medumba": "Nə̀ soŋte",
-    "french": "Dénoncer"
+    "french": "Dénoncer",
+    "english": "Report"
   },
   {
     "medumba": "Sɔ̀",
-    "french": "Dent"
+    "french": "Dent",
+    "english": "Tooth"
   },
   {
     "medumba": "Bǎgngɔ̀",
-    "french": "Département"
+    "french": "Département",
+    "english": "Department"
   },
   {
     "medumba": "Nòtogə",
-    "french": "Dépassement"
+    "french": "Dépassement",
+    "english": "Overrun"
   },
   {
     "medumba": "Nə̀ togə",
-    "french": "Dépasser"
+    "french": "Dépasser",
+    "english": "Overtake"
   },
   {
     "medumba": "Nαntə̀",
-    "french": "Dépêche"
+    "french": "Dépêche",
+    "english": "Dispatch"
   },
   {
     "medumba": "Ndə̂nde",
-    "french": "Dépêche"
+    "french": "Dépêche",
+    "english": "Dispatch"
   },
   {
     "medumba": "Nkʉ̌nndə",
-    "french": "Dépêche"
+    "french": "Dépêche",
+    "english": "Dispatch"
   },
   {
     "medumba": "Nə̀ nαntə",
-    "french": "Dépêcher"
+    "french": "Dépêcher",
+    "english": "Hurry"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Dépravation"
+    "french": "Dépravation",
+    "english": "Depravity"
   },
   {
     "medumba": "Ngàŋuꞌu",
-    "french": "Déprave"
+    "french": "Déprave",
+    "english": "Depraved"
   },
   {
     "medumba": "Nə̀ zwaŋtə",
-    "french": "Déraisonner"
+    "french": "Déraisonner",
+    "english": "Unreason"
   },
   {
     "medumba": "Nswɛ̌dnswɛd",
-    "french": "Dérangement"
+    "french": "Dérangement",
+    "english": "Disturbance"
   },
   {
     "medumba": "Nə̀ kàmtə̌",
-    "french": "Déranger"
+    "french": "Déranger",
+    "english": "Disturb"
   },
   {
     "medumba": "Nə̀ swɛ̀dtə̌",
-    "french": "Déranger"
+    "french": "Déranger",
+    "english": "Disturb"
   },
   {
     "medumba": "Miὰgtə̀",
-    "french": "Dernier"
+    "french": "Dernier",
+    "english": "Last"
   },
   {
     "medumba": "Ncɛ̌dnjàm",
-    "french": "Dernier"
+    "french": "Dernier",
+    "english": "Last"
   },
   {
     "medumba": "Ncɛ̌dtog",
-    "french": "Dernier"
+    "french": "Dernier",
+    "english": "Last"
   },
   {
     "medumba": "Nə̀ yǐ",
-    "french": "Dérober"
+    "french": "Dérober",
+    "english": "Steal"
   },
   {
     "medumba": "Njàm",
-    "french": "Derrière"
+    "french": "Derrière",
+    "english": "Behind"
   },
   {
     "medumba": "Nə̀ tʉꞌ njàm",
-    "french": "Derrière (être)"
+    "french": "Derrière (être)",
+    "english": "Behind (be)"
   },
   {
     "medumba": "Njàmndα",
-    "french": "Derrière (la maison)"
+    "french": "Derrière (la maison)",
+    "english": "Behind (the house)"
   },
   {
     "medumba": "Bə̂ ndʉ̀sə",
-    "french": "Dès que"
+    "french": "Dès que",
+    "english": "As soon as"
   },
   {
     "medumba": "Ndʉ̀sə̀",
-    "french": "Dès que"
+    "french": "Dès que",
+    "english": "As soon as"
   },
   {
     "medumba": "Nzwìd",
-    "french": "Descendance"
+    "french": "Descendance",
+    "english": "Descendants"
   },
   {
     "medumba": "Ntɔ̀",
-    "french": "Descendance"
+    "french": "Descendance",
+    "english": "Descendants"
   },
   {
     "medumba": "Nə̀ swəꞌə",
-    "french": "Descendre"
+    "french": "Descendre",
+    "english": "Go down"
   },
   {
     "medumba": "Dʉꞌ swə̂ꞌswəꞌ",
-    "french": "Descente"
+    "french": "Descente",
+    "english": "Descent"
   },
   {
     "medumba": "Kɔ̂nkwa",
-    "french": "Désert"
+    "french": "Désert",
+    "english": "Desert"
   },
   {
     "medumba": "Nə̀ nywinə",
-    "french": "Désespérer"
+    "french": "Désespérer",
+    "english": "Despair"
   },
   {
     "medumba": "Nywin",
-    "french": "Désespoir"
+    "french": "Désespoir",
+    "english": "Despair"
   },
   {
     "medumba": "Nə̀ sɔ̌ nswə",
-    "french": "Déshabiller"
+    "french": "Déshabiller",
+    "english": "Undress"
   },
   {
     "medumba": "Tàbnjòŋ",
-    "french": "Déshonneur"
+    "french": "Déshonneur",
+    "english": "Dishonor"
   },
   {
     "medumba": "Tûswə",
-    "french": "Déshonneur"
+    "french": "Déshonneur",
+    "english": "Dishonor"
   },
   {
     "medumba": "Nǔtuswə",
-    "french": "Déshonorable"
+    "french": "Déshonorable",
+    "english": "Dishonorable"
   },
   {
     "medumba": "Nə̀ kα̌g tûswə",
-    "french": "Déshonorer"
+    "french": "Déshonorer",
+    "english": "Dishonor"
   },
   {
     "medumba": "Nə̀ kα̌g mɛ̀n",
-    "french": "Déshonorer"
+    "french": "Déshonorer",
+    "english": "Dishonor"
   },
   {
     "medumba": "Nə̀ tǎb njoŋ̍",
-    "french": "De̍shonorer"
+    "french": "De̍shonorer",
+    "english": "Dishonor"
   },
   {
     "medumba": "Nə̀ tam tûswə",
-    "french": "De̍shonorer"
+    "french": "De̍shonorer",
+    "english": "Dishonor"
   },
   {
     "medumba": "Nə̀ coꞌo",
-    "french": "De̍signer"
+    "french": "De̍signer",
+    "english": "Designate"
   },
   {
     "medumba": "Nə̀ tag ndα",
-    "french": "De̍signe(auccesseur)"
+    "french": "De̍signe(auccesseur)",
+    "english": "Designator (successor)"
   },
   {
     "medumba": "Kʉntʉ",
-    "french": "De̍sir"
+    "french": "De̍sir",
+    "english": "Desire"
   },
   {
     "medumba": "Nə̀ tsi",
-    "french": "De̍sirer"
+    "french": "De̍sirer",
+    "english": "Desire"
   },
   {
     "medumba": "Nə̀ kɔ̌",
-    "french": "De̍sirer"
+    "french": "De̍sirer",
+    "english": "Desire"
   },
   {
     "medumba": "Nə̀ tǎtu",
-    "french": "De̍sobe̍ir"
+    "french": "De̍sobe̍ir",
+    "english": "To disobey"
   },
   {
     "medumba": "Sὰg",
-    "french": "De̍sobe̍issance"
+    "french": "De̍sobe̍issance",
+    "english": "Disobedience"
   },
   {
     "medumba": "Sὰgntʉ",
-    "french": "De̍sobe̍issance"
+    "french": "De̍sobe̍issance",
+    "english": "Disobedience"
   },
   {
     "medumba": "Tǎtu",
-    "french": "De̍sobe̍issance"
+    "french": "De̍sobe̍issance",
+    "english": "Disobedience"
   },
   {
     "medumba": "Ncǎgncǎgmɛ̀n",
-    "french": "De̍sodonne̍"
+    "french": "De̍sodonne̍",
+    "english": "De̍sodonne̍"
   },
   {
     "medumba": "Ncǎgncag",
-    "french": "De̍sordre"
+    "french": "De̍sordre",
+    "english": "Mess"
   },
   {
     "medumba": "Nə̀ jumə",
-    "french": "Desse̍cher"
+    "french": "Desse̍cher",
+    "english": "Dry out"
   },
   {
     "medumba": "Nə̀ yagə",
-    "french": "Desse̍cher"
+    "french": "Desse̍cher",
+    "english": "Dry out"
   },
   {
     "medumba": "Nkwàtə̀",
-    "french": "Dessein"
+    "french": "Dessein",
+    "english": "Purpose"
   },
   {
     "medumba": "Və̀bu",
-    "french": "Dessein"
+    "french": "Dessein",
+    "english": "Purpose"
   },
   {
     "medumba": "Nə̀ kiàgə",
-    "french": "De̍tacher"
+    "french": "De̍tacher",
+    "english": "Detach"
   },
   {
     "medumba": "Nə̀ kiàgtə̌",
-    "french": "De̍tacher"
+    "french": "De̍tacher",
+    "english": "Detach"
   },
   {
     "medumba": "Nùkôꞌntʉ",
-    "french": "De̍termine̍"
+    "french": "De̍termine̍",
+    "english": "Determine"
   },
   {
     "medumba": "Lamtə̀",
-    "french": "De̍tour (de̍tournement)"
+    "french": "De̍tour (de̍tournement)",
+    "english": "Detour (diversion)"
   },
   {
     "medumba": "Nə̀ lamtə",
-    "french": "De̍touner"
+    "french": "De̍touner",
+    "english": "De̍touner"
   },
   {
     "medumba": "Ne ghumtə",
-    "french": "De̍touner (voler)"
+    "french": "De̍touner (voler)",
+    "english": "To steal (to steal)"
   },
   {
     "medumba": "Ngàlamtə",
-    "french": "De̍touneur"
+    "french": "De̍touneur",
+    "english": "Detoureur"
   },
   {
     "medumba": "Nə̀ bagtə",
-    "french": "De̍truire"
+    "french": "De̍truire",
+    "english": "Destroy"
   },
   {
     "medumba": "Njo",
-    "french": "Dette"
+    "french": "Dette",
+    "english": "Debt"
   },
   {
     "medumba": "Vʉ",
-    "french": "Deuil"
+    "french": "Deuil",
+    "english": "Mourning"
   },
   {
     "medumba": "Bαhα",
-    "french": "Deux"
+    "french": "Deux",
+    "english": "Two"
   },
   {
     "medumba": "Mbadtə̀ bαhα",
-    "french": "Deuxième"
+    "french": "Deuxième",
+    "english": "Second"
   },
   {
     "medumba": "Nə̀ bwǒgmbwə̀",
-    "french": "De̍vancer"
+    "french": "De̍vancer",
+    "english": "Get ahead"
   },
   {
     "medumba": "Nə̀ bwǒgsə̀",
-    "french": "De̍vancer"
+    "french": "De̍vancer",
+    "english": "Get ahead"
   },
   {
     "medumba": "Nè kwe mbwə̀",
-    "french": "De̍vancer"
+    "french": "De̍vancer",
+    "english": "Get ahead"
   },
   {
     "medumba": "Mɛ̀nmbwə̀",
-    "french": "Devancier"
+    "french": "Devancier",
+    "english": "Predecessor"
   },
   {
     "medumba": "Mbwə̀",
-    "french": "Devant"
+    "french": "Devant",
+    "english": "In front"
   },
   {
     "medumba": "Nə tʉꞌʉ",
-    "french": "Devenir"
+    "french": "Devenir",
+    "english": "Become"
   },
   {
     "medumba": "Ngamndəꞌə",
-    "french": "Devin"
+    "french": "Devin",
+    "english": "Diviner"
   },
   {
     "medumba": "Bʉ̀ꞌ mɛ̀n",
-    "french": "Devise"
+    "french": "Devise",
+    "english": "Currency"
   },
   {
     "medumba": "Bʉ̀ꞌ ngɔ̀",
-    "french": "Devise (d’un pays)"
+    "french": "Devise (d’un pays)",
+    "english": "Currency (of a country)"
   },
   {
     "medumba": "Fiàŋtə̂ncobə",
-    "french": "Dialogue"
+    "french": "Dialogue",
+    "english": "Dialogue"
   },
   {
     "medumba": "Nə̀ fian̍təncobə",
-    "french": "Dialoguer"
+    "french": "Dialoguer",
+    "english": "Dialogue"
   },
   {
     "medumba": "Nə̀ swtəncobə",
-    "french": "Dialoguer"
+    "french": "Dialoguer",
+    "english": "Dialogue"
   },
   {
     "medumba": "Kòŋbàm",
-    "french": "Diarrhée"
+    "french": "Diarrhée",
+    "english": "Diarrhea"
   },
   {
     "medumba": "Bàmnə̀coꞌo",
-    "french": "Diarrhée"
+    "french": "Diarrhée",
+    "english": "Diarrhea"
   },
   {
     "medumba": "Ngʉꞌ tɔ̀ngò",
-    "french": "Dictature"
+    "french": "Dictature",
+    "english": "Dictatorship"
   },
   {
     "medumba": "Nsi",
-    "french": "Dieu"
+    "french": "Dieu",
+    "english": "God"
   },
   {
     "medumba": "Nsinəto",
-    "french": "Dieu (idole)"
+    "french": "Dieu (idole)",
+    "english": "God (idol)"
   },
   {
     "medumba": "Nə̀bαgtəlɛn",
-    "french": "Diffamation"
+    "french": "Diffamation",
+    "english": "Defamation"
   },
   {
     "medumba": "Nə̀tənù",
-    "french": "Diffamation"
+    "french": "Diffamation",
+    "english": "Defamation"
   },
   {
     "medumba": "Ndαm",
-    "french": "Diffamation"
+    "french": "Diffamation",
+    "english": "Defamation"
   },
   {
     "medumba": "Nə̀ bαgtə lɛn",
-    "french": "Diffamer"
+    "french": "Diffamer",
+    "english": "Defame"
   },
   {
     "medumba": "Nə̀ sǎnkʉ̀n",
-    "french": "Diffuser(une nouvelle)"
+    "french": "Diffuser(une nouvelle)",
+    "english": "Broadcast (news)"
   },
   {
     "medumba": "Nə̀kùꞌnǐ",
-    "french": "Digne"
+    "french": "Digne",
+    "english": "Worthy"
   },
   {
     "medumba": "Nkamə",
-    "french": "Dignitaire"
+    "french": "Dignitaire",
+    "english": "Dignitary"
   },
   {
     "medumba": "Kamə",
-    "french": "Dignité̍"
+    "french": "Dignité̍",
+    "english": "Dignity"
   },
   {
     "medumba": "Nə̀kùꞌnǐ",
-    "french": "Dignité̍"
+    "french": "Dignité̍",
+    "english": "Dignity"
   },
   {
     "medumba": "Cǎŋmfə̌dnju",
-    "french": "Dîner"
+    "french": "Dîner",
+    "english": "Dinner"
   },
   {
     "medumba": "Leꞌfitə̀",
-    "french": "Dimanche"
+    "french": "Dimanche",
+    "english": "Sunday"
   },
   {
     "medumba": "Nə̀ mintə̌",
-    "french": "Diminuer"
+    "french": "Diminuer",
+    "english": "Decrease"
   },
   {
     "medumba": "Nə̀ sèbə",
-    "french": "Diminuer"
+    "french": "Diminuer",
+    "english": "Decrease"
   },
   {
     "medumba": "Nə̀ cobə",
-    "french": "Dire"
+    "french": "Dire",
+    "english": "Say"
   },
   {
     "medumba": "Nə̀ to lǒꞌ mɛ̀n",
-    "french": "Dire les défauts"
+    "french": "Dire les défauts",
+    "english": "Say the flaws"
   },
   {
     "medumba": "Tɔtə̀",
-    "french": "Discrimination"
+    "french": "Discrimination",
+    "english": "Discrimination"
   },
   {
     "medumba": "Tɔbu",
-    "french": "Discrimination"
+    "french": "Discrimination",
+    "english": "Discrimination"
   },
   {
     "medumba": "Nə̀ tɔtə̌",
-    "french": "Discriminer"
+    "french": "Discriminer",
+    "english": "Discriminate"
   },
   {
     "medumba": "Ghumtə̀",
-    "french": "Dissimulation"
+    "french": "Dissimulation",
+    "english": "Concealment"
   },
   {
     "medumba": "Nə̀ ghumtə",
-    "french": "Dissimuler"
+    "french": "Dissimuler",
+    "english": "Conceal"
   },
   {
     "medumba": "Nə̀ zin kə̀ juꞌ nzə̀",
-    "french": "Divaguer"
+    "french": "Divaguer",
+    "english": "Wander"
   },
   {
     "medumba": "Nə̀ cǎ",
-    "french": "Divaguer"
+    "french": "Divaguer",
+    "english": "Wander"
   },
   {
     "medumba": "Nə̀ ghὰbtə̌",
-    "french": "Diviser"
+    "french": "Diviser",
+    "english": "Divide"
   },
   {
     "medumba": "Ghὰbtə̀",
-    "french": "Division"
+    "french": "Division",
+    "english": "Division"
   },
   {
     "medumba": "Fàgtə̀",
-    "french": "Division"
+    "french": "Division",
+    "english": "Division"
   },
   {
     "medumba": "Fàgtə̀nândα",
-    "french": "Divorce"
+    "french": "Divorce",
+    "english": "Divorce"
   },
   {
     "medumba": "Gham",
-    "french": "Dix"
+    "french": "Dix",
+    "english": "Ten"
   },
   {
     "medumba": "Mbadtə̀ gham",
-    "french": "Dixième"
+    "french": "Dixième",
+    "english": "Tenth"
   },
   {
     "medumba": "Ncʉ̌ꞌ nǔm tsə̀ gham",
-    "french": "Dixième (1/10)"
+    "french": "Dixième (1/10)",
+    "english": "Tenth (1/10)"
   },
   {
     "medumba": "Ndɛ̀nngα̂mghòn",
-    "french": "Docteur en medecine"
+    "french": "Docteur en medecine",
+    "english": "Doctor of Medicine"
   },
   {
     "medumba": "Tα̂kà",
-    "french": "Docteur traditionnel"
+    "french": "Docteur traditionnel",
+    "english": "Traditional doctor"
   },
   {
     "medumba": "Màd",
-    "french": "Doctrine"
+    "french": "Doctrine",
+    "english": "Doctrine"
   },
   {
     "medumba": "Nkwαlὰ",
-    "french": "Doctrine"
+    "french": "Doctrine",
+    "english": "Doctrine"
   },
   {
     "medumba": "Ntûbu",
-    "french": "Doigt"
+    "french": "Doigt",
+    "english": "Finger"
   },
   {
     "medumba": "Kwiag",
-    "french": "Domestique"
+    "french": "Domestique",
+    "english": "Domestic"
   },
   {
     "medumba": "Mɔnkəꞌ",
-    "french": "Domestique"
+    "french": "Domestique",
+    "english": "Domestic"
   },
   {
     "medumba": "Nə̀ kwiagte nyὰm",
-    "french": "Domestiquer"
+    "french": "Domestiquer",
+    "english": "Domesticate"
   },
   {
     "medumba": "Nə̀ kwiagtə",
-    "french": "Domestiquer"
+    "french": "Domestiquer",
+    "english": "Domesticate"
   },
   {
     "medumba": "Dʉ̌ꞌ ntswə",
-    "french": "Domicile"
+    "french": "Domicile",
+    "english": "Home"
   },
   {
     "medumba": "Nə̀ ləbtə",
-    "french": "Dompter"
+    "french": "Dompter",
+    "english": "Tame"
   },
   {
     "medumba": "Fùꞌ",
-    "french": "Don"
+    "french": "Don",
+    "english": "Donation"
   },
   {
     "medumba": "Jûbwɔ̌ntʉ / fαbwɔ̀",
-    "french": "Don"
+    "french": "Don",
+    "english": "Donation"
   },
   {
     "medumba": "Nə̀ fα",
-    "french": "Donner"
+    "french": "Donner",
+    "english": "Give"
   },
   {
     "medumba": "Nə̀ nywìꞌi",
-    "french": "Dorloter"
+    "french": "Dorloter",
+    "english": "Pamper"
   },
   {
     "medumba": "Nə̀ sǒ nkoꞌ",
-    "french": "Dorloter"
+    "french": "Dorloter",
+    "english": "Pamper"
   },
   {
     "medumba": "Nzîmiâglo",
-    "french": "Dormeur"
+    "french": "Dormeur",
+    "english": "Sleeper"
   },
   {
     "medumba": "Nə̀ zi",
-    "french": "Dormir"
+    "french": "Dormir",
+    "english": "Sleep"
   },
   {
     "medumba": "Dʉ̌ꞌzi",
-    "french": "Dortoir"
+    "french": "Dortoir",
+    "english": "Dormitory"
   },
   {
     "medumba": "Nvɛ̀n",
-    "french": "Dos"
+    "french": "Dos",
+    "english": "Back"
   },
   {
     "medumba": "Njàmmfɛ̀n",
-    "french": "Dos"
+    "french": "Dos",
+    "english": "Back"
   },
   {
     "medumba": "Mfìꞌ fu",
-    "french": "Dose d’un remède dose"
+    "french": "Dose d’un remède dose",
+    "english": "Dose of a remedy dose"
   },
   {
     "medumba": "Dʉ̌ꞌfiꞌ",
-    "french": "Douane"
+    "french": "Douane",
+    "english": "Customs"
   },
   {
     "medumba": "Ngàkwefeꞌ",
-    "french": "Douanier"
+    "french": "Douanier",
+    "english": "Customs officer"
   },
   {
     "medumba": "Ndàꞌndàꞌ",
-    "french": "Doucement"
+    "french": "Doucement",
+    "english": "Gently"
   },
   {
     "medumba": "Bɛdnì",
-    "french": "Douceur"
+    "french": "Douceur",
+    "english": "Softness"
   },
   {
     "medumba": "Nə̀ya",
-    "french": "Douleur"
+    "french": "Douleur",
+    "english": "Pain"
   },
   {
     "medumba": "Ya",
-    "french": "Douleur"
+    "french": "Douleur",
+    "english": "Pain"
   },
   {
     "medumba": "Mαgtə̀",
-    "french": "Doute"
+    "french": "Doute",
+    "english": "Doubt"
   },
   {
     "medumba": "Nə̀ mqgtə̌",
-    "french": "Douter"
+    "french": "Douter",
+    "english": "Doubt"
   },
   {
     "medumba": "Ngämmnyu",
-    "french": "Dragon"
+    "french": "Dragon",
+    "english": "Dragon"
   },
   {
     "medumba": "Nə̀ bɛd kǔ nkʉα",
-    "french": "Drainer (raphia)"
+    "french": "Drainer (raphia)",
+    "english": "Drain (raffia)"
   },
   {
     "medumba": "Ndǎŋndaŋ",
-    "french": "Droit"
+    "french": "Droit",
+    "english": "Law"
   },
   {
     "medumba": "Ntsinə",
-    "french": "Droit"
+    "french": "Droit",
+    "english": "Law"
   },
   {
     "medumba": "Nə̀ tsin ndǎŋndaŋ",
-    "french": "Droit (être)"
+    "french": "Droit (être)",
+    "english": "Right (to be)"
   },
   {
     "medumba": "Nə̀ tsin câŋ",
-    "french": "Droit (être)"
+    "french": "Droit (être)",
+    "english": "Right (to be)"
   },
   {
     "medumba": "Nka",
-    "french": "Droite"
+    "french": "Droite",
+    "english": "Right"
   },
   {
     "medumba": "Bûzwim",
-    "french": "Droite (à)"
+    "french": "Droite (à)",
+    "english": "Right (to)"
   },
   {
     "medumba": "Nə̀sαgə",
-    "french": "Dur"
+    "french": "Dur",
+    "english": "Hard"
   },
   {
     "medumba": "Nə̀ta",
-    "french": "Dur"
+    "french": "Dur",
+    "english": "Hard"
   },
   {
     "medumba": "Nə̀ tǎ",
-    "french": "Durcir"
+    "french": "Durcir",
+    "english": "Harden"
   },
   {
     "medumba": "Nə̀ sαgə",
-    "french": "Durcir"
+    "french": "Durcir",
+    "english": "Harden"
   },
   {
     "medumba": "Nə̀ saŋ tâ",
-    "french": "Durcir par le froid"
+    "french": "Durcir par le froid",
+    "english": "Harden by cold"
   },
   {
     "medumba": "Nə̀ sǒ nə̀ta",
-    "french": "Durcir"
+    "french": "Durcir",
+    "english": "Harden"
   },
   {
     "medumba": "Sagntʉ",
-    "french": "Dureté̍ (du coeur)"
+    "french": "Dureté̍ (du coeur)",
+    "english": "Hardness (of the heart)"
   },
   {
     "medumba": "Tα̌nntʉ",
-    "french": "Dureté̍ (du coeur)"
+    "french": "Dureté̍ (du coeur)",
+    "english": "Hardness (of the heart)"
   },
   {
     "medumba": "Nə̀tǎ",
-    "french": "Dureté̍"
+    "french": "Dureté̍",
+    "english": "Hardness"
   },
   {
     "medumba": "Cobomə",
-    "french": "Dysenterie"
+    "french": "Dysenterie",
+    "english": "Dysentery"
   },
   {
     "medumba": "Ntsə",
-    "french": "Eau"
+    "french": "Eau",
+    "english": "Water"
   },
   {
     "medumba": "Ntsə nə̀dum",
-    "french": "Eau chaude"
+    "french": "Eau chaude",
+    "english": "Hot water"
   },
   {
     "medumba": "Ntsə fi",
-    "french": "Eau froide"
+    "french": "Eau froide",
+    "english": "Cold water"
   },
   {
     "medumba": "Ntsə nəsαgtə",
-    "french": "Eau polluee"
+    "french": "Eau polluee",
+    "english": "Polluted water"
   },
   {
     "medumba": "Mbɛ̌n ntsə",
-    "french": "Eau polluee"
+    "french": "Eau polluee",
+    "english": "Polluted water"
   },
   {
     "medumba": "Mbɛ̌n ntsə",
-    "french": "Eau sale"
+    "french": "Eau sale",
+    "english": "Dirty water"
   },
   {
     "medumba": "Yubtə̂m ntsə",
-    "french": "Eau tiède"
+    "french": "Eau tiède",
+    "english": "Lukewarm water"
   },
   {
     "medumba": "Ntsə nə̀fitə",
-    "french": "Eau vive"
+    "french": "Eau vive",
+    "english": "Living water"
   },
   {
     "medumba": "Ŋwaꞌŋwaꞌməba",
-    "french": "Ecariate"
+    "french": "Ecariate",
+    "english": "Ecariate"
   },
   {
     "medumba": "Nə̀vʉ̌",
-    "french": "Echec"
+    "french": "Echec",
+    "english": "Failure"
   },
   {
     "medumba": "Foŋə",
-    "french": "Echo"
+    "french": "Echo",
+    "english": "Echo"
   },
   {
     "medumba": "Bə̀bǎꞌmbàŋ",
-    "french": "Eclair"
+    "french": "Eclair",
+    "english": "Lightning"
   },
   {
     "medumba": "Nə̀ lαntə",
-    "french": "Eclaircir"
+    "french": "Eclaircir",
+    "english": "Lighten"
   },
   {
     "medumba": "Nə̀ kèꞌe",
-    "french": "Eclairee"
+    "french": "Eclairee",
+    "english": "Enlightened"
   },
   {
     "medumba": "Nə̀ kəꞌbum",
-    "french": "Eclore"
+    "french": "Eclore",
+    "english": "Hatch"
   },
   {
     "medumba": "Tusɔ",
-    "french": "Ecole"
+    "french": "Ecole",
+    "english": "School"
   },
   {
     "medumba": "Dʉ̌ꞌŋwàꞌnì",
-    "french": "Ecole"
+    "french": "Ecole",
+    "english": "School"
   },
   {
     "medumba": "Ndα̂ŋwàꞌnikàmkʉle",
-    "french": "Ecole primaire"
+    "french": "Ecole primaire",
+    "english": "Primary school"
   },
   {
     "medumba": "Ngàn̍waꞌnì",
-    "french": "Ecolier"
+    "french": "Ecolier",
+    "english": "Schoolboy"
   },
   {
     "medumba": "Nə̀ zwiꞌtə",
-    "french": "Ecouter"
+    "french": "Ecouter",
+    "english": "Listen"
   },
   {
     "medumba": "Nə̀ ghôꞌo",
-    "french": "Ecraser"
+    "french": "Ecraser",
+    "english": "Overwrite"
   },
   {
     "medumba": "Nə̀ kǐ",
-    "french": "Ecrire"
+    "french": "Ecrire",
+    "english": "Write"
   },
   {
     "medumba": "Nə̀ kǐtə",
-    "french": "Ecrire"
+    "french": "Ecrire",
+    "english": "Write"
   },
   {
     "medumba": "Ngàkìtə̀",
-    "french": "Ecrivain"
+    "french": "Ecrivain",
+    "english": "Writer"
   },
   {
     "medumba": "Ndɛ̀nkukʉlə",
-    "french": "Ecrivain"
+    "french": "Ecrivain",
+    "english": "Writer"
   },
   {
     "medumba": "Nə̀ndʉ̀",
-    "french": "Ecume"
+    "french": "Ecume",
+    "english": "Scum"
   },
   {
     "medumba": "Kə̀sɔ",
-    "french": "Edente"
+    "french": "Edente",
+    "english": "Edentulous"
   },
   {
     "medumba": "Nə̀ bwə̀tə̌",
-    "french": "Effacer"
+    "french": "Effacer",
+    "english": "Clear"
   },
   {
     "medumba": "Tu",
-    "french": "Effigie"
+    "french": "Effigie",
+    "english": "Effigy"
   },
   {
     "medumba": "Nə̀ bàꞌ mvʉ̂ nsi",
-    "french": "Effondrer"
+    "french": "Effondrer",
+    "english": "Collapse"
   },
   {
     "medumba": "Nə̀ kǎg tùn",
-    "french": "Efforcer (sꞌ)"
+    "french": "Efforcer (sꞌ)",
+    "english": "Strive (sꞌ)"
   },
   {
     "medumba": "Nə̀ sǒ nə̀ta",
-    "french": "Efforcer (sꞌ)"
+    "french": "Efforcer (sꞌ)",
+    "english": "Strive (sꞌ)"
   },
   {
     "medumba": "Kàgtʉ̀n",
-    "french": "Effort"
+    "french": "Effort",
+    "english": "Effort"
   },
   {
     "medumba": "Nə̀kǎgtʉ̀n",
-    "french": "Effort"
+    "french": "Effort",
+    "english": "Effort"
   },
   {
     "medumba": "Nguα",
-    "french": "Egal (âge, titre)"
+    "french": "Egal (âge, titre)",
+    "english": "Equal (age, title)"
   },
   {
     "medumba": "Njòŋ",
-    "french": "Egal (prix, quantite, valeur)"
+    "french": "Egal (prix, quantite, valeur)",
+    "english": "Equal (price, quantity, value)"
   },
   {
     "medumba": "Nə̀ bə njǒŋ",
-    "french": "Egaler"
+    "french": "Egaler",
+    "english": "Match"
   },
   {
     "medumba": "Nə̀ kǔꞌ njǒŋ",
-    "french": "Egaler"
+    "french": "Egaler",
+    "english": "Match"
   },
   {
     "medumba": "Nə̀ bi",
-    "french": "Egarer"
+    "french": "Egarer",
+    "english": "Misplace"
   },
   {
     "medumba": "Nə̀ ghagni",
-    "french": "Egayer"
+    "french": "Egayer",
+    "english": "Brighten up"
   },
   {
     "medumba": "Nə ghagni bə̀nntʉ̀n",
-    "french": "Egayer les gens"
+    "french": "Egayer les gens",
+    "english": "Cheer up people"
   },
   {
     "medumba": "Ndα̂kə̀listò",
-    "french": "Eglise"
+    "french": "Eglise",
+    "english": "Church"
   },
   {
     "medumba": "Ghəꞌə",
-    "french": "Egoïsme"
+    "french": "Egoïsme",
+    "english": "Selfishness"
   },
   {
     "medumba": "Nyam",
-    "french": "Egoïsme"
+    "french": "Egoïsme",
+    "english": "Selfishness"
   },
   {
     "medumba": "Nyâmgheꞌe",
-    "french": "Egoïste"
+    "french": "Egoïste",
+    "english": "Selfish"
   },
   {
     "medumba": "Nyâmcoŋ",
-    "french": "Egoïste"
+    "french": "Egoïste",
+    "english": "Selfish"
   },
   {
     "medumba": "Nə̀ si tɔ",
-    "french": "Egorger"
+    "french": "Egorger",
+    "english": "Slaughter"
   },
   {
     "medumba": "Nə̀ kwìtə̌",
-    "french": "Egrener"
+    "french": "Egrener",
+    "english": "Eginer"
   },
   {
     "medumba": "Nə̀ ghaꞌtə",
-    "french": "Elargir"
+    "french": "Elargir",
+    "english": "Expand"
   },
   {
     "medumba": "Ghaꞌtə",
-    "french": "Elargissement"
+    "french": "Elargissement",
+    "english": "Enlargement"
   },
   {
     "medumba": "Nsə̂nyὰm",
-    "french": "Eléphant"
+    "french": "Eléphant",
+    "english": "Elephant"
   },
   {
     "medumba": "Mɛ̂nnsə",
-    "french": "Eléphanteaux"
+    "french": "Eléphanteaux",
+    "english": "Elephants"
   },
   {
     "medumba": "Ngàtamtɔ̀",
-    "french": "Electeur"
+    "french": "Electeur",
+    "english": "Voter"
   },
   {
     "medumba": "Ntâmtɔ̀",
-    "french": "Electeur"
+    "french": "Electeur",
+    "english": "Voter"
   },
   {
     "medumba": "Tɔ",
-    "french": "Election"
+    "french": "Election",
+    "english": "Election"
   },
   {
     "medumba": "Nə̀ kα̌g nyὰm",
-    "french": "Elever"
+    "french": "Elever",
+    "english": "Raise"
   },
   {
     "medumba": "Nə̀ kwiagtə",
-    "french": "Elever"
+    "french": "Elever",
+    "english": "Raise"
   },
   {
     "medumba": "Nə̀ bʉꞌʉ",
-    "french": "Elever"
+    "french": "Elever",
+    "english": "Raise"
   },
   {
     "medumba": "Ngàkwiagtə",
-    "french": "Eleveur"
+    "french": "Eleveur",
+    "english": "Breeder"
   },
   {
     "medumba": "Nə̀ toꞌo",
-    "french": "Empecher"
+    "french": "Empecher",
+    "english": "Prevent"
   },
   {
     "medumba": "Nə̀ cɛdtə",
-    "french": "Empecher"
+    "french": "Empecher",
+    "english": "Prevent"
   },
   {
     "medumba": "Dʉꞌ",
-    "french": "Emplacement"
+    "french": "Emplacement",
+    "english": "Location"
   },
   {
     "medumba": "Ca",
-    "french": "Emprisonnement"
+    "french": "Emprisonnement",
+    "english": "Imprisonment"
   },
   {
     "medumba": "Nə̀ cwiꞌi",
-    "french": "Emprunter"
+    "french": "Emprunter",
+    "english": "Borrow"
   },
   {
     "medumba": "Bə̂ ndʉ̀sə",
-    "french": "En meme temps"
+    "french": "En meme temps",
+    "english": "At the same time"
   },
   {
     "medumba": "Nə̀ fʉαgtə",
-    "french": "Enchanter"
+    "french": "Enchanter",
+    "english": "Enchant"
   },
   {
     "medumba": "Ngàgʉagtəmɛ̀n (1/6",
-    "french": "Enchanteur"
+    "french": "Enchanteur",
+    "english": "Enchanting"
   },
   {
     "medumba": "Ntsəŋwàꞌnì",
-    "french": "Encre"
+    "french": "Encre",
+    "english": "Ink"
   },
   {
     "medumba": "Dʉꞌ",
-    "french": "Endroit"
+    "french": "Endroit",
+    "english": "Location"
   },
   {
     "medumba": "Nə̀ tǎ",
-    "french": "Endurcir"
+    "french": "Endurcir",
+    "english": "Harden"
   },
   {
     "medumba": "Nə̀ sǒ nə̀ta",
-    "french": "Endurcir"
+    "french": "Endurcir",
+    "english": "Harden"
   },
   {
     "medumba": "Sag",
-    "french": "Endurcissement"
+    "french": "Endurcissement",
+    "english": "Hardening"
   },
   {
     "medumba": "Mɛn",
-    "french": "Enfant"
+    "french": "Enfant",
+    "english": "Child"
   },
   {
     "medumba": "Nə̀bwə",
-    "french": "Enfantement"
+    "french": "Enfantement",
+    "english": "Childbirth"
   },
   {
     "medumba": "Nə̀ bwə",
-    "french": "Enfanter"
+    "french": "Enfanter",
+    "english": "Give birth"
   },
   {
     "medumba": "Ndα̂mbwogə",
-    "french": "Enfer"
+    "french": "Enfer",
+    "english": "Hell"
   },
   {
     "medumba": "Nə̀ sǒ",
-    "french": "Enfoncer"
+    "french": "Enfoncer",
+    "english": "Fucking"
   },
   {
     "medumba": "Nə̀ tɛn nsô",
-    "french": "Enfoncer"
+    "french": "Enfoncer",
+    "english": "Fucking"
   },
   {
     "medumba": "Nùkôꞌntʉ",
-    "french": "Engage"
+    "french": "Engage",
+    "english": "Engaged"
   },
   {
     "medumba": "Nə̀ lôꞌ mɛ̀n fàꞌ",
-    "french": "Engager"
+    "french": "Engager",
+    "english": "Engage"
   },
   {
     "medumba": "Nə̀ toꞌo",
-    "french": "Engager"
+    "french": "Engager",
+    "english": "Engage"
   },
   {
     "medumba": "Nə̀ bam fàꞌ",
-    "french": "Engager (sꞌ)"
+    "french": "Engager (sꞌ)",
+    "english": "Engage (sꞌ)"
   },
   {
     "medumba": "Nə̀ bwə",
-    "french": "Engendrer"
+    "french": "Engendrer",
+    "english": "Generate"
   },
   {
     "medumba": "Nə̀ fìꞌi",
-    "french": "Engendrer"
+    "french": "Engendrer",
+    "english": "Generate"
   },
   {
     "medumba": "Nə̀ bumə",
-    "french": "Enivrer"
+    "french": "Enivrer",
+    "english": "Intoxicate"
   },
   {
     "medumba": "Nə̀ kələ",
-    "french": "Enlever"
+    "french": "Enlever",
+    "english": "Remove"
   },
   {
     "medumba": "Nə̀ lèꞌe",
-    "french": "Enlever"
+    "french": "Enlever",
+    "english": "Remove"
   },
   {
     "medumba": "Nə̀ sɔ̌",
-    "french": "Enlever"
+    "french": "Enlever",
+    "english": "Remove"
   },
   {
     "medumba": "Ngakə̀mbαn",
-    "french": "Ennemi"
+    "french": "Ennemi",
+    "english": "Enemy"
   },
   {
     "medumba": "Ngʉ̂dnì",
-    "french": "Ennui"
+    "french": "Ennui",
+    "english": "Boredom"
   },
   {
     "medumba": "Nə̀ kà tə̌",
-    "french": "Enorgueillir"
+    "french": "Enorgueillir",
+    "english": "Take pride"
   },
   {
     "medumba": "Nə̀ koꞌtə wud",
-    "french": "Enorgueillir"
+    "french": "Enorgueillir",
+    "english": "Take pride"
   },
   {
     "medumba": "Nə zwəꞌtə",
-    "french": "Enquêter"
+    "french": "Enquêter",
+    "english": "Investigate"
   },
   {
     "medumba": "Nə̀ tǎŋnga",
-    "french": "Enraciner"
+    "french": "Enraciner",
+    "english": "Root"
   },
   {
     "medumba": "Nə̀ ywǐmnga",
-    "french": "Enraciner"
+    "french": "Enraciner",
+    "english": "Root"
   },
   {
     "medumba": "Nə̀ bo",
-    "french": "Enrouler"
+    "french": "Enrouler",
+    "english": "Roll up"
   },
   {
     "medumba": "Nə̀ botə",
-    "french": "Enrouler"
+    "french": "Enrouler",
+    "english": "Roll up"
   },
   {
     "medumba": "Ngàtswìtə̀",
-    "french": "Enseignant"
+    "french": "Enseignant",
+    "english": "Teacher"
   },
   {
     "medumba": "Nə̀tswitə̌",
-    "french": "Enseignement"
+    "french": "Enseignement",
+    "english": "Teaching"
   },
   {
     "medumba": "Nə̀ tswitə̌",
-    "french": "Enseigner"
+    "french": "Enseigner",
+    "english": "Teach"
   },
   {
     "medumba": "Bwə̀ntam",
-    "french": "Ensemble"
+    "french": "Ensemble",
+    "english": "Together"
   },
   {
     "medumba": "Nə̀ fʉagtə",
-    "french": "Ensorceler"
+    "french": "Ensorceler",
+    "english": "Bewitch"
   },
   {
     "medumba": "Nə̀ lǒꞌ mɛn nsα",
-    "french": "Ensorceler"
+    "french": "Ensorceler",
+    "english": "Bewitch"
   },
   {
     "medumba": "Nə̀ kʉm fɛ̂d sə",
-    "french": "Entasser"
+    "french": "Entasser",
+    "english": "Piling up"
   },
   {
     "medumba": "Nə̀ juꞌu",
-    "french": "Entendre"
+    "french": "Entendre",
+    "english": "Hear"
   },
   {
     "medumba": "Nècoŋə",
-    "french": "Enterrement"
+    "french": "Enterrement",
+    "english": "Burial"
   },
   {
     "medumba": "Nə̀ coŋə",
-    "french": "Enterrer"
+    "french": "Enterrer",
+    "english": "Bury"
   },
   {
     "medumba": "Tûŋmwàꞌnì, tu",
-    "french": "En-tête"
+    "french": "En-tête",
+    "english": "Header"
   },
   {
     "medumba": "Ngàghub",
-    "french": "Entêté"
+    "french": "Entêté",
+    "english": "Stubborn"
   },
   {
     "medumba": "Tâtu",
-    "french": "Entêtement"
+    "french": "Entêtement",
+    "english": "Stubbornness"
   },
   {
     "medumba": "Ghub",
-    "french": "Entêtement"
+    "french": "Entêtement",
+    "english": "Stubbornness"
   },
   {
     "medumba": "Nə̀ tâtu",
-    "french": "Entêter (sꞌ)"
+    "french": "Entêter (sꞌ)",
+    "english": "Header (sꞌ)"
   },
   {
     "medumba": "Nə̀ diàŋ mbumə",
-    "french": "Entourer"
+    "french": "Entourer",
+    "english": "Surround"
   },
   {
     "medumba": "Ncù",
-    "french": "Entrée"
+    "french": "Entrée",
+    "english": "Entrance"
   },
   {
     "medumba": "Nzə̀, nzə̀ nə̀co",
-    "french": "Entrée"
+    "french": "Entrée",
+    "english": "Entrance"
   },
   {
     "medumba": "Nzə̀ndα",
-    "french": "Entrée"
+    "french": "Entrée",
+    "english": "Entrance"
   },
   {
     "medumba": "Nətaꞌ",
-    "french": "Entre jambe"
+    "french": "Entre jambe",
+    "english": "Between leg"
   },
   {
     "medumba": "Nətʉntə (",
-    "french": "Enumération"
+    "french": "Enumération",
+    "english": "Enumeration"
   },
   {
     "medumba": "Nə̀ tʉntə",
-    "french": "Enumérer"
+    "french": "Enumérer",
+    "english": "List"
   },
   {
     "medumba": "Fimŋwàꞌnì",
-    "french": "Enveloppe"
+    "french": "Enveloppe",
+    "english": "Envelope"
   },
   {
     "medumba": "Mfə̀ꞌ",
-    "french": "Enveloppe"
+    "french": "Enveloppe",
+    "english": "Envelope"
   },
   {
     "medumba": "Ghə̀ꞌtə̀",
-    "french": "Envie"
+    "french": "Envie",
+    "english": "Want"
   },
   {
     "medumba": "Nə̀ ghə̀tə̌",
-    "french": "Envier"
+    "french": "Envier",
+    "english": "Envy"
   },
   {
     "medumba": "Nə̀ tə lαg",
-    "french": "Envier"
+    "french": "Envier",
+    "english": "Envy"
   },
   {
     "medumba": "Nə̀ cʉ̌ju",
-    "french": "Envier"
+    "french": "Envier",
+    "english": "Envy"
   },
   {
     "medumba": "Nə̀ càgə",
-    "french": "Envoyer"
+    "french": "Envoyer",
+    "english": "Send"
   },
   {
     "medumba": "Nə̀ tumə",
-    "french": "Envoyer"
+    "french": "Envoyer",
+    "english": "Send"
   },
   {
     "medumba": "Nə̀ sàtə",
-    "french": "Eparpiller"
+    "french": "Eparpiller",
+    "english": "Scatter"
   },
   {
     "medumba": "Nkə̀mbə̀ꞌ",
-    "french": "Epaule"
+    "french": "Epaule",
+    "english": "Shoulder"
   },
   {
     "medumba": "Kαfὰ",
-    "french": "Epée"
+    "french": "Epée",
+    "english": "Sword"
   },
   {
     "medumba": "Ŋwîncò",
-    "french": "Epée"
+    "french": "Epée",
+    "english": "Sword"
   },
   {
     "medumba": "Nsὰŋwi",
-    "french": "Epée"
+    "french": "Epée",
+    "english": "Sword"
   },
   {
     "medumba": "Kòꞌ",
-    "french": "Epi (de mais)"
+    "french": "Epi (de mais)",
+    "english": "Ear (of corn)"
   },
   {
     "medumba": "Nə̀ nyiꞌte",
-    "french": "Epier"
+    "french": "Epier",
+    "english": "Epier"
   },
   {
     "medumba": "Waꞌa",
-    "french": "Epilepsie"
+    "french": "Epilepsie",
+    "english": "Epilepsy"
   },
   {
     "medumba": "Ngàvʉ̌waꞌa",
-    "french": "Epileptique"
+    "french": "Epileptique",
+    "english": "Epileptic"
   },
   {
     "medumba": "Mvʉ̀waꞌa",
-    "french": "Epileptique"
+    "french": "Epileptique",
+    "english": "Epileptic"
   },
   {
     "medumba": "Njɔ",
-    "french": "Epine"
+    "french": "Epine",
+    "english": "Thorn"
   },
   {
     "medumba": "Bèfěca",
-    "french": "Epine de folio de raphia"
+    "french": "Epine de folio de raphia",
+    "english": "Raffia folio spine"
   },
   {
     "medumba": "Nzwîmɛ̀n",
-    "french": "Epouse"
+    "french": "Epouse",
+    "english": "Wife"
   },
   {
     "medumba": "Nə̀ nandα",
-    "french": "Epouser"
+    "french": "Epouser",
+    "english": "Marry"
   },
   {
     "medumba": "Nə so mènnzwi",
-    "french": "Epouser"
+    "french": "Epouser",
+    "english": "Marry"
   },
   {
     "medumba": "Ndu",
-    "french": "Epoux"
+    "french": "Epoux",
+    "english": "Husband"
   },
   {
     "medumba": "Làŋtə̀",
-    "french": "Epreuve"
+    "french": "Epreuve",
+    "english": "Test"
   },
   {
     "medumba": "Nə̀ laŋ̀tə̌",
-    "french": "Eprouver"
+    "french": "Eprouver",
+    "english": "Test"
   },
   {
     "medumba": "Nshʉꞌ",
-    "french": "Equipe"
+    "french": "Equipe",
+    "english": "Team"
   },
   {
     "medumba": "Kum",
-    "french": "Equipe"
+    "french": "Equipe",
+    "english": "Team"
   },
   {
     "medumba": "Junetsine",
-    "french": "Equitable"
+    "french": "Equitable",
+    "english": "Fair"
   },
   {
     "medumba": "Nunətsinə",
-    "french": "Equité"
+    "french": "Equité",
+    "english": "Equity"
   },
   {
     "medumba": "Nə cǎ",
-    "french": "Errer"
+    "french": "Errer",
+    "english": "Wander"
   },
   {
     "medumba": "Fὰntə̀",
-    "french": "Erreur"
+    "french": "Erreur",
+    "english": "Error"
   },
   {
     "medumba": "Nə̀fὰntə̀",
-    "french": "Erreur"
+    "french": "Erreur",
+    "english": "Error"
   },
   {
     "medumba": "Nə̀tαbtə̌",
-    "french": "Erreur"
+    "french": "Erreur",
+    "english": "Error"
   },
   {
     "medumba": "Tὰbtə̀",
-    "french": "Erreur"
+    "french": "Erreur",
+    "english": "Error"
   },
   {
     "medumba": "Kàmnkòꞌ",
-    "french": "Escabeau"
+    "french": "Escabeau",
+    "english": "Stepladder"
   },
   {
     "medumba": "Mbǔꞌ",
-    "french": "Escalier"
+    "french": "Escalier",
+    "english": "Staircase"
   },
   {
     "medumba": "kwαn",
-    "french": "Esclavage"
+    "french": "Esclavage",
+    "english": "Slavery"
   },
   {
     "medumba": "Bùꞌ",
-    "french": "Esclave"
+    "french": "Esclave",
+    "english": "Slave"
   },
   {
     "medumba": "Kwαn",
-    "french": "Esclave"
+    "french": "Esclave",
+    "english": "Slave"
   },
   {
     "medumba": "Mîntʉ̀n",
-    "french": "Escroc"
+    "french": "Escroc",
+    "english": "Scammer"
   },
   {
     "medumba": "Dʉꞌ",
-    "french": "Espace"
+    "french": "Espace",
+    "english": "Space"
   },
   {
     "medumba": "Nə̀tɛddʉꞌ",
-    "french": "Esperance"
+    "french": "Esperance",
+    "english": "Hope"
   },
   {
     "medumba": "Nywintə̀",
-    "french": "Esperance"
+    "french": "Esperance",
+    "english": "Hope"
   },
   {
     "medumba": "Nə̀nywintə̀",
-    "french": "Espérer"
+    "french": "Espérer",
+    "english": "Hope"
   },
   {
     "medumba": "Nə̀ nywintə",
-    "french": "Espion"
+    "french": "Espion",
+    "english": "Spy"
   },
   {
     "medumba": "Ntom",
-    "french": "Espionner"
+    "french": "Espionner",
+    "english": "Spy"
   },
   {
     "medumba": "Nə̀ tomə",
-    "french": "Espionner"
+    "french": "Espionner",
+    "english": "Spy"
   },
   {
     "medumba": "Nə̀ nyiꞌtə",
-    "french": "Espionner"
+    "french": "Espionner",
+    "english": "Spy"
   },
   {
     "medumba": "Nə̀ zwəꞌtə",
-    "french": "Espoir"
+    "french": "Espoir",
+    "english": "Hope"
   },
   {
     "medumba": "Ywɛlə",
-    "french": "Esprit"
+    "french": "Esprit",
+    "english": "Spirit"
   },
   {
     "medumba": "Nə̀ ləꞌə",
-    "french": "Esquiver"
+    "french": "Esquiver",
+    "english": "Dodge"
   },
   {
     "medumba": "Nə̀ fìꞌtə̌",
-    "french": "Essayer"
+    "french": "Essayer",
+    "english": "Try"
   },
   {
     "medumba": "Nə̀ kə̀mtə̌",
-    "french": "Essayer"
+    "french": "Essayer",
+    "english": "Try"
   },
   {
     "medumba": "Nə̀ tαmtə",
-    "french": "Estimer"
+    "french": "Estimer",
+    "english": "Estimate"
   },
   {
     "medumba": "Cagə",
-    "french": "Estomac"
+    "french": "Estomac",
+    "english": "Stomach"
   },
   {
     "medumba": "Bô",
-    "french": "Et"
+    "french": "Et",
+    "english": "And"
   },
   {
     "medumba": "Dʉ̌ꞌŋwàꞌnì",
-    "french": "Etablissement scolaire"
+    "french": "Etablissement scolaire",
+    "english": "School establishment"
   },
   {
     "medumba": "Ndα̂ŋwàꞌnì tɛ̀dkʉlə",
-    "french": "Etablissement secondaire"
+    "french": "Etablissement secondaire",
+    "english": "Secondary establishment"
   },
   {
     "medumba": "Nkoꞌ",
-    "french": "Etagère"
+    "french": "Etagère",
+    "english": "Shelf"
   },
   {
     "medumba": "Nkǒꞌndα",
-    "french": "Etagère"
+    "french": "Etagère",
+    "english": "Shelf"
   },
   {
     "medumba": "Nkǒꞌnka",
-    "french": "Etagère pour vaisselle"
+    "french": "Etagère pour vaisselle",
+    "english": "Dish shelf"
   },
   {
     "medumba": "Nə̀ biagə",
-    "french": "Eteindre"
+    "french": "Eteindre",
+    "english": "Turn off"
   },
   {
     "medumba": "Bi",
-    "french": "Eteint"
+    "french": "Eteint",
+    "english": "Off"
   },
   {
     "medumba": "Màdmàd",
-    "french": "Eternel"
+    "french": "Eternel",
+    "english": "Eternal"
   },
   {
     "medumba": "Yoŋncʉꞌ",
-    "french": "Eternel"
+    "french": "Eternel",
+    "english": "Eternal"
   },
   {
     "medumba": "Ngǔꞌnguꞌ",
-    "french": "Eternel"
+    "french": "Eternel",
+    "english": "Eternal"
   },
   {
     "medumba": "Nsi",
-    "french": "Eternel"
+    "french": "Eternel",
+    "english": "Eternal"
   },
   {
     "medumba": "Ghaꞌtsie",
-    "french": "Eternuement"
+    "french": "Eternuement",
+    "english": "Sneeze"
   },
   {
     "medumba": "Nə sòŋə",
-    "french": "Etirer"
+    "french": "Etirer",
+    "english": "Stretch"
   },
   {
     "medumba": "Ne sǎm wud",
-    "french": "Etirer (sꞌ)"
+    "french": "Etirer (sꞌ)",
+    "english": "Stretch (sꞌ)"
   },
   {
     "medumba": "Sa",
-    "french": "Etoile"
+    "french": "Etoile",
+    "english": "Star"
   },
   {
     "medumba": "Nunecαmə",
-    "french": "Etonnant"
+    "french": "Etonnant",
+    "english": "Amazing"
   },
   {
     "medumba": "Nə̀ cαmə",
-    "french": "Etonner"
+    "french": "Etonner",
+    "english": "Astonish"
   },
   {
     "medumba": "Nə̀ biagə",
-    "french": "Etouffer"
+    "french": "Etouffer",
+    "english": "Suffocate"
   },
   {
     "medumba": "Nə̀ famə",
-    "french": "Etouffer"
+    "french": "Etouffer",
+    "english": "Suffocate"
   },
   {
     "medumba": "Kὰgnì",
-    "french": "Etourderie"
+    "french": "Etourderie",
+    "english": "thoughtlessness"
   },
   {
     "medumba": "Nkὰgnì",
-    "french": "Etourdie"
+    "french": "Etourdie",
+    "english": "Dizzy"
   },
   {
     "medumba": "Nuìnəcαmə̀",
-    "french": "Etrange"
+    "french": "Etrange",
+    "english": "Strange"
   },
   {
     "medumba": "Mfαn",
-    "french": "Etranger"
+    "french": "Etranger",
+    "english": "Foreigner"
   },
   {
     "medumba": "Ngʉ̀n",
-    "french": "Etranger"
+    "french": "Etranger",
+    "english": "Foreigner"
   },
   {
     "medumba": "Tum",
-    "french": "Etranger (à lꞌ)"
+    "french": "Etranger (à lꞌ)",
+    "english": "Foreigner (at home)"
   },
   {
     "medumba": "Nə̀ ba ntɔ",
-    "french": "Etrangler"
+    "french": "Etrangler",
+    "english": "Strangle"
   },
   {
     "medumba": "Nə̀ məm ntɔ",
-    "french": "Etrangler"
+    "french": "Etrangler",
+    "english": "Strangle"
   },
   {
     "medumba": "Nə̀ cʉb ntɔ̂ntɔ̂",
-    "french": "Etrangler"
+    "french": "Etrangler",
+    "english": "Strangle"
   },
   {
     "medumba": "Nə̀ bə",
-    "french": "Être"
+    "french": "Être",
+    "english": "Be"
   },
   {
     "medumba": "Jûzwiàg",
-    "french": "Être (un)"
+    "french": "Être (un)",
+    "english": "To be (one)"
   },
   {
     "medumba": "Nə̀ ghuꞌu",
-    "french": "Être gros"
+    "french": "Être gros",
+    "english": "Being fat"
   },
   {
     "medumba": "Mɛ̀nnyǎŋtu",
-    "french": "Être vivant"
+    "french": "Être vivant",
+    "english": "Being alive"
   },
   {
     "medumba": "Fed",
-    "french": "Etroit"
+    "french": "Etroit",
+    "english": "Narrow"
   },
   {
     "medumba": "Jûnə̀ziꞌi",
-    "french": "Etude"
+    "french": "Etude",
+    "english": "Study"
   },
   {
     "medumba": "Ngàŋwàꞌnìndʉb",
-    "french": "Etudiant"
+    "french": "Etudiant",
+    "english": "Student"
   },
   {
     "medumba": "Nə̀ ziꞌi",
-    "french": "Etudier"
+    "french": "Etudier",
+    "english": "Study"
   },
   {
     "medumba": "Ndɔ",
-    "french": "Etui (boîte)"
+    "french": "Etui (boîte)",
+    "english": "Case (box)"
   },
   {
     "medumba": "Mbα",
-    "french": "Etui (fourreau)"
+    "french": "Etui (fourreau)",
+    "english": "Case (sheath)"
   },
   {
     "medumba": "Nə̀ cob nkùn mə̀bwɔ (v",
-    "french": "Evangéliser"
+    "french": "Evangéliser",
+    "english": "Evangelize"
   },
   {
     "medumba": "Ngàsoŋnǔnsi",
-    "french": "Evangéliste"
+    "french": "Evangéliste",
+    "english": "Evangelist"
   },
   {
     "medumba": "ngàtcobnkʉ̀nmə̀bwɔ",
-    "french": "Evangéliste"
+    "french": "Evangéliste",
+    "english": "Evangelist"
   },
   {
     "medumba": "Nkʉ̀nmə̀bwɔ",
-    "french": "Evangile"
+    "french": "Evangile",
+    "english": "Gospel"
   },
   {
     "medumba": "Ndǎŋndaŋ",
-    "french": "Exact"
+    "french": "Exact",
+    "english": "Correct"
   },
   {
     "medumba": "Nə̀tsinə",
-    "french": "Exact"
+    "french": "Exact",
+    "english": "Correct"
   },
   {
     "medumba": "Kwaꞌndǎŋndaŋ",
-    "french": "Exactement"
+    "french": "Exactement",
+    "english": "Exactly"
   },
   {
     "medumba": "Ndǎŋndaŋ",
-    "french": "Exactement"
+    "french": "Exactement",
+    "english": "Exactly"
   },
   {
     "medumba": "Nə̀ yaꞌnkaꞌ",
-    "french": "Exagérer"
+    "french": "Exagérer",
+    "english": "Exaggerate"
   },
   {
     "medumba": "Nə̀ ghʉ̀ a ŋα",
-    "french": "Exagérer"
+    "french": "Exagérer",
+    "english": "Exaggerate"
   },
   {
     "medumba": "Làŋtə̌",
-    "french": "Examen"
+    "french": "Examen",
+    "english": "Review"
   },
   {
     "medumba": "Nə̀ laŋtə̌",
-    "french": "Examiner"
+    "french": "Examiner",
+    "english": "Examine"
   },
   {
     "medumba": "Nə̀ caꞌa",
-    "french": "Examiner"
+    "french": "Examiner",
+    "english": "Examine"
   },
   {
     "medumba": "Nə̀ dùdtě",
-    "french": "Excéder"
+    "french": "Excéder",
+    "english": "Exceed"
   },
   {
     "medumba": "Nə̀ cʉàtə̌",
-    "french": "Excéder"
+    "french": "Excéder",
+    "english": "Exceed"
   },
   {
     "medumba": "Nə̀ cʉǎ",
-    "french": "Excéder"
+    "french": "Excéder",
+    "english": "Exceed"
   },
   {
     "medumba": "Tûmlam",
-    "french": "Exception"
+    "french": "Exception",
+    "english": "Exception"
   },
   {
     "medumba": "Tûmlam",
-    "french": "Exceptionnel"
+    "french": "Exceptionnel",
+    "english": "Exceptional"
   },
   {
     "medumba": "Nə̀ tɛntə",
-    "french": "Exciter"
+    "french": "Exciter",
+    "english": "Excite"
   },
   {
     "medumba": "Mfìꞌ",
-    "french": "Exemple"
+    "french": "Exemple",
+    "english": "Example"
   },
   {
     "medumba": "Nə̀ be",
-    "french": "Exister"
+    "french": "Exister",
+    "english": "Exist"
   },
   {
     "medumba": "Nə̀ bàgtə̌",
-    "french": "Expliquer"
+    "french": "Expliquer",
+    "english": "Explain"
   },
   {
     "medumba": "Nə̀ bàgtə̌ nù",
-    "french": "Expliquer"
+    "french": "Expliquer",
+    "english": "Explain"
   },
   {
     "medumba": "Diantαnə",
-    "french": "Exposition-vente"
+    "french": "Exposition-vente",
+    "english": "Exhibition-sale"
   },
   {
     "medumba": "Nαntənαntə̀",
-    "french": "Expressément"
+    "french": "Expressément",
+    "english": "Expressly"
   },
   {
     "medumba": "Faꞌtə̀faꞌtə̀",
-    "french": "Expressement"
+    "french": "Expressement",
+    "english": "Expressly"
   },
   {
     "medumba": "Ndəndə",
-    "french": "Expressement"
+    "french": "Expressement",
+    "english": "Expressly"
   },
   {
     "medumba": "Nə̀ biagə",
-    "french": "Exterminer"
+    "french": "Exterminer",
+    "english": "Exterminate"
   },
   {
     "medumba": "Nə̀ biagndα",
-    "french": "Exterminer"
+    "french": "Exterminer",
+    "english": "Exterminate"
   },
   {
     "medumba": "Nùkətǒꞌyen",
-    "french": "Extraordinaire"
+    "french": "Extraordinaire",
+    "english": "Extraordinary"
   },
   {
     "medumba": "Nùkətǒꞌjuꞌ",
-    "french": "Extraordinaire"
+    "french": "Extraordinaire",
+    "english": "Extraordinary"
   },
   {
     "medumba": "Cʉàyàꞌnù",
-    "french": "Extraordinaire"
+    "french": "Extraordinaire",
+    "english": "Extraordinary"
   },
   {
     "medumba": "Bùdncὰbnù",
-    "french": "Extraordinaire"
+    "french": "Extraordinaire",
+    "english": "Extraordinary"
   },
   {
     "medumba": "Mbàŋlôkʉꞌ",
-    "french": "Extropié"
+    "french": "Extropié",
+    "english": "Extropiat"
   },
   {
     "medumba": "Nkəꞌnkɛ̀d",
-    "french": "Extropié"
+    "french": "Extropié",
+    "english": "Extropiat"
   },
   {
     "medumba": "Nə̀ nὰbtə̌",
-    "french": "Fabrique"
+    "french": "Fabrique",
+    "english": "Factory"
   },
   {
     "medumba": "Sə",
-    "french": "Face"
+    "french": "Face",
+    "english": "Face"
   },
   {
     "medumba": "Sə̂sə",
-    "french": "Face à face"
+    "french": "Face à face",
+    "english": "Face to face"
   },
   {
     "medumba": "Nə̀ laꞌa",
-    "french": "Fâcher (se)"
+    "french": "Fâcher (se)",
+    "english": "Get angry"
   },
   {
     "medumba": "Nə̀ yantʉ",
-    "french": "Fâcher (se)"
+    "french": "Fâcher (se)",
+    "english": "Get angry"
   },
   {
     "medumba": "Yântʉ",
-    "french": "Fâcherie"
+    "french": "Fâcherie",
+    "english": "Angry"
   },
   {
     "medumba": "Fʉàgə",
-    "french": "Facile"
+    "french": "Facile",
+    "english": "Easy"
   },
   {
     "medumba": "Ncaꞌ",
-    "french": "Fagot"
+    "french": "Fagot",
+    "english": "Fagot"
   },
   {
     "medumba": "Bod",
-    "french": "Faible"
+    "french": "Faible",
+    "english": "Low"
   },
   {
     "medumba": "Bod",
-    "french": "Faiblesse"
+    "french": "Faiblesse",
+    "english": "Weakness"
   },
   {
     "medumba": "Nzikuꞌu",
-    "french": "Faim"
+    "french": "Faim",
+    "english": "Hunger"
   },
   {
     "medumba": "Nə̀ ghʉ̌",
-    "french": "Faire"
+    "french": "Faire",
+    "english": "Do"
   },
   {
     "medumba": "Nə̀ nαbtə",
-    "french": "Faire"
+    "french": "Faire",
+    "english": "Do"
   },
   {
     "medumba": "Nə̀ fàꞌa",
-    "french": "Faire"
+    "french": "Faire",
+    "english": "Do"
   },
   {
     "medumba": "Fə̌soŋ",
-    "french": "Faire-part"
+    "french": "Faire-part",
+    "english": "Announcement"
   },
   {
     "medumba": "Nə̀ kǎŋ kǒꞌnù",
-    "french": "Falsifier"
+    "french": "Falsifier",
+    "english": "Falsify"
   },
   {
     "medumba": "Tǔndα",
-    "french": "Famille"
+    "french": "Famille",
+    "english": "Family"
   },
   {
     "medumba": "Kəkuα",
-    "french": "Famine"
+    "french": "Famine",
+    "english": "Starvation"
   },
   {
     "medumba": "Kuα",
-    "french": "Famine"
+    "french": "Famine",
+    "english": "Starvation"
   },
   {
     "medumba": "Nə̀ labə, nə̀ yubə",
-    "french": "Faner"
+    "french": "Faner",
+    "english": "Fading"
   },
   {
     "medumba": "Ngàghʉ̌ghâgha (1/6",
-    "french": "Fanfaron"
+    "french": "Fanfaron",
+    "english": "Braggart"
   },
   {
     "medumba": "Ngàtaꞌnsoŋə",
-    "french": "Fanfaron"
+    "french": "Fanfaron",
+    "english": "Braggart"
   },
   {
     "medumba": "Nhâgha",
-    "french": "Fanfaronnade"
+    "french": "Fanfaronnade",
+    "english": "Bragging"
   },
   {
     "medumba": "Ntâꞌnsoŋ",
-    "french": "Fanfaronnade"
+    "french": "Fanfaronnade",
+    "english": "Bragging"
   },
   {
     "medumba": "Ghǎmɛ̀n",
-    "french": "Fantôme"
+    "french": "Fantôme",
+    "english": "Ghost"
   },
   {
     "medumba": "Kòmzwi",
-    "french": "Farce"
+    "french": "Farce",
+    "english": "Prank"
   },
   {
     "medumba": "Ngàkǒmzwì",
-    "french": "Farceur"
+    "french": "Farceur",
+    "english": "Prankster"
   },
   {
     "medumba": "Lɛ̀d",
-    "french": "Fardeau"
+    "french": "Fardeau",
+    "english": "Burden"
   },
   {
     "medumba": "Mbâbbαn",
-    "french": "Farine"
+    "french": "Farine",
+    "english": "Flour"
   },
   {
     "medumba": "Bod",
-    "french": "Fatigue"
+    "french": "Fatigue",
+    "english": "Fatigue"
   },
   {
     "medumba": "Nə̀ kα̌g bod",
-    "french": "Fatiguer"
+    "french": "Fatiguer",
+    "english": "Tired"
   },
   {
     "medumba": "Fα̌nnù",
-    "french": "Faute"
+    "french": "Faute",
+    "english": "Fault"
   },
   {
     "medumba": "Fα̌ntə̀",
-    "french": "Faute"
+    "french": "Faute",
+    "english": "Fault"
   },
   {
     "medumba": "Nùkə̀bwɔ̀",
-    "french": "Faute"
+    "french": "Faute",
+    "english": "Fault"
   },
   {
     "medumba": "Nzwinyὰm",
-    "french": "Femelle"
+    "french": "Femelle",
+    "english": "Female"
   },
   {
     "medumba": "Mɛ̀nnzwi",
-    "french": "Femme"
+    "french": "Femme",
+    "english": "Women"
   },
   {
     "medumba": "Kâdtʉ̂ mɛ̀nnzwi 1/6",
-    "french": "Femme adultaire"
+    "french": "Femme adultaire",
+    "english": "Adultary woman"
   },
   {
     "medumba": "Ghuaꞌmə̀nnzwi (1/6",
-    "french": "Femme délaissée"
+    "french": "Femme délaissée",
+    "english": "abandoned woman"
   },
   {
     "medumba": "Mɛ̀nnzwîndu",
-    "french": "Femme mariée"
+    "french": "Femme mariée",
+    "english": "Married woman"
   },
   {
     "medumba": "Nzwighʉ̀n",
-    "french": "Femme(nouvellement mariée)"
+    "french": "Femme(nouvellement mariée)",
+    "english": "Woman (newly married)"
   },
   {
     "medumba": "Mαbwə",
-    "french": "Femme qui vient accoucher"
+    "french": "Femme qui vient accoucher",
+    "english": "Woman giving birth"
   },
   {
     "medumba": "Mαbwəngùb",
-    "french": "Femme (1er du roi)"
+    "french": "Femme (1er du roi)",
+    "english": "Wife (1st of the king)"
   },
   {
     "medumba": "Mα̂mfiꞌngɔ̀",
-    "french": "Femme patriarche"
+    "french": "Femme patriarche",
+    "english": "Female patriarch"
   },
   {
     "medumba": "Nə̀ bagə",
-    "french": "Fendre"
+    "french": "Fendre",
+    "english": "Split"
   },
   {
     "medumba": "Mfeꞌ",
-    "french": "Fenêtre"
+    "french": "Fenêtre",
+    "english": "Window"
   },
   {
     "medumba": "Tʉnə",
-    "french": "Fer"
+    "french": "Fer",
+    "english": "Iron"
   },
   {
     "medumba": "Ngàlɛ̌dncù",
-    "french": "Ferme̍ (homme)"
+    "french": "Ferme̍ (homme)",
+    "english": "Farm (man)"
   },
   {
     "medumba": "Nə̀ fʉ̀nə",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ kabtə",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ məmə",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ yɛ̀ntə̌",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Nə̀ yiꞌi",
-    "french": "Fermer"
+    "french": "Fermer",
+    "english": "Close"
   },
   {
     "medumba": "Cwədtùn",
-    "french": "Fesse"
+    "french": "Fesse",
+    "english": "Buttock"
   },
   {
     "medumba": "Diaŋntsiꞌi (",
-    "french": "Festival"
+    "french": "Festival",
+    "english": "Festival"
   },
   {
     "medumba": "Jʉα",
-    "french": "Fête"
+    "french": "Fête",
+    "english": "Party"
   },
   {
     "medumba": "Leꞌjʉα",
-    "french": "Fête (jour de )"
+    "french": "Fête (jour de )",
+    "english": "Feast (day of)"
   },
   {
     "medumba": "Nə̀ tsiàŋtě leꞌjʉα",
-    "french": "Fêter"
+    "french": "Fêter",
+    "english": "Celebrate"
   },
   {
     "medumba": "Mbwoge",
-    "french": "Feu"
+    "french": "Feu",
+    "english": "Fire"
   },
   {
     "medumba": "Mfə",
-    "french": "Feu (défunt )"
+    "french": "Feu (défunt )",
+    "english": "Fire (defunct)"
   },
   {
     "medumba": "Fu",
-    "french": "Feuille"
+    "french": "Feuille",
+    "english": "Leaf"
   },
   {
     "medumba": "Fə",
-    "french": "Feuille (de papier)"
+    "french": "Feuille (de papier)",
+    "english": "Sheet (of paper)"
   },
   {
     "medumba": "Ghù",
-    "french": "Fiançailles"
+    "french": "Fiançailles",
+    "english": "Engagement"
   },
   {
     "medumba": "Ndûghù",
-    "french": "Fiance"
+    "french": "Fiance",
+    "english": "Engagement"
   },
   {
     "medumba": "Nzwighù",
-    "french": "Fiancée"
+    "french": "Fiancée",
+    "english": "Fiancee"
   },
   {
     "medumba": "Ǹə̀ kǎ mɛ̀nnzwi",
-    "french": "Fiancer"
+    "french": "Fiancer",
+    "english": "Get engaged"
   },
   {
     "medumba": "Nə̀ tsho ghù",
-    "french": "Fiancer"
+    "french": "Fiancer",
+    "english": "Get engaged"
   },
   {
     "medumba": "Fàꞌkə̀cʉ̰ὰ",
-    "french": "Fiasco"
+    "french": "Fiasco",
+    "english": "Fiasco"
   },
   {
     "medumba": "Nə̀ femə",
-    "french": "Fiasquer"
+    "french": "Fiasquer",
+    "english": "Fascage"
   },
   {
     "medumba": "Mfiα̂gə",
-    "french": "Fibre"
+    "french": "Fibre",
+    "english": "Fiber"
   },
   {
     "medumba": "Saŋtə̀wud",
-    "french": "Fièvre"
+    "french": "Fièvre",
+    "english": "Fever"
   },
   {
     "medumba": "Com",
-    "french": "Figue"
+    "french": "Figue",
+    "english": "Fig"
   },
   {
     "medumba": "Tʉmbǎtsi",
-    "french": "Figuier"
+    "french": "Figuier",
+    "english": "Fig tree"
   },
   {
     "medumba": "Tʉcom",
-    "french": "Figuier"
+    "french": "Figuier",
+    "english": "Fig tree"
   },
   {
     "medumba": "Sə",
-    "french": "Figure"
+    "french": "Figure",
+    "english": "Figure"
   },
   {
     "medumba": "Mɛ̀nndʉb",
-    "french": "Figure 9grqnde0"
+    "french": "Figure 9grqnde0",
+    "english": "Figure 9grqnde0"
   },
   {
     "medumba": "Ndə̀b",
-    "french": "Fil"
+    "french": "Fil",
+    "english": "Wire"
   },
   {
     "medumba": "Nka",
-    "french": "File"
+    "french": "File",
+    "english": "File"
   },
   {
     "medumba": "Fot",
-    "french": "Filet"
+    "french": "Filet",
+    "english": "Net"
   },
   {
     "medumba": "Mbunjα",
-    "french": "Filet"
+    "french": "Filet",
+    "english": "Net"
   },
   {
     "medumba": "Ngòn",
-    "french": "Fille"
+    "french": "Fille",
+    "english": "Girl"
   },
   {
     "medumba": "Məngòn",
-    "french": "Fillette"
+    "french": "Fillette",
+    "english": "little girl"
   },
   {
     "medumba": "Nshùm",
-    "french": "Fils"
+    "french": "Fils",
+    "english": "Son"
   },
   {
     "medumba": "Mɛ̀nnshùm",
-    "french": "Fils"
+    "french": "Fils",
+    "english": "Son"
   },
   {
     "medumba": "Ncʉàmbwə̀",
-    "french": "Fils aine"
+    "french": "Fils aine",
+    "english": "Eldest son"
   },
   {
     "medumba": "Ngâꞌnzə̀",
-    "french": "Fils aine (de la famille)"
+    "french": "Fils aine (de la famille)",
+    "english": "Eldest son (of the family)"
   },
   {
     "medumba": "Tuswə",
-    "french": "Fils aine"
+    "french": "Fils aine",
+    "english": "Eldest son"
   },
   {
     "medumba": "Ntshoꞌndà",
-    "french": "Fils unique"
+    "french": "Fils unique",
+    "english": "only son"
   },
   {
     "medumba": "Mɛ̂nncʉꞌ",
-    "french": "Fils unique"
+    "french": "Fils unique",
+    "english": "only son"
   },
   {
     "medumba": "Nkwìmɛn",
-    "french": "Fils unique"
+    "french": "Fils unique",
+    "english": "only son"
   },
   {
     "medumba": "Cêdntsə",
-    "french": "Filtre"
+    "french": "Filtre",
+    "english": "Filter"
   },
   {
     "medumba": "Nə̀ celə",
-    "french": "Filtrer"
+    "french": "Filtrer",
+    "english": "Filter"
   },
   {
     "medumba": "Nə̀ mǐ",
-    "french": "Finir"
+    "french": "Finir",
+    "english": "Finish"
   },
   {
     "medumba": "Nə̀ miàgtə̌",
-    "french": "Finir"
+    "french": "Finir",
+    "english": "Finish"
   },
   {
     "medumba": "Miàgtə",
-    "french": "Finition, fin"
+    "french": "Finition, fin",
+    "english": "Finish, end"
   },
   {
     "medumba": "Nkàꞌ",
-    "french": "Flambeau"
+    "french": "Flambeau",
+    "english": "Flambeau"
   },
   {
     "medumba": "Nə̀ jʉǎ mbogə",
-    "french": "Flamber"
+    "french": "Flamber",
+    "english": "Flamber"
   },
   {
     "medumba": "Nə̀ bad nkàꞌ",
-    "french": "Flamber (faire)"
+    "french": "Flamber (faire)",
+    "english": "flambé (make)"
   },
   {
     "medumba": "Nsa",
-    "french": "Flanc"
+    "french": "Flanc",
+    "english": "Flank"
   },
   {
     "medumba": "Nə̀ badtə",
-    "french": "Flatter"
+    "french": "Flatter",
+    "english": "Flatter"
   },
   {
     "medumba": "Badtə̀",
-    "french": "Flatterie"
+    "french": "Flatterie",
+    "english": "Flattery"
   },
   {
     "medumba": "Vʉngɔ̀",
-    "french": "Fléau"
+    "french": "Fléau",
+    "english": "Scourge"
   },
   {
     "medumba": "Nsα̌mtʉ",
-    "french": "Fleur"
+    "french": "Fleur",
+    "english": "Flower"
   },
   {
     "medumba": "Nsα̌mnə̀nὰ",
-    "french": "Fleur"
+    "french": "Fleur",
+    "english": "Flower"
   },
   {
     "medumba": "Taꞌntsə",
-    "french": "Fleuve"
+    "french": "Fleuve",
+    "english": "River"
   },
   {
     "medumba": "Fedntsə",
-    "french": "Flot"
+    "french": "Flot",
+    "english": "Flow"
   },
   {
     "medumba": "Tuꞌntsə",
-    "french": "Flot (vague)"
+    "french": "Flot (vague)",
+    "english": "Flow (wave)"
   },
   {
     "medumba": "Ntǎdntad",
-    "french": "Flou"
+    "french": "Flou",
+    "english": "Blur"
   },
   {
     "medumba": "Ndɔ",
-    "french": "Flûte"
+    "french": "Flûte",
+    "english": "Flute"
   },
   {
     "medumba": "Mαndɔ",
-    "french": "Flute"
+    "french": "Flute",
+    "english": "Flute"
   },
   {
     "medumba": "Nə̀ tɔ ndɔ",
-    "french": "Fluter"
+    "french": "Fluter",
+    "english": "Fluter"
   },
   {
     "medumba": "Ngàtɔndɔ",
-    "french": "Flutiste"
+    "french": "Flutiste",
+    "english": "Flutist"
   },
   {
     "medumba": "Ntɔ̂ndɔ",
-    "french": "Flutiste"
+    "french": "Flutiste",
+    "english": "Flutist"
   },
   {
     "medumba": "Bâmntʉ",
-    "french": "Foi"
+    "french": "Foi",
+    "english": "Faith"
   },
   {
     "medumba": "Bì",
-    "french": "Foie"
+    "french": "Foie",
+    "english": "Liver"
   },
   {
     "medumba": "Dibὰ ntαnə",
-    "french": "Foire"
+    "french": "Foire",
+    "english": "Fair"
   },
   {
     "medumba": "Yòŋtsə",
-    "french": "Fois"
+    "french": "Fois",
+    "english": "Times"
   },
   {
     "medumba": "Nzə̀tsə",
-    "french": "Fois"
+    "french": "Fois",
+    "english": "Times"
   },
   {
     "medumba": "Bα",
-    "french": "Folie"
+    "french": "Folie",
+    "english": "Madness"
   },
   {
     "medumba": "Zwiaŋtə̀",
-    "french": "Folie"
+    "french": "Folie",
+    "english": "Madness"
   },
   {
     "medumba": "Yoŋtə̀",
-    "french": "Folie"
+    "french": "Folie",
+    "english": "Madness"
   },
   {
     "medumba": "Tǔnbàꞌ",
-    "french": "Fondation"
+    "french": "Fondation",
+    "english": "Foundation"
   },
   {
     "medumba": "Ne tə",
-    "french": "Fonder"
+    "french": "Fonder",
+    "english": "Found"
   },
   {
     "medumba": "Zwìn",
-    "french": "Fontanelle"
+    "french": "Fontanelle",
+    "english": "Fontanelle"
   },
   {
     "medumba": "Tânkù",
-    "french": "Football"
+    "french": "Football",
+    "english": "Football"
   },
   {
     "medumba": "Mbàꞌ",
-    "french": "Force"
+    "french": "Force",
+    "english": "Strength"
   },
   {
     "medumba": "Nə̀ta",
-    "french": "Force"
+    "french": "Force",
+    "english": "Strength"
   },
   {
     "medumba": "Ngʉꞌ",
-    "french": "Force"
+    "french": "Force",
+    "english": "Strength"
   },
   {
     "medumba": "Tà",
-    "french": "Force"
+    "french": "Force",
+    "english": "Strength"
   },
   {
     "medumba": "Nə̀ sǒ nə̀ta",
-    "french": "Forcer"
+    "french": "Forcer",
+    "english": "Force"
   },
   {
     "medumba": "Nə̀ sǒ ngʉꞌ",
-    "french": "Forcer"
+    "french": "Forcer",
+    "english": "Force"
   },
   {
     "medumba": "Nə̀ nαnə",
-    "french": "Forcer"
+    "french": "Forcer",
+    "english": "Force"
   },
   {
     "medumba": "Nə̀ ncʉb tʉ̀n",
-    "french": "Forcer"
+    "french": "Forcer",
+    "english": "Force"
   },
   {
     "medumba": "Fɛ̀n",
-    "french": "Foret"
+    "french": "Foret",
+    "english": "Drill"
   },
   {
     "medumba": "lὰm",
-    "french": "Forge"
+    "french": "Forge",
+    "english": "Blacksmithing"
   },
   {
     "medumba": "Nə̀ tswə̌ lὰm",
-    "french": "Forger"
+    "french": "Forger",
+    "english": "Forge"
   },
   {
     "medumba": "Nə̀ tswə̌ tʉnə",
-    "french": "Forger"
+    "french": "Forger",
+    "english": "Forge"
   },
   {
     "medumba": "Nə̀ və̌",
-    "french": "Forger"
+    "french": "Forger",
+    "english": "Forge"
   },
   {
     "medumba": "Tαlὰm",
-    "french": "Forgeron"
+    "french": "Forgeron",
+    "english": "Blacksmith"
   },
   {
     "medumba": "Ngànə̀tà",
-    "french": "Fort"
+    "french": "Fort",
+    "english": "Strong"
   },
   {
     "medumba": "Nətâmɛ̀n",
-    "french": "Fort"
+    "french": "Fort",
+    "english": "Strong"
   },
   {
     "medumba": "Vôgncʉꞌ",
-    "french": "Fort (très)"
+    "french": "Fort (très)",
+    "english": "Strong (very)"
   },
   {
     "medumba": "Kὰbntʉnə",
-    "french": "Forteresse"
+    "french": "Forteresse",
+    "english": "Fortress"
   },
   {
     "medumba": "Nə̀ sǒ nə̀ta",
-    "french": "Fortifier"
+    "french": "Fortifier",
+    "english": "Fortify"
   },
   {
     "medumba": "Nə̀ fα ngʉꞌ",
-    "french": "Fortifier"
+    "french": "Fortifier",
+    "english": "Fortify"
   },
   {
     "medumba": "Fub",
-    "french": "Fosse"
+    "french": "Fosse",
+    "english": "Pit"
   },
   {
     "medumba": "Fubntsə",
-    "french": "Fosse̍"
+    "french": "Fosse̍",
+    "english": "Pit"
   },
   {
     "medumba": "Fubtsǐdmbàŋ",
-    "french": "Fosse̍"
+    "french": "Fosse̍",
+    "english": "Pit"
   },
   {
     "medumba": "Mbα̂bʉnə",
-    "french": "Fou"
+    "french": "Fou",
+    "english": "Crazy"
   },
   {
     "medumba": "Shuaꞌa",
-    "french": "Fouet"
+    "french": "Fouet",
+    "english": "Whisk"
   },
   {
     "medumba": "Nə̀ fùꞌu",
-    "french": "Fouiller"
+    "french": "Fouiller",
+    "english": "Search"
   },
   {
     "medumba": "Nə̀ taꞌa",
-    "french": "Fouiller"
+    "french": "Fouiller",
+    "english": "Search"
   },
   {
     "medumba": "Bwǒŋbə̀nntʉ̀n",
-    "french": "Foule"
+    "french": "Foule",
+    "english": "Crowd"
   },
   {
     "medumba": "Nə̀ nyàŋtə̀ nkù",
-    "french": "Fouler"
+    "french": "Fouler",
+    "english": "Tread"
   },
   {
     "medumba": "Fə̂nsi",
-    "french": "Fourmi"
+    "french": "Fourmi",
+    "english": "Ant"
   },
   {
     "medumba": "Shule",
-    "french": "Fourmi"
+    "french": "Fourmi",
+    "english": "Ant"
   },
   {
     "medumba": "Ntα̌mbiaꞌa",
-    "french": "Fourmi magnan"
+    "french": "Fourmi magnan",
+    "english": "Magnan Ant"
   },
   {
     "medumba": "Ntα̌mbiaꞌa 1/6",
-    "french": "Fourmi magnan"
+    "french": "Fourmi magnan",
+    "english": "Magnan Ant"
   },
   {
     "medumba": "Ndûmmbwogə (1/6",
-    "french": "Fournaise"
+    "french": "Fournaise",
+    "english": "Furnace"
   },
   {
     "medumba": "Lαgmbwogə",
-    "french": "Foyer"
+    "french": "Foyer",
+    "english": "Hearth"
   },
   {
     "medumba": "Tɔ̌mbwogə",
-    "french": "Foyer"
+    "french": "Foyer",
+    "english": "Hearth"
   },
   {
     "medumba": "Fîfi",
-    "french": "Frais"
+    "french": "Frais",
+    "english": "Fees"
   },
   {
     "medumba": "Nəfitə",
-    "french": "Frais"
+    "french": "Frais",
+    "english": "Fees"
   },
   {
     "medumba": "Nə̀ buꞌu",
-    "french": "Frapper"
+    "french": "Frapper",
+    "english": "Hit"
   },
   {
     "medumba": "Nə̀ làbə",
-    "french": "Frapper"
+    "french": "Frapper",
+    "english": "Hit"
   },
   {
     "medumba": "Nə̀ tamtə ŋwaꞌnì (V",
-    "french": "Frapper à la machine"
+    "french": "Frapper à la machine",
+    "english": "Hitting machine"
   },
   {
     "medumba": "Nə̀ kəꞌtə nzə̀ndα (V",
-    "french": "Frapper à la porte"
+    "french": "Frapper à la porte",
+    "english": "Knock on the door"
   },
   {
     "medumba": "Mfʉm",
-    "french": "Fraude"
+    "french": "Fraude",
+    "english": "Fraud"
   },
   {
     "medumba": "Kùbtə̀",
-    "french": "Fraude"
+    "french": "Fraude",
+    "english": "Fraud"
   },
   {
     "medumba": "Cɔ",
-    "french": "Fraude"
+    "french": "Fraude",
+    "english": "Fraud"
   },
   {
     "medumba": "Nə̀ ghʉ̌ fʉ̀m",
-    "french": "Frauder"
+    "french": "Frauder",
+    "english": "Fraud"
   },
   {
     "medumba": "Nə̀ kubtə",
-    "french": "Frauder"
+    "french": "Frauder",
+    "english": "Fraud"
   },
   {
     "medumba": "Ngàghʉ̌mfʉm",
-    "french": "Fraudeur"
+    "french": "Fraudeur",
+    "english": "Fraudster"
   },
   {
     "medumba": "Ngàkùbtə",
-    "french": "Fraudeur"
+    "french": "Fraudeur",
+    "english": "Fraudster"
   },
   {
     "medumba": "Mfɛd",
-    "french": "Frère"
+    "french": "Frère",
+    "english": "Brother"
   },
   {
     "medumba": "Mɛ̀nmα",
-    "french": "Frère"
+    "french": "Frère",
+    "english": "Brother"
   },
   {
     "medumba": "Mɛ̀ntα",
-    "french": "Frère"
+    "french": "Frère",
+    "english": "Brother"
   },
   {
     "medumba": "Mfɛdntʉ̂mywɛlə(1/6",
-    "french": "Frère en christ"
+    "french": "Frère en christ",
+    "english": "Brother in Christ"
   },
   {
     "medumba": "Ntànywìn",
-    "french": "Frigidaire"
+    "french": "Frigidaire",
+    "english": "Fridge"
   },
   {
     "medumba": "Nə̀ ka",
-    "french": "Frire"
+    "french": "Frire",
+    "english": "Fry"
   },
   {
     "medumba": "Nə̀ katə",
-    "french": "Frire"
+    "french": "Frire",
+    "english": "Fry"
   },
   {
     "medumba": "Saŋtə̀wud (",
-    "french": "Frisson"
+    "french": "Frisson",
+    "english": "Thrill"
   },
   {
     "medumba": "Nə̀ saŋtə",
-    "french": "Frissonner"
+    "french": "Frissonner",
+    "english": "Shiver"
   },
   {
     "medumba": "Ngàghag",
-    "french": "Frivole"
+    "french": "Frivole",
+    "english": "Frivolous"
   },
   {
     "medumba": "Nə̀ ghagə",
-    "french": "Frivole (être)"
+    "french": "Frivole (être)",
+    "english": "Frivolous (to be)"
   },
   {
     "medumba": "Ghag",
-    "french": "Frivolité"
+    "french": "Frivolité",
+    "english": "Frivolity"
   },
   {
     "medumba": "Nə̀ ko mfʉag",
-    "french": "Froid (faire)"
+    "french": "Froid (faire)",
+    "english": "Cold (do)"
   },
   {
     "medumba": "Mfʉag",
-    "french": "Froid"
+    "french": "Froid",
+    "english": "Cold"
   },
   {
     "medumba": "Fifi",
-    "french": "Froid"
+    "french": "Froid",
+    "english": "Cold"
   },
   {
     "medumba": "Mbwə̀",
-    "french": "Front"
+    "french": "Front",
+    "english": "Forehead"
   },
   {
     "medumba": "Nkɔ̀se",
-    "french": "Front"
+    "french": "Front",
+    "english": "Forehead"
   },
   {
     "medumba": "Ncùsə",
-    "french": "Front"
+    "french": "Front",
+    "english": "Forehead"
   },
   {
     "medumba": "Ncùncò",
-    "french": "Front"
+    "french": "Front",
+    "english": "Forehead"
   },
   {
     "medumba": "Kaŋsə",
-    "french": "Front (bombe̍)"
+    "french": "Front (bombe̍)",
+    "english": "Forehead (bomb)"
   },
   {
     "medumba": "Dʉ̌ꞌncò",
-    "french": "Front (de combat)"
+    "french": "Front (de combat)",
+    "english": "Front (combat)"
   },
   {
     "medumba": "Ndʉ",
-    "french": "Frontière"
+    "french": "Frontière",
+    "english": "Border"
   },
   {
     "medumba": "Ndʉ̂ngɔ̀",
-    "french": "Frontière"
+    "french": "Frontière",
+    "english": "Border"
   },
   {
     "medumba": "Nə̀ yamntαmə",
-    "french": "Fructifier"
+    "french": "Fructifier",
+    "english": "Fruit"
   },
   {
     "medumba": "Nə̀ faꞌa",
-    "french": "Fructifier"
+    "french": "Fructifier",
+    "english": "Fruit"
   },
   {
     "medumba": "Nə̀ yamə",
-    "french": "Fructifier"
+    "french": "Fructifier",
+    "english": "Fruit"
   },
   {
     "medumba": "Nə̀ co",
-    "french": "Fructifier"
+    "french": "Fructifier",
+    "english": "Fruit"
   },
   {
     "medumba": "Tαmtʉ",
-    "french": "Fruit"
+    "french": "Fruit",
+    "english": "Fruit"
   },
   {
     "medumba": "Tʉnə̀yammntαmə",
-    "french": "Fruitier (arbre)"
+    "french": "Fruitier (arbre)",
+    "english": "Fruit tree (tree)"
   },
   {
     "medumba": "Nə̀ kʉ ̌",
-    "french": "Fuir"
+    "french": "Fuir",
+    "english": "Run away"
   },
   {
     "medumba": "Nzə̂mbwogə",
-    "french": "Fume̍e"
+    "french": "Fume̍e",
+    "english": "Smoke"
   },
   {
     "medumba": "Nə̀ lamnzə̂mbwogə",
-    "french": "Fumer"
+    "french": "Fumer",
+    "english": "Smoking"
   },
   {
     "medumba": "Nə̀ nu ndə̀bà",
-    "french": "Fumer"
+    "french": "Fumer",
+    "english": "Smoking"
   },
   {
     "medumba": "Ngànundə̀bà",
-    "french": "Fumeur"
+    "french": "Fumeur",
+    "english": "Smoker"
   },
   {
     "medumba": "Ngαnə",
-    "french": "Fusil"
+    "french": "Fusil",
+    "english": "Rifle"
   },
   {
     "medumba": "Taŋə",
-    "french": "Fût"
+    "french": "Fût",
+    "english": "Barrel"
   },
   {
     "medumba": "Nkwὰnnəfiagə",
-    "french": "Gage"
+    "french": "Gage",
+    "english": "Gage"
   },
   {
     "medumba": "Coꞌtu",
-    "french": "Gage"
+    "french": "Gage",
+    "english": "Gage"
   },
   {
     "medumba": "Nə̀ fiǎg nkὰn",
-    "french": "Gager"
+    "french": "Gager",
+    "english": "Gag"
   },
   {
     "medumba": "Nə̀ yα̂b cwɛ̀d",
-    "french": "Gager"
+    "french": "Gager",
+    "english": "Gag"
   },
   {
     "medumba": "Nə̀ jʉ",
-    "french": "Gagner"
+    "french": "Gagner",
+    "english": "Win"
   },
   {
     "medumba": "Nə̀ lǒŋ kamə",
-    "french": "Gagner"
+    "french": "Gagner",
+    "english": "Win"
   },
   {
     "medumba": "Nə̀ lǒŋ ncà",
-    "french": "Gagner"
+    "french": "Gagner",
+    "english": "Win"
   },
   {
     "medumba": "Nə̀satə",
-    "french": "Gai"
+    "french": "Gai",
+    "english": "Gay"
   },
   {
     "medumba": "Nəŋwatə",
-    "french": "Gai"
+    "french": "Gai",
+    "english": "Gay"
   },
   {
     "medumba": "Ŋwatəmɛ̀n",
-    "french": "Gai (homme)"
+    "french": "Gai (homme)",
+    "english": "Gay (man)"
   },
   {
     "medumba": "Ŋwatə",
-    "french": "Gaite̍"
+    "french": "Gaite̍",
+    "english": "Gaite̍"
   },
   {
     "medumba": "Satə̀",
-    "french": "Gaite̍"
+    "french": "Gaite̍",
+    "english": "Gaite̍"
   },
   {
     "medumba": "Mbαnə",
-    "french": "Gale"
+    "french": "Gale",
+    "english": "Scabies"
   },
   {
     "medumba": "Mɛ̀nmbαnə",
-    "french": "Galeux"
+    "french": "Galeux",
+    "english": "Mangy"
   },
   {
     "medumba": "Nə̀zwə̌ju",
-    "french": "Gangilion"
+    "french": "Gangilion",
+    "english": "Gangilium"
   },
   {
     "medumba": "Mbαnnzunə",
-    "french": "Gangrène"
+    "french": "Gangrène",
+    "english": "Gangrene"
   },
   {
     "medumba": "Nə̀bebə (",
-    "french": "Garde"
+    "french": "Garde",
+    "english": "Guard"
   },
   {
     "medumba": "Ngàbeb",
-    "french": "Garde"
+    "french": "Garde",
+    "english": "Guard"
   },
   {
     "medumba": "Bαmnα",
-    "french": "Garde (prendre)"
+    "french": "Garde (prendre)",
+    "english": "Guard (take)"
   },
   {
     "medumba": "Nə̀ zətə",
-    "french": "Garde (prendre)"
+    "french": "Garde (prendre)",
+    "english": "Guard (take)"
   },
   {
     "medumba": "Nə̀ bebə",
-    "french": "Garder"
+    "french": "Garder",
+    "english": "Keep"
   },
   {
     "medumba": "Nə̀ ləmə",
-    "french": "Garder"
+    "french": "Garder",
+    "english": "Keep"
   },
   {
     "medumba": "Nə̀ lə",
-    "french": "Garnir"
+    "french": "Garnir",
+    "english": "Garnish"
   },
   {
     "medumba": "Nə̀ kud mfʉag",
-    "french": "Geler"
+    "french": "Geler",
+    "english": "Freeze"
   },
   {
     "medumba": "Nə̀ nywìnə",
-    "french": "Geler"
+    "french": "Geler",
+    "english": "Freeze"
   },
   {
     "medumba": "Ntage",
-    "french": "Gencives"
+    "french": "Gencives",
+    "english": "Gums"
   },
   {
     "medumba": "Baꞌa",
-    "french": "Gendarme"
+    "french": "Gendarme",
+    "english": "Constable"
   },
   {
     "medumba": "Ndα̂bə̀fə̀",
-    "french": "Gendarmerie"
+    "french": "Gendarmerie",
+    "english": "Gendarmerie"
   },
   {
     "medumba": "Bə̀nntʉ̀n",
-    "french": "Gens"
+    "french": "Gens",
+    "english": "People"
   },
   {
     "medumba": "Mfìꞌcaꞌa",
-    "french": "Ge̍omètre"
+    "french": "Ge̍omètre",
+    "english": "Geometry"
   },
   {
     "medumba": "Ngα̂mmfiꞌcaꞌa",
-    "french": "Ge̍omètre"
+    "french": "Ge̍omètre",
+    "english": "Geometry"
   },
   {
     "medumba": "Nə̀ bile",
-    "french": "Germer"
+    "french": "Germer",
+    "english": "Sprout"
   },
   {
     "medumba": "Nə̀ ywìmə",
-    "french": "Germer"
+    "french": "Germer",
+    "english": "Sprout"
   },
   {
     "medumba": "Dʉbtɔ̀ngɔ̀",
-    "french": "Ge̍rontocratie"
+    "french": "Ge̍rontocratie",
+    "english": "Gerontocracy"
   },
   {
     "medumba": "Nə̀ tiàgə",
-    "french": "Glisser"
+    "french": "Glisser",
+    "english": "Slide"
   },
   {
     "medumba": "Nkunì",
-    "french": "Gloire"
+    "french": "Gloire",
+    "english": "Glory"
   },
   {
     "medumba": "Ghamtə̀",
-    "french": "Gloire"
+    "french": "Gloire",
+    "english": "Glory"
   },
   {
     "medumba": "Nə̀ ghamtə̀",
-    "french": "Glorifier"
+    "french": "Glorifier",
+    "english": "Glorify"
   },
   {
     "medumba": "Màꞌmî",
-    "french": "Glouton"
+    "french": "Glouton",
+    "english": "Glutton"
   },
   {
     "medumba": "Njʉkə̀ywɛd",
-    "french": "Glouton"
+    "french": "Glouton",
+    "english": "Glutton"
   },
   {
     "medumba": "Jʉkə̀ywɛd",
-    "french": "Gloutonnerie"
+    "french": "Gloutonnerie",
+    "english": "Gluttony"
   },
   {
     "medumba": "Lendtsə",
-    "french": "Gobelet"
+    "french": "Gobelet",
+    "english": "Tumbler"
   },
   {
     "medumba": "Côꞌkʉdnjumə",
-    "french": "Gomme"
+    "french": "Gomme",
+    "english": "Eraser"
   },
   {
     "medumba": "Məcòꞌ",
-    "french": "Gorille"
+    "french": "Gorille",
+    "english": "Gorilla"
   },
   {
     "medumba": "Nzə̀tɔ",
-    "french": "Gosier"
+    "french": "Gosier",
+    "english": "Throat"
   },
   {
     "medumba": "Ntûꞌntsə",
-    "french": "Gourde (d’eau)"
+    "french": "Gourde (d’eau)",
+    "english": "Bottle (of water)"
   },
   {
     "medumba": "Ncὰmntʉ",
-    "french": "Gourmand"
+    "french": "Gourmand",
+    "english": "Gourmet"
   },
   {
     "medumba": "Nə̀ cα̌mntʉ",
-    "french": "Gourmand (être)"
+    "french": "Gourmand (être)",
+    "english": "Greedy (to be)"
   },
   {
     "medumba": "Ncα̌mntʉ",
-    "french": "Gourmandise"
+    "french": "Gourmandise",
+    "english": "Gluttony"
   },
   {
     "medumba": "Nə̀cα̌mntʉ",
-    "french": "Gourmandise"
+    "french": "Gourmandise",
+    "english": "Gluttony"
   },
   {
     "medumba": "Njʉmɛ̀n",
-    "french": "Goût"
+    "french": "Goût",
+    "english": "Taste"
   },
   {
     "medumba": "Numɛ̀n",
-    "french": "Goût"
+    "french": "Goût",
+    "english": "Taste"
   },
   {
     "medumba": "Mbwɔ̌ju",
-    "french": "Goût"
+    "french": "Goût",
+    "english": "Taste"
   },
   {
     "medumba": "Nə̀ zwiꞌtə",
-    "french": "Goûter"
+    "french": "Goûter",
+    "english": "Snack"
   },
   {
     "medumba": "Tαm",
-    "french": "Goutte"
+    "french": "Goutte",
+    "english": "Drop"
   },
   {
     "medumba": "Tαmntsə",
-    "french": "Goutte d’eau"
+    "french": "Goutte d’eau",
+    "english": "Water drop"
   },
   {
     "medumba": "Kondɛ̀n",
-    "french": "Grâce"
+    "french": "Grâce",
+    "english": "Grace"
   },
   {
     "medumba": "Nzilə",
-    "french": "Grisse grand"
+    "french": "Grisse grand",
+    "english": "Gray big"
   },
   {
     "medumba": "Nkòꞌ",
-    "french": "Grand"
+    "french": "Grand",
+    "english": "Large"
   },
   {
     "medumba": "Ndʉb",
-    "french": "Grand"
+    "french": "Grand",
+    "english": "Large"
   },
   {
     "medumba": "Mα",
-    "french": "Grand"
+    "french": "Grand",
+    "english": "Large"
   },
   {
     "medumba": "A ghuꞌ",
-    "french": "Grand (c’est)"
+    "french": "Grand (c’est)",
+    "english": "Big (it’s)"
   },
   {
     "medumba": "Mɛ̀nndʉb",
-    "french": "Grand homme"
+    "french": "Grand homme",
+    "english": "Great man"
   },
   {
     "medumba": "Nzimɛ̀n",
-    "french": "Grand homme"
+    "french": "Grand homme",
+    "english": "Great man"
   },
   {
     "medumba": "Nsὰmɛ̀n",
-    "french": "Grand homme"
+    "french": "Grand homme",
+    "english": "Great man"
   },
   {
     "medumba": "Ghàꞌ",
-    "french": "Grandiose"
+    "french": "Grandiose",
+    "english": "Grandiose"
   },
   {
     "medumba": "Nkòꞌ",
-    "french": "Gradiose"
+    "french": "Gradiose",
+    "english": "Gradiosis"
   },
   {
     "medumba": "nkǒꞌnkǒꞌ cu",
-    "french": "Grandiose (chose)"
+    "french": "Grandiose (chose)",
+    "english": "Grand (thing)"
   },
   {
     "medumba": "Nə̀ kùꞌu",
-    "french": "Grandir"
+    "french": "Grandir",
+    "english": "Growing up"
   },
   {
     "medumba": "Nə̀nyamtə se",
-    "french": "Grimace"
+    "french": "Grimace",
+    "english": "Grimace"
   },
   {
     "medumba": "Nə̀ nyamte sə",
-    "french": "Grimacer"
+    "french": "Grimacer",
+    "english": "Grimace"
   },
   {
     "medumba": "Nə̀ fɛdnsɔ",
-    "french": "Grimacer les dent"
+    "french": "Grimacer les dent",
+    "english": "Grimacing your teeth"
   },
   {
     "medumba": "Nə̀ yàtə̌",
-    "french": "Guerir"
+    "french": "Guerir",
+    "english": "Heal"
   },
   {
     "medumba": "Nə̀ fǎꞌ ngòkɛd",
-    "french": "Guerir"
+    "french": "Guerir",
+    "english": "Heal"
   },
   {
     "medumba": "Nə̀ cwètə̌ ngòkɛd",
-    "french": "Guerir"
+    "french": "Guerir",
+    "english": "Heal"
   },
   {
     "medumba": "Ngàcwètə̀",
-    "french": "Guerisseur"
+    "french": "Guerisseur",
+    "english": "Healer"
   },
   {
     "medumba": "Ncò",
-    "french": "Guerre"
+    "french": "Guerre",
+    "english": "War"
   },
   {
     "medumba": "Nə̀ ləꞌ ncò",
-    "french": "Guerroyer"
+    "french": "Guerroyer",
+    "english": "War"
   },
   {
     "medumba": "Nə̀ mǎꞌ ncò",
-    "french": "Guerroyer"
+    "french": "Guerroyer",
+    "english": "War"
   },
   {
     "medumba": "Nə̀̀màꞌnzwə",
-    "french": "Habillement"
+    "french": "Habillement",
+    "english": "Clothing"
   },
   {
     "medumba": "Nə̀ kět nzwə",
-    "french": "Habiller"
+    "french": "Habiller",
+    "english": "Dress up"
   },
   {
     "medumba": "Nə̀ mǎꞌnzwə",
-    "french": "Habiller"
+    "french": "Habiller",
+    "english": "Dress up"
   },
   {
     "medumba": "Nə̀ tog nzwə",
-    "french": "Habiller"
+    "french": "Habiller",
+    "english": "Dress up"
   },
   {
     "medumba": "Kum",
-    "french": "Habit"
+    "french": "Habit",
+    "english": "Clothing"
   },
   {
     "medumba": "Nzwə",
-    "french": "Habit"
+    "french": "Habit",
+    "english": "Clothing"
   },
   {
     "medumba": "Zə̀laꞌ",
-    "french": "Habitant"
+    "french": "Habitant",
+    "english": "Inhabitant"
   },
   {
     "medumba": "Bàꞌ",
-    "french": "Habitation"
+    "french": "Habitation",
+    "english": "Housing"
   },
   {
     "medumba": "Dʉ̌ꞌntswə",
-    "french": "Habitation"
+    "french": "Habitation",
+    "english": "Housing"
   },
   {
     "medumba": "Ndα",
-    "french": "Habitatant"
+    "french": "Habitatant",
+    "english": "Resident"
   },
   {
     "medumba": "Nə̀ tswə",
-    "french": "Habiter"
+    "french": "Habiter",
+    "english": "Live"
   },
   {
     "medumba": "Màd",
-    "french": "Habitude"
+    "french": "Habitude",
+    "english": "Habit"
   },
   {
     "medumba": "Nə̀ lǒꞌ màd",
-    "french": "Habituer"
+    "french": "Habituer",
+    "english": "Get used to"
   },
   {
     "medumba": "Nə̀ mìlə",
-    "french": "Habituer"
+    "french": "Habituer",
+    "english": "Get used to"
   },
   {
     "medumba": "Njὰm",
-    "french": "Hache"
+    "french": "Hache",
+    "english": "Ax"
   },
   {
     "medumba": "Kὰb",
-    "french": "Haie"
+    "french": "Haie",
+    "english": "Hedge"
   },
   {
     "medumba": "Nkəmbαn",
-    "french": "Haine"
+    "french": "Haine",
+    "english": "Hate"
   },
   {
     "medumba": "Nǔnkə̀mbαn",
-    "french": "Haineux"
+    "french": "Haineux",
+    "english": "Hateful"
   },
   {
     "medumba": "Nə̀ bὰnə",
-    "french": "Haïr"
+    "french": "Haïr",
+    "english": "Hate"
   },
   {
     "medumba": "Ywɛtncù",
-    "french": "Haleine"
+    "french": "Haleine",
+    "english": "Breath"
   },
   {
     "medumba": "Lubə",
-    "french": "Hamec̩on"
+    "french": "Hamec̩on",
+    "english": "Hook"
   },
   {
     "medumba": "Tâmmbu",
-    "french": "Handball"
+    "french": "Handball",
+    "english": "Handball"
   },
   {
     "medumba": "Zwəꞌə",
-    "french": "Hanche"
+    "french": "Hanche",
+    "english": "Hip"
   },
   {
     "medumba": "Kə̀bwog",
-    "french": "Hardi"
+    "french": "Hardi",
+    "english": "Bold"
   },
   {
     "medumba": "Ngàfid",
-    "french": "Hardi"
+    "french": "Hardi",
+    "english": "Bold"
   },
   {
     "medumba": "Fit",
-    "french": "Hardiesse"
+    "french": "Hardiesse",
+    "english": "Boldness"
   },
   {
     "medumba": "Kùni",
-    "french": "Hardiesse"
+    "french": "Hardiesse",
+    "english": "Boldness"
   },
   {
     "medumba": "Nkun",
-    "french": "Haricot"
+    "french": "Haricot",
+    "english": "Bean"
   },
   {
     "medumba": "Loŋə",
-    "french": "Harpe"
+    "french": "Harpe",
+    "english": "Harp"
   },
   {
     "medumba": "Mfətʉ",
-    "french": "Haut"
+    "french": "Haut",
+    "english": "Top"
   },
   {
     "medumba": "Nə̀filə",
-    "french": "Hautain"
+    "french": "Hautain",
+    "english": "Haughty"
   },
   {
     "medumba": "Ngàfid",
-    "french": "Hautain"
+    "french": "Hautain",
+    "english": "Haughty"
   },
   {
     "medumba": "Nə̀nɛ̌ntʉ",
-    "french": "Hauteur"
+    "french": "Hauteur",
+    "english": "Height"
   },
   {
     "medumba": "Mfətʉ",
-    "french": "Hauteur"
+    "french": "Hauteur",
+    "english": "Height"
   },
   {
     "medumba": "Nùm kekaŋə",
-    "french": "Hauteur (en)"
+    "french": "Hauteur (en)",
+    "english": "Height (in)"
   },
   {
     "medumba": "Nə̀nὰ",
-    "french": "Herbe"
+    "french": "Herbe",
+    "english": "Grass"
   },
   {
     "medumba": "Ngàkαbnə̀nὰ",
-    "french": "Herboriste"
+    "french": "Herboriste",
+    "english": "Herbalist"
   },
   {
     "medumba": "Ntsiꞌi",
-    "french": "He̍ritage"
+    "french": "He̍ritage",
+    "english": "Heritage"
   },
   {
     "medumba": "Ndα",
-    "french": "He̍ritage"
+    "french": "He̍ritage",
+    "english": "Heritage"
   },
   {
     "medumba": "Nə̀ jʉndα",
-    "french": "He̍ritier"
+    "french": "He̍ritier",
+    "english": "Heir"
   },
   {
     "medumba": "Njʉndα",
-    "french": "He̍ritier"
+    "french": "He̍ritier",
+    "english": "Heir"
   },
   {
     "medumba": "Mὰgtə̌",
-    "french": "He̍sitation"
+    "french": "He̍sitation",
+    "english": "Hesitation"
   },
   {
     "medumba": "Nə̀ mὰgtə̌",
-    "french": "He̍siter"
+    "french": "He̍siter",
+    "english": "Hesitate"
   },
   {
     "medumba": "Ngə̀laŋ",
-    "french": "Heure"
+    "french": "Heure",
+    "english": "Time"
   },
   {
     "medumba": "Nyàm",
-    "french": "Heure"
+    "french": "Heure",
+    "english": "Time"
   },
   {
     "medumba": "Ngàtswəmə̀bwɔ",
-    "french": "Heureux"
+    "french": "Heureux",
+    "english": "Happy"
   },
   {
     "medumba": "Ngàfən",
-    "french": "Heurter"
+    "french": "Heurter",
+    "english": "Hit"
   },
   {
     "medumba": "Nə̀ faꞌtə",
-    "french": "Heurter"
+    "french": "Heurter",
+    "english": "Hit"
   },
   {
     "medumba": "Nkòg",
-    "french": "Hier"
+    "french": "Hier",
+    "english": "Yesterday"
   },
   {
     "medumba": "Ngα̂mcɔ̀",
-    "french": "Histoire"
+    "french": "Histoire",
+    "english": "History"
   },
   {
     "medumba": "Cɔ̀",
-    "french": "Histoire"
+    "french": "Histoire",
+    "english": "History"
   },
   {
     "medumba": "Mαndùm",
-    "french": "Homme"
+    "french": "Homme",
+    "english": "Man"
   },
   {
     "medumba": "Mə̀nntʉ̀n",
-    "french": "Homme"
+    "french": "Homme",
+    "english": "Man"
   },
   {
     "medumba": "Mɛ̀nnyǎŋtu",
-    "french": "Homme"
+    "french": "Homme",
+    "english": "Man"
   },
   {
     "medumba": "Ngabâmntʉ",
-    "french": "Homme de foi"
+    "french": "Homme de foi",
+    "english": "Man of faith"
   },
   {
     "medumba": "Mɛ̀nnənʉnə",
-    "french": "Homme juste"
+    "french": "Homme juste",
+    "english": "righteous man"
   },
   {
     "medumba": "Mɛ̀nnə̀tsinə",
-    "french": "Homme juste"
+    "french": "Homme juste",
+    "english": "righteous man"
   },
   {
     "medumba": "Nkùꞌnì",
-    "french": "Honneur"
+    "french": "Honneur",
+    "english": "Honor"
   },
   {
     "medumba": "Jûnkùꞌnì",
-    "french": "Honorable"
+    "french": "Honorable",
+    "english": "Honorable"
   },
   {
     "medumba": "Mɛ̀nnkùni",
-    "french": "Honorable"
+    "french": "Honorable",
+    "english": "Honorable"
   },
   {
     "medumba": "Tûswə",
-    "french": "Honte"
+    "french": "Honte",
+    "english": "Shame"
   },
   {
     "medumba": "Ngàtûswə",
-    "french": "Honte (qui a)"
+    "french": "Honte (qui a)",
+    "english": "Shame (who has)"
   },
   {
     "medumba": "Nǔtûswə",
-    "french": "Honteux"
+    "french": "Honteux",
+    "english": "Shameful"
   },
   {
     "medumba": "Ndα̂ghòn",
-    "french": "Hôpital"
+    "french": "Hôpital",
+    "english": "Hospital"
   },
   {
     "medumba": "Logtὰ",
-    "french": "Hôpital"
+    "french": "Hôpital",
+    "english": "Hospital"
   },
   {
     "medumba": "Dʉ̌ꞌghòn",
-    "french": "Hôpital"
+    "french": "Hôpital",
+    "english": "Hospital"
   },
   {
     "medumba": "Kə̀shʉꞌ",
-    "french": "Hoquet"
+    "french": "Hoquet",
+    "english": "Hiccups"
   },
   {
     "medumba": "Tǔnnjʉ",
-    "french": "Horizon"
+    "french": "Horizon",
+    "english": "Horizon"
   },
   {
     "medumba": "Kʉ̂ꞌkʉꞌ",
-    "french": "Horizontal"
+    "french": "Horizontal",
+    "english": "Horizontal"
   },
   {
     "medumba": "Ndòꞌngʉ̀n",
-    "french": "Hospitalier"
+    "french": "Hospitalier",
+    "english": "Hospitaller"
   },
   {
     "medumba": "Ndα̂ghʉ̀n",
-    "french": "Hôtel"
+    "french": "Hôtel",
+    "english": "Hotel"
   },
   {
     "medumba": "Mfɛd",
-    "french": "Huile"
+    "french": "Huile",
+    "english": "Oil"
   },
   {
     "medumba": "Mfɛ̂dkə̀nà",
-    "french": "Huile (d’arrachide"
+    "french": "Huile (d’arrachide",
+    "english": "Oil (peanut"
   },
   {
     "medumba": "Mfɛ̂dmbǎmə̀kalə",
-    "french": "Huile (de coco)"
+    "french": "Huile (de coco)",
+    "english": "Oil (coconut)"
   },
   {
     "medumba": "Mə̀nyà",
-    "french": "Huile (de palmiste)"
+    "french": "Huile (de palmiste)",
+    "english": "Oil (palm kernel)"
   },
   {
     "medumba": "Nə̀ nuꞌu",
-    "french": "Huiler"
+    "french": "Huiler",
+    "english": "Oil"
   },
   {
     "medumba": "Cα̌bmfɛd",
-    "french": "Huilerie"
+    "french": "Huilerie",
+    "english": "Oil mill"
   },
   {
     "medumba": "Lǒŋcὰb",
-    "french": "Huilerie"
+    "french": "Huilerie",
+    "english": "Oil mill"
   },
   {
     "medumba": "Fomə",
-    "french": "Huit"
+    "french": "Huit",
+    "english": "Eight"
   },
   {
     "medumba": "Mbadtə fomə",
-    "french": "Huitième"
+    "french": "Huitième",
+    "english": "Eighth"
   },
   {
     "medumba": "Ngàfαwudnsi",
-    "french": "Humble (personne)"
+    "french": "Humble (personne)",
+    "english": "Humble (person)"
   },
   {
     "medumba": "Nə̀ kǒg mɛ̀n",
-    "french": "Humilier"
+    "french": "Humilier",
+    "english": "Humiliate"
   },
   {
     "medumba": "Nə̀ fα wud nsi",
-    "french": "Humilier (sꞌ)"
+    "french": "Humilier (sꞌ)",
+    "english": "Humiliate (sꞌ)"
   },
   {
     "medumba": "Nə̀fαwud nsi",
-    "french": "Humilite̍"
+    "french": "Humilite̍",
+    "english": "Humility"
   },
   {
     "medumba": "Yὰkintɔ̀",
-    "french": "Hyacinthe"
+    "french": "Hyacinthe",
+    "english": "Hyacinth"
   },
   {
     "medumba": "Ŋàŋomə",
-    "french": "Hyène"
+    "french": "Hyène",
+    "english": "Hyena"
   },
   {
     "medumba": "Ced",
-    "french": "Hygiène"
+    "french": "Hygiène",
+    "english": "Hygiene"
   },
   {
     "medumba": "Kwibʉ̌ꞌ",
-    "french": "Hymne"
+    "french": "Hymne",
+    "english": "Anthem"
   },
   {
     "medumba": "kwǐnkuni",
-    "french": "Hymne"
+    "french": "Hymne",
+    "english": "Anthem"
   },
   {
     "medumba": "Kwingô",
-    "french": "Hymne national"
+    "french": "Hymne national",
+    "english": "National anthem"
   },
   {
     "medumba": "Mfum",
-    "french": "Hypocrisie"
+    "french": "Hypocrisie",
+    "english": "Hypocrisy"
   },
   {
     "medumba": "Ngamfʉm",
-    "french": "Hypocrite"
+    "french": "Hypocrite",
+    "english": "Hypocrite"
   },
   {
     "medumba": "Nsə̌nnî",
-    "french": "Ici"
+    "french": "Ici",
+    "english": "Here"
   },
   {
     "medumba": "Cən",
-    "french": "Idiot"
+    "french": "Idiot",
+    "english": "Idiot"
   },
   {
     "medumba": "Mbuꞌtu",
-    "french": "Idiot"
+    "french": "Idiot",
+    "english": "Idiot"
   },
   {
     "medumba": "Fə̀mnì",
-    "french": "Idiotie"
+    "french": "Idiotie",
+    "english": "Idiocy"
   },
   {
     "medumba": "Nsînəto",
-    "french": "Idôle"
+    "french": "Idôle",
+    "english": "Idol"
   },
   {
     "medumba": "Ngàbamnsînəto(1/6",
-    "french": "Idolâtre"
+    "french": "Idolâtre",
+    "english": "Idolater"
   },
   {
     "medumba": "Bəꞌ",
-    "french": "Igname"
+    "french": "Igname",
+    "english": "Yam"
   },
   {
     "medumba": "Ntsə̂ntsə",
-    "french": "Igname jaune"
+    "french": "Igname jaune",
+    "english": "Yellow yam"
   },
   {
     "medumba": "Nkὰgnì",
-    "french": "Ignorant"
+    "french": "Ignorant",
+    "english": "Ignorant"
   },
   {
     "medumba": "A",
-    "french": "Il/ elle"
+    "french": "Il/ elle",
+    "english": "He/she"
   },
   {
     "medumba": "Bo",
-    "french": "Ils / elles (eux)"
+    "french": "Ils / elles (eux)",
+    "english": "They/them"
   },
   {
     "medumba": "Boαbo",
-    "french": "Ils/ elles ( lui et eux)"
+    "french": "Ils/ elles ( lui et eux)",
+    "english": "They (him and them)"
   },
   {
     "medumba": "Ndiàŋkadcaꞌa",
-    "french": "Ile"
+    "french": "Ile",
+    "english": "Island"
   },
   {
     "medumba": "Ngɔ̌tɛ̀dntsə",
-    "french": "Ile"
+    "french": "Ile",
+    "english": "Island"
   },
   {
     "medumba": "Caꞌtɛ̀dntsə",
-    "french": "Ile"
+    "french": "Ile",
+    "english": "Island"
   },
   {
     "medumba": "Mfuni",
-    "french": "Image"
+    "french": "Image",
+    "english": "Picture"
   },
   {
     "medumba": "Nəto",
-    "french": "Image"
+    "french": "Image",
+    "english": "Picture"
   },
   {
     "medumba": "Fiꞌtə̀",
-    "french": "Imitation"
+    "french": "Imitation",
+    "english": "Imitation"
   },
   {
     "medumba": "Nə̀ fiꞌtə̌",
-    "french": "Imiter"
+    "french": "Imiter",
+    "english": "Imitate"
   },
   {
     "medumba": "Kə̀tàg",
-    "french": "Immanquablement"
+    "french": "Immanquablement",
+    "english": "Inevitably"
   },
   {
     "medumba": "Tαkə̀tàg",
-    "french": "Immanquablement"
+    "french": "Immanquablement",
+    "english": "Inevitably"
   },
   {
     "medumba": "Kə̀kondɛ̀n",
-    "french": "Impitoyable"
+    "french": "Impitoyable",
+    "english": "Merciless"
   },
   {
     "medumba": "Kə̀zəwʉ",
-    "french": "Impitoiyable"
+    "french": "Impitoiyable",
+    "english": "Merciless"
   },
   {
     "medumba": "Ngàlɛ̌dncù",
-    "french": "Impoli"
+    "french": "Impoli",
+    "english": "Rude"
   },
   {
     "medumba": "Kə̀nkùꞌnì",
-    "french": "Impoli"
+    "french": "Impoli",
+    "english": "Rude"
   },
   {
     "medumba": "Lɛ̀dncù",
-    "french": "Impolitesse"
+    "french": "Impolitesse",
+    "english": "Rudeness"
   },
   {
     "medumba": "Ncùb",
-    "french": "Impot"
+    "french": "Impot",
+    "english": "Tax"
   },
   {
     "medumba": "Nùkə̀kà",
-    "french": "Impre̍visible"
+    "french": "Impre̍visible",
+    "english": "Unpredictable"
   },
   {
     "medumba": "Sə̀ꞌkekaꞌ",
-    "french": "Impre̍visible"
+    "french": "Impre̍visible",
+    "english": "Unpredictable"
   },
   {
     "medumba": "Sə̀ꞌkə̀zə",
-    "french": "Impre̍vu"
+    "french": "Impre̍vu",
+    "english": "Unexpected"
   },
   {
     "medumba": "Nǔmɛ̀nwα",
-    "french": "Impre̍vu"
+    "french": "Impre̍vu",
+    "english": "Unexpected"
   },
   {
     "medumba": "kə̀lαn",
-    "french": "Impure"
+    "french": "Impure",
+    "english": "Impure"
   },
   {
     "medumba": "Ŋuꞌu",
-    "french": "Impurete̍"
+    "french": "Impurete̍",
+    "english": "Impurity"
   },
   {
     "medumba": "Nǔŋuꞌu",
-    "french": "Impurete̍"
+    "french": "Impurete̍",
+    "english": "Impurity"
   },
   {
     "medumba": "Ncwɛ̀d",
-    "french": "Inapte (en danse)"
+    "french": "Inapte (en danse)",
+    "english": "Unfit (in dancing)"
   },
   {
     "medumba": "Nə̀ totə",
-    "french": "Inaugurer"
+    "french": "Inaugurer",
+    "english": "Inaugurate"
   },
   {
     "medumba": "Nə̀ coꞌo",
-    "french": "Inaugurer"
+    "french": "Inaugurer",
+    "english": "Inaugurate"
   },
   {
     "medumba": "Nə̀ kwiagə",
-    "french": "Inaugurer (e̍difice)"
+    "french": "Inaugurer (e̍difice)",
+    "english": "Inaugurate (building)"
   },
   {
     "medumba": "Kə̀tà",
-    "french": "Incapable"
+    "french": "Incapable",
+    "english": "Unable"
   },
   {
     "medumba": "Kə̀kùꞌni",
-    "french": "Incapable"
+    "french": "Incapable",
+    "english": "Unable"
   },
   {
     "medumba": "Bìtò",
-    "french": "Incident"
+    "french": "Incident",
+    "english": "Incident"
   },
   {
     "medumba": "Ngə̀ꞌ",
-    "french": "Incident"
+    "french": "Incident",
+    "english": "Incident"
   },
   {
     "medumba": "Nùkə̀zə",
-    "french": "Incident"
+    "french": "Incident",
+    "english": "Incident"
   },
   {
     "medumba": "Nə̀ to bìtò",
-    "french": "Incident(avoir un)"
+    "french": "Incident(avoir un)",
+    "english": "Incident (have one)"
   },
   {
     "medumba": "Mɛ̀nwα",
-    "french": "Inconnu"
+    "french": "Inconnu",
+    "english": "Unknown"
   },
   {
     "medumba": "Mǒꞌmɛ̀n",
-    "french": "Inconnu"
+    "french": "Inconnu",
+    "english": "Unknown"
   },
   {
     "medumba": "Jûkə̀lɛ̀n",
-    "french": "Inconnu (chose)"
+    "french": "Inconnu (chose)",
+    "english": "Unknown (thing)"
   },
   {
     "medumba": "Dìbὰ",
-    "french": "Inde̍pendance"
+    "french": "Inde̍pendance",
+    "english": "Independence"
   },
   {
     "medumba": "Nəbəyûtu",
-    "french": "Inde̍pendant"
+    "french": "Inde̍pendant",
+    "english": "Independent"
   },
   {
     "medumba": "Nə̀tʉꞌyûtu",
-    "french": "Inde̍pendant"
+    "french": "Inde̍pendant",
+    "english": "Independent"
   },
   {
     "medumba": "Ndâdnyaꞌ",
-    "french": "Index (doigt)"
+    "french": "Index (doigt)",
+    "english": "Index (finger)"
   },
   {
     "medumba": "Ndâdsogə",
-    "french": "Index (doigt)"
+    "french": "Index (doigt)",
+    "english": "Index (finger)"
   },
   {
     "medumba": "Kə̀jumbu",
-    "french": "Indigent"
+    "french": "Indigent",
+    "english": "Destitute"
   },
   {
     "medumba": "Mbûndaŋsə",
-    "french": "Indigent"
+    "french": "Indigent",
+    "english": "Destitute"
   },
   {
     "medumba": "Ngàyəngəꞌ",
-    "french": "Indigent"
+    "french": "Indigent",
+    "english": "Destitute"
   },
   {
     "medumba": "Nə̀ beꞌtəꞌ",
-    "french": "Indiquer"
+    "french": "Indiquer",
+    "english": "Indicate"
   },
   {
     "medumba": "Nə̀ làꞌtə̌",
-    "french": "Indiquer"
+    "french": "Indiquer",
+    "english": "Indicate"
   },
   {
     "medumba": "Mǒꞌmɛ̀n",
-    "french": "Individu"
+    "french": "Individu",
+    "english": "Individual"
   },
   {
     "medumba": "Kôndɛ̀n",
-    "french": "Indulgence"
+    "french": "Indulgence",
+    "english": "Indulgence"
   },
   {
     "medumba": "Bwɔ̌ntʉ",
-    "french": "Indulgence"
+    "french": "Indulgence",
+    "english": "Indulgence"
   },
   {
     "medumba": "Ngàkondɛ̀n)",
-    "french": "Indulgent"
+    "french": "Indulgent",
+    "english": "Forgiving"
   },
   {
     "medumba": "Ngàbwɔ̌ntʉ",
-    "french": "Indulgent"
+    "french": "Indulgent",
+    "english": "Forgiving"
   },
   {
     "medumba": "Nùkə̀tǒꞌcob",
-    "french": "Ine̍dit"
+    "french": "Ine̍dit",
+    "english": "Unpublished"
   },
   {
     "medumba": "Nùkə̀tǒꞌjuꞌ",
-    "french": "Ine̍dit"
+    "french": "Ine̍dit",
+    "english": "Unpublished"
   },
   {
     "medumba": "Kad",
-    "french": "Infide̍lite̍"
+    "french": "Infide̍lite̍",
+    "english": "Unfaithful"
   },
   {
     "medumba": "Bamkə̀ghʉ̀",
-    "french": "Infide̍lite̍"
+    "french": "Infide̍lite̍",
+    "english": "Unfaithful"
   },
   {
     "medumba": "Nkə̀ꞌkɛ̀d",
-    "french": "Infirme"
+    "french": "Infirme",
+    "english": "Crippled"
   },
   {
     "medumba": "Lòꞌ",
-    "french": "Infirmite̍"
+    "french": "Infirmite̍",
+    "english": "Disability"
   },
   {
     "medumba": "Nə̀ beꞌtə",
-    "french": "Informer"
+    "french": "Informer",
+    "english": "Inform"
   },
   {
     "medumba": "Nə̀ soŋə",
-    "french": "Informer"
+    "french": "Informer",
+    "english": "Inform"
   },
   {
     "medumba": "Nə̀ tətə",
-    "french": "Informer"
+    "french": "Informer",
+    "english": "Inform"
   },
   {
     "medumba": "Nùkə̀tsin",
-    "french": "Iniquite̍"
+    "french": "Iniquite̍",
+    "english": "Inequity"
   },
   {
     "medumba": "Nə̀ cǎbncù",
-    "french": "Injurier"
+    "french": "Injurier",
+    "english": "Insult"
   },
   {
     "medumba": "Ntsəndunnə",
-    "french": "Inondation"
+    "french": "Inondation",
+    "english": "Flood"
   },
   {
     "medumba": "Nə̀ dunə",
-    "french": "Inonder"
+    "french": "Inonder",
+    "english": "Flood"
   },
   {
     "medumba": "Nə̀ lǎbwud",
-    "french": "Inquie̍ter (sꞌ)"
+    "french": "Inquie̍ter (sꞌ)",
+    "english": "To worry (to worry)"
   },
   {
     "medumba": "Nə̀ lǎbwud",
-    "french": "Insense̍"
+    "french": "Insense̍",
+    "english": "Insense"
   },
   {
     "medumba": "Kə̀lɛ̌nnù",
-    "french": "Insense̍"
+    "french": "Insense̍",
+    "english": "Insense"
   },
   {
     "medumba": "Mfʉ̀mwuli",
-    "french": "Insense̍"
+    "french": "Insense̍",
+    "english": "Insense"
   },
   {
     "medumba": "Nkαgnì",
-    "french": "Insense̍"
+    "french": "Insense̍",
+    "english": "Insense"
   },
   {
     "medumba": "Kə̀kondɛ̀n",
-    "french": "Insensibilite̍"
+    "french": "Insensibilite̍",
+    "english": "Insensitivity"
   },
   {
     "medumba": "Kə̀lɛ̌nngəꞌ",
-    "french": "Insensible"
+    "french": "Insensible",
+    "english": "Insensitive"
   },
   {
     "medumba": "Kə̀zəvʉ",
-    "french": "Insensible"
+    "french": "Insensible",
+    "english": "Insensitive"
   },
   {
     "medumba": "Sαgntʉmɛ̀n",
-    "french": "Insensible"
+    "french": "Insensible",
+    "english": "Insensitive"
   },
   {
     "medumba": "Nə̀sǎŋlaŋə",
-    "french": "Insistance"
+    "french": "Insistance",
+    "english": "Insistence"
   },
   {
     "medumba": "Nə̀tswèꞌtə̌",
-    "french": "Insistance"
+    "french": "Insistance",
+    "english": "Insistence"
   },
   {
     "medumba": "Nə̀ sǎŋ laŋə",
-    "french": "Insister"
+    "french": "Insister",
+    "english": "Insist"
   },
   {
     "medumba": "Nə̀ tswə̀ꞌtə̌",
-    "french": "Insister"
+    "french": "Insister",
+    "english": "Insist"
   },
   {
     "medumba": "Cὰbncù",
-    "french": "Insulte"
+    "french": "Insulte",
+    "english": "Insult"
   },
   {
     "medumba": "Cαbtə̀",
-    "french": "Insulte"
+    "french": "Insulte",
+    "english": "Insult"
   },
   {
     "medumba": "Nə̀ cα̌bncù",
-    "french": "Insulter"
+    "french": "Insulter",
+    "english": "Insult"
   },
   {
     "medumba": "Nə̀ cὰbtə̌",
-    "french": "Insulter"
+    "french": "Insulter",
+    "english": "Insult"
   },
   {
     "medumba": "Zenù",
-    "french": "Intelligence"
+    "french": "Intelligence",
+    "english": "Intelligence"
   },
   {
     "medumba": "Ngàzə̂nù",
-    "french": "Intelligent"
+    "french": "Intelligent",
+    "english": "Smart"
   },
   {
     "medumba": "Nzə̂nù",
-    "french": "Intelligent"
+    "french": "Intelligent",
+    "english": "Smart"
   },
   {
     "medumba": "Nkwàtə̀",
-    "french": "Intension"
+    "french": "Intension",
+    "english": "Intension"
   },
   {
     "medumba": "Nə̀ bǎb nə̀",
-    "french": "Intension de (avoir)"
+    "french": "Intension de (avoir)",
+    "english": "Intention to (have)"
   },
   {
     "medumba": "Nə̀ zin kamə",
-    "french": "Intercéder"
+    "french": "Intercéder",
+    "english": "Intercede"
   },
   {
     "medumba": "Nèzinkamə (",
-    "french": "Intercession"
+    "french": "Intercession",
+    "english": "Intercession"
   },
   {
     "medumba": "kὰn",
-    "french": "Interdiction"
+    "french": "Interdiction",
+    "english": "Ban"
   },
   {
     "medumba": "Nə̀ cʉ̀ꞌʉ",
-    "french": "Interdire"
+    "french": "Interdire",
+    "english": "Ban"
   },
   {
     "medumba": "Nə̀ yab kὰn",
-    "french": "Interdire"
+    "french": "Interdire",
+    "english": "Ban"
   },
   {
     "medumba": "Bìn",
-    "french": "Intérêt"
+    "french": "Intérêt",
+    "english": "Interest"
   },
   {
     "medumba": "Jûmə̀bwɔ",
-    "french": "Intéressant"
+    "french": "Intéressant",
+    "english": "Interesting"
   },
   {
     "medumba": "Jûtsiàntə̀",
-    "french": "Intéressant"
+    "french": "Intéressant",
+    "english": "Interesting"
   },
   {
     "medumba": "Nə̀ bwɔ̌",
-    "french": "Intéresser"
+    "french": "Intéresser",
+    "english": "Interest"
   },
   {
     "medumba": "Nə̀bàgtə̌",
-    "french": "Interprétation"
+    "french": "Interprétation",
+    "english": "Interpretation"
   },
   {
     "medumba": "Ngàbàgtə̀",
-    "french": "Interprète"
+    "french": "Interprète",
+    "english": "Interpreter"
   },
   {
     "medumba": "Mbaꞌsaꞌ",
-    "french": "Interprète"
+    "french": "Interprète",
+    "english": "Interpreter"
   },
   {
     "medumba": "Bɛdtə̀",
-    "french": "Interrogation"
+    "french": "Interrogation",
+    "english": "Questioning"
   },
   {
     "medumba": "Nə̀ bɛdtə̀",
-    "french": "Interroger"
+    "french": "Interroger",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ tɔtə̌",
-    "french": "Interroger"
+    "french": "Interroger",
+    "english": "Ask"
   },
   {
     "medumba": "Nə̀ zwəꞌtə",
-    "french": "Interroger"
+    "french": "Interroger",
+    "english": "Ask"
   },
   {
     "medumba": "Nto",
-    "french": "Intestin"
+    "french": "Intestin",
+    "english": "Intestine"
   },
   {
     "medumba": "Kɔ̂ntʉ",
-    "french": "Intime"
+    "french": "Intime",
+    "english": "Intimate"
   },
   {
     "medumba": "Bwèꞌtə",
-    "french": "Intimidation"
+    "french": "Intimidation",
+    "english": "Bullying"
   },
   {
     "medumba": "Bwog",
-    "french": "Intimidation"
+    "french": "Intimidation",
+    "english": "Bullying"
   },
   {
     "medumba": "Fedtə̀",
-    "french": "Intimidation"
+    "french": "Intimidation",
+    "english": "Bullying"
   },
   {
     "medumba": "Nyùꞌte",
-    "french": "Intimidation"
+    "french": "Intimidation",
+    "english": "Bullying"
   },
   {
     "medumba": "Nə̀ bwə̀ꞌtə̌",
-    "french": "Intimider"
+    "french": "Intimider",
+    "english": "Intimidate"
   },
   {
     "medumba": "Nə̀ fedtə",
-    "french": "Intimider"
+    "french": "Intimider",
+    "english": "Intimidate"
   },
   {
     "medumba": "Nə̀ kα̌g bwog",
-    "french": "Intimider"
+    "french": "Intimider",
+    "english": "Intimidate"
   },
   {
     "medumba": "Nə̀ mǎꞌ nyùꞌ",
-    "french": "Intimider"
+    "french": "Intimider",
+    "english": "Intimidate"
   },
   {
     "medumba": "Mvαn",
-    "french": "Intrus"
+    "french": "Intrus",
+    "english": "Intruder"
   },
   {
     "medumba": "Kə̀bìd",
-    "french": "Irréprochable"
+    "french": "Irréprochable",
+    "english": "Impeccable"
   },
   {
     "medumba": "Kə̀loꞌ",
-    "french": "Irréprochable"
+    "french": "Irréprochable",
+    "english": "Impeccable"
   },
   {
     "medumba": "Kə̀mbɛ̀n",
-    "french": "Irréprochable"
+    "french": "Irréprochable",
+    "english": "Impeccable"
   },
   {
     "medumba": "Kə̀ŋuꞌu",
-    "french": "Irréprochable"
+    "french": "Irréprochable",
+    "english": "Impeccable"
   },
   {
     "medumba": "Yântʉ",
-    "french": "Irritation"
+    "french": "Irritation",
+    "english": "Irritation"
   },
   {
     "medumba": "Nə̀ loꞌtəntʉ",
-    "french": "Irriter"
+    "french": "Irriter",
+    "english": "Irritate"
   },
   {
     "medumba": "Nə̀ yantʉ",
-    "french": "Irriter (sꞌ)"
+    "french": "Irriter (sꞌ)",
+    "english": "Irritate (sꞌ)"
   },
   {
     "medumba": "Sɔ̌nsənyὰm",
-    "french": "Ivoire"
+    "french": "Ivoire",
+    "english": "Ivory"
   },
   {
     "medumba": "Mbûmndùꞌ",
-    "french": "Ivrogne"
+    "french": "Ivrogne",
+    "english": "Drunk"
   },
   {
     "medumba": "Ngàbumndùꞌ",
-    "french": "Ivrogne"
+    "french": "Ivrogne",
+    "english": "Drunk"
   },
   {
     "medumba": "Ngànundùꞌ",
-    "french": "Ivrogne"
+    "french": "Ivrogne",
+    "english": "Drunk"
   },
   {
     "medumba": "Nə̀bûmndùꞌ",
-    "french": "Ivrognerie"
+    "french": "Ivrognerie",
+    "english": "Drunkenness"
   },
   {
     "medumba": "Nə̀ lα̌n mɛ̀n",
-    "french": "Jalouser"
+    "french": "Jalouser",
+    "english": "Jealousy"
   },
   {
     "medumba": "Lὰnmɛ̀n",
-    "french": "Jalousie"
+    "french": "Jalousie",
+    "english": "Jealousy"
   },
   {
     "medumba": "Lὰghəꞌə",
-    "french": "Jalousie"
+    "french": "Jalousie",
+    "english": "Jealousy"
   },
   {
     "medumba": "Ngàlα̌nmɛ̀n",
-    "french": "Jaloux"
+    "french": "Jaloux",
+    "english": "Jealous"
   },
   {
     "medumba": "Nə̀ lαghəꞌə",
-    "french": "Jaloux (être)"
+    "french": "Jaloux (être)",
+    "english": "Jealous (to be)"
   },
   {
     "medumba": "Kù",
-    "french": "Jambe"
+    "french": "Jambe",
+    "english": "Leg"
   },
   {
     "medumba": "Fʉnkù",
-    "french": "Jambe (tibia)"
+    "french": "Jambe (tibia)",
+    "english": "Leg (shin)"
   },
   {
     "medumba": "Nə̀ lǒꞌ mfìꞌ",
-    "french": "Jauger"
+    "french": "Jauger",
+    "english": "Gauge"
   },
   {
     "medumba": "Bwòŋ",
-    "french": "Jaune"
+    "french": "Jaune",
+    "english": "Yellow"
   },
   {
     "medumba": "Nə̀ bwòŋə",
-    "french": "Jaunir"
+    "french": "Jaunir",
+    "english": "Yellow"
   },
   {
     "medumba": "Mə̀",
-    "french": "Je"
+    "french": "Je",
+    "english": "I"
   },
   {
     "medumba": "Nə̀ màꞌa",
-    "french": "Jeter"
+    "french": "Jeter",
+    "english": "Throw"
   },
   {
     "medumba": "Nə̀ waꞌa",
-    "french": "Jeter"
+    "french": "Jeter",
+    "english": "Throw"
   },
   {
     "medumba": "Sa",
-    "french": "Jeu"
+    "french": "Jeu",
+    "english": "Game"
   },
   {
     "medumba": "Nə̀ tswə nzìkuꞌu",
-    "french": "Jeuner"
+    "french": "Jeuner",
+    "english": "Fast"
   },
   {
     "medumba": "Ngə̀laŋ nə̀tswənzikuꞌu",
-    "french": "Jeun"
+    "french": "Jeun",
+    "english": "Young"
   },
   {
     "medumba": "Mɛ̂nnshùm",
-    "french": "Jeune"
+    "french": "Jeune",
+    "english": "Young"
   },
   {
     "medumba": "Ngwαnmɛ̀n",
-    "french": "Jeune"
+    "french": "Jeune",
+    "english": "Young"
   },
   {
     "medumba": "Mɛ̂nnshùm",
-    "french": "Jeune (homme)"
+    "french": "Jeune (homme)",
+    "english": "Young (male)"
   },
   {
     "medumba": "Nshǔmnshùm",
-    "french": "Jeunes (les)"
+    "french": "Jeunes (les)",
+    "english": "Young people"
   },
   {
     "medumba": "Ngə̀la:ŋnshùm",
-    "french": "Jeunesse"
+    "french": "Jeunesse",
+    "english": "Youth"
   },
   {
     "medumba": "Tsiàŋtə̀",
-    "french": "Joie"
+    "french": "Joie",
+    "english": "Joy"
   },
   {
     "medumba": "Nə̀ tsiàŋtə̀",
-    "french": "Joie (être en)"
+    "french": "Joie (être en)",
+    "english": "Joy (to be in)"
   },
   {
     "medumba": "Nə̀ yòŋə",
-    "french": "Joindre"
+    "french": "Joindre",
+    "english": "Join"
   },
   {
     "medumba": "Nə̀ tàmtə̌",
-    "french": "Joindre"
+    "french": "Joindre",
+    "english": "Join"
   },
   {
     "medumba": "Yoŋ",
-    "french": "Joint"
+    "french": "Joint",
+    "english": "Gasket"
   },
   {
     "medumba": "Mbwɔ̀",
-    "french": "Joli"
+    "french": "Joli",
+    "english": "Pretty"
   },
   {
     "medumba": "Nə̀bwɔ̌",
-    "french": "Joli"
+    "french": "Joli",
+    "english": "Pretty"
   },
   {
     "medumba": "Ghəꞌ",
-    "french": "Joue"
+    "french": "Joue",
+    "english": "Play"
   },
   {
     "medumba": "Dùtə̂ngəꞌ",
-    "french": "Joues abattues"
+    "french": "Joues abattues",
+    "english": "Downcast cheeks"
   },
   {
     "medumba": "Tôngəꞌ",
-    "french": "Joues creuses"
+    "french": "Joues creuses",
+    "english": "Hollow cheeks"
   },
   {
     "medumba": "Nə̀ ghʉ̌ sa",
-    "french": "Jouer"
+    "french": "Jouer",
+    "english": "Play"
   },
   {
     "medumba": "Mbuꞌngə̀ꞌ",
-    "french": "Joufflu"
+    "french": "Joufflu",
+    "english": "Chubby"
   },
   {
     "medumba": "Mǔtngə̀ꞌ",
-    "french": "Joufflu"
+    "french": "Joufflu",
+    "english": "Chubby"
   },
   {
     "medumba": "Kələꞌə",
-    "french": "Joug"
+    "french": "Joug",
+    "english": "Yoke"
   },
   {
     "medumba": "Kuan",
-    "french": "Joug"
+    "french": "Joug",
+    "english": "Yoke"
   },
   {
     "medumba": "Leꞌe",
-    "french": "Jour"
+    "french": "Jour",
+    "english": "Day"
   },
   {
     "medumba": "Leꞌnjʉ",
-    "french": "Jour"
+    "french": "Jour",
+    "english": "Day"
   },
   {
     "medumba": "Leꞌvʉ",
-    "french": "Jour (de la mort)"
+    "french": "Jour (de la mort)",
+    "english": "Day (of death)"
   },
   {
     "medumba": "Leꞌngeꞌ",
-    "french": "Jour (de malheur)"
+    "french": "Jour (de malheur)",
+    "english": "Day (of misfortune)"
   },
   {
     "medumba": "Leꞌnjʉ̂ndʉb",
-    "french": "Jour (grand)"
+    "french": "Jour (grand)",
+    "english": "Day (big)"
   },
   {
     "medumba": "Mα̂njʉ",
-    "french": "Jour (grand)"
+    "french": "Jour (grand)",
+    "english": "Day (big)"
   },
   {
     "medumba": "Leꞌngùꞌnjʉ̂nswə (5/4",
-    "french": "Jour de l’an"
+    "french": "Jour de l’an",
+    "english": "New Year's Day"
   },
   {
     "medumba": "Leꞌjʉα",
-    "french": "Jour ferie"
+    "french": "Jour ferie",
+    "english": "Holiday"
   },
   {
     "medumba": "Leꞌfən",
-    "french": "Jour (de bonheur)"
+    "french": "Jour (de bonheur)",
+    "english": "Day (of happiness)"
   },
   {
     "medumba": "Leꞌbwə",
-    "french": "Jour (de naissance)"
+    "french": "Jour (de naissance)",
+    "english": "Day (of birth)"
   },
   {
     "medumba": "Nkʉ̌nleꞌe",
-    "french": "Journal"
+    "french": "Journal",
+    "english": "Newspaper"
   },
   {
     "medumba": "Nttswəꞌnjʉ̀",
-    "french": "Jours (les )"
+    "french": "Jours (les )",
+    "english": "Days (the)"
   },
   {
     "medumba": "Tswə̂tsiàŋtə̀",
-    "french": "Joyeux"
+    "french": "Joyeux",
+    "english": "Happy"
   },
   {
     "medumba": "Ngàcoꞌtəncà",
-    "french": "Juge"
+    "french": "Juge",
+    "english": "Judge"
   },
   {
     "medumba": "Ncà",
-    "french": "Jugement"
+    "french": "Jugement",
+    "english": "Judgment"
   },
   {
     "medumba": "Kamə",
-    "french": "Jugement"
+    "french": "Jugement",
+    "english": "Judgment"
   },
   {
     "medumba": "Nə̀ coꞌtə",
-    "french": "Juger"
+    "french": "Juger",
+    "english": "Judge"
   },
   {
     "medumba": "Mfə",
-    "french": "Jurement"
+    "french": "Jurement",
+    "english": "Swear"
   },
   {
     "medumba": "Nə̀ kα̌n mfə",
-    "french": "Jurer"
+    "french": "Jurer",
+    "english": "Swear"
   },
   {
     "medumba": "Nə̀kuꞌu",
-    "french": "Juste"
+    "french": "Juste",
+    "english": "Just"
   },
   {
     "medumba": "Nə̀tsinə",
-    "french": "Juste"
+    "french": "Juste",
+    "english": "Just"
   },
   {
     "medumba": "Mɛ̀nnənʉnə",
-    "french": "Juste (le)"
+    "french": "Juste (le)",
+    "english": "Just (the)"
   },
   {
     "medumba": "Mɛ̀nnə̀tsinə",
-    "french": "Juste (le)"
+    "french": "Juste (le)",
+    "english": "Just (the)"
   },
   {
     "medumba": "Nùnə̀ntsinə",
-    "french": "Justice"
+    "french": "Justice",
+    "english": "Justice"
   },
   {
     "medumba": "Mbàꞌkamə",
-    "french": "Justicier"
+    "french": "Justicier",
+    "english": "Vigilante"
   },
   {
     "medumba": "Ngàbǎꞌkamə",
-    "french": "Justicier"
+    "french": "Justicier",
+    "english": "Vigilante"
   },
   {
     "medumba": "nə̀ tsiagtənə̀ ta nù",
-    "french": "Justifier"
+    "french": "Justifier",
+    "english": "Justify"
   },
   {
     "medumba": "Nə̀ cob nənʉnə",
-    "french": "Justifier"
+    "french": "Justifier",
+    "english": "Justify"
   },
   {
     "medumba": "Mbem",
-    "french": "Kaolin"
+    "french": "Kaolin",
+    "english": "Kaolin"
   },
   {
     "medumba": "Kwʉncàŋ",
-    "french": "Kamikaze"
+    "french": "Kamikaze",
+    "english": "Kamikaze"
   },
   {
     "medumba": "Nkə",
-    "french": "Karaté̍"
+    "french": "Karaté̍",
+    "english": "Karate"
   },
   {
     "medumba": "Cə̀",
-    "french": "Képi"
+    "french": "Képi",
+    "english": "Kepi"
   },
   {
     "medumba": "Ntsəmbwognkà",
-    "french": "Kérosène"
+    "french": "Kérosène",
+    "english": "Kerosene"
   },
   {
     "medumba": "Kilò",
-    "french": "Kilogramme"
+    "french": "Kilogramme",
+    "english": "Kilogram"
   },
   {
     "medumba": "Laŋnzə̀",
-    "french": "Kilomètre"
+    "french": "Kilomètre",
+    "english": "Kilometer"
   },
   {
     "medumba": "Kilɔ̀metὰ",
-    "french": "Kilomètre"
+    "french": "Kilomètre",
+    "english": "Kilometer"
   },
   {
     "medumba": "Mətὰncâꞌmbʉm",
-    "french": "Kilomètre"
+    "french": "Kilomètre",
+    "english": "Kilometer"
   },
   {
     "medumba": "Nzwə̂nkɔ",
-    "french": "Kimono"
+    "french": "Kimono",
+    "english": "Kimono"
   },
   {
     "medumba": "Ndɔ",
-    "french": "Klaxon"
+    "french": "Klaxon",
+    "english": "Horn"
   },
   {
     "medumba": "Nə̀ tɔ ndɔ",
-    "french": "Klaxonner"
+    "french": "Klaxonner",
+    "english": "Honk"
   },
   {
     "medumba": "Ngàghumtə̀",
-    "french": "Kleptomane"
+    "french": "Kleptomane",
+    "english": "Kleptomaniac"
   },
   {
     "medumba": "Nə̀ ghumtə",
-    "french": "Kleptomanie"
+    "french": "Kleptomanie",
+    "english": "Kleptomania"
   },
   {
     "medumba": "Bwə",
-    "french": "Kola"
+    "french": "Kola",
+    "english": "Kola"
   },
   {
     "medumba": "Tʉbwə",
-    "french": "Kolatier"
+    "french": "Kolatier",
+    "english": "Kolatier"
   },
   {
     "medumba": "Nə̀dʉꞌnα",
-    "french": "Labour"
+    "french": "Labour",
+    "english": "Plowing"
   },
   {
     "medumba": "Ngə̀laŋŋèdʉꞌnα",
-    "french": "Labour (periode)"
+    "french": "Labour (periode)",
+    "english": "Plowing (period)"
   },
   {
     "medumba": "Nə̀ dʉꞌnα",
-    "french": "Labourer"
+    "french": "Labourer",
+    "english": "Plow"
   },
   {
     "medumba": "Ngàdʉꞌnα",
-    "french": "Laboureur"
+    "french": "Laboureur",
+    "english": "Plowman"
   },
   {
     "medumba": "Ndʉ̂ꞌnὰ",
-    "french": "Laboureur"
+    "french": "Laboureur",
+    "english": "Plowman"
   },
   {
     "medumba": "Diàŋkadntsə",
-    "french": "Lac"
+    "french": "Lac",
+    "english": "Lake"
   },
   {
     "medumba": "Kə̀tûntsə",
-    "french": "Lac"
+    "french": "Lac",
+    "english": "Lake"
   },
   {
     "medumba": "Mὰlαlα",
-    "french": "Là bas"
+    "french": "Là bas",
+    "english": "There"
   },
   {
     "medumba": "Mbwôgtùn",
-    "french": "Lâche"
+    "french": "Lâche",
+    "english": "Coward"
   },
   {
     "medumba": "Nə̀ naŋə",
-    "french": "Lâcher"
+    "french": "Lâcher",
+    "english": "Let go"
   },
   {
     "medumba": "Nə̀ kὰgə",
-    "french": "Lâcher"
+    "french": "Lâcher",
+    "english": "Let go"
   },
   {
     "medumba": "Bwog",
-    "french": "Lâchete̍"
+    "french": "Lâchete̍",
+    "english": "Cowardice"
   },
   {
     "medumba": "Nyǎŋnjùmbwə",
-    "french": "Laine"
+    "french": "Laine",
+    "english": "Wool"
   },
   {
     "medumba": "Bʉn",
-    "french": "Lait"
+    "french": "Lait",
+    "english": "Milk"
   },
   {
     "medumba": "Nə̀kwàꞌa",
-    "french": "Lamentation"
+    "french": "Lamentation",
+    "english": "Lamentation"
   },
   {
     "medumba": "Nə̀ kwaꞌa",
-    "french": "Lamenter"
+    "french": "Lamenter",
+    "english": "Lament"
   },
   {
     "medumba": "Nə̀ lὰnə",
-    "french": "Lamenter"
+    "french": "Lamenter",
+    "english": "Lament"
   },
   {
     "medumba": "Lαmbò",
-    "french": "Lampe"
+    "french": "Lampe",
+    "english": "Lamp"
   },
   {
     "medumba": "Kɔ",
-    "french": "Lance"
+    "french": "Lance",
+    "english": "Lance"
   },
   {
     "medumba": "Nə̀ màꞌa᷆",
-    "french": "Lancer"
+    "french": "Lancer",
+    "english": "Throw"
   },
   {
     "medumba": "Nə̀ màꞌ kɔ",
-    "french": "Lancer (flèche)"
+    "french": "Lancer (flèche)",
+    "english": "Throw (arrow)"
   },
   {
     "medumba": "Ngàmǎꞌ",
-    "french": "Lanceur"
+    "french": "Lanceur",
+    "english": "Launcher"
   },
   {
     "medumba": "Maꞌ",
-    "french": "Lanceur"
+    "french": "Lanceur",
+    "english": "Launcher"
   },
   {
     "medumba": "Lem",
-    "french": "Langue"
+    "french": "Langue",
+    "english": "Language"
   },
   {
     "medumba": "Ncobe",
-    "french": "Langue"
+    "french": "Langue",
+    "english": "Language"
   },
   {
     "medumba": "Nə̀ bolə",
-    "french": "Languir"
+    "french": "Languir",
+    "english": "Languish"
   },
   {
     "medumba": "Nə̀bolə",
-    "french": "Languirssant"
+    "french": "Languirssant",
+    "english": "Languishing"
   },
   {
     "medumba": "Nkɔ̌ca",
-    "french": "Lanière de bambou"
+    "french": "Lanière de bambou",
+    "english": "Bamboo strip"
   },
   {
     "medumba": "Nàghuꞌu",
-    "french": "Large"
+    "french": "Large",
+    "english": "Large"
   },
   {
     "medumba": "Nə̀zi",
-    "french": "Large"
+    "french": "Large",
+    "english": "Large"
   },
   {
     "medumba": "Nə̀tɛdntsə",
-    "french": "Large (le)"
+    "french": "Large (le)",
+    "english": "Wide (the)"
   },
   {
     "medumba": "Nə̀ kʉ̌",
-    "french": "Large (prandre le)"
+    "french": "Large (prandre le)",
+    "english": "Wide (take it)"
   },
   {
     "medumba": "Ntsə̌nyα",
-    "french": "Larme"
+    "french": "Larme",
+    "english": "Tear"
   },
   {
     "medumba": "Caꞌnkwa",
-    "french": "Late̍rie"
+    "french": "Late̍rie",
+    "english": "Laterie"
   },
   {
     "medumba": "Cǒꞌnguꞌu",
-    "french": "Laurier"
+    "french": "Laurier",
+    "english": "Laurel"
   },
   {
     "medumba": "Fə̌ꞌntsə",
-    "french": "Lavabo"
+    "french": "Lavabo",
+    "english": "Sink"
   },
   {
     "medumba": "Fə̀ꞌsògwud",
-    "french": "Lavabo"
+    "french": "Lavabo",
+    "english": "Sink"
   },
   {
     "medumba": "Nə̀ sogə",
-    "french": "Laver"
+    "french": "Laver",
+    "english": "Wash"
   },
   {
     "medumba": "Ngàsòg",
-    "french": "Laveur"
+    "french": "Laveur",
+    "english": "Washer"
   },
   {
     "medumba": "Tâmcɛd̈",
-    "french": "Lawn tennis"
+    "french": "Lawn tennis",
+    "english": "Lawn tennis"
   },
   {
     "medumba": "Ngàsiaŋ",
-    "french": "Lecteur"
+    "french": "Lecteur",
+    "english": "Reader"
   },
   {
     "medumba": "Junəsiaŋə",
-    "french": "Lecture"
+    "french": "Lecture",
+    "english": "Reading"
   },
   {
     "medumba": "Nə̀fʉàgə",
-    "french": "Le̍gèrete̍"
+    "french": "Le̍gèrete̍",
+    "english": "Lightness"
   },
   {
     "medumba": "Fùagə",
-    "french": "Le̍ger"
+    "french": "Le̍ger",
+    "english": "Light"
   }
 ];

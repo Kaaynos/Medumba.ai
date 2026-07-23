@@ -234,6 +234,20 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
     const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
     const ENTERPRISE_WHATSAPP = '+237697531413'; // Contact direct entreprise
 
+    // WhatsApp buttons ask for the visitor's name first (the app has no user
+    // identity yet at this point — Landing renders before any onboarding),
+    // then include it in the pre-filled message.
+    const [waModal, setWaModal] = useState(null); // { phone, message } | null
+    const [waName,  setWaName]  = useState('');
+    const openWhatsApp = (phone, message) => { setWaName(''); setWaModal({ phone, message }); };
+    const sendWhatsApp = () => {
+        if (!waModal || !waName.trim()) return;
+        const greeting = tr(`Bonjour, je m'appelle ${waName.trim()}. `, `Hello, my name is ${waName.trim()}. `);
+        const url = `https://wa.me/${waModal.phone.replace('+', '')}?text=${encodeURIComponent(greeting + waModal.message)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+        setWaModal(null);
+    };
+
     const isMobile = vw < 768;
     const isSmall  = vw < 480;
 
@@ -758,13 +772,13 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                                         <span style={{ fontSize:'.78rem',color:AMB,fontWeight:700 }}>★ {t.rating}</span>
                                         <span style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{t.students} {tr('élèves','students')}</span>
                                     </div>
-                                    <a href={`https://wa.me/${WHATSAPP_NUM.replace('+','')}?text=${encodeURIComponent(tr(`Bonjour, je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`Hello, I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}`}
-                                        target="_blank" rel="noopener noreferrer"
+                                    <button
+                                        onClick={() => openWhatsApp(WHATSAPP_NUM, tr(`je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}
                                         style={{ width:'100%',display:'block',boxSizing:'border-box',textAlign:'center',padding:'.6rem',borderRadius:'8px',background:'transparent',color:B,border:`1.5px solid ${B}`,fontWeight:700,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s',textDecoration:'none' }}
                                         onMouseEnter={e=>{e.currentTarget.style.background=B;e.currentTarget.style.color='#fff';}}
                                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color=B;}}>
                                         {tr('Contacter','Contact')} {t.name.split(' ')[0]}
-                                    </a>
+                                    </button>
                                 </div>
                             </Reveal>
                         ))}
@@ -975,13 +989,12 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         <p style={{ fontSize:'.78rem',fontWeight:800,color:'rgba(248,250,252,.7)',letterSpacing:'.5px',textTransform:'uppercase',marginBottom:'.9rem' }}>
                             {tr('Une question ? Écrivez-nous','Have a question? Write to us')}
                         </p>
-                        <a
-                            href={`https://wa.me/${ENTERPRISE_WHATSAPP.replace('+','')}`}
-                            target="_blank" rel="noopener noreferrer"
-                            style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',marginBottom:'1.1rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(37,211,102,.12)',border:'1.5px solid rgba(37,211,102,.35)',color:'#4ade80',fontWeight:700,fontSize:'.82rem',textDecoration:'none' }}
+                        <button
+                            onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr("j'ai une question sur Medumba.AI.", 'I have a question about Medumba.AI.'))}
+                            style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',marginBottom:'1.1rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(37,211,102,.12)',border:'1.5px solid rgba(37,211,102,.35)',color:'#4ade80',fontWeight:700,fontSize:'.82rem',fontFamily:'inherit',cursor:'pointer' }}
                         >
                             <IconWhatsApp size={17} /> {tr('Ou appelez/écrivez-nous sur WhatsApp :','Or call/message us on WhatsApp:')} {ENTERPRISE_WHATSAPP}
-                        </a>
+                        </button>
                         {footerStatus === 'sent' ? (
                             <div style={{ background:'rgba(34,197,94,.12)',border:'1.5px solid rgba(34,197,94,.35)',borderRadius:'12px',padding:'.85rem 1.1rem',color:'#4ade80',fontWeight:700,fontSize:'.85rem',maxWidth:'520px' }}>
                                 ✅ {tr('Message envoyé ! Merci.','Message sent! Thank you.')}
@@ -1045,23 +1058,53 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
             </footer>
 
             {/* ── Bouton flottant WhatsApp — contact direct entreprise ── */}
-            <a
-                href={`https://wa.me/${ENTERPRISE_WHATSAPP.replace('+','')}?text=${encodeURIComponent(tr('Bonjour, je souhaite avoir plus d\'informations sur Medumba.AI.','Hello, I\'d like more information about Medumba.AI.'))}`}
-                target="_blank" rel="noopener noreferrer"
+            <button
+                onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr("je souhaite avoir plus d'informations sur Medumba.AI.", "I'd like more information about Medumba.AI."))}
                 aria-label="WhatsApp"
                 style={{
                     position:'fixed', bottom:'5.5rem', right:'1.25rem', zIndex:200,
                     width:'56px', height:'56px', borderRadius:'50%',
-                    background:'#25D366', color:'#fff',
+                    background:'#25D366', color:'#fff', border:'none',
                     display:'flex', alignItems:'center', justifyContent:'center',
                     boxShadow:'0 6px 20px rgba(37,211,102,.45)',
-                    textDecoration:'none', transition:'transform .18s,box-shadow .18s',
+                    cursor:'pointer', transition:'transform .18s,box-shadow .18s',
                 }}
                 onMouseEnter={e=>{e.currentTarget.style.transform='scale(1.08)';}}
                 onMouseLeave={e=>{e.currentTarget.style.transform='';}}
             >
                 <IconWhatsApp />
-            </a>
+            </button>
+
+            {/* ── Modale : demande du nom avant d'ouvrir WhatsApp ── */}
+            {waModal && (
+                <div
+                    onClick={() => setWaModal(null)}
+                    style={{ position:'fixed', inset:0, background:'rgba(15,23,42,.55)', zIndex:1000, display:'flex', alignItems:'center', justifyContent:'center', padding:'1.5rem' }}
+                >
+                    <div onClick={e => e.stopPropagation()} style={{ background:'#fff', borderRadius:'20px', padding:'1.75rem', maxWidth:'380px', width:'100%', boxShadow:'0 20px 60px rgba(0,0,0,.3)' }}>
+                        <div style={{ fontSize:'1.05rem', fontWeight:900, color:INK, marginBottom:'.5rem' }}>
+                            {tr('Avant de continuer…', 'Before we continue…')}
+                        </div>
+                        <p style={{ fontSize:'.85rem', color:MUTED, marginBottom:'1rem', lineHeight:1.6 }}>
+                            {tr("Quel est votre nom ? Il sera inclus dans votre message WhatsApp.", "What's your name? It'll be included in your WhatsApp message.")}
+                        </p>
+                        <input
+                            autoFocus value={waName} onChange={e => setWaName(e.target.value)}
+                            placeholder={tr('Votre nom', 'Your name')}
+                            onKeyDown={e => { if (e.key === 'Enter' && waName.trim()) sendWhatsApp(); }}
+                            style={{ width:'100%', boxSizing:'border-box', padding:'.7rem .9rem', borderRadius:'10px', border:`1.5px solid ${SAND}`, fontSize:'.9rem', fontFamily:'inherit', outline:'none', marginBottom:'1.1rem' }}
+                        />
+                        <div style={{ display:'flex', gap:'.6rem' }}>
+                            <button onClick={() => setWaModal(null)} style={{ flex:1, padding:'.65rem', borderRadius:'10px', border:`1.5px solid ${SAND}`, background:'#fff', color:MUTED, fontWeight:700, fontSize:'.85rem', cursor:'pointer', fontFamily:'inherit' }}>
+                                {tr('Annuler', 'Cancel')}
+                            </button>
+                            <button onClick={sendWhatsApp} disabled={!waName.trim()} style={{ flex:2, padding:'.65rem', borderRadius:'10px', border:'none', background: waName.trim() ? '#25D366' : SAND, color:'#fff', fontWeight:800, fontSize:'.85rem', cursor: waName.trim() ? 'pointer' : 'default', fontFamily:'inherit' }}>
+                                {tr('Continuer vers WhatsApp', 'Continue to WhatsApp')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

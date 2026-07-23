@@ -989,12 +989,20 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                         <p style={{ fontSize:'.78rem',fontWeight:800,color:'rgba(248,250,252,.7)',letterSpacing:'.5px',textTransform:'uppercase',marginBottom:'.9rem' }}>
                             {tr('Une question ? Écrivez-nous','Have a question? Write to us')}
                         </p>
-                        <button
-                            onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr("j'ai une question sur Medumba.AI.", 'I have a question about Medumba.AI.'))}
-                            style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',marginBottom:'1.1rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(37,211,102,.12)',border:'1.5px solid rgba(37,211,102,.35)',color:'#4ade80',fontWeight:700,fontSize:'.82rem',fontFamily:'inherit',cursor:'pointer' }}
-                        >
-                            <IconWhatsApp size={17} /> {tr('Ou appelez/écrivez-nous sur WhatsApp :','Or call/message us on WhatsApp:')} {ENTERPRISE_WHATSAPP}
-                        </button>
+                        <div style={{ display:'flex', flexWrap:'wrap', gap:'.6rem', marginBottom:'1.1rem' }}>
+                            <button
+                                onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr("j'ai une question sur Medumba.AI.", 'I have a question about Medumba.AI.'))}
+                                style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(37,211,102,.12)',border:'1.5px solid rgba(37,211,102,.35)',color:'#4ade80',fontWeight:700,fontSize:'.82rem',fontFamily:'inherit',cursor:'pointer' }}
+                            >
+                                <IconWhatsApp size={17} /> {ENTERPRISE_WHATSAPP}
+                            </button>
+                            <a
+                                href="mailto:medumba.ai@kaaynos.com"
+                                style={{ display:'inline-flex',alignItems:'center',gap:'.5rem',padding:'.55rem .95rem',borderRadius:'99px',background:'rgba(96,165,250,.12)',border:'1.5px solid rgba(96,165,250,.35)',color:'#93c5fd',fontWeight:700,fontSize:'.82rem',textDecoration:'none' }}
+                            >
+                                ✉️ medumba.ai@kaaynos.com
+                            </a>
+                        </div>
                         {footerStatus === 'sent' ? (
                             <div style={{ background:'rgba(34,197,94,.12)',border:'1.5px solid rgba(34,197,94,.35)',borderRadius:'12px',padding:'.85rem 1.1rem',color:'#4ade80',fontWeight:700,fontSize:'.85rem',maxWidth:'520px' }}>
                                 ✅ {tr('Message envoyé ! Merci.','Message sent! Thank you.')}

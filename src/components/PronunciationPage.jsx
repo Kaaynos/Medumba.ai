@@ -274,13 +274,6 @@ export default function PronunciationPage({ nativeLang, onBack }) {
                 boxShadow: `0 4px 14px ${PURPLE}35`,
               }}>{isFr ? 'Suivant' : 'Next'} →</button>
             </div>
-
-            {/* Note audio */}
-            <div style={{ background: LIGHT, border: `1.5px solid #e9d5ff`, borderRadius: '12px', padding: '0.7rem 1rem', fontSize: '0.75rem', color: '#7c3aed', fontWeight: 600, lineHeight: 1.5 }}>
-              💡 {isFr
-                ? 'La lecture combine les enregistrements réels des syllabes. Si un mot ne peut pas être entièrement reconstitué, la synthèse vocale du navigateur prend le relais.'
-                : 'Reading combines real syllable recordings. If a word can\'t be fully reconstructed, browser speech synthesis takes over.'}
-            </div>
           </div>
         )}
 

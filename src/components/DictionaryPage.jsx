@@ -82,7 +82,7 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
     // 'french' | 'english' | 'medumba' — both non-Medumba languages are
     // always available, independent of the app's own UI language, so a
     // French-speaking user can still look up in English and vice versa.
-    const [lang,     setLang]     = useState('french');
+    const [lang,     setLang]     = useState(isFr ? 'french' : 'english');
     const [speaking, setSpeaking] = useState(null);
 
     // For the reverse (Medumba -> native language) direction, "native

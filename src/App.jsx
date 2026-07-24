@@ -198,6 +198,11 @@ function App() {
               if (name) setUserName(name.split(' ')[0]);
             });
             go(15);
+          } else if (new URLSearchParams(window.location.search).get('register') === '1') {
+            // QR-code deep link (festival banners etc.) — skip the marketing
+            // landing page and go straight into account creation.
+            history.replaceState(null, '', window.location.pathname);
+            go(8);
           } else {
             go(1);
           }

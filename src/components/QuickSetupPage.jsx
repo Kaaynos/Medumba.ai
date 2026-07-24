@@ -9,6 +9,7 @@ const QuickSetupPage = ({ onNext, onBack, nativeLang, setConnection, setProficie
     const [level,   setLevel]   = useState(null);
     const [reason,  setReasonS] = useState(null);
     const [goal,    setGoalS]   = useState(null);
+    const [goals,   setGoalsS]  = useState([]);
 
     const LEVELS = [
         { id: 1, emoji: '🌱', label: isFr ? 'Débutant absolu'  : 'Absolute beginner',  sub: isFr ? 'Je ne connais aucun mot' : 'I know no words yet' },
@@ -32,13 +33,23 @@ const QuickSetupPage = ({ onNext, onBack, nativeLang, setConnection, setProficie
         { id: 'intense', emoji: '💪', time: 30, label: isFr ? 'Intensif'    : 'Intense',  sub: isFr ? '30 min / jour' : '30 min / day' },
     ];
 
-    const canContinue = level && reason && goal;
+    const OBJECTIVES = [
+        { id: 'speak', emoji: '💬', label: isFr ? 'Parler couramment' : 'Speak fluently',     sub: isFr ? 'Converser à l\'oral' : 'Hold a conversation' },
+        { id: 'vocab', emoji: '📇', label: isFr ? 'Maîtriser le vocab' : 'Master vocabulary',  sub: isFr ? 'Élargir mon lexique' : 'Grow my word bank' },
+        { id: 'habit', emoji: '⏰', label: isFr ? "Habitudes d'étude" : 'Build study habits', sub: isFr ? 'Pratiquer chaque jour' : 'Practice daily' },
+    ];
+
+    const toggleObjective = (id) => {
+        setGoalsS(g => g.includes(id) ? g.filter(x => x !== id) : [...g, id]);
+    };
+
+    const canContinue = level && reason && goal && goals.length > 0;
 
     const handleNext = () => {
         setConnection('heritage');
         setProficiency(level);
         setReason(reason);
-        setGoals(['speak']);
+        setGoals(goals);
         setDailyGoal(goal);
         onNext();
     };
@@ -71,7 +82,7 @@ const QuickSetupPage = ({ onNext, onBack, nativeLang, setConnection, setProficie
                     {isFr ? 'Personnalisez votre parcours' : 'Personalize your journey'}
                 </h1>
                 <p style={{ fontSize: '.9rem', color: '#64748b', textAlign: 'center', marginBottom: '2rem', fontWeight: 600 }}>
-                    {isFr ? '30 secondes — juste 3 questions' : '30 seconds — just 3 questions'}
+                    {isFr ? '40 secondes — juste 4 questions' : '40 seconds — just 4 questions'}
                 </p>
 
                 {/* ── Section 1: Niveau ── */}
@@ -119,6 +130,21 @@ const QuickSetupPage = ({ onNext, onBack, nativeLang, setConnection, setProficie
                     </div>
                 </Section>
 
+                {/* ── Section 4: Objectifs d'apprentissage (multi-choix) ── */}
+                <Section label={isFr ? "4. Vos objectifs d'apprentissage ? (plusieurs choix possibles)" : '4. Your learning objectives? (pick any that apply)'}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '.6rem' }}>
+                        {OBJECTIVES.map(o => (
+                            <Card key={o.id} selected={goals.includes(o.id)} onClick={() => toggleObjective(o.id)} row>
+                                <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{o.emoji}</span>
+                                <div>
+                                    <div style={{ fontWeight: 800, fontSize: '.9rem', color: goals.includes(o.id) ? B : '#0f172a' }}>{o.label}</div>
+                                    <div style={{ fontSize: '.75rem', color: '#64748b' }}>{o.sub}</div>
+                                </div>
+                            </Card>
+                        ))}
+                    </div>
+                </Section>
+
                 {/* CTA */}
                 <button
                     onClick={handleNext}
@@ -136,7 +162,7 @@ const QuickSetupPage = ({ onNext, onBack, nativeLang, setConnection, setProficie
                 >
                     {canContinue
                         ? (isFr ? 'Continuer →' : 'Continue →')
-                        : (isFr ? 'Répondez aux 3 questions' : 'Answer all 3 questions')}
+                        : (isFr ? 'Répondez aux 4 questions' : 'Answer all 4 questions')}
                 </button>
             </div>
         </div>

@@ -17,6 +17,8 @@ import EmailPage                from './components/EmailPage';
 import PasswordPage             from './components/PasswordPage';
 import SuccessPage              from './components/SuccessPage';
 import OTPVerificationPage      from './components/OTPVerificationPage';
+import LoginPage                from './components/LoginPage';
+import ForgotPasswordPage       from './components/ForgotPasswordPage';
 import NewPasswordPage          from './components/NewPasswordPage';
 import PasswordResetSuccessPage from './components/PasswordResetSuccessPage';
 import LandingPage              from './components/LandingPage';
@@ -53,8 +55,10 @@ import { ThemeProvider }        from './context/ThemeContext';
 // 11  Email                                                     │  never requires this)
 // 12  Password                                                  │
 // 13  Success          (→15)                                    ┘
+// 20  Log in           (reached from the Dashboard's "Se connecter" button)
+// 21  Forgot Password  (→20)
 // 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
-// 23  Reset Success    (→15)  ┘ (no "Log in" screen exists anymore)
+// 23  Reset Success    (→15)  ┘
 // 14  Section viewer   (calendar | video | counting | dictionary)
 // 15  Gamified Dashboard
 // 99  Admin Panel
@@ -82,6 +86,9 @@ function App() {
 
   // ── Stripe payment success (detected from URL on load) ─────────
   const [paymentSuccess, setPaymentSuccess] = useState(() => getPaymentSuccessFromUrl());
+
+  // ── Free-access "Start" users land straight in their first lesson ──
+  const [autoStartFirstLesson, setAutoStartFirstLesson] = useState(false);
 
   // ── Profil discret (usage interne uniquement) ────────────────────
   const [_zodiacSign, _setZodiacSign] = useState(() => {
@@ -234,7 +241,7 @@ function App() {
       {/* ── Quick setup (niveau + raison + objectif — tout en 1) ── */}
       {step === 3 && (
         <QuickSetupPage
-          onNext={() => go(15)} onBack={back}
+          onNext={() => { setAutoStartFirstLesson(true); go(15); }} onBack={back}
           nativeLang={nativeLang}
           setConnection={setConnection}
           setProficiency={setProficiency}
@@ -276,6 +283,15 @@ function App() {
 
       {/* ── Password reset — plus de flux "connexion" dans l'UI, mais un lien de
          récupération déjà envoyé (avant ce changement) doit encore fonctionner. ── */}
+      {step === 20 && (
+        <LoginPage
+          onLogin={() => {}} // navigation handled instantly by the persistent auth listener above
+          onBack={back}
+          onForgotPassword={() => go(21)}
+          nativeLang={nativeLang}
+        />
+      )}
+      {step === 21 && <ForgotPasswordPage onNext={() => go(20)} onBack={() => go(20)} nativeLang={nativeLang} />}
       {step === 22 && <NewPasswordPage onNext={() => go(23)} onBack={() => go(1)} nativeLang={nativeLang} />}
       {step === 23 && <PasswordResetSuccessPage onNext={() => go(15)} nativeLang={nativeLang} />}
 
@@ -302,6 +318,10 @@ function App() {
           onAdmin={() => go(99)}
           paymentSuccess={paymentSuccess}
           onPaymentHandled={() => setPaymentSuccess(null)}
+          autoStartFirstLesson={autoStartFirstLesson}
+          onAutoStartHandled={() => setAutoStartFirstLesson(false)}
+          onRegister={() => go(8)}
+          onGoToLogin={() => go(20)}
         />
       )}
 

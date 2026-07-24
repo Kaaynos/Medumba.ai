@@ -280,13 +280,6 @@ const DashboardPage = ({
     const [certFlow,  setCertFlow]  = useState(null);   // null | 'exam'
     const [activeCert, setActiveCert] = useState(null); // { unitId, titleFr, titleEn, lessonIds }
 
-    /* ── free-access (no account) nudge to create a profile ── */
-    const [hideRegisterBanner, setHideRegisterBanner] = useState(() => localStorage.getItem(lsKey('med_hide_register_banner')) === '1');
-    const dismissRegisterBanner = () => {
-        localStorage.setItem(lsKey('med_hide_register_banner'), '1');
-        setHideRegisterBanner(true);
-    };
-
     /* ── linear progression: completing item[i] → item[i+1] becomes active ── */
     const applySessionProgress = (units) => {
         // Flatten all lessons across ALL units in sequence order
@@ -1483,60 +1476,6 @@ const DashboardPage = ({
                 </div>
             )}
 
-            {/* ── Free-access nudge: create a profile to save progress ── */}
-            {!currentUid && !hideRegisterBanner && (
-                <div style={{
-                    margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
-                    padding: '1rem 1.2rem', borderRadius: '16px',
-                    background: 'linear-gradient(135deg, #fef3c7, #fde68a)',
-                    border: '2px solid #f59e0b',
-                    display: 'flex', alignItems: 'center', gap: '1rem',
-                    position: 'relative',
-                }}>
-                    <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>💾</div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#92400e', marginBottom: '0.15rem' }}>
-                            {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
-                        </div>
-                        <div style={{ fontSize: '0.78rem', color: '#92400e', opacity: 0.85, marginBottom: '0.7rem' }}>
-                            {isFr
-                                ? 'Sans compte, ton XP et ta série sont perdus si tu changes d\'appareil.'
-                                : 'Without an account, your XP and streak are lost if you switch devices.'}
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-                            <button
-                                onClick={() => onRegister?.()}
-                                style={{
-                                    padding: '0.55rem 1.2rem', borderRadius: '9999px', border: 'none',
-                                    backgroundColor: '#92400e', color: '#fff', fontWeight: '800',
-                                    fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Créer mon profil' : 'Create my profile'}
-                            </button>
-                            <button
-                                onClick={() => onGoToLogin?.()}
-                                style={{
-                                    padding: '0.55rem 1.2rem', borderRadius: '9999px',
-                                    border: '2px solid #92400e', backgroundColor: 'transparent', color: '#92400e',
-                                    fontWeight: '800', fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Se connecter' : 'Log in'}
-                            </button>
-                        </div>
-                    </div>
-                    <button
-                        onClick={dismissRegisterBanner}
-                        aria-label={isFr ? 'Fermer' : 'Close'}
-                        style={{
-                            position: 'absolute', top: '0.6rem', right: '0.6rem',
-                            background: 'none', border: 'none', cursor: 'pointer',
-                            fontSize: '0.9rem', color: '#92400e', opacity: 0.6, padding: '0.25rem',
-                        }}
-                    >✕</button>
-                </div>
-            )}
 
             {/* ── Daily Stories strip ── */}
             {renderStoriesStrip()}
@@ -3207,18 +3146,17 @@ const DashboardPage = ({
             display: 'flex', flexDirection: 'column', gap: '1.1rem',
             backgroundColor: T.surface, overflowY: 'auto',
         }}>
-            {/* Free-access nudge: create a profile to save progress ── */}
-            {!currentUid && !hideRegisterBanner && (
+            {/* Free-access nudge: create a profile to save progress (permanent — no dismiss) ── */}
+            {!currentUid && (
                 <div style={{
                     padding: '1rem 1.1rem', borderRadius: '16px',
-                    background: 'linear-gradient(135deg, #fef3c7, #fde68a)',
-                    border: '2px solid #f59e0b', position: 'relative',
+                    backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
                 }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>💾</div>
-                    <div style={{ fontWeight: '800', fontSize: '0.85rem', color: '#92400e', marginBottom: '0.3rem', lineHeight: 1.3 }}>
+                    <div style={{ fontWeight: '800', fontSize: '0.85rem', color: '#0056D2', marginBottom: '0.3rem', lineHeight: 1.3 }}>
                         {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
                     </div>
-                    <div style={{ fontSize: '0.72rem', color: '#92400e', opacity: 0.85, marginBottom: '0.7rem', lineHeight: 1.4 }}>
+                    <div style={{ fontSize: '0.72rem', color: T.textMuted, marginBottom: '0.7rem', lineHeight: 1.4 }}>
                         {isFr
                             ? 'Sans compte, ton XP et ta série sont perdus si tu changes d\'appareil.'
                             : 'Without an account, your XP and streak are lost if you switch devices.'}
@@ -3228,7 +3166,7 @@ const DashboardPage = ({
                             onClick={() => onRegister?.()}
                             style={{
                                 width: '100%', padding: '0.6rem', borderRadius: '9999px', border: 'none',
-                                backgroundColor: '#92400e', color: '#fff', fontWeight: '800',
+                                backgroundColor: '#0056D2', color: '#fff', fontWeight: '800',
                                 fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'inherit',
                             }}
                         >
@@ -3238,22 +3176,13 @@ const DashboardPage = ({
                             onClick={() => onGoToLogin?.()}
                             style={{
                                 width: '100%', padding: '0.6rem', borderRadius: '9999px',
-                                border: '2px solid #92400e', backgroundColor: 'transparent', color: '#92400e',
+                                border: '2px solid #0056D2', backgroundColor: 'transparent', color: '#0056D2',
                                 fontWeight: '800', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'inherit',
                             }}
                         >
                             {isFr ? 'Se connecter' : 'Log in'}
                         </button>
                     </div>
-                    <button
-                        onClick={dismissRegisterBanner}
-                        aria-label={isFr ? 'Fermer' : 'Close'}
-                        style={{
-                            position: 'absolute', top: '0.6rem', right: '0.6rem',
-                            background: 'none', border: 'none', cursor: 'pointer',
-                            fontSize: '0.85rem', color: '#92400e', opacity: 0.6, padding: '0.2rem',
-                        }}
-                    >✕</button>
                 </div>
             )}
 
@@ -3469,40 +3398,6 @@ const DashboardPage = ({
                         </div>
                     ))}
                 </div>
-
-                {!currentUid && !hideRegisterBanner && (
-                    <div style={{
-                        width: '100%', maxWidth: '320px', padding: '1rem 1.1rem', borderRadius: '16px',
-                        background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b',
-                        animation: 'lc-fade 0.5s ease-out 0.5s both',
-                    }}>
-                        <div style={{ fontWeight: '800', fontSize: '0.85rem', color: '#92400e', marginBottom: '0.6rem', lineHeight: 1.3 }}>
-                            💾 {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                            <button
-                                onClick={() => onRegister?.()}
-                                style={{
-                                    flex: 1, padding: '0.55rem', borderRadius: '9999px', border: 'none',
-                                    backgroundColor: '#92400e', color: '#fff', fontWeight: '800',
-                                    fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Créer mon profil' : 'Create my profile'}
-                            </button>
-                            <button
-                                onClick={() => onGoToLogin?.()}
-                                style={{
-                                    flex: 1, padding: '0.55rem', borderRadius: '9999px',
-                                    border: '2px solid #92400e', backgroundColor: 'transparent', color: '#92400e',
-                                    fontWeight: '800', fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Se connecter' : 'Log in'}
-                            </button>
-                        </div>
-                    </div>
-                )}
 
                 <button onClick={() => setLessonFlow('daily_mission')}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,86,210,0.5)'; }}

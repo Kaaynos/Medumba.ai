@@ -4,6 +4,7 @@ import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
+import { getProgress, saveProgress, getLeaderboard, getMyRank } from '../services/userService';
 import { useTheme } from '../context/ThemeContext';
 import CertificationPage from './CertificationPage';
 import { UNIT_CERTIFICATIONS } from '../data/certification';
@@ -192,18 +193,7 @@ const PAYMENT_METHODS = [
     { id: 'mastercard', icon: '💳',  label: 'Mastercard'  },
 ];
 
-const LEADERBOARD_DATA = [
-    { rank: 1,  name: 'Alice M.',    xp: 2840, badge: '🥇', you: false },
-    { rank: 2,  name: 'Jean K.',     xp: 2560, badge: '🥈', you: false },
-    { rank: 3,  name: 'Sophie T.',   xp: 2190, badge: '🥉', you: false },
-    { rank: 4,  name: 'Marc D.',     xp: 1980, badge: null,  you: false },
-    { rank: 5,  name: 'Luc N.',      xp: 1740, badge: null,  you: false },
-    { rank: 6,  name: 'Emma W.',     xp: 1600, badge: null,  you: false },
-    { rank: 7,  name: 'You',         xp: 1340, badge: null,  you: true  },
-    { rank: 8,  name: 'Paul F.',     xp: 1200, badge: null,  you: false },
-    { rank: 9,  name: 'Nina C.',     xp: 980,  badge: null,  you: false },
-    { rank: 10, name: 'Omar B.',     xp: 760,  badge: null,  you: false },
-];
+const RANK_BADGES = ['🥇', '🥈', '🥉'];
 
 const DAILY_CHALLENGES = [
     { id: 'dc1', icon: '⚡', titleEn: 'Complete 3 lessons',    titleFr: 'Terminer 3 leçons',       progress: 2, total: 3, reward: 20 },
@@ -369,6 +359,52 @@ const DashboardPage = ({
     useEffect(() => { localStorage.setItem(lsKey('med_xp'),     xp);     }, [xp]);     // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_streak'), streak); }, [streak]); // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_hearts'), hearts); }, [hearts]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // ── Charger la vraie progression depuis Supabase au montage (le serveur
+    // fait autorité dès qu'il a une ligne — sinon on garde localStorage et la
+    // valeur remontera au serveur via l'effet de sauvegarde ci-dessous) ──
+    const serverHydrated = useRef(false);
+    useEffect(() => {
+        if (!currentUid) return;
+        getProgress(currentUid).then((p) => {
+            serverHydrated.current = true;
+            if (!p) return;
+            if (typeof p.xp     === 'number') setXp(p.xp);
+            if (typeof p.gems   === 'number') setGems(p.gems);
+            if (typeof p.hearts === 'number') setHearts(p.hearts);
+            if (typeof p.streak === 'number') setStreak(p.streak);
+        });
+    }, [currentUid]);
+
+    // ── Sauvegarder la vraie progression sur Supabase à chaque changement,
+    // pour que le classement (et le compte lui-même, sur un autre appareil)
+    // reflète des chiffres réels au lieu de rester local au navigateur ──
+    useEffect(() => {
+        if (!currentUid || !serverHydrated.current) return;
+        saveProgress(currentUid, { xp, gems, hearts, streak });
+    }, [currentUid, xp, gems, hearts, streak]);
+
+    /* ── classement réel (top par XP) ── */
+    const [leaderboard, setLeaderboard] = useState([]);
+    const [myRank, setMyRank] = useState(null);
+    const refreshLeaderboard = useCallback(() => {
+        getLeaderboard(10).then(setLeaderboard);
+        if (currentUid) getMyRank(currentUid).then(setMyRank);
+    }, [currentUid]);
+    useEffect(() => { refreshLeaderboard(); }, [refreshLeaderboard]);
+
+    // Le top 10 renvoyé par le serveur, avec badges + la ligne "vous" ajoutée
+    // à la fin si vous n'êtes pas déjà dedans (classement réel, pas de faux 7e rang).
+    const leaderboardRows = (() => {
+        const rows = leaderboard.map((e, i) => ({
+            rank: i + 1, name: e.display_name, xp: e.xp,
+            badge: RANK_BADGES[i] || null, you: e.user_id === currentUid,
+        }));
+        if (currentUid && !rows.some(r => r.you) && myRank) {
+            rows.push({ rank: myRank, name: isFr ? 'Vous' : 'You', xp, badge: null, you: true });
+        }
+        return rows;
+    })();
 
     /* ── notifications ── */
     const [notifEnabled, setNotifEnabled] = useState(() => isEnabled());
@@ -1764,11 +1800,16 @@ const DashboardPage = ({
             </div>
 
             {/* Top 3 Podium */}
+            {leaderboardRows.length < 3 ? (
+                <div style={{ textAlign: 'center', padding: '1.5rem 1rem', color: T.textMuted, fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+                    {isFr ? "Pas encore assez d'apprenants classés — revenez bientôt !" : 'Not enough ranked learners yet — check back soon!'}
+                </div>
+            ) : (
             <div style={{
                 display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
                 gap: '1rem', marginBottom: '2rem',
             }}>
-                {[LEADERBOARD_DATA[1], LEADERBOARD_DATA[0], LEADERBOARD_DATA[2]].map((entry, pi) => {
+                {[leaderboardRows[1], leaderboardRows[0], leaderboardRows[2]].map((entry, pi) => {
                     const heights = [90, 120, 75];
                     const colors  = [T.border, '#fbbf24', '#d1d5db'];
                     const order   = [2, 1, 3];
@@ -1800,15 +1841,16 @@ const DashboardPage = ({
                     );
                 })}
             </div>
+            )}
 
             {/* Full list */}
             <div style={{ borderRadius: '16px', border: `2px solid ${T.border}`, overflow: 'hidden' }}>
-                {LEADERBOARD_DATA.map((entry, i) => (
+                {leaderboardRows.map((entry, i) => (
                     <div key={entry.rank} style={{
                         display: 'flex', alignItems: 'center', gap: '0.75rem',
                         padding: '0.85rem 1.1rem',
                         backgroundColor: entry.you ? '#eff6ff' : i % 2 === 0 ? '#fff' : '#fafafa',
-                        borderBottom: i < LEADERBOARD_DATA.length - 1 ? `1px solid ${T.borderSub}` : 'none',
+                        borderBottom: i < leaderboardRows.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                     }}>
                         <span style={{
                             width: '24px', textAlign: 'center',
@@ -3133,13 +3175,17 @@ const DashboardPage = ({
                     </span>
                     <span style={{ fontSize: '1.1rem' }}>🏆</span>
                 </div>
-                {LEADERBOARD_DATA.slice(0, 3).map((entry, i, arr) => (
+                {leaderboardRows.length === 0 ? (
+                    <div style={{ padding: '0.45rem 0', fontSize: '0.8rem', color: T.textMuted }}>
+                        {isFr ? "Pas encore de classement" : 'No ranking yet'}
+                    </div>
+                ) : leaderboardRows.slice(0, 3).map((entry, i, arr) => (
                     <div key={entry.rank} style={{
                         display: 'flex', alignItems: 'center', gap: '0.55rem',
                         padding: '0.45rem 0',
                         borderBottom: i < arr.length - 1 ? `1px solid ${T.borderSub}` : 'none',
                     }}>
-                        <span style={{ fontSize: '1rem' }}>{entry.badge}</span>
+                        <span style={{ fontSize: '1rem' }}>{entry.badge || `#${entry.rank}`}</span>
                         <span style={{ flex: 1, fontWeight: '600', fontSize: '0.82rem', color: '#334155' }}>{entry.name}</span>
                         <span style={{ fontWeight: '800', fontSize: '0.78rem', color: '#0056D2' }}>{entry.xp} XP</span>
                     </div>
@@ -4095,6 +4141,7 @@ const DashboardPage = ({
                         {activeNav === 'challenge'   && renderChallenge()}
                         {activeNav === 'account'     && renderAccount()}
                         {activeNav === 'music'       && renderMusicCulture()}
+                        {activeNav === 'leaderboard' && renderLeaderboard()}
                     </div>
 
                     {/* Right panel — home tab, desktop only */}

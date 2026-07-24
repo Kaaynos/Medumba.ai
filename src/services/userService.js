@@ -89,6 +89,20 @@ export async function completeCertification(uid, unitId) {
     await saveProgress(uid, { completed_certifications: [...completed] });
 }
 
+/* ── Classement réel (top N par XP) ── */
+export async function getLeaderboard(limitN = 10) {
+    const { data, error } = await supabase.rpc('get_leaderboard', { limit_n: limitN });
+    if (error) { console.error('[userService] getLeaderboard error:', error.message); return []; }
+    return data || [];
+}
+
+/* ── Rang réel de l'utilisateur (1-indexé), même hors du top N ── */
+export async function getMyRank(uid) {
+    const { data, error } = await supabase.rpc('get_my_rank', { uid });
+    if (error) { console.error('[userService] getMyRank error:', error.message); return null; }
+    return data;
+}
+
 /* ── Vérifier si admin ── */
 export async function checkIsAdmin(uid) {
     const { data } = await supabase

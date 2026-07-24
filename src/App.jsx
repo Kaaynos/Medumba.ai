@@ -23,6 +23,7 @@ import NewPasswordPage          from './components/NewPasswordPage';
 import PasswordResetSuccessPage from './components/PasswordResetSuccessPage';
 import LandingPage              from './components/LandingPage';
 import QuickSetupPage           from './components/QuickSetupPage';
+import StartChoicePage          from './components/StartChoicePage';
 import DashboardPage            from './components/DashboardPage';
 import CalendarPage             from './components/CalendarPage';
 import VideoPage                from './components/VideoPage';
@@ -43,6 +44,7 @@ import { ThemeProvider }        from './context/ThemeContext';
 // ─── Step map ───────────────────────────────────────────────────────────────
 //  0  Splash
 //  1  Welcome
+// 18  Start Choice     (→2 continue free, →8 register, →20 log in)
 //  2  Language Selection
 //  3  Connection         ┐
 //  4  Proficiency        │ Courses onboarding
@@ -219,10 +221,21 @@ function App() {
       {/* ── Landing (marketing) ── */}
       {step === 1 && (
         <LandingPage
-          onStart={() => go(2)}
+          onStart={() => go(18)}
           onRegister={() => go(8)}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
+        />
+      )}
+
+      {/* ── Start choice: save progress via an account, or continue free ── */}
+      {step === 18 && (
+        <StartChoicePage
+          nativeLang={nativeLang}
+          onBack={back}
+          onRegister={() => go(8)}
+          onLogin={() => go(20)}
+          onContinue={() => go(2)}
         />
       )}
 

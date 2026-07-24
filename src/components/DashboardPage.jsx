@@ -2825,6 +2825,46 @@ const DashboardPage = ({
                     </div>
                 )}
 
+                {/* ── Free-access nudge: create a profile to save progress (mobile entry point) ── */}
+                {!currentUid && (
+                    <div style={{
+                        padding: '1rem 1.1rem', borderRadius: '16px', marginBottom: '1.25rem',
+                        backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
+                    }}>
+                        <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>💾</div>
+                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: '#0056D2', marginBottom: '0.3rem', lineHeight: 1.3 }}>
+                            {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
+                        </div>
+                        <div style={{ fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.85rem', lineHeight: 1.4 }}>
+                            {isFr
+                                ? 'Sans compte, ton XP et ta série sont perdus si tu changes d\'appareil.'
+                                : 'Without an account, your XP and streak are lost if you switch devices.'}
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.6rem' }}>
+                            <button
+                                onClick={() => onRegister?.()}
+                                style={{
+                                    flex: 1, padding: '0.65rem', borderRadius: '9999px', border: 'none',
+                                    backgroundColor: '#0056D2', color: '#fff', fontWeight: '800',
+                                    fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
+                                }}
+                            >
+                                {isFr ? 'Créer mon profil' : 'Create my profile'}
+                            </button>
+                            <button
+                                onClick={() => onGoToLogin?.()}
+                                style={{
+                                    flex: 1, padding: '0.65rem', borderRadius: '9999px',
+                                    border: '2px solid #0056D2', backgroundColor: 'transparent', color: '#0056D2',
+                                    fontWeight: '800', fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
+                                }}
+                            >
+                                {isFr ? 'Se connecter' : 'Log in'}
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 {/* ── Profile hero card ── */}
                 <div style={{
                     borderRadius: '24px', marginBottom: '1.25rem', overflow: 'hidden',

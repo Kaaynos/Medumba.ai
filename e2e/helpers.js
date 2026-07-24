@@ -8,6 +8,7 @@
 export async function startCourseToDashboard(page) {
     await page.goto('/');
     await page.getByText(/start the course/i).first().click();
+    await page.getByText(/Continuer sans compte|Continue without an account/i).click();
     await page.locator('select').first().selectOption({ index: 1 });
     await page.getByText(/Continuer/i).click();
     await page.getByText(/Débutant absolu/i).click();

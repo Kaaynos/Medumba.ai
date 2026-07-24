@@ -50,7 +50,7 @@ const SplashScreen = ({ onFinish }) => {
         <img src={logo} alt="Medumba.AI" style={{ width: '120px', height: 'auto', marginBottom: '1.25rem' }} />
         <span style={{ fontSize: '2rem', fontWeight: '800', color: '#1e293b', letterSpacing: '-0.02em' }}>Medumba.AI</span>
         <span style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.4rem', maxWidth: '320px', textAlign: 'center', lineHeight: 1.5 }}>
-          Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon: gamified lessons, dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers. Signing in with Google is optional and is used only to create your learner profile and securely save your course progress.
+          Medumba.AI is a learning app for the Medumba language of Bangangté, in the Ndé division, Cameroon: gamified lessons, dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers. Signing in with Google is optional and is used only to create your learner profile and securely save your course progress.
         </span>
       </div>
 

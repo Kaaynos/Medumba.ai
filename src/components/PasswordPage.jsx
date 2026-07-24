@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { registerUser } from '../services/authService';
+import { registerUser, resendConfirmationEmail } from '../services/authService';
 
 const B = '#1B4FD8';
 
@@ -19,6 +19,8 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
     const [show, setShow]         = useState(false);
     const [loading, setLoading]   = useState(false);
     const [error, setError]       = useState('');
+    const [needsConfirmation, setNeedsConfirmation] = useState(false);
+    const [resendState, setResendState] = useState('idle'); // idle | sending | sent
 
     const h   = isFrench ? "Crée un mot de passe 🔒" : "Create a password 🔒";
     const lbl = isFrench ? "Mot de passe" : "Password";
@@ -31,7 +33,7 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
         setError('');
         setLoading(true);
         try {
-            await registerUser({
+            const user = await registerUser({
                 name:      registrationData.name     || '',
                 email:     registrationData.email    || '',
                 password,
@@ -40,7 +42,11 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
                 reason:    registrationData.reason   || null,
                 dailyGoal: DAILY_GOAL_MAP[registrationData.dailyGoal] ?? 10,
             });
-            onNext();
+            if (user?.needsEmailConfirmation) {
+                setNeedsConfirmation(true);
+            } else {
+                onNext();
+            }
         } catch (e) {
             console.error('[register]', e);
             const msg = (e.message || '').toLowerCase();
@@ -60,6 +66,48 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
         } finally {
             setLoading(false);
         }
+    }
+
+    async function handleResend() {
+        if (resendState === 'sending') return;
+        setResendState('sending');
+        try {
+            await resendConfirmationEmail(registrationData.email || '');
+            setResendState('sent');
+        } catch (e) {
+            console.error('[resend-confirmation]', e);
+            setResendState('idle');
+        }
+    }
+
+    if (needsConfirmation) {
+        return (
+            <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#fff' }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '500px', margin: '0 auto', padding: '2rem 1.5rem 2.5rem', justifyContent: 'center', textAlign: 'center' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '1.25rem' }}>📬</div>
+                    <h1 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.75rem' }}>
+                        {isFrench ? 'Confirmez votre e-mail' : 'Confirm your email'}
+                    </h1>
+                    <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: 1.6, marginBottom: '2rem' }}>
+                        {isFrench
+                            ? `Nous avons envoyé un lien de confirmation à ${registrationData.email}. Cliquez dessus pour activer votre compte, puis connectez-vous.`
+                            : `We've sent a confirmation link to ${registrationData.email}. Click it to activate your account, then log in.`}
+                    </p>
+                    {resendState === 'sent' ? (
+                        <p style={{ color: '#16a34a', fontWeight: '700', fontSize: '0.9rem' }}>
+                            {isFrench ? 'E-mail renvoyé !' : 'Email resent!'}
+                        </p>
+                    ) : (
+                        <button onClick={handleResend} disabled={resendState === 'sending'} style={{ background: 'none', border: 'none', color: B, fontWeight: '700', fontSize: '0.9rem', cursor: resendState === 'sending' ? 'default' : 'pointer', fontFamily: 'inherit' }}>
+                            {resendState === 'sending' ? (isFrench ? 'Envoi…' : 'Sending…') : (isFrench ? "Renvoyer l'e-mail" : 'Resend email')}
+                        </button>
+                    )}
+                    <button onClick={onBack} style={{ marginTop: '2rem', background: 'none', border: 'none', color: '#94a3b8', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}>
+                        {isFrench ? '← Retour' : '← Back'}
+                    </button>
+                </div>
+            </div>
+        );
     }
 
     return (

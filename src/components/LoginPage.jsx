@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { loginUser, loginWithGoogle } from '../services/authService';
+import { loginUser, loginWithGoogle, resendConfirmationEmail } from '../services/authService';
 
 const B = '#1B4FD8';
 
@@ -28,6 +28,8 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
     const [loading, setLoading]   = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
     const [error, setError]       = useState('');
+    const [unconfirmed, setUnconfirmed] = useState(false);
+    const [resendState, setResendState] = useState('idle'); // idle | sending | sent
 
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && password.length >= 6;
 
@@ -49,9 +51,22 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
         backgroundColor: 'transparent', color: '#0f172a', fontFamily: 'inherit',
     };
 
+    async function handleResend() {
+        if (resendState === 'sending') return;
+        setResendState('sending');
+        try {
+            await resendConfirmationEmail(email);
+            setResendState('sent');
+        } catch (e) {
+            console.error('[resend-confirmation]', e);
+            setResendState('idle');
+        }
+    }
+
     async function handleLogin() {
         if (!isValid || loading) return;
         setError('');
+        setUnconfirmed(false);
         setLoading(true);
         try {
             const user = await loginUser(email, password);
@@ -59,7 +74,13 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
         } catch (e) {
             console.error('[login]', e);
             const msg = (e.message || '').toLowerCase();
-            if (msg.includes('invalid') || msg.includes('credentials') || msg.includes('not found') || msg.includes('wrong')) {
+            if (msg.includes('confirm')) {
+                setUnconfirmed(true);
+                setResendState('idle');
+                setError(isFrench
+                    ? "Votre e-mail n'est pas encore confirmé. Vérifiez votre boîte de réception."
+                    : "Your email isn't confirmed yet. Check your inbox.");
+            } else if (msg.includes('invalid') || msg.includes('credentials') || msg.includes('not found') || msg.includes('wrong')) {
                 setError(isFrench
                     ? 'E-mail ou mot de passe incorrect. Si vous vous êtes inscrit·e avec Google, utilisez "Continuer avec Google" ci-dessus, ou "Mot de passe oublié ?" pour en créer un.'
                     : 'Incorrect email or password. If you signed up with Google, use "Continue with Google" above, or "Forgot Password?" to set one.');
@@ -149,6 +170,18 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
                     <p style={{ textAlign: 'center', color: '#ef4444', fontSize: '0.9rem', fontWeight: '600', marginBottom: '1rem' }}>
                         {error}
                     </p>
+                )}
+
+                {unconfirmed && (
+                    resendState === 'sent' ? (
+                        <p style={{ textAlign: 'center', color: '#16a34a', fontWeight: '700', fontSize: '0.85rem', marginBottom: '1rem' }}>
+                            {isFrench ? 'E-mail renvoyé !' : 'Email resent!'}
+                        </p>
+                    ) : (
+                        <button onClick={handleResend} disabled={resendState === 'sending'} style={{ display: 'block', margin: '0 auto 1rem', background: 'none', border: 'none', color: B, fontWeight: '700', fontSize: '0.85rem', cursor: resendState === 'sending' ? 'default' : 'pointer', fontFamily: 'inherit' }}>
+                            {resendState === 'sending' ? (isFrench ? 'Envoi…' : 'Sending…') : (isFrench ? "Renvoyer l'e-mail de confirmation" : 'Resend confirmation email')}
+                        </button>
+                    )
                 )}
 
                 <div style={{ flex: 1 }} />

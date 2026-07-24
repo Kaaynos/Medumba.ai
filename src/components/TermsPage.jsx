@@ -6,8 +6,8 @@ const SAND = '#e2e8f0';
 const SECTIONS = [
     {
         titleFr: "Objet de l'application", titleEn: 'About the app',
-        bodyFr: "Medumba.AI est une application d'apprentissage de la langue Medumba (Bafoussam, Cameroun) : leçons gamifiées, dictionnaire, phrasebook, prononciation avec voix réelle, et classes avec des enseignants certifiés CEPOM.",
-        bodyEn: "Medumba.AI is a learning app for the Medumba language (Bafoussam, Cameroon): gamified lessons, a dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers.",
+        bodyFr: "Medumba.AI est une application d'apprentissage de la langue Medumba (Bangangté, Ndé, Cameroun) : leçons gamifiées, dictionnaire, phrasebook, prononciation avec voix réelle, et classes avec des enseignants certifiés CEPOM.",
+        bodyEn: "Medumba.AI is a learning app for the Medumba language (Bangangté, Ndé division, Cameroon): gamified lessons, a dictionary, phrasebook, real-voice pronunciation, and classes with CEPOM-certified teachers.",
     },
     {
         titleFr: "Compte utilisateur", titleEn: 'User account',

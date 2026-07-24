@@ -68,6 +68,23 @@ const ContactPage = ({ nativeLang, onBack }) => {
             </div>
 
             <div style={{ padding: '1.5rem', maxWidth: '640px', margin: '-1.5rem auto 0' }}>
+                {/* Coordonnées directes */}
+                <div style={{ background: '#fff', border: `1.5px solid ${SAND}`, borderRadius: '20px', padding: '1.25rem 1.5rem', marginBottom: '1.25rem', boxShadow: '0 8px 32px rgba(0,0,0,0.06)', display: 'flex', flexWrap: 'wrap', gap: '.6rem' }}>
+                    <a
+                        href="https://wa.me/237697531413"
+                        target="_blank" rel="noreferrer"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '.5rem', padding: '.5rem .9rem', borderRadius: '99px', background: 'rgba(37,211,102,.1)', border: '1.5px solid rgba(37,211,102,.35)', color: '#15803d', fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}
+                    >
+                        💬 +237 697 531 413
+                    </a>
+                    <a
+                        href="mailto:medumba.ai@kaaynos.com"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '.5rem', padding: '.5rem .9rem', borderRadius: '99px', background: 'rgba(0,86,210,.06)', border: `1.5px solid ${SAND}`, color: B, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}
+                    >
+                        ✉️ medumba.ai@kaaynos.com
+                    </a>
+                </div>
+
                 {/* FAQ */}
                 <div style={{ background: '#fff', border: `1.5px solid ${SAND}`, borderRadius: '20px', padding: '1.5rem', marginBottom: '1.25rem', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}>
                     <h2 style={{ fontSize: '1.05rem', fontWeight: '900', color: INK, marginBottom: '1rem' }}>

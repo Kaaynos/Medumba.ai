@@ -462,6 +462,24 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                             </div>
                         </Reveal>
 
+                        {/* Coordonnées visibles dès le premier écran */}
+                        <Reveal delay={0.03}>
+                            <div style={{ display:'flex',flexWrap:'wrap',gap:'.5rem',marginBottom:'1.25rem' }}>
+                                <button
+                                    onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr("j'ai une question sur Medumba.AI.", 'I have a question about Medumba.AI.'))}
+                                    style={{ display:'inline-flex',alignItems:'center',gap:'.4rem',background:'rgba(37,211,102,.1)',border:'1.5px solid rgba(37,211,102,.35)',borderRadius:'99px',padding:'.28rem .8rem',cursor:'pointer',fontFamily:'inherit',color:'#15803d',fontWeight:700,fontSize:isSmall?'.7rem':'.76rem' }}
+                                >
+                                    <IconWhatsApp size={14} /> {ENTERPRISE_WHATSAPP}
+                                </button>
+                                <a
+                                    href="mailto:medumba.ai@kaaynos.com"
+                                    style={{ display:'inline-flex',alignItems:'center',gap:'.4rem',background:'rgba(0,86,210,.06)',border:'1.5px solid rgba(0,86,210,.25)',borderRadius:'99px',padding:'.28rem .8rem',color:B,fontWeight:700,fontSize:isSmall?'.7rem':'.76rem',textDecoration:'none' }}
+                                >
+                                    ✉️ medumba.ai@kaaynos.com
+                                </a>
+                            </div>
+                        </Reveal>
+
                         <Reveal delay={0.06}>
                             <h2 style={{ fontSize:'.72rem',fontWeight:700,color:AMB,letterSpacing:'2.5px',textTransform:'uppercase',marginBottom:'.8rem' }}>
                                 Medumba.AI
@@ -486,8 +504,8 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                             </p>
                             <p style={{ fontSize:isSmall?'.8rem':'.85rem',color:MUTED,lineHeight:1.7,marginBottom:'2.25rem',maxWidth:'460px',opacity:0.85 }}>
                                 {tr(
-                                    "Medumba.AI est une application d'apprentissage pour la langue Medumba de Bafoussam, Cameroun. La connexion Google est optionnelle et sert uniquement à créer votre profil apprenant et à sauvegarder votre progression.",
-                                    "Medumba.AI is a learning app for the Medumba language of Bafoussam, Cameroon. Signing in with Google is optional and is used only to create your learner profile and securely save your course progress."
+                                    "Medumba.AI est une application d'apprentissage pour la langue Medumba de Bangangté, dans le Ndé, Cameroun. La connexion Google est optionnelle et sert uniquement à créer votre profil apprenant et à sauvegarder votre progression.",
+                                    "Medumba.AI is a learning app for the Medumba language of Bangangté, in the Ndé division, Cameroon. Signing in with Google is optional and is used only to create your learner profile and securely save your course progress."
                                 )}
                             </p>
                         </Reveal>
@@ -754,9 +772,9 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
 
                     <div className="teachers-grid" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.25rem' }}>
                         {[
-                            {name:'Kammbem Arthur',   levelFr:'Débutant · Intermédiaire',levelEn:'Beginner · Intermediate', specFr:'Grammaire & Phonologie', specEn:'Grammar & Phonology',  rating:'4.9',students:142,initials:'KA',color:B},
-                            {name:'Kuikeu Franck',    levelFr:'Intermédiaire · Avancé',levelEn:'Intermediate · Advanced', specFr:'Littérature & Proverbes', specEn:'Literature & Proverbs',  rating:'4.8',students:98, initials:'KF',color:AMB},
-                            {name:'Metchezin Francklin',levelFr:'Enfants · Débutant',levelEn:'Kids · Beginner',   specFr:'Contes & Culture Medumba', specEn:'Stories & Medumba Culture',rating:'5.0',students:67, initials:'MF',color:'#0891b2'},
+                            {name:'Kammbem Arthur',   levelFr:'Débutant · Intermédiaire',levelEn:'Beginner · Intermediate', specFr:'Grammaire & Phonologie', specEn:'Grammar & Phonology',  rating:'4.9',initials:'KA',color:B},
+                            {name:'Kuikeu Franck',    levelFr:'Intermédiaire · Avancé',levelEn:'Intermediate · Advanced', specFr:'Littérature & Proverbes', specEn:'Literature & Proverbs',  rating:'4.8',initials:'KF',color:AMB},
+                            {name:'Metchezin Francklin',levelFr:'Enfants · Débutant',levelEn:'Kids · Beginner',   specFr:'Contes & Culture Medumba', specEn:'Stories & Medumba Culture',rating:'5.0',initials:'MF',color:'#0891b2'},
                         ].map((t,i) => (
                             <Reveal key={i} delay={i*.09}>
                                 <div className="teacher-card" style={{ background:'#fff',padding:'1.5rem',border:`1.5px solid ${SAND}` }}>
@@ -768,9 +786,8 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                                         </div>
                                     </div>
                                     <div style={{ fontSize:'.78rem',color:INK,fontWeight:600,marginBottom:'.9rem',paddingBottom:'.9rem',borderBottom:`1px solid ${LIGHT}` }}>{tr(t.specFr,t.specEn)}</div>
-                                    <div style={{ display:'flex',justifyContent:'space-between',marginBottom:'1.1rem' }}>
+                                    <div style={{ marginBottom:'1.1rem' }}>
                                         <span style={{ fontSize:'.78rem',color:AMB,fontWeight:700 }}>★ {t.rating}</span>
-                                        <span style={{ fontSize:'.75rem',color:MUTED,fontWeight:500 }}>{t.students} {tr('élèves','students')}</span>
                                     </div>
                                     <button
                                         onClick={() => openWhatsApp(WHATSAPP_NUM, tr(`je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}

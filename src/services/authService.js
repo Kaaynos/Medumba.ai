@@ -44,7 +44,19 @@ export async function registerUser({ name, email, password, age, language, reaso
             daily_goal:   dailyGoal    || 'normal',
         });
     }
-    return data.user ? _toUserShape(data.user) : null;
+    if (!data.user) return null;
+    // Si "Confirm email" est actif côté Supabase, signUp() ne renvoie pas de
+    // session tant que l'utilisateur n'a pas cliqué le lien reçu par e-mail.
+    // Sans ce flag, l'appelant croit l'inscription terminée (onAuthStateChange
+    // ne se déclenche jamais) et l'utilisateur perd son compte au prochain
+    // rechargement — c'est le bug "l'inscription par e-mail ne marche pas".
+    return { ..._toUserShape(data.user), needsEmailConfirmation: !data.session };
+}
+
+/* ── Renvoyer l'e-mail de confirmation d'inscription ── */
+export async function resendConfirmationEmail(email) {
+    const { error } = await supabase.auth.resend({ type: 'signup', email });
+    if (error) throw error;
 }
 
 /* ── Connexion email / mot de passe ── */

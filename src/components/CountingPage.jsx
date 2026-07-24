@@ -174,8 +174,9 @@ const AUDIO_MAP = {
     17:   [51.35, 53.45],   // ncòbsὰmbα̂ gham
     18:   [54.70, 56.70],   // ncòbfomə gham
     19:   [57.95, 60.00],   // ncòbbwə̀'ə gham
-    // 20 — after long explanation block (seg37 = 8.5s), word at seg38
-    20:   [73.25, 73.95],   // ŋambα'
+    // 20 — clip removed (2026-07-24): confirmed incorrect, doesn't match the
+    // word — muted instead of playing a wrong pronunciation, until a real
+    // isolated recording is available.
     // tens 30–1000
     30:   [74.70, 76.45],   // ŋamntad
     40:   [77.95, 79.80],   // ŋamkuὰ

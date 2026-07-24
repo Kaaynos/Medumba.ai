@@ -231,8 +231,7 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
         }
     };
 
-    const WHATSAPP_NUM = '+237654863706'; // Zenù — enseignant CEPOM
-    const ENTERPRISE_WHATSAPP = '+237697531413'; // Contact direct entreprise
+    const ENTERPRISE_WHATSAPP = '+237697531413'; // Seul canal WhatsApp officiel — tout contact passe par là ou par e-mail
 
     // WhatsApp buttons ask for the visitor's name first (the app has no user
     // identity yet at this point — Landing renders before any onboarding),
@@ -790,7 +789,7 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                                         <span style={{ fontSize:'.78rem',color:AMB,fontWeight:700 }}>★ {t.rating}</span>
                                     </div>
                                     <button
-                                        onClick={() => openWhatsApp(WHATSAPP_NUM, tr(`je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}
+                                        onClick={() => openWhatsApp(ENTERPRISE_WHATSAPP, tr(`je souhaite prendre des cours de Medumba avec ${t.name}. Pouvez-vous me contacter ?`,`I'd like to take Medumba lessons with ${t.name}. Could you contact me?`))}
                                         style={{ width:'100%',display:'block',boxSizing:'border-box',textAlign:'center',padding:'.6rem',borderRadius:'8px',background:'transparent',color:B,border:`1.5px solid ${B}`,fontWeight:700,fontSize:'.82rem',cursor:'pointer',fontFamily:'inherit',transition:'all .15s',textDecoration:'none' }}
                                         onMouseEnter={e=>{e.currentTarget.style.background=B;e.currentTarget.style.color='#fff';}}
                                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color=B;}}>

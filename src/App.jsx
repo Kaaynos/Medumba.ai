@@ -234,7 +234,6 @@ function App() {
           nativeLang={nativeLang}
           onBack={back}
           onRegister={() => go(8)}
-          onLogin={() => go(20)}
           onContinue={() => go(2)}
         />
       )}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { submitContactMessage } from '../services/contactService';
+import ndopBg from '../assets/BamilekeNdop.jpg';
 
 const B = '#0056D2';
 const INK = '#0f172a';
@@ -51,7 +52,11 @@ const ContactPage = ({ nativeLang, onBack }) => {
     };
 
     return (
-        <div style={{ minHeight: '100dvh', backgroundColor: '#f8fafc', fontFamily: "'Outfit',system-ui,sans-serif" }}>
+        <div style={{
+            minHeight: '100dvh', fontFamily: "'Outfit',system-ui,sans-serif",
+            backgroundImage: `linear-gradient(rgba(248,250,252,0.93), rgba(248,250,252,0.93)), url(${ndopBg})`,
+            backgroundRepeat: 'repeat', backgroundSize: '340px auto',
+        }}>
             {/* Header */}
             <div style={{ background: B, padding: '1.5rem 1.5rem 2.5rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

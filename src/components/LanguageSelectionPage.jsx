@@ -81,9 +81,7 @@ const LanguageSelectionPage = ({ onNext, onBack, nativeLang, setNativeLang, lear
                                 onChange={(e) => setLearningLang(e.target.value)}
                                 style={selectStyle}
                             >
-                                <option value="">{isFr ? '— Sélectionner —' : '— Select —'}</option>
                                 <option value="medumba">🇨🇲  Medumba</option>
-                                <option value="english">🇬🇧  English</option>
                             </select>
                         </div>
                     </div>

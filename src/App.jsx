@@ -234,8 +234,8 @@ function App() {
       {/* ── Landing (marketing) ── */}
       {step === 1 && (
         <LandingPage
-          onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(3); }}
-          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(3); }}
+          onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(2); }}
+          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(2); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
           setNativeLang={setNativeLang}

@@ -173,6 +173,16 @@ const REASON_META = {
     other:     { emoji: '🧩', en: 'Personal goal',   fr: 'Objectif perso',     challengeEn: 'Beat your daily best',             challengeFr: 'Battre votre record du jour',    reward: 20 },
 };
 
+/* ── Emoji personnalisé par nom : même nom -> même emoji à chaque fois,
+   juste un petit plus sympathique dans la bannière d'accueil ── */
+const NAME_EMOJIS = ['🦁','🐼','🦊','🐨','🐸','🦉','🐢','🦋','🐬','🦄','🐝','🦜','🐳','🦖','🐧','🦕','🐙','🦩','🐿️','🦚'];
+function getNameEmoji(name) {
+    if (!name) return '🌟';
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+    return NAME_EMOJIS[hash % NAME_EMOJIS.length];
+}
+
 const GOAL_META = {
     speak: { emoji: '💬', en: 'Speak fluently',       fr: 'Parler couramment'   },
     vocab: { emoji: '📇', en: 'Master vocabulary',    fr: 'Maîtriser le vocab'  },
@@ -1458,7 +1468,7 @@ const DashboardPage = ({
                         </div>
                     </div>
                     <div style={{ fontSize: '3.5rem', flexShrink: 0, filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }}>
-                        {reasonMeta.emoji}
+                        {getNameEmoji(userName)}
                     </div>
                 </div>
             )}
@@ -2818,7 +2828,6 @@ const DashboardPage = ({
                             </div>
                             <select value={learnLang} onChange={(e) => setLearnLang(e.target.value)} style={{ ...selectStyle(T), border: '2px solid #bfdbfe', backgroundColor: T.blueTint, color: '#0056D2' }}>
                                 <option value="medumba">🇨🇲 Medumba</option>
-                                <option value="english">🇬🇧 English</option>
                             </select>
                         </div>
                     </div>
@@ -4020,7 +4029,6 @@ const DashboardPage = ({
                         style={{ ...selectStyle(T), border: '2px solid #bfdbfe', backgroundColor: T.blueTint, color: '#0056D2' }}
                     >
                         <option value="medumba">🇨🇲 Medumba</option>
-                        <option value="english">🇬🇧 English</option>
                     </select>
                 </div>
 

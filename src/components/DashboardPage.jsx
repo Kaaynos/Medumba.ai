@@ -926,7 +926,7 @@ const DashboardPage = ({
         {
             id: 's2', type: 'phrase', emoji: '💬', color: '#7c3aed',
             labelEn: 'Expression', labelFr: 'Expression',
-            titleEn: 'Ndʉ̂ kə?', titleFr: 'Ndʉ̂ kə?',
+            titleEn: 'Â ndʉ̂ kə?', titleFr: 'Â ndʉ̂ kə?',
             bodyEn: '"How are you?" — the most common Medumba greeting.',
             bodyFr: '"Comment ça va ?" — la salutation Medumba la plus courante.',
         },

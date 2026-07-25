@@ -51,7 +51,7 @@ const STORAGE_FILES = {
     // ── Phrases ──────────────────────────────────────────────────────
     "Ndà'ndà' lα!": '101_salut.mp3',
     'O zi ὰ?':      '102_bonjour.mp3',
-    'Ndʉ̂kə?':       '103_comment_ca_va.mp3',
+    'Â ndʉ̂ kə?':    '103_comment_ca_va.mp3',
     'A fi tsə.':    '104_ca_va_bien.mp3',
     "Mə lὰbtə̌":    '065_merci.mp3',
     "Sə̌' mə̀bwɔ!":  '108_bienvenue.mp3',

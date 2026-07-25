@@ -42,10 +42,12 @@ import { ThemeProvider }        from './context/ThemeContext';
 
 // ─── Step map ───────────────────────────────────────────────────────────────
 //  0  Splash
-//  1  Welcome (Landing) — "Start"/"Register" both require an account now,
-//     no more free/anonymous course access
-//  3  Quick setup (level/reason/objectives/daily goal) — runs FIRST, before
-//     registration ("Personnaliser mon parcours" ahead of the login wall)
+//  1  Welcome (Landing) — an account is required for course access either way,
+//     but "Start" and "Register" take different paths to get there:
+//     "Start"    → 2 (Language Selection) → 3 (Quick setup) → 8 (Registration)
+//     "Register" → 8 (Registration) directly, skipping 2 and 3
+//  2  Language Selection (Start only)
+//  3  Quick setup (level/reason/objectives/daily goal) (Start only)
 //  8  Profile Welcome  ┐
 //  9  Name             │
 // 10  Age               │ Registration (mandatory for course access)
@@ -56,8 +58,8 @@ import { ThemeProvider }        from './context/ThemeContext';
 // 21  Forgot Password  (→20)
 // 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
 // 23  Reset Success    (→15)  ┘
-// 2, 4-7, 18  orphaned — LanguageSelectionPage/Connection/Proficiency/
-//     Reason/Achieve/DailyGoal/StartChoicePage are no longer routed to
+// 4-7, 18  orphaned — Connection/Proficiency/Reason/Achieve/DailyGoal/
+//     StartChoicePage are no longer routed to
 // 14  Section viewer   (calendar | video | counting | dictionary)
 // 15  Gamified Dashboard
 // 99  Admin Panel
@@ -235,7 +237,7 @@ function App() {
       {step === 1 && (
         <LandingPage
           onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(2); }}
-          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(2); }}
+          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
           setNativeLang={setNativeLang}

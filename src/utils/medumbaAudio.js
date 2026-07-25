@@ -1,13 +1,15 @@
 /**
  * medumbaAudio.js
- * Priority chain for playing Medumba audio:
+ * Priority chain for playing Medumba audio — exact recordings only, never a
+ * word "created" by joining several syllable clips together (that doesn't
+ * sound natural — see hasRealVoice below):
  *   1. Supabase Storage (native speaker recordings — bucket: medumba-audio)
- *   2. Pre-recorded OGG clip (numbers 1-100 in vocal-count-medumba.ogg)
- *   3. Browser TTS fallback (approximate, French voice)
+ *   2. A single recorded syllable that IS the whole word (no joining)
+ *   3. Pre-recorded OGG clip (numbers 1-100 in vocal-count-medumba.ogg)
  */
 import { supabase } from '../config/supabase';
 import vocalSrc from '../assets/vocal-count-medumba.ogg';
-import { segmentPhrase, segmentPhraseLenient, playPhraseAudioLenient } from './syllableAudio';
+import { segmentPhrase, toneAudioUrl } from './syllableAudio';
 
 const BUCKET = 'medumba-audio';
 
@@ -194,21 +196,28 @@ export async function playMedumbaWord(word, onStart, onEnd) {
     // 1 — Supabase Storage (native speaker recording, mot exact)
     const url = await getWordUrl(word);
     if (url) {
-        _playUrl(url, onStart, () => _playSyllablesThenRest(word, onStart, onEnd), onEnd);
+        _playUrl(url, onStart, () => _playSingleSyllableOrNumber(word, onStart, onEnd), onEnd);
         return;
     }
 
-    _playSyllablesThenRest(word, onStart, onEnd);
+    _playSingleSyllableOrNumber(word, onStart, onEnd);
 }
 
-function _playSyllablesThenRest(word, onStart, onEnd) {
-    // 2 — Syllabes enregistrées ; les tokens non couverts sont sautés en
-    // silence plutôt que comblés par de la synthèse vocale.
-    const started = playPhraseAudioLenient(_syllableAudioRef, word, {
-        onEnd,
-        onFallback: () => _playNumberClip(word, onStart, onEnd),
-    });
-    if (started) { onStart?.(); return; }
+// Seul cas de syllabe autorisé : le mot ENTIER correspond à une seule
+// syllabe enregistrée — jamais un enchaînement de plusieurs clips (cf.
+// hasRealVoice ci-dessous ; décision produit : pas de son "recréé").
+function _playSingleSyllableOrNumber(word, onStart, onEnd) {
+    const seg = segmentPhrase(word);
+    if (seg && seg.length === 1) {
+        if (!_syllableAudioRef.current) _syllableAudioRef.current = new Audio();
+        const audio = _syllableAudioRef.current;
+        audio.pause();
+        audio.src = toneAudioUrl(seg[0].root, seg[0].tone);
+        audio.onended = () => onEnd?.();
+        audio.onerror = () => _playNumberClip(word, onStart, onEnd);
+        audio.play().then(() => onStart?.()).catch(() => _playNumberClip(word, onStart, onEnd));
+        return;
+    }
 
     _playNumberClip(word, onStart, onEnd);
 }

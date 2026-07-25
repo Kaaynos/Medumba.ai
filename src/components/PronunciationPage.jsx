@@ -3,7 +3,7 @@ import { MEDUMBA_SYLLABLES } from '../data/medumbaSyllables';
 import { VOCAB_EXPRESSIONS } from '../data/vocabExpressions';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import SYLLABLE_TONS from '../data/syllableTons.json';
-import { syllableAudioUrl, toneAudioUrl, segmentPhrase, playPhraseAudioLenient } from '../utils/syllableAudio';
+import { syllableAudioUrl, toneAudioUrl, segmentPhrase } from '../utils/syllableAudio';
 
 const PURPLE = '#7c3aed';
 const LIGHT  = '#faf5ff';
@@ -41,16 +41,23 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   const audioRef  = useRef(null);
 
   const word = WORD_POOL[wordIdx];
+  const wordHasVoice = word ? segmentPhrase(word.medumba)?.length === 1 : false;
 
-  /* ── Lire un mot du pool avec les vrais enregistrements de syllabes,
-   *    en les enchaînant dans l'ordre ; les mots non couverts sont sautés
-   *    en silence plutôt que remplacés par de la synthèse vocale. ── */
+  /* ── Lire un mot UNIQUEMENT s'il correspond à une seule syllabe
+   *    enregistrée dans son intégralité — jamais un enchaînement de
+   *    plusieurs clips (ça ne sonne pas naturel, décision produit).
+   *    Reste muet sinon (pas de TTS de secours). ── */
   const playWord = useCallback((phrase, onEnd) => {
+    const seg = segmentPhrase(phrase);
+    if (!seg || seg.length !== 1) { onEnd?.(); return; }
     setSpeaking(true);
-    playPhraseAudioLenient(audioRef, phrase, {
-      onEnd: () => { setSpeaking(false); onEnd?.(); },
-      onFallback: () => { setSpeaking(false); onEnd?.(); },
-    });
+    if (!audioRef.current) audioRef.current = new Audio();
+    const audio = audioRef.current;
+    audio.pause();
+    audio.src = toneAudioUrl(seg[0].root, seg[0].tone);
+    audio.onended = () => { setSpeaking(false); onEnd?.(); };
+    audio.onerror = () => { setSpeaking(false); onEnd?.(); };
+    audio.play().catch(() => { setSpeaking(false); onEnd?.(); });
   }, []);
 
   /* ── Jouer l'enregistrement réel d'une syllabe ; reste muet si aucun
@@ -212,24 +219,26 @@ export default function PronunciationPage({ nativeLang, onBack }) {
                 {word.medumba}
               </div>
 
-              {/* Bouton écouter */}
-              <button
-                onClick={() => playWord(word.medumba)}
-                disabled={speaking}
-                style={{
-                  background: speaking ? `${PURPLE}12` : LIGHT,
-                  border: `2px solid ${PURPLE}55`,
-                  borderRadius: '99px', padding: '0.55rem 1.5rem',
-                  cursor: speaking ? 'default' : 'pointer',
-                  fontSize: '1rem', fontWeight: 700, color: PURPLE, fontFamily: 'inherit',
-                  display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                  boxShadow: speaking ? `0 0 0 5px ${PURPLE}18` : 'none',
-                  transition: 'all 0.25s',
-                }}
-              >
-                <span style={{ fontSize: '1.1rem' }}>{speaking ? '🔊' : '🔈'}</span>
-                {isFr ? (speaking ? 'Lecture…' : 'Écouter') : (speaking ? 'Playing…' : 'Listen')}
-              </button>
+              {/* Bouton écouter — retiré entièrement si aucune vraie voix n'existe pour ce mot */}
+              {wordHasVoice && (
+                <button
+                  onClick={() => playWord(word.medumba)}
+                  disabled={speaking}
+                  style={{
+                    background: speaking ? `${PURPLE}12` : LIGHT,
+                    border: `2px solid ${PURPLE}55`,
+                    borderRadius: '99px', padding: '0.55rem 1.5rem',
+                    cursor: speaking ? 'default' : 'pointer',
+                    fontSize: '1rem', fontWeight: 700, color: PURPLE, fontFamily: 'inherit',
+                    display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                    boxShadow: speaking ? `0 0 0 5px ${PURPLE}18` : 'none',
+                    transition: 'all 0.25s',
+                  }}
+                >
+                  <span style={{ fontSize: '1.1rem' }}>{speaking ? '🔊' : '🔈'}</span>
+                  {isFr ? (speaking ? 'Lecture…' : 'Écouter') : (speaking ? 'Playing…' : 'Listen')}
+                </button>
+              )}
             </div>
 
             {/* Navigation */}

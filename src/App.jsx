@@ -44,15 +44,15 @@ import { ThemeProvider }        from './context/ThemeContext';
 //  0  Splash
 //  1  Welcome (Landing) — "Start"/"Register" both require an account now,
 //     no more free/anonymous course access
+//  3  Quick setup (level/reason/objectives/daily goal) — runs FIRST, before
+//     registration ("Personnaliser mon parcours" ahead of the login wall)
 //  8  Profile Welcome  ┐
 //  9  Name             │
 // 10  Age               │ Registration (mandatory for course access)
 // 11  Email             │
 // 12  Password          │
-// 13  Success  (→3)     ┘
-//  3  Quick setup (level/reason/objectives/daily goal) — runs right after
-//     registration, before the Dashboard
-// 20  Log in           (reached from the Dashboard's "Se connecter" button)
+// 13  Success  (→15, auto-starts the first lesson)                    ┘
+// 20  Log in           (reached from ProfileWelcomePage's "Log in" link)
 // 21  Forgot Password  (→20)
 // 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
 // 23  Reset Success    (→15)  ┘
@@ -234,8 +234,8 @@ function App() {
       {/* ── Landing (marketing) ── */}
       {step === 1 && (
         <LandingPage
-          onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
-          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
+          onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(3); }}
+          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(3); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
           setNativeLang={setNativeLang}
@@ -257,7 +257,7 @@ function App() {
       {/* ── Quick setup (niveau + raison + objectif — tout en 1) ── */}
       {step === 3 && (
         <QuickSetupPage
-          onNext={() => { setAutoStartFirstLesson(true); go(15); }} onBack={back}
+          onNext={() => go(8)} onBack={back}
           nativeLang={nativeLang}
           setConnection={setConnection}
           setProficiency={setProficiency}
@@ -290,7 +290,7 @@ function App() {
         />
       )}
       {step === 13 && <SuccessPage
-          onNext={() => go(3)}
+          onNext={() => { setAutoStartFirstLesson(true); go(15); }}
           nativeLang={nativeLang}
           userName={userName}
           onNavigate={(view) => go(14, view)}

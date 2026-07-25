@@ -4,7 +4,7 @@ import { MEDUMBA_QUESTIONS } from '../data/medumbaDictionary';
 import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
 import { getExpressionsByLesson } from '../data/expressionsByLesson';
 import { generateLessonQuestions } from '../utils/lessonGenerator';
-import { playMedumbaWord, stopMedumbaAudio } from '../utils/medumbaAudio';
+import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import frameImg from '../assets/Frame.png';
 import celebrationImg from '../assets/Auto Layout Vertical.png';
 
@@ -556,7 +556,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         }}>
                             {flipped ? card.medumba : card.fr}
                         </div>
-                        {flipped && (
+                        {flipped && hasRealVoice(card.medumba) && (
                             <button
                                 type="button"
                                 onClick={(e) => {
@@ -880,17 +880,19 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         marginBottom: '1.5rem',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                     }}>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
-                            width: '48px', height: '48px', borderRadius: '50%',
-                            backgroundColor: speaking ? '#eff6ff' : '#f8fafc',
-                            border: `2px solid ${speaking ? '#0056D2' : '#e2e8f0'}`,
-                            cursor: 'pointer', fontSize: '1.4rem',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            flexShrink: 0, transition: 'all 0.15s',
-                            animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'none',
-                        }}>
-                            {speaking ? '🔊' : '🔈'}
-                        </button>
+                        {hasRealVoice(q?.audio) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
+                                width: '48px', height: '48px', borderRadius: '50%',
+                                backgroundColor: speaking ? '#eff6ff' : '#f8fafc',
+                                border: `2px solid ${speaking ? '#0056D2' : '#e2e8f0'}`,
+                                cursor: 'pointer', fontSize: '1.4rem',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                flexShrink: 0, transition: 'all 0.15s',
+                                animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'none',
+                            }}>
+                                {speaking ? '🔊' : '🔈'}
+                            </button>
+                        )}
                         <span style={{ fontSize: '1.25rem', fontWeight: '700', color: T.text, lineHeight: 1.4 }}>
                             {isFr ? (q?.sourceFr ?? '') : (q?.sourceEn ?? '')}
                         </span>
@@ -994,13 +996,15 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 {/* ════ AUDIO exercise ════ */}
                 {type === 'audio' && (<>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.75rem', gap: '0.75rem' }}>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
-                            width: '96px', height: '96px', borderRadius: '50%',
-                            backgroundColor: '#eff6ff', border: '4px solid #0056D2',
-                            cursor: 'pointer', fontSize: '2.5rem',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'audio-pulse 2s ease-in-out infinite',
-                        }}>{speaking ? '🔊' : '🔈'}</button>
+                        {hasRealVoice(q?.audio) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
+                                width: '96px', height: '96px', borderRadius: '50%',
+                                backgroundColor: '#eff6ff', border: '4px solid #0056D2',
+                                cursor: 'pointer', fontSize: '2.5rem',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'audio-pulse 2s ease-in-out infinite',
+                            }}>{speaking ? '🔊' : '🔈'}</button>
+                        )}
                         <span style={{ fontSize: '0.82rem', fontWeight: '700', color: T.textMuted }}>
                             {isFr ? 'Appuyer pour rejouer' : 'Tap to replay'}
                         </span>
@@ -1046,7 +1050,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text }}>
                             {isFr ? q?.labelFr : q?.labelEn}
                         </div>
-                        {q?.audio && (
+                        {hasRealVoice(q?.audio) && (
                             <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q.audio); }} style={{
                                 marginTop: '0.75rem',
                                 width: '40px', height: '40px', borderRadius: '50%',

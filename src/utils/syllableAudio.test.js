@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toHexKey, segmentPhrase, segmentPhraseLenient } from './syllableAudio';
+import { toHexKey, segmentPhrase } from './syllableAudio';
 
 describe('toHexKey', () => {
     it('encodes ASCII text to lowercase hex', () => {
@@ -27,20 +27,5 @@ describe('segmentPhrase (strict)', () => {
     it('fails the whole phrase if any single word is uncovered', () => {
         const result = segmentPhrase('Bu zzzzqqqq');
         expect(result).toBeNull();
-    });
-});
-
-describe('segmentPhraseLenient (hybrid, mixes real audio + TTS)', () => {
-    it('returns null only when nothing in the phrase is covered', () => {
-        expect(segmentPhraseLenient('zzzzqqqq')).toBeNull();
-    });
-
-    it('marks the covered word as audio and the uncovered word as tts', () => {
-        const items = segmentPhraseLenient('Bu zzzzqqqq');
-        expect(items).not.toBeNull();
-        const hasAudio = items.some(i => i.type === 'audio');
-        const hasTts   = items.some(i => i.type === 'tts');
-        expect(hasAudio).toBe(true);
-        expect(hasTts).toBe(true);
     });
 });

@@ -14,12 +14,12 @@ const SplashScreen = ({ onFinish }) => {
       if (done) return;
       done = true;
       // Google OAuth redirects the session back in a URL fragment
-      // (#access_token=...) for Supabase's detectSessionInUrl to read — by
-      // now it's been consumed, so clean up the leftover bare "#" instead of
-      // leaving it in the address bar.
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
+      // (#access_token=...) for Supabase's detectSessionInUrl to read. By now
+      // Supabase has already consumed the token itself, which is why
+      // checking `window.location.hash` here reads empty — it still leaves
+      // a bare "#" character in the address bar, so strip it unconditionally
+      // rather than gating on a hash value that's already been cleared.
+      history.replaceState(history.state, '', window.location.pathname + window.location.search);
       fadeTimer = setTimeout(() => setVisible(false), 500);
       navTimer  = setTimeout(() => onFinish(user, event), 700);
     };

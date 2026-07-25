@@ -13,6 +13,13 @@ const SplashScreen = ({ onFinish }) => {
     const finish = (user, event) => {
       if (done) return;
       done = true;
+      // Google OAuth redirects the session back in a URL fragment
+      // (#access_token=...) for Supabase's detectSessionInUrl to read — by
+      // now it's been consumed, so clean up the leftover bare "#" instead of
+      // leaving it in the address bar.
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
       fadeTimer = setTimeout(() => setVisible(false), 500);
       navTimer  = setTimeout(() => onFinish(user, event), 700);
     };

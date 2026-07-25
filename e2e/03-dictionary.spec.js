@@ -68,12 +68,14 @@ test.describe('Dictionary', () => {
         await expect(page.getByText(/Traducteur IA/i).first()).toBeVisible();
     });
 
-    test('DICT-08: AI Translator returns a translation with a working listen button', async ({ page }) => {
+    test('DICT-08: AI Translator returns a translation (no listen button — no real voice for arbitrary AI text)', async ({ page }) => {
         test.setTimeout(90000); // hits a real external AI endpoint (Render free tier can cold-start)
         await page.getByText(/Traducteur IA/i).first().click();
         await page.getByPlaceholder(/Entrez du texte français/i).fill('Bonjour');
         await page.getByRole('button', { name: /Traduire/i }).click();
         await expect(page.getByText(/Résultat/i)).toBeVisible({ timeout: 60000 });
-        await expect(page.locator('button:has-text("🔈")')).toBeVisible();
+        // FIXED (2026-07-25): removed per "no fake voices" — AI-translated text
+        // can never have a real recording, so no listen button is offered.
+        await expect(page.locator('button:has-text("🔈")')).not.toBeVisible();
     });
 });

@@ -164,28 +164,6 @@ function _playClip(start, end, onStart, onEnd) {
     onStart?.();
 }
 
-/* ── TTS fallback ────────────────────────────────────────────── */
-function _playTTS(text, onStart, onEnd) {
-    if (!window.speechSynthesis) { onEnd?.(); return; }
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-
-    // Prefer Cameroonian French (closer phonology); fall back to fr-FR
-    const voices = window.speechSynthesis.getVoices();
-    const cmVoice = voices.find(v => v.lang === 'fr-CM');
-    if (cmVoice) {
-        utt.voice = cmVoice;
-    } else {
-        utt.lang = 'fr-FR';
-    }
-    utt.rate  = 0.78;
-    utt.pitch = 1.05;
-    utt.onstart = onStart ?? null;
-    utt.onend   = onEnd   ?? null;
-    utt.onerror = onEnd   ?? null;
-    window.speechSynthesis.speak(utt);
-}
-
 /* ── Public API ──────────────────────────────────────────────── */
 
 // Pseudo-ref (même forme qu'un useRef) pour réutiliser playPhraseAudio
@@ -224,21 +202,20 @@ export async function playMedumbaWord(word, onStart, onEnd) {
 }
 
 function _playSyllablesThenRest(word, onStart, onEnd) {
-    // 2 — Syllabes enregistrées, mélangées avec de la synthèse vocale mot
-    // par mot pour les tokens non couverts, plutôt que d'abandonner toute
-    // la phrase dès qu'un seul mot manque.
+    // 2 — Syllabes enregistrées ; les tokens non couverts sont sautés en
+    // silence plutôt que comblés par de la synthèse vocale.
     const started = playPhraseAudioLenient(_syllableAudioRef, word, {
         onEnd,
-        ttsSpeak: (text, onDone) => _playTTS(text, null, onDone),
-        onFallback: () => _playNumberClipOrTTS(word, onStart, onEnd),
+        onFallback: () => _playNumberClip(word, onStart, onEnd),
     });
     if (started) { onStart?.(); return; }
 
-    _playNumberClipOrTTS(word, onStart, onEnd);
+    _playNumberClip(word, onStart, onEnd);
 }
 
-async function _playNumberClipOrTTS(word, onStart, onEnd) {
-    // 3 — Pre-recorded OGG clip (numbers)
+async function _playNumberClip(word, onStart, onEnd) {
+    // 3 — Pre-recorded OGG clip (numbers) — nothing left to fall back to
+    // beyond this: no real recording means no sound, ever (no TTS).
     const clip = WORD_CLIPS[word];
     if (clip) {
         const ok = await ensureBuffer();
@@ -248,8 +225,7 @@ async function _playNumberClipOrTTS(word, onStart, onEnd) {
         }
     }
 
-    // 4 — TTS fallback
-    _playTTS(word, onStart, onEnd);
+    onEnd?.();
 }
 
 /**
@@ -276,7 +252,6 @@ export function stopMedumbaAudio() {
     if (_htmlAudio) { _htmlAudio.pause(); _htmlAudio = null; }
     _syllableAudioRef.current?.pause();
     _stopCurrent();
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
 }
 
 /* ══════════════════════════════════════════════════════════════════

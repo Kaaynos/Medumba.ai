@@ -231,10 +231,9 @@ const DashboardPage = ({
     currentUid     = null,
     paymentSuccess    = null, // { pkg, gems } — set by App.jsx after Stripe redirect
     onPaymentHandled  = null,
-    autoStartFirstLesson = false, // true right after the free-access "Start" personalization quiz
+    autoStartFirstLesson = false, // true right after registration's personalization quiz
     onAutoStartHandled   = null,
-    onRegister            = null,
-    onGoToLogin           = null,
+    onLogoClick          = null,
 }) => {
     /* ── theme ── */
     const { isDark, T, toggle: toggleDark } = useTheme();
@@ -2825,46 +2824,6 @@ const DashboardPage = ({
                     </div>
                 )}
 
-                {/* ── Free-access nudge: create a profile to save progress (mobile entry point) ── */}
-                {!currentUid && (
-                    <div style={{
-                        padding: '1rem 1.1rem', borderRadius: '16px', marginBottom: '1.25rem',
-                        backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
-                    }}>
-                        <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>💾</div>
-                        <div style={{ fontWeight: '800', fontSize: '0.9rem', color: '#0056D2', marginBottom: '0.3rem', lineHeight: 1.3 }}>
-                            {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
-                        </div>
-                        <div style={{ fontSize: '0.78rem', color: T.textMuted, marginBottom: '0.85rem', lineHeight: 1.4 }}>
-                            {isFr
-                                ? 'Sans compte, ton XP et ta série sont perdus si tu changes d\'appareil.'
-                                : 'Without an account, your XP and streak are lost if you switch devices.'}
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.6rem' }}>
-                            <button
-                                onClick={() => onRegister?.()}
-                                style={{
-                                    flex: 1, padding: '0.65rem', borderRadius: '9999px', border: 'none',
-                                    backgroundColor: '#0056D2', color: '#fff', fontWeight: '800',
-                                    fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Créer mon profil' : 'Create my profile'}
-                            </button>
-                            <button
-                                onClick={() => onGoToLogin?.()}
-                                style={{
-                                    flex: 1, padding: '0.65rem', borderRadius: '9999px',
-                                    border: '2px solid #0056D2', backgroundColor: 'transparent', color: '#0056D2',
-                                    fontWeight: '800', fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'inherit',
-                                }}
-                            >
-                                {isFr ? 'Se connecter' : 'Log in'}
-                            </button>
-                        </div>
-                    </div>
-                )}
-
                 {/* ── Profile hero card ── */}
                 <div style={{
                     borderRadius: '24px', marginBottom: '1.25rem', overflow: 'hidden',
@@ -3186,46 +3145,6 @@ const DashboardPage = ({
             display: 'flex', flexDirection: 'column', gap: '1.1rem',
             backgroundColor: T.surface, overflowY: 'auto',
         }}>
-            {/* Free-access nudge: create a profile to save progress (permanent — no dismiss) ── */}
-            {!currentUid && (
-                <div style={{
-                    padding: '1rem 1.1rem', borderRadius: '16px',
-                    backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
-                }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>💾</div>
-                    <div style={{ fontWeight: '800', fontSize: '0.85rem', color: '#0056D2', marginBottom: '0.3rem', lineHeight: 1.3 }}>
-                        {isFr ? 'Crée un profil pour sauvegarder ta progression !' : 'Create a profile to save your progress!'}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: T.textMuted, marginBottom: '0.7rem', lineHeight: 1.4 }}>
-                        {isFr
-                            ? 'Sans compte, ton XP et ta série sont perdus si tu changes d\'appareil.'
-                            : 'Without an account, your XP and streak are lost if you switch devices.'}
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <button
-                            onClick={() => onRegister?.()}
-                            style={{
-                                width: '100%', padding: '0.6rem', borderRadius: '9999px', border: 'none',
-                                backgroundColor: '#0056D2', color: '#fff', fontWeight: '800',
-                                fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'inherit',
-                            }}
-                        >
-                            {isFr ? 'Créer mon profil' : 'Create my profile'}
-                        </button>
-                        <button
-                            onClick={() => onGoToLogin?.()}
-                            style={{
-                                width: '100%', padding: '0.6rem', borderRadius: '9999px',
-                                border: '2px solid #0056D2', backgroundColor: 'transparent', color: '#0056D2',
-                                fontWeight: '800', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'inherit',
-                            }}
-                        >
-                            {isFr ? 'Se connecter' : 'Log in'}
-                        </button>
-                    </div>
-                </div>
-            )}
-
             {/* Daily goal */}
             <div style={{ padding: '1.1rem 1.2rem', borderRadius: '16px', border: `2px solid ${T.border}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
@@ -4035,7 +3954,7 @@ const DashboardPage = ({
             }}>
                 {/* Brand */}
                 <div
-                    onClick={() => { setActiveNav('home'); setPurchaseFlow(null); }}
+                    onClick={() => onLogoClick?.()}
                     style={{
                         display: 'flex', alignItems: 'center', gap: '0.65rem',
                         padding: '0 0.5rem', marginBottom: '1.25rem',
@@ -4167,7 +4086,7 @@ const DashboardPage = ({
                 }}>
                     {/* Logo — mobile only */}
                     {isMobile && (
-                        <div onClick={() => { setActiveNav('home'); setPurchaseFlow(null); }}
+                        <div onClick={() => onLogoClick?.()}
                              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
                             <img src={logo} alt="" style={{ width: '24px', height: 'auto' }} />
                             <span style={{ fontWeight: '800', color: '#0056D2', fontSize: '1rem' }}>Medumba</span>

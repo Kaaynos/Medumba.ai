@@ -27,21 +27,6 @@ const WORD_POOL = [
  }, { seen: new Set(), list: [] }).list
  .sort((a, b) => (segmentPhrase(b.medumba) !== null) - (segmentPhrase(a.medumba) !== null));
 
-/* ── TTS helper ── */
-function speakWord(text, onEnd) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u   = new SpeechSynthesisUtterance(text);
-  const vox = window.speechSynthesis.getVoices();
-  const v   = vox.find(v => v.lang === 'fr-CM') || vox.find(v => v.lang.startsWith('fr'));
-  if (v) u.voice = v;
-  u.lang  = 'fr-CM';
-  u.rate  = 0.78;
-  u.pitch = 1;
-  if (onEnd) { u.onend = onEnd; u.onerror = onEnd; }
-  window.speechSynthesis.speak(u);
-}
-
 export default function PronunciationPage({ nativeLang, onBack }) {
   const isFr = nativeLang === 'french';
 
@@ -57,53 +42,43 @@ export default function PronunciationPage({ nativeLang, onBack }) {
 
   const word = WORD_POOL[wordIdx];
 
-  /* ── Parler ── */
-  const speak = useCallback((text) => {
-    setSpeaking(true);
-    speakWord(text, () => setSpeaking(false));
-  }, []);
-
   /* ── Lire un mot du pool avec les vrais enregistrements de syllabes,
-   *    en les enchaînant dans l'ordre ; les mots non couverts basculent en
-   *    synthèse vocale individuellement sans faire échouer toute la phrase.
-   *    Repli sur la synthèse vocale de la phrase entière si rien n'est
-   *    couvert du tout. ── */
+   *    en les enchaînant dans l'ordre ; les mots non couverts sont sautés
+   *    en silence plutôt que remplacés par de la synthèse vocale. ── */
   const playWord = useCallback((phrase, onEnd) => {
     setSpeaking(true);
     playPhraseAudioLenient(audioRef, phrase, {
       onEnd: () => { setSpeaking(false); onEnd?.(); },
-      ttsSpeak: (text, onDone) => speakWord(text, onDone),
-      onFallback: (p) => speakWord(p, () => { setSpeaking(false); onEnd?.(); }),
+      onFallback: () => { setSpeaking(false); onEnd?.(); },
     });
   }, []);
 
-  /* ── Jouer l'enregistrement réel d'une syllabe, repli sur la synthèse
-   *    vocale si aucun enregistrement n'existe pour cette syllabe. ── */
+  /* ── Jouer l'enregistrement réel d'une syllabe ; reste muet si aucun
+   *    enregistrement n'existe pour cette syllabe (pas de TTS de secours). ── */
   const playSyllable = useCallback((syllable) => {
     if (!audioRef.current) audioRef.current = new Audio();
     const audio = audioRef.current;
     audio.pause();
-    audio.onerror = () => speak(syllable);
+    audio.onerror = () => {};
     audio.src = syllableAudioUrl(syllable);
-    audio.play().catch(() => speak(syllable));
-  }, [speak]);
+    audio.play().catch(() => {});
+  }, []);
 
-  /* ── Jouer le ton spécifique d'une syllabe (bas/moyen/montant/descendant),
-   *    repli sur la synthèse vocale du caractère tonal si le clip n'existe pas. ── */
-  const playTone = useCallback((syllable, tone, toneChar) => {
+  /* ── Jouer le ton spécifique d'une syllabe (bas/moyen/montant/descendant) ;
+   *    reste muet si le clip n'existe pas (pas de TTS de secours). ── */
+  const playTone = useCallback((syllable, tone) => {
     if (!audioRef.current) audioRef.current = new Audio();
     const audio = audioRef.current;
     audio.pause();
     setPlayingTone(tone);
     audio.onended = () => setPlayingTone(null);
-    audio.onerror = () => { speak(toneChar || syllable); setPlayingTone(null); };
+    audio.onerror = () => setPlayingTone(null);
     audio.src = toneAudioUrl(syllable, tone);
-    audio.play().catch(() => { speak(toneChar || syllable); setPlayingTone(null); });
-  }, [speak]);
+    audio.play().catch(() => setPlayingTone(null));
+  }, []);
 
   /* ── Navigation ── */
   const goNext = useCallback(() => {
-    window.speechSynthesis?.cancel();
     setSpeaking(false);
     clearTimeout(timerRef.current);
     audioRef.current?.pause();
@@ -111,7 +86,6 @@ export default function PronunciationPage({ nativeLang, onBack }) {
   }, []);
 
   const goPrev = useCallback(() => {
-    window.speechSynthesis?.cancel();
     setSpeaking(false);
     clearTimeout(timerRef.current);
     audioRef.current?.pause();
@@ -134,7 +108,6 @@ export default function PronunciationPage({ nativeLang, onBack }) {
 
   useEffect(() => {
     if (!autoPlay) {
-      window.speechSynthesis?.cancel();
       setSpeaking(false);
       clearTimeout(timerRef.current);
     }
@@ -154,7 +127,6 @@ export default function PronunciationPage({ nativeLang, onBack }) {
 
   /* ── Nettoyage au démontage ── */
   useEffect(() => () => {
-    window.speechSynthesis?.cancel();
     clearTimeout(timerRef.current);
     audioRef.current?.pause();
   }, []);
@@ -165,7 +137,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
       {/* ── Header ── */}
       <div style={{ background: `linear-gradient(135deg, ${PURPLE}, #a78bfa)`, padding: '1.25rem 1.5rem 0', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-          <button onClick={() => { window.speechSynthesis?.cancel(); onBack(); }}
+          <button onClick={() => { onBack(); }}
             style={{ background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '50%', width: 38, height: 38, cursor: 'pointer', fontSize: '1.2rem', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>←</button>
           <div>
             <div style={{ fontSize: '0.7rem', fontWeight: 700, opacity: 0.8, textTransform: 'uppercase', letterSpacing: '0.7px' }}>
@@ -179,7 +151,7 @@ export default function PronunciationPage({ nativeLang, onBack }) {
         <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '12px 12px 0 0', padding: '0.4rem 0.4rem 0' }}>
           {[{ id: 'lecture', fr: 'Lecture', en: 'Reading' }, { id: 'syllabaire', fr: 'Syllabaire', en: 'Syllabary' }].map(t => (
             <button key={t.id}
-              onClick={() => { setTab(t.id); setAutoPlay(false); window.speechSynthesis?.cancel(); setSpeaking(false); audioRef.current?.pause(); setPlayingTone(null); }}
+              onClick={() => { setTab(t.id); setAutoPlay(false); setSpeaking(false); audioRef.current?.pause(); setPlayingTone(null); }}
               style={{
                 flex: 1, padding: '0.6rem', borderRadius: '9px 9px 0 0', border: 'none', cursor: 'pointer',
                 backgroundColor: tab === t.id ? '#fff' : 'transparent',

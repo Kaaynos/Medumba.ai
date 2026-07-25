@@ -139,11 +139,11 @@ export function segmentPhraseLenient(phrase) {
   return anyAudio ? items : null;
 }
 
-// Joue une phrase en mélangeant vrais clips et synthèse vocale mot par mot
-// selon ce que segmentPhraseLenient a pu couvrir. `ttsSpeak(text, onDone)`
-// doit être fourni par l'appelant (voix/langue différente selon l'écran).
+// Joue une phrase en n'utilisant que les vrais clips couverts par
+// segmentPhraseLenient — les tokens non couverts sont silencieusement
+// sautés (jamais de synthèse vocale, cf. décision produit "no fake voices").
 // Retombe sur `onFallback(phrase)` si rien n'est couvert du tout.
-export function playPhraseAudioLenient(audioRef, phrase, { onEnd, ttsSpeak, onFallback } = {}) {
+export function playPhraseAudioLenient(audioRef, phrase, { onEnd, onFallback } = {}) {
   const items = segmentPhraseLenient(phrase);
   if (!items) {
     onFallback?.(phrase);
@@ -158,10 +158,7 @@ export function playPhraseAudioLenient(audioRef, phrase, { onEnd, ttsSpeak, onFa
   const playNext = () => {
     if (i >= items.length) { onEnd?.(); return; }
     const item = items[i++];
-    if (item.type === 'tts') {
-      ttsSpeak(item.text, playNext);
-      return;
-    }
+    if (item.type === 'tts') { playNext(); return; } // pas de vraie voix : on saute ce mot
     audio.src = toneAudioUrl(item.root, item.tone);
     audio.onended = playNext;
     audio.onerror = playNext; // clip manquant : on saute au suivant plutôt que d'abandonner toute la phrase

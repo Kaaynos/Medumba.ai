@@ -3,7 +3,7 @@ import profileVector from '../assets/welcom vector.png';
 import logo from '../assets/logo.png';
 import { loginWithGoogle } from '../services/authService';
 
-const ProfileWelcomePage = ({ onNext, nativeLang }) => {
+const ProfileWelcomePage = ({ onNext, onLogin, nativeLang }) => {
     const isFr = nativeLang === 'french';
     const [loadingGoogle, setLoadingGoogle] = useState(false);
     const [error, setError] = useState('');
@@ -129,6 +129,16 @@ const ProfileWelcomePage = ({ onNext, nativeLang }) => {
                 >
                     {isFr ? 'CRÉER AVEC EMAIL' : 'CREATE WITH EMAIL'}
                 </button>
+
+                {onLogin && (
+                    <button onClick={onLogin} style={{
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: '#64748b', fontWeight: '700', fontSize: '0.85rem',
+                        fontFamily: 'inherit', marginTop: '0.25rem',
+                    }}>
+                        {isFr ? 'Déjà un compte ? Se connecter' : 'Already have an account? Log in'}
+                    </button>
+                )}
             </div>
         </div>
     );

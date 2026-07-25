@@ -113,17 +113,6 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
             .slice(0, 80);
     }, [query, lang]);
 
-    const speak = (text) => {
-        if (!window.speechSynthesis) return;
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'fr-FR'; u.rate = 0.8;
-        u.onstart = () => setSpeaking(text);
-        u.onend   = () => setSpeaking(null);
-        u.onerror = () => setSpeaking(null);
-        window.speechSynthesis.speak(u);
-    };
-
     // Joue un mot Medumba avec les vrais enregistrements de syllabes.
     // Aucun repli TTS : toutes les entrées affichées ont déjà une couverture
     // vocale complète garantie par le filtre sur ALL_ENTRIES ci-dessus.
@@ -134,7 +123,6 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
     };
 
     useEffect(() => () => {
-        window.speechSynthesis?.cancel();
         audioRef.current?.pause();
     }, []);
 
@@ -417,7 +405,6 @@ const DictionaryPage = ({ nativeLang, onBack }) => {
                                         {aiResult.translation}
                                     </span>
                                     <div style={{ display: 'flex', gap: '0.4rem' }}>
-                                        <button onClick={() => speak(aiResult.translation)} style={{ background: '#ede9fe', border: '2px solid #ddd6fe', borderRadius: '50%', width: '32px', height: '32px', cursor: 'pointer', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🔈</button>
                                         <button onClick={() => copyText(aiResult.translation)} style={{ background: '#ede9fe', border: '2px solid #ddd6fe', borderRadius: '50%', width: '32px', height: '32px', cursor: 'pointer', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             {copied ? '✅' : '📋'}
                                         </button>

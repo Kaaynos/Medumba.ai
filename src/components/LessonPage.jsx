@@ -352,27 +352,15 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     }, [currentQ, type]);
 
     /* ── Audio playback ─────────────────────────────────────────── */
-    /* For Medumba: uses pre-recorded OGG clips where available,
-       falls back to fr-CM / fr-FR TTS for other vocabulary.
-       For English: always uses en-US TTS.                          */
+    /* No synthetic voices anywhere: only real recorded Medumba clips play.
+       English-track words and any Medumba word without a real recording
+       stay silent rather than fake a pronunciation. */
     const playAudio = (text, _lang) => {
-        if (!text) return;
-        if (learnLang === 'english') {
-            if (!window.speechSynthesis) return;
-            window.speechSynthesis.cancel();
-            const utt = new SpeechSynthesisUtterance(text);
-            utt.lang  = 'en-US';
-            utt.rate  = 0.85;
-            utt.onstart = () => setSpeaking(true);
-            utt.onend   = () => setSpeaking(false);
-            utt.onerror = () => setSpeaking(false);
-            window.speechSynthesis.speak(utt);
-        } else {
-            playMedumbaWord(text,
-                () => setSpeaking(true),
-                () => setSpeaking(false),
-            );
-        }
+        if (!text || learnLang === 'english') return;
+        playMedumbaWord(text,
+            () => setSpeaking(true),
+            () => setSpeaking(false),
+        );
     };
 
     /* ── Tile word selection ── */

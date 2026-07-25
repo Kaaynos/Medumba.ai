@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
 import { getPaymentSuccessFromUrl } from './config/stripe';
@@ -23,7 +23,6 @@ import NewPasswordPage          from './components/NewPasswordPage';
 import PasswordResetSuccessPage from './components/PasswordResetSuccessPage';
 import LandingPage              from './components/LandingPage';
 import QuickSetupPage           from './components/QuickSetupPage';
-import StartChoicePage          from './components/StartChoicePage';
 import DashboardPage            from './components/DashboardPage';
 import CalendarPage             from './components/CalendarPage';
 import VideoPage                from './components/VideoPage';
@@ -43,24 +42,22 @@ import { ThemeProvider }        from './context/ThemeContext';
 
 // ─── Step map ───────────────────────────────────────────────────────────────
 //  0  Splash
-//  1  Welcome
-// 18  Start Choice     (→2 continue free, →8 register, →20 log in)
-//  2  Language Selection
-//  3  Connection         ┐
-//  4  Proficiency        │ Courses onboarding
-//  5  Reason             │
-//  6  Achieve            │
-//  7  Daily Goal         ┘
-//  8  Profile Welcome  (= "Register", reached from landing nav) ┐
-//  9  Name                                                      │ Registration
-// 10  Age                                                       │ (optional — app access
-// 11  Email                                                     │  never requires this)
-// 12  Password                                                  │
-// 13  Success          (→15)                                    ┘
+//  1  Welcome (Landing) — "Start"/"Register" both require an account now,
+//     no more free/anonymous course access
+//  8  Profile Welcome  ┐
+//  9  Name             │
+// 10  Age               │ Registration (mandatory for course access)
+// 11  Email             │
+// 12  Password          │
+// 13  Success  (→3)     ┘
+//  3  Quick setup (level/reason/objectives/daily goal) — runs right after
+//     registration, before the Dashboard
 // 20  Log in           (reached from the Dashboard's "Se connecter" button)
 // 21  Forgot Password  (→20)
 // 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
 // 23  Reset Success    (→15)  ┘
+// 2, 4-7, 18  orphaned — LanguageSelectionPage/Connection/Proficiency/
+//     Reason/Achieve/DailyGoal/StartChoicePage are no longer routed to
 // 14  Section viewer   (calendar | video | counting | dictionary)
 // 15  Gamified Dashboard
 // 99  Admin Panel
@@ -115,6 +112,22 @@ function App() {
   };
 
   const back = () => history.back();
+
+  /* ── Idle logout — clicking the Hub logo goes to the Landing page but
+     keeps the session alive for a grace period (in case the user comes
+     right back), only actually signing out after 20 minutes idle. The
+     user's XP/streak/level are never at risk either way: they're synced
+     to Supabase live as they're earned, independent of session state. ── */
+  const IDLE_LOGOUT_MS = 20 * 60 * 1000;
+  const idleLogoutTimerRef = useRef(null);
+  const cancelIdleLogout = () => {
+    if (idleLogoutTimerRef.current) { clearTimeout(idleLogoutTimerRef.current); idleLogoutTimerRef.current = null; }
+  };
+  const goToLandingWithIdleLogout = () => {
+    cancelIdleLogout();
+    idleLogoutTimerRef.current = setTimeout(() => { logoutUser(); }, IDLE_LOGOUT_MS);
+    go(1);
+  };
 
   useEffect(() => {
     // Stamp the very first page so the first back-press lands here, not outside
@@ -221,20 +234,11 @@ function App() {
       {/* ── Landing (marketing) ── */}
       {step === 1 && (
         <LandingPage
-          onStart={() => go(18)}
-          onRegister={() => go(8)}
+          onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
+          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
-        />
-      )}
-
-      {/* ── Start choice: save progress via an account, or continue free ── */}
-      {step === 18 && (
-        <StartChoicePage
-          nativeLang={nativeLang}
-          onBack={back}
-          onRegister={() => go(8)}
-          onContinue={() => go(2)}
+          setNativeLang={setNativeLang}
         />
       )}
 
@@ -264,7 +268,7 @@ function App() {
       )}
 
       {/* ── Account creation ── */}
-      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} nativeLang={nativeLang} />}
+      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} onLogin={() => go(20)} nativeLang={nativeLang} />}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a, birthdate) => {
         setUserAge(a);
@@ -286,7 +290,7 @@ function App() {
         />
       )}
       {step === 13 && <SuccessPage
-          onNext={() => go(15)}
+          onNext={() => go(3)}
           nativeLang={nativeLang}
           userName={userName}
           onNavigate={(view) => go(14, view)}
@@ -332,8 +336,7 @@ function App() {
           onPaymentHandled={() => setPaymentSuccess(null)}
           autoStartFirstLesson={autoStartFirstLesson}
           onAutoStartHandled={() => setAutoStartFirstLesson(false)}
-          onRegister={() => go(8)}
-          onGoToLogin={() => go(20)}
+          onLogoClick={goToLandingWithIdleLogout}
         />
       )}
 

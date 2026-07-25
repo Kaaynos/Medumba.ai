@@ -158,7 +158,7 @@ function AppPreview({ small, isFr }) {
 }
 
 /* ══════════════ COMPOSANT PRINCIPAL ══════════════ */
-export default function LandingPage({ onStart, onRegister, onNavigate, onDownload }) {
+export default function LandingPage({ onStart, onRegister, onNavigate, onDownload, setNativeLang }) {
     const nav = onNavigate ?? onStart;
     const [menuOpen,  setMenuOpen]  = useState(false);
     const [scrolled,  setScrolled]  = useState(false);
@@ -167,6 +167,11 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
     // Anglais en langue principale, français disponible via la bascule.
     const [isFr,      setIsFr]      = useState(false);
     const tr = (fr, en) => isFr ? fr : en;
+
+    // Le choix de langue ici doit survivre à l'inscription (le flux Register
+    // ne passe plus par LanguageSelectionPage) — on le répercute vers l'état
+    // global à chaque changement, y compris la valeur initiale au montage.
+    useEffect(() => { setNativeLang?.(isFr ? 'french' : 'english'); }, [isFr]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Nombre réel d'apprenants actifs (30 derniers jours) — remplace le "4" en dur.
     const [activeLearners, setActiveLearners] = useState(null);

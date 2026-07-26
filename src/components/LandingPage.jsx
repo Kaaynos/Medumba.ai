@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
 import tontah from '../assets/tontah.webp';
+import tontahExpressions from '../assets/tontah-expressions.webp';
+import tontahPoses from '../assets/tontah-poses.webp';
+import tontahAccessories from '../assets/tontah-accessories.webp';
 import { getActiveLearnerCount } from '../services/statsService';
 import { submitContactMessage, getLandingComments, listenLandingComments } from '../services/contactService';
 import { submitTestimonial, getApprovedTestimonials } from '../services/testimonialService';
@@ -613,6 +616,21 @@ export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, 
                         </Reveal>
                     </div>
                 </div>
+
+                {!isSmall && (
+                    <div style={{ maxWidth:'1160px',margin:'3.5rem auto 0',display:'flex',flexDirection:'column',gap:'2rem' }}>
+                        {[
+                            { src:tontahExpressions, fr:'Ses expressions', en:'Her expressions', delay:0.05 },
+                            { src:tontahPoses,       fr:'Ses poses',       en:'Her poses',       delay:0.1 },
+                            { src:tontahAccessories, fr:'Ses accessoires', en:'Her accessories', delay:0.15 },
+                        ].map((row,i) => (
+                            <Reveal key={i} delay={row.delay}>
+                                <p style={{ fontSize:'.72rem',fontWeight:700,color:AMB,letterSpacing:'2px',textTransform:'uppercase',marginBottom:'.6rem' }}>{tr(row.fr,row.en)}</p>
+                                <img src={row.src} alt={tr(row.fr,row.en)} style={{ width:'100%',height:'auto',borderRadius:'20px',boxShadow:'0 8px 24px rgba(0,86,210,0.08)' }} />
+                            </Reveal>
+                        ))}
+                    </div>
+                )}
             </section>
 
             {/* ══ RESSOURCES ══ */}

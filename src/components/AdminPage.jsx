@@ -16,42 +16,33 @@ function StatCard({ icon, label, value, color = B }) {
   );
 }
 
-function MethodBadge({ method, isFr }) {
-  const isGoogle = method?.includes('google');
+const PROF_LABELS = {
+  1: { en: 'Absolute Beginner', fr: 'Débutant absolu', color: '#ef4444' },
+  2: { en: 'Elementary',        fr: 'Élémentaire',      color: '#f59e0b' },
+  3: { en: 'Intermediate',      fr: 'Intermédiaire',    color: '#22c55e' },
+  4: { en: 'Advanced',          fr: 'Avancé',           color: '#0056D2' },
+};
+
+function LevelBadge({ proficiency, isFr }) {
+  const meta = PROF_LABELS[proficiency] || PROF_LABELS[1];
   return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: '4px',
-      padding: '3px 10px', borderRadius: '99px', fontSize: '0.75rem', fontWeight: '700',
-      backgroundColor: isGoogle ? '#fef3c7' : '#eff6ff',
-      color: isGoogle ? '#d97706' : B,
-    }}>
-      {isGoogle ? 'G Google' : `✉ ${isFr ? 'E-mail' : 'Email'}`}
+    <span style={{ padding: '3px 10px', borderRadius: '99px', fontSize: '0.75rem', fontWeight: '800', backgroundColor: meta.color, color: '#fff', whiteSpace: 'nowrap' }}>
+      {isFr ? meta.fr : meta.en}
     </span>
   );
 }
 
-function LevelBadge({ level }) {
-  const colors = { A1: '#22c55e', A2: '#84cc16', B1: '#f59e0b', B2: '#f97316', C1: '#ef4444', C2: '#8b5cf6' };
-  return (
-    <span style={{ padding: '3px 10px', borderRadius: '99px', fontSize: '0.75rem', fontWeight: '800', backgroundColor: colors[level] || '#e2e8f0', color: '#fff' }}>
-      {level || 'A1'}
-    </span>
-  );
-}
-
-function fmt(ts, isFr) {
-  if (!ts) return '—';
+function fmt(iso, isFr) {
+  if (!iso) return '—';
   try {
-    const d = ts.toDate ? ts.toDate() : typeof ts === 'string' ? new Date(ts) : new Date(ts.seconds * 1000);
-    return d.toLocaleDateString(isFr ? 'fr-FR' : 'en-US');
+    return new Date(iso).toLocaleDateString(isFr ? 'fr-FR' : 'en-US');
   } catch { return '—'; }
 }
 
-function isActive(lastSeen) {
-  if (!lastSeen) return false;
+function isActive(lastActive) {
+  if (!lastActive) return false;
   try {
-    const d    = lastSeen.toDate ? lastSeen.toDate() : new Date(lastSeen.seconds * 1000);
-    const diff = (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
+    const diff = (Date.now() - new Date(lastActive).getTime()) / (1000 * 60 * 60 * 24);
     return diff <= 7;
   } catch { return false; }
 }
@@ -74,7 +65,7 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   useEffect(() => {
     getAllUsers()
       .then(setUsers)
-      .catch(() => setError(isFr ? 'Erreur de chargement. Vérifiez les règles Firestore.' : 'Loading error. Check the Firestore rules.'))
+      .catch(() => setError(isFr ? 'Erreur de chargement. Vérifiez les règles Supabase (RLS).' : 'Loading error. Check the Supabase RLS rules.'))
       .finally(() => setLoading(false));
   }, [isFr]);
 
@@ -111,8 +102,7 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   );
 
   const totalXP    = users.reduce((s, u) => s + (u.xp || 0), 0);
-  const activeCount = users.filter(u => isActive(u.lastSeen)).length;
-  const googleCount = users.filter(u => u.provider === 'google.com').length;
+  const activeCount = users.filter(u => isActive(u.lastActive)).length;
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: BG, fontFamily: 'inherit' }}>
@@ -272,10 +262,9 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
           <div style={{ backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
 
             {/* Table header */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr 1fr', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#f1f5f9', fontSize: '0.72rem', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#f1f5f9', fontSize: '0.72rem', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               <span>{isFr ? 'Utilisateur' : 'User'}</span>
               <span>Email</span>
-              <span>{isFr ? 'Méthode' : 'Method'}</span>
               <span>{isFr ? 'Niveau' : 'Level'}</span>
               <span>XP</span>
               <span>{isFr ? 'Inscrit' : 'Joined'}</span>
@@ -289,7 +278,7 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
                   key={u.uid}
                   onClick={() => setSelected(selected?.uid === u.uid ? null : u)}
                   style={{
-                    display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr 1fr',
+                    display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr',
                     gap: '0.5rem', padding: '0.9rem 1.25rem', alignItems: 'center',
                     borderBottom: '1px solid #f1f5f9', cursor: 'pointer',
                     backgroundColor: selected?.uid === u.uid ? '#eff6ff' : '#fff',
@@ -302,14 +291,13 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
                     </div>
                     <div>
                       <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' }}>{u.name || (isFr ? '(sans nom)' : '(no name)')}</div>
-                      <div style={{ fontSize: '0.72rem', color: isActive(u.lastSeen) ? '#22c55e' : '#94a3b8', fontWeight: '600' }}>
-                        {isActive(u.lastSeen) ? (isFr ? '● Actif récemment' : '● Recently active') : (isFr ? '○ Inactif' : '○ Inactive')}
+                      <div style={{ fontSize: '0.72rem', color: isActive(u.lastActive) ? '#22c55e' : '#94a3b8', fontWeight: '600' }}>
+                        {isActive(u.lastActive) ? (isFr ? '● Actif récemment' : '● Recently active') : (isFr ? '○ Inactif' : '○ Inactive')}
                       </div>
                     </div>
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.email || '—'}</div>
-                  <div><MethodBadge method={u.provider} isFr={isFr} /></div>
-                  <div><LevelBadge level={u.level} /></div>
+                  <div><LevelBadge proficiency={u.proficiency} isFr={isFr} /></div>
                   <div style={{ fontWeight: '800', color: B, fontSize: '0.9rem' }}>{u.xp ?? 0}</div>
                   <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{fmt(u.createdAt, isFr)}</div>
                 </div>
@@ -330,8 +318,8 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
               {[
                 { label: 'UID',                              value: selected.uid.slice(0, 16) + '...' },
-                { label: isFr ? 'Objectif' : 'Goal',          value: isFr ? `${selected.dailyGoal ?? '—'} min/jour` : `${selected.dailyGoal ?? '—'} min/day` },
-                { label: isFr ? 'Langue' : 'Language',        value: selected.language || '—' },
+                { label: isFr ? 'Objectif quotidien' : 'Daily goal', value: selected.dailyGoal || '—' },
+                { label: isFr ? 'Langue maternelle' : 'Native language', value: selected.nativeLang || '—' },
                 { label: 'Streak',                            value: isFr ? `🔥 ${selected.streak ?? 0} jours` : `🔥 ${selected.streak ?? 0} days` },
                 { label: isFr ? 'Gemmes' : 'Gems',            value: `💎 ${selected.gems ?? 0}` },
                 { label: isFr ? 'Cœurs' : 'Hearts',           value: `❤️ ${selected.hearts ?? 0}` },

@@ -1,8 +1,51 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+
+import audioA from '../assets/alphabet/a.mp4';
+import audioB from '../assets/alphabet/b.mp4';
+import audioBarU from '../assets/alphabet/bar_u.mp4';
+import audioC from '../assets/alphabet/c.mp4';
+import audioD from '../assets/alphabet/d.mp4';
+import audioE from '../assets/alphabet/e.mp4';
+import audioEng from '../assets/alphabet/eng.mp4';
+import audioF from '../assets/alphabet/f.mp4';
+import audioG from '../assets/alphabet/g.mp4';
+import audioGh from '../assets/alphabet/gh.mp4';
+import audioGlottal from '../assets/alphabet/glottal.mp4';
+import audioH from '../assets/alphabet/h.mp4';
+import audioI from '../assets/alphabet/i.mp4';
+import audioJ from '../assets/alphabet/j.mp4';
+import audioK from '../assets/alphabet/k.mp4';
+import audioL from '../assets/alphabet/l.mp4';
+import audioM from '../assets/alphabet/m.mp4';
+import audioN from '../assets/alphabet/n.mp4';
+import audioNy from '../assets/alphabet/ny.mp4';
+import audioO from '../assets/alphabet/o.mp4';
+import audioOpenE from '../assets/alphabet/open_e.mp4';
+import audioOpenO from '../assets/alphabet/open_o.mp4';
+import audioS from '../assets/alphabet/s.mp4';
+import audioSh from '../assets/alphabet/sh.mp4';
+import audioT from '../assets/alphabet/t.mp4';
+import audioTs from '../assets/alphabet/ts.mp4';
+import audioU from '../assets/alphabet/u.mp4';
+import audioV from '../assets/alphabet/v.mp4';
+import audioW from '../assets/alphabet/w.mp4';
+import audioY from '../assets/alphabet/y.mp4';
+import audioZ from '../assets/alphabet/z.mp4';
 
 /* ════════════════════════════════════════════════════════════════
-   Alphabet Medumba — 32 lettres (pas d'audio : pas encore de voix Medumba enregistrée)
+   Alphabet Medumba — 33 lettres (voix réelle pour toutes sauf α et ə,
+   qui restent sans enregistrement pour l'instant)
 ════════════════════════════════════════════════════════════════ */
+
+// Lettre → fichier audio réel. α et ə n'ont pas de voix enregistrée : pas d'entrée ici.
+const AUDIO_MAP = {
+    a: audioA, b: audioB, ɨ: audioBarU, c: audioC, d: audioD, e: audioE,
+    ŋ: audioEng, f: audioF, g: audioG, gh: audioGh, 'ꞌ': audioGlottal,
+    h: audioH, i: audioI, j: audioJ, k: audioK, l: audioL, m: audioM,
+    n: audioN, ny: audioNy, o: audioO, ε: audioOpenE, ɔ: audioOpenO,
+    s: audioS, sh: audioSh, t: audioT, ts: audioTs, u: audioU, v: audioV,
+    w: audioW, y: audioY, z: audioZ,
+};
 
 const LETTERS = [
     // ── Ligne 1 ──────────────────────────────────────────────
@@ -41,6 +84,7 @@ const LETTERS = [
     { letter: 'w',  type: 'consonant', ipa: '[w]',   phoneFr: 'comme "ou" dans "oui"',      phoneEn: 'like "w" in "water"',        color: '#16a34a', example: 'wud',     exMeanFr: 'nuit',       exMeanEn: 'night' },
     { letter: 'y',  type: 'consonant', ipa: '[j]',   phoneFr: 'comme "y" dans "yeux"',      phoneEn: 'like "y" in "yes"',          color: '#16a34a', example: 'nyàm',    exMeanFr: 'soleil',     exMeanEn: 'sun' },
     { letter: 'z',  type: 'consonant', ipa: '[z]',   phoneFr: 'comme "z" français',         phoneEn: 'like "z" in "zero"',         color: '#16a34a', example: 'zα',      exMeanFr: 'moi',        exMeanEn: 'me' },
+    { letter: 'ꞌ',  type: 'consonant', ipa: '[ʔ]',   phoneFr: 'coup de glotte (son étranglé)', phoneEn: 'glottal stop (a catch in the throat)', color: '#7c3aed', example: 'baꞌ', exMeanFr: 'maison', exMeanEn: 'house' },
 ];
 
 const VOWEL_COUNT     = LETTERS.filter(l => l.type === 'vowel').length;
@@ -99,7 +143,7 @@ const LetterCard = ({ item, isFr, active, onSelect }) => {
 };
 
 /* ── Panel de détail (lettre sélectionnée) ── */
-const DetailPanel = ({ item, isFr }) => (
+const DetailPanel = ({ item, isFr, hasAudio, playing, onPlay }) => (
     <div style={{
         background: `linear-gradient(135deg, ${item.color}15, ${item.color}08)`,
         border: `2px solid ${item.color}30`,
@@ -126,6 +170,22 @@ const DetailPanel = ({ item, isFr }) => (
                     IPA : <span style={{ fontStyle: 'italic', color: item.color }}>{item.ipa}</span>
                 </div>
             </div>
+            {hasAudio && (
+                <button
+                    onClick={onPlay}
+                    style={{
+                        marginLeft: 'auto', flexShrink: 0,
+                        background: '#fff', border: `1.5px solid ${item.color}55`, borderRadius: '999px',
+                        width: '44px', height: '44px', cursor: playing ? 'default' : 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '1.2rem', boxShadow: playing ? `0 0 0 5px ${item.color}18` : '0 2px 6px rgba(0,0,0,0.06)',
+                        transition: 'all 0.2s',
+                    }}
+                    aria-label={isFr ? 'Écouter' : 'Listen'}
+                >
+                    {playing ? '🔊' : '🔈'}
+                </button>
+            )}
         </div>
         <div style={{
             backgroundColor: '#fff', borderRadius: '12px', padding: '0.75rem 1rem',
@@ -151,12 +211,26 @@ const AlphabetPage = ({ nativeLang, onBack }) => {
     const [filter,   setFilter]   = useState('all'); // 'all' | 'vowel' | 'consonant'
     const [selected, setSelected] = useState(null);
     const [showImg,  setShowImg]  = useState(false);
+    const [playing,  setPlaying]  = useState(null); // letter currently playing, or null
+    const audioRef = useRef(null);
 
     const visible = filter === 'all'
         ? LETTERS
         : LETTERS.filter(l => l.type === filter);
 
     const selectedItem = LETTERS.find(l => l.letter === selected);
+
+    const playLetter = (letter) => {
+        const src = AUDIO_MAP[letter];
+        if (!src) return;
+        if (audioRef.current) audioRef.current.pause();
+        const audio = new Audio(src);
+        audioRef.current = audio;
+        setPlaying(letter);
+        audio.onended = () => setPlaying(null);
+        audio.onerror = () => setPlaying(null);
+        audio.play().catch(() => setPlaying(null));
+    };
 
     return (
         <div style={{
@@ -185,8 +259,8 @@ const AlphabetPage = ({ nativeLang, onBack }) => {
                     <div>
                         <div style={{ fontSize: '0.72rem', fontWeight: '700', opacity: 0.85, textTransform: 'uppercase', letterSpacing: '0.7px' }}>
                             {isFr
-                                ? `32 lettres · ${VOWEL_COUNT} voyelles · ${CONSONANT_COUNT} consonnes`
-                                : `32 letters · ${VOWEL_COUNT} vowels · ${CONSONANT_COUNT} consonants`}
+                                ? `${LETTERS.length} lettres · ${VOWEL_COUNT} voyelles · ${CONSONANT_COUNT} consonnes`
+                                : `${LETTERS.length} letters · ${VOWEL_COUNT} vowels · ${CONSONANT_COUNT} consonants`}
                         </div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>
                             🔤 {isFr ? 'Alphabet Medumba' : 'Medumba Alphabet'}
@@ -255,7 +329,15 @@ const AlphabetPage = ({ nativeLang, onBack }) => {
                 </div>
 
                 {/* Détail lettre sélectionnée */}
-                {selectedItem && <DetailPanel item={selectedItem} isFr={isFr} />}
+                {selectedItem && (
+                    <DetailPanel
+                        item={selectedItem}
+                        isFr={isFr}
+                        hasAudio={!!AUDIO_MAP[selectedItem.letter]}
+                        playing={playing === selectedItem.letter}
+                        onPlay={() => playLetter(selectedItem.letter)}
+                    />
+                )}
 
                 {/* Grille de lettres */}
                 <div style={{
@@ -263,7 +345,7 @@ const AlphabetPage = ({ nativeLang, onBack }) => {
                     gridTemplateColumns: 'repeat(4, 1fr)',
                     gap: '0.6rem',
                 }}>
-                    {visible.map((item, i) => (
+                    {visible.map((item) => (
                         <LetterCard
                             key={item.letter}
                             item={item}

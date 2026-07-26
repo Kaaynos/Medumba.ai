@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
+import tontah from '../assets/tontah.webp';
 import { getActiveLearnerCount } from '../services/statsService';
 import { submitContactMessage, getLandingComments, listenLandingComments } from '../services/contactService';
 import { submitTestimonial, getApprovedTestimonials } from '../services/testimonialService';
@@ -836,6 +837,51 @@ export default function LandingPage({ onStart, onRegister, onNavigate, onDownloa
                     <Reveal delay={0.3} style={{ marginTop:isMobile?'2.5rem':'3.5rem' }}>
                         <button onClick={onStart} className="lp-cta" style={{ width:isMobile?'100%':'auto' }}>🚀 {tr("Commencer maintenant — c'est gratuit","Start now — it's free")}</button>
                     </Reveal>
+                </div>
+            </section>
+
+            {/* ══ TONTAH ══ */}
+            <section style={{ background:LIGHT,padding:PH }}>
+                <div style={{ maxWidth:'1160px',margin:'0 auto',display:'flex',flexDirection:isMobile?'column':'row',alignItems:'center',gap:isMobile?'2.5rem':'5rem' }}>
+                    {!isSmall && (
+                        <Reveal delay={0.1} style={{ flexShrink:0,display:'flex',justifyContent:'center' }}>
+                            <img src={tontah} alt="Tontah" style={{ width:isMobile?'200px':'260px', height:'auto', filter:'drop-shadow(0 18px 30px rgba(0,86,210,0.18))' }} />
+                        </Reveal>
+                    )}
+                    <div style={{ flex:1,minWidth:0 }}>
+                        <Reveal>
+                            <div style={{ display:'inline-flex',alignItems:'center',gap:'.4rem',background:'#fff',border:`2px solid #fde68a`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.1rem' }}>
+                                <span style={{ fontSize:'.9rem' }}>✨</span>
+                                <span style={{ fontSize:'.72rem',fontWeight:700,color:'#92400e',letterSpacing:'.3px' }}>{tr('Bientôt disponible','Coming soon')}</span>
+                            </div>
+                        </Reveal>
+                        <Reveal delay={0.06}>
+                            <h2 style={TITLE(isSmall?'2rem':isMobile?'2.4rem':'2.9rem')}>{tr('Bientôt : votre compagnon ','Meet ')}<span style={{ color:B }}>Tontah</span></h2>
+                        </Reveal>
+                        <Reveal delay={0.12}>
+                            <p style={{ fontSize:isSmall?'.92rem':'1.02rem',color:MUTED,lineHeight:1.8,marginTop:'1rem',marginBottom:'1.75rem',maxWidth:'480px' }}>
+                                {tr(
+                                    "Tontah sera votre compagnon IA pour l'apprentissage, la croissance et le bien-être — toujours là pour vous aider à apprendre, explorer et progresser en confiance.",
+                                    "Tontah will be your AI companion for learning, growth and well-being — always here to help you learn, explore, and grow with confidence."
+                                )}
+                            </p>
+                        </Reveal>
+                        <Reveal delay={0.18}>
+                            <div style={{ display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(2,1fr)',gap:'1rem',maxWidth:'520px' }}>
+                                {[
+                                    { icon:'📖', fr:'Intelligent et bienveillant', en:'Smart & Supportive' },
+                                    { icon:'🧡', fr:'Attentif et encourageant',    en:'Caring & Encouraging' },
+                                    { icon:'🛡️', fr:'Sûr et digne de confiance',   en:'Safe & Trustworthy' },
+                                    { icon:'✨', fr:'Curieux et créatif',          en:'Curious & Creative' },
+                                ].map((p,i) => (
+                                    <div key={i} style={{ display:'flex',alignItems:'center',gap:'.6rem' }}>
+                                        <span style={{ fontSize:'1.1rem' }}>{p.icon}</span>
+                                        <span style={{ fontSize:'.85rem',fontWeight:700,color:INK }}>{tr(p.fr,p.en)}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </Reveal>
+                    </div>
                 </div>
             </section>
 

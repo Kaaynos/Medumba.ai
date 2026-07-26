@@ -37,7 +37,7 @@ export async function getProgress(uid) {
 export async function saveProgress(uid, fields) {
     const { error } = await supabase
         .from('user_progress')
-        .upsert({ user_id: uid, ...fields, updated_at: new Date().toISOString() });
+        .upsert({ user_id: uid, ...fields, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
     if (error) console.error('[userService] saveProgress error:', error.message);
 }
 

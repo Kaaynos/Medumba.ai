@@ -575,7 +575,7 @@ export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, 
                 <div style={{ maxWidth:'1160px',margin:'0 auto',display:'flex',flexDirection:isMobile?'column':'row',alignItems:'center',gap:isMobile?'2.5rem':'5rem' }}>
                     {!isSmall && (
                         <Reveal delay={0.1} style={{ flexShrink:0,display:'flex',justifyContent:'center' }}>
-                            <img src={tontah} alt="Tontah" style={{ width:isMobile?'200px':'260px', height:'auto', filter:'drop-shadow(0 18px 30px rgba(0,86,210,0.18))' }} />
+                            <img src={tontah} alt="Tontah" style={{ width:isMobile?'260px':'340px', height:'auto', borderRadius:'32px', filter:'drop-shadow(0 18px 30px rgba(0,86,210,0.18))' }} />
                         </Reveal>
                     )}
                     <div style={{ flex:1,minWidth:0 }}>

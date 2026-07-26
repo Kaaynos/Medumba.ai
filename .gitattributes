@@ -1,1 +1,7 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+
+# Small bundled clips (alphabet/syllable audio) are imported by Vite and must
+# be real binary in the git blob — Vercel's build clones the repo without
+# resolving Git LFS, so anything LFS-tracked here becomes a broken pointer
+# stub in production (see the public/videos/ incident this was learned from).
+src/assets/alphabet/*.mp4 -filter -diff -merge -text

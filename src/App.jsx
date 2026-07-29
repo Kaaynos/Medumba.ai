@@ -197,6 +197,17 @@ function App() {
     _motivation: getMotivationMessage(_zp),
   };
 
+  // ── Tontah persona (Phase 1: age bracket only — Parent/Teacher personas
+  // wait on the account-model and teacher-roster work; see the chat design
+  // doc). Logged-out visitors and adults share the same voice for now. ──
+  const chatPersona = !currentUid
+    ? 'visitor'
+    : Number(userAge) > 0 && Number(userAge) < 15
+      ? 'child'
+      : Number(userAge) >= 15 && Number(userAge) <= 18
+        ? 'teen'
+        : 'adult';
+
   // ── Standalone legal pages (direct URL, outside the step machine) ──
   // Required so Google's OAuth branding-verification crawler can fetch
   // /privacy and /terms directly without going through onboarding.
@@ -220,6 +231,7 @@ function App() {
             getUserProfile(user.uid).then((prof) => {
               const name = prof?.name || user.displayName || '';
               if (name) setUserName(name.split(' ')[0]);
+              if (prof?.age) setUserAge(prof.age);
             });
             go(15);
           } else if (new URLSearchParams(window.location.search).get('register') === '1') {
@@ -354,7 +366,7 @@ function App() {
       )}
 
       {/* ── Support chat widget — landing, hub sections, dashboard ── */}
-      {(step === 1 || step === 14 || step === 15) && <ChatWidget nativeLang={nativeLang} />}
+      {(step === 1 || step === 14 || step === 15) && <ChatWidget nativeLang={nativeLang} persona={chatPersona} />}
 
     </ErrorBoundary>
     </ThemeProvider>

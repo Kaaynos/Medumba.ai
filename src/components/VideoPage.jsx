@@ -92,6 +92,7 @@ const CATEGORIES = [
 /* ── Inline video player modal ─────────────────────────────── */
 const VideoPlayer = ({ video, cat, isFr, onClose }) => {
     const [videoError, setVideoError] = useState(false);
+    const [iframeLoaded, setIframeLoaded] = useState(false);
     return (
     <div
         onClick={onClose}
@@ -133,13 +134,33 @@ const VideoPlayer = ({ video, cat, isFr, onClose }) => {
                 }}>✕</button>
             </div>
             {video.youtube ? (
-                <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${video.youtube}?autoplay=1&rel=0`}
-                    title={isFr ? video.titleFr : video.titleEn}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    style={{ width: '100%', height: '300px', display: 'block', border: 'none', backgroundColor: '#000' }}
-                />
+                <div style={{ position: 'relative', width: '100%', height: '300px', backgroundColor: '#000' }}>
+                    {!iframeLoaded && (
+                        <div style={{
+                            position: 'absolute', inset: 0, display: 'flex',
+                            flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                            gap: '0.75rem', color: 'rgba(255,255,255,0.7)',
+                        }}>
+                            <style>{'@keyframes vid-spin { to { transform: rotate(360deg); } }'}</style>
+                            <div style={{
+                                width: '32px', height: '32px', borderRadius: '50%',
+                                border: '3px solid rgba(255,255,255,0.2)', borderTopColor: '#fff',
+                                animation: 'vid-spin 0.8s linear infinite',
+                            }} />
+                            <span style={{ fontSize: '0.78rem', fontWeight: '600' }}>
+                                {isFr ? 'Chargement…' : 'Loading…'}
+                            </span>
+                        </div>
+                    )}
+                    <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${video.youtube}?autoplay=1&rel=0`}
+                        title={isFr ? video.titleFr : video.titleEn}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        onLoad={() => setIframeLoaded(true)}
+                        style={{ width: '100%', height: '100%', display: 'block', border: 'none', backgroundColor: '#000' }}
+                    />
+                </div>
             ) : videoError ? (
                 <div style={{ padding: '3rem 2rem', textAlign: 'center', backgroundColor: '#0f172a' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🎬</div>

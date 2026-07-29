@@ -56,13 +56,14 @@ test.describe('RES-03: Videos (doc superseded)', () => {
     });
 
     test('videos open in an embedded in-app player, not an external link (doc expected external — superseded by an intentional UX change)', async ({ page }) => {
-        // "Telling Time" (Drawings category) has a youtube id, unlike the
-        // local-mp4-only featured hero video.
-        await page.getByText('Telling Time', { exact: true }).click();
-        const iframe = page.locator('iframe[src*="youtube-nocookie.com/embed"]');
-        await expect(iframe).toBeVisible({ timeout: 5000 });
+        // All videos are now Supabase-Storage-hosted mp4s (the YouTube-embedded
+        // ones were removed — unreliable load times/availability), so this
+        // checks the <video> element instead of a youtube-nocookie iframe.
+        await page.getByText('Drawing 01', { exact: true }).click();
+        const video = page.locator('video');
+        await expect(video).toBeVisible({ timeout: 5000 });
         await page.locator('button:has-text("✕")').click();
-        await expect(iframe).not.toBeVisible();
+        await expect(video).not.toBeVisible();
     });
 });
 

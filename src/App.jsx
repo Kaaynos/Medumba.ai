@@ -241,6 +241,7 @@ function App() {
           onLogin={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(20); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
+          nativeLang={nativeLang}
           setNativeLang={setNativeLang}
         />
       )}

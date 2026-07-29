@@ -159,14 +159,16 @@ function AppPreview({ small, isFr }) {
 }
 
 /* ══════════════ COMPOSANT PRINCIPAL ══════════════ */
-export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, onDownload, setNativeLang }) {
+export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, onDownload, nativeLang, setNativeLang }) {
     const nav = onNavigate ?? onStart;
     const [menuOpen,  setMenuOpen]  = useState(false);
     const [scrolled,  setScrolled]  = useState(false);
     const [vw,        setVw]        = useState(() => window.innerWidth);
     const [activeT,   setActiveT]   = useState(0);
-    // Anglais en langue principale, français disponible via la bascule.
-    const [isFr,      setIsFr]      = useState(false);
+    // Anglais en langue principale, français disponible via la bascule —
+    // mais si l'utilisateur a déjà choisi une langue (LanguageSelectionPage),
+    // on la respecte au lieu de l'écraser au remontage de cette page.
+    const [isFr,      setIsFr]      = useState(nativeLang === 'french');
     const tr = (fr, en) => isFr ? fr : en;
 
     // Le choix de langue ici doit survivre à l'inscription (le flux Register

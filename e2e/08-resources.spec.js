@@ -72,8 +72,8 @@ test.describe('RES-04: Alphabet reference page', () => {
         await page.getByText(/Alphabet/i).first().click();
     });
 
-    test('shows all 32 letters and opens a detail panel on selection', async ({ page }) => {
-        await expect(page.getByText(/32 LETTERS/i)).toBeVisible();
+    test('shows all 33 letters and opens a detail panel on selection', async ({ page }) => {
+        await expect(page.getByText(/33 LETTERS/i)).toBeVisible();
         await page.getByText('a', { exact: true }).first().click();
         await expect(page.getByText(/like "a" in "father"/i)).toBeVisible();
     });

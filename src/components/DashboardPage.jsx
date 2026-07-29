@@ -34,15 +34,15 @@ const EMOJI_3D = {
     '🃏': `${_FE}/Joker/3D/joker_3d.png`,
     '⚡': `${_FE}/High%20voltage/3D/high_voltage_3d.png`,
     '👤': `${_FE}/Bust%20in%20silhouette/3D/bust_in_silhouette_3d.png`,
-    '👋': `${_FE}/Waving%20hand/3D/waving_hand_3d.png`,
+    '👋': `${_FE}/Waving%20hand/Default/3D/waving_hand_3d_default.png`,
     '🍜': `${_FE}/Steaming%20bowl/3D/steaming_bowl_3d.png`,
     '👨‍👩‍👧': `${_FE}/People%20hugging/3D/people_hugging_3d.png`,
     '🔢': `${_FE}/Input%20numbers/3D/input_numbers_3d.png`,
-    '🏃': `${_FE}/Person%20running/3D/person_running_3d.png`,
+    '🏃': `${_FE}/Person%20running/Default/3D/person_running_3d_default.png`,
     '🎓': `${_FE}/Graduation%20cap/3D/graduation_cap_3d.png`,
     '🌿': `${_FE}/Herb/3D/herb_3d.png`,
     '🥁': `${_FE}/Drum/3D/drum_3d.png`,
-    '🖐️': `${_FE}/Hand%20with%20fingers%20splayed/3D/hand_with_fingers_splayed_3d.png`,
+    '🖐️': `${_FE}/Hand%20with%20fingers%20splayed/Default/3D/hand_with_fingers_splayed_3d_default.png`,
     '🐾': `${_FE}/Paw%20prints/3D/paw_prints_3d.png`,
     '🌽': `${_FE}/Ear%20of%20corn/3D/ear_of_corn_3d.png`,
     '🎨': `${_FE}/Artist%20palette/3D/artist_palette_3d.png`,
@@ -70,12 +70,13 @@ const EMOJI_3D = {
     '🍬': `${_FE}/Candy/3D/candy_3d.png`,
     '🔧': `${_FE}/Wrench/3D/wrench_3d.png`,
     '⏱️': `${_FE}/Stopwatch/3D/stopwatch_3d.png`,
-    '🌍': `${_FE}/Globe%20showing%20Europe-Africa/3D/globe_showing_europe-africa_3d.png`,
-    '💪': `${_FE}/Flexed%20biceps/3D/flexed_biceps_3d.png`,
+    '🌍': `${_FE}/Globe%20showing%20europe-africa/3D/globe_showing_europe-africa_3d.png`,
+    '💪': `${_FE}/Flexed%20biceps/Default/3D/flexed_biceps_3d_default.png`,
 };
 const E3D = ({ emoji, size = '1.5rem', style: s = {} }) => {
     const url = EMOJI_3D[emoji];
-    if (url) return <img src={url} alt={emoji} style={{ width: size, height: size, objectFit: 'contain', flexShrink: 0, display: 'inline-block', ...s }} />;
+    const [broken, setBroken] = useState(false);
+    if (url && !broken) return <img src={url} alt={emoji} onError={() => setBroken(true)} style={{ width: size, height: size, objectFit: 'contain', flexShrink: 0, display: 'inline-block', ...s }} />;
     return <span style={{ fontSize: size, ...s }}>{emoji}</span>;
 };
 
@@ -101,13 +102,13 @@ const STORYSET = {
 const _FE3 = 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@latest/assets';
 const CAT_VISUAL = {
     family:    { gradient: 'linear-gradient(135deg,#f3e8ff,#ddd6fe)', accent: '#7c3aed', svgUrl: STORYSET.family,    d3icon: null,            fluent: `${_FE3}/People%20hugging/3D/people_hugging_3d.png`,              lottie: null },
-    body:      { gradient: 'linear-gradient(135deg,#ccfbf1,#99f6e4)', accent: '#0d9488', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Hand%20with%20fingers%20splayed/3D/hand_with_fingers_splayed_3d.png`, lottie: null },
+    body:      { gradient: 'linear-gradient(135deg,#ccfbf1,#99f6e4)', accent: '#0d9488', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Hand%20with%20fingers%20splayed/Default/3D/hand_with_fingers_splayed_3d_default.png`, lottie: null },
     animals:   { gradient: 'linear-gradient(135deg,#dcfce7,#bbf7d0)', accent: '#16a34a', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Paw%20prints/3D/paw_prints_3d.png`,                    lottie: null },
     food:      { gradient: 'linear-gradient(135deg,#fff7ed,#fed7aa)', accent: '#ea580c', svgUrl: null,               d3icon: 'tea-cup',       fluent: `${_FE3}/Steaming%20bowl/3D/steaming_bowl_3d.png`,              lottie: 'https://assets8.lottiefiles.com/temp/lf20_nXwOJj.json' },
     colors:    { gradient: 'linear-gradient(135deg,#fef9c3,#fde68a)', accent: '#ca8a04', svgUrl: null,               d3icon: 'color-palette', fluent: `${_FE3}/Artist%20palette/3D/artist_palette_3d.png`,            lottie: null },
     numbers:   { gradient: 'linear-gradient(135deg,#dbeafe,#bfdbfe)', accent: '#2563eb', svgUrl: null,               d3icon: null,            fluent: `${_FE3}/Input%20numbers/3D/input_numbers_3d.png`,              lottie: null },
     nature:    { gradient: 'linear-gradient(135deg,#f0fdf4,#bbf7d0)', accent: '#15803d', svgUrl: STORYSET.nature,    d3icon: null,            fluent: `${_FE3}/Herb/3D/herb_3d.png`,                                 lottie: null },
-    greetings: { gradient: 'linear-gradient(135deg,#e0e7ff,#c7d2fe)', accent: '#4f46e5', svgUrl: STORYSET.greetings, d3icon: null,           fluent: `${_FE3}/Waving%20hand/3D/waving_hand_3d.png`,                 lottie: null },
+    greetings: { gradient: 'linear-gradient(135deg,#e0e7ff,#c7d2fe)', accent: '#4f46e5', svgUrl: STORYSET.greetings, d3icon: null,           fluent: `${_FE3}/Waving%20hand/Default/3D/waving_hand_3d_default.png`,                 lottie: null },
 };
 
 const LottieIcon = ({ catId, fallbackEmoji, size = 80 }) => {
@@ -2100,7 +2101,7 @@ const DashboardPage = ({
         souris:      `${FE}/Mouse%20face/3D/mouse_face_3d.png`,
         lapin:       `${FE}/Rabbit%20face/3D/rabbit_face_3d.png`,
         lièvre:      `${FE}/Rabbit%20face/3D/rabbit_face_3d.png`,
-        mouton:      `${FE}/Sheep/3D/sheep_3d.png`,
+        mouton:      `${FE}/Ewe/3D/ewe_3d.png`,
         chèvre:      `${FE}/Goat/3D/goat_3d.png`,
         cabri:       `${FE}/Goat/3D/goat_3d.png`,
         cochon:      `${FE}/Pig%20face/3D/pig_face_3d.png`,

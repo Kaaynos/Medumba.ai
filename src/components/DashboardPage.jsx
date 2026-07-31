@@ -4,7 +4,7 @@ import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
-import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen } from '../services/userService';
+import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen, getMyCohortInfo } from '../services/userService';
 import { useTheme } from '../context/ThemeContext';
 import CertificationPage from './CertificationPage';
 import { UNIT_CERTIFICATIONS } from '../data/certification';
@@ -381,6 +381,14 @@ const DashboardPage = ({
     useEffect(() => { localStorage.setItem(lsKey('med_xp'),     xp);     }, [xp]);     // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_streak'), streak); }, [streak]); // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_hearts'), hearts); }, [hearts]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // ── Ma classe (si ce profil est inscrit dans une cohorte) — devoir de la
+    // semaine et prochaine séance, écrits par l'enseignant ──
+    const [myCohortInfo, setMyCohortInfo] = useState(null);
+    useEffect(() => {
+        if (!profileId) { setMyCohortInfo(null); return; }
+        getMyCohortInfo(profileId).then(setMyCohortInfo);
+    }, [profileId]);
 
     // ── Marquer ce profil comme actif MAINTENANT — nécessaire pour un profil
     // enfant (pas de compte auth propre, donc jamais touché par le SIGNED_IN
@@ -1535,6 +1543,51 @@ const DashboardPage = ({
                 </div>
             )}
 
+
+            {/* ── My Class — only if this profile is enrolled in a cohort ── */}
+            {myCohortInfo && (
+                <div style={{
+                    margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
+                    padding: '1.1rem 1.3rem', borderRadius: '18px',
+                    backgroundColor: T.surface, border: `2px solid ${T.border}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🎓</span>
+                        <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>{myCohortInfo.cohortName}</span>
+                    </div>
+
+                    {myCohortInfo.nextSession && (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: T.blueTint, borderRadius: '12px', padding: '0.65rem 0.9rem', marginBottom: '0.75rem' }}>
+                            <div>
+                                <div style={{ fontSize: '0.68rem', fontWeight: '700', color: '#0056D2', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                    {isFr ? 'Prochaine séance' : 'Next class'}
+                                </div>
+                                <div style={{ fontSize: '0.88rem', fontWeight: '700', color: T.text }}>
+                                    {new Date(myCohortInfo.nextSession.session_date).toLocaleDateString(isFr ? 'fr-FR' : 'en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+                                </div>
+                            </div>
+                            {myCohortInfo.nextSession.meeting_link && (
+                                <a href={myCohortInfo.nextSession.meeting_link} target="_blank" rel="noopener noreferrer" style={{
+                                    padding: '0.5rem 1rem', borderRadius: '9999px', backgroundColor: '#0056D2', color: '#fff',
+                                    fontWeight: '700', fontSize: '0.82rem', textDecoration: 'none', flexShrink: 0,
+                                }}>{isFr ? 'Rejoindre' : 'Join'}</a>
+                            )}
+                        </div>
+                    )}
+
+                    {myCohortInfo.homeworkNote && (
+                        <div>
+                            <div style={{ fontSize: '0.68rem', fontWeight: '700', color: T.textSub, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.3rem' }}>
+                                📝 {isFr ? 'Devoir de la semaine' : 'This week\'s homework'}
+                            </div>
+                            <div style={{ fontSize: '0.85rem', color: T.text, fontWeight: '600', lineHeight: 1.5 }}>
+                                {myCohortInfo.homeworkNote}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* ── Daily Stories strip ── */}
             {renderStoriesStrip()}

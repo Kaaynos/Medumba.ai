@@ -1,5 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getMyCohorts, getCohortRoster, updateCohortHomework } from '../services/teacherService';
+import {
+    getMyCohorts, getCohortRoster, updateCohortHomework,
+    listCohortSessions, createClassSession, getSessionAttendance, markAttendance,
+} from '../services/teacherService';
 
 const B  = '#1B4FD8';
 const BG = '#f8fafc';
@@ -60,7 +63,49 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
     const daysAgo = (iso) => {
         if (!iso) return null;
         const d = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
-        return d;
+        return Math.max(0, d); // clock skew between client/server can read as "the future"
+    };
+
+    /* ── Sessions ── */
+    const [sessions, setSessions] = useState([]);
+    const [newSessionDate, setNewSessionDate] = useState('');
+    const [newSessionLink, setNewSessionLink] = useState('');
+    const [creatingSession, setCreatingSession] = useState(false);
+    const [openSessionId, setOpenSessionId] = useState(null);
+    const [attendance, setAttendance] = useState({}); // profileId -> present (bool|null)
+
+    const loadSessions = useCallback((cohortId) => {
+        listCohortSessions(cohortId).then(setSessions);
+    }, []);
+
+    useEffect(() => {
+        if (!activeCohortId) return;
+        loadSessions(activeCohortId);
+        setOpenSessionId(null);
+    }, [activeCohortId, loadSessions]);
+
+    const handleCreateSession = async () => {
+        if (!newSessionDate || !activeCohortId) return;
+        setCreatingSession(true);
+        try {
+            await createClassSession(activeCohortId, { sessionDate: newSessionDate, meetingLink: newSessionLink.trim() || null });
+            setNewSessionDate(''); setNewSessionLink('');
+            loadSessions(activeCohortId);
+        } finally {
+            setCreatingSession(false);
+        }
+    };
+
+    const openSession = async (sessionId) => {
+        if (openSessionId === sessionId) { setOpenSessionId(null); return; }
+        setOpenSessionId(sessionId);
+        const rows = await getSessionAttendance(sessionId);
+        setAttendance(Object.fromEntries(rows.map(r => [r.profile_id, r.present])));
+    };
+
+    const toggleAttendance = async (profileId, present) => {
+        setAttendance(prev => ({ ...prev, [profileId]: present }));
+        await markAttendance(openSessionId, profileId, present);
     };
 
     return (
@@ -146,6 +191,69 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
                                             cursor: savingHomework ? 'default' : 'pointer', fontFamily: 'inherit', opacity: savingHomework ? 0.6 : 1,
                                         }}>{savingHomework ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Enregistrer' : 'Save')}</button>
                                     </div>
+                                </div>
+
+                                {/* Sessions */}
+                                <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '1.25rem 1.5rem', marginBottom: '1.25rem', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                                    <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a', marginBottom: '0.75rem' }}>
+                                        📅 {isFr ? 'Séances' : 'Class sessions'}
+                                    </div>
+
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '0.5rem', marginBottom: '1rem' }}>
+                                        <input type="date" value={newSessionDate} onChange={e => setNewSessionDate(e.target.value)}
+                                            style={{ padding: '0.5rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem' }} />
+                                        <input value={newSessionLink} onChange={e => setNewSessionLink(e.target.value)}
+                                            placeholder={isFr ? 'Lien (Zoom, Meet...)' : 'Meeting link (Zoom, Meet...)'}
+                                            style={{ padding: '0.5rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem' }} />
+                                        <button onClick={handleCreateSession} disabled={!newSessionDate || creatingSession} style={{
+                                            padding: '0.5rem 1rem', borderRadius: '8px', border: 'none',
+                                            backgroundColor: newSessionDate ? B : '#e2e8f0', color: '#fff',
+                                            fontWeight: '700', fontSize: '0.82rem', cursor: newSessionDate ? 'pointer' : 'default', fontFamily: 'inherit',
+                                        }}>{isFr ? 'Ajouter' : 'Add'}</button>
+                                    </div>
+
+                                    {sessions.length === 0 ? (
+                                        <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{isFr ? 'Aucune séance planifiée' : 'No sessions scheduled'}</div>
+                                    ) : (
+                                        sessions.map(s => (
+                                            <div key={s.id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                                                <div onClick={() => openSession(s.id)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.65rem 0', cursor: 'pointer' }}>
+                                                    <div>
+                                                        <span style={{ fontWeight: '700', fontSize: '0.86rem', color: '#0f172a' }}>
+                                                            {new Date(s.session_date).toLocaleDateString(isFr ? 'fr-FR' : 'en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                                                        </span>
+                                                        {s.meeting_link && (
+                                                            <a href={s.meeting_link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ marginLeft: '0.6rem', fontSize: '0.78rem', color: B, fontWeight: '700' }}>
+                                                                {isFr ? 'Lien' : 'Link'} ↗
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                    <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '700' }}>
+                                                        {isFr ? 'Présences' : 'Attendance'} {openSessionId === s.id ? '▾' : '▸'}
+                                                    </span>
+                                                </div>
+                                                {openSessionId === s.id && (
+                                                    <div style={{ paddingBottom: '0.75rem' }}>
+                                                        {roster.map(r => (
+                                                            <div key={r.profileId} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.35rem 0.5rem' }}>
+                                                                <span style={{ fontSize: '0.82rem', color: '#0f172a' }}>{r.name || '(no name)'}</span>
+                                                                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                                                    <button onClick={() => toggleAttendance(r.profileId, true)} style={{
+                                                                        padding: '0.25rem 0.6rem', borderRadius: '999px', border: `1.5px solid ${attendance[r.profileId] === true ? '#16a34a' : '#e2e8f0'}`,
+                                                                        backgroundColor: attendance[r.profileId] === true ? '#dcfce7' : '#fff', color: '#16a34a', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit',
+                                                                    }}>✓ {isFr ? 'Présent' : 'Present'}</button>
+                                                                    <button onClick={() => toggleAttendance(r.profileId, false)} style={{
+                                                                        padding: '0.25rem 0.6rem', borderRadius: '999px', border: `1.5px solid ${attendance[r.profileId] === false ? '#dc2626' : '#e2e8f0'}`,
+                                                                        backgroundColor: attendance[r.profileId] === false ? '#fee2e2' : '#fff', color: '#dc2626', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit',
+                                                                    }}>✕ {isFr ? 'Absent' : 'Absent'}</button>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
 
                                 {/* Roster */}

@@ -185,3 +185,38 @@ export async function addChildProfile(guardianUid, { name, birthYear }) {
 
     return child;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Student-facing cohort info — "what class am I in, what's this week's
+   homework, when's the next session". Read-only from the learner's side;
+   RLS (migration 016) scopes this to cohorts the active profile actually
+   belongs to.
+───────────────────────────────────────────────────────────────────────────── */
+export async function getMyCohortInfo(profileId) {
+    const { data: memberships, error } = await supabase
+        .from('cohort_members')
+        .select('cohort_id')
+        .eq('profile_id', profileId);
+    if (error || !memberships || memberships.length === 0) return null;
+
+    const cohortId = memberships[0].cohort_id;
+    const { data: cohort } = await supabase.from('cohorts').select('*').eq('id', cohortId).single();
+    if (!cohort) return null;
+
+    const today = new Date().toISOString().slice(0, 10);
+    const { data: sessions } = await supabase
+        .from('class_sessions')
+        .select('*')
+        .eq('cohort_id', cohortId)
+        .eq('status', 'scheduled')
+        .gte('session_date', today)
+        .order('session_date', { ascending: true })
+        .limit(1);
+
+    return {
+        cohortName: cohort.name,
+        homeworkNote: cohort.homework_note,
+        homeworkUpdatedAt: cohort.homework_updated_at,
+        nextSession: sessions?.[0] || null,
+    };
+}

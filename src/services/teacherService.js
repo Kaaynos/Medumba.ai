@@ -53,3 +53,47 @@ export async function updateCohortHomework(cohortId, text) {
         .eq('id', cohortId);
     if (error) throw error;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Class sessions & attendance — a session is a real, actionable class date:
+   when, and the link to actually join (entered by hand — no video-room API
+   is wired into this codebase, so this doesn't fabricate one).
+───────────────────────────────────────────────────────────────────────────── */
+
+export async function listCohortSessions(cohortId) {
+    const { data, error } = await supabase
+        .from('class_sessions')
+        .select('*')
+        .eq('cohort_id', cohortId)
+        .order('session_date', { ascending: true });
+    if (error) { console.error('[teacherService] listCohortSessions error:', error.message); return []; }
+    return data;
+}
+
+export async function createClassSession(cohortId, { sessionDate, meetingLink, notes }) {
+    const { data, error } = await supabase
+        .from('class_sessions')
+        .insert({ cohort_id: cohortId, session_date: sessionDate, meeting_link: meetingLink || null, notes: notes || null })
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateSessionStatus(sessionId, status) {
+    const { error } = await supabase.from('class_sessions').update({ status }).eq('id', sessionId);
+    if (error) throw error;
+}
+
+export async function getSessionAttendance(sessionId) {
+    const { data, error } = await supabase.from('attendance').select('*').eq('session_id', sessionId);
+    if (error) { console.error('[teacherService] getSessionAttendance error:', error.message); return []; }
+    return data;
+}
+
+export async function markAttendance(sessionId, profileId, present) {
+    const { error } = await supabase
+        .from('attendance')
+        .upsert({ session_id: sessionId, profile_id: profileId, present, marked_at: new Date().toISOString() }, { onConflict: 'session_id,profile_id' });
+    if (error) throw error;
+}

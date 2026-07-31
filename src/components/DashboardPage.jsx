@@ -4,7 +4,7 @@ import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
-import { getProgress, saveProgress, getLeaderboard, getMyRank } from '../services/userService';
+import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen } from '../services/userService';
 import { useTheme } from '../context/ThemeContext';
 import CertificationPage from './CertificationPage';
 import { UNIT_CERTIFICATIONS } from '../data/certification';
@@ -240,12 +240,20 @@ const DashboardPage = ({
     onLogout       = null,
     onAdmin        = null,
     currentUid     = null,
+    // Which household member's Hub is showing right now — defaults to the
+    // account holder (currentUid) but can be a child profile with no login
+    // of its own (see userService.js household functions). currentUid stays
+    // the real authenticated identity (admin checks etc.); activeProfileId
+    // is who XP/streak/lessons read and write for.
+    activeProfileId       = null,
+    onSwitchProfile       = null, // (profileId) => void — set by App.jsx
     paymentSuccess    = null, // { pkg, gems } — set by App.jsx after Stripe redirect
     onPaymentHandled  = null,
     autoStartFirstLesson = false, // true right after registration's personalization quiz
     onAutoStartHandled   = null,
     onLogoClick          = null,
 }) => {
+    const profileId = activeProfileId || currentUid;
     /* ── theme ── */
     const { isDark, T, toggle: toggleDark } = useTheme();
 
@@ -280,7 +288,7 @@ const DashboardPage = ({
     const profMeta    = PROF_LABELS[profLevel]  ?? PROF_LABELS[1];
 
     /* ── completed lessons persisted in localStorage (per user) ── */
-    const lsKey = (k) => `${currentUid || 'anon'}_${k}`;
+    const lsKey = (k) => `${profileId || 'anon'}_${k}`;
     const [completedLessons, setCompletedLessons] = useState(() => { try { const v = localStorage.getItem(lsKey('med_completed')); return v ? new Set(JSON.parse(v)) : new Set(); } catch { return new Set(); } });
     useEffect(() => { localStorage.setItem(lsKey('med_completed'), JSON.stringify([...completedLessons])); }, [completedLessons]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -374,13 +382,19 @@ const DashboardPage = ({
     useEffect(() => { localStorage.setItem(lsKey('med_streak'), streak); }, [streak]); // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => { localStorage.setItem(lsKey('med_hearts'), hearts); }, [hearts]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // ── Marquer ce profil comme actif MAINTENANT — nécessaire pour un profil
+    // enfant (pas de compte auth propre, donc jamais touché par le SIGNED_IN
+    // d'authService.js), mais on le fait pour tout le monde par cohérence. ──
+    useEffect(() => { touchLastSeen(profileId); }, [profileId]);
+
     // ── Charger la vraie progression depuis Supabase au montage (le serveur
     // fait autorité dès qu'il a une ligne — sinon on garde localStorage et la
     // valeur remontera au serveur via l'effet de sauvegarde ci-dessous) ──
     const serverHydrated = useRef(false);
     useEffect(() => {
-        if (!currentUid) return;
-        getProgress(currentUid).then((p) => {
+        serverHydrated.current = false;
+        if (!profileId) return;
+        getProgress(profileId).then((p) => {
             serverHydrated.current = true;
             if (!p) return;
             if (typeof p.xp     === 'number') setXp(p.xp);
@@ -388,33 +402,68 @@ const DashboardPage = ({
             if (typeof p.hearts === 'number') setHearts(p.hearts);
             if (typeof p.streak === 'number') setStreak(p.streak);
         });
-    }, [currentUid]);
+    }, [profileId]);
 
     // ── Sauvegarder la vraie progression sur Supabase à chaque changement,
     // pour que le classement (et le compte lui-même, sur un autre appareil)
     // reflète des chiffres réels au lieu de rester local au navigateur ──
     useEffect(() => {
-        if (!currentUid || !serverHydrated.current) return;
-        saveProgress(currentUid, { xp, gems, hearts, streak });
-    }, [currentUid, xp, gems, hearts, streak]);
+        if (!profileId || !serverHydrated.current) return;
+        saveProgress(profileId, { xp, gems, hearts, streak });
+    }, [profileId, xp, gems, hearts, streak]);
 
     /* ── classement réel (top par XP) ── */
     const [leaderboard, setLeaderboard] = useState([]);
     const [myRank, setMyRank] = useState(null);
     const refreshLeaderboard = useCallback(() => {
         getLeaderboard(10).then(setLeaderboard);
-        if (currentUid) getMyRank(currentUid).then(setMyRank);
-    }, [currentUid]);
+        if (profileId) getMyRank(profileId).then(setMyRank);
+    }, [profileId]);
     useEffect(() => { refreshLeaderboard(); }, [refreshLeaderboard]);
+
+    /* ── household / "My Family" — the account holder + any child profiles ── */
+    const [householdMembers, setHouseholdMembers] = useState([]);
+    const [familyLoading,    setFamilyLoading]    = useState(false);
+    const [addChildOpen,     setAddChildOpen]     = useState(false);
+    const [newChildName,     setNewChildName]     = useState('');
+    const [newChildAge,      setNewChildAge]      = useState('');
+    const [addChildError,    setAddChildError]    = useState('');
+
+    const refreshHousehold = useCallback(() => {
+        if (!currentUid) return;
+        setFamilyLoading(true);
+        listHouseholdMembers(currentUid).then((members) => {
+            setHouseholdMembers(members);
+            setFamilyLoading(false);
+        });
+    }, [currentUid]);
+    useEffect(() => { refreshHousehold(); }, [refreshHousehold]);
+
+    const handleAddChild = async () => {
+        if (!newChildName.trim() || !currentUid) return;
+        setAddChildError('');
+        try {
+            await addChildProfile(currentUid, {
+                name: newChildName.trim(),
+                birthYear: newChildAge ? Number(newChildAge) : null,
+            });
+            setNewChildName('');
+            setNewChildAge('');
+            setAddChildOpen(false);
+            refreshHousehold();
+        } catch (e) {
+            setAddChildError(e.message || (isFr ? 'Erreur. Réessayez.' : 'Something went wrong. Try again.'));
+        }
+    };
 
     // Le top 10 renvoyé par le serveur, avec badges + la ligne "vous" ajoutée
     // à la fin si vous n'êtes pas déjà dedans (classement réel, pas de faux 7e rang).
     const leaderboardRows = (() => {
         const rows = leaderboard.map((e, i) => ({
             rank: i + 1, name: e.display_name, xp: e.xp,
-            badge: RANK_BADGES[i] || null, you: e.user_id === currentUid,
+            badge: RANK_BADGES[i] || null, you: e.user_id === profileId,
         }));
-        if (currentUid && !rows.some(r => r.you) && myRank) {
+        if (profileId && !rows.some(r => r.you) && myRank) {
             rows.push({ rank: myRank, name: isFr ? 'Vous' : 'You', xp, badge: null, you: true });
         }
         return rows;
@@ -1953,7 +2002,7 @@ const DashboardPage = ({
                     </div>
                     {/* Language toggle */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1.25rem', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
-                        <button onClick={() => setPbDir('fr')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'fr' ? '#eff6ff' : 'transparent', color: pbDir === 'fr' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Français' : 'French'}</button>
+                        <button onClick={() => setPbDir('fr')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'fr' ? '#eff6ff' : 'transparent', color: pbDir === 'fr' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Français' : 'English'}</button>
                         <span style={{ color: T.textSub, fontWeight: '700' }}>⇄</span>
                         <button onClick={() => setPbDir('medumba')} style={{ flex: 1, padding: '0.45rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.82rem', border: '1.5px solid #bfdbfe', backgroundColor: pbDir === 'medumba' ? '#eff6ff' : 'transparent', color: pbDir === 'medumba' ? '#0056D2' : T.textSub, cursor: 'pointer', fontFamily: 'inherit' }}>Medumba</button>
                     </div>
@@ -1961,8 +2010,9 @@ const DashboardPage = ({
                     <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
                         {(() => {
                             return phrases.map((p, i) => {
-                                const primary   = showMedumba ? p.medumba : p.fr;
-                                const secondary = showMedumba ? p.fr      : p.medumba;
+                                const translationText = isFr ? p.fr : (p.en || p.fr);
+                                const primary   = showMedumba ? p.medumba : translationText;
+                                const secondary = showMedumba ? translationText : p.medumba;
                                 if (primary.length > 120) return null;
                                 return (
                                     <div key={i} style={{
@@ -2231,7 +2281,7 @@ const DashboardPage = ({
                             </div>
                             <div style={{ padding: '1.25rem 1.5rem 2.5rem' }}>
                                 <div style={{ fontSize: '1.7rem', fontWeight: '900', color: T.text, marginBottom: '0.25rem', letterSpacing: '-0.5px' }}>{word.medumba}</div>
-                                <div style={{ fontSize: '1rem', color: CAT_VISUAL[cat.id]?.accent ?? T.textSub, fontWeight: '600' }}>{word.fr}</div>
+                                <div style={{ fontSize: '1rem', color: CAT_VISUAL[cat.id]?.accent ?? T.textSub, fontWeight: '600' }}>{isFr ? word.fr : (word.en || word.fr)}</div>
                             </div>
                             <button
                                 onClick={() => {
@@ -2261,7 +2311,7 @@ const DashboardPage = ({
                                 <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '2.2rem', height: '2.2rem' }}>{renderWordIcon(w.fr, cat.icon, '2rem')}</span>
                                 <div>
                                     <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>{w.medumba}</div>
-                                    <div style={{ fontSize: '0.78rem', color: T.textSub }}>{w.fr}</div>
+                                    <div style={{ fontSize: '0.78rem', color: T.textSub }}>{isFr ? w.fr : (w.en || w.fr)}</div>
                                 </div>
                                 <span style={{ marginLeft: 'auto', color: T.textSub }}>›</span>
                             </button>
@@ -2961,6 +3011,104 @@ const DashboardPage = ({
                         </div>
                     ))}
                 </div>
+
+                {/* ── My Family — household members, switch active profile ── */}
+                <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, marginBottom: '0.85rem' }}>
+                    {isFr ? '👨‍👩‍👧 Ma Famille' : '👨‍👩‍👧 My Family'}
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1rem' }}>
+                    {householdMembers.map((m) => {
+                        const isActive = m.id === profileId;
+                        const isSelf   = m.auth_user_id === currentUid;
+                        return (
+                            <div key={m.id} style={{
+                                display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                padding: '0.85rem 1rem', borderRadius: '14px',
+                                border: `2px solid ${isActive ? '#0056D2' : T.border}`,
+                                backgroundColor: isActive ? T.blueTint : T.surface,
+                            }}>
+                                <div style={{
+                                    width: '40px', height: '40px', borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #0056D2, #38bdf8)',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontSize: '1rem', fontWeight: '900', color: '#fff', flexShrink: 0,
+                                }}>{(m.name || '?').trim().charAt(0).toUpperCase()}</div>
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div style={{ fontWeight: '700', fontSize: '0.92rem', color: T.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                        {m.name || (isFr ? 'Sans nom' : 'Unnamed')}
+                                        {isSelf && <span style={{ fontSize: '0.7rem', color: T.textSub, fontWeight: '600' }}> · {isFr ? 'vous' : 'you'}</span>}
+                                    </div>
+                                    <div style={{ fontSize: '0.75rem', color: T.textMuted, fontWeight: '600' }}>
+                                        🔥 {m.progress?.streak ?? 0} · ⚡ {m.progress?.xp ?? 0} XP
+                                    </div>
+                                </div>
+                                {isActive ? (
+                                    <span style={{ fontSize: '0.72rem', fontWeight: '800', color: '#0056D2', flexShrink: 0 }}>
+                                        {isFr ? 'Actif' : 'Active'}
+                                    </span>
+                                ) : (
+                                    <button
+                                        onClick={() => onSwitchProfile?.(m.id)}
+                                        style={{
+                                            flexShrink: 0, padding: '0.45rem 0.85rem', borderRadius: '99px',
+                                            border: `1.5px solid ${T.border}`, backgroundColor: T.surface,
+                                            color: T.text, fontWeight: '700', fontSize: '0.78rem',
+                                            cursor: 'pointer', fontFamily: 'inherit',
+                                        }}
+                                    >{isFr ? 'Basculer' : 'Switch'}</button>
+                                )}
+                            </div>
+                        );
+                    })}
+                    {familyLoading && householdMembers.length === 0 && (
+                        <div style={{ fontSize: '0.82rem', color: T.textMuted, padding: '0.5rem 0' }}>
+                            {isFr ? 'Chargement…' : 'Loading…'}
+                        </div>
+                    )}
+                </div>
+
+                {addChildOpen ? (
+                    <div style={{
+                        padding: '1rem', borderRadius: '14px', border: `2px solid ${T.border}`,
+                        backgroundColor: T.surface, marginBottom: '1.5rem',
+                        display: 'flex', flexDirection: 'column', gap: '0.6rem',
+                    }}>
+                        <input
+                            value={newChildName}
+                            onChange={(e) => setNewChildName(e.target.value)}
+                            placeholder={isFr ? 'Prénom de l\'enfant' : 'Child\'s name'}
+                            style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.88rem', backgroundColor: T.bg, color: T.text }}
+                        />
+                        <input
+                            value={newChildAge}
+                            onChange={(e) => setNewChildAge(e.target.value.replace(/\D/g, ''))}
+                            placeholder={isFr ? 'Année de naissance (optionnel)' : 'Birth year (optional)'}
+                            inputMode="numeric"
+                            style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.88rem', backgroundColor: T.bg, color: T.text }}
+                        />
+                        {addChildError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600' }}>{addChildError}</div>}
+                        <div style={{ display: 'flex', gap: '0.6rem' }}>
+                            <button onClick={() => { setAddChildOpen(false); setAddChildError(''); }} style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.85rem' }}>
+                                {isFr ? 'Annuler' : 'Cancel'}
+                            </button>
+                            <button onClick={handleAddChild} disabled={!newChildName.trim()} style={{ flex: 2, padding: '0.65rem', borderRadius: '10px', border: 'none', backgroundColor: newChildName.trim() ? '#0056D2' : T.border, color: '#fff', fontWeight: '700', cursor: newChildName.trim() ? 'pointer' : 'default', fontFamily: 'inherit', fontSize: '0.85rem' }}>
+                                {isFr ? 'Ajouter' : 'Add'}
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <button
+                        onClick={() => setAddChildOpen(true)}
+                        style={{
+                            width: '100%', marginBottom: '1.5rem', padding: '0.85rem',
+                            borderRadius: '14px', border: `1.5px dashed ${T.border}`,
+                            backgroundColor: 'transparent', color: T.textSub,
+                            fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit',
+                        }}
+                    >
+                        {isFr ? '+ Ajouter un membre de la famille' : '+ Add a family member'}
+                    </button>
+                )}
 
                 {/* ── Share ── */}
                 <button

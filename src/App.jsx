@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
+import { listHouseholdMembers } from './services/userService';
 import { getPaymentSuccessFromUrl } from './config/stripe';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
@@ -36,6 +37,8 @@ import AdminPage                from './components/AdminPage';
 import AppDownloadPage          from './components/AppDownloadPage';
 import PrivacyPage              from './components/PrivacyPage';
 import TermsPage                from './components/TermsPage';
+import WhoIsLearningPage        from './components/WhoIsLearningPage';
+import TeacherPortalPage        from './components/TeacherPortalPage';
 import ChatWidget                from './components/ChatWidget';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
@@ -81,9 +84,30 @@ function App() {
 
   // ── Account creation ─────────────────────────────────────────────
   const [userName,    setUserName]    = useState('');
+  const [userFullName, setUserFullName] = useState(''); // untruncated — Teacher Portal etc.
   const [userAge,     setUserAge]     = useState('');
   const [userEmail,   setUserEmail]   = useState('');
   const [currentUid,  setCurrentUid]  = useState(null);
+
+  // ── Which household member's Hub is active — defaults to the account
+  // holder; switched from the "My Family" screen when a guardian picks a
+  // child profile. Reset to the account holder on every fresh login. ──
+  const [activeProfileId, setActiveProfileId] = useState(null);
+
+  // ── "Who's learning?" gate — shown once per login, only when the
+  // household holds more than one profile (a guardian plus at least one
+  // child). Most accounts only ever have one profile, so this stays null
+  // and nobody sees an extra screen. ──
+  const [profilePicker, setProfilePicker] = useState(null); // null | array of members
+
+  // Runs after every successful login: decides whether the "Who's
+  // learning?" picker is needed before landing on the Hub.
+  const resolveActiveProfile = (uid) => {
+    setActiveProfileId(uid); // sensible default while the household loads
+    listHouseholdMembers(uid).then((members) => {
+      if (members.length > 1) setProfilePicker(members);
+    });
+  };
 
   // ── Stripe payment success (detected from URL on load) ─────────
   const [paymentSuccess, setPaymentSuccess] = useState(() => getPaymentSuccessFromUrl());
@@ -166,14 +190,24 @@ function App() {
       if (user) {
         if (user.email) setUserEmail(user.email);
         setCurrentUid(user.uid);
+        resolveActiveProfile(user.uid);
         getUserProfile(user.uid).then((prof) => {
           const name = prof?.name || user.displayName || '';
-          if (name) setUserName(name.split(' ')[0]);
+          if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
+          // Restore the account's actual language preference — without this,
+          // nativeLang stays '' (English) for every returning user, since it
+          // was only ever set by the fresh-signup onboarding flow.
+          if (prof?.native_lang) setNativeLang(prof.native_lang);
+          // Teachers land in their own portal, never the learner Hub —
+          // there is no learner content behind a teacher's login.
+          const dest = prof?.role === 'teacher' ? 16 : 15;
+          setStep(dest);
+          history.pushState({ step: dest, hubView: 'hub' }, '');
         });
-        setStep(15);
-        history.pushState({ step: 15, hubView: 'hub' }, '');
       } else {
         setCurrentUid(null);
+        setActiveProfileId(null);
+        setProfilePicker(null);
         setStep(1);
         history.pushState({ step: 1, hubView: 'hub' }, '');
       }
@@ -217,11 +251,14 @@ function App() {
           if (user) {
             if (user.email) setUserEmail(user.email);
             setCurrentUid(user.uid);
+            resolveActiveProfile(user.uid);
             getUserProfile(user.uid).then((prof) => {
               const name = prof?.name || user.displayName || '';
-              if (name) setUserName(name.split(' ')[0]);
+              if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
+              if (prof?.native_lang) setNativeLang(prof.native_lang);
+              // Teachers land in their own portal, never the learner Hub.
+              go(prof?.role === 'teacher' ? 16 : 15);
             });
-            go(15);
           } else if (new URLSearchParams(window.location.search).get('register') === '1') {
             // QR-code deep link (festival banners etc.) — skip the marketing
             // landing page and go straight into account creation.
@@ -325,15 +362,41 @@ function App() {
       {step === 14 && hubView === 'cepom'         && <CepomPage         nativeLang={nativeLang} onBack={() => go(1)} />}
       {step === 14 && hubView === 'contact'       && <ContactPage       nativeLang={nativeLang} onBack={() => go(1)} />}
 
+      {/* ── Teacher Portal — a teacher's login never sees the learner Hub ── */}
+      {step === 16 && (
+        <TeacherPortalPage
+          teacherUid={currentUid}
+          teacherName={userFullName}
+          nativeLang={nativeLang}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
+      {/* ── "Who's learning?" — only shown when the household has more than
+         one profile; picking one closes the gate and reveals the Hub. ── */}
+      {step === 15 && profilePicker && (
+        <WhoIsLearningPage
+          members={profilePicker}
+          nativeLang={nativeLang}
+          onPick={(id) => { setActiveProfileId(id); setProfilePicker(null); }}
+        />
+      )}
+
       {/* ── Gamified Dashboard ── */}
-      {step === 15 && (
+      {step === 15 && !profilePicker && (
         <DashboardPage
-          key={currentUid || 'anon'}
+          // Remount cleanly whenever the logged-in account OR the active
+          // household profile changes, so per-profile localStorage-backed
+          // state (xp/gems/streak lazy initializers) never leaks between
+          // profiles while switching who the Hub is showing.
+          key={`${currentUid || 'anon'}_${activeProfileId || 'anon'}`}
           userStats={userStats}
           nativeLang={nativeLang}
           learningLang={learningLang}
           profile={profile}
           currentUid={currentUid}
+          activeProfileId={activeProfileId}
+          onSwitchProfile={setActiveProfileId}
           onLogout={async () => { await logoutUser(); go(1); }}
           onAdmin={() => go(99)}
           paymentSuccess={paymentSuccess}

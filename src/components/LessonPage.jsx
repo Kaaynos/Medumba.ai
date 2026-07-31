@@ -150,28 +150,33 @@ function buildExpressionQuestions(studied, pool) {
     const frDistractors = (exclude) =>
         pool.filter(e => e.fr !== exclude)
             .sort(() => Math.random() - 0.5).slice(0, 3).map(e => e.fr);
+    const enDistractors = (exclude) =>
+        pool.filter(e => (e.en || e.fr) !== exclude)
+            .sort(() => Math.random() - 0.5).slice(0, 3).map(e => e.en || e.fr);
     const trunc = (s, n) => s.length > n ? s.slice(0, n) + '…' : s;
 
     /* 1 & 2 — MCQ both directions for each card */
     studied.forEach(expr => {
+        const exprEn = expr.en || expr.fr;
         /* Fr → Medumba */
         const optsA = [...medDistractors(expr.medumba), expr.medumba].sort(() => Math.random() - 0.5);
         qs.push({
             type: 'meaning',
             _exprDir: 'fr2med',
-            sourceFr: expr.fr, sourceEn: expr.fr,
+            sourceFr: expr.fr, sourceEn: exprEn,
             options: optsA, optionsFr: optsA,
             answer: expr.medumba, answerFr: expr.medumba,
         });
 
-        /* Medumba → Fr */
-        const optsB = [...frDistractors(expr.fr), expr.fr].sort(() => Math.random() - 0.5);
+        /* Medumba → Fr/En */
+        const optsFr = [...frDistractors(expr.fr), expr.fr].sort(() => Math.random() - 0.5);
+        const optsEn = [...enDistractors(exprEn), exprEn].sort(() => Math.random() - 0.5);
         qs.push({
             type: 'meaning',
             _exprDir: 'med2fr',
             sourceFr: expr.medumba, sourceEn: expr.medumba,
-            options: optsB, optionsFr: optsB,
-            answer: expr.fr, answerFr: expr.fr,
+            options: optsEn, optionsFr: optsFr,
+            answer: exprEn, answerFr: expr.fr,
         });
     });
 
@@ -195,7 +200,7 @@ function buildExpressionQuestions(studied, pool) {
             qs.push({
                 type: 'tile',
                 _exprDir: 'tile',
-                sourceFr: expr.fr, sourceEn: expr.fr,
+                sourceFr: expr.fr, sourceEn: expr.en || expr.fr,
                 answer: words, bank,
                 audio: expr.medumba,
             });
@@ -205,7 +210,7 @@ function buildExpressionQuestions(studied, pool) {
     const matchPairs = studied.map(e => ({
         medumba: trunc(e.medumba, 30),
         french:  trunc(e.fr, 32),
-        english: trunc(e.fr, 32),
+        english: trunc(e.en || e.fr, 32),
     }));
     qs.push({ type: 'match', _exprDir: 'match', pairs: matchPairs });
 
@@ -250,6 +255,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [lesson?.id, learnLang],
     );
+
 
     /* phase: 'flashcards' → show study cards, 'exercise' → show questions */
     const [phase, setPhase] = useState('flashcards');
@@ -548,13 +554,13 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                             letterSpacing: '0.8px',
                             color: flipped ? 'rgba(255,255,255,0.7)' : '#94a3b8',
                         }}>
-                            {flipped ? 'Medumba' : (isFr ? 'Français' : 'French')}
+                            {flipped ? 'Medumba' : (isFr ? 'Français' : 'English')}
                         </div>
                         <div style={{
                             fontSize: '1.2rem', fontWeight: '800', lineHeight: 1.4,
                             color: flipped ? '#fff' : '#0f172a',
                         }}>
-                            {flipped ? card.medumba : card.fr}
+                            {flipped ? card.medumba : (isFr ? card.fr : (card.en || card.fr))}
                         </div>
                         {flipped && hasRealVoice(card.medumba) && (
                             <button

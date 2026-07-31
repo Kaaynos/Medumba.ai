@@ -1302,6 +1302,6 @@ export const BASE_EXPRESSIONS = [
 // Combined pool: original (261) + phrasebook (1992) + vocab 511/259 (510)
 export const MEDUMBA_EXPRESSIONS = [
   ...BASE_EXPRESSIONS,
-  ...PHRASEBOOK_EXPRESSIONS.map(({ fr, medumba }) => ({ fr, medumba })),
+  ...PHRASEBOOK_EXPRESSIONS.map(({ fr, medumba, en, lessons }) => ({ fr, medumba, en, lessons })),
   ...VOCAB_EXPRESSIONS,
 ];

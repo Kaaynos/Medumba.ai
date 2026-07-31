@@ -14,6 +14,17 @@ export async function getProfile(uid) {
     return data;
 }
 
+/* ── Marque un profil comme actif à l'instant ── */
+// authService.js does this for the account holder on real Supabase sign-in,
+// but a child profile (no auth account of its own) never fires that event —
+// its own "last active" needs to be touched whenever ITS Hub is in use,
+// account-holder or child alike.
+export async function touchLastSeen(profileId) {
+    if (!profileId) return;
+    try { await supabase.from('profiles').update({ last_seen: new Date().toISOString() }).eq('id', profileId); }
+    catch { /* best-effort, never block the Hub on this */ }
+}
+
 /* ── Mettre à jour le profil ── */
 export async function updateProfile(uid, fields) {
     const { error } = await supabase
@@ -111,4 +122,66 @@ export async function checkIsAdmin(uid) {
         .eq('id', uid)
         .single();
     return data?.is_admin ?? false;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Household / guardian model — one account holder, several learner profiles.
+   A "child" profile has no auth_user_id of its own: it only exists inside its
+   guardian's household, and the guardian's session is what grants access to
+   it (see migration 014's household RLS policies).
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Tous les profils du foyer de `uid` (lui-même compris), avec leur progression ── */
+export async function listHouseholdMembers(uid) {
+    const me = await getProfile(uid);
+    if (!me?.household_id) return [];
+
+    const { data: members, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('household_id', me.household_id)
+        .order('created_at', { ascending: true });
+    if (error) { console.error('[userService] listHouseholdMembers error:', error.message); return []; }
+
+    const ids = members.map(m => m.id);
+    const { data: progress } = await supabase
+        .from('user_progress')
+        .select('*')
+        .in('user_id', ids);
+    const progressByUid = Object.fromEntries((progress ?? []).map(p => [p.user_id, p]));
+
+    return members.map(m => ({ ...m, progress: progressByUid[m.id] ?? null }));
+}
+
+/* ── Ajoute un profil enfant (sans compte auth) au foyer de `guardianUid` ── */
+export async function addChildProfile(guardianUid, { name, birthYear }) {
+    const guardian = await getProfile(guardianUid);
+    if (!guardian?.household_id) throw new Error('No household found for this account.');
+
+    // profiles.id has no DB-side default — every prior row got it from the
+    // signup trigger (id = auth user's own id). A child profile has no auth
+    // user, so it must be generated here.
+    const { data: child, error } = await supabase
+        .from('profiles')
+        .insert({
+            id:           crypto.randomUUID(),
+            household_id: guardian.household_id,
+            name,
+            birth_year:   birthYear || null,
+            role:         'child',
+            native_lang:  guardian.native_lang,
+            learning_lang: guardian.learning_lang,
+        })
+        .select()
+        .single();
+    if (error) throw error;
+
+    // The auth.users signup trigger creates user_progress automatically for
+    // account holders; a child profile has no auth row, so create it here.
+    const { error: progressError } = await supabase
+        .from('user_progress')
+        .insert({ user_id: child.id });
+    if (progressError) console.error('[userService] addChildProfile progress error:', progressError.message);
+
+    return child;
 }

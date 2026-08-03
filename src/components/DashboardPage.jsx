@@ -493,7 +493,14 @@ const DashboardPage = ({
        session this time so the write actually lands. ── */
     const myOwnMember = householdMembers.find(m => m.auth_user_id === currentUid);
     const [ageConfirmDismissed, setAgeConfirmDismissed] = useState(false);
-    const showAgeConfirm = profileId === currentUid && myOwnMember?.role === 'child' && !myOwnMember?.age && !ageConfirmDismissed;
+    const [ageConfirmResultRole, setAgeConfirmResultRole] = useState(null); // null until saved — shows the success step
+    // Keeps the modal open through its own success step even after
+    // refreshHousehold() clears myOwnMember.age (which would otherwise make
+    // this condition go false and unmount the modal before the user sees
+    // the "saved" confirmation).
+    const showAgeConfirm = !ageConfirmDismissed && (
+        (profileId === currentUid && myOwnMember?.role === 'child' && !myOwnMember?.age) || ageConfirmResultRole !== null
+    );
     const [ageConfirmValue, setAgeConfirmValue] = useState('');
     const [ageConfirmSaving, setAgeConfirmSaving] = useState(false);
     const [ageConfirmError, setAgeConfirmError] = useState('');
@@ -503,8 +510,8 @@ const DashboardPage = ({
         setAgeConfirmSaving(true);
         setAgeConfirmError('');
         try {
-            await confirmAge(myOwnMember.id, ageConfirmValue.trim());
-            setAgeConfirmDismissed(true);
+            const role = await confirmAge(myOwnMember.id, ageConfirmValue.trim());
+            setAgeConfirmResultRole(role);
             refreshHousehold();
         } catch (e) {
             setAgeConfirmError(e.message);
@@ -4649,28 +4656,46 @@ const DashboardPage = ({
                             width: '100%', maxWidth: '380px', backgroundColor: T.surface,
                             borderRadius: '24px', padding: '1.75rem', boxShadow: '0 12px 48px rgba(0,0,0,0.25)',
                         }}>
-                            <div style={{ fontSize: '1.05rem', fontWeight: 900, color: T.text, marginBottom: '0.5rem' }}>
-                                🎂 {isFr ? 'Quel âge as-tu ?' : "What's your age?"}
-                            </div>
-                            <p style={{ fontSize: '0.85rem', color: T.textMuted, fontWeight: 600, lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                                {isFr
-                                    ? "On personnalise l'app selon l'âge (contenu, rôle du compte). Cette information ne nous avait jamais été transmise correctement — dis-le-nous une bonne fois."
-                                    : "We personalize the app by age (content, account role). This never actually reached us before — let us know once."}
-                            </p>
-                            <input
-                                type="number" value={ageConfirmValue} onChange={e => setAgeConfirmValue(e.target.value)}
-                                placeholder={isFr ? 'ex. 34' : 'e.g. 34'} autoFocus
-                                style={{ width: '100%', padding: '0.75rem 0.9rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '1.05rem', fontWeight: 700, backgroundColor: T.bg, color: T.text, boxSizing: 'border-box', marginBottom: '1rem' }}
-                            />
-                            {ageConfirmError && <div style={{ fontSize: '0.8rem', color: '#dc2626', fontWeight: '600', marginBottom: '0.75rem' }}>{ageConfirmError}</div>}
-                            <div style={{ display: 'flex', gap: '0.6rem' }}>
-                                <button onClick={() => setAgeConfirmDismissed(true)} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.88rem' }}>
-                                    {isFr ? 'Plus tard' : 'Later'}
-                                </button>
-                                <button onClick={handleConfirmAge} disabled={!ageConfirmValue.trim() || ageConfirmSaving} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: 'none', backgroundColor: ageConfirmValue.trim() ? '#0056D2' : T.border, color: '#fff', fontWeight: 700, cursor: ageConfirmValue.trim() ? 'pointer' : 'default', fontFamily: 'inherit', fontSize: '0.88rem' }}>
-                                    {ageConfirmSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Confirmer' : 'Confirm')}
-                                </button>
-                            </div>
+                            {ageConfirmResultRole !== null ? (
+                                <>
+                                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: T.text, marginBottom: '0.5rem' }}>
+                                        ✅ {isFr ? 'Merci !' : 'Thank you!'}
+                                    </div>
+                                    <p style={{ fontSize: '0.85rem', color: T.textMuted, fontWeight: 600, lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                                        {isFr
+                                            ? `C'est enregistré — ton compte est maintenant reconnu comme ${ageConfirmResultRole === 'parent' ? 'parent' : 'enfant'}.`
+                                            : `Saved — your account is now recognized as a ${ageConfirmResultRole === 'parent' ? 'parent' : 'child'} account.`}
+                                    </p>
+                                    <button onClick={() => setAgeConfirmDismissed(true)} style={{ width: '100%', padding: '0.75rem', borderRadius: '12px', border: 'none', backgroundColor: '#0056D2', color: '#fff', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.88rem' }}>
+                                        {isFr ? 'Continuer' : 'Continue'}
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: T.text, marginBottom: '0.5rem' }}>
+                                        🎂 {isFr ? 'Quel âge as-tu ?' : "What's your age?"}
+                                    </div>
+                                    <p style={{ fontSize: '0.85rem', color: T.textMuted, fontWeight: 600, lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                                        {isFr
+                                            ? "On personnalise l'app selon l'âge (contenu, rôle du compte). Cette information ne nous avait jamais été transmise correctement — dis-le-nous une bonne fois."
+                                            : "We personalize the app by age (content, account role). This never actually reached us before — let us know once."}
+                                    </p>
+                                    <input
+                                        type="number" value={ageConfirmValue} onChange={e => setAgeConfirmValue(e.target.value)}
+                                        placeholder={isFr ? 'ex. 34' : 'e.g. 34'} autoFocus
+                                        style={{ width: '100%', padding: '0.75rem 0.9rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '1.05rem', fontWeight: 700, backgroundColor: T.bg, color: T.text, boxSizing: 'border-box', marginBottom: '1rem' }}
+                                    />
+                                    {ageConfirmError && <div style={{ fontSize: '0.8rem', color: '#dc2626', fontWeight: '600', marginBottom: '0.75rem' }}>{ageConfirmError}</div>}
+                                    <div style={{ display: 'flex', gap: '0.6rem' }}>
+                                        <button onClick={() => setAgeConfirmDismissed(true)} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.88rem' }}>
+                                            {isFr ? 'Plus tard' : 'Later'}
+                                        </button>
+                                        <button onClick={handleConfirmAge} disabled={!ageConfirmValue.trim() || ageConfirmSaving} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: 'none', backgroundColor: ageConfirmValue.trim() ? '#0056D2' : T.border, color: '#fff', fontWeight: 700, cursor: ageConfirmValue.trim() ? 'pointer' : 'default', fontFamily: 'inherit', fontSize: '0.88rem' }}>
+                                            {ageConfirmSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Confirmer' : 'Confirm')}
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 )}

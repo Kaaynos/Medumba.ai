@@ -167,6 +167,14 @@ function App() {
   // ── Stripe payment success (detected from URL on load) ─────────
   const [paymentSuccess, setPaymentSuccess] = useState(() => getPaymentSuccessFromUrl());
 
+  // ── Deep-link query params (?register=1, ?login=1), captured once at
+  // initial render — listenAuthState fires its startup snapshot TWICE
+  // (documented above), and SplashScreen's onFinish reads this on every
+  // call. Re-reading the live window.location.search there would break on
+  // the second call, since the first call's own history.replaceState()
+  // already stripped the param by then. ──
+  const [initialDeepLinkParams] = useState(() => new URLSearchParams(window.location.search));
+
   // ── Free-access "Start" users land straight in their first lesson ──
   const [autoStartFirstLesson, setAutoStartFirstLesson] = useState(false);
 
@@ -293,11 +301,18 @@ function App() {
           }
           if (user) {
             handleLogin(user).then((dest) => go(dest));
-          } else if (new URLSearchParams(window.location.search).get('register') === '1') {
+          } else if (initialDeepLinkParams.get('register') === '1') {
             // QR-code deep link (festival banners etc.) — skip the marketing
             // landing page and go straight into account creation.
             history.replaceState(null, '', window.location.pathname);
             go(8);
+          } else if (initialDeepLinkParams.get('login') === '1') {
+            // Email deep link (e.g. the age-confirmation notice) — skip the
+            // marketing landing page and go straight to Log in. Once
+            // authenticated, handleLogin() runs as normal and the
+            // age-confirm modal (DashboardPage) takes it from there.
+            history.replaceState(null, '', window.location.pathname);
+            go(20);
           } else {
             go(1);
           }

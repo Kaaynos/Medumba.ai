@@ -44,3 +44,59 @@ export async function approveToDictionary(submission) {
         .eq('id', submission.id);
     if (subError) throw subError;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Ask-an-elder loop (Tontah ticket 3's open_question, migration 034's write
+   policies) — the same console, a second intake path, not a separate one.
+───────────────────────────────────────────────────────────────────────────── */
+export async function listOpenQuestions(status = null) {
+    let query = supabase.from('open_question').select('*').order('created_at', { ascending: false });
+    if (status) query = query.eq('status', status);
+    const { data, error } = await query;
+    if (error) { console.error('[stewardService] listOpenQuestions error:', error.message); return []; }
+    return data;
+}
+
+/* The question turns out to already be in the corpus — just wasn't found
+   (a retrieval gap, not a real gap). Links it, no new data written. */
+export async function linkQuestionToExistingEntry(questionId, corpusEntryId) {
+    const { error } = await supabase.from('open_question').update({
+        status: 'answered', answered_corpus_entry_id: corpusEntryId, answered_at: new Date().toISOString(),
+    }).eq('id', questionId);
+    if (error) throw error;
+}
+
+/* The real case the loop exists for: the word genuinely wasn't in the
+   corpus. Steward provides it — text always, audio when an elder's
+   recording is in hand — creating the entry and (optionally) linking a
+   real recording, never a synthesized one. */
+export async function answerQuestionWithNewEntry(questionId, { headword, glossFr, glossEn }, audioBlob = null) {
+    const { data: entry, error: entryError } = await supabase.from('corpus_entry').insert({
+        headword, gloss_fr: glossFr || null, gloss_en: glossEn || null, tags: ['word'],
+    }).select().single();
+    if (entryError) throw entryError;
+
+    if (audioBlob) {
+        const path = `corpus/${entry.id}-${Date.now()}.webm`;
+        const { error: uploadError } = await supabase.storage.from('medumba-audio').upload(path, audioBlob, { contentType: 'audio/webm' });
+        if (uploadError) throw uploadError;
+        const { error: audioError } = await supabase.from('corpus_audio').insert({
+            corpus_entry_id: entry.id, storage_path: path,
+        });
+        if (audioError) throw audioError;
+    }
+
+    const { error: qError } = await supabase.from('open_question').update({
+        status: 'answered', answered_corpus_entry_id: entry.id, answered_at: new Date().toISOString(),
+    }).eq('id', questionId);
+    if (qError) throw qError;
+
+    return entry;
+}
+
+export async function declineQuestion(questionId) {
+    const { error } = await supabase.from('open_question').update({
+        status: 'declined', answered_at: new Date().toISOString(),
+    }).eq('id', questionId);
+    if (error) throw error;
+}

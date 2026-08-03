@@ -53,6 +53,24 @@ export async function registerUser({ name, email, password, age, language, reaso
     return { ..._toUserShape(data.user), needsEmailConfirmation: !data.session };
 }
 
+/* ── Un ado (13-18) réclame son propre compte pour un profil enfant ──
+   Le profil garde le même id (XP, streak, leçons restent liés) ; seul
+   auth_user_id passe de null à ce nouveau compte, et le profil migre vers
+   son propre foyer — la vraie étape de confidentialité vis-à-vis du
+   tuteur (migration 019, trigger handle_new_user()). */
+export async function claimProfile(email, password, childProfileId) {
+    const { data, error } = await supabase.auth.signUp({
+        email, password,
+        options: { data: { claiming_profile_id: childProfileId } },
+    });
+    if (error) throw error;
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        throw new Error('EMAIL_ALREADY_LINKED');
+    }
+    if (!data.user) return null;
+    return { ..._toUserShape(data.user), needsEmailConfirmation: !data.session };
+}
+
 /* ── Renvoyer l'e-mail de confirmation d'inscription ── */
 export async function resendConfirmationEmail(email) {
     const { error } = await supabase.auth.resend({ type: 'signup', email });
@@ -98,12 +116,16 @@ export async function updateUserPassword(newPassword) {
     if (error) throw error;
 }
 
-/* ── Profil utilisateur ── */
+/* ── Profil utilisateur ──
+   Looked up by auth_user_id, not id: for a normal account holder these are
+   the same value, but a self-claimed teen profile (migration 019) keeps its
+   original id (so XP/streak/history stay linked) while only auth_user_id
+   points at their new login. */
 export async function getUserProfile(uid) {
     const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', uid)
+        .eq('auth_user_id', uid)
         .single();
     if (error) return null;
     return data;

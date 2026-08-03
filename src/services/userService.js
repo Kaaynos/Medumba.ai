@@ -3,12 +3,25 @@
 ───────────────────────────────────────────────────────────────────────────── */
 import { supabase } from '../config/supabase';
 
-/* ── Lire le profil complet ── */
+/* ── Lire le profil du compte connecté (par auth_user_id, pas id — voir
+   authService.js:getUserProfile pour le même choix et pourquoi) ── */
 export async function getProfile(uid) {
     const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', uid)
+        .eq('auth_user_id', uid)
+        .single();
+    if (error) return null;
+    return data;
+}
+
+/* ── Lire un profil par son id (pas auth_user_id) — utilisé pour dériver la
+   tranche d'âge du profil actif, qui peut être un enfant sans compte auth ── */
+export async function getProfileById(id) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('id, name, birth_year, native_lang')
+        .eq('id', id)
         .single();
     if (error) return null;
     return data;

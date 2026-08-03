@@ -13,6 +13,7 @@ export async function getAllUsers() {
             name: p.name,
             email: p.email,
             role: p.role,
+            locationType: p.location_type,
             age: p.age,
             reason: p.reason,
             dailyGoal: p.daily_goal,

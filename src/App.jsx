@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
-import { listHouseholdMembers } from './services/userService';
+import { listHouseholdMembers, getProfileById } from './services/userService';
 import { getPaymentSuccessFromUrl } from './config/stripe';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
@@ -39,6 +39,12 @@ import PrivacyPage              from './components/PrivacyPage';
 import TermsPage                from './components/TermsPage';
 import WhoIsLearningPage        from './components/WhoIsLearningPage';
 import TeacherPortalPage        from './components/TeacherPortalPage';
+import CoordinatorPortalPage    from './components/CoordinatorPortalPage';
+import CulturalStewardPage      from './components/CulturalStewardPage';
+import ContentCreatorPage       from './components/ContentCreatorPage';
+import EnrolmentAdvisorPage     from './components/EnrolmentAdvisorPage';
+import BabyRitualPage           from './components/BabyRitualPage';
+import YoungLearnerPage         from './components/YoungLearnerPage';
 import ChatWidget                from './components/ChatWidget';
 import ErrorBoundary            from './components/ErrorBoundary';
 import { ThemeProvider }        from './context/ThemeContext';
@@ -61,10 +67,17 @@ import { ThemeProvider }        from './context/ThemeContext';
 // 21  Forgot Password  (→20)
 // 22  New Password     (→23)  ┐ Reached only via an emailed recovery link
 // 23  Reset Success    (→15)  ┘
-// 4-7, 18  orphaned — Connection/Proficiency/Reason/Achieve/DailyGoal/
-//     StartChoicePage are no longer routed to
+// 4-7  orphaned — Connection/Proficiency/Reason/Achieve/DailyGoal pages are
+//     no longer routed to
 // 14  Section viewer   (calendar | video | counting | dictionary)
-// 15  Gamified Dashboard
+// 15  Gamified Dashboard — or, if the active profile is 0-4 or 5-8,
+//     BabyRitualPage / YoungLearnerPage instead (same step, age-branched)
+// 16  Teacher Portal      (role === 'teacher' logins land here, never 15)
+// 17  App Download Page
+// 18  Coordinator Portal  (role === 'coordinator' logins land here, never 15)
+// 19  Cultural Steward Portal (role === 'content_owner' logins land here, never 15)
+// 24  Content Creator Studio (role === 'content_creator' logins land here, never 15)
+// 25  Enrolment Advisor Console (role === 'advisor' logins land here, never 15)
 // 99  Admin Panel
 
 function App() {
@@ -94,19 +107,61 @@ function App() {
   // child profile. Reset to the account holder on every fresh login. ──
   const [activeProfileId, setActiveProfileId] = useState(null);
 
+  // ── Age band of the active profile — a 0-4 or 5-8 child gets a wholly
+  // different experience (BabyRitualPage / YoungLearnerPage) instead of the
+  // gamified Hub (Personas & Journeys v2: "age is collected one screen
+  // earlier and read by nothing afterward" — this is what reads it). Kept
+  // separate from the login-time `prof` lookup because the active profile
+  // can be switched mid-session to any household member, each with their
+  // own birth_year. ──
+  const [activeProfileMeta, setActiveProfileMeta] = useState(null);
+  useEffect(() => {
+    if (!activeProfileId) { setActiveProfileMeta(null); return; }
+    getProfileById(activeProfileId).then(setActiveProfileMeta);
+  }, [activeProfileId]);
+  const activeAge = activeProfileMeta?.birth_year ? new Date().getFullYear() - activeProfileMeta.birth_year : null;
+  const isBabyBand = activeAge !== null && activeAge <= 4;
+  const isYoungLearnerBand = activeAge !== null && activeAge >= 5 && activeAge <= 8;
+
   // ── "Who's learning?" gate — shown once per login, only when the
   // household holds more than one profile (a guardian plus at least one
   // child). Most accounts only ever have one profile, so this stays null
   // and nobody sees an extra screen. ──
   const [profilePicker, setProfilePicker] = useState(null); // null | array of members
 
-  // Runs after every successful login: decides whether the "Who's
-  // learning?" picker is needed before landing on the Hub.
-  const resolveActiveProfile = (uid) => {
-    setActiveProfileId(uid); // sensible default while the household loads
-    listHouseholdMembers(uid).then((members) => {
+  // Runs once per successful login: resolves who this auth session actually
+  // is (name, language, which portal to land in), and whether the "Who's
+  // learning?" picker is needed before landing on the Hub. Centralised here
+  // because it used to be duplicated at both call sites, and because the
+  // profile lookup needs care: for a self-claimed teen profile (migration
+  // 019) profiles.id is NOT the same as the auth uid — only auth_user_id is
+  // — so activeProfileId must come from the resolved profile, never assumed
+  // to equal the raw uid.
+  const handleLogin = async (user) => {
+    if (user.email) setUserEmail(user.email);
+    setCurrentUid(user.uid);
+    const prof = await getUserProfile(user.uid);
+    const name = prof?.name || user.displayName || '';
+    if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
+    if (prof?.native_lang) setNativeLang(prof.native_lang);
+    const myProfileId = prof?.id || user.uid;
+    setActiveProfileId(myProfileId);
+    listHouseholdMembers(user.uid).then((members) => {
       if (members.length > 1) setProfilePicker(members);
     });
+    if (prof?.role === 'teacher') return 16;
+    if (prof?.role === 'coordinator') return 18;
+    if (prof?.role === 'content_owner') return 19;
+    if (prof?.role === 'content_creator') return 24; // 20-23 already used (login/reset flow)
+    if (prof?.role === 'advisor') return 25;
+    return 15;
+  };
+
+  // Re-opens "Who's learning?" so a guardian can switch away from a 0-4/5-8
+  // profile — those bands have no in-page nav back to the Hub by design.
+  const reopenProfilePicker = () => {
+    if (!currentUid) return;
+    listHouseholdMembers(currentUid).then((members) => setProfilePicker(members));
   };
 
   // ── Stripe payment success (detected from URL on load) ─────────
@@ -188,19 +243,7 @@ function App() {
         return;
       }
       if (user) {
-        if (user.email) setUserEmail(user.email);
-        setCurrentUid(user.uid);
-        resolveActiveProfile(user.uid);
-        getUserProfile(user.uid).then((prof) => {
-          const name = prof?.name || user.displayName || '';
-          if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
-          // Restore the account's actual language preference — without this,
-          // nativeLang stays '' (English) for every returning user, since it
-          // was only ever set by the fresh-signup onboarding flow.
-          if (prof?.native_lang) setNativeLang(prof.native_lang);
-          // Teachers land in their own portal, never the learner Hub —
-          // there is no learner content behind a teacher's login.
-          const dest = prof?.role === 'teacher' ? 16 : 15;
+        handleLogin(user).then((dest) => {
           setStep(dest);
           history.pushState({ step: dest, hubView: 'hub' }, '');
         });
@@ -249,16 +292,7 @@ function App() {
             return;
           }
           if (user) {
-            if (user.email) setUserEmail(user.email);
-            setCurrentUid(user.uid);
-            resolveActiveProfile(user.uid);
-            getUserProfile(user.uid).then((prof) => {
-              const name = prof?.name || user.displayName || '';
-              if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
-              if (prof?.native_lang) setNativeLang(prof.native_lang);
-              // Teachers land in their own portal, never the learner Hub.
-              go(prof?.role === 'teacher' ? 16 : 15);
-            });
+            handleLogin(user).then((dest) => go(dest));
           } else if (new URLSearchParams(window.location.search).get('register') === '1') {
             // QR-code deep link (festival banners etc.) — skip the marketing
             // landing page and go straight into account creation.
@@ -372,6 +406,45 @@ function App() {
         />
       )}
 
+      {/* ── Coordinator Portal — same idea, a coordinator's login never
+         sees the learner Hub either ── */}
+      {step === 18 && (
+        <CoordinatorPortalPage
+          coordinatorName={userFullName}
+          nativeLang={nativeLang}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
+      {/* ── Cultural Steward Portal — same idea again ── */}
+      {step === 19 && (
+        <CulturalStewardPage
+          stewardName={userFullName}
+          nativeLang={nativeLang}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
+      {/* ── Content Creator Studio — same idea again ── */}
+      {step === 24 && (
+        <ContentCreatorPage
+          creatorUid={currentUid}
+          creatorName={userFullName}
+          nativeLang={nativeLang}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
+      {/* ── Enrolment Advisor Console — same idea again ── */}
+      {step === 25 && (
+        <EnrolmentAdvisorPage
+          advisorUid={currentUid}
+          advisorName={userFullName}
+          nativeLang={nativeLang}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
       {/* ── "Who's learning?" — only shown when the household has more than
          one profile; picking one closes the gate and reveals the Hub. ── */}
       {step === 15 && profilePicker && (
@@ -382,8 +455,32 @@ function App() {
         />
       )}
 
+      {/* ── The 0-4 band: audio-only ritual, no screen "app" at all ── */}
+      {step === 15 && !profilePicker && isBabyBand && (
+        <BabyRitualPage
+          key={`baby_${activeProfileId}`}
+          babyProfileId={activeProfileId}
+          babyName={activeProfileMeta?.name}
+          nativeLang={nativeLang}
+          onBack={reopenProfilePicker}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
+      {/* ── The 5-8 band: tap-and-speak only, four-minute hard cap ── */}
+      {step === 15 && !profilePicker && isYoungLearnerBand && (
+        <YoungLearnerPage
+          key={`young_${activeProfileId}`}
+          learnerProfileId={activeProfileId}
+          learnerName={activeProfileMeta?.name}
+          nativeLang={nativeLang}
+          onBack={reopenProfilePicker}
+          onLogout={async () => { await logoutUser(); go(1); }}
+        />
+      )}
+
       {/* ── Gamified Dashboard ── */}
-      {step === 15 && !profilePicker && (
+      {step === 15 && !profilePicker && !isBabyBand && !isYoungLearnerBand && (
         <DashboardPage
           // Remount cleanly whenever the logged-in account OR the active
           // household profile changes, so per-profile localStorage-backed

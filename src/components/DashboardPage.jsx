@@ -5,6 +5,10 @@ import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
 import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen, getMyCohortInfo } from '../services/userService';
+import { claimProfile } from '../services/authService';
+import { uploadPracticeClip, saveClip, getWeeklyClips } from '../services/practiceClipService';
+import { wordOfTheDay } from '../utils/realVoiceWords';
+import AudioRecorder from './AudioRecorder';
 import { useTheme } from '../context/ThemeContext';
 import CertificationPage from './CertificationPage';
 import { UNIT_CERTIFICATIONS } from '../data/certification';
@@ -437,6 +441,40 @@ const DashboardPage = ({
     const [newChildAge,      setNewChildAge]      = useState('');
     const [addChildError,    setAddChildError]    = useState('');
 
+    /* ── Teen self-claim (13-18, autonomy at 15) — only ever offered on the
+       CURRENTLY ACTIVE profile if it's an unclaimed child: claiming signs
+       this browser session into the teen's brand-new account immediately
+       (Supabase replaces the session on signUp), so it must be the teen's
+       own action from their own active session, not something a guardian
+       triggers on someone else's row while browsing My Family. ── */
+    const [claimOpen,     setClaimOpen]     = useState(false);
+    const [claimEmail,    setClaimEmail]    = useState('');
+    const [claimPassword, setClaimPassword] = useState('');
+    const [claimError,    setClaimError]    = useState('');
+    const [claiming,      setClaiming]      = useState(false);
+    const [claimSent,     setClaimSent]     = useState(false);
+
+    const handleClaimProfile = async () => {
+        if (!claimEmail.trim() || claimPassword.length < 6 || !profileId) return;
+        setClaiming(true);
+        setClaimError('');
+        try {
+            const result = await claimProfile(claimEmail.trim(), claimPassword, profileId);
+            if (result?.needsEmailConfirmation) {
+                // No new session yet — this browser stays on the guardian's
+                // account until the teen confirms by email. Without this
+                // message, claiming looks like it silently did nothing.
+                setClaimSent(true);
+                setClaiming(false);
+            }
+            // Otherwise the auth listener in App.jsx picks up the new
+            // session automatically from here.
+        } catch (e) {
+            setClaimError(e.message || (isFr ? 'Erreur. Réessayez.' : 'Something went wrong. Try again.'));
+            setClaiming(false);
+        }
+    };
+
     const refreshHousehold = useCallback(() => {
         if (!currentUid) return;
         setFamilyLoading(true);
@@ -446,6 +484,45 @@ const DashboardPage = ({
         });
     }, [currentUid]);
     useEffect(() => { refreshHousehold(); }, [refreshHousehold]);
+
+    /* ── Sunday tape / proof artefact (Personas & Journeys v2: "No proof
+       artefact"; the master journey's weekly ritual is "forty seconds of
+       her children's voices"). This week's practice_clips per household
+       member, so a guardian can see and share what's actually been
+       recorded — not a fabricated summary. ── */
+    const [weeklyClipsByMember, setWeeklyClipsByMember] = useState({});
+    useEffect(() => {
+        if (householdMembers.length === 0) return;
+        Promise.all(householdMembers.map(m => getWeeklyClips(m.id).then(clips => [m.id, clips])))
+            .then(entries => setWeeklyClipsByMember(Object.fromEntries(entries)));
+    }, [householdMembers]);
+
+    /* ── Practice recorder — the raw material for the tape above. Prompts
+       with a real recorded word (never TTS) so the learner has something
+       concrete to repeat before recording their own attempt. ── */
+    const [practicePrompt]     = useState(() => wordOfTheDay());
+    const [practiceBlob,       setPracticeBlob]       = useState(null);
+    const [practiceSaving,     setPracticeSaving]     = useState(false);
+    const [practiceSaved,      setPracticeSaved]      = useState(false);
+    const [practiceError,      setPracticeError]      = useState('');
+
+    const handleSavePracticeClip = async () => {
+        if (!practiceBlob || !profileId) return;
+        setPracticeSaving(true);
+        setPracticeError('');
+        try {
+            const url = await uploadPracticeClip(practiceBlob, profileId);
+            await saveClip(profileId, url, practicePrompt?.medumba);
+            setPracticeBlob(null);
+            setPracticeSaved(true);
+            setTimeout(() => setPracticeSaved(false), 3000);
+            getWeeklyClips(profileId).then(clips => setWeeklyClipsByMember(prev => ({ ...prev, [profileId]: clips })));
+        } catch (e) {
+            setPracticeError(e.message);
+        } finally {
+            setPracticeSaving(false);
+        }
+    };
 
     const handleAddChild = async () => {
         if (!newChildName.trim() || !currentUid) return;
@@ -1585,6 +1662,54 @@ const DashboardPage = ({
                                 {myCohortInfo.homeworkNote}
                             </div>
                         </div>
+                    )}
+                </div>
+            )}
+
+            {/* ── Practice & Record — raw material for the weekly "Sunday
+                tape" sent to family (My Family tab). Not a lesson exercise:
+                just a real recording of the learner saying a real word. ── */}
+            {practicePrompt && (
+                <div style={{
+                    margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
+                    padding: '1.1rem 1.3rem', borderRadius: '18px',
+                    backgroundColor: T.surface, border: `2px solid ${T.border}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🎙️</span>
+                        <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>
+                            {isFr ? 'Enregistre-toi' : 'Record yourself'}
+                        </span>
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: T.textMuted, fontWeight: 600, marginBottom: '0.75rem' }}>
+                        {isFr ? 'Répète ce mot à voix haute, puis enregistre-toi :' : 'Say this word out loud, then record yourself:'}
+                    </p>
+                    <button
+                        onClick={() => playMedumbaWord(practicePrompt.medumba)}
+                        style={{
+                            width: '100%', marginBottom: '0.85rem', padding: '0.85rem',
+                            borderRadius: '14px', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                            background: T.blueTint, color: '#0056D2', fontWeight: '900', fontSize: '1.1rem',
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem',
+                        }}
+                    >
+                        <span>🔊 {practicePrompt.medumba}</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.textMuted }}>
+                            {isFr ? practicePrompt.french : practicePrompt.english}
+                        </span>
+                    </button>
+                    <AudioRecorder isFr={isFr} onRecorded={setPracticeBlob} label={isFr ? 'Ton enregistrement' : 'Your recording'} />
+                    {practiceError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600', marginTop: '0.6rem' }}>{practiceError}</div>}
+                    {practiceSaved && <div style={{ fontSize: '0.78rem', color: '#16a34a', fontWeight: '700', marginTop: '0.6rem' }}>✅ {isFr ? 'Enregistré !' : 'Saved!'}</div>}
+                    {practiceBlob && !practiceSaved && (
+                        <button onClick={handleSavePracticeClip} disabled={practiceSaving} style={{
+                            width: '100%', marginTop: '0.75rem', padding: '0.75rem', borderRadius: '12px', border: 'none',
+                            backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', fontSize: '0.88rem',
+                            cursor: 'pointer', fontFamily: 'inherit', opacity: practiceSaving ? 0.6 : 1,
+                        }}>
+                            {practiceSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Garder ce clip' : 'Keep this clip')}
+                        </button>
                     )}
                 </div>
             )}
@@ -3073,13 +3198,16 @@ const DashboardPage = ({
                     {householdMembers.map((m) => {
                         const isActive = m.id === profileId;
                         const isSelf   = m.auth_user_id === currentUid;
+                        const age      = m.birth_year ? new Date().getFullYear() - m.birth_year : null;
+                        const canClaim = isActive && !m.auth_user_id && (age === null || age >= 15);
                         return (
                             <div key={m.id} style={{
-                                display: 'flex', alignItems: 'center', gap: '0.85rem',
+                                display: 'flex', flexDirection: 'column', gap: '0.6rem',
                                 padding: '0.85rem 1rem', borderRadius: '14px',
                                 border: `2px solid ${isActive ? '#0056D2' : T.border}`,
                                 backgroundColor: isActive ? T.blueTint : T.surface,
                             }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                                 <div style={{
                                     width: '40px', height: '40px', borderRadius: '50%',
                                     background: 'linear-gradient(135deg, #0056D2, #38bdf8)',
@@ -3111,6 +3239,52 @@ const DashboardPage = ({
                                     >{isFr ? 'Basculer' : 'Switch'}</button>
                                 )}
                             </div>
+
+                            {canClaim && (
+                                claimSent ? (
+                                    <div style={{ fontSize: '0.8rem', color: '#16a34a', fontWeight: '700', paddingTop: '0.5rem', borderTop: `1px solid ${T.border}` }}>
+                                        ✅ {isFr
+                                            ? `E-mail envoyé à ${claimEmail} — confirmez-le pour activer votre compte. Votre série, XP et leçons vous attendent.`
+                                            : `Email sent to ${claimEmail} — confirm it to activate your account. Your streak, XP and lessons will be waiting.`}
+                                    </div>
+                                ) : claimOpen ? (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', paddingTop: '0.5rem', borderTop: `1px solid ${T.border}` }}>
+                                        <div style={{ fontSize: '0.78rem', color: T.textMuted, fontWeight: '600' }}>
+                                            {isFr
+                                                ? 'Créez votre propre email et mot de passe — votre série, XP et leçons restent les vôtres.'
+                                                : 'Set your own email and password — your streak, XP and lessons stay yours.'}
+                                        </div>
+                                        <input
+                                            value={claimEmail} onChange={e => setClaimEmail(e.target.value)}
+                                            placeholder={isFr ? 'Votre email' : 'Your email'}
+                                            style={{ padding: '0.55rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.85rem', backgroundColor: T.bg, color: T.text }}
+                                        />
+                                        <input
+                                            type="password" value={claimPassword} onChange={e => setClaimPassword(e.target.value)}
+                                            placeholder={isFr ? 'Mot de passe (6+ caractères)' : 'Password (6+ characters)'}
+                                            style={{ padding: '0.55rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.85rem', backgroundColor: T.bg, color: T.text }}
+                                        />
+                                        {claimError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600' }}>{claimError}</div>}
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <button onClick={() => { setClaimOpen(false); setClaimError(''); }} style={{ flex: 1, padding: '0.55rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.82rem' }}>
+                                                {isFr ? 'Annuler' : 'Cancel'}
+                                            </button>
+                                            <button onClick={handleClaimProfile} disabled={!claimEmail.trim() || claimPassword.length < 6 || claiming} style={{ flex: 2, padding: '0.55rem', borderRadius: '10px', border: 'none', backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.82rem', opacity: claiming ? 0.6 : 1 }}>
+                                                {claiming ? (isFr ? 'Création...' : 'Creating...') : (isFr ? 'Créer mon compte' : 'Create my account')}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <button onClick={() => setClaimOpen(true)} style={{
+                                        alignSelf: 'flex-start', padding: '0.4rem 0.8rem', borderRadius: '99px',
+                                        border: '1.5px solid #7c3aed', backgroundColor: 'transparent', color: '#7c3aed',
+                                        fontWeight: '700', fontSize: '0.76rem', cursor: 'pointer', fontFamily: 'inherit',
+                                    }}>
+                                        🔒 {isFr ? 'Créer mon propre compte' : 'Create my own account'}
+                                    </button>
+                                )
+                            )}
+                            </div>
                         );
                     })}
                     {familyLoading && householdMembers.length === 0 && (
@@ -3119,6 +3293,48 @@ const DashboardPage = ({
                         </div>
                     )}
                 </div>
+
+                {/* ── Sunday tape / proof artefact — this week's real practice
+                    clips per family member, playable and shareable. Nothing
+                    sends itself: a guardian chooses to share, same as
+                    "Share my progress" below. ── */}
+                {householdMembers.filter(m => (weeklyClipsByMember[m.id]?.length ?? 0) > 0).length > 0 && (
+                    <>
+                        <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: T.text, marginBottom: '0.85rem' }}>
+                            {isFr ? '📼 Bande de la semaine' : '📼 This week\'s tape'}
+                        </h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.5rem' }}>
+                            {householdMembers.map((m) => {
+                                const clips = weeklyClipsByMember[m.id] || [];
+                                if (clips.length === 0) return null;
+                                return (
+                                    <div key={m.id} style={{
+                                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                        padding: '0.85rem 1rem', borderRadius: '14px',
+                                        border: `2px solid ${T.border}`, backgroundColor: T.surface,
+                                    }}>
+                                        <div>
+                                            <div style={{ fontWeight: '700', fontSize: '0.9rem', color: T.text }}>{m.name}</div>
+                                            <div style={{ fontSize: '0.75rem', color: T.textMuted, fontWeight: '600' }}>
+                                                {isFr ? `${clips.length} clip${clips.length > 1 ? 's' : ''} cette semaine` : `${clips.length} clip${clips.length > 1 ? 's' : ''} this week`}
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setShareModal({ type: 'tape', data: { childName: m.name, clips } })}
+                                            style={{
+                                                padding: '0.5rem 1rem', borderRadius: '99px', border: 'none',
+                                                backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', fontSize: '0.8rem',
+                                                cursor: 'pointer', fontFamily: 'inherit',
+                                            }}
+                                        >
+                                            📤 {isFr ? 'Envoyer' : 'Send'}
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </>
+                )}
 
                 {addChildOpen ? (
                     <div style={{
@@ -4029,10 +4245,14 @@ const DashboardPage = ({
 
         const msgFr = type === 'lesson'
             ? `🎉 Je viens de terminer une leçon Medumba avec ${data.accuracy}% de précision et +${data.xp} XP sur Medumba.AI !\n🔥 Série de ${streak} jours · ⚡ ${xp} XP total\n\nApprends le Medumba toi aussi → medumba.ai`
+            : type === 'tape'
+            ? `🇨🇲 ${data.childName} a pratiqué le Medumba cette semaine ! Écoute :\n\n${(data.clips || []).map(c => c.audio_url).join('\n')}\n\nMedumba.AI → medumba.ai`
             : `🇨🇲 J'apprends le Medumba sur Medumba.AI !\n🔥 ${streak} jours de série · ⚡ ${xp} XP · 💎 ${gems} diamants\n\nRejoins-moi → medumba.ai`;
 
         const msgEn = type === 'lesson'
             ? `🎉 Just finished a Medumba lesson with ${data.accuracy}% accuracy and +${data.xp} XP on Medumba.AI!\n🔥 ${streak}-day streak · ⚡ ${xp} XP total\n\nLearn Medumba too → medumba.ai`
+            : type === 'tape'
+            ? `🇨🇲 ${data.childName} practiced Medumba this week! Listen:\n\n${(data.clips || []).map(c => c.audio_url).join('\n')}\n\nMedumba.AI → medumba.ai`
             : `🇨🇲 I'm learning Medumba on Medumba.AI!\n🔥 ${streak}-day streak · ⚡ ${xp} XP · 💎 ${gems} diamonds\n\nJoin me → medumba.ai`;
 
         const msg = isFr ? msgFr : msgEn;
@@ -4081,10 +4301,14 @@ const DashboardPage = ({
                     <div style={{ width: '40px', height: '4px', borderRadius: '99px', backgroundColor: T.border, margin: '0 auto 1.25rem' }} />
 
                     <div style={{ fontSize: '1.1rem', fontWeight: 900, color: T.text, marginBottom: '0.25rem' }}>
-                        {isFr ? '📲 Partager ma progression' : '📲 Share my progress'}
+                        {type === 'tape'
+                            ? (isFr ? `📼 Envoyer la bande de ${data.childName}` : `📼 Send ${data.childName}'s tape`)
+                            : (isFr ? '📲 Partager ma progression' : '📲 Share my progress')}
                     </div>
                     <p style={{ fontSize: '0.82rem', color: T.textMuted, marginBottom: '1.25rem', fontWeight: 600 }}>
-                        {isFr ? 'Montre tes progrès à tes amis !' : 'Show your progress to your friends!'}
+                        {type === 'tape'
+                            ? (isFr ? 'La famille adore entendre sa voix.' : 'Family loves hearing their voice.')
+                            : (isFr ? 'Montre tes progrès à tes amis !' : 'Show your progress to your friends!')}
                     </p>
 
                     {/* Preview card */}

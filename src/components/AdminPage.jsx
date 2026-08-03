@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import {
-    getAllUsers, setUserRole, listCohorts, createCohort,
-    getCohortMembers, addCohortMember, removeCohortMember,
-} from '../services/adminService';
+import { getAllUsers, setUserRole } from '../services/adminService';
 import { getContactMessages, updateMessageStatus } from '../services/contactService';
 import { getAllTestimonials, updateTestimonialStatus } from '../services/testimonialService';
+import CohortManager from './CohortManager';
+import FinanceOverview from './FinanceOverview';
 
 const B  = '#1B4FD8';
 const BG = '#f8fafc';
@@ -69,62 +68,10 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   const [testimonials, setTestimonials]         = useState([]);
   const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
-  /* ── Cohorts ── */
-  const [cohorts, setCohorts]             = useState([]);
-  const [cohortsLoading, setCohortsLoading] = useState(true);
-  const [newCohortName, setNewCohortName]   = useState('');
-  const [newCohortTeacher, setNewCohortTeacher] = useState('');
-  const [newCohortSchedule, setNewCohortSchedule] = useState('');
-  const [cohortError, setCohortError]       = useState('');
-  const [openCohortId, setOpenCohortId]     = useState(null);
-  const [cohortMembers, setCohortMembers]   = useState([]);
-  const [addMemberSearch, setAddMemberSearch] = useState('');
-
-  const refreshCohorts = () => {
-    setCohortsLoading(true);
-    listCohorts().then(setCohorts).finally(() => setCohortsLoading(false));
-  };
-  useEffect(() => { refreshCohorts(); }, []);
-
-  const teachers = users.filter(u => u.role === 'teacher');
-
   const handleSetRole = async (uid, role) => {
     setUsers(prev => prev.map(u => u.uid === uid ? { ...u, role } : u));
     if (selected?.uid === uid) setSelected(prev => ({ ...prev, role }));
     try { await setUserRole(uid, role); } catch (e) { setError(e.message); }
-  };
-
-  const handleCreateCohort = async () => {
-    if (!newCohortName.trim()) return;
-    setCohortError('');
-    try {
-      await createCohort({
-        teacherId: newCohortTeacher || null,
-        name: newCohortName.trim(),
-        scheduleNote: newCohortSchedule.trim() || null,
-      });
-      setNewCohortName(''); setNewCohortTeacher(''); setNewCohortSchedule('');
-      refreshCohorts();
-    } catch (e) { setCohortError(e.message); }
-  };
-
-  const openCohort = async (cohortId) => {
-    if (openCohortId === cohortId) { setOpenCohortId(null); return; }
-    setOpenCohortId(cohortId);
-    setCohortMembers(await getCohortMembers(cohortId));
-  };
-
-  const handleAddMember = async (profileId) => {
-    await addCohortMember(openCohortId, profileId);
-    setCohortMembers(await getCohortMembers(openCohortId));
-    refreshCohorts();
-    setAddMemberSearch('');
-  };
-
-  const handleRemoveMember = async (memberRowId) => {
-    await removeCohortMember(memberRowId);
-    setCohortMembers(await getCohortMembers(openCohortId));
-    refreshCohorts();
   };
 
   useEffect(() => {
@@ -167,6 +114,7 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   );
 
   const totalXP    = users.reduce((s, u) => s + (u.xp || 0), 0);
+  const totalGems  = users.reduce((s, u) => s + (u.gems || 0), 0);
   const activeCount = users.filter(u => isActive(u.lastActive)).length;
 
   return (
@@ -225,108 +173,15 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
             backgroundColor: tab === 'cohorts' ? B : '#fff', color: tab === 'cohorts' ? '#fff' : '#64748b',
             fontWeight: '800', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit',
           }}>🎓 {isFr ? 'Cohortes' : 'Cohorts'}</button>
+          <button onClick={() => setTab('finance')} style={{
+            padding: '0.55rem 1.1rem', borderRadius: '9999px', border: `2px solid ${tab === 'finance' ? B : '#e2e8f0'}`,
+            backgroundColor: tab === 'finance' ? B : '#fff', color: tab === 'finance' ? '#fff' : '#64748b',
+            fontWeight: '800', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit',
+          }}>💰 {isFr ? 'Finance' : 'Finance'}</button>
         </div>
 
-        {tab === 'cohorts' && (
-          <div>
-            {/* New cohort form */}
-            <div style={{ backgroundColor: '#fff', borderRadius: '14px', padding: '1.25rem', marginBottom: '1.25rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-              <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a', marginBottom: '0.75rem' }}>
-                {isFr ? '+ Nouvelle cohorte' : '+ New cohort'}
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 2fr auto', gap: '0.6rem', alignItems: 'center' }}>
-                <input value={newCohortName} onChange={e => setNewCohortName(e.target.value)}
-                  placeholder={isFr ? 'Nom (ex. Cohorte A)' : 'Name (e.g. Cohort A)'}
-                  style={{ padding: '0.55rem 0.75rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.85rem' }} />
-                <select value={newCohortTeacher} onChange={e => setNewCohortTeacher(e.target.value)}
-                  style={{ padding: '0.55rem 0.75rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.85rem' }}>
-                  <option value="">{isFr ? '— Enseignant —' : '— Teacher —'}</option>
-                  {teachers.map(t => <option key={t.uid} value={t.uid}>{t.name || t.email}</option>)}
-                </select>
-                <input value={newCohortSchedule} onChange={e => setNewCohortSchedule(e.target.value)}
-                  placeholder={isFr ? 'Horaire (ex. Samedi 10h)' : 'Schedule (e.g. Saturdays 10am)'}
-                  style={{ padding: '0.55rem 0.75rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.85rem' }} />
-                <button onClick={handleCreateCohort} disabled={!newCohortName.trim()} style={{
-                  padding: '0.55rem 1rem', borderRadius: '8px', border: 'none',
-                  backgroundColor: newCohortName.trim() ? B : '#e2e8f0', color: '#fff',
-                  fontWeight: '700', fontSize: '0.85rem', cursor: newCohortName.trim() ? 'pointer' : 'default', fontFamily: 'inherit',
-                }}>{isFr ? 'Créer' : 'Create'}</button>
-              </div>
-              {teachers.length === 0 && (
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.6rem' }}>
-                  {isFr
-                    ? 'Aucun enseignant pour l\'instant — donnez le rôle "teacher" à un utilisateur dans l\'onglet Utilisateurs.'
-                    : 'No teachers yet — grant a user the "teacher" role from the Users tab.'}
-                </div>
-              )}
-              {cohortError && <div style={{ fontSize: '0.8rem', color: '#dc2626', marginTop: '0.5rem', fontWeight: '600' }}>{cohortError}</div>}
-            </div>
-
-            {/* Cohort list */}
-            {cohortsLoading ? (
-              <div style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>{isFr ? 'Chargement...' : 'Loading...'}</div>
-            ) : cohorts.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '3rem', color: '#94a3b8' }}>{isFr ? 'Aucune cohorte' : 'No cohorts yet'}</div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {cohorts.map(c => (
-                  <div key={c.id} style={{ backgroundColor: '#fff', borderRadius: '14px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
-                    <div onClick={() => openCohort(c.id)} style={{ padding: '1rem 1.25rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a' }}>{c.name}</div>
-                        <div style={{ fontSize: '0.78rem', color: '#64748b' }}>
-                          {c.teacherName || (isFr ? 'Aucun enseignant assigné' : 'No teacher assigned')}
-                          {c.schedule_note ? ` · ${c.schedule_note}` : ''}
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '0.82rem', fontWeight: '700', color: B }}>
-                        {c.memberCount} {isFr ? 'élève(s)' : 'student(s)'}
-                      </div>
-                    </div>
-                    {openCohortId === c.id && (
-                      <div style={{ padding: '0 1.25rem 1.25rem', borderTop: '1px solid #f1f5f9' }}>
-                        <div style={{ fontSize: '0.78rem', fontWeight: '700', color: '#64748b', margin: '0.85rem 0 0.5rem' }}>
-                          {isFr ? 'Élèves' : 'Roster'}
-                        </div>
-                        {cohortMembers.length === 0 && (
-                          <div style={{ fontSize: '0.82rem', color: '#94a3b8', marginBottom: '0.5rem' }}>{isFr ? 'Aucun élève' : 'No students yet'}</div>
-                        )}
-                        {cohortMembers.map(m => (
-                          <div key={m.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0', borderBottom: '1px solid #f8fafc' }}>
-                            <span style={{ fontSize: '0.85rem', color: '#0f172a', fontWeight: '600' }}>{m.name || m.email || m.profileId.slice(0, 8)}</span>
-                            <button onClick={() => handleRemoveMember(m.id)} style={{ border: 'none', background: 'none', color: '#dc2626', fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}>{isFr ? 'Retirer' : 'Remove'}</button>
-                          </div>
-                        ))}
-                        <div style={{ marginTop: '0.75rem' }}>
-                          <input
-                            value={addMemberSearch} onChange={e => setAddMemberSearch(e.target.value)}
-                            placeholder={isFr ? 'Chercher un élève par nom/email...' : 'Search a student by name/email...'}
-                            style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem', boxSizing: 'border-box' }}
-                          />
-                          {addMemberSearch.trim() && (
-                            <div style={{ marginTop: '0.4rem', maxHeight: '160px', overflowY: 'auto', border: '1px solid #f1f5f9', borderRadius: '8px' }}>
-                              {users
-                                .filter(u =>
-                                  !cohortMembers.some(m => m.profileId === u.uid) &&
-                                  ((u.name || '').toLowerCase().includes(addMemberSearch.toLowerCase()) ||
-                                   (u.email || '').toLowerCase().includes(addMemberSearch.toLowerCase())))
-                                .slice(0, 8)
-                                .map(u => (
-                                  <div key={u.uid} onClick={() => handleAddMember(u.uid)} style={{ padding: '0.5rem 0.75rem', cursor: 'pointer', fontSize: '0.82rem', borderBottom: '1px solid #f8fafc' }}>
-                                    {u.name || '(no name)'} <span style={{ color: '#94a3b8' }}>{u.email}</span>
-                                  </div>
-                                ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        {tab === 'cohorts' && <CohortManager isFr={isFr} />}
+        {tab === 'finance' && <FinanceOverview isFr={isFr} users={users} />}
 
         {tab === 'messages' && (
           <div>
@@ -414,7 +269,7 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
           <StatCard icon="👥" label={isFr ? 'Utilisateurs' : 'Users'}    value={users.length}  color={B} />
           <StatCard icon="🟢" label={isFr ? 'Actifs (7 jours)' : 'Active (7 days)'} value={activeCount}   color="#22c55e" />
           <StatCard icon="⭐" label={isFr ? 'XP total gagné' : 'Total XP earned'}  value={totalXP}       color="#f59e0b" />
-          <StatCard icon="💎" label={isFr ? 'Gemmes distribuées' : 'Gems distributed'} value={users.length * 50} color="#8b5cf6" />
+          <StatCard icon="💎" label={isFr ? 'Gemmes en circulation' : 'Gems in circulation'} value={totalGems} color="#8b5cf6" />
         </div>
 
         {/* Search */}
@@ -523,7 +378,10 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
                 <option value="child">child</option>
                 <option value="parent">parent</option>
                 <option value="teacher">teacher</option>
+                <option value="coordinator">coordinator</option>
                 <option value="content_owner">content_owner</option>
+                <option value="content_creator">content_creator</option>
+                <option value="advisor">advisor</option>
                 <option value="bizmgr">bizmgr</option>
                 <option value="admin">admin</option>
               </select>

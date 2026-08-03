@@ -5,7 +5,7 @@ const INK = '#0f172a';
 const MUTED = '#64748b';
 const SAND = '#e2e8f0';
 
-const ChatWidget = ({ nativeLang }) => {
+const ChatWidget = ({ nativeLang, profileId = null }) => {
     const isFr = nativeLang === 'french';
     const [open, setOpen] = useState(false);
     const [messages, setMessages] = useState([]);
@@ -29,7 +29,7 @@ const ChatWidget = ({ nativeLang }) => {
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: next }),
+                body: JSON.stringify({ messages: next, profileId }),
             });
             const data = await res.json();
             setMessages([...next, { role: 'assistant', content: data.reply || (isFr ? "Désolé, je n'ai pas pu répondre. Essayez la page Contact." : "Sorry, I couldn't reply. Please try the Contact page.") }]);

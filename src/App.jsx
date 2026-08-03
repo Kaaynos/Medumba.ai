@@ -529,7 +529,7 @@ function App() {
       )}
 
       {/* ── Support chat widget — landing, hub sections, dashboard ── */}
-      {(step === 1 || step === 14 || step === 15) && <ChatWidget nativeLang={nativeLang} />}
+      {(step === 1 || step === 14 || step === 15) && <ChatWidget nativeLang={nativeLang} profileId={activeProfileId || currentUid} />}
 
     </ErrorBoundary>
     </ThemeProvider>

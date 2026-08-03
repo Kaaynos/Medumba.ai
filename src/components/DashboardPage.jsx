@@ -4,7 +4,7 @@ import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
 import { isAdmin } from '../services/adminService';
-import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen, getMyCohortInfo } from '../services/userService';
+import { getProgress, saveProgress, getLeaderboard, getMyRank, listHouseholdMembers, addChildProfile, touchLastSeen, getMyCohortInfo, confirmAge } from '../services/userService';
 import { claimProfile } from '../services/authService';
 import { uploadPracticeClip, saveClip, getWeeklyClips } from '../services/practiceClipService';
 import { wordOfTheDay } from '../utils/realVoiceWords';
@@ -484,6 +484,34 @@ const DashboardPage = ({
         });
     }, [currentUid]);
     useEffect(() => { refreshHousehold(); }, [refreshHousehold]);
+
+    /* ── Age confirmation — every account created before the signup fix
+       (migration 025) has role stuck at 'child' with no age on file at
+       all, since the old client-side upsert silently failed under RLS
+       pre-confirmation. Asked once, on the account holder's own Hub only
+       (never while viewing a switched child profile), with a real
+       session this time so the write actually lands. ── */
+    const myOwnMember = householdMembers.find(m => m.auth_user_id === currentUid);
+    const [ageConfirmDismissed, setAgeConfirmDismissed] = useState(false);
+    const showAgeConfirm = profileId === currentUid && myOwnMember?.role === 'child' && !myOwnMember?.age && !ageConfirmDismissed;
+    const [ageConfirmValue, setAgeConfirmValue] = useState('');
+    const [ageConfirmSaving, setAgeConfirmSaving] = useState(false);
+    const [ageConfirmError, setAgeConfirmError] = useState('');
+
+    const handleConfirmAge = async () => {
+        if (!ageConfirmValue.trim() || !myOwnMember?.id) return;
+        setAgeConfirmSaving(true);
+        setAgeConfirmError('');
+        try {
+            await confirmAge(myOwnMember.id, ageConfirmValue.trim());
+            setAgeConfirmDismissed(true);
+            refreshHousehold();
+        } catch (e) {
+            setAgeConfirmError(e.message);
+        } finally {
+            setAgeConfirmSaving(false);
+        }
+    };
 
     /* ── Sunday tape / proof artefact (Personas & Journeys v2: "No proof
        artefact"; the master journey's weekly ritual is "forty seconds of
@@ -4609,6 +4637,43 @@ const DashboardPage = ({
 
                 {/* Share modal */}
                 {renderShareModal()}
+
+                {/* Age confirmation — see showAgeConfirm above */}
+                {showAgeConfirm && (
+                    <div style={{
+                        position: 'fixed', inset: 0, zIndex: 500,
+                        backgroundColor: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem',
+                    }}>
+                        <div style={{
+                            width: '100%', maxWidth: '380px', backgroundColor: T.surface,
+                            borderRadius: '24px', padding: '1.75rem', boxShadow: '0 12px 48px rgba(0,0,0,0.25)',
+                        }}>
+                            <div style={{ fontSize: '1.05rem', fontWeight: 900, color: T.text, marginBottom: '0.5rem' }}>
+                                🎂 {isFr ? 'Quel âge as-tu ?' : "What's your age?"}
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: T.textMuted, fontWeight: 600, lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                                {isFr
+                                    ? "On personnalise l'app selon l'âge (contenu, rôle du compte). Cette information ne nous avait jamais été transmise correctement — dis-le-nous une bonne fois."
+                                    : "We personalize the app by age (content, account role). This never actually reached us before — let us know once."}
+                            </p>
+                            <input
+                                type="number" value={ageConfirmValue} onChange={e => setAgeConfirmValue(e.target.value)}
+                                placeholder={isFr ? 'ex. 34' : 'e.g. 34'} autoFocus
+                                style={{ width: '100%', padding: '0.75rem 0.9rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '1.05rem', fontWeight: 700, backgroundColor: T.bg, color: T.text, boxSizing: 'border-box', marginBottom: '1rem' }}
+                            />
+                            {ageConfirmError && <div style={{ fontSize: '0.8rem', color: '#dc2626', fontWeight: '600', marginBottom: '0.75rem' }}>{ageConfirmError}</div>}
+                            <div style={{ display: 'flex', gap: '0.6rem' }}>
+                                <button onClick={() => setAgeConfirmDismissed(true)} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.88rem' }}>
+                                    {isFr ? 'Plus tard' : 'Later'}
+                                </button>
+                                <button onClick={handleConfirmAge} disabled={!ageConfirmValue.trim() || ageConfirmSaving} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: 'none', backgroundColor: ageConfirmValue.trim() ? '#0056D2' : T.border, color: '#fff', fontWeight: 700, cursor: ageConfirmValue.trim() ? 'pointer' : 'default', fontFamily: 'inherit', fontSize: '0.88rem' }}>
+                                    {ageConfirmSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Confirmer' : 'Confirm')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Premium paywall modal */}
                 {renderPremiumModal()}

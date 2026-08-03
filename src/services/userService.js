@@ -27,6 +27,24 @@ export async function getProfileById(id) {
     return data;
 }
 
+/* ── Confirme l'âge d'un compte existant qui n'en a jamais eu (le bug
+   corrigé par la migration 025 : age/role n'ont jamais été sauvegardés à
+   l'inscription pour les comptes créés avant elle). Contrairement à
+   l'upsert() cassé de registerUser(), cet appel s'exécute avec une vraie
+   session active — RLS "profiles_own" / "claimed_profile_self_access"
+   l'autorise donc réellement. Le rôle est dérivé ici, jamais accepté tel
+   quel du client. ── */
+export async function confirmAge(profileId, age) {
+    const numericAge = Number(age);
+    const role = Number.isFinite(numericAge) && numericAge >= 18 ? 'parent' : 'child';
+    const { error } = await supabase
+        .from('profiles')
+        .update({ age: String(age), role })
+        .eq('id', profileId);
+    if (error) throw error;
+    return role;
+}
+
 /* ── Marque un profil comme actif à l'instant ── */
 // authService.js does this for the account holder on real Supabase sign-in,
 // but a child profile (no auth account of its own) never fires that event —

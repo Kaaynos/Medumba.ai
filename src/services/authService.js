@@ -12,13 +12,22 @@ export async function handleGoogleRedirectResult() {
     return _toUserShape(session.user);
 }
 
-/* ── Inscription email / mot de passe ── */
+/* ── Inscription email / mot de passe ──
+   age/reason/dailyGoal passent par les metadata de signUp(), lues par le
+   trigger handle_new_user() (migration 025) — PAS par un upsert() client
+   après coup. Ce projet a "Confirm email" actif : signUp() ne renvoie
+   aucune session tant que le lien reçu par e-mail n'est pas cliqué, donc
+   un upsert client juste après s'exécute sans authentification et RLS le
+   rejette silencieusement (aucune erreur vérifiée nulle part) — c'est
+   pour ça que age restait toujours null et role toujours 'child', quel
+   que soit l'âge saisi dans AgePage. Le trigger, lui, tourne en SECURITY
+   DEFINER et n'a besoin d'aucune session. */
 export async function registerUser({ name, email, password, age, language, reason, dailyGoal }) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-            data: { name, native_lang: language || 'french' },
+            data: { name, native_lang: language || 'french', age: age || '', reason: reason || '', daily_goal: dailyGoal || 'normal' },
         },
     });
     if (error) throw error;
@@ -30,19 +39,6 @@ export async function registerUser({ name, email, password, age, language, reaso
     // peut plus jamais se connecter par e-mail/mot de passe.
     if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
         throw new Error('EMAIL_ALREADY_LINKED');
-    }
-
-    // Le trigger handle_new_user() crée automatiquement profiles + user_progress
-    // On met à jour les champs supplémentaires immédiatement
-    if (data.user) {
-        await supabase.from('profiles').upsert({
-            id:           data.user.id,
-            name:         name         || '',
-            age:          age          || null,
-            native_lang:  language     || 'french',
-            reason:       reason       || null,
-            daily_goal:   dailyGoal    || 'normal',
-        });
     }
     if (!data.user) return null;
     // Si "Confirm email" est actif côté Supabase, signUp() ne renvoie pas de

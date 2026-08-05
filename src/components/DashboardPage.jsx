@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'lottie-react';
+import { supabase } from '../config/supabase';
 import { openStripePayment } from '../config/stripe';
 import { THEO } from '../services/theoService';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
@@ -639,116 +640,52 @@ const DashboardPage = ({
         { id: 'account',     icon: '👤', labelEn: 'ACCOUNT',     labelFr: 'COMPTE'     },
     ];
 
-    /* ── learning path data — Medumba track ── */
-    const unitsMedumba = [
-        {
-            id: 1, color: '#0056D2', accent: '#0041a3', emoji: '🔤',
-            titleEn: 'Foundations',   titleFr: 'Les Bases',
-            subEn:   'Learn the basics of Medumba',
-            subFr:   'Apprenez les bases du Medumba',
-            lessons: [
-                { id: 'l0', titleEn: 'Alphabet',   titleFr: 'Alphabet',      type: 'lesson', status: 'active'  },
-                { id: 'l1', titleEn: 'Greetings',  titleFr: 'Salutations',   type: 'lesson', status: 'locked'  },
-                { id: 'l2', titleEn: 'Body Parts',  titleFr: 'Corps humain',  type: 'lesson', status: 'locked'  },
-                { id: 'l3', titleEn: 'Food',        titleFr: 'Nourriture',    type: 'lesson', status: 'locked'  },
-                { id: 'c1', titleEn: 'Chest',       titleFr: 'Coffre',        type: 'chest',  status: 'locked'  },
-                { id: 'l4', titleEn: 'Colors',      titleFr: 'Couleurs',      type: 'lesson', status: 'locked'  },
-                { id: 'l5', titleEn: 'Numbers',     titleFr: 'Chiffres',      type: 'lesson', status: 'locked'  },
-            ],
-        },
-        {
-            id: 2, color: '#2563eb', accent: '#1d4ed8', emoji: '👥',
-            titleEn: 'People & World', titleFr: 'Personnes & Monde',
-            subEn:   'Animals, family and the world around you',
-            subFr:   'Animaux, famille et le monde qui vous entoure',
-            lessons: [
-                { id: 'l6', titleEn: 'Animals',    titleFr: 'Animaux',       type: 'lesson', status: 'locked' },
-                { id: 'l7', titleEn: 'Family',     titleFr: 'Famille',       type: 'lesson', status: 'locked' },
-                { id: 'l8', titleEn: 'Nature',     titleFr: 'Nature',        type: 'lesson', status: 'locked' },
-                { id: 'b1', titleEn: 'Boss Fight', titleFr: 'Défi Boss',     type: 'boss',   status: 'locked' },
-            ],
-        },
-        {
-            id: 3, color: '#0891b2', accent: '#0e7490', emoji: '🌿',
-            titleEn: 'Daily Life',    titleFr: 'Vie Quotidienne',
-            subEn:   'Everyday expressions & phrases',
-            subFr:   'Expressions pour tous les jours',
-            lessons: [
-                { id: 'l9',  titleEn: 'Time',          titleFr: 'Temps',          type: 'lesson', status: 'locked' },
-                { id: 'l10', titleEn: 'Introductions',  titleFr: 'Présentations',  type: 'lesson', status: 'locked' },
-                { id: 'c2',  titleEn: 'Chest',          titleFr: 'Coffre',         type: 'chest',  status: 'locked' },
-            ],
-        },
-        {
-            id: 4, color: '#7c3aed', accent: '#6d28d9', emoji: '🏫',
-            titleEn: 'Society & Health', titleFr: 'Société & Santé',
-            subEn:   'From classroom to kitchen — real-world Medumba',
-            subFr:   'De la classe à la cuisine — Medumba du quotidien',
-            lessons: [
-                { id: 'l11', titleEn: 'Kitchen',      titleFr: 'Cuisine',       type: 'lesson', status: 'locked' },
-                { id: 'l12', titleEn: 'Illnesses',    titleFr: 'Maladies',      type: 'lesson', status: 'locked' },
-                { id: 'l13', titleEn: 'School',       titleFr: 'École',         type: 'lesson', status: 'locked' },
-                { id: 'b2',  titleEn: 'Boss Fight',   titleFr: 'Défi Boss',     type: 'boss',   status: 'locked' },
-                { id: 'l14', titleEn: 'Professions',  titleFr: 'Métiers',       type: 'lesson', status: 'locked' },
-                { id: 'c3',  titleEn: 'Chest',        titleFr: 'Coffre',        type: 'chest',  status: 'locked' },
-            ],
-        },
-        {
-            id: 5, color: '#b45309', accent: '#92400e', emoji: '🥁',
-            titleEn: 'Culture & Language', titleFr: 'Culture & Langue',
-            subEn:   'Conversations, verbs and Medumba cultural rites',
-            subFr:   'Conversations, verbes et rites culturels Medumba',
-            lessons: [
-                { id: 'l15', titleEn: 'Conversations', titleFr: 'Conversations',   type: 'lesson', status: 'locked' },
-                { id: 'l16', titleEn: 'Action Verbs',  titleFr: 'Verbes d\'action', type: 'lesson', status: 'locked' },
-                { id: 'b3',  titleEn: 'Boss Fight',    titleFr: 'Défi Boss',        type: 'boss',   status: 'locked' },
-                { id: 'l17', titleEn: 'Culture & Rites', titleFr: 'Culture & Rites', type: 'lesson', status: 'locked' },
-                { id: 'c4',  titleEn: 'Chest',         titleFr: 'Coffre',           type: 'chest',  status: 'locked' },
-            ],
-        },
-    ];
+    /* ── learning path data — fetched live from Supabase (lesson_units,
+       lessons — migration 035) instead of hardcoded here. Shape matches
+       exactly what the rest of this component already expects, so
+       applySessionProgress/applyChestUnlocks/rendering below are
+       unchanged. Chest/boss ids are stored course-prefixed in the DB
+       (they collided between the two courses under a shared primary
+       key) and stripped back to their bare form here so existing
+       openedChests/localStorage state keeps matching. ── */
+    const [unitsMedumba, setUnitsMedumba] = useState([]);
+    const [unitsEnglish, setUnitsEnglish] = useState([]);
+    useEffect(() => {
+        let cancelled = false;
+        (async () => {
+            const [{ data: unitRows }, { data: lessonRows }] = await Promise.all([
+                supabase.from('lesson_units').select('*').order('order_index'),
+                supabase.from('lessons').select('*').order('order_index'),
+            ]);
+            if (cancelled) return;
 
-    /* ── learning path data — English track ── */
-    const unitsEnglish = [
-        {
-            id: 1, color: '#0056D2', accent: '#0041a3', emoji: '🗣️',
-            titleEn: 'First Words',   titleFr: 'Premiers Mots',
-            subEn:   'Start speaking English from day one',
-            subFr:   'Commencez à parler anglais dès le premier jour',
-            lessons: [
-                { id: 'e1', titleEn: 'Hello!',      titleFr: 'Bonjour !',    type: 'lesson', status: 'completed' },
-                { id: 'e2', titleEn: 'Alphabet',    titleFr: 'Alphabet',     type: 'lesson', status: 'active'    },
-                { id: 'e3', titleEn: 'Numbers',     titleFr: 'Chiffres',     type: 'lesson', status: 'locked'    },
-                { id: 'c1', titleEn: 'Chest',       titleFr: 'Coffre',       type: 'chest',  status: 'locked'    },
-                { id: 'e4', titleEn: 'Colors',      titleFr: 'Couleurs',     type: 'lesson', status: 'locked'    },
-                { id: 'e5', titleEn: 'Animals',     titleFr: 'Animaux',      type: 'lesson', status: 'locked'    },
-            ],
-        },
-        {
-            id: 2, color: '#2563eb', accent: '#1d4ed8', emoji: '🏙️',
-            titleEn: 'City Life',     titleFr: 'Vie Urbaine',
-            subEn:   'Navigate daily English situations',
-            subFr:   'Naviguer dans les situations du quotidien',
-            lessons: [
-                { id: 'e6', titleEn: 'Shopping',    titleFr: 'Achats',       type: 'lesson', status: 'locked' },
-                { id: 'e7', titleEn: 'Directions',  titleFr: 'Directions',   type: 'lesson', status: 'locked' },
-                { id: 'e8', titleEn: 'Restaurant',  titleFr: 'Restaurant',   type: 'lesson', status: 'locked' },
-                { id: 'b1', titleEn: 'Boss Fight',  titleFr: 'Défi Boss',    type: 'boss',   status: 'locked' },
-            ],
-        },
-        {
-            id: 3, color: '#0891b2', accent: '#0e7490', emoji: '💼',
-            titleEn: 'Work & Study',  titleFr: 'Travail & Études',
-            subEn:   'English for professional contexts',
-            subFr:   'L\'anglais dans un contexte professionnel',
-            lessons: [
-                { id: 'e9',  titleEn: 'Introductions', titleFr: 'Présentations', type: 'lesson', status: 'locked' },
-                { id: 'e10', titleEn: 'Emails',        titleFr: 'E-mails',       type: 'lesson', status: 'locked' },
-                { id: 'e11', titleEn: 'Meetings',      titleFr: 'Réunions',      type: 'lesson', status: 'locked' },
-                { id: 'c2',  titleEn: 'Chest',         titleFr: 'Coffre',        type: 'chest',  status: 'locked' },
-            ],
-        },
-    ];
+            const buildUnits = (course) => {
+                const courseUnits = (unitRows ?? []).filter(u => u.course === course);
+                let seenFirstLesson = false;
+                return courseUnits.map(u => ({
+                    id: u.order_index, color: u.color, accent: u.accent, emoji: u.emoji,
+                    titleEn: u.title_en, titleFr: u.title_fr, subEn: u.subtitle_en, subFr: u.subtitle_fr,
+                    lessons: (lessonRows ?? [])
+                        .filter(l => l.unit_id === u.id)
+                        .map(l => {
+                            // Only the very first lesson in the whole course
+                            // defaults 'active' — applySessionProgress cascades
+                            // the rest via the completed-predecessor chain.
+                            const isFirst = !seenFirstLesson;
+                            seenFirstLesson = true;
+                            return {
+                                id: l.id.replace(/^(medumba|english)_/, ''),
+                                titleEn: l.title_en, titleFr: l.title_fr, type: l.type,
+                                status: isFirst ? 'active' : 'locked',
+                            };
+                        }),
+                }));
+            };
+            setUnitsMedumba(buildUnits('medumba'));
+            setUnitsEnglish(buildUnits('english'));
+        })();
+        return () => { cancelled = true; };
+    }, []);
 
     /* ── mark opened chests as completed so the linear chain can continue ── */
     const applyChestUnlocks = (rawUnits) => rawUnits.map(unit => ({
@@ -768,8 +705,9 @@ const DashboardPage = ({
     // first lesson's flashcards instead of the Hub, matching what Register
     // users would expect after answering questions about their course.
     const autoStartedRef = useRef(false);
+    const unitsReady = (learnLang === 'english' ? unitsEnglish : unitsMedumba).length > 0;
     useEffect(() => {
-        if (!autoStartFirstLesson || autoStartedRef.current) return;
+        if (!autoStartFirstLesson || autoStartedRef.current || !unitsReady) return;
         for (const unit of units) {
             for (const lesson of unit.lessons) {
                 if (lesson.status === 'locked' || lesson.type === 'boss' || lesson.type === 'chest') continue;
@@ -781,7 +719,7 @@ const DashboardPage = ({
                 return;
             }
         }
-    }, [autoStartFirstLesson]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [autoStartFirstLesson, unitsReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const zigzagFull   = [0, 56, 90, 56, 0, -56, -90, -56, 0, 56, 90];
     const zigzagMobile = [0, 36, 56, 36, 0, -36, -56, -36, 0, 36, 56];
@@ -1759,6 +1697,12 @@ const DashboardPage = ({
                     </div>
                 </div>
             </div>
+
+            {!unitsReady && (
+                <div style={{ textAlign: 'center', padding: '2.5rem 1rem', color: T.textMuted, fontWeight: '700', fontSize: '0.9rem' }}>
+                    {isFr ? 'Chargement des leçons...' : 'Loading lessons...'}
+                </div>
+            )}
 
             {units.map((unit, uIdx) => {
                 const unitStart = globalIdx;

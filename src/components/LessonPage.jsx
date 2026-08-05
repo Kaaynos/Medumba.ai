@@ -1,127 +1,23 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { MEDUMBA_QUESTIONS } from '../data/medumbaDictionary';
-import { MEDUMBA_EXPRESSIONS } from '../data/medumbaExpressions';
-import { getExpressionsByLesson } from '../data/expressionsByLesson';
+import { supabase } from '../config/supabase';
 import { generateLessonQuestions } from '../utils/lessonGenerator';
 import { playMedumbaWord, stopMedumbaAudio, hasRealVoice } from '../utils/medumbaAudio';
+import { hasLetterAudio, playLetterAudio, stopLetterAudio } from '../utils/letterAudio';
 import frameImg from '../assets/Frame.png';
 import celebrationImg from '../assets/Auto Layout Vertical.png';
 
 /* ════════════════════════════════════════════════════════════════════
-   QUESTION DATA
-   Each question:
+   Question/flashcard content is fetched live from Supabase
+   (lesson_questions, lesson_flashcards, variety_questions — migration
+   035), not a static object hardcoded here. Each question payload
+   shape:
      sourceFr  — sentence shown when interface = French
      sourceEn  — sentence shown when interface = English
      answer    — correct word array (in target language)
      bank      — all tiles offered (answer + distractors)
      audio     — text fed to SpeechSynthesis (target lang)
 ════════════════════════════════════════════════════════════════════ */
-const QUESTIONS = {
-    /* ── English course ── */
-    e1: [   // Hello!
-        {
-            sourceFr: 'Comment vous appelez-vous',
-            sourceEn: 'What is your name',
-            answer: ['What', 'is', 'your', 'name'],
-            bank:   ['What', 'is', 'your', 'name', 'Who', 'are', 'you', 'my'],
-            audio:  'What is your name',
-        },
-        {
-            sourceFr: 'Je m\'appelle Marie',
-            sourceEn: 'My name is Marie',
-            answer: ['My', 'name', 'is', 'Marie'],
-            bank:   ['My', 'name', 'is', 'Marie', 'Her', 'your', 'was', 'John'],
-            audio:  'My name is Marie',
-        },
-        {
-            sourceFr: 'Enchanté de vous rencontrer',
-            sourceEn: 'Nice to meet you',
-            answer: ['Nice', 'to', 'meet', 'you'],
-            bank:   ['Nice', 'to', 'meet', 'you', 'Good', 'see', 'him', 'great'],
-            audio:  'Nice to meet you',
-        },
-    ],
-    e2: [   // Alphabet
-        {
-            sourceFr: 'Je marche et elle nage',
-            sourceEn: 'I walk and she swims',
-            answer: ['I', 'walk', 'and', 'she', 'swims'],
-            bank:   ['I', 'walk', 'and', 'she', 'swims', 'runs', 'he', 'we'],
-            audio:  'I walk and she swims',
-        },
-        {
-            sourceFr: 'Il mange une pomme',
-            sourceEn: 'He eats an apple',
-            answer: ['He', 'eats', 'an', 'apple'],
-            bank:   ['He', 'eats', 'an', 'apple', 'she', 'drinks', 'the', 'banana'],
-            audio:  'He eats an apple',
-        },
-        {
-            sourceFr: 'Nous jouons ensemble',
-            sourceEn: 'We play together',
-            answer: ['We', 'play', 'together'],
-            bank:   ['We', 'play', 'together', 'I', 'run', 'alone', 'they', 'jump'],
-            audio:  'We play together',
-        },
-        {
-            sourceFr: 'Elle lit un livre',
-            sourceEn: 'She reads a book',
-            answer: ['She', 'reads', 'a', 'book'],
-            bank:   ['She', 'reads', 'a', 'book', 'he', 'writes', 'the', 'letter'],
-            audio:  'She reads a book',
-        },
-        {
-            sourceFr: 'Je t\'aime',
-            sourceEn: 'I love you',
-            answer: ['I', 'love', 'you'],
-            bank:   ['I', 'love', 'you', 'she', 'like', 'him', 'we', 'hate'],
-            audio:  'I love you',
-        },
-    ],
-    e3: [   // Numbers
-        {
-            sourceFr: 'J\'ai vingt ans',
-            sourceEn: 'I am twenty years old',
-            answer: ['I', 'am', 'twenty', 'years', 'old'],
-            bank:   ['I', 'am', 'twenty', 'years', 'old', 'she', 'thirty', 'ten', 'new'],
-            audio:  'I am twenty years old',
-        },
-    ],
-    e4: [   // Colors
-        {
-            sourceFr: 'Le ciel est bleu',
-            sourceEn: 'The sky is blue',
-            answer: ['The', 'sky', 'is', 'blue'],
-            bank:   ['The', 'sky', 'is', 'blue', 'sea', 'green', 'was', 'red'],
-            audio:  'The sky is blue',
-        },
-    ],
-    e5: [   // Animals
-        {
-            sourceFr: 'Le chien court vite',
-            sourceEn: 'The dog runs fast',
-            answer: ['The', 'dog', 'runs', 'fast'],
-            bank:   ['The', 'dog', 'runs', 'fast', 'cat', 'walks', 'slow', 'a'],
-            audio:  'The dog runs fast',
-        },
-    ],
-    e6: [   // Shopping
-        {
-            sourceFr: 'Combien ça coûte',
-            sourceEn: 'How much does it cost',
-            answer: ['How', 'much', 'does', 'it', 'cost'],
-            bank:   ['How', 'much', 'does', 'it', 'cost', 'what', 'is', 'the', 'price'],
-            audio:  'How much does it cost',
-        },
-    ],
-    /* ── Medumba course — from Dictionnaire Ncobnkùn.xlsx ── */
-    ...MEDUMBA_QUESTIONS,
-};
-
-/* fallback pool when no specific lesson data exists */
-const FALLBACK_EN = QUESTIONS.e2;
-const FALLBACK_MD = QUESTIONS.l1;
 
 const DIAMONDS_PER_Q = 5;
 const XP_PER_Q       = 10;
@@ -228,33 +124,42 @@ function formatTime(seconds) {
 /* ════════════════════════════════════════════════════════════════════
    COMPONENT
 ════════════════════════════════════════════════════════════════════ */
+const MAX_QUESTIONS = 13;
+
 const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClose }) => {
     const { isDark, T } = useTheme();
-    /* themed expression pool for this lesson */
-    const exprPool = useMemo(
-        () => getExpressionsByLesson(lesson?.id),
-        [lesson?.id],
-    );
 
-    /* flashcards shown once before exercises — drawn from themed pool */
-    const flashcards = useMemo(() => pickRandom(exprPool, FLASHCARD_COUNT), [exprPool]);
+    /* Flashcards + quiz questions, fetched live from Supabase (migration
+       035) instead of read synchronously from a static import — this is
+       the one network round-trip the lesson flow needs, gated by
+       contentLoading below. */
+    const [contentLoading, setContentLoading] = useState(true);
+    const [flashcards, setFlashcards] = useState([]);
+    const [questions, setQuestions] = useState([]);
 
-    /* expression questions built from the 5 studied flashcards */
-    const exprQuestions = useMemo(
-        () => learnLang === 'medumba' ? buildExpressionQuestions(flashcards, exprPool) : [],
+    useEffect(() => {
+        let cancelled = false;
+        setContentLoading(true);
+        (async () => {
+            const { data: cardRows, error: cardsError } = await supabase
+                .from('lesson_flashcards')
+                .select('expression_fr, expression_medumba, expression_en')
+                .eq('lesson_id', lesson?.id)
+                .order('order_index');
+            if (cardsError) console.error('[LessonPage] lesson_flashcards fetch failed:', cardsError.message);
+            const exprPool = (cardRows ?? []).map(c => ({ fr: c.expression_fr, medumba: c.expression_medumba, en: c.expression_en }));
+            const picked = pickRandom(exprPool, FLASHCARD_COUNT);
+            const exprQuestions = learnLang === 'medumba' ? buildExpressionQuestions(picked, exprPool) : [];
+
+            const base = await generateLessonQuestions(lesson?.id, profile ?? {}, learnLang);
+            if (cancelled) return;
+            setFlashcards(picked);
+            setQuestions([...base, ...exprQuestions].slice(0, MAX_QUESTIONS));
+            setContentLoading(false);
+        })();
+        return () => { cancelled = true; };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [flashcards, learnLang],
-    );
-
-    const MAX_QUESTIONS = 13;
-    const questions = useMemo(
-        () => {
-            const base = generateLessonQuestions(lesson?.id, profile ?? {}, QUESTIONS, learnLang);
-            return [...base, ...exprQuestions].slice(0, MAX_QUESTIONS);
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [lesson?.id, learnLang],
-    );
+    }, [lesson?.id, learnLang]);
 
 
     /* phase: 'flashcards' → show study cards, 'exercise' → show questions */
@@ -313,6 +218,7 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
         }
         // Reset per-question state
         stopMedumbaAudio();
+        stopLetterAudio();
         setSpeaking(false);
         setPlaced([]);
         setSelectedOption(null);
@@ -353,21 +259,31 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     /* ── Audio auto-play for audio questions ── */
     useEffect(() => {
         if (type === 'audio' && q?.audio) {
-            setTimeout(() => playAudio(q.audio), 400);
+            setTimeout(() => playAudio(q.audio, null, q?.audioKind), 400);
         }
     }, [currentQ, type]);
 
     /* ── Audio playback ─────────────────────────────────────────── */
     /* No synthetic voices anywhere: only real recorded Medumba clips play.
        English-track words and any Medumba word without a real recording
-       stay silent rather than fake a pronunciation. */
-    const playAudio = (text, _lang) => {
+       stay silent rather than fake a pronunciation. `audioKind: 'letter'`
+       (Alphabet lesson only) plays the letter's own isolated sound
+       (letterAudio.js) instead of a whole-word recording. */
+    const playAudio = (text, _lang, audioKind) => {
         if (!text || learnLang === 'english') return;
+        if (audioKind === 'letter') {
+            playLetterAudio(text, () => setSpeaking(true), () => setSpeaking(false));
+            return;
+        }
         playMedumbaWord(text,
             () => setSpeaking(true),
             () => setSpeaking(false),
         );
     };
+
+    const audioAvailable = (question) => question?.audioKind === 'letter'
+        ? hasLetterAudio(question.audio)
+        : hasRealVoice(question?.audio);
 
     /* ── Tile word selection ── */
     const bank    = q?.bank ?? [];
@@ -472,6 +388,24 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
     const progress = questions.length > 0
         ? Math.round((currentQ / questions.length) * 100)
         : 0;
+
+    /* ════════════════════════════════════════════════════
+       Content fetch in flight — the one network round-trip
+       the lesson flow needs (flashcards + questions, migration 035)
+    ════════════════════════════════════════════════════ */
+    if (contentLoading) {
+        return (
+            <div style={{
+                width: '100%', height: '100vh', display: 'flex',
+                alignItems: 'center', justifyContent: 'center',
+                backgroundColor: T.bg,
+            }}>
+                <span style={{ fontSize: '0.95rem', fontWeight: '700', color: T.textMuted }}>
+                    {isFr ? 'Chargement...' : 'Loading...'}
+                </span>
+            </div>
+        );
+    }
 
     /* ════════════════════════════════════════════════════
        FLASHCARD PHASE — study expressions before exercises
@@ -886,8 +820,8 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         marginBottom: '1.5rem',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                     }}>
-                        {hasRealVoice(q?.audio) && (
-                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
+                        {audioAvailable(q) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio, null, q?.audioKind); }} style={{
                                 width: '48px', height: '48px', borderRadius: '50%',
                                 backgroundColor: speaking ? '#eff6ff' : '#f8fafc',
                                 border: `2px solid ${speaking ? '#0056D2' : '#e2e8f0'}`,
@@ -977,6 +911,20 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         <span style={{ fontSize: q?._exprDir ? '1.3rem' : '2rem', fontWeight: '900', color: T.text, lineHeight: 1.3 }}>
                             {isFr ? q?.sourceFr : q?.sourceEn}
                         </span>
+                        {audioAvailable(q) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio, null, q?.audioKind); }} style={{
+                                marginTop: '0.6rem',
+                                width: '40px', height: '40px', borderRadius: '50%',
+                                backgroundColor: speaking ? '#eff6ff' : '#f8fafc',
+                                border: `2px solid ${speaking ? '#0056D2' : '#e2e8f0'}`,
+                                cursor: 'pointer', fontSize: '1.1rem',
+                                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                                transition: 'all 0.15s',
+                                animation: speaking ? 'speaker-wave 0.6s ease-in-out infinite' : 'none',
+                            }}>
+                                {speaking ? '🔊' : '🔈'}
+                            </button>
+                        )}
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: q?._exprDir === 'med2fr' ? '1fr' : '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
@@ -1002,8 +950,8 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                 {/* ════ AUDIO exercise ════ */}
                 {type === 'audio' && (<>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.75rem', gap: '0.75rem' }}>
-                        {hasRealVoice(q?.audio) && (
-                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio); }} style={{
+                        {audioAvailable(q) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q?.audio, null, q?.audioKind); }} style={{
                                 width: '96px', height: '96px', borderRadius: '50%',
                                 backgroundColor: '#eff6ff', border: '4px solid #0056D2',
                                 cursor: 'pointer', fontSize: '2.5rem',
@@ -1056,8 +1004,8 @@ const LessonPage = ({ lesson, learnLang, isFr, profile, onFinish, onShare, onClo
                         <div style={{ fontSize: '1.6rem', fontWeight: '900', color: T.text }}>
                             {isFr ? q?.labelFr : q?.labelEn}
                         </div>
-                        {hasRealVoice(q?.audio) && (
-                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q.audio); }} style={{
+                        {audioAvailable(q) && (
+                            <button type="button" onClick={(e) => { e.stopPropagation(); playAudio(q.audio, null, q?.audioKind); }} style={{
                                 marginTop: '0.75rem',
                                 width: '40px', height: '40px', borderRadius: '50%',
                                 backgroundColor: speaking ? '#eff6ff' : '#f8fafc',

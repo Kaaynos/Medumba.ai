@@ -277,25 +277,25 @@ export const THEMES_META = {
 export const MEDUMBA_QUESTIONS = {
   "l0": [
     {
-      "sourceFr": "Maison",
-      "sourceEn": "House",
-      "answer": ["Baꞌ"],
-      "bank": ["Baꞌ", "Cα̂ꞌ", "Nkwǐ", "Mɛn", "Ntsə", "Saŋə"],
-      "audio": "Baꞌ"
+      "sourceFr": "Lettre de \"Bɔ\" (nous) ?",
+      "sourceEn": "Letter in \"Bɔ\" (we)?",
+      "answer": ["ɔ"],
+      "bank": ["ɔ", "s", "ny", "ɨ", "sh", "b"],
+      "audio": "Bɔ"
     },
     {
-      "sourceFr": "Chien",
-      "sourceEn": "Dog",
-      "answer": ["Cα̂ꞌ"],
-      "bank": ["Cα̂ꞌ", "Baꞌ", "Nkwǐ", "Mɛn", "Ntsə", "Saŋə"],
-      "audio": "Cα̂ꞌ"
+      "sourceFr": "Lettre de \"Saŋə\" (vache) ?",
+      "sourceEn": "Letter in \"Saŋə\" (cow)?",
+      "answer": ["s"],
+      "bank": ["s", "ɔ", "ny", "ɨ", "sh", "b"],
+      "audio": "Saŋə"
     },
     {
-      "sourceFr": "Enfant",
-      "sourceEn": "Child",
-      "answer": ["Mɛn"],
-      "bank": ["Mɛn", "Baꞌ", "Cα̂ꞌ", "Nkwǐ", "Ntsə", "Saŋə"],
-      "audio": "Mɛn"
+      "sourceFr": "Lettre de \"Nyàm\" (soleil) ?",
+      "sourceEn": "Letter in \"Nyàm\" (sun)?",
+      "answer": ["ny"],
+      "bank": ["ny", "s", "ɔ", "ɨ", "sh", "b"],
+      "audio": "Nyàm"
     }
   ],
   "l1": [

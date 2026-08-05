@@ -10,12 +10,39 @@
 // security model gone." Accordingly, this endpoint never reads a persona
 // or profileId from the request body for gating purposes — only from the
 // caller's verified Supabase access token.
+//
+// Guardrail layer added on top: a distress/safety check on free-text
+// tool arguments (fails closed — an error in the check itself denies,
+// never falls through unguarded), grounding enforcement on look_up_word
+// results, and every call logged to chat_turn. See
+// api/_tontah/guardrails.js for what's in scope and what's deliberately
+// deferred.
 
 import { createClient } from '@supabase/supabase-js';
 import { resolvePersona, isToolAllowed } from './_tontah/persona.js';
 import { lookUpWord, playRecording, scoreAttempt, addToPractice, askAnElder } from './_tontah/tools.js';
+import { checkDistress, enforceGrounding } from './_tontah/guardrails.js';
+import { notifySafetyEscalation } from './_tontah/notify.js';
 
 const SUPABASE_URL = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
+
+function freeTextFor(tool, args) {
+    if (tool === 'look_up_word') return args?.term || '';
+    if (tool === 'ask_an_elder') return [args?.term, args?.context].filter(Boolean).join(' ');
+    return '';
+}
+
+async function logChatTurn(admin, { profileId, contentJson, guardrailFlags }) {
+    try {
+        await admin.from('chat_turn').insert({
+            profile_id: profileId || null,
+            content_json: contentJson,
+            guardrail_flags: guardrailFlags || [],
+        });
+    } catch (e) {
+        console.error('[tontah-chat] chat_turn logging failed:', e.message);
+    }
+}
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -25,6 +52,7 @@ export default async function handler(req, res) {
 
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     const mistralKey = process.env.MISTRAL_API_KEY;
+    const resendKey  = process.env.RESEND_API_KEY;
     if (!serviceKey || !mistralKey) {
         res.status(503).json({ error: 'Tontah tools are not configured yet.' });
         return;
@@ -58,10 +86,40 @@ export default async function handler(req, res) {
         return;
     }
 
+    // ── Guardrail check: fails closed — any error in here resolves to
+    // the safe/deny path, never falls through to the unguarded tool call. ──
+    let distressFlagged;
+    try {
+        distressFlagged = checkDistress(freeTextFor(tool, args));
+    } catch (e) {
+        console.error('[tontah-chat] guardrail check itself errored — failing closed:', e.message);
+        distressFlagged = true;
+    }
+
+    if (distressFlagged) {
+        const flaggedText = freeTextFor(tool, args);
+        await logChatTurn(admin, {
+            profileId: profile?.id, guardrailFlags: ['distress_flag'],
+            contentJson: { tool, args, escalated: true },
+        });
+        await notifySafetyEscalation({ resendApiKey: resendKey, persona, profile, tool, flaggedText });
+        // Never anything counselling-shaped — an acknowledgment and a
+        // human-channel handoff, nothing generated.
+        res.status(200).json({
+            result: { escalated: true, message: 'Someone real will follow up with you. You are not alone in this.' },
+        });
+        return;
+    }
+
     try {
         let result;
         switch (tool) {
-            case 'look_up_word':    result = await lookUpWord(admin, mistralKey, profile, args || {}); break;
+            case 'look_up_word': {
+                const raw = await lookUpWord(admin, mistralKey, profile, args || {});
+                const { grounded, results } = enforceGrounding(raw);
+                result = grounded ? results : { found: false, suggestion: 'ask_an_elder' };
+                break;
+            }
             case 'play_recording':  result = await playRecording(admin, args || {}); break;
             case 'score_attempt':   result = await scoreAttempt(admin, profile, args || {}); break;
             case 'add_to_practice': result = await addToPractice(admin, profile, args || {}); break;
@@ -70,9 +128,11 @@ export default async function handler(req, res) {
                 res.status(400).json({ error: 'Unknown tool' });
                 return;
         }
+        await logChatTurn(admin, { profileId: profile?.id, contentJson: { tool, args, result } });
         res.status(200).json({ result });
     } catch (e) {
         console.error(`[tontah-chat] ${tool} failed:`, e.message);
+        await logChatTurn(admin, { profileId: profile?.id, guardrailFlags: ['tool_error'], contentJson: { tool, args, error: e.message } });
         res.status(500).json({ error: 'Tool execution failed' });
     }
 }

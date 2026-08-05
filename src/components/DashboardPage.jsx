@@ -1701,54 +1701,6 @@ const DashboardPage = ({
                 </div>
             )}
 
-            {/* ── Practice & Record — raw material for the weekly "Sunday
-                tape" sent to family (My Family tab). Not a lesson exercise:
-                just a real recording of the learner saying a real word. ── */}
-            {practicePrompt && (
-                <div style={{
-                    margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
-                    padding: '1.1rem 1.3rem', borderRadius: '18px',
-                    backgroundColor: T.surface, border: `2px solid ${T.border}`,
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
-                        <span style={{ fontSize: '1.2rem' }}>🎙️</span>
-                        <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>
-                            {isFr ? 'Enregistre-toi' : 'Record yourself'}
-                        </span>
-                    </div>
-                    <p style={{ fontSize: '0.82rem', color: T.textMuted, fontWeight: 600, marginBottom: '0.75rem' }}>
-                        {isFr ? 'Répète ce mot à voix haute, puis enregistre-toi :' : 'Say this word out loud, then record yourself:'}
-                    </p>
-                    <button
-                        onClick={() => playMedumbaWord(practicePrompt.medumba)}
-                        style={{
-                            width: '100%', marginBottom: '0.85rem', padding: '0.85rem',
-                            borderRadius: '14px', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                            background: T.blueTint, color: '#0056D2', fontWeight: '900', fontSize: '1.1rem',
-                            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem',
-                        }}
-                    >
-                        <span>🔊 {practicePrompt.medumba}</span>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.textMuted }}>
-                            {isFr ? practicePrompt.french : practicePrompt.english}
-                        </span>
-                    </button>
-                    <AudioRecorder isFr={isFr} onRecorded={setPracticeBlob} label={isFr ? 'Ton enregistrement' : 'Your recording'} />
-                    {practiceError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600', marginTop: '0.6rem' }}>{practiceError}</div>}
-                    {practiceSaved && <div style={{ fontSize: '0.78rem', color: '#16a34a', fontWeight: '700', marginTop: '0.6rem' }}>✅ {isFr ? 'Enregistré !' : 'Saved!'}</div>}
-                    {practiceBlob && !practiceSaved && (
-                        <button onClick={handleSavePracticeClip} disabled={practiceSaving} style={{
-                            width: '100%', marginTop: '0.75rem', padding: '0.75rem', borderRadius: '12px', border: 'none',
-                            backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', fontSize: '0.88rem',
-                            cursor: 'pointer', fontFamily: 'inherit', opacity: practiceSaving ? 0.6 : 1,
-                        }}>
-                            {practiceSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Garder ce clip' : 'Keep this clip')}
-                        </button>
-                    )}
-                </div>
-            )}
-
             {/* ── Daily Stories strip ── */}
             {renderStoriesStrip()}
 
@@ -3328,6 +3280,54 @@ const DashboardPage = ({
                         </div>
                     )}
                 </div>
+
+                {/* ── Practice & Record — raw material for the tape below.
+                    Moved here from the Home tab (was cluttering the top of
+                    the Hub, ahead of the lessons themselves) — it belongs
+                    next to what it feeds. ── */}
+                {practicePrompt && (
+                    <div style={{
+                        padding: '1.1rem 1.3rem', borderRadius: '18px', marginBottom: '1.5rem',
+                        backgroundColor: T.surface, border: `2px solid ${T.border}`,
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+                            <span style={{ fontSize: '1.2rem' }}>🎙️</span>
+                            <span style={{ fontWeight: '800', fontSize: '0.95rem', color: T.text }}>
+                                {isFr ? 'Enregistre-toi' : 'Record yourself'}
+                            </span>
+                        </div>
+                        <p style={{ fontSize: '0.82rem', color: T.textMuted, fontWeight: 600, marginBottom: '0.75rem' }}>
+                            {isFr ? 'Répète ce mot à voix haute, puis enregistre-toi :' : 'Say this word out loud, then record yourself:'}
+                        </p>
+                        <button
+                            onClick={() => playMedumbaWord(practicePrompt.medumba)}
+                            style={{
+                                width: '100%', marginBottom: '0.85rem', padding: '0.85rem',
+                                borderRadius: '14px', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                                background: T.blueTint, color: '#0056D2', fontWeight: '900', fontSize: '1.1rem',
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem',
+                            }}
+                        >
+                            <span>🔊 {practicePrompt.medumba}</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.textMuted }}>
+                                {isFr ? practicePrompt.french : practicePrompt.english}
+                            </span>
+                        </button>
+                        <AudioRecorder isFr={isFr} onRecorded={setPracticeBlob} label={isFr ? 'Ton enregistrement' : 'Your recording'} />
+                        {practiceError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600', marginTop: '0.6rem' }}>{practiceError}</div>}
+                        {practiceSaved && <div style={{ fontSize: '0.78rem', color: '#16a34a', fontWeight: '700', marginTop: '0.6rem' }}>✅ {isFr ? 'Enregistré !' : 'Saved!'}</div>}
+                        {practiceBlob && !practiceSaved && (
+                            <button onClick={handleSavePracticeClip} disabled={practiceSaving} style={{
+                                width: '100%', marginTop: '0.75rem', padding: '0.75rem', borderRadius: '12px', border: 'none',
+                                backgroundColor: '#0056D2', color: '#fff', fontWeight: '700', fontSize: '0.88rem',
+                                cursor: 'pointer', fontFamily: 'inherit', opacity: practiceSaving ? 0.6 : 1,
+                            }}>
+                                {practiceSaving ? (isFr ? 'Enregistrement...' : 'Saving...') : (isFr ? 'Garder ce clip' : 'Keep this clip')}
+                            </button>
+                        )}
+                    </div>
+                )}
 
                 {/* ── Sunday tape / proof artefact — this week's real practice
                     clips per family member, playable and shareable. Nothing

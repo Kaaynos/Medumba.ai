@@ -1557,42 +1557,47 @@ export const MEDUMBA_QUESTIONS = {
 ════════════════════════════════════════════════════════════════ */
 export const LEVEL_QUESTIONS = {
 
-  /* ── l0 : Alphabet — example words drawn from the 32-letter reference
-     used in AlphabetPage.jsx, so vocabulary stays consistent across
-     the app. ─────────────────────────────────────────────────────── */
+  /* ── l0 : Alphabet — genuine letter-recognition questions (which letter
+     starts this real Medumba word), not vocabulary translation. Words and
+     their letter pairing come verbatim from AlphabetPage.jsx's own
+     33-letter reference; only letters whose example word is confirmed to
+     have real recorded audio (hasRealVoice, cross-checked directly
+     against medumbaAudio.js's STORAGE_FILES/WORD_CLIPS — 19 of 33 letters
+     qualify) are used here, so nothing taught points at a word that
+     can't actually be heard. ─────────────────────────────────────────── */
   l0: {
     meaning: [
-      { type: 'meaning', sourceFr: 'Maison', sourceEn: 'House', audio: 'Baꞌ',
-        options: ['Baꞌ', 'Cα̂ꞌ', 'Nkwǐ', 'Mɛn'],
-        optionsFr: ['Baꞌ', 'Cα̂ꞌ', 'Nkwǐ', 'Mɛn'],
-        answer: 'Baꞌ', answerFr: 'Baꞌ' },
-      { type: 'meaning', sourceFr: 'Chien', sourceEn: 'Dog', audio: 'Cα̂ꞌ',
-        options: ['Cα̂ꞌ', 'Baꞌ', 'Ntsə', 'Saŋə'],
-        optionsFr: ['Cα̂ꞌ', 'Baꞌ', 'Ntsə', 'Saŋə'],
-        answer: 'Cα̂ꞌ', answerFr: 'Cα̂ꞌ' },
-      { type: 'meaning', sourceFr: 'Singe', sourceEn: 'Monkey', audio: 'Nkwǐ',
-        options: ['Nkwǐ', 'Mɛn', 'Cα̂ꞌ', 'Ntsə'],
-        optionsFr: ['Nkwǐ', 'Mɛn', 'Cα̂ꞌ', 'Ntsə'],
-        answer: 'Nkwǐ', answerFr: 'Nkwǐ' },
-      { type: 'meaning', sourceFr: 'Enfant', sourceEn: 'Child', audio: 'Mɛn',
-        options: ['Mɛn', 'Nkwǐ', 'Saŋə', 'Baꞌ'],
-        optionsFr: ['Mɛn', 'Nkwǐ', 'Saŋə', 'Baꞌ'],
-        answer: 'Mɛn', answerFr: 'Mɛn' },
-      { type: 'meaning', sourceFr: 'Eau', sourceEn: 'Water', audio: 'Ntsə',
-        options: ['Ntsə', 'Saŋə', 'Mɛn', 'Cα̂ꞌ'],
-        optionsFr: ['Ntsə', 'Saŋə', 'Mɛn', 'Cα̂ꞌ'],
-        answer: 'Ntsə', answerFr: 'Ntsə' },
-      { type: 'meaning', sourceFr: 'Vache', sourceEn: 'Cow', audio: 'Saŋə',
-        options: ['Saŋə', 'Ntsə', 'Baꞌ', 'Nkwǐ'],
-        optionsFr: ['Saŋə', 'Ntsə', 'Baꞌ', 'Nkwǐ'],
-        answer: 'Saŋə', answerFr: 'Saŋə' },
+      { type: 'meaning', sourceFr: 'Lettre de "Mα̂" ?', sourceEn: 'Letter in "Mα̂"?', audio: 'Mα̂',
+        options: ['α', 'n', 't', 'k'],
+        optionsFr: ['α', 'n', 't', 'k'],
+        answer: 'α', answerFr: 'α' },
+      { type: 'meaning', sourceFr: 'Lettre de "Baꞌ" ?', sourceEn: 'Letter in "Baꞌ"?', audio: 'Baꞌ',
+        options: ['b', 'm', 't', 'α'],
+        optionsFr: ['b', 'm', 't', 'α'],
+        answer: 'b', answerFr: 'b' },
+      { type: 'meaning', sourceFr: 'Lettre de "Nkwǐ" ?', sourceEn: 'Letter in "Nkwǐ"?', audio: 'Nkwǐ',
+        options: ['k', 'b', 'n', 'α'],
+        optionsFr: ['k', 'b', 'n', 'α'],
+        answer: 'k', answerFr: 'k' },
+      { type: 'meaning', sourceFr: 'Lettre de "Mɛn" ?', sourceEn: 'Letter in "Mɛn"?', audio: 'Mɛn',
+        options: ['m', 'k', 'α', 't'],
+        optionsFr: ['m', 'k', 'α', 't'],
+        answer: 'm', answerFr: 'm' },
+      { type: 'meaning', sourceFr: 'Lettre de "Ntsə" ?', sourceEn: 'Letter in "Ntsə"?', audio: 'Ntsə',
+        options: ['n', 't', 'b', 'm'],
+        optionsFr: ['n', 't', 'b', 'm'],
+        answer: 'n', answerFr: 'n' },
+      { type: 'meaning', sourceFr: 'Lettre de "Tα̂" ?', sourceEn: 'Letter in "Tα̂"?', audio: 'Tα̂',
+        options: ['t', 'n', 'm', 'k'],
+        optionsFr: ['t', 'n', 'm', 'k'],
+        answer: 't', answerFr: 't' },
     ],
     match: [{ type: 'match', pairs: [
-      { medumba: 'Baꞌ',  french: 'Maison', english: 'House'  },
-      { medumba: 'Cα̂ꞌ', french: 'Chien',  english: 'Dog'    },
-      { medumba: 'Nkwǐ', french: 'Singe',  english: 'Monkey' },
-      { medumba: 'Mɛn',  french: 'Enfant', english: 'Child'  },
-      { medumba: 'Ntsə', french: 'Eau',    english: 'Water'  },
+      { medumba: 'ɔ',  french: 'Bɔ (nous)',      english: 'Bɔ (we)'     },
+      { medumba: 's',  french: 'Saŋə (vache)',   english: 'Saŋə (cow)'  },
+      { medumba: 'sh', french: 'Nshùm (garçon)', english: 'Nshùm (boy)' },
+      { medumba: 'ɨ',  french: 'Bʉn (lait)',     english: 'Bʉn (milk)' },
+      { medumba: 'ny', french: 'Nyàm (soleil)',  english: 'Nyàm (sun)' },
     ]}],
   },
 

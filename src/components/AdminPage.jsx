@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllUsers, setUserRole } from '../services/adminService';
+import { getAllUsers, setUserRole, deleteUser } from '../services/adminService';
 import { getContactMessages, updateMessageStatus } from '../services/contactService';
 import { getAllTestimonials, updateTestimonialStatus } from '../services/testimonialService';
 import CohortManager from './CohortManager';
@@ -72,6 +72,23 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
     setUsers(prev => prev.map(u => u.uid === uid ? { ...u, role } : u));
     if (selected?.uid === uid) setSelected(prev => ({ ...prev, role }));
     try { await setUserRole(uid, role); } catch (e) { setError(e.message); }
+  };
+
+  const [confirmingDeleteId, setConfirmingDeleteId] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const handleDeleteUser = async (uid) => {
+    setDeleting(true);
+    setError('');
+    try {
+      await deleteUser(uid);
+      setUsers(prev => prev.filter(u => u.uid !== uid));
+      setSelected(null);
+      setConfirmingDeleteId(null);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setDeleting(false);
+    }
   };
 
   useEffect(() => {
@@ -385,6 +402,39 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
                 <option value="bizmgr">bizmgr</option>
                 <option value="admin">admin</option>
               </select>
+            </div>
+
+            <div style={{ marginTop: '1rem' }}>
+              {confirmingDeleteId === selected.uid ? (
+                <div style={{ backgroundColor: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '10px', padding: '0.9rem 1rem' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#b91c1c', marginBottom: '0.25rem' }}>
+                    {isFr ? '⚠️ Supprimer définitivement ce compte ?' : '⚠️ Permanently delete this account?'}
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: '#7f1d1d', marginBottom: '0.75rem' }}>
+                    {isFr
+                      ? 'Le compte, la progression et tout ce qui y est lié seront supprimés. Action irréversible.'
+                      : 'The account, progress, and everything tied to it will be removed. This cannot be undone.'}
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button onClick={() => setConfirmingDeleteId(null)} disabled={deleting} style={{
+                      padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1.5px solid #e2e8f0',
+                      backgroundColor: '#fff', color: '#64748b', fontWeight: '700', fontSize: '0.82rem',
+                      cursor: 'pointer', fontFamily: 'inherit',
+                    }}>{isFr ? 'Annuler' : 'Cancel'}</button>
+                    <button onClick={() => handleDeleteUser(selected.uid)} disabled={deleting} style={{
+                      padding: '0.45rem 0.9rem', borderRadius: '8px', border: 'none',
+                      backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '0.82rem',
+                      cursor: deleting ? 'default' : 'pointer', fontFamily: 'inherit', opacity: deleting ? 0.7 : 1,
+                    }}>{deleting ? (isFr ? 'Suppression...' : 'Deleting...') : (isFr ? 'Oui, supprimer' : 'Yes, delete')}</button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => setConfirmingDeleteId(selected.uid)} style={{
+                  padding: '0.5rem 0.9rem', borderRadius: '8px', border: '1.5px solid #fecaca',
+                  backgroundColor: '#fff', color: '#dc2626', fontWeight: '700', fontSize: '0.82rem',
+                  cursor: 'pointer', fontFamily: 'inherit',
+                }}>🗑️ {isFr ? 'Supprimer cet utilisateur' : 'Delete this user'}</button>
+              )}
             </div>
           </div>
         )}

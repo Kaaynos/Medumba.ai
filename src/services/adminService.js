@@ -53,6 +53,23 @@ export async function setUserRole(uid, role) {
     if (error) throw error;
 }
 
+/* Deletes a user's account permanently (auth login + profile + everything
+   FK-cascaded from it — cohort membership, progress, attendance, etc.).
+   Server-side (api/admin-users.js): the Auth Admin API needs the service
+   role key, which never belongs in the browser bundle. */
+export async function deleteUser(profileId) {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) throw new Error('Not authenticated');
+    const res = await fetch('/api/admin-users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({ action: 'deleteUser', profileId }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || 'Delete failed');
+    return json;
+}
+
 export async function listCohorts() {
     const { data, error } = await supabase
         .from('cohorts')

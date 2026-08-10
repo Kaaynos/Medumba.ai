@@ -70,14 +70,90 @@ export async function listCohortSessions(cohortId) {
     return data;
 }
 
-export async function createClassSession(cohortId, { sessionDate, meetingLink, notes }) {
+export async function createClassSession(cohortId, { sessionDate, scheduledStart, durationMinutes, meetingLink, notes }) {
+    // scheduledStart (ISO timestamp) is the real prerequisite for Zoom
+    // automation and punctuality tracking; sessionDate alone still works
+    // for a session with no known time yet (backward compatible).
+    const row = {
+        cohort_id: cohortId,
+        session_date: sessionDate || (scheduledStart ? scheduledStart.slice(0, 10) : null),
+        scheduled_start: scheduledStart || null,
+        duration_minutes: durationMinutes || 60,
+        meeting_link: meetingLink || null,
+        notes: notes || null,
+    };
     const { data, error } = await supabase
         .from('class_sessions')
-        .insert({ cohort_id: cohortId, session_date: sessionDate, meeting_link: meetingLink || null, notes: notes || null })
+        .insert(row)
         .select()
         .single();
     if (error) throw error;
+
+    // Best-effort Zoom automation — never blocks session creation. Degrades
+    // silently to the manually-entered meetingLink above when Zoom isn't
+    // configured (no env vars) or this teacher has no zoom_email set yet.
+    if (scheduledStart) {
+        try {
+            const { createZoomMeeting } = await import('./zoomService');
+            const zoom = await createZoomMeeting({ sessionId: data.id, scheduledStart, durationMinutes: row.duration_minutes });
+            if (zoom?.configured) {
+                const { data: updated } = await supabase
+                    .from('class_sessions')
+                    .update({ zoom_meeting_id: zoom.meetingId, zoom_join_url: zoom.joinUrl, zoom_start_url: zoom.startUrl, meeting_link: zoom.joinUrl })
+                    .eq('id', data.id)
+                    .select()
+                    .single();
+                if (updated) return updated;
+            }
+        } catch (e) {
+            console.warn('[teacherService] Zoom automation skipped:', e.message);
+        }
+    }
     return data;
+}
+
+/* ── Teacher punctuality ───────────────────────────────────────────────
+   markSessionStarted is a self-reported proxy for "did she show up" — the
+   teacher taps it when she starts the class. Not Zoom-verified (a webhook
+   on meeting.started would be more accurate; that needs the same Zoom app
+   as createZoomMeeting above, worth revisiting once that exists). ──────── */
+export async function markSessionStarted(sessionId) {
+    const { error } = await supabase
+        .from('class_sessions')
+        .update({ teacher_started_at: new Date().toISOString() })
+        .eq('id', sessionId);
+    if (error) throw error;
+}
+
+/** Punctuality across a teacher's own sessions: average lateness in minutes
+ *  (only counting sessions that were actually started), and a count of
+ *  sessions that had a scheduled_start already in the past with no
+ *  teacher_started_at and no 'completed' status — i.e. plausibly missed. */
+export async function getPunctualityStats(teacherId) {
+    const { data: cohorts } = await supabase.from('cohorts').select('id').eq('teacher_id', teacherId);
+    const cohortIds = (cohorts ?? []).map(c => c.id);
+    if (cohortIds.length === 0) return { avgLateMinutes: 0, sessionsStarted: 0, sessionsMissed: 0 };
+
+    const { data: sessions, error } = await supabase
+        .from('class_sessions')
+        .select('scheduled_start, teacher_started_at, status')
+        .in('cohort_id', cohortIds)
+        .not('scheduled_start', 'is', null);
+    if (error) { console.error('[teacherService] getPunctualityStats error:', error.message); return { avgLateMinutes: 0, sessionsStarted: 0, sessionsMissed: 0 }; }
+
+    const now = Date.now();
+    let lateSum = 0, started = 0, missed = 0;
+    for (const s of sessions ?? []) {
+        const scheduled = new Date(s.scheduled_start).getTime();
+        if (s.teacher_started_at) {
+            const lateMinutes = Math.max(0, Math.round((new Date(s.teacher_started_at).getTime() - scheduled) / 60000));
+            lateSum += lateMinutes;
+            started += 1;
+        } else if (scheduled < now && s.status !== 'completed' && s.status !== 'cancelled') {
+            missed += 1;
+        }
+    }
+    return { avgLateMinutes: started > 0 ? Math.round(lateSum / started) : 0, sessionsStarted: started, sessionsMissed: missed };
 }
 
 export async function updateSessionStatus(sessionId, status) {

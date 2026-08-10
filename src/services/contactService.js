@@ -13,10 +13,10 @@ export async function submitContactMessage({ name, email, phone, subject, messag
     // Best-effort email notification — the message is already saved above,
     // so a failure here (e.g. Resend not configured) must not surface to the user.
     try {
-        await fetch('/api/contact-notify', {
+        await fetch('/api/notify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, phone, subject, message }),
+            body: JSON.stringify({ kind: 'contact', name, email, phone, subject, message }),
         });
     } catch {
         // ignored — the message still landed in contact_messages

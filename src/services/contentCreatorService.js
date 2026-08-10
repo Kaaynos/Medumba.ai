@@ -46,6 +46,18 @@ export async function submitWord(creatorProfileId, { wordFr, wordEn, definitionF
         audio_url:     audioUrl || null,
     });
     if (error) throw error;
+
+    // Best-effort — the submission is already saved above, so a failure
+    // here (e.g. Resend not configured) must not surface to the submitter.
+    try {
+        await fetch('/api/notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ kind: 'word_submission', wordFr, wordMedumba: null }),
+        });
+    } catch {
+        // ignored — the submission still landed in word_submissions
+    }
 }
 
 export async function listMySubmissions(creatorProfileId) {

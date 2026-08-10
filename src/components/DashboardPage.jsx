@@ -23,6 +23,7 @@ import globeImg   from '../assets/globe 1.png';
 import LessonLoadingPage from './LessonLoadingPage';
 import LessonPage        from './LessonPage';
 import { getPersonalizedTip } from '../utils/lessonGenerator';
+import { getNextBestAction } from '../services/nextBestActionService';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
 import {
@@ -720,6 +721,33 @@ const DashboardPage = ({
             }
         }
     }, [autoStartFirstLesson, unitsReady]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // Next Best Action (nextBestActionService.js) — replaces the old static
+    // "Débutant ? Concentrez-vous..." tip with a real suggestion read from
+    // THEO's event log. Fetched once units are ready; getPersonalizedTip
+    // remains the fallback if THEO has nothing to say yet (e.g. no events
+    // logged, or the fetch fails) rather than leaving an empty gap.
+    const [nba, setNba] = useState(null);
+    useEffect(() => {
+        if (!unitsReady) return;
+        getNextBestAction(units).then(action => {
+            setNba(action);
+            if (action) THEO.nbaShown(action.ruleId);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [unitsReady, learnLang]);
+
+    const handleNbaClick = () => {
+        if (!nba) return;
+        THEO.nbaClicked(nba.ruleId);
+        if (nba.lesson && nba.unit) {
+            setActiveLesson({ ...nba.lesson, unitColor: nba.unit.color, unitAccent: nba.unit.accent });
+            setLessonFlow('loading');
+            THEO.lessonStart(nba.lesson.id, nba.unit.id);
+        } else if (nba.navTarget) {
+            setActiveNav(nba.navTarget);
+        }
+    };
 
     const zigzagFull   = [0, 56, 90, 56, 0, -56, -90, -56, 0, 56, 90];
     const zigzagMobile = [0, 36, 56, 36, 0, -36, -56, -36, 0, 36, 56];
@@ -1581,8 +1609,26 @@ const DashboardPage = ({
                 </div>
             )}
 
-            {/* ── Personalized tip banner ── */}
-            {(profile.reason || (profile.goals && profile.goals.length > 0)) && (
+            {/* ── Next best action — real suggestion from THEO's event log,
+               falling back to the static personalized tip if THEO has
+               nothing to say yet. ── */}
+            {nba ? (
+                <div style={{
+                    margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
+                    padding: '0.9rem 1.2rem', borderRadius: '16px',
+                    backgroundColor: T.blueTint, border: '2px solid #bfdbfe',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap',
+                }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: '600', color: '#1e40af', lineHeight: 1.5 }}>
+                        {isFr ? nba.titleFr : nba.titleEn}
+                    </span>
+                    <button onClick={handleNbaClick} style={{
+                        padding: '0.4rem 0.9rem', borderRadius: '9999px', border: 'none',
+                        backgroundColor: '#1e40af', color: '#fff', fontWeight: '700', fontSize: '0.8rem',
+                        cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0,
+                    }}>{isFr ? nba.actionFr : nba.actionEn} →</button>
+                </div>
+            ) : (profile.reason || (profile.goals && profile.goals.length > 0)) && (
                 <div style={{
                     margin: isMobile ? '1rem 0.75rem 0' : '1.5rem 2rem 0',
                     padding: '0.9rem 1.2rem', borderRadius: '16px',

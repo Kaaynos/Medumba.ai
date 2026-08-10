@@ -5,6 +5,8 @@
 // indirection, upgrade risk, and a debugging layer between you and a bug
 // a child will find."
 
+import { sendNotifyEmail } from '../_shared/notify.js';
+
 const BUCKET = 'medumba-audio';
 
 async function embed(mistralKey, text) {
@@ -94,6 +96,11 @@ export async function askAnElder(admin, profile, { term }) {
         profile_id: profile?.id || null, term_asked: term,
     }).select().single();
     if (error) throw new Error(error.message);
+
+    // Best-effort — the question is already queued above, so a failure here
+    // (e.g. Resend not configured) must not block the answer to the learner.
+    sendNotifyEmail('open_question', { termAsked: term, askedByName: profile?.name }).catch(() => {});
+
     // Never a guess, never hedged — "I don't know that one yet. Let me
     // ask in Bangangté — I'll come back to you."
     return { openQuestionId: data.id, expectedWindowDays: 3 };

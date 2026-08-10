@@ -4,7 +4,7 @@ import {
     getCohortMembers, addCohortMember, removeCohortMember,
 } from '../services/adminService';
 import {
-    listCohortSessions, createClassSession, getSessionAttendance, markAttendance,
+    listCohortSessions, createClassSession, getSessionAttendance, markAttendance, getPunctualityStats,
 } from '../services/teacherService';
 
 const B  = '#1B4FD8';
@@ -44,6 +44,19 @@ const CohortManager = ({ isFr }) => {
         listCohorts().then(setCohorts).finally(() => setCohortsLoading(false));
     }, []);
     useEffect(() => { refreshCohorts(); }, [refreshCohorts]);
+
+    /* ── Punctuality flag per teacher — the reliability signal that drives
+       whether she can hold more cohorts (Personas & Journeys v2). One fetch
+       per distinct teacher across all cohorts, not per cohort. ── */
+    const [teacherPunctuality, setTeacherPunctuality] = useState({}); // teacherId -> stats
+    useEffect(() => {
+        const teacherIds = [...new Set(cohorts.map(c => c.teacher_id).filter(Boolean))];
+        teacherIds.forEach(id => {
+            if (teacherPunctuality[id]) return;
+            getPunctualityStats(id).then(stats => setTeacherPunctuality(prev => ({ ...prev, [id]: stats })));
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cohorts]);
 
     const handleSetRole = async (uid, role) => {
         setUsers(prev => prev.map(u => u.uid === uid ? { ...u, role } : u));
@@ -159,6 +172,15 @@ const CohortManager = ({ isFr }) => {
                                     <div style={{ fontSize: '0.78rem', color: c.teacherName ? '#64748b' : '#d97706', fontWeight: c.teacherName ? '400' : '700' }}>
                                         {c.teacherName || (isFr ? '⚠ Aucun enseignant assigné' : '⚠ No teacher assigned')}
                                         {c.schedule_note ? ` · ${c.schedule_note}` : ''}
+                                        {c.teacher_id && teacherPunctuality[c.teacher_id]?.sessionsStarted > 0 && (
+                                            <span style={{
+                                                marginLeft: '0.5rem', fontWeight: '700',
+                                                color: teacherPunctuality[c.teacher_id].avgLateMinutes <= 2 ? '#16a34a' : teacherPunctuality[c.teacher_id].avgLateMinutes <= 10 ? '#d97706' : '#dc2626',
+                                            }}>
+                                                · {isFr ? `${teacherPunctuality[c.teacher_id].avgLateMinutes} min retard moy.` : `avg ${teacherPunctuality[c.teacher_id].avgLateMinutes} min late`}
+                                                {teacherPunctuality[c.teacher_id].sessionsMissed > 0 && ` · ${teacherPunctuality[c.teacher_id].sessionsMissed} ${isFr ? 'manquée(s)' : 'missed'}`}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div style={{ fontSize: '0.82rem', fontWeight: '700', color: B }}>

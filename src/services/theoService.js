@@ -124,4 +124,10 @@ export const THEO = {
     // Navigation
     pageView:       (page)                        => emitTheo('page_view',       { page },                                 null),
     appOpen:        ()                            => emitTheo('app_open',        { platform: getPlatform() },              null),
+
+    // Next Best Action (nextBestActionService.js) — logged so a future
+    // reinforcement-learning pass has real shown/clicked outcomes to train
+    // on, not just the rules-engine's own guesses.
+    nbaShown:       (ruleId)                      => emitTheo('nba_shown',       { rule_id: ruleId },                      null),
+    nbaClicked:     (ruleId)                      => emitTheo('nba_clicked',     { rule_id: ruleId },                      null),
 };

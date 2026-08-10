@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import {
     getMyCohorts, getCohortRoster, updateCohortHomework,
     listCohortSessions, createClassSession, getSessionAttendance, markAttendance,
+    markSessionStarted, getPunctualityStats,
 } from '../services/teacherService';
 
 const B  = '#1B4FD8';
@@ -69,10 +70,13 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
     /* ── Sessions ── */
     const [sessions, setSessions] = useState([]);
     const [newSessionDate, setNewSessionDate] = useState('');
+    const [newSessionTime, setNewSessionTime] = useState('');
     const [newSessionLink, setNewSessionLink] = useState('');
     const [creatingSession, setCreatingSession] = useState(false);
     const [openSessionId, setOpenSessionId] = useState(null);
     const [attendance, setAttendance] = useState({}); // profileId -> present (bool|null)
+    const [startingSessionId, setStartingSessionId] = useState(null);
+    const [punctuality, setPunctuality] = useState(null);
 
     const loadSessions = useCallback((cohortId) => {
         listCohortSessions(cohortId).then(setSessions);
@@ -84,15 +88,42 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
         setOpenSessionId(null);
     }, [activeCohortId, loadSessions]);
 
+    useEffect(() => {
+        if (!teacherUid) return;
+        getPunctualityStats(teacherUid).then(setPunctuality);
+    }, [teacherUid, sessions]);
+
     const handleCreateSession = async () => {
         if (!newSessionDate || !activeCohortId) return;
         setCreatingSession(true);
         try {
-            await createClassSession(activeCohortId, { sessionDate: newSessionDate, meetingLink: newSessionLink.trim() || null });
-            setNewSessionDate(''); setNewSessionLink('');
+            const scheduledStart = newSessionTime ? `${newSessionDate}T${newSessionTime}:00` : null;
+            await createClassSession(activeCohortId, {
+                sessionDate: newSessionDate,
+                scheduledStart: scheduledStart ? new Date(scheduledStart).toISOString() : null,
+                meetingLink: newSessionLink.trim() || null,
+            });
+            setNewSessionDate(''); setNewSessionTime(''); setNewSessionLink('');
             loadSessions(activeCohortId);
         } finally {
             setCreatingSession(false);
+        }
+    };
+
+    // On-time / N minutes late, or null if the class hasn't been started yet.
+    const lateness = (s) => {
+        if (!s.scheduled_start || !s.teacher_started_at) return null;
+        const minutes = Math.round((new Date(s.teacher_started_at).getTime() - new Date(s.scheduled_start).getTime()) / 60000);
+        return minutes;
+    };
+
+    const handleStartSession = async (sessionId) => {
+        setStartingSessionId(sessionId);
+        try {
+            await markSessionStarted(sessionId);
+            loadSessions(activeCohortId);
+        } finally {
+            setStartingSessionId(null);
         }
     };
 
@@ -195,15 +226,26 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
 
                                 {/* Sessions */}
                                 <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '1.25rem 1.5rem', marginBottom: '1.25rem', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                                    <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a', marginBottom: '0.75rem' }}>
-                                        📅 {isFr ? 'Séances' : 'Class sessions'}
+                                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                                        <div style={{ fontWeight: '800', fontSize: '0.92rem', color: '#0f172a' }}>
+                                            📅 {isFr ? 'Séances' : 'Class sessions'}
+                                        </div>
+                                        {punctuality && punctuality.sessionsStarted > 0 && (
+                                            <div style={{ fontSize: '0.74rem', fontWeight: '700', color: punctuality.avgLateMinutes <= 2 ? '#16a34a' : punctuality.avgLateMinutes <= 10 ? '#d97706' : '#dc2626' }}>
+                                                {isFr ? `Ponctualité : ${punctuality.avgLateMinutes} min en moy.` : `Punctuality: avg ${punctuality.avgLateMinutes} min`}
+                                                {punctuality.sessionsMissed > 0 && <span style={{ color: '#dc2626', marginLeft: '0.5rem' }}>· {punctuality.sessionsMissed} {isFr ? 'manquée(s)' : 'missed'}</span>}
+                                            </div>
+                                        )}
                                     </div>
 
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '0.5rem', marginBottom: '1rem' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.3fr auto', gap: '0.5rem', marginBottom: '1rem' }}>
                                         <input type="date" value={newSessionDate} onChange={e => setNewSessionDate(e.target.value)}
                                             style={{ padding: '0.5rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem' }} />
+                                        <input type="time" value={newSessionTime} onChange={e => setNewSessionTime(e.target.value)}
+                                            title={isFr ? 'Heure (facultatif — nécessaire pour Zoom et la ponctualité)' : 'Time (optional — needed for Zoom automation and punctuality tracking)'}
+                                            style={{ padding: '0.5rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem' }} />
                                         <input value={newSessionLink} onChange={e => setNewSessionLink(e.target.value)}
-                                            placeholder={isFr ? 'Lien (Zoom, Meet...)' : 'Meeting link (Zoom, Meet...)'}
+                                            placeholder={isFr ? 'Lien (si pas de Zoom auto)' : 'Meeting link (if no Zoom automation)'}
                                             style={{ padding: '0.5rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.82rem' }} />
                                         <button onClick={handleCreateSession} disabled={!newSessionDate || creatingSession} style={{
                                             padding: '0.5rem 1rem', borderRadius: '8px', border: 'none',
@@ -215,20 +257,45 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
                                     {sessions.length === 0 ? (
                                         <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{isFr ? 'Aucune séance planifiée' : 'No sessions scheduled'}</div>
                                     ) : (
-                                        sessions.map(s => (
+                                        sessions.map(s => {
+                                            const late = lateness(s);
+                                            const canStart = s.scheduled_start && !s.teacher_started_at && new Date(s.scheduled_start) <= new Date();
+                                            return (
                                             <div key={s.id} style={{ borderTop: '1px solid #f1f5f9' }}>
-                                                <div onClick={() => openSession(s.id)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.65rem 0', cursor: 'pointer' }}>
-                                                    <div>
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.65rem 0' }}>
+                                                    <div onClick={() => openSession(s.id)} style={{ cursor: 'pointer', flex: 1 }}>
                                                         <span style={{ fontWeight: '700', fontSize: '0.86rem', color: '#0f172a' }}>
                                                             {new Date(s.session_date).toLocaleDateString(isFr ? 'fr-FR' : 'en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                                                         </span>
+                                                        {s.scheduled_start && (
+                                                            <span style={{ marginLeft: '0.5rem', fontSize: '0.78rem', color: '#64748b', fontWeight: '600' }}>
+                                                                {new Date(s.scheduled_start).toLocaleTimeString(isFr ? 'fr-FR' : 'en-US', { hour: '2-digit', minute: '2-digit' })}
+                                                            </span>
+                                                        )}
+                                                        {s.zoom_join_url && (
+                                                            <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', color: '#16a34a', fontWeight: '700' }}>Zoom ✓</span>
+                                                        )}
                                                         {s.meeting_link && (
                                                             <a href={s.meeting_link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ marginLeft: '0.6rem', fontSize: '0.78rem', color: B, fontWeight: '700' }}>
                                                                 {isFr ? 'Lien' : 'Link'} ↗
                                                             </a>
                                                         )}
+                                                        {late !== null && (
+                                                            <div style={{ fontSize: '0.72rem', fontWeight: '700', color: late <= 2 ? '#16a34a' : late <= 10 ? '#d97706' : '#dc2626', marginTop: '0.15rem' }}>
+                                                                {late <= 2
+                                                                    ? (isFr ? '✓ À l\'heure' : '✓ On time')
+                                                                    : (isFr ? `${late} min de retard` : `${late} min late`)}
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '700' }}>
+                                                    {canStart && (
+                                                        <button onClick={(e) => { e.stopPropagation(); handleStartSession(s.id); }} disabled={startingSessionId === s.id} style={{
+                                                            padding: '0.3rem 0.7rem', borderRadius: '999px', border: `1.5px solid ${B}`,
+                                                            backgroundColor: '#fff', color: B, fontSize: '0.74rem', fontWeight: '700',
+                                                            cursor: startingSessionId === s.id ? 'default' : 'pointer', fontFamily: 'inherit', marginRight: '0.5rem',
+                                                        }}>{startingSessionId === s.id ? '...' : (isFr ? '▶ Démarrer' : '▶ Start class')}</button>
+                                                    )}
+                                                    <span onClick={() => openSession(s.id)} style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: '700', cursor: 'pointer' }}>
                                                         {isFr ? 'Présences' : 'Attendance'} {openSessionId === s.id ? '▾' : '▸'}
                                                     </span>
                                                 </div>
@@ -252,7 +319,8 @@ const TeacherPortalPage = ({ teacherUid, teacherName, nativeLang, onLogout }) =>
                                                     </div>
                                                 )}
                                             </div>
-                                        ))
+                                            );
+                                        })
                                     )}
                                 </div>
 

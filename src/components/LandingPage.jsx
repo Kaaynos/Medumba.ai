@@ -2,8 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/logo.png';
 import tontah from '../assets/tontah.webp';
 import { getActiveLearnerCount } from '../services/statsService';
+import { getLatestMilestone } from '../services/milestoneService';
 import { submitContactMessage, getLandingComments, listenLandingComments } from '../services/contactService';
 import { submitTestimonial, getApprovedTestimonials } from '../services/testimonialService';
+import MilestoneCelebration from './MilestoneCelebration';
+
+const MILESTONE_CELEBRATION_DAYS = 3;
 
 /* ── Palette Medumba ── */
 const B    = '#0056D2';
@@ -183,6 +187,26 @@ export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, 
     }, []);
     const learnerCountLabel = activeLearners ?? '…';
 
+    // Milestone celebration popup — shown to any visitor, logged in or not,
+    // for MILESTONE_CELEBRATION_DAYS after a threshold is crossed (migration
+    // 042). Once per browser per threshold, so a returning visitor within
+    // the window doesn't get nagged again.
+    const [milestone, setMilestone] = useState(null); // { threshold, reached_at } | null
+    useEffect(() => {
+        getLatestMilestone().then((m) => {
+            if (!m) return;
+            const daysSince = (Date.now() - new Date(m.reached_at).getTime()) / 86400000;
+            if (daysSince > MILESTONE_CELEBRATION_DAYS) return;
+            let seen = false;
+            try { seen = localStorage.getItem(`med_milestone_seen_${m.threshold}`) === '1'; } catch {}
+            if (!seen) setMilestone(m);
+        });
+    }, []);
+    const dismissMilestone = () => {
+        if (milestone) { try { localStorage.setItem(`med_milestone_seen_${milestone.threshold}`, '1'); } catch {} }
+        setMilestone(null);
+    };
+
     // Vrais témoignages approuvés (plus de faux contenu — cf. réunion du 12/07).
     const [testimonials, setTestimonials] = useState(null); // null = chargement
     useEffect(() => {
@@ -326,6 +350,9 @@ export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, 
 
     return (
         <div style={{ fontFamily:"'Outfit',system-ui,sans-serif", color:INK, background:CREAM, overflowX:'hidden' }}>
+            {milestone && (
+                <MilestoneCelebration threshold={milestone.threshold} nativeLang={nativeLang} onDismiss={dismissMilestone} />
+            )}
             <style>{`
                 *,*::before,*::after{box-sizing:border-box;}
                 html{scroll-behavior:smooth;}

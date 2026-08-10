@@ -22,12 +22,18 @@ export async function handleGoogleRedirectResult() {
    pour ça que age restait toujours null et role toujours 'child', quel
    que soit l'âge saisi dans AgePage. Le trigger, lui, tourne en SECURITY
    DEFINER et n'a besoin d'aucune session. */
-export async function registerUser({ name, email, password, age, language, reason, dailyGoal }) {
+export async function registerUser({ name, email, password, age, language, reason, dailyGoal, requestedRole }) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-            data: { name, native_lang: language || 'french', age: age || '', reason: reason || '', daily_goal: dailyGoal || 'normal' },
+            data: {
+                name, native_lang: language || 'french', age: age || '', reason: reason || '', daily_goal: dailyGoal || 'normal',
+                // Only ever honored server-side if it's in the trigger's
+                // whitelist (parent/child/content_creator) — see migration
+                // 041. A crafted requested_role here can't grant anything else.
+                requested_role: requestedRole || '',
+            },
         },
     });
     if (error) throw error;

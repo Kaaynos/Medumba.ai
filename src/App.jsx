@@ -12,6 +12,7 @@ import ReasonPage               from './components/ReasonPage';
 import AchievePage              from './components/AchievePage';
 import DailyGoalPage            from './components/DailyGoalPage';
 import ProfileWelcomePage       from './components/ProfileWelcomePage';
+import RoleChoicePage           from './components/RoleChoicePage';
 import NamePage                 from './components/NamePage';
 import AgePage                  from './components/AgePage';
 import EmailPage                from './components/EmailPage';
@@ -58,6 +59,7 @@ import { ThemeProvider }        from './context/ThemeContext';
 //  2  Language Selection (Start only)
 //  3  Quick setup (level/reason/objectives/daily goal) (Start only)
 //  8  Profile Welcome  ┐
+// 26  Role choice (parent / learning myself / content creator) │
 //  9  Name             │
 // 10  Age               │ Registration (mandatory for course access)
 // 11  Email             │
@@ -100,6 +102,7 @@ function App() {
   const [userFullName, setUserFullName] = useState(''); // untruncated — Teacher Portal etc.
   const [userAge,     setUserAge]     = useState('');
   const [userEmail,   setUserEmail]   = useState('');
+  const [requestedRole, setRequestedRole] = useState('');
   const [currentUid,  setCurrentUid]  = useState(null);
 
   // ── Which household member's Hub is active — defaults to the account
@@ -358,7 +361,8 @@ function App() {
       )}
 
       {/* ── Account creation ── */}
-      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} onLogin={() => go(20)} nativeLang={nativeLang} />}
+      {step === 8  && <ProfileWelcomePage onNext={() => go(26)} onLogin={() => go(20)} nativeLang={nativeLang} />}
+      {step === 26 && <RoleChoicePage onNext={(role) => { setRequestedRole(role); go(9); }} onBack={back} nativeLang={nativeLang} />}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a, birthdate) => {
         setUserAge(a);
@@ -376,7 +380,7 @@ function App() {
       {step === 12 && (
         <PasswordPage
           onNext={() => go(13)} onBack={back} nativeLang={nativeLang}
-          registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal }}
+          registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal, requestedRole }}
         />
       )}
       {step === 13 && <SuccessPage

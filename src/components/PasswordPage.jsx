@@ -41,6 +41,7 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
                 language:  isFrench ? 'french' : 'english',
                 reason:    registrationData.reason   || null,
                 dailyGoal: DAILY_GOAL_MAP[registrationData.dailyGoal] ?? 10,
+                requestedRole: registrationData.requestedRole || '',
             });
             if (user?.needsEmailConfirmation) {
                 setNeedsConfirmation(true);

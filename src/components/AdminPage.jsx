@@ -325,117 +325,118 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
               <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8' }}>{isFr ? 'Aucun résultat' : 'No results'}</div>
             ) : (
               filtered.map(u => (
-                <div
-                  key={u.uid}
-                  onClick={() => setSelected(selected?.uid === u.uid ? null : u)}
-                  style={{
-                    display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr',
-                    gap: '0.5rem', padding: '0.9rem 1.25rem', alignItems: 'center',
-                    borderBottom: '1px solid #f1f5f9', cursor: 'pointer',
-                    backgroundColor: selected?.uid === u.uid ? '#eff6ff' : '#fff',
-                    transition: 'background 0.15s',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: B, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: '800', fontSize: '0.85rem', flexShrink: 0 }}>
-                      {(u.name?.[0] || u.email?.[0] || '?').toUpperCase()}
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' }}>{u.name || (isFr ? '(sans nom)' : '(no name)')}</div>
-                      <div style={{ fontSize: '0.72rem', color: isActive(u.lastActive) ? '#22c55e' : '#94a3b8', fontWeight: '600' }}>
-                        {isActive(u.lastActive) ? (isFr ? '● Actif récemment' : '● Recently active') : (isFr ? '○ Inactif' : '○ Inactive')}
+                <div key={u.uid}>
+                  <div
+                    onClick={() => setSelected(selected?.uid === u.uid ? null : u)}
+                    style={{
+                      display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr 1fr',
+                      gap: '0.5rem', padding: '0.9rem 1.25rem', alignItems: 'center',
+                      borderBottom: '1px solid #f1f5f9', cursor: 'pointer',
+                      backgroundColor: selected?.uid === u.uid ? '#eff6ff' : '#fff',
+                      transition: 'background 0.15s',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                      <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: B, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: '800', fontSize: '0.85rem', flexShrink: 0 }}>
+                        {(u.name?.[0] || u.email?.[0] || '?').toUpperCase()}
+                      </div>
+                      <div>
+                        <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' }}>{u.name || (isFr ? '(sans nom)' : '(no name)')}</div>
+                        <div style={{ fontSize: '0.72rem', color: isActive(u.lastActive) ? '#22c55e' : '#94a3b8', fontWeight: '600' }}>
+                          {isActive(u.lastActive) ? (isFr ? '● Actif récemment' : '● Recently active') : (isFr ? '○ Inactif' : '○ Inactive')}
+                        </div>
                       </div>
                     </div>
+                    <div style={{ fontSize: '0.82rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.email || '—'}</div>
+                    <div><LevelBadge proficiency={u.proficiency} isFr={isFr} /></div>
+                    <div style={{ fontWeight: '800', color: B, fontSize: '0.9rem' }}>{u.xp ?? 0}</div>
+                    <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{fmt(u.createdAt, isFr)}</div>
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.email || '—'}</div>
-                  <div><LevelBadge proficiency={u.proficiency} isFr={isFr} /></div>
-                  <div style={{ fontWeight: '800', color: B, fontSize: '0.9rem' }}>{u.xp ?? 0}</div>
-                  <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{fmt(u.createdAt, isFr)}</div>
+
+                  {/* Detail panel — inline, directly under the row that was clicked */}
+                  {selected?.uid === u.uid && (
+                    <div style={{ backgroundColor: BG, padding: '1.5rem', borderBottom: '1px solid #f1f5f9' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <div style={{ fontWeight: '800', fontSize: '1rem', color: '#0f172a' }}>
+                          {isFr ? 'Détail' : 'Detail'} — {selected.name || selected.email}
+                        </div>
+                        <button onClick={() => setSelected(null)} style={{ border: 'none', background: '#fff', borderRadius: '8px', padding: '0.3rem 0.7rem', cursor: 'pointer', color: '#64748b', fontFamily: 'inherit' }}>✕</button>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+                        {[
+                          { label: 'UID',                              value: selected.uid.slice(0, 16) + '...' },
+                          { label: isFr ? 'Objectif quotidien' : 'Daily goal', value: selected.dailyGoal || '—' },
+                          { label: isFr ? 'Langue maternelle' : 'Native language', value: selected.nativeLang || '—' },
+                          { label: 'Streak',                            value: isFr ? `🔥 ${selected.streak ?? 0} jours` : `🔥 ${selected.streak ?? 0} days` },
+                          { label: isFr ? 'Gemmes' : 'Gems',            value: `💎 ${selected.gems ?? 0}` },
+                          { label: isFr ? 'Cœurs' : 'Hearts',           value: `❤️ ${selected.hearts ?? 0}` },
+                          { label: isFr ? 'Leçons' : 'Lessons',         value: isFr ? `${(selected.completedLessons ?? []).length} complétée(s)` : `${(selected.completedLessons ?? []).length} completed` },
+                          { label: isFr ? 'Raison' : 'Reason',          value: selected.reason || '—' },
+                          { label: isFr ? 'Âge' : 'Age',                value: selected.age || '—' },
+                        ].map(item => (
+                          <div key={item.label} style={{ backgroundColor: '#fff', borderRadius: '10px', padding: '0.75rem' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>{item.label}</div>
+                            <div style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.9rem' }}>{item.value}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div style={{ marginTop: '1rem', backgroundColor: '#fff', borderRadius: '10px', padding: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '700', textTransform: 'uppercase' }}>{isFr ? 'Rôle' : 'Role'}</div>
+                        <select
+                          value={selected.role || 'child'}
+                          onChange={e => handleSetRole(selected.uid, e.target.value)}
+                          style={{ padding: '0.4rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: '700', color: '#0f172a' }}
+                        >
+                          <option value="child">child</option>
+                          <option value="parent">parent</option>
+                          <option value="teacher">teacher</option>
+                          <option value="coordinator">coordinator</option>
+                          <option value="content_owner">content_owner</option>
+                          <option value="content_creator">content_creator</option>
+                          <option value="advisor">advisor</option>
+                          <option value="bizmgr">bizmgr</option>
+                          <option value="admin">admin</option>
+                        </select>
+                      </div>
+
+                      <div style={{ marginTop: '1rem' }}>
+                        {confirmingDeleteId === selected.uid ? (
+                          <div style={{ backgroundColor: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '10px', padding: '0.9rem 1rem' }}>
+                            <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#b91c1c', marginBottom: '0.25rem' }}>
+                              {isFr ? '⚠️ Supprimer définitivement ce compte ?' : '⚠️ Permanently delete this account?'}
+                            </div>
+                            <div style={{ fontSize: '0.8rem', color: '#7f1d1d', marginBottom: '0.75rem' }}>
+                              {isFr
+                                ? 'Le compte, la progression et tout ce qui y est lié seront supprimés. Action irréversible.'
+                                : 'The account, progress, and everything tied to it will be removed. This cannot be undone.'}
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                              <button onClick={() => setConfirmingDeleteId(null)} disabled={deleting} style={{
+                                padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1.5px solid #e2e8f0',
+                                backgroundColor: '#fff', color: '#64748b', fontWeight: '700', fontSize: '0.82rem',
+                                cursor: 'pointer', fontFamily: 'inherit',
+                              }}>{isFr ? 'Annuler' : 'Cancel'}</button>
+                              <button onClick={() => handleDeleteUser(selected.uid)} disabled={deleting} style={{
+                                padding: '0.45rem 0.9rem', borderRadius: '8px', border: 'none',
+                                backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '0.82rem',
+                                cursor: deleting ? 'default' : 'pointer', fontFamily: 'inherit', opacity: deleting ? 0.7 : 1,
+                              }}>{deleting ? (isFr ? 'Suppression...' : 'Deleting...') : (isFr ? 'Oui, supprimer' : 'Yes, delete')}</button>
+                            </div>
+                          </div>
+                        ) : (
+                          <button onClick={() => setConfirmingDeleteId(selected.uid)} style={{
+                            padding: '0.5rem 0.9rem', borderRadius: '8px', border: '1.5px solid #fecaca',
+                            backgroundColor: '#fff', color: '#dc2626', fontWeight: '700', fontSize: '0.82rem',
+                            cursor: 'pointer', fontFamily: 'inherit',
+                          }}>🗑️ {isFr ? 'Supprimer cet utilisateur' : 'Delete this user'}</button>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))
             )}
-          </div>
-        )}
-
-        {/* Detail panel */}
-        {selected && (
-          <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '1.5rem', marginTop: '1rem', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <div style={{ fontWeight: '800', fontSize: '1rem', color: '#0f172a' }}>
-                {isFr ? 'Détail' : 'Detail'} — {selected.name || selected.email}
-              </div>
-              <button onClick={() => setSelected(null)} style={{ border: 'none', background: '#f1f5f9', borderRadius: '8px', padding: '0.3rem 0.7rem', cursor: 'pointer', color: '#64748b', fontFamily: 'inherit' }}>✕</button>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
-              {[
-                { label: 'UID',                              value: selected.uid.slice(0, 16) + '...' },
-                { label: isFr ? 'Objectif quotidien' : 'Daily goal', value: selected.dailyGoal || '—' },
-                { label: isFr ? 'Langue maternelle' : 'Native language', value: selected.nativeLang || '—' },
-                { label: 'Streak',                            value: isFr ? `🔥 ${selected.streak ?? 0} jours` : `🔥 ${selected.streak ?? 0} days` },
-                { label: isFr ? 'Gemmes' : 'Gems',            value: `💎 ${selected.gems ?? 0}` },
-                { label: isFr ? 'Cœurs' : 'Hearts',           value: `❤️ ${selected.hearts ?? 0}` },
-                { label: isFr ? 'Leçons' : 'Lessons',         value: isFr ? `${(selected.completedLessons ?? []).length} complétée(s)` : `${(selected.completedLessons ?? []).length} completed` },
-                { label: isFr ? 'Raison' : 'Reason',          value: selected.reason || '—' },
-                { label: isFr ? 'Âge' : 'Age',                value: selected.age || '—' },
-              ].map(item => (
-                <div key={item.label} style={{ backgroundColor: BG, borderRadius: '10px', padding: '0.75rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>{item.label}</div>
-                  <div style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.9rem' }}>{item.value}</div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: '1rem', backgroundColor: BG, borderRadius: '10px', padding: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: '700', textTransform: 'uppercase' }}>{isFr ? 'Rôle' : 'Role'}</div>
-              <select
-                value={selected.role || 'child'}
-                onChange={e => handleSetRole(selected.uid, e.target.value)}
-                style={{ padding: '0.4rem 0.6rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: '700', color: '#0f172a' }}
-              >
-                <option value="child">child</option>
-                <option value="parent">parent</option>
-                <option value="teacher">teacher</option>
-                <option value="coordinator">coordinator</option>
-                <option value="content_owner">content_owner</option>
-                <option value="content_creator">content_creator</option>
-                <option value="advisor">advisor</option>
-                <option value="bizmgr">bizmgr</option>
-                <option value="admin">admin</option>
-              </select>
-            </div>
-
-            <div style={{ marginTop: '1rem' }}>
-              {confirmingDeleteId === selected.uid ? (
-                <div style={{ backgroundColor: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '10px', padding: '0.9rem 1rem' }}>
-                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#b91c1c', marginBottom: '0.25rem' }}>
-                    {isFr ? '⚠️ Supprimer définitivement ce compte ?' : '⚠️ Permanently delete this account?'}
-                  </div>
-                  <div style={{ fontSize: '0.8rem', color: '#7f1d1d', marginBottom: '0.75rem' }}>
-                    {isFr
-                      ? 'Le compte, la progression et tout ce qui y est lié seront supprimés. Action irréversible.'
-                      : 'The account, progress, and everything tied to it will be removed. This cannot be undone.'}
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button onClick={() => setConfirmingDeleteId(null)} disabled={deleting} style={{
-                      padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1.5px solid #e2e8f0',
-                      backgroundColor: '#fff', color: '#64748b', fontWeight: '700', fontSize: '0.82rem',
-                      cursor: 'pointer', fontFamily: 'inherit',
-                    }}>{isFr ? 'Annuler' : 'Cancel'}</button>
-                    <button onClick={() => handleDeleteUser(selected.uid)} disabled={deleting} style={{
-                      padding: '0.45rem 0.9rem', borderRadius: '8px', border: 'none',
-                      backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '0.82rem',
-                      cursor: deleting ? 'default' : 'pointer', fontFamily: 'inherit', opacity: deleting ? 0.7 : 1,
-                    }}>{deleting ? (isFr ? 'Suppression...' : 'Deleting...') : (isFr ? 'Oui, supprimer' : 'Yes, delete')}</button>
-                  </div>
-                </div>
-              ) : (
-                <button onClick={() => setConfirmingDeleteId(selected.uid)} style={{
-                  padding: '0.5rem 0.9rem', borderRadius: '8px', border: '1.5px solid #fecaca',
-                  backgroundColor: '#fff', color: '#dc2626', fontWeight: '700', fontSize: '0.82rem',
-                  cursor: 'pointer', fontFamily: 'inherit',
-                }}>🗑️ {isFr ? 'Supprimer cet utilisateur' : 'Delete this user'}</button>
-              )}
-            </div>
           </div>
         )}
 

@@ -159,11 +159,16 @@ const LottieIcon = ({ catId, fallbackEmoji, size = 80 }) => {
 
 /* ── Profile-driven constants ─────────────────────────────────── */
 const DAILY_GOAL_CONFIG = {
+    // Keys match QuickSetupPage.jsx's real dailyGoal ids exactly (relaxed,
+    // normal, serious, intense) — this used to list great/awesome, left
+    // over from the now-orphaned DailyGoalPage.jsx (App.jsx's own comment
+    // marks steps 4-7, including DailyGoalPage, as no longer routed to;
+    // QuickSetupPage replaced it with a different id set that this was
+    // never updated to match).
     relaxed: { time: 5,  xp: 10  },
     normal:  { time: 10, xp: 20  },
     serious: { time: 15, xp: 30  },
-    great:   { time: 30, xp: 60  },
-    awesome: { time: 60, xp: 100 },
+    intense: { time: 30, xp: 60  },
 };
 
 const PROF_LABELS = {

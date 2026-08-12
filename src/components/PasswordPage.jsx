@@ -11,8 +11,6 @@ const Eye = ({ crossed }) => (
     </svg>
 );
 
-const DAILY_GOAL_MAP = { relaxed: 5, normal: 10, serious: 15, great: 30, awesome: 60 };
-
 const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => {
     const isFrench = nativeLang === 'french';
     const [password, setPassword] = useState('');
@@ -40,8 +38,14 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
                 age:       registrationData.age      || null,
                 language:  isFrench ? 'french' : 'english',
                 reason:    registrationData.reason   || null,
-                dailyGoal: DAILY_GOAL_MAP[registrationData.dailyGoal] ?? 10,
+                // registerUser/handle_new_user expect the same string id
+                // QuickSetupPage collected (relaxed/normal/serious/intense)
+                // — this used to convert to a number of minutes here, which
+                // never matched what DashboardPage/lessonGenerator read back.
+                dailyGoal: registrationData.dailyGoal || 'normal',
                 requestedRole: registrationData.requestedRole || '',
+                proficiency: registrationData.proficiency || null,
+                goals: registrationData.goals || [],
             });
             if (user?.needsEmailConfirmation) {
                 setNeedsConfirmation(true);

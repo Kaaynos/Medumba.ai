@@ -22,7 +22,7 @@ export async function handleGoogleRedirectResult() {
    pour ça que age restait toujours null et role toujours 'child', quel
    que soit l'âge saisi dans AgePage. Le trigger, lui, tourne en SECURITY
    DEFINER et n'a besoin d'aucune session. */
-export async function registerUser({ name, email, password, age, language, reason, dailyGoal, requestedRole }) {
+export async function registerUser({ name, email, password, age, language, reason, dailyGoal, requestedRole, proficiency, goals }) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -33,6 +33,12 @@ export async function registerUser({ name, email, password, age, language, reaso
                 // whitelist (parent/child/content_creator) — see migration
                 // 041. A crafted requested_role here can't grant anything else.
                 requested_role: requestedRole || '',
+                // proficiency/goals used to be captured in QuickSetupPage and
+                // then silently dropped — never written to the DB at all
+                // (migration 043). Metadata values are plain strings, so
+                // goals (an array) is sent comma-joined and split server-side.
+                proficiency: proficiency || '',
+                goals: Array.isArray(goals) ? goals.join(',') : '',
             },
         },
     });

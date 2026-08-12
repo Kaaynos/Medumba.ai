@@ -147,6 +147,19 @@ function App() {
     const name = prof?.name || user.displayName || '';
     if (name) { setUserName(name.split(' ')[0]); setUserFullName(name); }
     if (prof?.native_lang) setNativeLang(prof.native_lang);
+    // These used to only ever get set during the same-session signup quiz
+    // (QuickSetupPage) and never reloaded on a normal login — so every
+    // returning user silently lost their proficiency/reason/goals/daily
+    // goal the moment they closed the app, even though the database had
+    // it. profile.proficiency defaults to 1 either way (existing rows
+    // written before migration 043 have no real value stored), so this
+    // fix alone won't retroactively recover data that was never saved —
+    // only what's actually in the row now gets applied.
+    if (prof?.age)         setUserAge(prof.age);
+    if (prof?.proficiency) setProficiency(prof.proficiency);
+    if (prof?.reason)      setReason(prof.reason);
+    if (prof?.goals?.length) setGoals(prof.goals);
+    if (prof?.daily_goal)  setDailyGoal(prof.daily_goal);
     const myProfileId = prof?.id || user.uid;
     setActiveProfileId(myProfileId);
     listHouseholdMembers(user.uid).then((members) => {
@@ -380,7 +393,7 @@ function App() {
       {step === 12 && (
         <PasswordPage
           onNext={() => go(13)} onBack={back} nativeLang={nativeLang}
-          registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal, requestedRole }}
+          registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal, requestedRole, proficiency, goals }}
         />
       )}
       {step === 13 && <SuccessPage

@@ -13,12 +13,14 @@
 import { supabase } from '../config/supabase';
 
 /* ── Session length cap by daily-goal ──────────────────────────── */
+// Keys match QuickSetupPage.jsx's real dailyGoal ids (relaxed/normal/
+// serious/intense) — see DashboardPage.jsx's DAILY_GOAL_CONFIG comment
+// for why this used to say great/awesome instead.
 const GOAL_QUESTION_CAP = {
     relaxed: 5,
     normal:  7,
     serious: 10,
-    great:   13,
-    awesome: 13,
+    intense: 13,
 };
 
 /* ── Variety mix driven by learner goals (Level 4 only) ─────────── */
@@ -188,7 +190,7 @@ export function getPersonalizedTip(profile = {}, isFr = false) {
             ? '💬 Écoutez bien les exercices audio pour améliorer votre prononciation !'
             : '💬 Listen carefully to audio exercises to improve your pronunciation!';
     }
-    if (dailyGoal === 'awesome' || dailyGoal === 'great') {
+    if (dailyGoal === 'intense') {
         return isFr
             ? '🔥 Objectif ambitieux ! Chaque leçon complétée vous rapproche du niveau natif.'
             : '🔥 Ambitious goal! Each lesson brings you closer to native level.';

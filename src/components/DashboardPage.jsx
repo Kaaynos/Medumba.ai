@@ -24,6 +24,7 @@ import LessonLoadingPage from './LessonLoadingPage';
 import LessonPage        from './LessonPage';
 import { getPersonalizedTip } from '../utils/lessonGenerator';
 import { getNextBestAction } from '../services/nextBestActionService';
+import { lessonScore } from '../data/lessonTags';
 import { PHRASEBOOK_EXPRESSIONS } from '../data/phrasebookExpressions';
 import { VOCAB_EXPRESSIONS }      from '../data/vocabExpressions';
 import {
@@ -173,12 +174,41 @@ const PROF_LABELS = {
 };
 
 const REASON_META = {
-    fun:       { emoji: '😁', en: 'Just for fun',    fr: 'Pour le plaisir',    challengeEn: 'Play 3 fun mini-games',          challengeFr: 'Jouer à 3 mini-jeux',           reward: 25 },
-    career:    { emoji: '💼', en: 'Career growth',   fr: 'Carrière',           challengeEn: 'Learn 5 professional expressions', challengeFr: 'Apprendre 5 expressions pro',    reward: 35 },
-    education: { emoji: '🎓', en: 'Education',        fr: 'Éducation',          challengeEn: 'Complete 2 study exercises',       challengeFr: 'Finir 2 exercices scolaires',    reward: 30 },
-    vacation:  { emoji: '✈️', en: 'Travel',           fr: 'Voyage',             challengeEn: 'Master 5 travel phrases',          challengeFr: 'Maîtriser 5 phrases de voyage',  reward: 30 },
-    other:     { emoji: '🧩', en: 'Personal goal',   fr: 'Objectif perso',     challengeEn: 'Beat your daily best',             challengeFr: 'Battre votre record du jour',    reward: 20 },
+    // Keys match QuickSetupPage.jsx's real reason ids exactly (family,
+    // culture, career, fun, other) — this used to list education/vacation,
+    // which aren't real answers, while family/culture (which are) fell
+    // through to the "fun" fallback below and showed the wrong badge.
+    family:  { emoji: '🏡', en: 'Family',         fr: 'Famille',        challengeEn: 'Learn 5 family expressions',        challengeFr: 'Apprendre 5 expressions de famille', reward: 30 },
+    culture: { emoji: '🎭', en: 'Culture',        fr: 'Culture',        challengeEn: 'Learn a proverb or tradition',       challengeFr: 'Apprendre un proverbe ou une tradition', reward: 30 },
+    career:  { emoji: '💼', en: 'Career growth',  fr: 'Carrière',       challengeEn: 'Learn 5 professional expressions',  challengeFr: 'Apprendre 5 expressions pro',        reward: 35 },
+    fun:     { emoji: '😁', en: 'Just for fun',   fr: 'Pour le plaisir', challengeEn: 'Play 3 fun mini-games',             challengeFr: 'Jouer à 3 mini-jeux',                reward: 25 },
+    other:   { emoji: '🧩', en: 'Personal goal',  fr: 'Objectif perso', challengeEn: 'Beat your daily best',              challengeFr: 'Battre votre record du jour',        reward: 20 },
 };
+
+/* ── Personalize the Medumba unit path by reason/goals (English course is
+   untouched — QuickSetupPage's quiz is worded specifically around "why
+   learn Medumba", so applying it to a different curriculum wouldn't mean
+   anything). l0 (Alphabet) and chest/boss slots are never touched — only
+   the type==='lesson' items within each unit get re-sorted among
+   themselves, by relevance score, stable on ties (safe no-op when nothing
+   matches: the original order comes back unchanged). ── */
+function reorderMedumbaLessons(units, reason, goals) {
+    return units.map(unit => {
+        const slots = [];
+        unit.lessons.forEach((lesson, i) => {
+            if (lesson.type === 'lesson' && lesson.id !== 'l0') slots.push(i);
+        });
+        if (slots.length < 2) return unit;
+
+        const ranked = slots
+            .map((slotIndex, originalOrder) => ({ lesson: unit.lessons[slotIndex], originalOrder, score: lessonScore(unit.lessons[slotIndex].id, reason, goals) }))
+            .sort((a, b) => b.score - a.score || a.originalOrder - b.originalOrder);
+
+        const lessons = [...unit.lessons];
+        slots.forEach((slotIndex, i) => { lessons[slotIndex] = ranked[i].lesson; });
+        return { ...unit, lessons };
+    });
+}
 
 /* ── Emoji personnalisé par nom : même nom -> même emoji à chaque fois,
    juste un petit plus sympathique dans la bannière d'accueil ── */
@@ -699,7 +729,9 @@ const DashboardPage = ({
 
     // Pipeline: chest opened state → linear unlock chain (based on real completedLessons,
     // the static per-lesson `status` fields above are just the fresh-user defaults)
-    const units = applySessionProgress(applyChestUnlocks(learnLang === 'english' ? unitsEnglish : unitsMedumba));
+    const rawUnitsForCourse = learnLang === 'english' ? unitsEnglish : unitsMedumba;
+    const personalizedUnits = learnLang === 'english' ? rawUnitsForCourse : reorderMedumbaLessons(rawUnitsForCourse, profile.reason, profile.goals ?? []);
+    const units = applySessionProgress(applyChestUnlocks(personalizedUnits));
 
     // Free-access "Start" users skip account creation, so the personalization
     // quiz is their first real interaction — drop them straight into the

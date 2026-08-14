@@ -11,7 +11,7 @@ const Eye = ({ crossed }) => (
     </svg>
 );
 
-const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => {
+const PasswordPage = ({ onNext, onBack, onLogin, nativeLang, registrationData = {} }) => {
     const isFrench = nativeLang === 'french';
     const [password, setPassword] = useState('');
     const [show, setShow]         = useState(false);
@@ -98,6 +98,20 @@ const PasswordPage = ({ onNext, onBack, nativeLang, registrationData = {} }) => 
                             ? `Nous avons envoyé un lien de confirmation à ${registrationData.email}. Cliquez dessus pour activer votre compte, puis connectez-vous.`
                             : `We've sent a confirmation link to ${registrationData.email}. Click it to activate your account, then log in.`}
                     </p>
+                    {onLogin && (
+                        <button
+                            onClick={onLogin}
+                            style={{
+                                width: '100%', backgroundColor: B, color: '#fff',
+                                padding: '1.1rem', borderRadius: '9999px', fontSize: '1.05rem',
+                                fontWeight: '700', border: 'none', cursor: 'pointer',
+                                boxShadow: '0 8px 24px rgba(27,79,216,0.3)', letterSpacing: '0.3px',
+                                marginBottom: '1.5rem',
+                            }}
+                        >
+                            {isFrench ? "J'ai confirmé — Se connecter" : "I've confirmed — Log in"}
+                        </button>
+                    )}
                     {resendState === 'sent' ? (
                         <p style={{ color: '#16a34a', fontWeight: '700', fontSize: '0.9rem' }}>
                             {isFrench ? 'E-mail renvoyé !' : 'Email resent!'}

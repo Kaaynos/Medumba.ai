@@ -405,7 +405,7 @@ function App() {
       {step === 11 && <EmailPage    onNext={(e) => { setUserEmail(e); go(12); }} onBack={back} nativeLang={nativeLang} />}
       {step === 12 && (
         <PasswordPage
-          onNext={() => go(requestedRole === 'parent' ? 27 : 13)} onBack={back} nativeLang={nativeLang}
+          onNext={() => go(requestedRole === 'parent' ? 27 : 13)} onBack={back} onLogin={() => go(20)} nativeLang={nativeLang}
           registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal, requestedRole, proficiency, goals }}
         />
       )}

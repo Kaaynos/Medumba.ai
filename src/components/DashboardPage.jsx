@@ -477,6 +477,13 @@ const DashboardPage = ({
     const [newChildName,     setNewChildName]     = useState('');
     const [newChildAge,      setNewChildAge]      = useState('');
     const [addChildError,    setAddChildError]    = useState('');
+    // Optional — mirrors QuickSetupPage's quiz so a child added here isn't
+    // stuck at the flat defaults (Beginner, no reason/goals) that only the
+    // "signing up for my child" registration path used to escape.
+    const [newChildLevel,     setNewChildLevel]     = useState('');
+    const [newChildReason,    setNewChildReason]    = useState('');
+    const [newChildDailyGoal, setNewChildDailyGoal] = useState('');
+    const [newChildGoals,     setNewChildGoals]     = useState([]);
 
     /* ── Teen self-claim (13-18, autonomy at 15) — only ever offered on the
        CURRENTLY ACTIVE profile if it's an unclaimed child: claiming signs
@@ -603,9 +610,17 @@ const DashboardPage = ({
             await addChildProfile(currentUid, {
                 name: newChildName.trim(),
                 birthYear: newChildAge ? Number(newChildAge) : null,
+                proficiency: newChildLevel ? Number(newChildLevel) : undefined,
+                reason: newChildReason || undefined,
+                dailyGoal: newChildDailyGoal || undefined,
+                goals: newChildGoals.length > 0 ? newChildGoals : undefined,
             });
             setNewChildName('');
             setNewChildAge('');
+            setNewChildLevel('');
+            setNewChildReason('');
+            setNewChildDailyGoal('');
+            setNewChildGoals([]);
             setAddChildOpen(false);
             refreshHousehold();
         } catch (e) {
@@ -3417,9 +3432,76 @@ const DashboardPage = ({
                             inputMode="numeric"
                             style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.88rem', backgroundColor: T.bg, color: T.text }}
                         />
+
+                        <div style={{ fontSize: '0.72rem', color: T.textMuted, fontWeight: '700', textTransform: 'uppercase', marginTop: '0.25rem' }}>
+                            {isFr ? 'Personnaliser son parcours (optionnel)' : "Personalize their journey (optional)"}
+                        </div>
+
+                        <select
+                            value={newChildLevel}
+                            onChange={(e) => setNewChildLevel(e.target.value)}
+                            style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.85rem', backgroundColor: T.bg, color: newChildLevel ? T.text : T.textMuted }}
+                        >
+                            <option value="">{isFr ? '— Niveau —' : '— Level —'}</option>
+                            <option value="1">{isFr ? 'Débutant absolu' : 'Absolute beginner'}</option>
+                            <option value="2">{isFr ? 'Quelques mots' : 'A few words'}</option>
+                            <option value="3">{isFr ? 'Intermédiaire' : 'Intermediate'}</option>
+                            <option value="4">{isFr ? 'Avancé' : 'Advanced'}</option>
+                        </select>
+
+                        <select
+                            value={newChildReason}
+                            onChange={(e) => setNewChildReason(e.target.value)}
+                            style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.85rem', backgroundColor: T.bg, color: newChildReason ? T.text : T.textMuted }}
+                        >
+                            <option value="">{isFr ? '— Pourquoi apprend-il/elle le Medumba ? —' : '— Why are they learning Medumba? —'}</option>
+                            {Object.entries(REASON_META).map(([id, r]) => (
+                                <option key={id} value={id}>{r.emoji} {isFr ? r.fr : r.en}</option>
+                            ))}
+                        </select>
+
+                        <select
+                            value={newChildDailyGoal}
+                            onChange={(e) => setNewChildDailyGoal(e.target.value)}
+                            style={{ padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, fontFamily: 'inherit', fontSize: '0.85rem', backgroundColor: T.bg, color: newChildDailyGoal ? T.text : T.textMuted }}
+                        >
+                            <option value="">{isFr ? '— Objectif quotidien —' : '— Daily goal —'}</option>
+                            <option value="relaxed">{isFr ? 'En douceur — 5 min/jour' : 'Gentle — 5 min/day'}</option>
+                            <option value="normal">{isFr ? 'Régulier — 10 min/jour' : 'Regular — 10 min/day'}</option>
+                            <option value="serious">{isFr ? 'Sérieux — 15 min/jour' : 'Serious — 15 min/day'}</option>
+                            <option value="intense">{isFr ? 'Intensif — 30 min/jour' : 'Intense — 30 min/day'}</option>
+                        </select>
+
+                        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                            {[
+                                { id: 'speak', fr: 'Parler couramment', en: 'Speak fluently' },
+                                { id: 'vocab', fr: 'Maîtriser le vocab', en: 'Master vocabulary' },
+                                { id: 'habit', fr: "Habitudes d'étude", en: 'Build study habits' },
+                            ].map((g) => {
+                                const picked = newChildGoals.includes(g.id);
+                                return (
+                                    <button
+                                        key={g.id}
+                                        type="button"
+                                        onClick={() => setNewChildGoals(prev => prev.includes(g.id) ? prev.filter(x => x !== g.id) : [...prev, g.id])}
+                                        style={{
+                                            padding: '0.4rem 0.75rem', borderRadius: '99px',
+                                            border: `1.5px solid ${picked ? '#0056D2' : T.border}`,
+                                            backgroundColor: picked ? T.blueTint : 'transparent',
+                                            color: picked ? '#0056D2' : T.textSub,
+                                            fontWeight: '700', fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'inherit',
+                                        }}
+                                    >{isFr ? g.fr : g.en}</button>
+                                );
+                            })}
+                        </div>
+
                         {addChildError && <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: '600' }}>{addChildError}</div>}
                         <div style={{ display: 'flex', gap: '0.6rem' }}>
-                            <button onClick={() => { setAddChildOpen(false); setAddChildError(''); }} style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.85rem' }}>
+                            <button onClick={() => {
+                                setAddChildOpen(false); setAddChildError('');
+                                setNewChildLevel(''); setNewChildReason(''); setNewChildDailyGoal(''); setNewChildGoals([]);
+                            }} style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: `1.5px solid ${T.border}`, backgroundColor: 'transparent', color: T.textSub, fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.85rem' }}>
                                 {isFr ? 'Annuler' : 'Cancel'}
                             </button>
                             <button onClick={handleAddChild} disabled={!newChildName.trim()} style={{ flex: 2, padding: '0.65rem', borderRadius: '10px', border: 'none', backgroundColor: newChildName.trim() ? '#0056D2' : T.border, color: '#fff', fontWeight: '700', cursor: newChildName.trim() ? 'pointer' : 'default', fontFamily: 'inherit', fontSize: '0.85rem' }}>

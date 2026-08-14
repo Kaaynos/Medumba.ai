@@ -54,12 +54,14 @@ import { ThemeProvider }        from './context/ThemeContext';
 //  0  Splash
 //  1  Welcome (Landing) — an account is required for course access either way,
 //     but "Start" and "Register" take different paths to get there:
-//     "Start"    → 2 (Language Selection) → 3 (Quick setup) → 8 (Registration)
-//     "Register" → 8 (Registration) directly, skipping 2 and 3
+//     "Start"    → 2 (Language Selection) → 3 (Quick setup) → 26 (Role choice)
+//     "Register" → 26 (Role choice) directly, skipping 2 and 3
+// 26  Role choice (parent / learning myself / content creator) — asked right
+//     after "Personalize your journey" (Quick setup) so the answer is
+//     captured before account creation, not lost along the way.
 //  2  Language Selection (Start only)
 //  3  Quick setup (level/reason/objectives/daily goal) (Start only)
 //  8  Profile Welcome  ┐
-// 26  Role choice (parent / learning myself / content creator) │
 //  9  Name             │
 // 10  Age               │ Registration (mandatory for course access)
 // 11  Email             │
@@ -321,7 +323,7 @@ function App() {
             // QR-code deep link (festival banners etc.) — skip the marketing
             // landing page and go straight into account creation.
             history.replaceState(null, '', window.location.pathname);
-            go(8);
+            go(26);
           } else if (initialDeepLinkParams.get('login') === '1') {
             // Email deep link (e.g. the age-confirmation notice) — skip the
             // marketing landing page and go straight to Log in. Once
@@ -339,7 +341,7 @@ function App() {
       {step === 1 && (
         <LandingPage
           onStart={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(2); }}
-          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(8); }}
+          onRegister={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(26); }}
           onLogin={() => { if (currentUid) { cancelIdleLogout(); go(15); } else go(20); }}
           onNavigate={(view) => go(14, view)}
           onDownload={() => go(17)}
@@ -363,7 +365,7 @@ function App() {
       {/* ── Quick setup (niveau + raison + objectif — tout en 1) ── */}
       {step === 3 && (
         <QuickSetupPage
-          onNext={() => go(8)} onBack={back}
+          onNext={() => go(26)} onBack={back}
           nativeLang={nativeLang}
           setConnection={setConnection}
           setProficiency={setProficiency}
@@ -374,8 +376,8 @@ function App() {
       )}
 
       {/* ── Account creation ── */}
-      {step === 8  && <ProfileWelcomePage onNext={() => go(26)} onLogin={() => go(20)} nativeLang={nativeLang} />}
-      {step === 26 && <RoleChoicePage onNext={(role) => { setRequestedRole(role); go(9); }} onBack={back} nativeLang={nativeLang} />}
+      {step === 26 && <RoleChoicePage onNext={(role) => { setRequestedRole(role); go(8); }} onBack={back} nativeLang={nativeLang} />}
+      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} onLogin={() => go(20)} nativeLang={nativeLang} />}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a, birthdate) => {
         setUserAge(a);

@@ -27,6 +27,16 @@ export async function registerUser({ name, email, password, age, language, reaso
         email,
         password,
         options: {
+            // Without this, Supabase falls back to whatever "Site URL" is
+            // configured in its dashboard — a single fixed value that can't
+            // be right for every environment this app is deployed to
+            // (production/staging/dev all live at different origins). A
+            // user confirming their email from staging would get bounced to
+            // production instead, landing on a fresh origin with no session
+            // context — which looks exactly like "back to the landing page,
+            // log in again." Pinning it to the actual origin they signed up
+            // from fixes that regardless of dashboard config.
+            emailRedirectTo: window.location.origin,
             data: {
                 name, native_lang: language || 'french', age: age || '', reason: reason || '', daily_goal: dailyGoal || 'normal',
                 // Only ever honored server-side if it's in the trigger's
@@ -69,7 +79,7 @@ export async function registerUser({ name, email, password, age, language, reaso
 export async function claimProfile(email, password, childProfileId) {
     const { data, error } = await supabase.auth.signUp({
         email, password,
-        options: { data: { claiming_profile_id: childProfileId } },
+        options: { emailRedirectTo: window.location.origin, data: { claiming_profile_id: childProfileId } },
     });
     if (error) throw error;
     if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {

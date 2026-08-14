@@ -13,6 +13,7 @@ import AchievePage              from './components/AchievePage';
 import DailyGoalPage            from './components/DailyGoalPage';
 import ProfileWelcomePage       from './components/ProfileWelcomePage';
 import RoleChoicePage           from './components/RoleChoicePage';
+import AddChildDuringSignupPage from './components/AddChildDuringSignupPage';
 import NamePage                 from './components/NamePage';
 import AgePage                  from './components/AgePage';
 import EmailPage                from './components/EmailPage';
@@ -66,6 +67,9 @@ import { ThemeProvider }        from './context/ThemeContext';
 // 10  Age               │ Registration (mandatory for course access)
 // 11  Email             │
 // 12  Password          │
+// 27  Add your child (→13) — only when Role choice was "parent"; carries
+//     the Quick setup answers onto the CHILD's own profile, since without
+//     this they had nowhere to go but the parent's own account.
 // 13  Success  (→15, auto-starts the first lesson)                    ┘
 // 20  Log in           (reached from ProfileWelcomePage's "Log in" link)
 // 21  Forgot Password  (→20)
@@ -284,16 +288,23 @@ function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Assembled profile object ─────────────────────────────────────
+  // Prefers the ACTIVE profile's own proficiency/reason/goals/daily_goal
+  // (activeProfileMeta — set whenever a household member other than the
+  // account holder is being viewed, e.g. after switching via "Who's
+  // learning?") over the logged-in account holder's own state. Without
+  // this, switching to a child's Hub kept showing the parent's own quiz
+  // answers — the child's personalization (however it got set: signup-time
+  // or manually) was fetched but never actually used.
   const _zp = getZodiacProfile(_zodiacSign);
   const profile = {
-    name:        userName,
-    age:         userAge,
+    name:        activeProfileMeta?.name ?? userName,
+    age:         activeAge ?? userAge,
     email:       userEmail,
     connection:  connection,
-    proficiency: proficiency,
-    reason:      reason,
-    goals:       goals,
-    dailyGoal:   dailyGoal ?? 'normal',
+    proficiency: activeProfileMeta?.proficiency ?? proficiency,
+    reason:      activeProfileMeta?.reason ?? reason,
+    goals:       (activeProfileMeta?.goals?.length ? activeProfileMeta.goals : goals) ?? goals,
+    dailyGoal:   activeProfileMeta?.daily_goal ?? dailyGoal ?? 'normal',
     _pace:       _zp?.pace       ?? 'normal',
     _style:      _zp?.style      ?? 'standard',
     _focus:      _zp?.focus      ?? 'vocabulary',
@@ -394,8 +405,14 @@ function App() {
       {step === 11 && <EmailPage    onNext={(e) => { setUserEmail(e); go(12); }} onBack={back} nativeLang={nativeLang} />}
       {step === 12 && (
         <PasswordPage
-          onNext={() => go(13)} onBack={back} nativeLang={nativeLang}
+          onNext={() => go(requestedRole === 'parent' ? 27 : 13)} onBack={back} nativeLang={nativeLang}
           registrationData={{ name: userName, email: userEmail, age: userAge, reason, dailyGoal, requestedRole, proficiency, goals }}
+        />
+      )}
+      {step === 27 && (
+        <AddChildDuringSignupPage
+          onNext={() => go(13)} nativeLang={nativeLang}
+          proficiency={proficiency} reason={reason} goals={goals} dailyGoal={dailyGoal}
         />
       )}
       {step === 13 && <SuccessPage

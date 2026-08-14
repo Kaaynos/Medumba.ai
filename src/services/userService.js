@@ -16,11 +16,16 @@ export async function getProfile(uid) {
 }
 
 /* ── Lire un profil par son id (pas auth_user_id) — utilisé pour dériver la
-   tranche d'âge du profil actif, qui peut être un enfant sans compte auth ── */
+   tranche d'âge du profil actif, qui peut être un enfant sans compte auth.
+   Inclut aussi proficiency/reason/goals/daily_goal : le profil actif (pas
+   forcément le titulaire du compte connecté) doit porter sa propre
+   personnalisation quand on bascule vers un autre membre du foyer via
+   "Qui apprend ?" — sinon le Hub d'un enfant affichait toujours le niveau/
+   raison/objectifs du parent connecté. ── */
 export async function getProfileById(id) {
     const { data, error } = await supabase
         .from('profiles')
-        .select('id, name, birth_year, native_lang')
+        .select('id, name, birth_year, native_lang, proficiency, reason, goals, daily_goal')
         .eq('id', id)
         .single();
     if (error) return null;
@@ -184,8 +189,15 @@ export async function listHouseholdMembers(uid) {
     return members.map(m => ({ ...m, progress: progressByUid[m.id] ?? null }));
 }
 
-/* ── Ajoute un profil enfant (sans compte auth) au foyer de `guardianUid` ── */
-export async function addChildProfile(guardianUid, { name, birthYear }) {
+/* ── Ajoute un profil enfant (sans compte auth) au foyer de `guardianUid` ──
+   proficiency/reason/goals/dailyGoal sont optionnels : la modale "+ Ajouter
+   un membre de la famille" (Compte) n'a jamais posé ces questions, et n'en
+   passe donc aucune — le nouveau profil retombe sur les defaults de la
+   colonne (proficiency 1, reason/goals vides). Le flux d'inscription "Je
+   m'inscris pour mon enfant", lui, les fournit : c'est le seul moyen pour
+   que le quiz "Personnalisez votre parcours" personnalise réellement le
+   Hub de l'enfant, plutôt que celui du parent qui l'a rempli en son nom. ── */
+export async function addChildProfile(guardianUid, { name, birthYear, proficiency, reason, goals, dailyGoal }) {
     const guardian = await getProfile(guardianUid);
     if (!guardian?.household_id) throw new Error('No household found for this account.');
 
@@ -202,6 +214,10 @@ export async function addChildProfile(guardianUid, { name, birthYear }) {
             role:         'child',
             native_lang:  guardian.native_lang,
             learning_lang: guardian.learning_lang,
+            ...(proficiency ? { proficiency } : {}),
+            ...(reason ? { reason } : {}),
+            ...(goals && goals.length > 0 ? { goals } : {}),
+            ...(dailyGoal ? { daily_goal: dailyGoal } : {}),
         })
         .select()
         .single();

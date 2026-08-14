@@ -50,6 +50,26 @@ export async function confirmAge(profileId, age) {
     return role;
 }
 
+/* ── Applies Quick-setup/role-choice answers stashed before a Google OAuth
+   redirect (App.jsx's handleLogin, fed by ProfileWelcomePage.jsx) —
+   signInWithOAuth() has no options.data channel to the signup trigger like
+   signUp() does, so this is the only way those answers reach the profile
+   for a Google sign-up. Same authenticated-self-update pattern as
+   confirmAge() above; requestedRole is checked against the same whitelist
+   the trigger itself uses (migration 041) — never trusted verbatim. ── */
+export async function applyPendingOnboarding(profileId, { proficiency, reason, goals, dailyGoal, requestedRole }) {
+    const SAFE_ROLES = ['parent', 'child', 'content_creator'];
+    const patch = {};
+    if (proficiency) patch.proficiency = Number(proficiency);
+    if (reason) patch.reason = reason;
+    if (goals && goals.length > 0) patch.goals = goals;
+    if (dailyGoal) patch.daily_goal = dailyGoal;
+    if (requestedRole && SAFE_ROLES.includes(requestedRole)) patch.role = requestedRole;
+    if (Object.keys(patch).length === 0) return;
+    const { error } = await supabase.from('profiles').update(patch).eq('id', profileId);
+    if (error) throw error;
+}
+
 /* ── Marque un profil comme actif à l'instant ── */
 // authService.js does this for the account holder on real Supabase sign-in,
 // but a child profile (no auth account of its own) never fires that event —

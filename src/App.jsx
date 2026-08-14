@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { getZodiacSign, getZodiacProfile, getMotivationMessage } from './utils/zodiac';
 import { logoutUser, listenAuthState, getUserProfile } from './services/authService';
-import { listHouseholdMembers, getProfileById } from './services/userService';
+import { listHouseholdMembers, getProfileById, applyPendingOnboarding } from './services/userService';
 import { getPaymentSuccessFromUrl } from './config/stripe';
 import SplashScreen             from './components/SplashScreen';
 import WelcomePage              from './components/WelcomePage';
@@ -171,11 +171,38 @@ function App() {
     listHouseholdMembers(user.uid).then((members) => {
       if (members.length > 1) setProfilePicker(members);
     });
+
+    // Consume onboarding answers stashed before a Google OAuth redirect
+    // (ProfileWelcomePage.jsx) — signInWithOAuth() has no metadata channel
+    // to the signup trigger like signUp() does, so "Personalize your
+    // journey" and "What brings you here" would otherwise be silently lost
+    // for a Google sign-up. One-time use: always cleared, whether or not it
+    // ends up applied, so a later unrelated login never picks up stale data.
+    let pending = null;
+    try {
+      const raw = localStorage.getItem('med_pending_onboarding');
+      if (raw) {
+        localStorage.removeItem('med_pending_onboarding');
+        const parsed = JSON.parse(raw);
+        if (Date.now() - (parsed.ts || 0) < 10 * 60 * 1000) pending = parsed;
+      }
+    } catch { /* best-effort */ }
+    if (pending) {
+      try {
+        await applyPendingOnboarding(myProfileId, pending);
+        if (pending.proficiency) setProficiency(pending.proficiency);
+        if (pending.reason)      setReason(pending.reason);
+        if (pending.goals?.length) setGoals(pending.goals);
+        if (pending.dailyGoal)   setDailyGoal(pending.dailyGoal);
+      } catch (e) { console.error('[applyPendingOnboarding]', e); }
+    }
+
     if (prof?.role === 'teacher') return 16;
     if (prof?.role === 'coordinator') return 18;
     if (prof?.role === 'content_owner') return 19;
-    if (prof?.role === 'content_creator') return 24; // 20-23 already used (login/reset flow)
+    if (prof?.role === 'content_creator' || pending?.requestedRole === 'content_creator') return 24; // 20-23 already used (login/reset flow)
     if (prof?.role === 'advisor') return 25;
+    if (pending?.requestedRole === 'parent') return 27; // add-your-child step, same as the email signup path
     return 15;
   };
 
@@ -388,7 +415,12 @@ function App() {
 
       {/* ── Account creation ── */}
       {step === 26 && <RoleChoicePage onNext={(role) => { setRequestedRole(role); go(8); }} onBack={back} nativeLang={nativeLang} />}
-      {step === 8  && <ProfileWelcomePage onNext={() => go(9)} onLogin={() => go(20)} nativeLang={nativeLang} />}
+      {step === 8  && (
+        <ProfileWelcomePage
+          onNext={() => go(9)} onLogin={() => go(20)} nativeLang={nativeLang}
+          proficiency={proficiency} reason={reason} goals={goals} dailyGoal={dailyGoal} requestedRole={requestedRole}
+        />
+      )}
       {step === 9  && <NamePage     onNext={(n) => { setUserName(n);  go(10); }} onBack={back} nativeLang={nativeLang} />}
       {step === 10 && <AgePage      onNext={(a, birthdate) => {
         setUserAge(a);

@@ -3,7 +3,7 @@ import profileVector from '../assets/welcom vector.png';
 import logo from '../assets/logo.png';
 import { loginWithGoogle } from '../services/authService';
 
-const ProfileWelcomePage = ({ onNext, onLogin, nativeLang }) => {
+const ProfileWelcomePage = ({ onNext, onLogin, nativeLang, proficiency, reason, goals, dailyGoal, requestedRole }) => {
     const isFr = nativeLang === 'french';
     const [loadingGoogle, setLoadingGoogle] = useState(false);
     const [error, setError] = useState('');
@@ -12,6 +12,22 @@ const ProfileWelcomePage = ({ onNext, onLogin, nativeLang }) => {
         setError('');
         setLoadingGoogle(true);
         try {
+            // signInWithOAuth() has no options.data like signUp() does — Google
+            // controls what lands in raw_user_meta_data, so there's no way to
+            // hand the trigger our own reason/goals/proficiency/requestedRole
+            // through the redirect. Stashing it here and consuming it once the
+            // OAuth round trip completes (App.jsx's handleLogin) is the only
+            // way "Personalize your journey" and "What brings you here" don't
+            // just get silently dropped for a Google sign-up. Only worth
+            // stashing anything if the quiz was actually answered — a bare
+            // "Register" → Google user has nothing to carry over.
+            if (proficiency || reason || requestedRole) {
+                try {
+                    localStorage.setItem('med_pending_onboarding', JSON.stringify({
+                        proficiency, reason, goals, dailyGoal, requestedRole, ts: Date.now(),
+                    }));
+                } catch { /* localStorage unavailable — proceed without it, same as before this fix */ }
+            }
             await loginWithGoogle();
             // auth state listener in App.jsx handles redirect to step 15
         } catch (e) {

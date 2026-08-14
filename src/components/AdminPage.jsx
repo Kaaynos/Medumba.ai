@@ -125,10 +125,19 @@ export default function AdminPage({ onBack, currentUserUid, nativeLang }) {
   const newMessageCount = messages.filter(m => m.status === 'new').length;
   const pendingTestimonialCount = testimonials.filter(t => t.status === 'pending').length;
 
-  const filtered = users.filter(u =>
-    (u.name || '').toLowerCase().includes(search.toLowerCase()) ||
-    (u.email || '').toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = users
+    .filter(u =>
+      (u.name || '').toLowerCase().includes(search.toLowerCase()) ||
+      (u.email || '').toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      // Active users first (same "Actif récemment" definition as the green
+      // dot next to their name); within each group, most recently active first.
+      const aActive = isActive(a.lastActive);
+      const bActive = isActive(b.lastActive);
+      if (aActive !== bActive) return aActive ? -1 : 1;
+      return new Date(b.lastActive || 0) - new Date(a.lastActive || 0);
+    });
 
   const totalXP    = users.reduce((s, u) => s + (u.xp || 0), 0);
   const totalGems  = users.reduce((s, u) => s + (u.gems || 0), 0);

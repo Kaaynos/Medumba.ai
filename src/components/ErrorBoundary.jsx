@@ -1,4 +1,5 @@
 import React from 'react';
+import { Sentry } from '../config/sentry';
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class ErrorBoundary extends React.Component {
     componentDidCatch(error, errorInfo) {
         this.setState({ error: error, errorInfo: errorInfo });
         console.error("Uncaught error:", error, errorInfo);
+        Sentry.captureException(error, { extra: { componentStack: errorInfo?.componentStack } });
     }
 
     render() {

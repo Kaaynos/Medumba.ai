@@ -2,6 +2,7 @@
    userService.js — Profil utilisateur + progression (Supabase PostgreSQL)
 ───────────────────────────────────────────────────────────────────────────── */
 import { supabase } from '../config/supabase';
+import { posthog } from '../config/posthog';
 
 /* ── Lire le profil du compte connecté (par auth_user_id, pas id — voir
    authService.js:getUserProfile pour le même choix et pourquoi) ── */
@@ -144,6 +145,10 @@ export async function completeLesson(uid, lessonId) {
     if (completed.has(lessonId)) return; // déjà faite
     completed.add(lessonId);
     await saveProgress(uid, { completed_lessons: [...completed] });
+    // O2 activity signal (scope doc §2) — first and every subsequent
+    // lesson completion, not just the first, so 30-day-active can be
+    // computed from real usage rather than login alone.
+    posthog.capture('lesson_completed', { lessonId, totalCompleted: completed.size });
 }
 
 /* ── Marquer une certification d'unité comme obtenue ── */

@@ -21,6 +21,7 @@
     "firebase": "^12.13.0",
     "lottie-react": "^2.4.1",
     "pdfjs-dist": "^6.0.227",
+    "posthog-js": "^1.433.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -44,5 +45,12 @@
     "vite": "^7.2.4",
     "vitest": "^4.1.10",
     "xlsx": "^0.18.5"
+  },
+  "allowScripts": {
+    "@firebase/util@1.15.1": true,
+    "esbuild@0.28.1": true,
+    "protobufjs@7.6.5": true,
+    "puppeteer@24.43.1": true,
+    "core-js@3.50.0": true
   }
 }

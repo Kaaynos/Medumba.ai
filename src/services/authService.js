@@ -3,6 +3,7 @@
    Mêmes signatures de fonctions qu'avant pour ne pas casser l'app.
 ───────────────────────────────────────────────────────────────────────────── */
 import { supabase } from '../config/supabase';
+import { posthog } from '../config/posthog';
 
 /* ── Google OAuth redirect result (appelé au chargement) ── */
 export async function handleGoogleRedirectResult() {
@@ -63,6 +64,11 @@ export async function registerUser({ name, email, password, age, language, reaso
         throw new Error('EMAIL_ALREADY_LINKED');
     }
     if (!data.user) return null;
+    // Captured here, not on the later SIGNED_IN from clicking the
+    // confirmation link — this is the actual "account created" moment the
+    // O1 baseline (scope doc) counts against, regardless of email-confirm
+    // status.
+    posthog.capture('user_signed_up', { method: 'email' });
     // Si "Confirm email" est actif côté Supabase, signUp() ne renvoie pas de
     // session tant que l'utilisateur n'a pas cliqué le lien reçu par e-mail.
     // Sans ce flag, l'appelant croit l'inscription terminée (onAuthStateChange
@@ -170,7 +176,22 @@ export function listenAuthState(callback) {
     // Écouter les changements futurs — met à jour last_seen sur une vraie
     // connexion (email/mot de passe ou Google OAuth), pas sur chaque refresh.
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' && session?.user) _touchLastSeen(session.user.id);
+        if (event === 'SIGNED_IN' && session?.user) {
+            _touchLastSeen(session.user.id);
+            posthog.identify(session.user.id, { email: session.user.email });
+            // Google OAuth has no separate "just registered" step to hook
+            // (unlike registerUser() above) — a first-ever sign-in looks
+            // like created_at and last_sign_in_at landing within seconds of
+            // each other. Not exact, but good enough for a funnel count.
+            const created  = new Date(session.user.created_at).getTime();
+            const lastSeen = new Date(session.user.last_sign_in_at).getTime();
+            if (Math.abs(lastSeen - created) < 60_000) {
+                posthog.capture('user_signed_up', { method: 'google' });
+            } else {
+                posthog.capture('user_logged_in');
+            }
+        }
+        if (event === 'SIGNED_OUT') posthog.reset();
         callback(session?.user ? _toUserShape(session.user) : null, event);
     });
 

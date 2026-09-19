@@ -36,6 +36,7 @@ service-account.json
 
 .vercel
 .env*
+!.env.example
 
 # Playwright
 test-results/

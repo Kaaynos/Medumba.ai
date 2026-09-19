@@ -1,10 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
 // This suite must always run against a real deployed environment (dev or
-// production), never a local `npm run dev` server — src/config/supabase.js
-// hardcodes the production Supabase project with no local env override, so
-// a local server silently writes real test data (accounts, XP, leaderboard
-// rows) straight into production. Pass the target explicitly:
+// production), never a local `npm run dev` server — without a .env.local
+// setting VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY (see .env.example), a
+// local server falls back to the production Supabase project, so it would
+// silently write real test data (accounts, XP, leaderboard rows) straight
+// into production. Pass the target explicitly:
 //   TEST_ENV=dev npx playwright test
 //   TEST_ENV=production npx playwright test
 const ENV_URLS = {

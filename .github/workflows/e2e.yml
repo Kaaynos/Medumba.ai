@@ -1,9 +1,10 @@
 name: E2E (production)
 
 # Manual trigger only — this suite runs against the live production site
-# (see playwright.config.js and AGENTS.md: no dev/staging environment
-# exists yet), so it creates real accounts, XP and leaderboard rows.
-# Run it deliberately, not on every push.
+# (see playwright.config.js and AGENTS.md: no staging Supabase project is
+# provisioned yet, though the app now supports pointing a deployment at one
+# via VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY), so it creates real
+# accounts, XP and leaderboard rows. Run it deliberately, not on every push.
 on:
   workflow_dispatch:
 

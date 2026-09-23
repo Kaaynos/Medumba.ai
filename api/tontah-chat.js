@@ -24,7 +24,7 @@ import { lookUpWord, playRecording, scoreAttempt, addToPractice, askAnElder } fr
 import { checkDistress, enforceGrounding } from './_tontah/guardrails.js';
 import { notifySafetyEscalation } from './_tontah/notify.js';
 
-const SUPABASE_URL = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
+const SUPABASE_URL = 'https://pgubejptzgmqcdiltyns.supabase.co';
 
 function freeTextFor(tool, args) {
     if (tool === 'look_up_word') return args?.term || '';

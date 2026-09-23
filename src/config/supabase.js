@@ -1,7 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL  = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtaHp6d2lxbG1ld2dodGxtamJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyOTE0MDYsImV4cCI6MjA5Nzg2NzQwNn0.u5awGG3fob1zhh6-r6gNtrc8-KR-tnAL3-SETn7dcQA';
+// Switched from amhzzwiqlmewghtlmjbm (paused: exceed_storage_size_quota,
+// unrecovered) to pgubejptzgmqcdiltyns. Schema/RLS policies verified
+// present (37/37 tables, 91 policies); medumba-audio Storage bucket and
+// Auth provider config still need confirming before this is fully live.
+const SUPABASE_URL  = 'https://pgubejptzgmqcdiltyns.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBndWJlanB0emdtcWNkaWx0eW5zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjQyNzMsImV4cCI6MjEwNDgwMDI3M30.Y4TT0qkHy4NhimCSy5_1Drxc2lmIbN_nMbP-Hu8A7YE';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON, {
     auth: {

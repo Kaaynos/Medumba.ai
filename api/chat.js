@@ -12,7 +12,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
+const SUPABASE_URL = 'https://pgubejptzgmqcdiltyns.supabase.co';
 
 const SYSTEM_PROMPT = `You are the support assistant for Medumba.AI, an app for learning the Medumba language (Bafoussam, Cameroon). Answer briefly and helpfully in the same language the user writes in (French or English). Use only the facts below — if you don't know the answer, say you don't know and suggest the contact form.
 

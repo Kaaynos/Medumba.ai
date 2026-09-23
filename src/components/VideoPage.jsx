@@ -9,7 +9,7 @@ import { supabase } from '../config/supabase';
    via Git LFS, and Vercel's build doesn't resolve LFS pointers, so
    they'd 404/serve pointer text in production.
 ══════════════════════════════════════════════════════════════════ */
-const STORAGE_BASE = 'https://amhzzwiqlmewghtlmjbm.supabase.co/storage/v1/object/public/videos';
+const STORAGE_BASE = 'https://pgubejptzgmqcdiltyns.supabase.co/storage/v1/object/public/videos';
 const CATEGORIES = [
     {
         id: 'intro',

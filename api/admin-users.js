@@ -10,7 +10,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://amhzzwiqlmewghtlmjbm.supabase.co';
+const SUPABASE_URL = 'https://pgubejptzgmqcdiltyns.supabase.co';
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {

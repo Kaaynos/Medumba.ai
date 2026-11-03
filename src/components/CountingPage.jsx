@@ -175,8 +175,7 @@ const AUDIO_MAP = {
     18:   [54.70, 56.70],   // ncòbfomə gham
     19:   [57.95, 60.00],   // ncòbbwə̀'ə gham
     // 20 — clip removed (2026-07-24): confirmed incorrect, doesn't match the
-    // word — muted instead of playing a wrong pronunciation, until a real
-    // isolated recording is available.
+    // word. Now played from its own recording (OWN_RECORDINGS below).
     // tens 30–1000
     30:   [74.70, 76.45],   // ŋamntad
     40:   [77.95, 79.80],   // ŋamkuὰ
@@ -188,6 +187,36 @@ const AUDIO_MAP = {
     100:  [97.60, 99.20],   // nkʉ
     1000: [100.75, 102.55], // ncaꞌ
 };
+
+// Numbers with their own separate recording (2026-11-02), played instead of
+// the AUDIO_MAP clip. 20 had no correct clip; the others were re-recorded.
+const OWN_RECORDINGS = Object.fromEntries(
+    Object.entries(import.meta.glob('../assets/counting/count_*.wav', { eager: true, query: '?url', import: 'default' }))
+        .map(([path, url]) => [Number(path.match(/count_(\d+)\.wav$/)[1]), url]),
+);
+
+// "ncòb + unit" cut from the 11–19 clips: 21–99 are this prefix followed by
+// the tens word, exactly how toMedumba() builds them (e.g. 43 = ncòbtad ŋamkuὰ).
+const NCOB_PREFIX = {
+    1: [31.40, 32.59], 2: [34.85, 36.22], 3: [38.50, 39.60],
+    4: [41.85, 42.85], 5: [45.05, 46.09], 6: [48.20, 49.31],
+    7: [51.35, 52.74], 8: [54.70, 55.92], 9: [57.95, 59.12],
+};
+
+// Pieces of the real recordings that say n, or null if there are none. Each
+// piece is a [start, end] clip of vocal-count-medumba.ogg or a recording URL.
+const tensPiece = (n) => OWN_RECORDINGS[n] || AUDIO_MAP[n];
+const segmentsFor = (n) => {
+    const whole = tensPiece(n);
+    if (whole) return [whole];
+    if (n > 20 && n < 100) {
+        const prefix = NCOB_PREFIX[n % 10];
+        const tens = tensPiece(n - n % 10);
+        if (prefix && tens) return [prefix, tens];
+    }
+    return null;
+};
+const hasVoice = (n) => segmentsFor(n) !== null;
 
 // Simple quiz pool (0–30 for manageable choices)
 const makeQuiz = () => {
@@ -219,7 +248,8 @@ const CountingPage = ({ nativeLang, onBack }) => {
     const audioCtxRef    = useRef(null);
     const audioBufferRef = useRef(null);
     const loadingRef     = useRef(false);
-    const sourceRef      = useRef(null);
+    const sourcesRef     = useRef([]);
+    const recordingBuffersRef = useRef({});
 
     const getCtx = () => {
         if (!audioCtxRef.current)
@@ -246,25 +276,48 @@ const CountingPage = ({ nativeLang, onBack }) => {
     // enregistrement réel (voir AUDIO_MAP) restent muets — cf. AlphabetPage,
     // même choix produit (pas de faux bouton "Écouter").
     const playNumber = useCallback(async (n) => {
-        const seg = AUDIO_MAP[n];
-        if (!seg) return;
+        const segs = segmentsFor(n);
+        if (!segs) return;
 
         await loadAudio();
-        if (!audioBufferRef.current) return;
-
         const ctx = getCtx();
-        if (ctx.state === 'suspended') await ctx.resume();
-
-        if (sourceRef.current) {
-            try { sourceRef.current.stop(); } catch (_) {}
+        const pieces = [];
+        for (const seg of segs) {
+            if (Array.isArray(seg)) {
+                if (!audioBufferRef.current) return;
+                pieces.push({ buffer: audioBufferRef.current, offset: seg[0], duration: seg[1] - seg[0] });
+            } else {
+                let buffer = recordingBuffersRef.current[seg];
+                if (!buffer) {
+                    try {
+                        const res = await fetch(seg);
+                        buffer = await ctx.decodeAudioData(await res.arrayBuffer());
+                        recordingBuffersRef.current[seg] = buffer;
+                    } catch (e) {
+                        console.warn('Audio load failed:', e);
+                        return;
+                    }
+                }
+                pieces.push({ buffer, offset: 0, duration: buffer.duration });
+            }
         }
 
-        const source = ctx.createBufferSource();
-        source.buffer = audioBufferRef.current;
-        source.connect(ctx.destination);
-        source.start(0, seg[0], seg[1] - seg[0]);
-        source.onended = () => setSpeaking(null);
-        sourceRef.current = source;
+        if (ctx.state === 'suspended') await ctx.resume();
+
+        sourcesRef.current.forEach(s => { try { s.stop(); } catch { /* already stopped */ } });
+
+        // Back to back on the audio clock, so the joined pieces leave no gap.
+        let at = ctx.currentTime;
+        sourcesRef.current = pieces.map(({ buffer, offset, duration }) => {
+            const source = ctx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(ctx.destination);
+            source.start(at, offset, duration);
+            at += duration;
+            return source;
+        });
+        const last = sourcesRef.current[sourcesRef.current.length - 1];
+        last.onended = () => { if (sourcesRef.current.includes(last)) setSpeaking(null); };
         setSpeaking(n);
     }, [loadAudio]);
 
@@ -295,7 +348,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
 
     const SpeakerBtn = ({ n }) => {
         const active = speaking === n;
-        const hasAudio = Boolean(AUDIO_MAP[n]);
+        const hasAudio = hasVoice(n);
         if (!hasAudio) {
             return (
                 <div
@@ -439,7 +492,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     <div style={{ fontSize: '2.8rem', fontWeight: '900', color: '#0891b2', marginBottom: '0.5rem' }}>
                                         {quiz.q.medumba}
                                     </div>
-                                    {AUDIO_MAP[quiz.q.n] ? (
+                                    {hasVoice(quiz.q.n) ? (
                                         <button onClick={() => playNumber(quiz.q.n)} style={{ background: '#f0f9ff', border: '2px solid #bae6fd', borderRadius: '99px', padding: '0.4rem 1rem', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#0891b2', fontFamily: 'inherit' }}>
                                             {speaking === quiz.q.n ? '🔊' : '🔈'} {isFr ? 'Écouter' : 'Listen'}
                                         </button>
@@ -538,7 +591,7 @@ const CountingPage = ({ nativeLang, onBack }) => {
                                     <div style={{ fontSize: '1rem', fontWeight: '700', color: '#475569', marginBottom: '1rem' }}>
                                         = {num}
                                     </div>
-                                    {medumba && (AUDIO_MAP[num] ? (
+                                    {medumba && (hasVoice(num) ? (
                                         <button onClick={() => playNumber(num)} style={{
                                             background: '#f0f9ff', border: '2px solid #bae6fd', borderRadius: '99px',
                                             padding: '0.5rem 1.25rem', cursor: 'pointer', fontSize: '0.9rem',

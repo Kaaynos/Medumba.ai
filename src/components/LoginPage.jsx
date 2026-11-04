@@ -104,7 +104,13 @@ const LoginPage = ({ onLogin, onBack, onForgotPassword, nativeLang }) => {
             console.error('[google-login]', e);
             const msg = (e.message || '').toLowerCase();
             if (!msg.includes('cancelled') && !msg.includes('closed')) {
-                setError((isFrench ? 'Google : ' : 'Google: ') + (e.message || (isFrench ? 'Réessayez.' : 'Try again.')));
+                if (msg.includes('unsupported provider') || (msg.includes('provider') && msg.includes('enabled'))) {
+                    setError(isFrench
+                        ? 'La connexion Google n\'est pas encore activée sur ce site. Utilisez votre e-mail et mot de passe ci-dessous.'
+                        : 'Google sign-in isn\'t enabled on this site yet. Use your email and password below.');
+                } else {
+                    setError((isFrench ? 'Google : ' : 'Google: ') + (e.message || (isFrench ? 'Réessayez.' : 'Try again.')));
+                }
             }
         } finally {
             setGoogleLoading(false);

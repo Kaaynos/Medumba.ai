@@ -31,7 +31,14 @@ const ProfileWelcomePage = ({ onNext, onLogin, nativeLang, proficiency, reason, 
             await loginWithGoogle();
             // auth state listener in App.jsx handles redirect to step 15
         } catch (e) {
-            setError(isFr ? 'Connexion Google annulée ou échouée.' : 'Google sign-in cancelled or failed.');
+            const msg = (e.message || '').toLowerCase();
+            if (msg.includes('unsupported provider') || (msg.includes('provider') && msg.includes('enabled'))) {
+                setError(isFr
+                    ? "La connexion Google n'est pas encore activée sur ce site. Utilisez un e-mail et un mot de passe."
+                    : "Google sign-in isn't enabled on this site yet. Use an email and password instead.");
+            } else {
+                setError(isFr ? 'Connexion Google annulée ou échouée.' : 'Google sign-in cancelled or failed.');
+            }
             setLoadingGoogle(false);
         }
     };

@@ -26,4 +26,37 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    // Node/CommonJS scripts and configs — not browser code, so `process`,
+    // `require`, `module`, `exports`, `Buffer` etc. are real globals here,
+    // not undefined references.
+    files: [
+      'api/**/*.js',
+      'functions/**/*.js',
+      'dico/**/*.js',
+      'extract_pdfs.js',
+      'playwright.config.js',
+      'mobile/babel.config.js',
+      'mobile/metro.config.js',
+    ],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
+    // React Native source — bundled via Metro (CommonJS `require`), so it
+    // needs Node globals alongside the browser-ish ones RN also exposes.
+    files: ['mobile/src/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
+  },
+  {
+    // Service worker scope — `self`/`clients`/`registration` aren't
+    // browser-window globals.
+    files: ['public/sw-notifications.js'],
+    languageOptions: {
+      globals: globals.serviceworker,
+    },
+  },
 ])

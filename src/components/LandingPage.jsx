@@ -602,11 +602,9 @@ export default function LandingPage({ onStart, onRegister, onLogin, onNavigate, 
             {/* ══ TONTAH ══ */}
             <section style={{ background:LIGHT,padding:PH }}>
                 <div style={{ maxWidth:'1160px',margin:'0 auto',display:'flex',flexDirection:isMobile?'column':'row',alignItems:'center',gap:isMobile?'2.5rem':'5rem' }}>
-                    {!isSmall && (
-                        <Reveal delay={0.1} style={{ flexShrink:0,display:'flex',justifyContent:'center' }}>
-                            <img src={tontah} alt="Tontah" style={{ width:isMobile?'260px':'340px', height:'auto', borderRadius:'32px', filter:'drop-shadow(0 18px 30px rgba(0,86,210,0.18))' }} />
-                        </Reveal>
-                    )}
+                    <Reveal delay={0.1} style={{ flexShrink:0,display:'flex',justifyContent:'center' }}>
+                        <img src={tontah} alt="Tontah" style={{ width:isSmall?'200px':isMobile?'260px':'340px', height:'auto', borderRadius:'32px', filter:'drop-shadow(0 18px 30px rgba(0,86,210,0.18))' }} />
+                    </Reveal>
                     <div style={{ flex:1,minWidth:0 }}>
                         <Reveal>
                             <div style={{ display:'inline-flex',alignItems:'center',gap:'.4rem',background:'#fff',border:`2px solid #fde68a`,borderRadius:'99px',padding:'.3rem .9rem',marginBottom:'1.1rem' }}>
